@@ -1,0 +1,46 @@
+{
+  "cycle": 117,
+  "pass": false,
+  "deterministicPass": true,
+  "sanityStatus": "fail-scoped",
+  "failures": [
+    {
+      "check": "sanity-read",
+      "detail": "INIT-012: The write states \"Filing deadline missed,\" but the prior row records no filing deadline, so this claim has no basis in the city record."
+    },
+    {
+      "check": "sanity-read",
+      "detail": "INIT-014: The write says \"C115/C116 records conflict with failed/vote-scheduled entries,\" but the prior row shows only a C115 filing note and no C116 entry or failed-vote entry, so the stated conflict is unsupported. The new \"eleven-case complaint crosswalk\" action also appears nowhere in the prior row."
+    }
+  ],
+  "touchedInitiatives": [
+    "INIT-006",
+    "INIT-005",
+    "INIT-001",
+    "INIT-002",
+    "INIT-003",
+    "INIT-007",
+    "INIT-008",
+    "INIT-009",
+    "INIT-010",
+    "INIT-011",
+    "INIT-012",
+    "INIT-013",
+    "INIT-014",
+    "INIT-015"
+  ],
+  "maxRows": 14,
+  "sanity": {
+    "pass": false,
+    "issues": [
+      "INIT-012: The write states \"Filing deadline missed,\" but the prior row records no filing deadline, so this claim has no basis in the city record.",
+      "INIT-014: The write says \"C115/C116 records conflict with failed/vote-scheduled entries,\" but the prior row shows only a C115 filing note and no C116 entry or failed-vote entry, so the stated conflict is unsupported. The new \"eleven-case complaint crosswalk\" action also appears nowhere in the prior row."
+    ],
+    "blockedInitiatives": [
+      "INIT-012",
+      "INIT-014"
+    ]
+  },
+  "model": "anthropic/claude-haiku-5.5",
+  "ranAt": "2026-11-23T00:29:47.492Z"
+}

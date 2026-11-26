@@ -1,0 +1,5 @@
+# Glenview, in their own words
+
+## Daniela Kapoor — Teacher
+
+> *(I look up from the kitchen counter, a half-empty mug of tea in my hand. The window is cracked open a couple inches, letting in the cool air.)* Honestly? Right now it feels... quieter than it should be. There's a hum from the freeway a few blocks over, but it's distant, like a lullaby. I can hear a dog barking somewhere down the hill, and maybe the low rumble of a shuttle making its last run. But it's not the same as it used to be. Not since Jack London got so rowdy and we started avoiding Uptown. The crack of a bat from a screen outside a bar used to carry all the way up here on nights like this. People would stop and watch, you know? Now it's just... my neighbor's porch light flickering. The paper over the windows at the corner store has started flapping in the wind. That sound — that's the one that sticks. It's like the neighborhood is holding its breath. I keep the TV on low, even when I'm not watching. Just to have a voice in the room. It's a single woman thing, I guess. But tonight, it's tuned to the sports recap, and they're still talking

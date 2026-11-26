@@ -1,0 +1,682 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "117",
+  "persona": "ines-sorensen",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Ines Sorensen",
+    "popid": "POP-01211"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "Ordinary people at the edge of a big personal change (a promotion after 28 years, a new marriage, a new child), in their own words.",
+      "angle": "Ordinary people at the edge of a big personal change (a promotion after 28 years, a new marriage, a new child), in their own words.",
+      "hood": null,
+      "citizens": [
+        "Joseph Cramp (POP-00272)",
+        "Jocelyn Santo (POP-00547)",
+        "Travis Paiz (POP-00222)",
+        "Serg Cerrano (POP-00523)"
+      ],
+      "popids": [
+        "POP-00272",
+        "POP-00547",
+        "POP-00222",
+        "POP-00523"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/culture_c117_ines-sorensen_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00272",
+      "name": "Joseph Cramp",
+      "quote": "*(Joseph lets out a low, dry chuckle, rubbing the back of his neck with a calloused hand. He glances down at his work shoes, then back up at the reporter, his voice warm but steady.)* \"First fire? Honestly, it's probably not the dramatic one folks expect. It's the supply closet inventory on the third floor of the Civic Center. That's the one that's been a slow bleed for years—nobody's kept a proper log since before I got my first set of keys. Come Monday morning, I know I'm gonna open that door and it'll look like a tornado hit a Staples. Paper towels everywhere, the good floor cleaner mixed in with the cheap stuff, and a mop bucket that's got a squeaky wheel that'll wake the dead.\" He shrugs, a hint of pride in his eyes. \"Twenty-eight years taught me that the big fires are just a bunch of little sparks that got ignored. You don't put out a fire by yelling at it. You show up early, you check the corners, you learn which door sticks in the humidity and which tenant always leaves the back exit propped open. You take care of the small stuff so the building can breathe. That's the whole job. The title changed, but the principle didn't. You keep the place solid, and the people in it can do their thing.\" *(He pauses, a small smile breaking through.)* \"So yeah, I'll be the guy with the clipboard and a fresh roll of trash bags on Monday. It ain't glamorous, but it's mine. And I'm ready for it.\"",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; steady, hard to shake; somewhat family-minded; somewhat curious; casually interested in the teams",
+      "recorded": true,
+      "fallback": null,
+      "raw": "*(Joseph lets out a low, dry chuckle, rubbing the back of his neck with a calloused hand. He glances down at his work shoes, then back up at the reporter, his voice warm but steady.)*\n\n\"First fire? Honestly, it's probably not the dramatic one folks expect. It's the supply closet inventory on the third floor of the Civic Center. That's the one that's been a slow bleed for years—nobody's kept a proper log since before I got my first set of keys. Come Monday morning, I know I'm gonna open that door and it'll look like a tornado hit a Staples. Paper towels everywhere, the good floor cleaner mixed in with the cheap stuff, and a mop bucket that's got a squeaky wheel that'll wake the dead.\"\n\nHe shrugs, a hint of pride in his eyes.\n\n\"Twenty-eight years taught me that the big fires are just a bunch of little sparks that got ignored. You don't put out a fire by yelling at it. You show up early, you check the corners, you learn which door sticks in the humidity and which tenant always leaves the back exit propped open. You take care of the small stuff so the building can breathe. That's the whole job. The title changed, but the principle didn't. You keep the place solid, and the people in it can do their thing.\"\n\n*(He pauses, a small smile breaking through.)*\n\n\"So yeah, I'll be the guy with the clipboard and a fresh roll of trash bags on Monday. It ain't glamorous, but it's mine. And I'm ready for it.\"",
+      "claims": {
+        "answer": "quote",
+        "factIds": [],
+        "basis": "own-wake",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00272-fe60e38a19",
+        "authoredQuote": true,
+        "publishableQuote": "*(Joseph lets out a low, dry chuckle, rubbing the back of his neck with a calloused hand. He glances down at his work shoes, then back up at the reporter, his voice warm but steady.)* \"First fire? Honestly, it's probably not the dramatic one folks expect. It's the supply closet inventory on the third floor of the Civic Center. That's the one that's been a slow bleed for years—nobody's kept a proper log since before I got my first set of keys. Come Monday morning, I know I'm gonna open that door and it'll look like a tornado hit a Staples. Paper towels everywhere, the good floor cleaner mixed in with the cheap stuff, and a mop bucket that's got a squeaky wheel that'll wake the dead.\" He shrugs, a hint of pride in his eyes. \"Twenty-eight years taught me that the big fires are just a bunch of little sparks that got ignored. You don't put out a fire by yelling at it. You show up early, you check the corners, you learn which door sticks in the humidity and which tenant always leaves the back exit propped open. You take care of the small stuff so the building can breathe. That's the whole job. The title changed, but the principle didn't. You keep the place solid, and the people in it can do their thing.\" *(He pauses, a small smile breaking through.)* \"So yeah, I'll be the guy with the clipboard and a fresh roll of trash bags on Monday. It ain't glamorous, but it's mine. And I'm ready for it.\""
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00272",
+          "name": "Joseph Cramp",
+          "role": "Janitor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "You said it's still sinking in. When you picture the first shift with the new responsibilities, what's the first fire you think you'll have to put out, and what did the 28 years teach you about it? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Joseph Cramp — Janitor — Downtown",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null,
+          "ownLife": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Joseph Cramp, Janitor, Downtown (POP-00272) — 4 pages; latest to a reporter, C117; Lives carried the promotion this Cycle: “I've been a Janitor for 28 years, and I just got promoted. To be honest, it's still sinking in. It means more responsibilities, more fires to put out…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-5cfdbd2d8e5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Joseph Cramp — Janitor — Downtown",
+            "src": "Simulation_Ledger profile for POP-00272",
+            "id": "F-d03f1ebe86eb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00547",
+      "name": "Jocelyn Santo",
+      "quote": "Oh, that's a good question. Let me think. One thing that's already different—really different—is the coffee situation. Travis is a pour-over guy, like, he has the little scale and the gooseneck kettle and he weighs the beans. I used to just slam a cup from a drip machine and run out the door to teach a 6 a.m. class. Now I actually sit down with him for ten minutes before I go, and it's this slow little ritual I never knew I needed. It's small, but it makes the mornings feel like ours, you know? And something we haven't worked out yet... honestly, it's the laundry. Or more specifically, the folding. I fold everything a certain way—tight, military-ish, because I grew up that way—and Travis just... balls things up and shoves them in drawers. We've had this gentle, silly standoff about it for weeks. We haven't figured it out yet. It's not a big deal, but it's the kind of thing you realize you have to actually negotiate when you merge two lives. We'll get there. Probably after I teach him my folding method one drawer at a time.",
+      "disp": "driven, hard to sit still; warm, tender with people; close to family; fairly steady",
+      "recorded": true,
+      "fallback": null,
+      "raw": "Oh, that's a good question. Let me think. One thing that's already different—really different—is the coffee situation. Travis is a pour-over guy, like, he has the little scale and the gooseneck kettle and he weighs the beans. I used to just slam a cup from a drip machine and run out the door to teach a 6 a.m. class. Now I actually sit down with him for ten minutes before I go, and it's this slow little ritual I never knew I needed. It's small, but it makes the mornings feel like ours, you know?\n\nAnd something we haven't worked out yet... honestly, it's the laundry. Or more specifically, the folding. I fold everything a certain way—tight, military-ish, because I grew up that way—and Travis just... balls things up and shoves them in drawers. We've had this gentle, silly standoff about it for weeks. We haven't figured it out yet. It's not a big deal, but it's the kind of thing you realize you have to actually negotiate when you merge two lives. We'll get there. Probably after I teach him my folding method one drawer at a time.",
+      "claims": {
+        "answer": "quote",
+        "factIds": [],
+        "basis": "own-wake",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00547-086c4afbc5",
+        "authoredQuote": true,
+        "publishableQuote": "Oh, that's a good question. Let me think. One thing that's already different—really different—is the coffee situation. Travis is a pour-over guy, like, he has the little scale and the gooseneck kettle and he weighs the beans. I used to just slam a cup from a drip machine and run out the door to teach a 6 a.m. class. Now I actually sit down with him for ten minutes before I go, and it's this slow little ritual I never knew I needed. It's small, but it makes the mornings feel like ours, you know? And something we haven't worked out yet... honestly, it's the laundry. Or more specifically, the folding. I fold everything a certain way—tight, military-ish, because I grew up that way—and Travis just... balls things up and shoves them in drawers. We've had this gentle, silly standoff about it for weeks. We haven't figured it out yet. It's not a big deal, but it's the kind of thing you realize you have to actually negotiate when you merge two lives. We'll get there. Probably after I teach him my folding method one drawer at a time."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00547",
+          "name": "Jocelyn Santo",
+          "role": "Yoga Instructor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "You said you're still figuring out how this household works. What's one thing in the house that's already different from your life before, and what's one you haven't worked out yet? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Jocelyn Santo — Yoga Instructor — Lake Merritt",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null,
+          "ownLife": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Jocelyn Santo, Yoga Instructor, Lake Merritt (POP-00547) — 2 pages; latest to a reporter, a question they carry, C117; Lives carried the new household this Cycle: “Still figuring out how Travis and I make this household work while everything is so new.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-b112a943f1c1"
+          },
+          {
+            "t": "FACT",
+            "text": "Jocelyn Santo — Yoga Instructor — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00547",
+            "id": "F-0e8b918f6f5e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00272",
+      "name": "Joseph Cramp",
+      "quote": "*(Joseph lets out a low, dry chuckle, rubbing the back of his neck with a calloused hand. He glances down at his work shoes, then back up at the reporter, his voice warm but steady.)* \"First fire? Honestly, it's probably not the dramatic one folks expect. It's the supply closet inventory on the third floor of the Civic Center. That's the one that's been a slow bleed for years—nobody's kept a proper log since before I got my first set of keys. Come Monday morning, I know I'm gonna open that door and it'll look like a tornado hit a Staples. Paper towels everywhere, the good floor cleaner mixed in with the cheap stuff, and a mop bucket that's got a squeaky wheel that'll wake the dead.\" He shrugs, a hint of pride in his eyes. \"Twenty-eight years taught me that the big fires are just a bunch of little sparks that got ignored. You don't put out a fire by yelling at it. You show up early, you check the corners, you learn which door sticks in the humidity and which tenant always leaves the back exit propped open. You take care of the small stuff so the building can breathe. That's the whole job. The title changed, but the principle didn't. You keep the place solid, and the people in it can do their thing.\" *(He pauses, a small smile breaking through.)* \"So yeah, I'll be the guy with the clipboard and a fresh roll of trash bags on Monday. It ain't glamorous, but it's mine. And I'm ready for it.\"",
+      "disp": "can't switch off, working themselves thin; magnetic, center of every room; warm, tender with people; steady, hard to shake; somewhat family-minded; somewhat curious; casually interested in the teams",
+      "recorded": true,
+      "fallback": null,
+      "raw": "*(Joseph lets out a low, dry chuckle, rubbing the back of his neck with a calloused hand. He glances down at his work shoes, then back up at the reporter, his voice warm but steady.)*\n\n\"First fire? Honestly, it's probably not the dramatic one folks expect. It's the supply closet inventory on the third floor of the Civic Center. That's the one that's been a slow bleed for years—nobody's kept a proper log since before I got my first set of keys. Come Monday morning, I know I'm gonna open that door and it'll look like a tornado hit a Staples. Paper towels everywhere, the good floor cleaner mixed in with the cheap stuff, and a mop bucket that's got a squeaky wheel that'll wake the dead.\"\n\nHe shrugs, a hint of pride in his eyes.\n\n\"Twenty-eight years taught me that the big fires are just a bunch of little sparks that got ignored. You don't put out a fire by yelling at it. You show up early, you check the corners, you learn which door sticks in the humidity and which tenant always leaves the back exit propped open. You take care of the small stuff so the building can breathe. That's the whole job. The title changed, but the principle didn't. You keep the place solid, and the people in it can do their thing.\"\n\n*(He pauses, a small smile breaking through.)*\n\n\"So yeah, I'll be the guy with the clipboard and a fresh roll of trash bags on Monday. It ain't glamorous, but it's mine. And I'm ready for it.\"",
+      "claims": {
+        "answer": "quote",
+        "factIds": [],
+        "basis": "own-wake",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00272-fe60e38a19",
+        "authoredQuote": true,
+        "publishableQuote": "*(Joseph lets out a low, dry chuckle, rubbing the back of his neck with a calloused hand. He glances down at his work shoes, then back up at the reporter, his voice warm but steady.)* \"First fire? Honestly, it's probably not the dramatic one folks expect. It's the supply closet inventory on the third floor of the Civic Center. That's the one that's been a slow bleed for years—nobody's kept a proper log since before I got my first set of keys. Come Monday morning, I know I'm gonna open that door and it'll look like a tornado hit a Staples. Paper towels everywhere, the good floor cleaner mixed in with the cheap stuff, and a mop bucket that's got a squeaky wheel that'll wake the dead.\" He shrugs, a hint of pride in his eyes. \"Twenty-eight years taught me that the big fires are just a bunch of little sparks that got ignored. You don't put out a fire by yelling at it. You show up early, you check the corners, you learn which door sticks in the humidity and which tenant always leaves the back exit propped open. You take care of the small stuff so the building can breathe. That's the whole job. The title changed, but the principle didn't. You keep the place solid, and the people in it can do their thing.\" *(He pauses, a small smile breaking through.)* \"So yeah, I'll be the guy with the clipboard and a fresh roll of trash bags on Monday. It ain't glamorous, but it's mine. And I'm ready for it.\""
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00272",
+          "name": "Joseph Cramp",
+          "role": "Janitor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "You said it's still sinking in. When you picture the first shift with the new responsibilities, what's the first fire you think you'll have to put out, and what did the 28 years teach you about it? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Joseph Cramp — Janitor — Downtown",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null,
+          "ownLife": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Joseph Cramp, Janitor, Downtown (POP-00272) — 4 pages; latest to a reporter, C117; Lives carried the promotion this Cycle: “I've been a Janitor for 28 years, and I just got promoted. To be honest, it's still sinking in. It means more responsibilities, more fires to put out…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-5cfdbd2d8e5f"
+          },
+          {
+            "t": "FACT",
+            "text": "Joseph Cramp — Janitor — Downtown",
+            "src": "Simulation_Ledger profile for POP-00272",
+            "id": "F-d03f1ebe86eb"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00547",
+      "name": "Jocelyn Santo",
+      "quote": "Oh, that's a good question. Let me think. One thing that's already different—really different—is the coffee situation. Travis is a pour-over guy, like, he has the little scale and the gooseneck kettle and he weighs the beans. I used to just slam a cup from a drip machine and run out the door to teach a 6 a.m. class. Now I actually sit down with him for ten minutes before I go, and it's this slow little ritual I never knew I needed. It's small, but it makes the mornings feel like ours, you know? And something we haven't worked out yet... honestly, it's the laundry. Or more specifically, the folding. I fold everything a certain way—tight, military-ish, because I grew up that way—and Travis just... balls things up and shoves them in drawers. We've had this gentle, silly standoff about it for weeks. We haven't figured it out yet. It's not a big deal, but it's the kind of thing you realize you have to actually negotiate when you merge two lives. We'll get there. Probably after I teach him my folding method one drawer at a time.",
+      "disp": "driven, hard to sit still; warm, tender with people; close to family; fairly steady",
+      "recorded": true,
+      "fallback": null,
+      "raw": "Oh, that's a good question. Let me think. One thing that's already different—really different—is the coffee situation. Travis is a pour-over guy, like, he has the little scale and the gooseneck kettle and he weighs the beans. I used to just slam a cup from a drip machine and run out the door to teach a 6 a.m. class. Now I actually sit down with him for ten minutes before I go, and it's this slow little ritual I never knew I needed. It's small, but it makes the mornings feel like ours, you know?\n\nAnd something we haven't worked out yet... honestly, it's the laundry. Or more specifically, the folding. I fold everything a certain way—tight, military-ish, because I grew up that way—and Travis just... balls things up and shoves them in drawers. We've had this gentle, silly standoff about it for weeks. We haven't figured it out yet. It's not a big deal, but it's the kind of thing you realize you have to actually negotiate when you merge two lives. We'll get there. Probably after I teach him my folding method one drawer at a time.",
+      "claims": {
+        "answer": "quote",
+        "factIds": [],
+        "basis": "own-wake",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00547-086c4afbc5",
+        "authoredQuote": true,
+        "publishableQuote": "Oh, that's a good question. Let me think. One thing that's already different—really different—is the coffee situation. Travis is a pour-over guy, like, he has the little scale and the gooseneck kettle and he weighs the beans. I used to just slam a cup from a drip machine and run out the door to teach a 6 a.m. class. Now I actually sit down with him for ten minutes before I go, and it's this slow little ritual I never knew I needed. It's small, but it makes the mornings feel like ours, you know? And something we haven't worked out yet... honestly, it's the laundry. Or more specifically, the folding. I fold everything a certain way—tight, military-ish, because I grew up that way—and Travis just... balls things up and shoves them in drawers. We've had this gentle, silly standoff about it for weeks. We haven't figured it out yet. It's not a big deal, but it's the kind of thing you realize you have to actually negotiate when you merge two lives. We'll get there. Probably after I teach him my folding method one drawer at a time."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00547",
+          "name": "Jocelyn Santo",
+          "role": "Yoga Instructor",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "You said you're still figuring out how this household works. What's one thing in the house that's already different from your life before, and what's one you haven't worked out yet? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Jocelyn Santo — Yoga Instructor — Lake Merritt",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null,
+          "ownLife": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Jocelyn Santo, Yoga Instructor, Lake Merritt (POP-00547) — 2 pages; latest to a reporter, a question they carry, C117; Lives carried the new household this Cycle: “Still figuring out how Travis and I make this household work while everything is so new.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-b112a943f1c1"
+          },
+          {
+            "t": "FACT",
+            "text": "Jocelyn Santo — Yoga Instructor — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00547",
+            "id": "F-0e8b918f6f5e"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00222",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:559534329568'.",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00222",
+          "name": "Travis Paiz",
+          "role": "Mover",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "You called setting up the household a whirlwind and said it's been a lot. What was the moment when it hit you that it was real, and what did Jocelyn say or do? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Travis Paiz — Mover — Lake Merritt",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null,
+          "ownLife": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Travis Paiz, Mover, Lake Merritt (POP-00222) — 3 pages; latest to a reporter, C117; Lives carried the new household this Cycle: “Setting up the household with Jocelyn was a whirlwind, to be honest. We just got married and were eager to start our life together. It's been a lot…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-bb47920d0d27"
+          },
+          {
+            "t": "FACT",
+            "text": "Travis Paiz — Mover — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00222",
+            "id": "F-4a1fbca4fffd"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00523",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:559534329568'.",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00523",
+          "name": "Serg Cerrano",
+          "role": "Mover",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "You said the city's pace is pulling you forward since the new child. What is it pulling you away from, and what do you do in the hour when it lets go? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Serg Cerrano — Mover — Fruitvale",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null,
+          "ownLife": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Serg Cerrano, Mover, Fruitvale (POP-00523) — 1 page; latest to a reporter, C117; Lives carried the new child this Cycle: “After welcoming my new child, I felt the city's pace pulling me forward. Life's been busy, and I've been close to family a lot lately.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-f36aed6eb994"
+          },
+          {
+            "t": "FACT",
+            "text": "Serg Cerrano — Mover — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00523",
+            "id": "F-409de841f851"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-25T19:17:48.446Z"
+}

@@ -1,9 +1,24 @@
 {
   "v": "UNDOCKED-STANDINGS/2",
-  "computedAt": "2026-11-21T02:55:59.339Z",
+  "computedAt": "2026-11-26T02:55:54.333Z",
   "rows": [
     {
       "Rank": 1,
+      "POPID": "POP-01188",
+      "Holder": "Marguerite Kimball-Ostrow",
+      "Episodes": 3,
+      "PointsTotal": 49.08,
+      "CreditsTotal": 0,
+      "CombatTotal": 1,
+      "MishapTotal": 0,
+      "BestMagnitude": 2,
+      "LastAiredCycle": 117,
+      "CyclesLed": 2,
+      "CurrentStreak": 2,
+      "PointsPending": 0
+    },
+    {
+      "Rank": 2,
       "POPID": "POP-00298",
       "Holder": "Luis Taz",
       "Episodes": 3,
@@ -13,12 +28,12 @@
       "MishapTotal": 0,
       "BestMagnitude": 2,
       "LastAiredCycle": 115,
-      "CyclesLed": 3,
-      "CurrentStreak": 3,
+      "CyclesLed": 2,
+      "CurrentStreak": 0,
       "PointsPending": 0
     },
     {
-      "Rank": 2,
+      "Rank": 3,
       "POPID": "POP-00008",
       "Holder": "P Slayer",
       "Episodes": 2,
@@ -33,7 +48,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 3,
+      "Rank": 4,
       "POPID": "POP-00530",
       "Holder": "Lena Okafor",
       "Episodes": 3,
@@ -48,7 +63,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 4,
+      "Rank": 5,
       "POPID": "POP-00918",
       "Holder": "Manju Abebe",
       "Episodes": 2,
@@ -63,7 +78,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 5,
+      "Rank": 6,
       "POPID": "POP-01195",
       "Holder": "Elijah Brown",
       "Episodes": 2,
@@ -78,7 +93,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 6,
+      "Rank": 7,
       "POPID": "POP-00647",
       "Holder": "Ronald Silk",
       "Episodes": 2,
@@ -93,7 +108,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 7,
+      "Rank": 8,
       "POPID": "POP-00663",
       "Holder": "Soo Loo",
       "Episodes": 5,
@@ -102,21 +117,6 @@
       "CombatTotal": 5,
       "MishapTotal": 0,
       "BestMagnitude": 3,
-      "LastAiredCycle": 117,
-      "CyclesLed": 0,
-      "CurrentStreak": 0,
-      "PointsPending": 0
-    },
-    {
-      "Rank": 8,
-      "POPID": "POP-01188",
-      "Holder": "Marguerite Kimball-Ostrow",
-      "Episodes": 2,
-      "PointsTotal": 37.16,
-      "CreditsTotal": 0,
-      "CombatTotal": 0,
-      "MishapTotal": 0,
-      "BestMagnitude": 2,
       "LastAiredCycle": 117,
       "CyclesLed": 0,
       "CurrentStreak": 0,
@@ -139,6 +139,21 @@
     },
     {
       "Rank": 10,
+      "POPID": "POP-01209",
+      "Holder": "Daniela Kapoor",
+      "Episodes": 2,
+      "PointsTotal": 33.870000000000005,
+      "CreditsTotal": 0,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 3,
+      "LastAiredCycle": 118,
+      "CyclesLed": 0,
+      "CurrentStreak": 0,
+      "PointsPending": 0
+    },
+    {
+      "Rank": 11,
       "POPID": "POP-00816",
       "Holder": "Daphne Stafford",
       "Episodes": 2,
@@ -153,7 +168,37 @@
       "PointsPending": 0
     },
     {
-      "Rank": 11,
+      "Rank": 12,
+      "POPID": "POP-00957",
+      "Holder": "David Okonkwo",
+      "Episodes": 1,
+      "PointsTotal": 29.92,
+      "CreditsTotal": 0,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 2,
+      "LastAiredCycle": 118,
+      "CyclesLed": 0,
+      "CurrentStreak": 0,
+      "PointsPending": 0
+    },
+    {
+      "Rank": 13,
+      "POPID": "POP-00230",
+      "Holder": "Jett Walker",
+      "Episodes": 1,
+      "PointsTotal": 21.82,
+      "CreditsTotal": 0,
+      "CombatTotal": 0,
+      "MishapTotal": 0,
+      "BestMagnitude": 2,
+      "LastAiredCycle": 118,
+      "CyclesLed": 0,
+      "CurrentStreak": 0,
+      "PointsPending": 0
+    },
+    {
+      "Rank": 14,
       "POPID": "POP-00597",
       "Holder": "Eric Taveras",
       "Episodes": 3,
@@ -168,7 +213,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 12,
+      "Rank": 15,
       "POPID": "POP-00143",
       "Holder": "Clarissa Dane",
       "Episodes": 9,
@@ -183,7 +228,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 13,
+      "Rank": 16,
       "POPID": "POP-00688",
       "Holder": "Merkin Jumper",
       "Episodes": 7,
@@ -198,7 +243,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 14,
+      "Rank": 17,
       "POPID": "POP-01053",
       "Holder": "Rosario Medina",
       "Episodes": 3,
@@ -213,7 +258,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 15,
+      "Rank": 18,
       "POPID": "POP-00141",
       "Holder": "Priya Narang",
       "Episodes": 2,
@@ -228,7 +273,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 16,
+      "Rank": 19,
       "POPID": "POP-00770",
       "Holder": "Kato Rivers",
       "Episodes": 3,
@@ -243,7 +288,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 17,
+      "Rank": 20,
       "POPID": "POP-00235",
       "Holder": "Aaliyah Brennan",
       "Episodes": 2,
@@ -258,7 +303,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 18,
+      "Rank": 21,
       "POPID": "POP-01203",
       "Holder": "Iris Pham",
       "Episodes": 2,
@@ -273,7 +318,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 19,
+      "Rank": 22,
       "POPID": "POP-00836",
       "Holder": "Cristina Booker",
       "Episodes": 2,
@@ -288,7 +333,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 20,
+      "Rank": 23,
       "POPID": "POP-00926",
       "Holder": "Briar Soto",
       "Episodes": 2,
@@ -303,7 +348,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 21,
+      "Rank": 24,
       "POPID": "POP-01077",
       "Holder": "Rafael Phillips",
       "Episodes": 2,
@@ -318,7 +363,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 22,
+      "Rank": 25,
       "POPID": "POP-00962",
       "Holder": "Marcus Walker",
       "Episodes": 7,
@@ -333,7 +378,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 23,
+      "Rank": 26,
       "POPID": "POP-00775",
       "Holder": "Sammie Alvarez",
       "Episodes": 3,
@@ -348,7 +393,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 24,
+      "Rank": 27,
       "POPID": "POP-00121",
       "Holder": "Otis Redd",
       "Episodes": 2,
@@ -363,7 +408,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 25,
+      "Rank": 28,
       "POPID": "POP-00300",
       "Holder": "Belle Lopez",
       "Episodes": 3,
@@ -378,7 +423,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 26,
+      "Rank": 29,
       "POPID": "POP-00190",
       "Holder": "Jackson Sift",
       "Episodes": 2,
@@ -393,7 +438,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 27,
+      "Rank": 30,
       "POPID": "POP-00731",
       "Holder": "Leanne Wu",
       "Episodes": 2,
@@ -408,7 +453,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 28,
+      "Rank": 31,
       "POPID": "POP-00287",
       "Holder": "Simone Adesanya",
       "Episodes": 2,
@@ -423,7 +468,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 29,
+      "Rank": 32,
       "POPID": "POP-00495",
       "Holder": "Rosalind Young",
       "Episodes": 2,
@@ -438,7 +483,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 30,
+      "Rank": 33,
       "POPID": "POP-00031",
       "Holder": "Martin Richards",
       "Episodes": 2,
@@ -453,7 +498,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 31,
+      "Rank": 34,
       "POPID": "POP-00734",
       "Holder": "Father Miguel",
       "Episodes": 2,
@@ -468,7 +513,7 @@
       "PointsPending": 0
     },
     {
-      "Rank": 32,
+      "Rank": 35,
       "POPID": "POP-00842",
       "Holder": "Wanjiru Liu",
       "Episodes": 2,

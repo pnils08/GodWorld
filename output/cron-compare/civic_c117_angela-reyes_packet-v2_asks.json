@@ -1,0 +1,382 @@
+[
+  {
+    "pop": "POP-00325",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00325\",\"name\":\"Isabel Lopes\",\"role\":\"ESL Teacher\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Angela Reyes\",\"question\":\"You said the calendar squares all look alike lately. What does a regular week look like in your ESL classroom now? Have you noticed anything in attendance, behavior or how new students are settling in? Speak from your life.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Isabel Lopes — ESL Teacher — Fruitvale — age 42 — ESL Teacher at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null},\"known\":[{\"t\":\"FACT\",\"text\":\"Isabel Lopes — ESL Teacher — Fruitvale — age 42 — ESL Teacher at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace\",\"src\":\"Simulation_Ledger profile for POP-00325\",\"id\":\"F-38271c2f4671\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00325",
+        "name": "Isabel Lopes",
+        "role": "ESL Teacher",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Angela Reyes",
+        "question": "You said the calendar squares all look alike lately. What does a regular week look like in your ESL classroom now? Have you noticed anything in attendance, behavior or how new students are settling in? Speak from your life."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Isabel Lopes — ESL Teacher — Fruitvale — age 42 — ESL Teacher at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Isabel Lopes — ESL Teacher — Fruitvale — age 42 — ESL Teacher at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+          "src": "Simulation_Ledger profile for POP-00325",
+          "id": "F-38271c2f4671"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00317",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00317\",\"name\":\"Lila Bennington\",\"role\":\"Oakland City Schools Elementary Teacher\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Angela Reyes\",\"question\":\"What do you notice first in your elementary classroom these days, and has anything shifted in attendance or mood this fall? Speak from your life.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Lila Bennington — Oakland City Schools Elementary Teacher — Fruitvale — age 53 — Oakland City Schools Elementary Teacher at Oakland City Schools; C117: re-read an old journal page and didn't recognize the handwriting mood\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null},\"known\":[{\"t\":\"FACT\",\"text\":\"Lila Bennington — Oakland City Schools Elementary Teacher — Fruitvale — age 53 — Oakland City Schools Elementary Teacher at Oakland City Schools; C117: re-read an old journal page and didn't recognize the handwriting mood\",\"src\":\"Simulation_Ledger profile for POP-00317\",\"id\":\"F-61dd9c406819\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00317",
+        "name": "Lila Bennington",
+        "role": "Oakland City Schools Elementary Teacher",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Angela Reyes",
+        "question": "What do you notice first in your elementary classroom these days, and has anything shifted in attendance or mood this fall? Speak from your life."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Lila Bennington — Oakland City Schools Elementary Teacher — Fruitvale — age 53 — Oakland City Schools Elementary Teacher at Oakland City Schools; C117: re-read an old journal page and didn't recognize the handwriting mood",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Lila Bennington — Oakland City Schools Elementary Teacher — Fruitvale — age 53 — Oakland City Schools Elementary Teacher at Oakland City Schools; C117: re-read an old journal page and didn't recognize the handwriting mood",
+          "src": "Simulation_Ledger profile for POP-00317",
+          "id": "F-61dd9c406819"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00667",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00667\",\"name\":\"Lo Thoop\",\"role\":\"Creative Writing Teacher\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Angela Reyes\",\"question\":\"As a creative writing teacher in Jack London, what changes do you see in your students' writing or engagement? Jack London's index slipped from 7.39 to 7.3. Does that match what you see? Speak from your life.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Lo Thoop — Creative Writing Teacher — Jack London — age 68 — Creative Writing Teacher at Oakland City Schools; C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null},\"known\":[{\"t\":\"FACT\",\"text\":\"Lo Thoop — Creative Writing Teacher — Jack London — age 68 — Creative Writing Teacher at Oakland City Schools; C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.\",\"src\":\"Simulation_Ledger profile for POP-00667\",\"id\":\"F-34bc37fd58c0\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00667",
+        "name": "Lo Thoop",
+        "role": "Creative Writing Teacher",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Angela Reyes",
+        "question": "As a creative writing teacher in Jack London, what changes do you see in your students' writing or engagement? Jack London's index slipped from 7.39 to 7.3. Does that match what you see? Speak from your life."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Lo Thoop — Creative Writing Teacher — Jack London — age 68 — Creative Writing Teacher at Oakland City Schools; C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Lo Thoop — Creative Writing Teacher — Jack London — age 68 — Creative Writing Teacher at Oakland City Schools; C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+          "src": "Simulation_Ledger profile for POP-00667",
+          "id": "F-34bc37fd58c0"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00739",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00739\",\"name\":\"Karem Asante\",\"role\":\"Youth Counselor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Angela Reyes\",\"question\":\"You sit in a lot of meetings and see kids one on one. What are West Oakland students bringing in, and is there a change behind the index slipping from 8.0 to 7.92? Speak from your life.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null},\"known\":[{\"t\":\"FACT\",\"text\":\"Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.\",\"src\":\"Simulation_Ledger profile for POP-00739\",\"id\":\"F-155f7988991e\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00739",
+        "name": "Karem Asante",
+        "role": "Youth Counselor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Angela Reyes",
+        "question": "You sit in a lot of meetings and see kids one on one. What are West Oakland students bringing in, and is there a change behind the index slipping from 8.0 to 7.92? Speak from your life."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+          "src": "Simulation_Ledger profile for POP-00739",
+          "id": "F-155f7988991e"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

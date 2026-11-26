@@ -1,0 +1,93 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Tommy Fry
+Team: Las Vegas Aviators (AAA, Oakland Athletics)
+Position: SS
+Jersey: #33
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: A
+Overall: 77 (trending up)
+MLB Service: 0.000
+Age: 25
+Bats: R
+Throws: R
+Height: 5'11"
+Weight: 172 lbs
+Drafted: Round 1 (2037)
+Secondary Position: 2B, 3B
+Hitter Tendency: OPPOSITE
+Born: MICHIGAN
+Canonical POPID: not yet assigned (not on Simulation_Ledger or As_Roster)
+
+--------------------------------------------------
+
+ATTRIBUTES (game screen; change shown in brackets)
+
+CON R: 65 (+4)
+CON L: 77 (+4)
+POW R: 57 (+2)
+POW L: 55 (-1)
+VIS: 63 (+2)
+DISC: 61
+CLT: 67 (+3)
+BUNT: 16 (+3)
+DBUNT: 37 (+2)
+DUR: 86 (+2)
+FLD: 64 (+3)
+ARM: 55 (+4)
+ACC: 55 (+4)
+REAC: 52 (+5)
+SPD: 64
+STEAL: 95
+BR AGG: 59 (+1)
+
+--------------------------------------------------
+
+CONTRACT
+
+2042: $100K
+2043: RNW
+2044: RNW
+2045: ARB
+2046: ARB
+2047: ARB
+2048: FA
+2049: FA
+2050: FA
+2051: FA
+
+On Active Roster: NO
+On 40-Man Roster: YES
+Minor League Options: 0/3 used
+Playoff Eligible: -
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+
+MLB STATS
+
+None (0.000 MLB service). No minor league stats screen sent.
+
+--------------------------------------------------
+
+AWARDS
+
+Not yet read.
+
+--------------------------------------------------
+
+NOTES
+
+- Acquired: 2041, Trade (NYM)
+
+END

@@ -2,7 +2,7 @@
   "generated": "2026-11-25",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1795,
+  "functionsMapped": 1798,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -687,6 +687,7 @@
         "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_",
         "phase05-citizens/applyBusinessDynamics.js::bizCoverageDeviation_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
+        "phase05-citizens/bondEngine.js::bondsFromSharedMoments_",
         "phase05-citizens/bondEngine.js::checkConfrontationTriggers_",
         "phase05-citizens/bondEngine.js::createBond_",
         "phase05-citizens/bondEngine.js::detectNewBonds_",
@@ -3143,6 +3144,7 @@
     "relationshipBonds": {
       "writers": [
         "phase04-events/generationalEventsEngine.js::createGenerationalBond_",
+        "phase05-citizens/bondEngine.js::bondsFromSharedMoments_",
         "phase05-citizens/bondEngine.js::createBond_",
         "phase05-citizens/bondEngine.js::processGCCourtship_",
         "phase05-citizens/bondEngine.js::processGCMarriageLottery_",
@@ -3158,6 +3160,7 @@
         "phase04-events/generationalEventsEngine.js::triggerPromotionCascade_",
         "phase05-citizens/bondEngine.js::applyAllianceBenefits_",
         "phase05-citizens/bondEngine.js::bondExists_",
+        "phase05-citizens/bondEngine.js::bondsFromSharedMoments_",
         "phase05-citizens/bondEngine.js::checkConfrontationTriggers_",
         "phase05-citizens/bondEngine.js::createBond_",
         "phase05-citizens/bondEngine.js::detectTriangleRivalries_",
@@ -3371,9 +3374,9 @@
         "utilities/exportCycleArtifacts.js::buildCycleContextPack_"
       ]
     },
-    "bondMomentsUnstepped": {
+    "bondsFromMoments": {
       "writers": [
-        "phase05-citizens/bondEngine.js::updateExistingBonds_"
+        "phase05-citizens/bondEngine.js::bondsFromSharedMoments_"
       ],
       "readers": []
     },
@@ -3382,9 +3385,16 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ],
       "readers": [
+        "phase05-citizens/bondEngine.js::bondsFromSharedMoments_",
         "phase05-citizens/bondEngine.js::updateExistingBonds_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
+    },
+    "bondMomentsUnstepped": {
+      "writers": [
+        "phase05-citizens/bondEngine.js::updateExistingBonds_"
+      ],
+      "readers": []
     },
     "_faithJoinRipple": {
       "writers": [
@@ -5157,6 +5167,7 @@
         "phase04-events/generationalEventsEngine.js::formSingleParentHousehold_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::householdHousingById_",
+        "phase05-citizens/bondEngine.js::householdTypeById_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",

@@ -1,0 +1,51 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-23T02:55:35.399Z",
+  "POPID": "POP-01209",
+  "Cycle": 117,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop01209-2026-11-23T02-30-21",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop01209-2026-11-23T02-30-21.json",
+  "Holder": "Daniela Kapoor",
+  "CreditsDelta": 0,
+  "Magnitude": 3,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Daniela Kapoor credits=0 systems=sol,alpha_centauri,tau_ceti,electra,mimosa,ross_154,arcturus,timberline,maplevale",
+  "DecidedAt": "2026-11-23T02:55:35.405Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 117,
+    "EventType": "undocked-episode",
+    "POPID": "POP-01209",
+    "Holder": "Daniela Kapoor",
+    "EpisodeId": "undocked-pop01209-Y3C13",
+    "CreditsDelta": 0,
+    "PointsDelta": 23.14,
+    "Systems": [
+      "sol",
+      "alpha_centauri",
+      "tau_ceti",
+      "electra",
+      "mimosa",
+      "ross_154",
+      "arcturus",
+      "timberline",
+      "maplevale"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 3,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop01209-2026-11-23T02-30-21.json"
+  },
+  "PointsDelta": 23.14
+}

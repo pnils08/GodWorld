@@ -1,0 +1,440 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "117",
+  "persona": "elliot-marbury",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00166",
+      "name": "Elliot Marbury",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Travis Coles — 3 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "data-desk",
+        "hood": null,
+        "facts": [
+          "Travis Coles — SP, Athletics; 3 seasons on the dossier",
+          "Travis Coles 2041 ATH: 32 G, 32 GS, 22-4, 0 SV, 215 IP, 166 H, 65 ER, 25 HR, 39 BB, 254 SO, ERA 2.72",
+          "Travis Coles 2040 WSH: 33 G, 33 GS, 13-8, 0 SV, 219.1 IP, 177 H, 50 ER, 17 HR, 61 BB, 207 SO, ERA 2.05",
+          "Travis Coles 2039 WSH: 33 G, 33 GS, 9-15, 0 SV, 197.2 IP, 179 H, 87 ER, 26 HR, 51 BB, 198 SO, ERA 3.96",
+          "Travis Coles 2041 rates (215 IP): 10.6 K per 9, 1.6 BB per 9, 6.51 K per BB (worked from the season line)",
+          "Travis Coles 2040 rates (219.1 IP): 8.5 K per 9, 2.5 BB per 9, 3.39 K per BB (worked from the season line)",
+          "Travis Coles 2039 rates (197.2 IP): 9.0 K per 9, 2.3 BB per 9, 3.88 K per BB (worked from the season line)",
+          "Peer — Benji Dillon (SP, Athletics) 2041 ATH: 35 G, 28 GS, 10-8, 1 SV, 150.1 IP, 155 H, 74 ER, 16 HR, 65 BB, 132 SO, ERA 4.43",
+          "Peer — Benji Dillon 2041 rates (150.1 IP): 7.9 K per 9, 3.9 BB per 9, 2.03 K per BB (worked from the season line)",
+          "Peer — Henry Rivas (SP, Athletics) 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64",
+          "Peer — Henry Rivas 2041 rates (136.1 IP): 8.8 K per 9, 1.6 BB per 9, 5.54 K per BB (worked from the season line)",
+          "This cycle (feed notes, off-season): The one mark on the year came in World Series game 2, when he and Clark Saryan each gave up 2 runs in relief of Travis Coles."
+        ],
+        "priorCycle": "DOSSIER",
+        "note": "subject is on this cycle's feed",
+        "engineHooks": [],
+        "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-data-desk",
+      "hood": null,
+      "score": null,
+      "src": "output/player_truesource_mirror.json Travis Coles @C117",
+      "nearby": [
+        {
+          "text": "A's | roster-move | (off-season) | Mark Aitken",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | re-signing | (off-season) | Vladimir Gonzalez",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Austin Reaves, Wendell Carter Jr, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Austin Reaves, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles — 3 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+        "src": "output/player_truesource_mirror.json Travis Coles @C117",
+        "id": "F-85692f225047"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles's 2041 line against 2 earlier seasons and 2 peers.",
+        "src": "output/player_truesource_mirror.json Travis Coles @C117",
+        "id": "F-480554020509"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles — SP, Athletics; 3 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json Travis Coles",
+        "id": "F-98523943218c"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles 2041 ATH: 32 G, 32 GS, 22-4, 0 SV, 215 IP, 166 H, 65 ER, 25 HR, 39 BB, 254 SO, ERA 2.72",
+        "src": "output/player_truesource_mirror.json Travis Coles",
+        "id": "F-e886192b26cf"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles 2040 WSH: 33 G, 33 GS, 13-8, 0 SV, 219.1 IP, 177 H, 50 ER, 17 HR, 61 BB, 207 SO, ERA 2.05",
+        "src": "output/player_truesource_mirror.json Travis Coles",
+        "id": "F-d215fe318911"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles 2039 WSH: 33 G, 33 GS, 9-15, 0 SV, 197.2 IP, 179 H, 87 ER, 26 HR, 51 BB, 198 SO, ERA 3.96",
+        "src": "output/player_truesource_mirror.json Travis Coles",
+        "id": "F-a6ac44702062"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles 2041 rates (215 IP): 10.6 K per 9, 1.6 BB per 9, 6.51 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Travis Coles",
+        "id": "F-26a02a50b92c"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles 2040 rates (219.1 IP): 8.5 K per 9, 2.5 BB per 9, 3.39 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Travis Coles",
+        "id": "F-a89097d47e91"
+      },
+      {
+        "t": "FACT",
+        "text": "Travis Coles 2039 rates (197.2 IP): 9.0 K per 9, 2.3 BB per 9, 3.88 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Travis Coles",
+        "id": "F-780c3e454f03"
+      },
+      {
+        "t": "FACT",
+        "text": "Peer — Benji Dillon (SP, Athletics) 2041 ATH: 35 G, 28 GS, 10-8, 1 SV, 150.1 IP, 155 H, 74 ER, 16 HR, 65 BB, 132 SO, ERA 4.43",
+        "src": "output/player_truesource_mirror.json Benji Dillon",
+        "id": "F-0ca9a1a03748"
+      },
+      {
+        "t": "FACT",
+        "text": "Peer — Benji Dillon 2041 rates (150.1 IP): 7.9 K per 9, 3.9 BB per 9, 2.03 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Benji Dillon",
+        "id": "F-abeac4aace05"
+      },
+      {
+        "t": "FACT",
+        "text": "Peer — Henry Rivas (SP, Athletics) 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64",
+        "src": "output/player_truesource_mirror.json Henry Rivas",
+        "id": "F-8ff347d1068a"
+      },
+      {
+        "t": "FACT",
+        "text": "Peer — Henry Rivas 2041 rates (136.1 IP): 8.8 K per 9, 1.6 BB per 9, 5.54 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Henry Rivas",
+        "id": "F-30d206f5b045"
+      },
+      {
+        "t": "FACT",
+        "text": "This cycle (feed notes, off-season): The one mark on the year came in World Series game 2, when he and Clark Saryan each gave up 2 runs in relief of Travis Coles.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C117",
+        "id": "F-f754d3f99f62"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-data-desk",
+      "angle": "Travis Coles — 3 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "label": "Travis Coles — 3 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+      "hookLine": "Travis Coles's 2041 line against 2 earlier seasons and 2 peers.",
+      "hood": null,
+      "citizens": [
+        "Travis Coles (POP-00533)"
+      ],
+      "popids": [
+        "POP-00533"
+      ],
+      "ref": "output/player_truesource_mirror.json Travis Coles @C117",
+      "cycle": 117
+    },
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "DATA-DESK-SLICE-1",
+    "kind": "beat-data-desk",
+    "seat": {
+      "slug": "elliot-marbury",
+      "name": "Elliot Marbury",
+      "popid": "POP-00166",
+      "desk": "sports",
+      "domain": "data-desk",
+      "builder": "buildMarburySlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-data-desk",
+      "score": 100,
+      "label": "Travis Coles — 3 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+      "hood": null,
+      "source": "output/player_truesource_mirror.json Travis Coles @C117"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Travis Coles — 3 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year — what the line proves, on what sample, and what would disprove it",
+      "hookLine": "Travis Coles's 2041 line against 2 earlier seasons and 2 peers.",
+      "anchorFacts": [
+        "Travis Coles — SP, Athletics; 3 seasons on the dossier",
+        "Travis Coles 2041 ATH: 32 G, 32 GS, 22-4, 0 SV, 215 IP, 166 H, 65 ER, 25 HR, 39 BB, 254 SO, ERA 2.72",
+        "Travis Coles 2040 WSH: 33 G, 33 GS, 13-8, 0 SV, 219.1 IP, 177 H, 50 ER, 17 HR, 61 BB, 207 SO, ERA 2.05",
+        "Travis Coles 2039 WSH: 33 G, 33 GS, 9-15, 0 SV, 197.2 IP, 179 H, 87 ER, 26 HR, 51 BB, 198 SO, ERA 3.96",
+        "Travis Coles 2041 rates (215 IP): 10.6 K per 9, 1.6 BB per 9, 6.51 K per BB (worked from the season line)",
+        "Travis Coles 2040 rates (219.1 IP): 8.5 K per 9, 2.5 BB per 9, 3.39 K per BB (worked from the season line)",
+        "Travis Coles 2039 rates (197.2 IP): 9.0 K per 9, 2.3 BB per 9, 3.88 K per BB (worked from the season line)",
+        "Peer — Benji Dillon (SP, Athletics) 2041 ATH: 35 G, 28 GS, 10-8, 1 SV, 150.1 IP, 155 H, 74 ER, 16 HR, 65 BB, 132 SO, ERA 4.43",
+        "Peer — Benji Dillon 2041 rates (150.1 IP): 7.9 K per 9, 3.9 BB per 9, 2.03 K per BB (worked from the season line)",
+        "Peer — Henry Rivas (SP, Athletics) 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64",
+        "Peer — Henry Rivas 2041 rates (136.1 IP): 8.8 K per 9, 1.6 BB per 9, 5.54 K per BB (worked from the season line)",
+        "This cycle (feed notes, off-season): The one mark on the year came in World Series game 2, when he and Clark Saryan each gave up 2 runs in relief of Travis Coles."
+      ],
+      "evidence": [
+        {
+          "text": "Travis Coles — SP, Athletics; 3 seasons on the dossier",
+          "src": "output/player_truesource_mirror.json Travis Coles"
+        },
+        {
+          "text": "Travis Coles 2041 ATH: 32 G, 32 GS, 22-4, 0 SV, 215 IP, 166 H, 65 ER, 25 HR, 39 BB, 254 SO, ERA 2.72",
+          "src": "output/player_truesource_mirror.json Travis Coles"
+        },
+        {
+          "text": "Travis Coles 2040 WSH: 33 G, 33 GS, 13-8, 0 SV, 219.1 IP, 177 H, 50 ER, 17 HR, 61 BB, 207 SO, ERA 2.05",
+          "src": "output/player_truesource_mirror.json Travis Coles"
+        },
+        {
+          "text": "Travis Coles 2039 WSH: 33 G, 33 GS, 9-15, 0 SV, 197.2 IP, 179 H, 87 ER, 26 HR, 51 BB, 198 SO, ERA 3.96",
+          "src": "output/player_truesource_mirror.json Travis Coles"
+        },
+        {
+          "text": "Travis Coles 2041 rates (215 IP): 10.6 K per 9, 1.6 BB per 9, 6.51 K per BB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Travis Coles"
+        },
+        {
+          "text": "Travis Coles 2040 rates (219.1 IP): 8.5 K per 9, 2.5 BB per 9, 3.39 K per BB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Travis Coles"
+        },
+        {
+          "text": "Travis Coles 2039 rates (197.2 IP): 9.0 K per 9, 2.3 BB per 9, 3.88 K per BB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Travis Coles"
+        },
+        {
+          "text": "Peer — Benji Dillon (SP, Athletics) 2041 ATH: 35 G, 28 GS, 10-8, 1 SV, 150.1 IP, 155 H, 74 ER, 16 HR, 65 BB, 132 SO, ERA 4.43",
+          "src": "output/player_truesource_mirror.json Benji Dillon"
+        },
+        {
+          "text": "Peer — Benji Dillon 2041 rates (150.1 IP): 7.9 K per 9, 3.9 BB per 9, 2.03 K per BB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Benji Dillon"
+        },
+        {
+          "text": "Peer — Henry Rivas (SP, Athletics) 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64",
+          "src": "output/player_truesource_mirror.json Henry Rivas"
+        },
+        {
+          "text": "Peer — Henry Rivas 2041 rates (136.1 IP): 8.8 K per 9, 1.6 BB per 9, 5.54 K per BB (worked from the season line)",
+          "src": "output/player_truesource_mirror.json Henry Rivas"
+        },
+        {
+          "text": "This cycle (feed notes, off-season): The one mark on the year came in World Series game 2, when he and Clark Saryan each gave up 2 runs in relief of Travis Coles.",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl @C117"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "DOSSIER",
+        "vs": null
+      },
+      "hooks": [],
+      "note": "subject is on this cycle's feed",
+      "pageVoices": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange"
+    },
+    "citizens": [
+      {
+        "popid": "POP-00533",
+        "name": "Travis Coles",
+        "role": "SP, Athletics",
+        "neighborhood": null,
+        "business": null,
+        "profile": "Travis Coles — SP, Athletics",
+        "why": "dossier on file (player_truesource_mirror)"
+      }
+    ],
+    "pointers": [
+      "output/player_truesource_mirror.json Travis Coles @C117"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Elliot Marbury",
+    "popid": "POP-00166",
+    "text": "The dossier gives me three seasons of Travis Coles and the rates I can work from them. The 2041 line is the one that stands out — 22-4, 2.72 ERA, 215 innings — but the rate that matters is the walk column: 39 walks against 254 strikeouts, a 6.51 K/BB. That is not a normal season for him. In 2040 he was at 3.39, in 2039 at 3.88. The 2041 number is nearly double his own two-year baseline. The question is whether that is a real change in how he throws or a single season of good fortune on balls in play and sequencing. The sample is 215 innings, which is a real sample but not a conclusive one. The peer band helps: Henry Rivas ran a 5.54 K/BB in 136.1 innings, Benji Dillon a 2.03 in 150.1. So Col",
+    "plan": {
+      "chase": "The dossier gives me three seasons of Travis Coles and the rates I can work from them. The 2041 line is the one that stands out — 22-4, 2.72 ERA, 215 innings — but the rate that matters is the walk column: 39 walks against 254 strikeouts, a 6.51 K/BB. That is not a normal season for him. In 2040 he was at 3.39, in 2039 at 3.88. The 2041 number is nearly double his own two-year baseline. The question is whether that is a real change in how he throws or a single season of good fortune on balls in play and sequencing. The sample is 215 innings, which is a real sample but not a conclusive one. The peer band helps: Henry Rivas ran a 5.54 K/BB in 136.1 innings, Benji Dillon a 2.03 in 150.1. So Col",
+      "focus": "Travis Coles's 2041 walk rate against his own two prior seasons and the 2041 peer band on the Athletics staff.",
+      "why": "The 6.51 K/BB in 2041 is the single largest rate change in the three-season dossier, and it is the load-bearing number under his 22-4 record. Without it, the ERA is not repeatable.",
+      "checks": [
+        "Confirm the 2041 walk total (39) and strikeout total (254) against the innings figure (215) before publishing the 6.51 rate.",
+        "Verify the 2040 and 2039 rates from the season lines, not from memory.",
+        "Check that the peer rates for Dillon and Rivas are computed from their listed lines and not from any other source.",
+        "State the sample size (215 innings) in the same paragraph as the claim.",
+        "Name the specific next-season number (walk rate above 2.3 per nine) that would disprove the claim."
+      ],
+      "targets": [],
+      "interpretation": "The 2041 season is the hinge. The two prior seasons show a competent starter with good but not elite command. The 2041 walk rate is a step change, and the peer band makes it look less like a staff-wide environment and more like something specific to Coles. But one season is variance until a second season confirms it.",
+      "unverifiedLead": [
+        "Whether Coles changed his pitch mix or mechanics between 2040 and 2041 is not in the dossier and would require a separate source.",
+        "Whether the World Series game 2 relief appearance — where he and Clark Saryan each gave up 2 runs — affected his postseason line is not in the dossier."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | roster-move | (off-season) | Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | re-signing | (off-season) | Vladimir Gonzalez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Austin Reaves, Wendell Carter Jr, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01028",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Austin Reaves, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01024"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-25T12:16:12.335Z"
+}

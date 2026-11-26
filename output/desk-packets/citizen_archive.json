@@ -2,7 +2,7 @@
   "Mike Paulson": {
     "popId": "POP-00527",
     "name": "Mike Paulson",
-    "totalRefs": 14,
+    "totalRefs": 16,
     "articles": [
       {
         "source": "",
@@ -73,13 +73,23 @@
         "source": "Tanya Cruz",
         "title": "sports_c115_tanya-cruz-0fa5",
         "cycle": "115"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c116_tanya-cruz-0fa5",
+        "cycle": "116"
       }
     ]
   },
   "Deacon Seymour": {
     "popId": "POP-00528",
     "name": "Deacon Seymour",
-    "totalRefs": 11,
+    "totalRefs": 14,
     "articles": [
       {
         "source": "",
@@ -135,13 +145,28 @@
         "source": "Dr. Lila Mezran",
         "title": "civic_c113_lila-mezran-23ad",
         "cycle": "113"
+      },
+      {
+        "source": "Dr. Lila Mezran",
+        "title": "civic_c116_lila-mezran-23ad",
+        "cycle": "116"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c116_tanya-cruz-0fa5",
+        "cycle": "116"
       }
     ]
   },
   "Adash Stanley": {
     "popId": "POP-01023",
     "name": "Adash Stanley",
-    "totalRefs": 11,
+    "totalRefs": 12,
     "articles": [
       {
         "source": "",
@@ -197,13 +222,18 @@
         "source": "P Slayer",
         "title": "sports_c114_p-slayer-0fa5",
         "cycle": "114"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
       }
     ]
   },
   "Vinnie Keane": {
     "popId": "POP-00001",
     "name": "Vinnie Keane",
-    "totalRefs": 20,
+    "totalRefs": 22,
     "articles": [
       {
         "source": "",
@@ -304,13 +334,23 @@
         "source": "Tanya Cruz",
         "title": "sports_c115_tanya-cruz-0fa5",
         "cycle": "115"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c116_kai-marston-97bf",
+        "cycle": "116"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c116_tanya-cruz-0fa5",
+        "cycle": "116"
       }
     ]
   },
   "Darrin Davis": {
     "popId": "POP-00021",
     "name": "Darrin Davis",
-    "totalRefs": 11,
+    "totalRefs": 12,
     "articles": [
       {
         "source": "",
@@ -366,13 +406,18 @@
         "source": "Kai Marston",
         "title": "culture_c115_kai-marston-97bf",
         "cycle": "115"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c116_kai-marston-97bf",
+        "cycle": "116"
       }
     ]
   },
   "Mark Aitken": {
     "popId": "POP-00003",
     "name": "Mark Aitken",
-    "totalRefs": 11,
+    "totalRefs": 14,
     "articles": [
       {
         "source": "",
@@ -428,13 +473,28 @@
         "source": "Maria Keen",
         "title": "culture_c112_maria-keen-23ad",
         "cycle": "112"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
+      },
+      {
+        "source": "P Slayer",
+        "title": "sports_c116_p-slayer-0fa5",
+        "cycle": "116"
       }
     ]
   },
   "Henry Rivas": {
     "popId": "POP-00024",
     "name": "Henry Rivas",
-    "totalRefs": 6,
+    "totalRefs": 7,
     "articles": [
       {
         "source": "",
@@ -465,13 +525,18 @@
         "source": "Celeste Tran",
         "title": "wire_c114_celeste-tran-0fa5",
         "cycle": "114"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
       }
     ]
   },
   "Travis Coles": {
     "popId": "POP-00533",
     "name": "Travis Coles",
-    "totalRefs": 11,
+    "totalRefs": 12,
     "articles": [
       {
         "source": "",
@@ -527,13 +592,18 @@
         "source": "Anthony Raines",
         "title": "sports_c114_anthony-raines-23ad",
         "cycle": "114"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c116_kai-marston-97bf",
+        "cycle": "116"
       }
     ]
   },
   "Benji Dillon": {
     "popId": "POP-00018",
     "name": "Benji Dillon",
-    "totalRefs": 18,
+    "totalRefs": 20,
     "articles": [
       {
         "source": "",
@@ -624,6 +694,16 @@
         "source": "Tanya Cruz",
         "title": "sports_c115_tanya-cruz-0fa5",
         "cycle": "115"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c116_kai-marston-97bf",
+        "cycle": "116"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c116_tanya-cruz-0fa5",
+        "cycle": "116"
       }
     ]
   },
@@ -744,7 +824,7 @@
   "Elliott Crane": {
     "popId": "POP-00044",
     "name": "Elliott Crane",
-    "totalRefs": 13,
+    "totalRefs": 14,
     "articles": [
       {
         "source": "",
@@ -810,13 +890,18 @@
         "source": "Carmen Delaine",
         "title": "civic_c115_carmen-delaine-23ad",
         "cycle": "115"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c116_carmen-delaine-23ad",
+        "cycle": "116"
       }
     ]
   },
   "Brenda Okoro": {
     "popId": "POP-00037",
     "name": "Brenda Okoro",
-    "totalRefs": 6,
+    "totalRefs": 7,
     "articles": [
       {
         "source": "",
@@ -847,6 +932,11 @@
         "source": "Carmen Delaine",
         "title": "civic_c115_carmen-delaine-23ad",
         "cycle": "115"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c116_carmen-delaine-23ad",
+        "cycle": "116"
       }
     ]
   },
@@ -1236,7 +1326,7 @@
   "Ramon Vega": {
     "popId": "POP-00042",
     "name": "Ramon Vega",
-    "totalRefs": 12,
+    "totalRefs": 13,
     "articles": [
       {
         "source": "",
@@ -1297,13 +1387,18 @@
         "source": "Carmen Delaine",
         "title": "civic_c115_carmen-delaine-23ad",
         "cycle": "115"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c116_carmen-delaine-23ad",
+        "cycle": "116"
       }
     ]
   },
   "Danny Horn": {
     "popId": "POP-00022",
     "name": "Danny Horn",
-    "totalRefs": 11,
+    "totalRefs": 12,
     "articles": [
       {
         "source": "",
@@ -1359,6 +1454,11 @@
         "source": "Maria Keen",
         "title": "culture_c114_maria-keen-23ad",
         "cycle": "114"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c116_kai-marston-97bf",
+        "cycle": "116"
       }
     ]
   },
@@ -1541,7 +1641,7 @@
   "Leonard Tran": {
     "popId": "POP-00502",
     "name": "Leonard Tran",
-    "totalRefs": 10,
+    "totalRefs": 11,
     "articles": [
       {
         "source": "",
@@ -1592,6 +1692,11 @@
         "source": "Carmen Delaine",
         "title": "civic_c115_carmen-delaine-23ad",
         "cycle": "115"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c116_carmen-delaine-23ad",
+        "cycle": "116"
       }
     ]
   },
@@ -1813,7 +1918,7 @@
   "Marcus Webb": {
     "popId": "POP-00790",
     "name": "Marcus Webb",
-    "totalRefs": 6,
+    "totalRefs": 7,
     "articles": [
       {
         "source": "",
@@ -1844,6 +1949,11 @@
         "source": "Carmen Delaine",
         "title": "civic_c115_carmen-delaine-23ad",
         "cycle": "115"
+      },
+      {
+        "source": "Carmen Delaine",
+        "title": "civic_c116_carmen-delaine-23ad",
+        "cycle": "116"
       }
     ]
   },
@@ -2519,7 +2629,7 @@
   "Ernesto Quintero": {
     "popId": "POP-00050",
     "name": "Ernesto Quintero",
-    "totalRefs": 4,
+    "totalRefs": 7,
     "articles": [
       {
         "source": "",
@@ -2540,6 +2650,21 @@
         "source": "Anthony Raines",
         "title": "sports_c114_anthony-raines-23ad",
         "cycle": "114"
+      },
+      {
+        "source": "Kai Marston",
+        "title": "culture_c116_kai-marston-97bf",
+        "cycle": "116"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
+      },
+      {
+        "source": "P Slayer",
+        "title": "sports_c116_p-slayer-0fa5",
+        "cycle": "116"
       }
     ]
   },
@@ -3118,7 +3243,7 @@
   "Martin Richards": {
     "popId": "POP-00031",
     "name": "Martin Richards",
-    "totalRefs": 6,
+    "totalRefs": 7,
     "articles": [
       {
         "source": "",
@@ -3149,6 +3274,11 @@
         "source": "Elliot Marbury",
         "title": "sports_c112_elliot-marbury-23ad",
         "cycle": "112"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
       }
     ]
   },
@@ -3187,7 +3317,7 @@
   "Eric Taveras": {
     "popId": "POP-00597",
     "name": "Eric Taveras",
-    "totalRefs": 5,
+    "totalRefs": 6,
     "articles": [
       {
         "source": "",
@@ -3213,13 +3343,18 @@
         "source": "Nia Rook",
         "title": "undocked-digest_c113_nia-rook-weekly-70bb",
         "cycle": "113"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
       }
     ]
   },
   "Shawn Nguyen": {
     "popId": "POP-00971",
     "name": "Shawn Nguyen",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "",
@@ -3230,6 +3365,11 @@
         "source": "",
         "title": "Baylight and infrastructure articles",
         "cycle": "84"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
       }
     ]
   },
@@ -3541,7 +3681,7 @@
   "Pablo Almanzar": {
     "popId": "POP-01078",
     "name": "Pablo Almanzar",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "Anthony Raines",
@@ -3557,6 +3697,11 @@
         "source": "Anthony Raines",
         "title": "sports_c109_anthony-raines-abcf",
         "cycle": "109"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
       }
     ]
   },
@@ -4133,12 +4278,17 @@
   "Rick Dillon": {
     "popId": "POP-00743",
     "name": "Rick Dillon",
-    "totalRefs": 1,
+    "totalRefs": 2,
     "articles": [
       {
         "source": "Angela Reyes",
         "title": "civic_c106_angela-reyes-abcf",
         "cycle": "106"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
       }
     ]
   },
@@ -4418,7 +4568,7 @@
   "Guadalupe Lupe": {
     "popId": "POP-00643",
     "name": "Guadalupe Lupe",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "Hal Richmond",
@@ -4434,6 +4584,11 @@
         "source": "Nia Rook",
         "title": "undocked_c108_nia-rook-8f8c",
         "cycle": "108"
+      },
+      {
+        "source": "Ines Sorensen",
+        "title": "culture_c116_ines-sorensen-23ad-1715",
+        "cycle": "116"
       }
     ]
   },
@@ -4481,7 +4636,7 @@
   "Yu Zen": {
     "popId": "POP-00194",
     "name": "Yu Zen",
-    "totalRefs": 3,
+    "totalRefs": 5,
     "articles": [
       {
         "source": "Dr. Lila Mezran",
@@ -4497,6 +4652,16 @@
         "source": "Dr. Lila Mezran",
         "title": "civic_c113_lila-mezran-23ad",
         "cycle": "113"
+      },
+      {
+        "source": "Dr. Lila Mezran",
+        "title": "civic_c116_lila-mezran-23ad",
+        "cycle": "116"
+      },
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
       }
     ]
   },
@@ -4676,7 +4841,7 @@
   "Vladimir Gonzalez": {
     "popId": "POP-00598",
     "name": "Vladimir Gonzalez",
-    "totalRefs": 7,
+    "totalRefs": 8,
     "articles": [
       {
         "source": "P Slayer",
@@ -4712,13 +4877,18 @@
         "source": "Tamsin Pruitt",
         "title": "culture_c115_tamsin-pruitt-23ad-0021",
         "cycle": "115"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
       }
     ]
   },
   "Desmond Morton": {
     "popId": "POP-00051",
     "name": "Desmond Morton",
-    "totalRefs": 4,
+    "totalRefs": 5,
     "articles": [
       {
         "source": "P Slayer",
@@ -4739,6 +4909,11 @@
         "source": "Tanya Cruz",
         "title": "sports_c113_tanya-cruz-0fa5",
         "cycle": "113"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
       }
     ]
   },
@@ -5415,7 +5590,7 @@
   "Omar Amici": {
     "popId": "POP-00263",
     "name": "Omar Amici",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "Ines Sorensen",
@@ -5431,6 +5606,11 @@
         "source": "Tamsin Pruitt",
         "title": "culture_c113_tamsin-pruitt-23ad",
         "cycle": "113"
+      },
+      {
+        "source": "Ines Sorensen",
+        "title": "culture_c116_ines-sorensen-23ad-1715",
+        "cycle": "116"
       }
     ]
   },
@@ -5550,7 +5730,7 @@
   "Maurice Franklin": {
     "popId": "POP-00801",
     "name": "Maurice Franklin",
-    "totalRefs": 3,
+    "totalRefs": 4,
     "articles": [
       {
         "source": "Dr. Lila Mezran",
@@ -5566,6 +5746,11 @@
         "source": "Tamsin Pruitt",
         "title": "culture_c115_tamsin-pruitt-23ad-0023",
         "cycle": "115"
+      },
+      {
+        "source": "Dr. Lila Mezran",
+        "title": "civic_c116_lila-mezran-23ad",
+        "cycle": "116"
       }
     ]
   },
@@ -5774,7 +5959,7 @@
   "Frank Reyna": {
     "popId": "POP-00079",
     "name": "Frank Reyna",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "Anthony Raines",
@@ -5785,6 +5970,11 @@
         "source": "Tanya Cruz",
         "title": "sports_c113_tanya-cruz-0fa5",
         "cycle": "113"
+      },
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
       }
     ]
   },
@@ -6094,7 +6284,7 @@
   "Luis Taz": {
     "popId": "POP-00298",
     "name": "Luis Taz",
-    "totalRefs": 2,
+    "totalRefs": 3,
     "articles": [
       {
         "source": "Nia Rook",
@@ -6105,6 +6295,11 @@
         "source": "Nia Rook",
         "title": "undocked-digest_c115_nia-rook-weekly-70bb",
         "cycle": "115"
+      },
+      {
+        "source": "Nia Rook",
+        "title": "undocked-digest_c116_nia-rook-weekly-70bb",
+        "cycle": "116"
       }
     ]
   },
@@ -6321,6 +6516,213 @@
         "source": "Nia Rook",
         "title": "undocked-digest_c115_nia-rook-weekly-70bb",
         "cycle": "115"
+      }
+    ]
+  },
+  "Tre Mingo": {
+    "popId": "POP-00123",
+    "name": "Tre Mingo",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Ines Sorensen",
+        "title": "culture_c116_ines-sorensen-23ad-1715",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Caroline Cabrera": {
+    "popId": "POP-00847",
+    "name": "Caroline Cabrera",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Ines Sorensen",
+        "title": "culture_c116_ines-sorensen-23ad-1715",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Edmund Alegero": {
+    "popId": "POP-00282",
+    "name": "Edmund Alegero",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Wanjiru Liu": {
+    "popId": "POP-00842",
+    "name": "Wanjiru Liu",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Drago Helio": {
+    "popId": "POP-00714",
+    "name": "Drago Helio",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Davey Martinez": {
+    "popId": "POP-00213",
+    "name": "Davey Martinez",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Grace Oyelaran": {
+    "popId": "POP-01162",
+    "name": "Grace Oyelaran",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Harry Hayward": {
+    "popId": "POP-01223",
+    "name": "Harry Hayward",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Joaquín Nakamura": {
+    "popId": "POP-00248",
+    "name": "Joaquín Nakamura",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Mesi Westin": {
+    "popId": "POP-00650",
+    "name": "Mesi Westin",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Tanisha Freeman": {
+    "popId": "POP-00848",
+    "name": "Tanisha Freeman",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Tamsin Pruitt",
+        "title": "culture_c116_tamsin-pruitt-23ad-0020",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Giancarlo Hernandez": {
+    "popId": "POP-01239",
+    "name": "Giancarlo Hernandez",
+    "totalRefs": 2,
+    "articles": [
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
+      },
+      {
+        "source": "P Slayer",
+        "title": "sports_c116_p-slayer-0fa5",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Kevin Clark": {
+    "popId": "POP-00053",
+    "name": "Kevin Clark",
+    "totalRefs": 3,
+    "articles": [
+      {
+        "source": "Anthony Raines",
+        "title": "sports_c116_anthony-raines-23ad",
+        "cycle": "116"
+      },
+      {
+        "source": "P Slayer",
+        "title": "sports_c116_p-slayer-0fa5",
+        "cycle": "116"
+      },
+      {
+        "source": "Tanya Cruz",
+        "title": "sports_c116_tanya-cruz-0fa5",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Marguerite Kimball-Ostrow": {
+    "popId": "POP-01188",
+    "name": "Marguerite Kimball-Ostrow",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Nia Rook",
+        "title": "undocked-digest_c116_nia-rook-weekly-70bb",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Manju Abebe": {
+    "popId": "POP-00918",
+    "name": "Manju Abebe",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Nia Rook",
+        "title": "undocked-digest_c116_nia-rook-weekly-70bb",
+        "cycle": "116"
+      }
+    ]
+  },
+  "Soo Loo": {
+    "popId": "POP-00663",
+    "name": "Soo Loo",
+    "totalRefs": 1,
+    "articles": [
+      {
+        "source": "Nia Rook",
+        "title": "undocked-digest_c116_nia-rook-weekly-70bb",
+        "cycle": "116"
       }
     ]
   }

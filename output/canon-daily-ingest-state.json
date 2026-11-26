@@ -10,125 +10,53 @@
       "sha256": "7863e04535cc9cca102c56fdc63599f12d0ae6de49d8c284a9a092161a24e5e1",
       "restoredBy": "builder 2026-10-25 (false canon-violation overridden)"
     },
-    "article-c116-business_c116_business-desk_packet-v2_anthropic-claude-opus-5-5": {
-      "cycle": "116",
-      "sha256": "e6f06c0c914e60885af50e57f70fcf6918bcd3ded4ceceadb75a1b258e1f9e6d"
+    "article-c117-civic_c117_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "117",
+      "sha256": "6aeee82df3a43d7e0a9103101e00fdc9e8bfcf7627140a18a0701f9b90cee09c"
     },
-    "article-c116-civic_c116_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "1312e473619ec5085e01ea2bb428e06a055b203288e6b0978b48e85ae3462f0f"
+    "article-c117-civic_c117_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "117",
+      "sha256": "d557eecf8abf1ef282e9c2b5939c55947ccda1dfc4d1b306172e84f41ea1dce2"
     },
-    "article-c116-civic_c116_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "00c2138fc9f957688389c835739d3d13589ad3bf58d09725bc0418274ad9ba28"
+    "article-c117-culture_c117_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "117",
+      "sha256": "c5209545203b6eeef477aecdb56cd9fa047da1313416167cc9c66c678b165cfe"
     },
-    "article-c116-civic_c116_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "340607d8c96e8f4d2ffff319e6576640608cd5e8b3df5e68397f73a23dfc7092"
+    "article-c117-sports_c117_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "117",
+      "sha256": "3130bae67f3bc7b6f5f2a27e95a6581b4a81400e002badf133ab6d318ff3e16a"
     },
-    "article-c116-culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "d6714b177e1e9260b3fbe6e2c06c20ea22851c209bfc078eb521ab2681b17789"
+    "article-c117-undocked_c117_nia-rook_packet-v2_openai-gpt-6-luna": {
+      "cycle": "117",
+      "sha256": "278c04f5f503a745d290fbb524c029c2906c593a6299178d235e08ebd1f9d4bf"
     },
-    "article-c116-sports_c116_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "9f7422e481e6073143127e7ca365b22c67b9df8471291d4be566c8257dd6ee45"
+    "article-c117-civic_c117_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "117",
+      "sha256": "49377c5a134a9e4d52542f2af59eb967556c7e32c64b0c1ba483ad8128706156"
     },
-    "article-c116-undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna": {
-      "cycle": "116",
-      "sha256": "8c63a22f7426250726295f6562efbf28617d6c5d8ccbf65a07f4cc69da2f9e89"
+    "article-c117-civic_c117_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "117",
+      "sha256": "80dd52e6d7f09864fd524d6672c0dd48d0432d0f2ce0d43b5fd70a17f776bd23"
     },
-    "article-c116-civic_c116_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "b1eca11827d04de3aacb23420411fdd6cb0948fb5a50e65d91406e5e1edc2c94"
+    "article-c117-culture_c117_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "117",
+      "sha256": "f39afc01ff08e095b83bd361259d2e82b22abf652e45572f9e08b787b27977f2"
     },
-    "article-c116-civic_c116_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "1051e2040feba4408d1c278c904c9992b9f8537a73cb595777b605a11387f93b"
+    "article-c117-culture_c117_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0018": {
+      "cycle": "117",
+      "sha256": "ce184e043dc7c40b9baaad330531004f26e66644ebd441512f6b031a20db521b"
     },
-    "article-c116-culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020": {
-      "cycle": "116",
-      "sha256": "ae676aa515f0ae4e5c966fcc66184e76c6fcd6bc9a48f0457f624e6dc652f16a"
+    "article-c117-sports_c117_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5": {
+      "cycle": "117",
+      "sha256": "6d7419e40a002e111fd1b9caf7e83d4f6f1d8b3eaf0bfb3d841d4d2ecb91ebd8"
     },
-    "article-c116-sports_c116_selena-grant_packet-v2_openai-gpt-5-6-luna": {
-      "cycle": "116",
-      "sha256": "b62fb4583086d9858a12eefdd9a4c38e790a04053e3df694d81fac436a5ad553"
+    "article-c117-sports_c117_selena-grant_packet-v2_openai-gpt-5-6-luna": {
+      "cycle": "117",
+      "sha256": "b9d8d7e6c87bcc7a0b601d818c1dcc05d389f2a8398b7517a288979292cf3771"
     },
-    "article-c116-civic_c116_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "1b0ade0e8ce0782a10e642753b044afdab275f556f50d0c54d5ee70211be551d"
-    },
-    "article-c116-civic_c116_noah-tan_packet-v2_x-ai-grok-4-3": {
-      "cycle": "116",
-      "sha256": "2702176666af8fa225a6221cc1848863dad03d0ba236d2e3eff60e870ba88456"
-    },
-    "article-c116-culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "9864d28507bc4cfa9cdf7a1c79cdcc0576e1b178fe36ac9ebdb2a60f2dd1cf90"
-    },
-    "article-c116-culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021": {
-      "cycle": "116",
-      "sha256": "632fd281073b13df75dba555deed37f67c86d1f71c4fb7c1c40a62993ed6cd8b"
-    },
-    "article-c116-sports_c116_p-slayer_packet-v2_x-ai-grok-4-3": {
-      "cycle": "116",
-      "sha256": "33c2ea354662778998ff2e921bb71b3ac8a324b5d0fbf51a37c2321bd51a3daf"
-    },
-    "article-c116-sports_c116_tanya-cruz_packet-v2_x-ai-grok-4-3": {
-      "cycle": "116",
-      "sha256": "c54b945785dc407433a57d8423eee86b2a05907f1328258182791fa3f4a0db1c"
-    },
-    "article-c116-undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna-0023": {
-      "cycle": "116",
-      "sha256": "a73a9fc0efb9ba26da499338f5a85201eeef11bf60084372eeaa5c451939b860"
-    },
-    "article-c116-culture_c116_elliot-graye_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "136cadb8e2342849c48fe5177f5c050a1c6b6171391fd31f7ebf5d3a4d12a392"
-    },
-    "article-c116-culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-0020": {
-      "cycle": "116",
-      "sha256": "121dadd6559d40378ab9a08c6d86ea0bf5baa5fe9606d7ac946158d9c6fa6002"
-    },
-    "article-c116-sports_c116_simon-leary_packet-v2_openai-gpt-5-6-luna": {
-      "cycle": "116",
-      "sha256": "0b6cbefc62ac9135b1acf3a7050265a45b49aa6fce58ef06d19a4695458215a0"
-    },
-    "article-c116-sports_c116_talia-finch_packet-v2_openai-gpt-5-6-luna": {
-      "cycle": "116",
-      "sha256": "36edd7a6403331d0c262325929027dbccfca301b650684d8b018136757ede459"
-    },
-    "article-c116-undocked_c116_nia-rook_packet-v2_openai-gpt-6-luna-0021": {
-      "cycle": "116",
-      "sha256": "979a9f6d1c8785dc051329eea742fb65e9f4e7562141064ccdac24c5f088207c"
-    },
-    "article-c116-culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-0021": {
-      "cycle": "116",
-      "sha256": "71681468471ceafa40b6ab927ad06c3f1928e46d4eb65da0d0ab368a05db4e7e"
-    },
-    "article-c116-culture_c116_kai-marston_packet-v2_anthropic-claude-haiku-5-5": {
-      "cycle": "116",
-      "sha256": "244a7b3ab6929580f85ec74bb5b13ea528dd111229260deec7be16cd6e04b00f"
-    },
-    "article-c116-culture_c116_maria-keen_packet-v2_anthropic-claude-sonnet-5-5": {
-      "cycle": "116",
-      "sha256": "a1c4cca223b4659d9c193149188ae8b52af243eb74a5d87cfc218cd5dedbd1a2"
-    },
-    "article-c116-culture_c116_mason-ortega_packet-v2_x-ai-grok-4-3": {
-      "cycle": "116",
-      "sha256": "f4365d583242a7f32b60379bc2c7cc73a8b61d8b450ab15f49d8fd1e2088431a"
-    },
-    "article-c116-culture_c116_sharon-okafor_packet-v2_openai-gpt-5-6-luna": {
-      "cycle": "116",
-      "sha256": "4581b90b13d893f03f9b3ef4a9287ac5cdcc92c52d5bd3ae2ae199664bcc1582"
-    },
-    "article-c116-culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0019": {
-      "cycle": "116",
-      "sha256": "eaed223e799c38aa6c64f09582f7909f764686961f8caac099568a22eee588ec"
-    },
-    "article-c116-culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0022": {
-      "cycle": "116",
-      "sha256": "a21eb0e5560fe9b99579a595c81bd3d7cd81fe2443eb167ece74c0064783b6d4"
+    "article-c117-sports_c117_tanya-cruz_packet-v2_x-ai-grok-4-3": {
+      "cycle": "117",
+      "sha256": "d5bb70fec6f7b974a2ce79ff6061979bbb5063ee4c9897c5581483d3cb90f12d"
     }
   }
 }

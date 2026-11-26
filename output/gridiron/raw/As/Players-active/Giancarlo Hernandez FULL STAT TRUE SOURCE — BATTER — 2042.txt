@@ -1,0 +1,93 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Giancarlo Hernandez
+Team: Oakland Athletics
+Position: 3B
+Jersey: #15
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: A
+Overall: 78 (trending up)
+MLB Service: 0.003
+Age: 23
+Bats: R
+Throws: R
+Height: 5'9"
+Weight: 208 lbs
+Drafted: Round 1 (2036)
+Secondary Position: NONE
+Hitter Tendency: WHOLE FIELD
+Born: DOMINICAN REPUBLIC
+Canonical POPID: POP-01239
+
+--------------------------------------------------
+
+ATTRIBUTES (game screen; change shown in brackets)
+
+CON R: 65 (+2)
+CON L: 68 (+9)
+POW R: 54 (+2)
+POW L: 49 (+2)
+VIS: 57 (+4)
+DISC: 62 (+4)
+CLT: 66 (+3)
+BUNT: 50 (+3)
+DBUNT: 44 (+2)
+DUR: 85 (+3)
+FLD: 96 (+3)
+ARM: 70 (+3)
+ACC: 58 (+2)
+REAC: 80 (+3)
+SPD: 66
+STEAL: 71 (-2)
+BR AGG: 60
+
+--------------------------------------------------
+
+CONTRACT
+
+2042: RNW
+2043: RNW
+2044: RNW
+2045: ARB
+2046: ARB
+2047: ARB
+2048: FA
+2049: FA
+2050: FA
+2051: FA
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Options: 0/3 used
+Playoff Eligible: -
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+
+MLB STATS
+
+Not yet read (no MLB Stats screen sent; 0.003 service).
+
+--------------------------------------------------
+
+AWARDS
+
+Not yet read.
+
+--------------------------------------------------
+
+NOTES
+
+- Acquired: 2041, Trade (PHI)
+
+END

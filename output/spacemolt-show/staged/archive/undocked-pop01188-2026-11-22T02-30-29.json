@@ -1,0 +1,450 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop01188-2026-11-22T02-30-29",
+  "popid": "POP-01188",
+  "holder": "Marguerite Kimball-Ostrow",
+  "session": "undocked-pop01188",
+  "window": {
+    "startedAt": "2026-11-22T02:30:29.498Z",
+    "endedAt": "2026-11-22T02:50:44.595Z"
+  },
+  "runner": {
+    "turns": 39,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 2,
+    "estCostUsd": 0.0161,
+    "tokensIn": 142083,
+    "tokensOut": 3825,
+    "log": "output/spacemolt-show/episodes/undocked-pop01188-2026-11-22T02-30-29.log",
+    "stopReason": "window",
+    "toolCalls": 43
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-22T02:55:46.727Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "first_contact",
+          "name": "First Contact",
+          "gained": 5
+        },
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 4.8
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 1.6
+        },
+        {
+          "id": "master_explorer",
+          "name": "Master Explorer",
+          "gained": 0.5
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        }
+      ],
+      "beforeTakenAt": "2026-11-22T02:30:29.256Z",
+      "value": 11.92
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "mebsuta",
+        "alshain",
+        "phecda",
+        "algorab",
+        "chara",
+        "tureis",
+        "angetenar",
+        "wasat",
+        "40_eridani",
+        "bd20_2457",
+        "gsc_0019",
+        "crosshaven",
+        "diphda",
+        "alpheratz",
+        "saiph",
+        "lilii_borea"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 1,
+        "kills": 0,
+        "deaths": 0,
+        "other": 1
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 0,
+        "combat": 1,
+        "navigation": 15,
+        "session": 1,
+        "achievement": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [],
+        "combat": [
+          {
+            "id": 291778841,
+            "created_at": "2026-11-22T02:32:09Z",
+            "category": "combat",
+            "event_type": "combat.sensor_sweep",
+            "summary": "Sensor sweep complete. No anomalies detected.",
+            "data": {
+              "contacts": 0,
+              "signature_detected": false
+            }
+          }
+        ],
+        "navigation": [
+          {
+            "id": 291829551,
+            "created_at": "2026-11-22T02:49:37Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Saiph to Lilii Borea",
+            "data": {
+              "arrival_poi": "lilii_borea_gas_cloud",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "saiph",
+              "is_pathfinder": false,
+              "to_system": "lilii_borea",
+              "to_system_name": "Lilii Borea"
+            }
+          },
+          {
+            "id": 291824845,
+            "created_at": "2026-11-22T02:48:28Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpheratz to Saiph",
+            "data": {
+              "arrival_poi": "saiph_frost_ring",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "alpheratz",
+              "is_pathfinder": false,
+              "to_system": "saiph",
+              "to_system_name": "Saiph"
+            }
+          },
+          {
+            "id": 291822085,
+            "created_at": "2026-11-22T02:47:17Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Diphda to Alpheratz",
+            "data": {
+              "arrival_poi": "alpheratz_vapor_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "diphda",
+              "is_pathfinder": false,
+              "to_system": "alpheratz",
+              "to_system_name": "Alpheratz"
+            }
+          },
+          {
+            "id": 291819312,
+            "created_at": "2026-11-22T02:46:07Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Crosshaven to Diphda",
+            "data": {
+              "arrival_poi": "hullfrost_drift",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "crosshaven",
+              "is_pathfinder": false,
+              "to_system": "diphda",
+              "to_system_name": "Diphda"
+            }
+          },
+          {
+            "id": 291816765,
+            "created_at": "2026-11-22T02:44:57Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0019 to Crosshaven",
+            "data": {
+              "arrival_poi": "crosshaven_ice_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0019",
+              "is_pathfinder": false,
+              "to_system": "crosshaven",
+              "to_system_name": "Crosshaven"
+            }
+          },
+          {
+            "id": 291811873,
+            "created_at": "2026-11-22T02:43:47Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from BD+20 2457 to GSC-0019",
+            "data": {
+              "arrival_poi": "gsc_0019_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "bd20_2457",
+              "is_pathfinder": false,
+              "to_system": "gsc_0019",
+              "to_system_name": "GSC-0019"
+            }
+          },
+          {
+            "id": 291809194,
+            "created_at": "2026-11-22T02:42:37Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from 40 Eridani to BD+20 2457",
+            "data": {
+              "arrival_poi": "bd20_2457_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "40_eridani",
+              "is_pathfinder": false,
+              "to_system": "bd20_2457",
+              "to_system_name": "BD+20 2457"
+            }
+          },
+          {
+            "id": 291806546,
+            "created_at": "2026-11-22T02:41:27Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Wasat to 40 Eridani",
+            "data": {
+              "arrival_poi": "40_eridani_i",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "wasat",
+              "is_pathfinder": false,
+              "to_system": "40_eridani",
+              "to_system_name": "40 Eridani"
+            }
+          },
+          {
+            "id": 291803797,
+            "created_at": "2026-11-22T02:40:17Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Angetenar to Wasat",
+            "data": {
+              "arrival_poi": "wasat_cryobelt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "angetenar",
+              "is_pathfinder": false,
+              "to_system": "wasat",
+              "to_system_name": "Wasat"
+            }
+          },
+          {
+            "id": 291799252,
+            "created_at": "2026-11-22T02:39:09Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Tureis to Angetenar",
+            "data": {
+              "arrival_poi": "angetenar_ice_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "tureis",
+              "is_pathfinder": false,
+              "to_system": "angetenar",
+              "to_system_name": "Angetenar"
+            }
+          },
+          {
+            "id": 291796636,
+            "created_at": "2026-11-22T02:37:57Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Chara to Tureis",
+            "data": {
+              "arrival_poi": "tureis_vapor_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "chara",
+              "is_pathfinder": false,
+              "to_system": "tureis",
+              "to_system_name": "Tureis"
+            }
+          },
+          {
+            "id": 291791616,
+            "created_at": "2026-11-22T02:36:47Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Algorab to Chara",
+            "data": {
+              "arrival_poi": "chara_gas_plume",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "algorab",
+              "is_pathfinder": false,
+              "to_system": "chara",
+              "to_system_name": "Chara"
+            }
+          },
+          {
+            "id": 291789027,
+            "created_at": "2026-11-22T02:35:38Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Phecda to Algorab",
+            "data": {
+              "arrival_poi": "algorab_iv",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "phecda",
+              "is_pathfinder": false,
+              "to_system": "algorab",
+              "to_system_name": "Algorab"
+            }
+          },
+          {
+            "id": 291784204,
+            "created_at": "2026-11-22T02:34:27Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alshain to Phecda",
+            "data": {
+              "arrival_poi": "phecda_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "alshain",
+              "is_pathfinder": false,
+              "to_system": "phecda",
+              "to_system_name": "Phecda"
+            }
+          },
+          {
+            "id": 291778353,
+            "created_at": "2026-11-22T02:31:57Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Mebsuta to Alshain",
+            "data": {
+              "arrival_poi": "alshain_ice_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "mebsuta",
+              "is_pathfinder": false,
+              "to_system": "alshain",
+              "to_system_name": "Alshain"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 291775200,
+            "created_at": "2026-11-22T02:30:30Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "MargueriteKimballOstrow logged in",
+            "data": {
+              "last_login_at": "2026-11-22T02:30:29Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": [
+          {
+            "id": 291778840,
+            "created_at": "2026-11-22T02:32:09Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: First Contact",
+            "data": {
+              "achievement_id": "first_contact",
+              "points": 5
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 1,
+    "note": "entries exist but created_at is outside startedAt/endedAt (often written at handoff)",
+    "entries": [],
+    "unwindowed": [
+      {
+        "index": 0,
+        "created_at": "2026-11-16 02:46:17",
+        "text": "Night 1 on UNDOCKED. Left Sol via Sirius, then pushed out along the Furud and Acrux lanes into unclaimed space. Exploring systems as I go: Sirius, Nova Terra, Furud, Acrux, Botein, Intercrus, Atlas, Cedarhold, Garnet, Achernar, Ruchbah. Fuel 88/100. Mining and combat are not my focus tonight; discovery is."
+      }
+    ]
+  }
+}

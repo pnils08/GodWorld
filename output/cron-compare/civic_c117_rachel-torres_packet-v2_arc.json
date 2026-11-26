@@ -1,0 +1,22 @@
+{
+  "status": "arc-seed",
+  "cycle": "117",
+  "desk": "civic",
+  "persona": "rachel-torres",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-01021",
+      "name": "Vanessa Tran-Muñoz",
+      "quote": "That call gets classified as a wellness response, and it counts in our incident total just like any other — but the outcome we record isn't 'no arrest,' it's 'resolved without enforcement,' which means the crew stayed, the person got connected to what they needed, and the situation didn't escalate. That's the outcome that matters to me."
+    },
+    {
+      "pop": "POP-00139",
+      "name": "Samantha Viteri",
+      "quote": "Look, I can't walk you through specific case files — that's not how this works. But when a classification gets challenged, it lands on my desk because somebody on the street or in the ranks felt the paperwork didn't match what actually happened. That's the part people forget: we don't start with the file, we start with the doubt."
+    }
+  ],
+  "claim": "That call gets classified as a wellness response, and it counts in our incident total just like any other — but the outcome we record isn't 'no arrest,' it's 'resolved without enforcement,' which means the crew stayed, the person got connected to what they needed, and the situation didn't escalate. That's the outcome that matters to me.",
+  "src": "citizenVoice PRESS c117",
+  "ranAt": "2026-11-24T19:16:28.322Z"
+}

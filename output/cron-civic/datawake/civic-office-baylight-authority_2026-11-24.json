@@ -1,0 +1,102 @@
+{
+  "office": "baylight_authority",
+  "agentDir": "civic-office-baylight-authority",
+  "holder": "Keisha Ramos",
+  "popid": "POP-00041",
+  "title": "Baylight Authority Director",
+  "date": "2026-11-24",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Cycle 117 — Weekly Report on the Record**\n**Keisha Ramos, Director, Baylight Authority**\n\nINIT-006, first, and plainly. No construction milestone has been declared passed. The tracker now carries a C117 entry saying the same thing in the same words — the evidence-file review must be published while remediation, the hotline, dust control and workforce oversight continue. That is not the milestone pass I have been refusing to sign, and I want it understood that way on the record. I also want to correct something I said to you last cycle. I told you I'd have the next construction action written down before the foundation got poured. What I actually have is a review scheduled for Cycle 118, against the same evidence file, and nothing new poured into it. So the honest version is: the file hasn't moved, my determination hasn't moved, and I'm not going to announce progress because the calendar turned.\n\nWhat is running is what was running: independent oversight on site, the 48-hour hotline live, dust control active on the haul routes. Those records are the ones the review is supposed to be measuring, and they keep being kept whether or not anybody reads the memo.\n\nOn the two improvement flags recorded this cycle for Jack London and Downtown — I've seen them, they're real, and I'm not converting them into a construction win. A flag tells us where to look. It doesn't tell us the foundation is poured, and I won't let it be reported as if it did.\n\nNow Marine Systems, and this is where I have to own something. I told you last cycle I'd have an answer from them or I'd say I don't have one. I'm saying I don't have one. Their ledger row in my own district reads zero employees, growth negative, and their name appears nowhere in my office's employment records — which means what I was tracking as five people, then three, then zero was a district figure, not a payroll I ever held in my hands. I'm not going to dress that up as diligence. If the sea-level monitoring work is still happening somewhere, I don't know where. If it isn't, then this district lost a science function quietly and my file doesn't say so. I'm sending the written request again, this cycle, addressed to the company and copied to their last principal of record, and I'll put the response or my failure to get one on this record next cycle.\n\nMy own numbers, for the record. The Baylight District is now on a *steady* trajectory as of this cycle — that's a change from last week, sentiment ticking up to 0.09 from 0.06, migration still mildly negative. One cycle of steady is not a trend and I'm not calling it one. Retail vitality at 6.81 is the weak line on this district's own sheet and I'm watching it more than the sentiment number, because a district that anchors a stadium and can't hold retail is a district that's busy on game nights and empty on Tuesday.\n\nOutside the district: no Glenview public-works event on the ledger this cycle, after three cycles running. I still don't have the scope-and-timeline answer I asked Public Works for, and I'm not going to treat the silence of the ledger as the answer. I'd rather hear \"we're done\" from a person than infer it from an empty column.\n\nAnd two things I'll name because the city has a ledger and I read it. Ivy Hill Family Dental is closing — eight weeks of decline, revenue under the line, zero jobs with it. Zero jobs is lucky, and it's still a dental office leaving a neighborhood the boom skipped. Ivy Hill was already on the skipped list before this. And Downtown's transit tangle eased after three cycles, which is good news I'll take and not overclaim.\n\nNext cycle: the Cycle 118 construction milestone review against the assembled evidence file, published, whichever way it comes out. And the Marine Systems answer, or my plain statement that I still don't have one.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-24T11:46:43.970Z",
+  "usage": {
+    "prompt_tokens": 22809,
+    "completion_tokens": 1204,
+    "cost": 0.001
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [
+    {
+      "tool": "memory_recall",
+      "input": {
+        "query": "Marine Systems"
+      },
+      "resultChars": 2603
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Your initiative on the city's tracker (INIT-006)"
+      },
+      "resultChars": 2535
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Business, economic and infrastructure events on the city's event ledger",
+        "from_cycle": 116
+      },
+      "resultChars": 490
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Employment_Roster",
+        "match": "Marine Systems"
+      },
+      "resultChars": 66
+    },
+    {
+      "tool": "neighborhood_read",
+      "input": {
+        "neighborhood": "Baylight District"
+      },
+      "resultChars": 2212
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Business_Ledger",
+        "match": "Marine Systems"
+      },
+      "resultChars": 195
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Map",
+        "match": "Glenview"
+      },
+      "resultChars": 51
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Marine Systems Baylight"
+      },
+      "resultChars": 51
+    }
+  ],
+  "memory": {
+    "searchedOn": "baylight harbor construction",
+    "entries": 7,
+    "fromSearch": 6,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00041",
+    "id": "Fg3a6h4eDwMakX6k5UTgGx",
+    "customId": "cp-POP-00041-c117-CIVIC-datawake-2026-11-24"
+  }
+}

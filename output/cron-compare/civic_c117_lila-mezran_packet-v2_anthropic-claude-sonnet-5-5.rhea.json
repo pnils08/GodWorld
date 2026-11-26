@@ -1,0 +1,84 @@
+{
+  "draft": "output/cron-compare/civic_c117_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "117",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "6aeee82df3a43d7e0a9103101e00fdc9e8bfcf7627140a18a0701f9b90cee09c",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft strictly adheres to C117 ground truth, official interview transcripts, and hospital census records with zero discrepancies.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-v2",
+    "packageVersion": "LILA-LEP2-3",
+    "manifestId": "AM-9921547a5e1e",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "3.9",
+          "219",
+          "4.5"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "That's a data gap, not an accounting detail... and that's a problem I own."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Coen Cartier",
+      "Deacon Seymour",
+      "Jonas Patel",
+      "Maurice Franklin",
+      "Priya Narang",
+      "Yu Zen"
+    ],
+    "unverified": [
+      "Piedmont Avenue"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 6,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0151,
+  "durationMs": 4205,
+  "parseError": false,
+  "ranAt": "2026-11-24T00:18:37.093Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 905,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "6aeee82df3a43d7e0a9103101e00fdc9e8bfcf7627140a18a0701f9b90cee09c",
+    "costUsd": 0.001
+  }
+}

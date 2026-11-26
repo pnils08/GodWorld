@@ -1,0 +1,293 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 117,
+  "empty": false,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 117,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00230",
+      "Holder": "Jett Walker",
+      "EpisodeId": "undocked-pop00230-Y3C13",
+      "CreditsDelta": 0,
+      "PointsDelta": 21.82,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "miaplacidus",
+        "maplevale",
+        "dubhe",
+        "alfirk",
+        "revati"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00230-2026-11-24T02-30-26.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 117,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00957",
+      "Holder": "David Okonkwo",
+      "EpisodeId": "undocked-pop00957-Y3C13",
+      "CreditsDelta": 0,
+      "PointsDelta": 29.92,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "ross_154",
+        "arcturus",
+        "timberline",
+        "maplevale",
+        "miaplacidus"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00957-2026-11-25T02-30-29.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 117,
+      "EventType": "undocked-episode",
+      "POPID": "POP-01209",
+      "Holder": "Daniela Kapoor",
+      "EpisodeId": "undocked-pop01209-Y3C13-e2",
+      "CreditsDelta": 0,
+      "PointsDelta": 10.73,
+      "Systems": [
+        "hatysa",
+        "ridgecrest",
+        "cervantes",
+        "miaplacidus",
+        "mimosa",
+        "electra",
+        "tau_ceti",
+        "alpha_centauri",
+        "sol",
+        "sirius",
+        "nova_terra",
+        "furud",
+        "acrux",
+        "botein",
+        "diadem"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01209-2026-11-26T02-30-34.json"
+    }
+  ],
+  "laneEntries": [
+    {
+      "ref": "undocked:undocked-pop00230-Y3C13",
+      "label": "UNDOCKED: Jett Walker, Monday night",
+      "kind": "undocked",
+      "popids": [
+        "POP-00230"
+      ],
+      "nightSource": "record",
+      "handle": {
+        "angle": "UNDOCKED episode: Jett Walker, Monday night. Standings: Marguerite Kimball-Ostrow leads the board — rank #1, 49.08 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Jett Walker — Plumber.",
+        "citizens": [
+          "Jett Walker — Plumber, UNDOCKED cast pilot"
+        ],
+        "facts": [
+          "Jett Walker's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Miaplacidus, Maplevale, Dubhe, Alfirk and Revati; mined 1 copper ore and 7 iron ore; earned Wanderer (9 points), Maiden Jump (5 points), Voyager I (3.6 points), Cartographer (2.7 points), Voyager II (0.9 points), Chronicler (0.6 points), Far Traveler (0.01 points), Jump Master (0.01 points) and Prospector I (0.01 points); came out even on credits; flew until the show's time ran out.",
+          "Jett Walker — Plumber (ledger)"
+        ]
+      },
+      "who": {
+        "name": "Jett Walker",
+        "roleType": "Plumber",
+        "employerBizId": "BIZ-00090",
+        "tier": "4",
+        "career": []
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 117,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00230",
+        "Holder": "Jett Walker",
+        "EpisodeId": "undocked-pop00230-Y3C13",
+        "CreditsDelta": 0,
+        "PointsDelta": 21.82,
+        "Systems": [
+          "sol",
+          "alpha_centauri",
+          "tau_ceti",
+          "electra",
+          "mimosa",
+          "miaplacidus",
+          "maplevale",
+          "dubhe",
+          "alfirk",
+          "revati"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 2,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00230-2026-11-24T02-30-26.json"
+      },
+      "hood": "Rockridge"
+    },
+    {
+      "ref": "undocked:undocked-pop00957-Y3C13",
+      "label": "UNDOCKED: David Okonkwo, Tuesday night",
+      "kind": "undocked",
+      "popids": [
+        "POP-00957"
+      ],
+      "nightSource": "record",
+      "handle": {
+        "angle": "UNDOCKED episode: David Okonkwo, Tuesday night. Standings: Marguerite Kimball-Ostrow leads the board — rank #1, 49.08 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: David Okonkwo — Retired Insurance Adjuster.",
+        "citizens": [
+          "David Okonkwo — Retired Insurance Adjuster, UNDOCKED cast pilot"
+        ],
+        "facts": [
+          "David Okonkwo's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; took the Local Sector Survey contract; mined 8 iron ore; earned Wanderer (9 points), First Steps (5 points), Maiden Jump (5 points), Voyager I (3.6 points), Cartographer (2.7 points), The Truth Is Out There (2.5 points), Chronicler (1.2 points), Voyager II (0.9 points), Far Traveler (0.01 points), Jump Master (0.01 points) and Prospector I (0.01 points); came out even on credits; flew until the show's time ran out.",
+          "David Okonkwo — Retired Insurance Adjuster (ledger)"
+        ]
+      },
+      "who": {
+        "name": "David Okonkwo",
+        "roleType": "Retired Insurance Adjuster",
+        "employerBizId": "UNTRACKED",
+        "tier": "4",
+        "career": []
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 117,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00957",
+        "Holder": "David Okonkwo",
+        "EpisodeId": "undocked-pop00957-Y3C13",
+        "CreditsDelta": 0,
+        "PointsDelta": 29.92,
+        "Systems": [
+          "sol",
+          "alpha_centauri",
+          "tau_ceti",
+          "electra",
+          "mimosa",
+          "ross_154",
+          "arcturus",
+          "timberline",
+          "maplevale",
+          "miaplacidus"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 2,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00957-2026-11-25T02-30-29.json"
+      },
+      "hood": "Lake Merritt"
+    },
+    {
+      "ref": "undocked:undocked-pop01209-Y3C13-e2",
+      "label": "UNDOCKED: Daniela Kapoor, Wednesday night",
+      "kind": "undocked",
+      "popids": [
+        "POP-01209"
+      ],
+      "nightSource": "record",
+      "handle": {
+        "angle": "UNDOCKED episode: Daniela Kapoor, Wednesday night. Standings: Marguerite Kimball-Ostrow leads the board — rank #1, 49.08 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Daniela Kapoor — Teacher.",
+        "citizens": [
+          "Daniela Kapoor — Teacher, UNDOCKED cast pilot"
+        ],
+        "facts": [
+          "Daniela Kapoor's Wednesday night on UNDOCKED: went through Hatysa, Ridgecrest, Cervantes, Miaplacidus, Mimosa, Electra, Tau Ceti, Alpha Centauri, Sol, Sirius, Nova Terra, Furud, Acrux, Botein and Diadem; mined 5 iron ore and 3 copper ore; earned Voyager I (4 points), Cartographer (3 points), Chronicler (1.2 points), Wanderer (1 point), Voyager II (1 point), Master Explorer (0.5 points), Far Traveler (0.01 points), Jump Master (0.01 points) and Prospector I (0.01 points); came out even on credits; flew until the show's time ran out.",
+          "Daniela Kapoor — Teacher (ledger)"
+        ]
+      },
+      "who": {
+        "name": "Daniela Kapoor",
+        "roleType": "Teacher",
+        "employerBizId": null,
+        "tier": "4",
+        "career": []
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 117,
+        "EventType": "undocked-episode",
+        "POPID": "POP-01209",
+        "Holder": "Daniela Kapoor",
+        "EpisodeId": "undocked-pop01209-Y3C13-e2",
+        "CreditsDelta": 0,
+        "PointsDelta": 10.73,
+        "Systems": [
+          "hatysa",
+          "ridgecrest",
+          "cervantes",
+          "miaplacidus",
+          "mimosa",
+          "electra",
+          "tau_ceti",
+          "alpha_centauri",
+          "sol",
+          "sirius",
+          "nova_terra",
+          "furud",
+          "acrux",
+          "botein",
+          "diadem"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 2,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop01209-2026-11-26T02-30-34.json"
+      },
+      "hood": "Glenview"
+    }
+  ],
+  "standings": {
+    "asOf": "2026-11-26T02:55:54.333Z",
+    "leader": {
+      "Rank": 1,
+      "POPID": "POP-01188",
+      "Holder": "Marguerite Kimball-Ostrow",
+      "Episodes": 3,
+      "PointsTotal": 49.08,
+      "CreditsTotal": 0,
+      "CombatTotal": 1,
+      "MishapTotal": 0,
+      "BestMagnitude": 2,
+      "LastAiredCycle": 117,
+      "CyclesLed": 2,
+      "CurrentStreak": 2,
+      "PointsPending": 0
+    }
+  },
+  "generatedAt": "2026-11-26T12:15:13.022Z"
+}

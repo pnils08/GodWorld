@@ -1,0 +1,44 @@
+{
+  "office": "baylight_authority",
+  "cycle": 117,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "I held the construction milestone determination pending rather than signing a pass: the review is conducted against the assembled evidence file and no milestone is declared passed. I answered Mara Vance in writing that the tracker's 'complete' refers to the C115 evidence-file review closing, not to a milestone, and I put the public evidence-file location, the remaining determination work, the responsible desk, and a next reporting date on the record. The low-severity Jack London and Downtown improvement flags do not substitute for construction findings, so they are noted and the haul-route and hotline records keep running as the ongoing measure.",
+  "maraAnswer": {
+    "confrontationId": "CONF-116-civic-office-baylight-authority",
+    "kind": "answer",
+    "text": "Mara — here is the whole of it. What the C116 'complete' entry closes is the C115 evidence-file review as a review: the file was assembled, checked against independent soil verification, 48-hour hotline logs, dust-control records on the haul routes, and the Jack London workforce results, and the review was conducted. That is all 'complete' means, and it is what the tracker should read. No construction milestone has been determined, and there is no signed determination — I am not supplying one, because the evidence file supports a completed review, not a passed milestone. The public evidence file sits with the Baylight Authority records desk (the same open-to-inspection file referenced in my C115 findings statement), and the review findings publication is the public-facing copy. The remaining determination work is: closing the outstanding evidence items, drafting the determination memo with a signed/unsigned line the public can see, and a written recommendation to the Council on whether the milestone is earned — tracked as a pending determination at this office, responsibility mine as Director, with the next reporting date in my C118 weekly report. Until that memo is signed, the status stays explicitly pending. Continuing oversight — remediation verification, the 48-hour hotline, dust control, workforce coordination — is not a passed milestone and should never be read as one; it is what the next determination measures against.",
+    "evidenceFileLocation": "Baylight Authority public records desk — open-to-inspection evidence file, as cited in the C115 findings statement",
+    "remainingDetermination": "Outstanding evidence-item closeout, determination memo with signed/unsigned line, written Council recommendation",
+    "responsibility": "Keisha Ramos, Director, Baylight Authority",
+    "nextReportingDate": "C118 weekly report",
+    "signedDetermination": null,
+    "status": "pending"
+  },
+  "statements": [
+    {
+      "statementId": "STMT-117-baylight_authority-001",
+      "type": "determination",
+      "topic": "Baylight construction milestone — review conducted, determination pending, status clarified",
+      "initiative": "INIT-006",
+      "decision": "Hold the construction milestone determination pending; publish the scope and basis of the C115 completed entry, the evidence-file location, remaining determination work, responsibility, and next reporting date; sign no determination that the evidence does not support.",
+      "quote": "A completed review is not a passed milestone — and I will not sign a determination the evidence file has not earned.",
+      "fullStatement": "Keisha Ramos, Director, Baylight Authority. I want the record to say plainly what the tracker's 'complete' entry means and what it does not. It means the C115 evidence-file review was conducted: independent soil verification, 48-hour hotline logs, dust-control records on the haul routes, and the Jack London workforce results, all assembled and inspected. It does not mean a construction milestone has been declared passed. No milestone has passed, there is no signed determination, and I am not supplying one this cycle. The evidence file remains open to inspection at the Baylight Authority public records desk. What remains is determination work: closing the outstanding evidence items, drafting the determination memo with a signed-or-unsigned line the public can read, and a written recommendation to the Council. That work is tracked at this office under my responsibility, with a next reporting date in my C118 weekly report. And to be clear about the low-severity Jack London and Downtown improvement flags: an improvement flag is not a construction finding. The hotline and dust records do not pause while a memo is written — they are what the determination measures against, and they keep running.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "MilestoneNotes": "C117: review conducted, no signed determination; status pending, next reporting C118",
+        "NextScheduledAction": "Draft determination memo and Council recommendation; report status in C118 weekly report",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-baylight_authority-002",
+      "type": "oversight",
+      "topic": "Jack London and Downtown improvement flags — recorded, not converted into construction findings",
+      "initiative": null,
+      "decision": "Note the low-severity improvement flags on the record and continue remediation, hotline, dust-control, and workforce oversight without claiming a milestone.",
+      "quote": "An improvement flag tells us where to look; it does not tell us the foundation is poured.",
+      "fullStatement": "Keisha Ramos, Director, Baylight Authority. The engine flags Jack London and Downtown at low severity for improvement, and I am recording that on the public record rather than letting it pass unmentioned. An improvement flag is a prompt for oversight, not a construction finding and not a verdict on the milestone. What a reporter will see on the ground this week is unchanged and should be: haul-route dust control active, the 48-hour hotline staffed and logging, remediation verification continuing under independent eyes, and the Jack London workforce coordination desk tracking its results. Those records are the continuing oversight, and they are not a passed milestone. If the flags point to something the evidence file has not captured, it goes into the determination memo as an outstanding item — in writing, with a date, not into a press line.",
+      "trackerUpdates": {}
+    }
+  ]
+}

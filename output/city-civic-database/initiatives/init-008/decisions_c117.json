@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-008",
+  "initiativeId": "INIT-008",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-007)",
+  "consolidatedFrom": [
+    "STMT-117-mayor_gavel-007 (Mayor gavel — Downtown revitalization and Uptown planning stall)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-008",
+    "ImplementationPhase": "stalled",
+    "MilestoneNotes": "C117: Uptown planning execution is not evidenced; INIT-008 is stalled, with the $15M authorization still pending Council and no implementation claimed.",
+    "NextScheduledAction": "Execute and publish Uptown stabilization planning with timeline, benchmarks and committee record",
+    "NextActionCycle": 118
+  }
+}

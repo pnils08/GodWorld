@@ -1,0 +1,80 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/staged/civic_c117_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Yu Zen",
+        "role": "mentioned",
+        "popid": "POP-00194"
+      },
+      {
+        "name": "Deacon Seymour",
+        "role": "mentioned",
+        "popid": "POP-00528"
+      },
+      {
+        "name": "Maurice Franklin",
+        "role": "mentioned",
+        "popid": "POP-00801"
+      },
+      {
+        "name": "Coen Cartier",
+        "role": "mentioned",
+        "popid": "POP-00338"
+      },
+      {
+        "name": "Priya Narang",
+        "role": "mentioned",
+        "popid": "POP-00141"
+      },
+      {
+        "name": "Jonas Patel",
+        "role": "mentioned",
+        "popid": "POP-00142"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "After the scare, I stopped treating my body like it was somebody else's problem. This week that meant actually taking the doctor's advice and getting my blood pressure checked on my day off — cost me a morning I would've spent helping my daughter move some furniture. And I asked for a later shift start twice so I could walk the ten blocks instead of driving. It's not dramatic, but it's the kind of thing I used to put off. The money part is the co-pay, which is what it is. The time part is the part that stings — but I figure I owe it to my kids to stick around a little longer.",
+        "sourceRef": "citizenVoice PRESS Coen Cartier"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-9921547a5e1e",
+    "draftSha256": "6aeee82df3a43d7e0a9103101e00fdc9e8bfcf7627140a18a0701f9b90cee09c",
+    "verdict": "output/cron-compare/civic_c117_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-24T00:18:37.093Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 905,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "6aeee82df3a43d7e0a9103101e00fdc9e8bfcf7627140a18a0701f9b90cee09c",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-24T00:18:41.458Z"
+}

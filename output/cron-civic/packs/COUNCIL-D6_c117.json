@@ -1,0 +1,539 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": true,
+  "actor": {
+    "id": "POP-00044",
+    "name": "Elliott Crane",
+    "role": "City Council District 6",
+    "officeId": "COUNCIL-D6",
+    "district": "D6",
+    "faction": "CRC",
+    "agentDir": "civic-office-council-d6",
+    "initiative": null,
+    "dials": {
+      "approval": 60
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "no move this cycle"
+  },
+  "pulse": null,
+  "prewrite": {
+    "claim": null,
+    "lineFacts": [],
+    "missing": [
+      "no due action on this seat this cycle"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC116 - answer CONF-116-civic-office-council-d6: awaiting the Sunday fold\nNo applied or failed outcome in the available ledgers.",
+      "moves": [
+        {
+          "moveId": "MV-116-civic-office-council-d6-2026-11-17:answer:CONF-116-civic-office-council-d6",
+          "cycle": 116,
+          "date": "2026-11-17",
+          "agentDir": "civic-office-council-d6",
+          "popid": "POP-00044",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-116-civic-office-council-d6",
+            "text": "Our office has tracked the medium-severity health spike affecting 93 residents along Piedmont Avenue and has requested substantiated findings from the coordinating health-response authorities. Residents and local merchants deserve clear, verified answers rather than speculative estimates. We expect the responsible agency to issue a transparent public update as soon as clinical assessments and baseline verification are finalized.",
+            "directiveCycle": 116,
+            "confrontationSeat": "civic-office-council-d6"
+          },
+          "status": "pending",
+          "at": "2026-11-17T11:45:31.697Z"
+        }
+      ]
+    },
+    "board": [],
+    "boardAvailable": true,
+    "boardIds": [],
+    "boardText": "Your board is empty: no initiative sponsors you or touches your turf.",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [],
+      "participation": [
+        {
+          "cycle": "115",
+          "hood": "Piedmont Ave",
+          "snippet": "Clarissa, I hear you on the storefronts — I've watched three different businesses turn…",
+          "affect": "Energized"
+        }
+      ],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 115,
+      "throughCycle": 117,
+      "window": "Complaint display C115–C117; condition counter C117 only.",
+      "text": "Complaint display C115–C117; condition counter C117 only.\nNo Civic complaints from your turf in this window.\nConstructive civic participation (not complaints): 1."
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 5,
+      "shownStaff": 5,
+      "text": "The working city:\n- Rafael Montez: The Badge & Paddle announcement is done, and I'm still turning over the image of the Chief of Police swinging… (C115)\n- Elena Soria Dominguez: The schematics are done, and they're good. But they're just paper until the community review is documented… (C115)\n- Bobby Chen-Ramirez: Q2 audit went out clean, filed on schedule, and the merchant-clinic walkthrough is now a standing thing. That… (C115)\n- Vanessa Tran-Muñoz: The Chinatown call is still sitting with me. We got someone there, but the wait was too long, and I keep… (C115)\n- Marcus Webb: The renewal ordinance went to council today; that part's done, the draft held. I keep thinking about cycle… (C115)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "setAtClose": 116,
+      "text": "City patrol strategy, set by the Police Chief at the C116 close: balanced (patrols spread evenly — the default posture). Chief's note: Crime indices flat to slightly down citywide with no single district deteriorating sharply enough to justify shifting resources; balanced posture maintains even coverage and preserves OARI co-response coordination."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-104-civic-office-council-d6",
+          "cycle": 104,
+          "agentDir": "civic-office-council-d6",
+          "demand": "Elliott Crane — City Council District 6 — Submit the formal CRC caucus oversight motion specifying the required audit parameters for the Temescal Health Center and Youth Apprenticeship Pipeline.",
+          "sourceText": "## Elliott Crane — City Council District 6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** Submit the formal CRC caucus oversight motion specifying the required audit parameters for the Temescal Health Center and Youth Apprenticeship Pipeline.\n- **Why:** The CRC caucus raised fiscal objections in C103 regarding accelerated construction spending and apprenticeship expansion that require formal legislative framing.\n- **Acceptance:** Formal filing of a council audit motion or committee inquiry specifying the financial records requested from OEWD and project leads.\n- **Silence consequence:** Unresolved caucus disputes stall committee hearings and delay scheduled project appropriations.\n",
+          "src": "output/mara-directives/mara_directive_c104_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-108-civic-office-council-d6",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d6",
+          "demand": "Elliott Crane — City Council District 6 — Formulate an action plan to reverse declining sentiment in Piedmont Avenue and confirm oversight criteria for Baylight remediation.",
+          "sourceText": "## Elliott Crane — City Council District 6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** Formulate an action plan to reverse declining sentiment in Piedmont Avenue and confirm oversight criteria for Baylight remediation.\n- **Why:** Piedmont Avenue sentiment dropped to 0.23 (below city median 0.330) despite low CrimeIndex (0.54), while Baylight mobilization requires independent council oversight.\n- **Acceptance:** A public district strategy addressing Piedmont Avenue merchant sentiment and a filed oversight memorandum for INIT-006 Phase II remediation.\n- **Silence consequence:** Commercial district sentiment continues downward drift while regional project remediation proceeds without cross-district scrutiny.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-116-civic-office-council-d6",
+          "cycle": 116,
+          "agentDir": "civic-office-council-d6",
+          "demand": "Elliott Crane — City Council District 6 — What has the responsible health-response office established about the Piedmont Avenue spike, and when will residents receive a public update?",
+          "sourceText": "## Elliott Crane — City Council District 6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** What has the responsible health-response office established about the Piedmont Avenue spike, and when will residents receive a public update?\n- **Why:** The Cycle 116 city summary records a medium-severity health spike on Piedmont Avenue with impactScore 25, and your Cycle 116 statement requests factual departmental follow-through without new administrative machinery.\n- **Acceptance:** What is known and still unverified, the responsible department, any service response already undertaken, any remaining municipal steps and the next public update date; distinguish the event record from a diagnosis and do not infer a neighborhood-wide emergency.",
+          "src": "output/mara-directives/mara_directive_c116_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "latestCycle": 117,
+      "open": [],
+      "answeredIds": [
+        "CONF-104-civic-office-council-d6",
+        "CONF-116-civic-office-council-d6"
+      ]
+    },
+    "conditions": {
+      "available": true,
+      "proposals": [],
+      "text": "No proposals in the available board/move evidence need condition counts."
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 117,
+      "problems": [
+        {
+          "id": "[\"Piedmont Ave\",\"health.sickResidents\"]",
+          "hood": "Piedmont Ave",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 92,
+          "cycle": 117
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Piedmont Ave\",\"health.sickResidents\"]",
+          "hood": "Piedmont Ave",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 92,
+          "cycle": 117
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Piedmont Ave\",\"health.sickResidents\"]",
+          "hood": "Piedmont Ave",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 92,
+          "cycle": 117,
+          "passedOverCycle": 113
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Health and safety readings this week (C117).\n- Piedmont Ave: 92 residents sick"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Approval": "60"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Faction": "CRC",
+        "Approval": 51
+      },
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Faction": "CRC",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  },
+  "brief": {
+    "version": "CIVIC-BRIEF/2",
+    "cycle": 117,
+    "generation": {
+      "cycle": 117,
+      "observedAt": "2026-11-22T23:52:30.201Z",
+      "sources": {
+        "sports": {
+          "available": true,
+          "hash": "d4da41397ab0b66868cfb214c5e22aa3a2afcc762de9752913d91e9f329463b6"
+        },
+        "summary": {
+          "available": true,
+          "hash": "1ceb16333c1be5cf0c32a3d4e6393ece77d21f3cdb947ee6007b453938d4d814"
+        }
+      },
+      "hash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+      "completeThrough": "2026-11-22T23:52:30.201Z",
+      "issues": [],
+      "statement": "Events reflect the saved export as of its refresh watermark; later same-Cycle events require a new export."
+    },
+    "sections": {
+      "events": {
+        "available": true,
+        "items": [],
+        "omittedCount": 0,
+        "retrievalKeys": []
+      },
+      "measuredState": {
+        "districts": [
+          {
+            "district": "D6",
+            "available": true,
+            "retrievalKey": "district/D6",
+            "neighborhoods": [
+              {
+                "hood": "Piedmont Ave",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.22",
+                    "previous": "0.21",
+                    "change": 0.010000000000000009
+                  },
+                  "CrimeIndex": {
+                    "value": "0.61",
+                    "previous": "0.59",
+                    "change": 0.020000000000000018
+                  },
+                  "RetailVitality": {
+                    "value": "15.57",
+                    "previous": "12.94",
+                    "change": 2.630000000000001
+                  },
+                  "HousingPressure": {
+                    "value": "1.5",
+                    "previous": "0.5",
+                    "change": 1
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "growth",
+                    "previous": "growth",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "7",
+                    "previous": "6",
+                    "change": 1
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "previousCycleAvailable": true
+      },
+      "commitments": {
+        "priorMoves": [
+          {
+            "moveId": "MV-116-civic-office-council-d6-2026-11-17:answer:CONF-116-civic-office-council-d6",
+            "type": "answer",
+            "status": "pending",
+            "cycle": 116,
+            "retrievalKey": "prior/MV-116-civic-office-council-d6-2026-11-17:answer:CONF-116-civic-office-council-d6"
+          }
+        ],
+        "evidenceAvailable": true,
+        "outcomeFeedAvailable": false,
+        "actionOutcomes": [],
+        "actionReconciliationAvailable": false,
+        "actionReconciliationReason": "ENOENT: no such file or directory, open '/root/GodWorld/output/beats/Civic_Action_Ledger.jsonl'",
+        "reconciledActions": []
+      },
+      "opportunities": {
+        "board": [],
+        "omittedCount": 0,
+        "boardRetrievalKeys": [],
+        "selectedInitiative": null,
+        "resourceBalanceAvailable": false,
+        "budgetAuthorityKey": "budget/authority",
+        "openChoice": "No selected initiative; a reasoned no-op or a grounded opportunity is available."
+      },
+      "response": {
+        "petitionWindow": "Complaint display C115–C117; condition counter C117 only.",
+        "complaints": 0,
+        "participation": 1,
+        "mediaOutcomeAvailable": false,
+        "committedResponseAvailable": false,
+        "committedResponse": [],
+        "note": "Response counts require saved experience and reaction receipts, and are not a representative poll. Only published receipts appear as coverage."
+      },
+      "authorizedActions": {
+        "categoriesAvailable": true,
+        "categoryKeys": [
+          "health",
+          "transit",
+          "education",
+          "economic",
+          "workforce",
+          "safety",
+          "sports",
+          "environment"
+        ],
+        "detailKey": "budget/authority",
+        "note": "Move validation and later execution decide authority. An accepted request is not an applied outcome."
+      }
+    }
+  },
+  "_briefEvidence": {
+    "event": {},
+    "district": {
+      "D6": {
+        "available": true,
+        "district": "D6",
+        "neighborhoods": [
+          {
+            "hood": "Piedmont Ave",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.22",
+                "previous": "0.21",
+                "change": 0.010000000000000009
+              },
+              "CrimeIndex": {
+                "value": "0.61",
+                "previous": "0.59",
+                "change": 0.020000000000000018
+              },
+              "RetailVitality": {
+                "value": "15.57",
+                "previous": "12.94",
+                "change": 2.630000000000001
+              },
+              "HousingPressure": {
+                "value": "1.5",
+                "previous": "0.5",
+                "change": 1
+              },
+              "NeighborhoodTrajectory": {
+                "value": "growth",
+                "previous": "growth",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "7",
+                "previous": "6",
+                "change": 1
+              }
+            },
+            "sourceRef": "Neighborhood_Map (fire close)"
+          }
+        ],
+        "previousCycleAvailable": true
+      }
+    },
+    "project": {},
+    "budget": {
+      "authority": {
+        "officeId": "COUNCIL-D6",
+        "district": "D6",
+        "categories": [
+          {
+            "key": "health",
+            "label": "clinics, care",
+            "band": "$5M-$100M",
+            "canDeliver": true
+          },
+          {
+            "key": "transit",
+            "label": "stations, lines",
+            "band": "$20M-$500M",
+            "canDeliver": true
+          },
+          {
+            "key": "education",
+            "label": "schools, youth learning",
+            "band": "$1M-$50M",
+            "canDeliver": true
+          },
+          {
+            "key": "economic",
+            "label": "business, local economy",
+            "band": "$2M-$50M",
+            "canDeliver": false
+          },
+          {
+            "key": "workforce",
+            "label": "jobs, training",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "safety",
+            "label": "public safety, response",
+            "band": "$2M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "sports",
+            "label": "stadiums, recreation",
+            "band": "$10M-$500M",
+            "canDeliver": false
+          },
+          {
+            "key": "environment",
+            "label": "parks, air, water",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          }
+        ],
+        "resourceBalance": null,
+        "resourceBalanceAvailable": false,
+        "note": "Category bands are filing constraints. Spendable treasury balance requires typed current allocation evidence."
+      }
+    },
+    "prior": {
+      "MV-116-civic-office-council-d6-2026-11-17:answer:CONF-116-civic-office-council-d6": {
+        "moveId": "MV-116-civic-office-council-d6-2026-11-17:answer:CONF-116-civic-office-council-d6",
+        "cycle": 116,
+        "date": "2026-11-17",
+        "agentDir": "civic-office-council-d6",
+        "popid": "POP-00044",
+        "type": "answer",
+        "payload": {
+          "confrontationId": "CONF-116-civic-office-council-d6",
+          "text": "Our office has tracked the medium-severity health spike affecting 93 residents along Piedmont Avenue and has requested substantiated findings from the coordinating health-response authorities. Residents and local merchants deserve clear, verified answers rather than speculative estimates. We expect the responsible agency to issue a transparent public update as soon as clinical assessments and baseline verification are finalized.",
+          "directiveCycle": 116,
+          "confrontationSeat": "civic-office-council-d6"
+        },
+        "status": "pending",
+        "at": "2026-11-17T11:45:31.697Z"
+      }
+    }
+  }
+}

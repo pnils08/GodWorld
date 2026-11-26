@@ -1,0 +1,4 @@
+{
+ "ok": false,
+ "error": "engine.275: Cycle 117 started 5 min ago — refusing a second fire inside 60 min. If this re-fire is deliberate, set script property FIRE_GUARD_OVERRIDE=118 and fire again."
+}

@@ -1,0 +1,48 @@
+{
+  "office": "council_d3",
+  "cycle": 117,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "I hold the OARI expansion until the Fruitvale briefing record is executed and published, and I will not describe that record as done until the actual date, venue, notice dates and access arrangements are inspectable. I also hold the Fruitvale Transit Hub at its C86 authorization until the design consultant delivers schematics and a documented Fruitvale community review exists — a low-severity improvement flag is not a comment-and-response record. On the apprenticeship pipeline I require the placement-gap analysis and adjustment plan with explicit Fruitvale and West Oakland review published this cycle, and I hold the San Antonio commercial blocks as an active district matter rather than a footnote.",
+  "statements": [
+    {
+      "statementId": "STMT-117-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — Fruitvale briefing record and expansion hold",
+      "initiative": "INIT-002",
+      "decision": "Hold expansion; require execution and publication of the D3 Fruitvale briefing record with the actual date, venue, notice dates, accessibility and participation arrangements, and the district and Fruitvale data references, and file written next dates for the D5 audit and Baylight feasibility review.",
+      "quote": "Fruitvale gets the briefing and the written record before expansion, not the other way around.",
+      "fullStatement": "I am answering the Director's crosswalk question directly. The Fruitvale briefing must be executed and published — with the actual date and venue, the notice dates, the accessibility and participation arrangements, the Fruitvale data references, the response times, and the transit-review calendar. The briefing is the point, and the community doesn't owe City Hall a second, stronger briefing. I hold expansion until the briefing is available, the D5 audit and the Baylight feasibility review have been given written next dates, and the public can inspect the record. I won't claim the briefing is done before the record shows the date, the venue, and the access measures. Director Vance, I welcome the request to make the whole session linkable to the OARI packet, and I will treat the briefing and the packet as one continuous record — but that record is not complete until it is published and inspectable.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub Phase II — schematics and documented community review",
+      "initiative": "INIT-003",
+      "decision": "Hold further design advancement at the C86 authorization; require the contracted design consultant to deliver preliminary schematics and conduct a documented Fruitvale community review this cycle, with a public comment-and-response record before any next phase.",
+      "quote": "A $230 million transit hub earns its next phase by answering Fruitvale in public, not by treating schematics as a finish line.",
+      "fullStatement": "The Fruitvale Transit Hub is not a design exercise for the consultant's portfolio — it is $230 million of public money, and the community oversight provisions in the contract are part of the deal. I voted for this at C86, and I haven't wavered: schematics get delivered and the Fruitvale community review gets documented, with a comment-and-response record before any further design advancement. The engineer's review flagged a low-severity improvement at Fruitvale; I want to see the response, not just the flag. Until the schematics, the review, and the documented response are in the same public record, this project stays at the authorization it has.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d3-003",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — placement-gap analysis and adjustment plan publication",
+      "initiative": "INIT-007",
+      "decision": "Require the placement-gap analysis and adjustment plan with explicit Fruitvale and West Oakland review to be published this cycle, and record implementation as stalled until that publication exists.",
+      "quote": "A first cohort report is not a placement record. Fruitvale and West Oakland get the gaps, the adjustments, and the next review in writing.",
+      "fullStatement": "The Youth Apprenticeship Pipeline has been in the same stage since C114, and the engine's review flags Fruitvale and West Oakland for improvement at low severity. That is not a reason to declare victory, and it is not a reason to proclaim failure. It is a reason to publish the placement-gap analysis and the adjustment plan this cycle, with explicit Fruitvale and West Oakland review and the next review date written down. A first cohort report is not a placement record. If the analysis and the plan are not published this cycle, that is a missed publication, and I will record it as such. For now, the implementation is stalled and the public record should say so.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d3-004",
+      "type": "vote_statement",
+      "topic": "San Antonio commercial blocks — next public update and district investment",
+      "initiative": null,
+      "decision": "Hold San Antonio commercial blocks as an active district matter, with the next public update and a named district office point of contact rather than a footnote.",
+      "quote": "San Antonio is climbing, not collapsing, and the commercial blocks are the next place I want that climb to show.",
+      "fullStatement": "San Antonio's sentiment moved from -0.16 to -0.03 this cycle, the crime index held flat at 0.73, and retail vitality slipped from 5.22 to 4.84. Those numbers are all going in the same direction: the neighborhood is climbing, and the commercial blocks are where the climb has to show up next. So I am keeping the Sonía commercial-blocks public update on the calendar, asking for a named office point of contact, and reviewing the neighborhood in the same frame as Fruitvale. I will not let a slow retail vitality number get treated as noise. I want it treated as a district problem with a named office and a date attached.",
+      "trackerUpdates": {}
+    }
+  ]
+}

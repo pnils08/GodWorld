@@ -1,0 +1,54 @@
+{
+  "model": "openai/gpt-6-luna",
+  "calls": [
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Daniela Kapoor"
+      },
+      "resultChars": 120,
+      "resultHead": "Daniela Kapoor — role: Teacher; neighborhood: Glenview; born: 2003; wealth: 4; careerStage: mid-career; popid: POP-01209"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Marguerite Kimball-Ostrow"
+      },
+      "resultChars": 189,
+      "resultHead": "Marguerite Kimball-Ostrow — role: Elementary Teacher; neighborhood: Piedmont Ave; born: 2004; wealth: 6; careerStage: mid-career; employerBiz: BIZ-00016; skills: Education; popid: POP-01188"
+    },
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Daniela Kapoor"
+      },
+      "resultChars": 172,
+      "resultHead": "Available gate-approved UNDOCKED feed history for Daniela Kapoor before C117:\nNo earlier episode found in the available approved packs; this does not prove none ever aired."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Daniela Kapoor"
+      },
+      "resultChars": 190,
+      "resultHead": "No published piece from before C117 came back for \"Daniela Kapoor\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Marguerite Kimball-Ostrow"
+      },
+      "resultChars": 1093,
+      "resultHead": "[C116 · daily · Nia Rook] Marguerite Kimball-Ostrow’s even-credit Sunday leaves Luis Taz’s lead intact—and puts the contrast right in the chair: she took the long way through the night, while the board still belongs to the pilot who wasn’t flying this episode. Kimball-Ostrow moved through sixteen systems, from Sol and Sirius to Atlas, Cedarhold, Ironhollow and Shaula, flying until the show’s time ran out. The credits ended where they began. That’s not a windfall episode or a spectacular plunge; it’s a route that keeps opening doors without \n[C116 · daily · Nia Rook] # UNDOCKED: Marguerite Kimb"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "UNDOCKED"
+      },
+      "resultChars": 3281,
+      "resultHead": "[C116 · daily · Nia Rook] I like the little tension in it: the route keeps unfolding, but the balance refuses a dramatic final tilt. At a Piedmont Ave watch-room table, you can imagine the argument splitting two ways. Is the satisfying part the distance, or the refusal to turn every stop into a transaction? No need to pretend the room has a consensus. UNDOCKED is better when the chair leaves space for both readings. Marguerite put it plainly: “I didn't really have a strategy on Wednesday night. I just flew through the systems one by one, an\n[C114 · daily · Nia Rook] UNDOCKED: Silk takes the to"
+    }
+  ],
+  "ranAt": "2026-11-24T00:23:03.321Z"
+}

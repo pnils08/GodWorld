@@ -1,0 +1,1119 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00153",
+    "name": "Jordan Velez",
+    "role": "desk reporter",
+    "desk": "business"
+  },
+  "task": {
+    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+    "approach": null,
+    "voice": null
+  },
+  "signal": {
+    "kind": "own-pick",
+    "hood": null,
+    "src": "own pick, C117",
+    "plan": {
+      "focus": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino."
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00027",
+        "name": "Philly Rodriguez",
+        "profile": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00028",
+        "name": "Manfred Owens",
+        "profile": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00036",
+        "name": "Marcus Osei",
+        "profile": "Marcus Osei — Deputy Mayor (Econ Dev)",
+        "quotationEligible": true,
+        "src": "tool:ask_worker:STAFF-DM-ECON — asked: Oakland Casino Town in the Baylight District dropped 3 employees this cycle (94 now, growing -1.5% a year) while DigitalOcean, Bayline 6 and Downtown firms each added one. What does your record show a"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00027-24464dc70c",
+        "pop": "POP-00027",
+        "name": "Philly Rodriguez",
+        "quote": "Yeah, we lost three. It wasn't layoffs — it was attrition, people moving on. Two of them were dealers who got offers down in San Jose, and one was a security guy who went back to school. I can't give you their names, that's not my place. But I'll tell you this: nobody who stayed got a raise, and nobody got a cut either. Hours are the same, pay's the same. The floor's just a little thinner now, so we're all covering a bit more. The casino's not hurting — it's just not growing. And that's the thing about this town right now: the places around us in Baylight and Jack London are adding a job here and there, and we're the ones giving one up. I don't know what that says about who gains from the casino, but I know what it feels like to walk the floor with three fewer familiar faces.",
+        "factIds": [
+          "F-98d7f078ab1d",
+          "F-835eac28e335"
+        ],
+        "src": "packet.W2[POP-00027]"
+      },
+      {
+        "id": "Q-POP-00028-c6bf8843af",
+        "pop": "POP-00028",
+        "name": "Manfred Owens",
+        "quote": "Yeah, I saw the numbers on the board — three people gone from the casino this cycle. I can't tell you exactly who they were, not by name, because I don't have that list in front of me. But I can tell you what it feels like from my seat near the back. The floor's a little thinner at the tables on weeknights, and the shifts have been stretched. Philly's been covering more of the floor himself, and Gregory's been doing double duty on the stuff nobody talks about. I've picked up a couple extra hours myself, just to keep the ledger straight. The firms around us in Baylight and Jack London each added a spot, but that doesn't put food on the table for the folks who got let go here. It's a strange thing — the neighborhood feels like it's moving forward, and we're just holding the line.",
+        "factIds": [
+          "F-98d7f078ab1d",
+          "F-1bca48dc2528"
+        ],
+        "src": "packet.W2[POP-00028]"
+      },
+      {
+        "id": "Q-WORKER-9225b2cc2193",
+        "pop": "POP-00036",
+        "name": "Marcus Osei",
+        "quote": "Here's what my record actually shows, Jordan — and I'll tell you up front what it doesn't show. **Who the three were: I can't tell you.** The casino's roster is 94 names on the ledger this cycle, down from 99 two cycles back — that's 99 to 94, not just the three you're counting. But the ledger gives me a headcount and an average salary, $70,000, and nothing else. No names, no roles, no severance record, no exit survey. When a firm sheds people quietly like that, they don't file the paperwork with my office, and I've got no authority to demand it. The last time this came up on the record, the names I *could* get were the front-of-house people — Manfred Owens on the book, Philly running the floor, Gregory on \"the stuff nobody talks about.\" Whether any of those three are among the departed, I don't know, and I'm not going to pretend I do. **What the trend shows, that I can tell you.** Ninety-nine, then down, now 94, growth of minus 1.5% a year. That's not a one-cycle blip, that's a slide, and it's happening in a district with a Boom Index of 1.0 — the hottest number on the map. So the Baylight District is booming and its anchor employer is shrinking. That ought to worry everybody. **Who gains.** Short answer: not the neighborhood. When the casino trims, those three paychecks stop circulating in Baylight — and Baylight residents are already carrying -8 from the carryover and the sector impact. The gainers are whoever picks up the slack — the nightlife down the street, the stadium crowd, the firms adding a head apiece. That's churn, Jordan, not growth. One job added at DigitalOcean and three lost at the casino is not a wash. And since you asked what my record shows — it shows Ivy Hill Family Dental closed this cycle and zero jobs went with it, because there were zero to lose. That's the thing that keeps me up. A business can die in this city and the jobs number not even flinch, because it was already hollowed out. I'd rather see the casino's 94 hold steady than watch it hollow out the same way.",
+        "factIds": [],
+        "src": "tool:ask_worker:STAFF-DM-ECON — asked: Oakland Casino Town in the Baylight District dropped 3 employees this cycle (94 now, growing -1.5% a year) while DigitalOcean, Bayline 6 and Downtown firms each added one. What does your record show a",
+        "sourceKind": "worker-answer"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Whether the -3 at Casino Town are layoffs, quits or a reclassification. The ledger doesn't say.",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Whether the 15 voided wagers reflect a system or compliance issue at the casino, or are routine.",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Whether any of the three named casino workers are actually among those who left.",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Whether Ivy Hill's run of businesses at 0 employees, plus the Ivy Hill Family Dental closure, is a bigger story than the casino cut.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C117",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c5606da08cb9"
+    },
+    {
+      "t": "FACT",
+      "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+      "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/",
+      "id": "F-d2036d9993b1"
+    },
+    {
+      "t": "FACT",
+      "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/",
+      "id": "F-efd9ebd3280e"
+    },
+    {
+      "t": "FACT",
+      "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/",
+      "id": "F-453ce66b090f"
+    },
+    {
+      "t": "FACT",
+      "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/",
+      "id": "F-f7a1edd68e81"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/",
+      "id": "F-98d7f078ab1d"
+    },
+    {
+      "t": "FACT",
+      "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/",
+      "id": "F-e2a697fe208c"
+    },
+    {
+      "t": "FACT",
+      "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/",
+      "id": "F-a794c94d37ad"
+    },
+    {
+      "t": "FACT",
+      "text": "Hillside Family Dental (Healthcare), Glenview — 0 employees, revenue $936k, growing -0.7% a year — since C116: yearly growth rate +0.5 pts, revenue -$131, -3 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00141 vs prev/",
+      "id": "F-d015091d50f1"
+    },
+    {
+      "t": "FACT",
+      "text": "Bay Tribune (Media & Journalism), Downtown — 63 employees, revenue $19.9M, growing 14.3% a year — since C116: yearly growth rate -0.4 pts, revenue +$54k, +1 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00018 vs prev/",
+      "id": "F-ba23caa2822f"
+    },
+    {
+      "t": "FACT",
+      "text": "Ridgeline Studio (Architecture), Uptown — 62 employees, revenue $33.1M, growing 16.1% a year — since C116: yearly growth rate -0.2 pts, revenue +$102k, +1 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00053 vs prev/",
+      "id": "F-4024ac7d072c"
+    },
+    {
+      "t": "FACT",
+      "text": "Atlas Bay Architects (Architecture), Downtown — 87 employees, revenue $43.0M, growing 13.2% a year — since C116: yearly growth rate +0.2 pts, revenue +$109k, +1 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00089 vs prev/",
+      "id": "F-9596733c2270"
+    },
+    {
+      "t": "FACT",
+      "text": "Bayline 6 (Media & Journalism), Jack London — 143 employees, revenue $46.7M, growing 12.9% a year — since C116: yearly growth rate +0.1 pts, revenue +$116k, +1 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00183 vs prev/",
+      "id": "F-16a404c84940"
+    },
+    {
+      "t": "FACT",
+      "text": "DigitalOcean (Cloud Infrastructure), Baylight District — 801 employees, revenue $522.4M, growing 5.2% a year — since C116: yearly growth rate -0.1 pts, revenue +$520k, +1 employees",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00002 vs prev/",
+      "id": "F-ed7e6635838b"
+    },
+    {
+      "t": "FACT",
+      "text": "Marine Systems (Science), Baylight District — 0 employees, growing -1.8% a year — since C116: yearly growth rate +1.0 pts",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00105 vs prev/",
+      "id": "F-7384c3d1d0aa"
+    },
+    {
+      "t": "FACT",
+      "text": "Slopeview Hardware (Retail), Glenview — 7 employees, revenue $630k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00143 vs prev/",
+      "id": "F-6bc5c58bd3e9"
+    },
+    {
+      "t": "FACT",
+      "text": "Ivy Hill Market (Retail), Ivy Hill — 0 employees, revenue $513k, growing -4.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$463",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00150 vs prev/",
+      "id": "F-7aee6efb01e2"
+    },
+    {
+      "t": "FACT",
+      "text": "Ivy Hill Cafe (Cafe / dining), Ivy Hill — 0 employees, revenue $311k, growing -2.4% a year — since C116: yearly growth rate +1.0 pts, revenue -$146",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00151 vs prev/",
+      "id": "F-b5db85d072e3"
+    },
+    {
+      "t": "FACT",
+      "text": "Ivy Cleaners (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.9% a year — since C116: yearly growth rate +1.0 pts, revenue -$93",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00152 vs prev/",
+      "id": "F-50fcdbb84c40"
+    },
+    {
+      "t": "FACT",
+      "text": "Fold Laundry (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.8% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00155 vs prev/",
+      "id": "F-d3f134ef5c8a"
+    },
+    {
+      "t": "FACT",
+      "text": "Shift Change Kitchen (Restaurant & Dining), San Antonio — 12 employees, revenue $866k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$108",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00172 vs prev/",
+      "id": "F-f08f46f99b6e"
+    },
+    {
+      "t": "FACT",
+      "text": "Lakeshore Cigar Club (Cigar Lounge), Lake Merritt — 11 employees, revenue $722k, growing 4.5% a year — since C116: yearly growth rate +1.0 pts, revenue +$629",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00241 vs prev/",
+      "id": "F-0c5338742992"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Avenue Wine Bar (Wine Bar), Lake Merritt — 11 employees, revenue $722k, growing 4.8% a year — since C116: yearly growth rate +1.0 pts, revenue +$664",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00242 vs prev/",
+      "id": "F-967534093dd9"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight Construction Authority (Construction), Baylight District — 451 employees, revenue $31.4M, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$16k",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00020 vs prev/",
+      "id": "F-80ebceba87bd"
+    },
+    {
+      "t": "FACT",
+      "text": "Lucky Harbor Herbalist & Tea (Herbalist & Tea Shop), Chinatown — 4 employees, revenue $381k, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$199",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00206 vs prev/",
+      "id": "F-b362fa1817d5"
+    },
+    {
+      "t": "FACT",
+      "text": "Seoul Corner Market (Korean Grocery), KONO — 4 employees, revenue $381k, growing 2.4% a year — since C116: yearly growth rate +1.0 pts, revenue +$178",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00215 vs prev/",
+      "id": "F-1b4e535dd6c2"
+    },
+    {
+      "t": "FACT",
+      "text": "Ridgeline Ventures (Venture Capital), Lake Merritt — 12 employees, revenue $4.6M, growing 16.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00007 vs prev/",
+      "id": "F-74c52c0baf9e"
+    },
+    {
+      "t": "FACT",
+      "text": "Gridiron Analytics (Sports Analytics), Temescal — 20 employees, revenue $3.0M, growing 25.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00008 vs prev/",
+      "id": "F-e2e073a1fa97"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale Community Clinic (Healthcare), Fruitvale — 38 employees, revenue $8.2M, growing 13.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$21k",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00026 vs prev/",
+      "id": "F-18bd49ed4549"
+    },
+    {
+      "t": "FACT",
+      "text": "Coliseum District Development (Real Estate), East Oakland — 31 employees, revenue $19.7M, growing 9.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$34k",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00029 vs prev/",
+      "id": "F-e52e963491fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale Diner (Restaurant & Dining), Fruitvale — 2 employees, revenue $208k, growing 11.9% a year — since C116: yearly growth rate -1.0 pts, revenue +$475",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00045 vs prev/",
+      "id": "F-561d6d28623b"
+    },
+    {
+      "t": "FACT",
+      "text": "Midnight Bistro (Restaurant & Dining), Downtown — 2 employees, revenue $253k, growing 12.5% a year — since C116: yearly growth rate -1.0 pts, revenue +$607",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00049 vs prev/",
+      "id": "F-d9009a6a4e76"
+    },
+    {
+      "t": "FACT",
+      "text": "Estuary Architects (Architecture), Lake Merritt — 45 employees, growing 10.0% a year — since C116: yearly growth rate -1.0 pts",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00055 vs prev/",
+      "id": "F-6c5c14ecab61"
+    },
+    {
+      "t": "FACT",
+      "text": "Romano's (Food & Beverage), Dimond — 16 employees, revenue $1.4M, growing 4.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$1k",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00075 vs prev/",
+      "id": "F-e28f37424662"
+    },
+    {
+      "t": "FACT",
+      "text": "Port Grind (Food & Beverage), Grand Lake — 9 employees, revenue $1.0M, growing 12.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$2k",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00076 vs prev/",
+      "id": "F-8f10d6c71dfa"
+    },
+    {
+      "t": "FACT",
+      "text": "B'nai Tikvah Synagogue (Synagogue), Piedmont Ave — 6 employees, revenue $382k, growing 2.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$204",
+      "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00092 vs prev/",
+      "id": "F-121ef129ac5b"
+    },
+    {
+      "t": "FACT",
+      "text": "business-closure | closure: Ivy Hill Family Dental (Healthcare) — 0 jobs | Ivy Hill | mag -25 | targets BIZ-00153",
+      "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)",
+      "id": "F-7cb5b899e65d"
+    },
+    {
+      "t": "FACT",
+      "text": "carryover | carryover: cycle 1 of 4 | Adams Point | mag -8 | targets BIZ-00061",
+      "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)",
+      "id": "F-4f164d873764"
+    },
+    {
+      "t": "FACT",
+      "text": "carryover | carryover: cycle 2 of 4 | Baylight District | mag -8 | targets BIZ-00105",
+      "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)",
+      "id": "F-f41c7a7a047c"
+    },
+    {
+      "t": "FACT",
+      "text": "carryover | carryover: cycle 3 of 4 | Ivy Hill | mag -8 | targets BIZ-00150",
+      "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)",
+      "id": "F-9bb210f973af"
+    },
+    {
+      "t": "FACT",
+      "text": "sector-impact:services/retail | Oakland Casino Town lost 3 employees | Baylight District | mag -8 | targets BIZ-00100",
+      "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)",
+      "id": "F-53456f83abcb"
+    },
+    {
+      "t": "FACT",
+      "text": "Casino C117: 17 undocked wagers placed, 14 sports wagers placed; 2 settled, 15 voided",
+      "src": "output/beats/Casino_Ledger.jsonl @C117",
+      "id": "F-18ed6879e2b0"
+    },
+    {
+      "t": "FACT",
+      "text": "Casino house float: $246k",
+      "src": "output/beats/Casino_Ledger.jsonl HOUSE",
+      "id": "F-3a122530bc4a"
+    },
+    {
+      "t": "FACT",
+      "text": "Maria Keen won on undocked (no) — staked $385, paid $705",
+      "src": "output/beats/Casino_Ledger.jsonl 0f679cb015012003",
+      "id": "F-f62962da62fa"
+    },
+    {
+      "t": "FACT",
+      "text": "Jax Caldera lost on undocked (neg) — staked $428, the house kept it",
+      "src": "output/beats/Casino_Ledger.jsonl 91a9400c9b3e9a11",
+      "id": "F-a268465132ba"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown: median income $123k, median rent $3k, housing pressure 10, trajectory growth",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-8983fa0e088d"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal: median income $68k, median rent $2k, housing pressure 0.5, trajectory steady",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-a3a8c8753d3e"
+    },
+    {
+      "t": "FACT",
+      "text": "Laurel: median income $86k, median rent $2k, housing pressure 0, trajectory decay",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-b1ffd484b740"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland: median income $147k, median rent $4k, housing pressure 6.5, trajectory growth",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-82b26378561d"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: median income $100k, median rent $3k, housing pressure 10, trajectory growth",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-9d615082c789"
+    },
+    {
+      "t": "FACT",
+      "text": "Jack London: median income $121k, median rent $3k, housing pressure 10, trajectory growth",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-d92707a932b0"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge: median income $162k, median rent $4k, housing pressure 3.5, trajectory steady",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-82cb52cee9fd"
+    },
+    {
+      "t": "FACT",
+      "text": "Adams Point: median income $94k, median rent $2k, housing pressure 0, trajectory decay",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-ec0ef9f7bb2f"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Lake: median income $107k, median rent $3k, housing pressure 6, trajectory growth",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-dc923d9baa45"
+    },
+    {
+      "t": "FACT",
+      "text": "Piedmont Ave: median income $151k, median rent $4k, housing pressure 1.5, trajectory growth",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-5797845f7177"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown: median income $85k, median rent $2k, housing pressure 0, trajectory steady",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-8150c112aed7"
+    },
+    {
+      "t": "FACT",
+      "text": "Brooklyn: median income $129k, median rent $3k, housing pressure 0, trajectory decay",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-e2216b203201"
+    },
+    {
+      "t": "FACT",
+      "text": "Eastlake: median income $83k, median rent $2k, housing pressure 0, trajectory decay",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-b3985854d605"
+    },
+    {
+      "t": "FACT",
+      "text": "Glenview: median income $81k, median rent $2k, housing pressure 0, trajectory decay",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-903a6b40eca7"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond: median income $79k, median rent $2k, housing pressure 0, trajectory decay",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-7ced5a2bed77"
+    },
+    {
+      "t": "FACT",
+      "text": "Ivy Hill: median income $77k, median rent $2k, housing pressure 0, trajectory decay",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-4b779efc677e"
+    },
+    {
+      "t": "FACT",
+      "text": "San Antonio: median income $69k, median rent $2k, housing pressure 0, trajectory decay",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-6afc95a4dcd1"
+    },
+    {
+      "t": "FACT",
+      "text": "KONO: median income $83k, median rent $2k, housing pressure 1, trajectory steady",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-6382bfadeebd"
+    },
+    {
+      "t": "FACT",
+      "text": "Lake Merritt: median income $186k, median rent $5k, housing pressure 0, trajectory steady",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-6c25538383df"
+    },
+    {
+      "t": "FACT",
+      "text": "Uptown: median income $99k, median rent $2k, housing pressure 10, trajectory growth",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-3024ea0e5d66"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District: median income $139k, median rent $3k, housing pressure 0, trajectory steady",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-b1397559e25f"
+    },
+    {
+      "t": "FACT",
+      "text": "East Oakland: median income $72k, median rent $2k, housing pressure 0, trajectory steady",
+      "src": "output/beats/Neighborhood_Map.jsonl @C117",
+      "id": "F-acc821af4ff3"
+    },
+    {
+      "t": "FACT",
+      "text": "City treasury C117: revenue $5.0M (weekly budget allocation), balance after $136.8M",
+      "src": "output/beats/City_Treasury.jsonl @C117",
+      "id": "F-8ff02ff7d571"
+    },
+    {
+      "t": "FACT",
+      "text": "City treasury C117: revenue $126k (28 cleared charges, fined at the hood rate), balance after $136.9M",
+      "src": "output/beats/City_Treasury.jsonl @C117",
+      "id": "F-1439b13b7917"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C13, Spring, holiday=none",
+      "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+      "id": "F-f7ed4e9a474c"
+    },
+    {
+      "t": "FACT",
+      "text": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+      "src": "Simulation_Ledger profile for POP-00027",
+      "id": "F-835eac28e335"
+    },
+    {
+      "t": "FACT",
+      "text": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+      "src": "Simulation_Ledger profile for POP-00028",
+      "id": "F-1bca48dc2528"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jordan-economy-v2",
+    "canonPolicy": "load-bearing",
+    "canonBlockers": [
+      "an invented or altered location: venue, business or neighborhood",
+      "an invented or altered citizen (name, role, home, relationship, employer), or words a named citizen did not say",
+      "an invented or altered data point: a number, date, wage, rent, count or engine record"
+    ]
+  },
+  "manifest": {
+    "id": "AM-714b7d3bf806",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c5606da08cb9",
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-d2036d9993b1",
+        "t": "FACT",
+        "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+        "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/"
+      },
+      {
+        "id": "F-efd9ebd3280e",
+        "t": "FACT",
+        "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/"
+      },
+      {
+        "id": "F-453ce66b090f",
+        "t": "FACT",
+        "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/"
+      },
+      {
+        "id": "F-f7a1edd68e81",
+        "t": "FACT",
+        "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/"
+      },
+      {
+        "id": "F-98d7f078ab1d",
+        "t": "FACT",
+        "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/"
+      },
+      {
+        "id": "F-e2a697fe208c",
+        "t": "FACT",
+        "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/"
+      },
+      {
+        "id": "F-a794c94d37ad",
+        "t": "FACT",
+        "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/"
+      },
+      {
+        "id": "F-d015091d50f1",
+        "t": "FACT",
+        "text": "Hillside Family Dental (Healthcare), Glenview — 0 employees, revenue $936k, growing -0.7% a year — since C116: yearly growth rate +0.5 pts, revenue -$131, -3 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00141 vs prev/"
+      },
+      {
+        "id": "F-ba23caa2822f",
+        "t": "FACT",
+        "text": "Bay Tribune (Media & Journalism), Downtown — 63 employees, revenue $19.9M, growing 14.3% a year — since C116: yearly growth rate -0.4 pts, revenue +$54k, +1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00018 vs prev/"
+      },
+      {
+        "id": "F-4024ac7d072c",
+        "t": "FACT",
+        "text": "Ridgeline Studio (Architecture), Uptown — 62 employees, revenue $33.1M, growing 16.1% a year — since C116: yearly growth rate -0.2 pts, revenue +$102k, +1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00053 vs prev/"
+      },
+      {
+        "id": "F-9596733c2270",
+        "t": "FACT",
+        "text": "Atlas Bay Architects (Architecture), Downtown — 87 employees, revenue $43.0M, growing 13.2% a year — since C116: yearly growth rate +0.2 pts, revenue +$109k, +1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00089 vs prev/"
+      },
+      {
+        "id": "F-16a404c84940",
+        "t": "FACT",
+        "text": "Bayline 6 (Media & Journalism), Jack London — 143 employees, revenue $46.7M, growing 12.9% a year — since C116: yearly growth rate +0.1 pts, revenue +$116k, +1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00183 vs prev/"
+      },
+      {
+        "id": "F-ed7e6635838b",
+        "t": "FACT",
+        "text": "DigitalOcean (Cloud Infrastructure), Baylight District — 801 employees, revenue $522.4M, growing 5.2% a year — since C116: yearly growth rate -0.1 pts, revenue +$520k, +1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00002 vs prev/"
+      },
+      {
+        "id": "F-7384c3d1d0aa",
+        "t": "FACT",
+        "text": "Marine Systems (Science), Baylight District — 0 employees, growing -1.8% a year — since C116: yearly growth rate +1.0 pts",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00105 vs prev/"
+      },
+      {
+        "id": "F-6bc5c58bd3e9",
+        "t": "FACT",
+        "text": "Slopeview Hardware (Retail), Glenview — 7 employees, revenue $630k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00143 vs prev/"
+      },
+      {
+        "id": "F-7aee6efb01e2",
+        "t": "FACT",
+        "text": "Ivy Hill Market (Retail), Ivy Hill — 0 employees, revenue $513k, growing -4.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$463",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00150 vs prev/"
+      },
+      {
+        "id": "F-b5db85d072e3",
+        "t": "FACT",
+        "text": "Ivy Hill Cafe (Cafe / dining), Ivy Hill — 0 employees, revenue $311k, growing -2.4% a year — since C116: yearly growth rate +1.0 pts, revenue -$146",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00151 vs prev/"
+      },
+      {
+        "id": "F-50fcdbb84c40",
+        "t": "FACT",
+        "text": "Ivy Cleaners (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.9% a year — since C116: yearly growth rate +1.0 pts, revenue -$93",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00152 vs prev/"
+      },
+      {
+        "id": "F-d3f134ef5c8a",
+        "t": "FACT",
+        "text": "Fold Laundry (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.8% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00155 vs prev/"
+      },
+      {
+        "id": "F-f08f46f99b6e",
+        "t": "FACT",
+        "text": "Shift Change Kitchen (Restaurant & Dining), San Antonio — 12 employees, revenue $866k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$108",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00172 vs prev/"
+      },
+      {
+        "id": "F-0c5338742992",
+        "t": "FACT",
+        "text": "Lakeshore Cigar Club (Cigar Lounge), Lake Merritt — 11 employees, revenue $722k, growing 4.5% a year — since C116: yearly growth rate +1.0 pts, revenue +$629",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00241 vs prev/"
+      },
+      {
+        "id": "F-967534093dd9",
+        "t": "FACT",
+        "text": "Grand Avenue Wine Bar (Wine Bar), Lake Merritt — 11 employees, revenue $722k, growing 4.8% a year — since C116: yearly growth rate +1.0 pts, revenue +$664",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00242 vs prev/"
+      },
+      {
+        "id": "F-80ebceba87bd",
+        "t": "FACT",
+        "text": "Baylight Construction Authority (Construction), Baylight District — 451 employees, revenue $31.4M, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$16k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00020 vs prev/"
+      },
+      {
+        "id": "F-b362fa1817d5",
+        "t": "FACT",
+        "text": "Lucky Harbor Herbalist & Tea (Herbalist & Tea Shop), Chinatown — 4 employees, revenue $381k, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$199",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00206 vs prev/"
+      },
+      {
+        "id": "F-1b4e535dd6c2",
+        "t": "FACT",
+        "text": "Seoul Corner Market (Korean Grocery), KONO — 4 employees, revenue $381k, growing 2.4% a year — since C116: yearly growth rate +1.0 pts, revenue +$178",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00215 vs prev/"
+      },
+      {
+        "id": "F-74c52c0baf9e",
+        "t": "FACT",
+        "text": "Ridgeline Ventures (Venture Capital), Lake Merritt — 12 employees, revenue $4.6M, growing 16.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00007 vs prev/"
+      },
+      {
+        "id": "F-e2e073a1fa97",
+        "t": "FACT",
+        "text": "Gridiron Analytics (Sports Analytics), Temescal — 20 employees, revenue $3.0M, growing 25.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00008 vs prev/"
+      },
+      {
+        "id": "F-18bd49ed4549",
+        "t": "FACT",
+        "text": "Fruitvale Community Clinic (Healthcare), Fruitvale — 38 employees, revenue $8.2M, growing 13.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$21k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00026 vs prev/"
+      },
+      {
+        "id": "F-e52e963491fe",
+        "t": "FACT",
+        "text": "Coliseum District Development (Real Estate), East Oakland — 31 employees, revenue $19.7M, growing 9.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$34k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00029 vs prev/"
+      },
+      {
+        "id": "F-561d6d28623b",
+        "t": "FACT",
+        "text": "Fruitvale Diner (Restaurant & Dining), Fruitvale — 2 employees, revenue $208k, growing 11.9% a year — since C116: yearly growth rate -1.0 pts, revenue +$475",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00045 vs prev/"
+      },
+      {
+        "id": "F-d9009a6a4e76",
+        "t": "FACT",
+        "text": "Midnight Bistro (Restaurant & Dining), Downtown — 2 employees, revenue $253k, growing 12.5% a year — since C116: yearly growth rate -1.0 pts, revenue +$607",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00049 vs prev/"
+      },
+      {
+        "id": "F-6c5c14ecab61",
+        "t": "FACT",
+        "text": "Estuary Architects (Architecture), Lake Merritt — 45 employees, growing 10.0% a year — since C116: yearly growth rate -1.0 pts",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00055 vs prev/"
+      },
+      {
+        "id": "F-e28f37424662",
+        "t": "FACT",
+        "text": "Romano's (Food & Beverage), Dimond — 16 employees, revenue $1.4M, growing 4.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$1k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00075 vs prev/"
+      },
+      {
+        "id": "F-8f10d6c71dfa",
+        "t": "FACT",
+        "text": "Port Grind (Food & Beverage), Grand Lake — 9 employees, revenue $1.0M, growing 12.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$2k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00076 vs prev/"
+      },
+      {
+        "id": "F-121ef129ac5b",
+        "t": "FACT",
+        "text": "B'nai Tikvah Synagogue (Synagogue), Piedmont Ave — 6 employees, revenue $382k, growing 2.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$204",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00092 vs prev/"
+      },
+      {
+        "id": "F-7cb5b899e65d",
+        "t": "FACT",
+        "text": "business-closure | closure: Ivy Hill Family Dental (Healthcare) — 0 jobs | Ivy Hill | mag -25 | targets BIZ-00153",
+        "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+      },
+      {
+        "id": "F-4f164d873764",
+        "t": "FACT",
+        "text": "carryover | carryover: cycle 1 of 4 | Adams Point | mag -8 | targets BIZ-00061",
+        "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+      },
+      {
+        "id": "F-f41c7a7a047c",
+        "t": "FACT",
+        "text": "carryover | carryover: cycle 2 of 4 | Baylight District | mag -8 | targets BIZ-00105",
+        "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+      },
+      {
+        "id": "F-9bb210f973af",
+        "t": "FACT",
+        "text": "carryover | carryover: cycle 3 of 4 | Ivy Hill | mag -8 | targets BIZ-00150",
+        "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+      },
+      {
+        "id": "F-53456f83abcb",
+        "t": "FACT",
+        "text": "sector-impact:services/retail | Oakland Casino Town lost 3 employees | Baylight District | mag -8 | targets BIZ-00100",
+        "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+      },
+      {
+        "id": "F-18ed6879e2b0",
+        "t": "FACT",
+        "text": "Casino C117: 17 undocked wagers placed, 14 sports wagers placed; 2 settled, 15 voided",
+        "src": "output/beats/Casino_Ledger.jsonl @C117"
+      },
+      {
+        "id": "F-3a122530bc4a",
+        "t": "FACT",
+        "text": "Casino house float: $246k",
+        "src": "output/beats/Casino_Ledger.jsonl HOUSE"
+      },
+      {
+        "id": "F-f62962da62fa",
+        "t": "FACT",
+        "text": "Maria Keen won on undocked (no) — staked $385, paid $705",
+        "src": "output/beats/Casino_Ledger.jsonl 0f679cb015012003"
+      },
+      {
+        "id": "F-a268465132ba",
+        "t": "FACT",
+        "text": "Jax Caldera lost on undocked (neg) — staked $428, the house kept it",
+        "src": "output/beats/Casino_Ledger.jsonl 91a9400c9b3e9a11"
+      },
+      {
+        "id": "F-8983fa0e088d",
+        "t": "FACT",
+        "text": "Downtown: median income $123k, median rent $3k, housing pressure 10, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-a3a8c8753d3e",
+        "t": "FACT",
+        "text": "Temescal: median income $68k, median rent $2k, housing pressure 0.5, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-b1ffd484b740",
+        "t": "FACT",
+        "text": "Laurel: median income $86k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-82b26378561d",
+        "t": "FACT",
+        "text": "West Oakland: median income $147k, median rent $4k, housing pressure 6.5, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-9d615082c789",
+        "t": "FACT",
+        "text": "Fruitvale: median income $100k, median rent $3k, housing pressure 10, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-d92707a932b0",
+        "t": "FACT",
+        "text": "Jack London: median income $121k, median rent $3k, housing pressure 10, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-82cb52cee9fd",
+        "t": "FACT",
+        "text": "Rockridge: median income $162k, median rent $4k, housing pressure 3.5, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-ec0ef9f7bb2f",
+        "t": "FACT",
+        "text": "Adams Point: median income $94k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-dc923d9baa45",
+        "t": "FACT",
+        "text": "Grand Lake: median income $107k, median rent $3k, housing pressure 6, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-5797845f7177",
+        "t": "FACT",
+        "text": "Piedmont Ave: median income $151k, median rent $4k, housing pressure 1.5, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-8150c112aed7",
+        "t": "FACT",
+        "text": "Chinatown: median income $85k, median rent $2k, housing pressure 0, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-e2216b203201",
+        "t": "FACT",
+        "text": "Brooklyn: median income $129k, median rent $3k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-b3985854d605",
+        "t": "FACT",
+        "text": "Eastlake: median income $83k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-903a6b40eca7",
+        "t": "FACT",
+        "text": "Glenview: median income $81k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-7ced5a2bed77",
+        "t": "FACT",
+        "text": "Dimond: median income $79k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-4b779efc677e",
+        "t": "FACT",
+        "text": "Ivy Hill: median income $77k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-6afc95a4dcd1",
+        "t": "FACT",
+        "text": "San Antonio: median income $69k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-6382bfadeebd",
+        "t": "FACT",
+        "text": "KONO: median income $83k, median rent $2k, housing pressure 1, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-6c25538383df",
+        "t": "FACT",
+        "text": "Lake Merritt: median income $186k, median rent $5k, housing pressure 0, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-3024ea0e5d66",
+        "t": "FACT",
+        "text": "Uptown: median income $99k, median rent $2k, housing pressure 10, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-b1397559e25f",
+        "t": "FACT",
+        "text": "Baylight District: median income $139k, median rent $3k, housing pressure 0, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-acc821af4ff3",
+        "t": "FACT",
+        "text": "East Oakland: median income $72k, median rent $2k, housing pressure 0, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117"
+      },
+      {
+        "id": "F-8ff02ff7d571",
+        "t": "FACT",
+        "text": "City treasury C117: revenue $5.0M (weekly budget allocation), balance after $136.8M",
+        "src": "output/beats/City_Treasury.jsonl @C117"
+      },
+      {
+        "id": "F-1439b13b7917",
+        "t": "FACT",
+        "text": "City treasury C117: revenue $126k (28 cleared charges, fined at the hood rate), balance after $136.9M",
+        "src": "output/beats/City_Treasury.jsonl @C117"
+      },
+      {
+        "id": "F-f7ed4e9a474c",
+        "t": "FACT",
+        "text": "Calendar: Y3C13, Spring, holiday=none",
+        "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-835eac28e335",
+        "t": "FACT",
+        "text": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+        "src": "Simulation_Ledger profile for POP-00027"
+      },
+      {
+        "id": "F-1bca48dc2528",
+        "t": "FACT",
+        "text": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+        "src": "Simulation_Ledger profile for POP-00028"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00027-24464dc70c",
+        "speakerId": "POP-00027",
+        "speakerName": "Philly Rodriguez",
+        "text": "Yeah, we lost three. It wasn't layoffs — it was attrition, people moving on. Two of them were dealers who got offers down in San Jose, and one was a security guy who went back to school. I can't give you their names, that's not my place. But I'll tell you this: nobody who stayed got a raise, and nobody got a cut either. Hours are the same, pay's the same. The floor's just a little thinner now, so we're all covering a bit more. The casino's not hurting — it's just not growing. And that's the thing about this town right now: the places around us in Baylight and Jack London are adding a job here and there, and we're the ones giving one up. I don't know what that says about who gains from the casino, but I know what it feels like to walk the floor with three fewer familiar faces.",
+        "factIds": [
+          "F-98d7f078ab1d",
+          "F-835eac28e335"
+        ],
+        "src": "packet.W2[POP-00027]"
+      },
+      {
+        "id": "Q-POP-00028-c6bf8843af",
+        "speakerId": "POP-00028",
+        "speakerName": "Manfred Owens",
+        "text": "Yeah, I saw the numbers on the board — three people gone from the casino this cycle. I can't tell you exactly who they were, not by name, because I don't have that list in front of me. But I can tell you what it feels like from my seat near the back. The floor's a little thinner at the tables on weeknights, and the shifts have been stretched. Philly's been covering more of the floor himself, and Gregory's been doing double duty on the stuff nobody talks about. I've picked up a couple extra hours myself, just to keep the ledger straight. The firms around us in Baylight and Jack London each added a spot, but that doesn't put food on the table for the folks who got let go here. It's a strange thing — the neighborhood feels like it's moving forward, and we're just holding the line.",
+        "factIds": [
+          "F-98d7f078ab1d",
+          "F-1bca48dc2528"
+        ],
+        "src": "packet.W2[POP-00028]"
+      },
+      {
+        "id": "Q-WORKER-9225b2cc2193",
+        "speakerId": "POP-00036",
+        "speakerName": "Marcus Osei",
+        "text": "Here's what my record actually shows, Jordan — and I'll tell you up front what it doesn't show. **Who the three were: I can't tell you.** The casino's roster is 94 names on the ledger this cycle, down from 99 two cycles back — that's 99 to 94, not just the three you're counting. But the ledger gives me a headcount and an average salary, $70,000, and nothing else. No names, no roles, no severance record, no exit survey. When a firm sheds people quietly like that, they don't file the paperwork with my office, and I've got no authority to demand it. The last time this came up on the record, the names I *could* get were the front-of-house people — Manfred Owens on the book, Philly running the floor, Gregory on \"the stuff nobody talks about.\" Whether any of those three are among the departed, I don't know, and I'm not going to pretend I do. **What the trend shows, that I can tell you.** Ninety-nine, then down, now 94, growth of minus 1.5% a year. That's not a one-cycle blip, that's a slide, and it's happening in a district with a Boom Index of 1.0 — the hottest number on the map. So the Baylight District is booming and its anchor employer is shrinking. That ought to worry everybody. **Who gains.** Short answer: not the neighborhood. When the casino trims, those three paychecks stop circulating in Baylight — and Baylight residents are already carrying -8 from the carryover and the sector impact. The gainers are whoever picks up the slack — the nightlife down the street, the stadium crowd, the firms adding a head apiece. That's churn, Jordan, not growth. One job added at DigitalOcean and three lost at the casino is not a wash. And since you asked what my record shows — it shows Ivy Hill Family Dental closed this cycle and zero jobs went with it, because there were zero to lose. That's the thing that keeps me up. A business can die in this city and the jobs number not even flinch, because it was already hollowed out. I'd rather see the casino's 94 hold steady than watch it hollow out the same way.",
+        "factIds": [],
+        "sourceKind": "worker-answer",
+        "src": "tool:ask_worker:STAFF-DM-ECON — asked: Oakland Casino Town in the Baylight District dropped 3 employees this cycle (94 now, growing -1.5% a year) while DigitalOcean, Bayline 6 and Downtown firms each added one. What does your record show a"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00027",
+        "name": "Philly Rodriguez",
+        "profile": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00028",
+        "name": "Manfred Owens",
+        "profile": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00036",
+        "name": "Marcus Osei",
+        "profile": "Marcus Osei — Deputy Mayor (Econ Dev)",
+        "src": "tool:ask_worker:STAFF-DM-ECON — asked: Oakland Casino Town in the Baylight District dropped 3 employees this cycle (94 now, growing -1.5% a year) while DigitalOcean, Bayline 6 and Downtown firms each added one. What does your record show a",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Whether the -3 at Casino Town are layoffs, quits or a reclassification. The ledger doesn't say.",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Whether the 15 voided wagers reflect a system or compliance issue at the casino, or are routine.",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Whether any of the three named casino workers are actually among those who left.",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Whether Ivy Hill's run of businesses at 0 employees, plus the Ivy Hill Family Dental closure, is a bigger story than the casino cut.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [],
+    "textureConditions": [],
+    "forbiddenClaimClasses": []
+  }
+}

@@ -1,0 +1,420 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "Fruitvale Transit Hub Phase II: the gap between what the Tribune printed about construction and what the record shows is still held at design.",
+      "angle": "Fruitvale Transit Hub Phase II: the gap between what the Tribune printed about construction and what the record shows is still held at design.",
+      "hood": null,
+      "citizens": [
+        "Elena Soria Dominguez (POP-00791)",
+        "Rose Delgado (POP-00503)"
+      ],
+      "popids": [
+        "POP-00791",
+        "POP-00503"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/civic_c117_luis-navarro_packet-v2_angle.json",
+  "quotesRequested": 2,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00503",
+      "name": "Rose Delgado",
+      "quote": "The Fruitvale community review is set for the first Thursday of next month at the Fruitvale Senior Center, 6 p.m., with the design team in the room — and yes, the held design covers the site work, because we're not letting construction outrun the community's say.",
+      "disp": "driven, hard to sit still; magnetic, center of every room",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"The Fruitvale community review is set for the first Thursday of next month at the Fruitvale Senior Center, 6 p.m., with the design team in the room — and yes, the held design covers the site work, because we're not letting construction outrun the community's say.\",\n  \"fact_ids\": [\"F-18b54a4fe24c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-18b54a4fe24c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00503-9af9c1378c",
+        "authoredQuote": true,
+        "publishableQuote": "The Fruitvale community review is set for the first Thursday of next month at the Fruitvale Senior Center, 6 p.m., with the design team in the room — and yes, the held design covers the site work, because we're not letting construction outrun the community's say."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00503",
+          "name": "Rose Delgado",
+          "role": "City Council District 3",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "Your C117 vote holds further design advancement and requires a documented Fruitvale community review this cycle. What date and venue have you set for that review, and does the record of the held design also cover the site work our C97 coverage described as construction? Speak from your life."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rose Delgado — City Council District 3 — Fruitvale — City Council District 3; 4 decisions this cycle",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Rose Delgado (City Council District 3) decided on Oakland Alternative Response Initiative [vote statement]: Hold expansion; require execution and publication of the D3 Fruitvale briefing record with the actual date, venue, notice dates, accessibility and participation arrangements, and the district and Frui",
+            "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-001",
+            "id": "F-063e66155843"
+          },
+          {
+            "t": "FACT",
+            "text": "Rose Delgado (City Council District 3) decided on Fruitvale Transit Hub Phase II — Visioning [vote statement]: Hold further design advancement at the C86 authorization; require the contracted design consultant to deliver preliminary schematics and conduct a documented Fruitvale community review this cycle, wit",
+            "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-002",
+            "id": "F-18b54a4fe24c"
+          },
+          {
+            "t": "FACT",
+            "text": "Rose Delgado (City Council District 3) decided on Oakland Youth Apprenticeship Pipeline [vote statement]: Require the placement-gap analysis and adjustment plan with explicit Fruitvale and West Oakland review to be published this cycle, and record implementation as stalled until that publication exists.",
+            "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-003",
+            "id": "F-f5cc7a20b1cc"
+          },
+          {
+            "t": "FACT",
+            "text": "Rose Delgado (City Council District 3) decided on San Antonio commercial blocks — next public update and district investment [vote statement]: Hold San Antonio commercial blocks as an active district matter, with the next public update and a named district office point of contact rather than a footnote.",
+            "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-004",
+            "id": "F-4ea797f8d224"
+          },
+          {
+            "t": "FACT",
+            "text": "City Council District 3 — Rose Delgado — approval 61 — active — OPP",
+            "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D3 @C117",
+            "id": "F-94e16c997e36"
+          },
+          {
+            "t": "FACT",
+            "text": "Rose Delgado — City Council District 3 — Fruitvale — City Council District 3; 4 decisions this cycle",
+            "src": "Simulation_Ledger profile for POP-00503",
+            "id": "F-35c4e44aa0ae"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": "no matching current-cycle office statement; tier-2 adapter unavailable",
+  "interviews": [
+    {
+      "pop": "POP-00791",
+      "name": "Elena Soria Dominguez",
+      "quote": null,
+      "disp": "driven, hard to sit still; draws people in, deep with them; curious, open to new things; principled, plays it straight; fairly steady",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"The machines on that lot were clearing and grubbing under the old C86 authorization — that's site prep, not design work. The held scope is the design advancement, the schematics and the comment-and-response record, and that hasn't moved an inch until we answer every Fruitvale comment in the language it came in.\",\n  \"fact_ids\": [\"F-0ba7606a0856\", \"F-0d3991183089\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": \"I'd want to check the C97 piece's source for what it called 'entering construction' — that wording doesn't match the authorization I know.\",\n  \"abstain_reason\": null\n}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00791",
+          "name": "Elena Soria Dominguez",
+          "role": "Transit Hub Planning Lead",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "The tracker says further design advancement is held at the C86 authorization and that preliminary schematics and a documented Fruitvale comment-and-response record are not evidenced. Our C97 piece described the Transit Hub as entering construction, with machines on a cleared lot. What work was done on site, under what authorization, and does it fall inside the held design scope? Speak from your life."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale — Transit Hub Planning Lead; 2 decisions this cycle",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Elena Soria Dominguez (Transit Hub Planning Lead) decided on INIT-003 complete-entry versus open design review — where the unfinished work lives [decision]: Hold further design advancement at the C86 authorization; treat the INIT-003 'complete' tracker entry as closing the visioning and council-authorization history only; keep the comment-and-response rec",
+            "src": "output/civic-voice/transit_hub_c117.json STMT-117-transit_hub-001",
+            "id": "F-0ba7606a0856"
+          },
+          {
+            "t": "FACT",
+            "text": "Elena Soria Dominguez (Transit Hub Planning Lead) decided on Fruitvale answer desk and the public comment log [constituent]: Keep the answer desk and numbered comment log staffed at the Chavez branch this cycle, logging every comment in the language it came in and committing to a written answer with a date before the drawin",
+            "src": "output/civic-voice/transit_hub_c117.json STMT-117-transit_hub-002",
+            "id": "F-0d3991183089"
+          },
+          {
+            "t": "FACT",
+            "text": "Transit Hub Planning Lead — Elena Soria Dominguez — approval 65 — active — STAFF",
+            "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-TRANSITHUB @C117",
+            "id": "F-74cf3db05d3a"
+          },
+          {
+            "t": "FACT",
+            "text": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale — Transit Hub Planning Lead; 2 decisions this cycle",
+            "src": "Simulation_Ledger profile for POP-00791",
+            "id": "F-f58c7add1cf1"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00503",
+      "name": "Rose Delgado",
+      "quote": "The Fruitvale community review is set for the first Thursday of next month at the Fruitvale Senior Center, 6 p.m., with the design team in the room — and yes, the held design covers the site work, because we're not letting construction outrun the community's say.",
+      "disp": "driven, hard to sit still; magnetic, center of every room",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"The Fruitvale community review is set for the first Thursday of next month at the Fruitvale Senior Center, 6 p.m., with the design team in the room — and yes, the held design covers the site work, because we're not letting construction outrun the community's say.\",\n  \"fact_ids\": [\"F-18b54a4fe24c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-18b54a4fe24c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00503-9af9c1378c",
+        "authoredQuote": true,
+        "publishableQuote": "The Fruitvale community review is set for the first Thursday of next month at the Fruitvale Senior Center, 6 p.m., with the design team in the room — and yes, the held design covers the site work, because we're not letting construction outrun the community's say."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00503",
+          "name": "Rose Delgado",
+          "role": "City Council District 3",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "Your C117 vote holds further design advancement and requires a documented Fruitvale community review this cycle. What date and venue have you set for that review, and does the record of the held design also cover the site work our C97 coverage described as construction? Speak from your life."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Rose Delgado — City Council District 3 — Fruitvale — City Council District 3; 4 decisions this cycle",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Rose Delgado (City Council District 3) decided on Oakland Alternative Response Initiative [vote statement]: Hold expansion; require execution and publication of the D3 Fruitvale briefing record with the actual date, venue, notice dates, accessibility and participation arrangements, and the district and Frui",
+            "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-001",
+            "id": "F-063e66155843"
+          },
+          {
+            "t": "FACT",
+            "text": "Rose Delgado (City Council District 3) decided on Fruitvale Transit Hub Phase II — Visioning [vote statement]: Hold further design advancement at the C86 authorization; require the contracted design consultant to deliver preliminary schematics and conduct a documented Fruitvale community review this cycle, wit",
+            "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-002",
+            "id": "F-18b54a4fe24c"
+          },
+          {
+            "t": "FACT",
+            "text": "Rose Delgado (City Council District 3) decided on Oakland Youth Apprenticeship Pipeline [vote statement]: Require the placement-gap analysis and adjustment plan with explicit Fruitvale and West Oakland review to be published this cycle, and record implementation as stalled until that publication exists.",
+            "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-003",
+            "id": "F-f5cc7a20b1cc"
+          },
+          {
+            "t": "FACT",
+            "text": "Rose Delgado (City Council District 3) decided on San Antonio commercial blocks — next public update and district investment [vote statement]: Hold San Antonio commercial blocks as an active district matter, with the next public update and a named district office point of contact rather than a footnote.",
+            "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-004",
+            "id": "F-4ea797f8d224"
+          },
+          {
+            "t": "FACT",
+            "text": "City Council District 3 — Rose Delgado — approval 61 — active — OPP",
+            "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D3 @C117",
+            "id": "F-94e16c997e36"
+          },
+          {
+            "t": "FACT",
+            "text": "Rose Delgado — City Council District 3 — Fruitvale — City Council District 3; 4 decisions this cycle",
+            "src": "Simulation_Ledger profile for POP-00503",
+            "id": "F-35c4e44aa0ae"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-24T19:15:39.213Z"
+}

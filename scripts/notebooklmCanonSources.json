@@ -48,7 +48,8 @@
     "06e1843d-5c67-4052-8ddd-de2fc22413d1",
     "972bb82e-70f8-48a2-9bf2-9a9061d11f46",
     "0f829b78-8866-4af2-9407-24568e65c5a3",
-    "4a60554f-6c74-4823-820b-9f8e341d5023"
+    "4a60554f-6c74-4823-820b-9f8e341d5023",
+    "afb5ffdb-5a20-4a19-9414-b1e22fba4e04"
   ],
   "allowedCanonReferenceSourceIds": [
     "c31ff29f-42d5-4ed3-ba71-620c463a39a6",
@@ -853,6 +854,14 @@
       "reason": "Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).",
       "evidence": [
         "editions/cycle_pulse_c115.txt"
+      ]
+    },
+    "afb5ffdb-5a20-4a19-9414-b1e22fba4e04": {
+      "title": "The Cycle Pulse — Y3C12",
+      "classification": "published",
+      "reason": "Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).",
+      "evidence": [
+        "editions/cycle_pulse_c116.txt"
       ]
     }
   }

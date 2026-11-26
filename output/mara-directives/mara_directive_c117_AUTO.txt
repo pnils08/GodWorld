@@ -1,0 +1,85 @@
+# C117 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 117
+**Issued:** C117 (auto-derived, cron-civic-run.js --stage=directive, post-close)
+**Source:** close_c117 + the week's statements + promise record + world_summary_c117 + tracker
+
+---
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** Supply the source-backed complaint and INIT-014 reconciliation, and identify the office responsible for publishing INIT-007’s placement-gap analysis.
+- **Why:** Your Cycle 117 close leaves the promised complaint crosswalk and INIT-014 filing unverified; current office evidence lists seven complaints, while your statements discuss eleven from Cycle 116, and the live tracker still carries INIT-014’s Cycle 115 filed notation and Cycle 117 Council-review date. Janae Rivers’s Cycle 116 reply also requests a publishing office for INIT-007 that the supplied record does not identify.
+- **Acceptance:** A crosswalk distinguishing reporting windows, matching the seven promised responses to actual cases, and marking missing references, owners, remedies and dates honestly; a Clerk reference or explicit unverified status for INIT-014, with the tracker discrepancy referred for correction; and a named INIT-007 publishing office and district-submission requirements, or an explicit account of that unresolved assignment.
+- **Promise:** P-d94459ae1189b667; P-b87ef751a66c370d
+## Rose Delgado — City Council District 3
+
+- **Agent:** `.claude/agents/civic-office-council-d3/`
+- **Address:** Provide the inspectable district briefing-and-notice reference and reconcile your report that it was linked with your subsequent statement that publication remains incomplete.
+- **Why:** Your Cycle 116 reply says the consolidated Fruitvale record is linked to the published OARI packet; your Cycle 117 statement says the record is not complete until published and inspectable, while Vanessa Tran-Muñoz’s Cycle 117 update reports publication.
+- **Acceptance:** One usable public reference covering the actual briefing date and venue, notice dates, access arrangements, district and Fruitvale figures, and transit-review calendar; identify any missing component and explain whether the differing statements concern the same file. Do not repeat a briefing merely because its documentation has been described inconsistently.
+- **Promise:** P-71776abe706ff093
+## Ramon Vega — City Council District 4
+
+- **Agent:** `.claude/agents/civic-office-council-d4/`
+- **Address:** Provide the Dimond briefing’s factual record and the documented status of outstanding service questions in Dimond and Glenview.
+- **Why:** The Cycle 117 city summary records the Dimond Emergency Town Briefing, a high-severity culture spike and a dumping-cleared event; your Cycle 117 statement still lacks the earlier pickup’s recovery status and Glenview meeting follow-through. Keisha Ramos’s Cycle 116 report describes Glenview public-works spikes across three cycles.
+- **Acceptance:** The briefing’s documented findings, what remains unverified, any municipal next steps and responsible offices; separately, whether the dumping clearance relates to the earlier missed pickup, without assuming it does. For Glenview, supply available findings and work records, or identify the departmental records request, its custodian if known, and the next update rather than repeating the severity label.
+## Janae Rivers — City Council District 5
+
+- **Agent:** `.claude/agents/civic-office-council-d5/`
+- **Address:** Supply D5’s intake-and-placement contribution and account for its handoff toward the still-unpublished INIT-007 analysis.
+- **Why:** Your Cycle 116 reply offered East Oakland’s contribution with participating organizations named, while asking Planning to identify the publishing office and format; your Cycle 117 statement acknowledges that the Cycle 115 publication pledge did not produce the documents. The live tracker now schedules publication for Cycle 118.
+- **Acceptance:** The district contribution or a precise account of what remains missing; actual organization names, source periods, intake and placement figures, and any documented submission or receipt. Distinguish D5’s contribution from the citywide analysis covering West Oakland and Fruitvale. If the publishing assignment still prevents submission, say so; that assignment is also being put to the Mayor rather than assumed to belong to Planning.
+- **Promise:** P-36f7939757489205
+## Nina Chen — City Council District 8
+
+- **Agent:** `.claude/agents/civic-office-council-d8/`
+- **Address:** Identify the outstanding departmental action on Eastlake’s requests, reconcile the complaint reporting windows, and report whether Adams Point’s assistance effort has requested municipal coordination.
+- **Why:** Your Cycle 117 statement leaves Eastlake allocations proposed and unauthorized, without a certified schedule; your Cycle 116 reply located four complaints exclusively in Lake Merritt, while Cycle 117 office evidence lists two district complaints. The Cycle 117 city summary records Adams Point United Methodist activating its emergency assistance fund.
+- **Acceptance:** Available Eastlake request references, or explicit undocketed status, with the missing authorization step and departmental assistance needed; a window-and-location reconciliation that does not treat a lower count as proof of resolution; and any actual request from the Adams Point organizers and city response, including a supported answer that no municipal assistance has been requested.
+- **Promise:** P-6903e362468303b6
+## Terrence Mobley — City Council District 9
+
+- **Agent:** `.claude/agents/civic-office-council-d9/`
+- **Address:** Update the Laurel scope, outreach and filing record against your Cycle 116 commitment, distinguishing recorded work from completed deliverables.
+- **Why:** Your Cycle 116 reply acknowledged the missed filing and committed to completing scope, outreach and Clerk-verified submission; no statement from your office landed at the Cycle 117 close. The live tracker records district work in Cycle 117 but still says those deliverables are not evidenced and schedules the next step for Cycle 118.
+- **Acceptance:** The scope and outreach products actually completed, any remaining work, and the Clerk reference if submission occurred; otherwise, retain explicit outstanding status and identify the next reporting date. Explain what the recorded work accomplished without presenting it as a filing or treating the proposed $6 million as authorized.
+- **Promise:** P-b6cac45e0bdc5443
+## Marcus Webb — OEWD Program Director (Stabilization Fund)
+
+- **Agent:** `.claude/agents/civic-project-stabilization-fund/`
+- **Address:** Provide the closeout verification reference and clarify your Grand Lake certification language against the Mayor’s closing record.
+- **Why:** Your Cycle 117 statement calls the C114 closeout verified and published and describes Grand Lake’s roll call as held and certified; the Mayor’s Cycle 117 close says neither closeout verification nor a Clerk-certified roll call is supplied. The live INIT-001 tracker carries verification and Council consideration to Cycle 118.
+- **Acceptance:** The published closeout and verification references, identifying what was verified and by whom; for Grand Lake, the certified roll-call reference if one exists, or a correction distinguishing intended procedure from completed certification. Leave renewal, vote totals and enactment unclaimed unless the corresponding Council record supports them.
+## Vanessa Tran-Muñoz — OARI Program Director
+
+- **Agent:** `.claude/agents/civic-project-oari/`
+- **Address:** Supply the Clerk-filed D5 and Baylight next dates and explain what the quiet reporting streams do—and do not—capture about OARI operations.
+- **Why:** Your Cycle 117 updates report written next dates filed without stating the dates, while the Mayor’s close and live tracker still carry that documentation step forward to Cycle 118. Your Cycle 116 report questioned zero van events and zero mental-health and substance-treatment hospital activity; the Cycle 117 city summary records an OARI de-escalation in West Oakland.
+- **Acceptance:** The actual dates and filing references, or corrected filing status; an explanation of which records capture dispatch activity versus hospital intake, their reporting periods and any known capture limitations. Explain how the West Oakland event is recorded without treating one successful response as proof that every reporting stream is complete or that expansion conditions have been satisfied.
+## Bobby Chen-Ramirez — Health Center Project Director
+
+- **Agent:** `.claude/agents/civic-project-health-center/`
+- **Address:** Supply the Q3 filing and merchant-walkthrough evidence, or correct the completed entries and quarterly schedule.
+- **Why:** Your Cycle 117 tracker updates report the audit filed and walkthrough completed and move recurring actions to Cycle 121; the Mayor’s Cycle 117 close says verification is absent, and the live tracker still schedules those Q3 closing steps for Cycle 118.
+- **Acceptance:** HCAI and Clerk receipt or filing references, a public audit reference, and the dated walkthrough record with findings and remaining actions. If either step is unfinished, distinguish intention from completion and reconcile the proposed Cycle 121 recurrence with the outstanding Cycle 118 entry. Continued clinic operations are not in question.
+## Elena Soria Dominguez — Transit Hub Planning Lead
+
+- **Agent:** `.claude/agents/civic-project-transit-hub/`
+- **Address:** Link the delivered schematics and open community-review log to the Council record, with a current reporting date for unfinished responses.
+- **Why:** Your Cycle 117 statement and reply identify delivered Mayer & Associates schematics and a numbered log at the Chavez branch, but the Mayor’s Cycle 117 close says the schematics and documented review are not evidenced in the packet. Your stated reporting date remains Cycle 117, and the response record remains unfinished.
+- **Acceptance:** Inspectable schematics and review-log references, a clear inventory of completed and unfinished responses, and written next dates for the remaining work under Mayer & Associates with your office reviewing. Preserve the distinction between completed authorization history, delivered drawings and an unfinished response record; do not redeliver drawings merely to resolve a packet-reference problem.
+## Keisha Ramos — Baylight Authority Director
+
+- **Agent:** `.claude/agents/civic-office-baylight-authority/`
+- **Address:** Report the Marine Systems response, or explicitly report that none has arrived, as you undertook to do this cycle.
+- **Why:** Your Cycle 116 weekly report described Marine Systems’ ledger headcount reaching zero and said, “Next cycle: I’ll have the Marine Systems answer or I’ll say I don’t have one”; your Cycle 117 statement addresses construction oversight but supplies neither update.
+- **Acceptance:** The written request and any company reply, or explicit no-response status; distinguish confirmed information from unanswered questions about sea-level monitoring work and employee arrangements, and identify any remaining follow-up. Your separate construction determination already has an explicit pending status and Cycle 118 reporting date; no unsupported milestone signature is requested.
+- **Promise:** P-bfd37c6da17c47d4
+
+## Not directing
+- Denise Carter (City Council District 1): Her Cycle 117 response identifies the missing records and Planning assistance needed and sets Cycle 118 for reporting; another demand would not supply the requested records or custodian.
+- Leonard Tran (City Council District 2): His Cycle 117 statement keeps Downtown authorization pending and asks for an executable planning record; the close acknowledges the missing work and schedules recovery for Cycle 118, without supplying a vote that would test his recorded YES commitment.
+- Elliott Crane (City Council District 6): His Cycle 117 statement distinguishes the Piedmont Avenue incident record from unverified diagnoses and calls for a documented public-update date next cycle; that reporting point has not passed.
+- Warren Ashford (City Council District 7): His Cycle 117 response identifies Building, Fire and Finance follow-through for KONO without claiming completion; the separate health-center evidence discrepancy is directed to the project director rather than duplicated here.

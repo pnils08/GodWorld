@@ -1,0 +1,391 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00230-2026-11-24T02-30-26",
+  "popid": "POP-00230",
+  "holder": "Jett Walker",
+  "session": "undocked-pop00230",
+  "window": {
+    "startedAt": "2026-11-24T02:30:26.876Z",
+    "endedAt": "2026-11-24T02:50:33.451Z"
+  },
+  "runner": {
+    "turns": 44,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 3,
+    "estCostUsd": 0.0277,
+    "tokensIn": 244901,
+    "tokensOut": 6494,
+    "log": "output/spacemolt-show/episodes/undocked-pop00230-2026-11-24T02-30-26.log",
+    "stopReason": "window",
+    "toolCalls": 38
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-24T02:55:34.743Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "wanderer",
+          "name": "Wanderer",
+          "gained": 9
+        },
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "gained": 5
+        },
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 3.6
+        },
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 2.7
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 0.9
+        },
+        {
+          "id": "chronicler",
+          "name": "Chronicler",
+          "gained": 0.6
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_i",
+          "name": "Prospector I",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_ii",
+          "name": "Prospector II",
+          "gained": 0
+        }
+      ],
+      "beforeTakenAt": "2026-11-24T02:30:26.635Z",
+      "value": 21.82
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "miaplacidus",
+        "maplevale",
+        "dubhe",
+        "alfirk",
+        "revati"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "copper_ore": 1,
+          "iron_ore": 7
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 9,
+        "session": 1,
+        "achievement": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 299755902,
+            "created_at": "2026-11-24T02:44:13Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Copper Ore at Main Belt Echo",
+            "data": {
+              "poi_name": "Main Belt Echo",
+              "quantity": 1,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "electra",
+              "system_name": "Electra",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 299755545,
+            "created_at": "2026-11-24T02:44:13Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 7 Iron Ore at Main Belt Echo",
+            "data": {
+              "poi_name": "Main Belt Echo",
+              "quantity": 7,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "electra",
+              "system_name": "Electra",
+              "ticks": 7
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 299775462,
+            "created_at": "2026-11-24T02:50:30Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alfirk to Revati",
+            "data": {
+              "arrival_poi": "revati_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "alfirk",
+              "is_pathfinder": false,
+              "to_system": "revati",
+              "to_system_name": "Revati"
+            }
+          },
+          {
+            "id": 299772407,
+            "created_at": "2026-11-24T02:49:19Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Dubhe to Alfirk",
+            "data": {
+              "arrival_poi": "alfirk_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "dubhe",
+              "is_pathfinder": false,
+              "to_system": "alfirk",
+              "to_system_name": "Alfirk"
+            }
+          },
+          {
+            "id": 299767430,
+            "created_at": "2026-11-24T02:48:09Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Maplevale to Dubhe",
+            "data": {
+              "arrival_poi": "dubhe_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "maplevale",
+              "is_pathfinder": false,
+              "to_system": "dubhe",
+              "to_system_name": "Dubhe"
+            }
+          },
+          {
+            "id": 299764383,
+            "created_at": "2026-11-24T02:46:59Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Miaplacidus to Maplevale",
+            "data": {
+              "arrival_poi": "maplevale_ii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "miaplacidus",
+              "is_pathfinder": false,
+              "to_system": "maplevale",
+              "to_system_name": "Maplevale"
+            }
+          },
+          {
+            "id": 299761324,
+            "created_at": "2026-11-24T02:45:50Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Mimosa to Miaplacidus",
+            "data": {
+              "arrival_poi": "miaplacidus_alloy_remnants",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "mimosa",
+              "is_pathfinder": false,
+              "to_system": "miaplacidus",
+              "to_system_name": "Miaplacidus"
+            }
+          },
+          {
+            "id": 299758163,
+            "created_at": "2026-11-24T02:44:39Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Electra to Mimosa",
+            "data": {
+              "arrival_poi": "mimosa_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "electra",
+              "is_pathfinder": false,
+              "to_system": "mimosa",
+              "to_system_name": "Mimosa"
+            }
+          },
+          {
+            "id": 299741180,
+            "created_at": "2026-11-24T02:39:49Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Tau Ceti to Electra",
+            "data": {
+              "arrival_poi": "electra_i",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "tau_ceti",
+              "is_pathfinder": false,
+              "to_system": "electra",
+              "to_system_name": "Electra"
+            }
+          },
+          {
+            "id": 299736513,
+            "created_at": "2026-11-24T02:38:40Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpha Centauri to Tau Ceti",
+            "data": {
+              "arrival_poi": "fomalhaut_4675g_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "alpha_centauri",
+              "is_pathfinder": false,
+              "to_system": "tau_ceti",
+              "to_system_name": "Tau Ceti"
+            }
+          },
+          {
+            "id": 299733512,
+            "created_at": "2026-11-24T02:37:31Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "farwatch",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 299713203,
+            "created_at": "2026-11-24T02:30:28Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "JettWalker logged in",
+            "data": {
+              "last_login_at": "2026-11-24T02:30:26Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": [
+          {
+            "id": 299734001,
+            "created_at": "2026-11-24T02:37:42Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Maiden Jump",
+            "data": {
+              "achievement_id": "maiden_jump",
+              "points": 5
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 1,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-11-24 02:50:33",
+        "text": "[Session Handoff] - **Mid-action:** Just jumped to Revati and arrived at `revati_ii`. The system hasn't been inspected yet, so the next call is likely `get_system` on Revati.\n- **Immediate next step:** Run `get_system` for Revati, then pick the next unexplored neighbor and keep jumping.\n- **Location and ship:** Currently in Revati (`revati_ii`). Ship, credits, and exact cargo counts were not shown in this transcript. Check status before acting on them.\n- **Cargo:** A few ore units from mining: Iron Ore (multiple) and at least 1 Copper Ore. Cargo totals are unverified.\n- **Ongoing plan:** Exploration/charting is the current focus, since it pays more per step. Recent route: Mimosa → Miaplacidus → Ma"
+      }
+    ],
+    "unwindowed": []
+  }
+}

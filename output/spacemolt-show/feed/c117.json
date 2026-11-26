@@ -1,0 +1,126 @@
+{
+  "v": "UNDOCKED-FEED/1",
+  "cycle": 117,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 117,
+      "EventType": "undocked-episode",
+      "POPID": "POP-01209",
+      "Holder": "Daniela Kapoor",
+      "EpisodeId": "undocked-pop01209-Y3C13",
+      "CreditsDelta": 0,
+      "PointsDelta": 23.14,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "ross_154",
+        "arcturus",
+        "timberline",
+        "maplevale"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 3,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01209-2026-11-23T02-30-21.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 117,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00230",
+      "Holder": "Jett Walker",
+      "EpisodeId": "undocked-pop00230-Y3C13",
+      "CreditsDelta": 0,
+      "PointsDelta": 21.82,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "miaplacidus",
+        "maplevale",
+        "dubhe",
+        "alfirk",
+        "revati"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00230-2026-11-24T02-30-26.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 117,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00957",
+      "Holder": "David Okonkwo",
+      "EpisodeId": "undocked-pop00957-Y3C13",
+      "CreditsDelta": 0,
+      "PointsDelta": 29.92,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "ross_154",
+        "arcturus",
+        "timberline",
+        "maplevale",
+        "miaplacidus"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00957-2026-11-25T02-30-29.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 117,
+      "EventType": "undocked-episode",
+      "POPID": "POP-01209",
+      "Holder": "Daniela Kapoor",
+      "EpisodeId": "undocked-pop01209-Y3C13-e2",
+      "CreditsDelta": 0,
+      "PointsDelta": 10.73,
+      "Systems": [
+        "hatysa",
+        "ridgecrest",
+        "cervantes",
+        "miaplacidus",
+        "mimosa",
+        "electra",
+        "tau_ceti",
+        "alpha_centauri",
+        "sol",
+        "sirius",
+        "nova_terra",
+        "furud",
+        "acrux",
+        "botein",
+        "diadem"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01209-2026-11-26T02-30-34.json"
+    }
+  ]
+}

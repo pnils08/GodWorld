@@ -1,0 +1,777 @@
+{
+  "empty": false,
+  "cycle": 117,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Desmond Morton",
+      "Darrin Davis",
+      "Danny Horn"
+    ],
+    "restaurants": [
+      {
+        "name": "Estuary Oyster House",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Eastlake Kitchen",
+        "hood": "Eastlake"
+      },
+      {
+        "name": "Parkedge Diner",
+        "hood": "Eastlake"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "OakTown Social",
+        "hood": "Temescal"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 3,
+      "vibe": "quiet",
+      "movement": "restricted",
+      "weatherImpact": 1.02
+    },
+    "cityEvents": [
+      "Rockridge Garden Market",
+      "Dimond Emergency Town Briefing",
+      "Uptown Outdoor Gallery",
+      "The Reaves Family Block Party"
+    ],
+    "tv": [
+      "Bay Area Alert",
+      "Spring Lineup",
+      "Oakland Baseball Tonight",
+      "One-on-One with TyJerome (PG)"
+    ],
+    "movies": [
+      "New Bloom",
+      "Diamond City"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight",
+    "streamingTrend": "political commentary surge",
+    "foodTrend": "High mobility / civic-tension food trend"
+  },
+  "signals": {
+    "fameCount": 3,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c117.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Desmond Morton spotted at Oakland Asian Cultural Center",
+        "name": "Desmond Morton",
+        "venue": "Oakland Asian Cultural Center",
+        "ref": "Ripple_Ledger cycle 117 (CauseType lifestyle-sighting); rendered: world_summary_c117.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Chinatown",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Darrin Davis spotted at Eastlake Barbers",
+        "name": "Darrin Davis",
+        "venue": "Eastlake Barbers",
+        "ref": "Ripple_Ledger cycle 117 (CauseType lifestyle-sighting); rendered: world_summary_c117.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Eastlake",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Danny Horn spotted at Eastlake Tap Room",
+        "name": "Danny Horn",
+        "venue": "Eastlake Tap Room",
+        "ref": "Ripple_Ledger cycle 117 (CauseType lifestyle-sighting); rendered: world_summary_c117.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Eastlake",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Luis Taz — the city keeps saying the name: Tier 4 -> 3",
+        "name": "Luis Taz",
+        "ref": "Ripple_Ledger cycle 117 (CauseType fame-event); rendered: world_summary_c117.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00298"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-climb | Ines Sorensen — the city keeps saying the name: Tier 3 -> 2",
+        "name": "Ines Sorensen",
+        "ref": "Ripple_Ledger cycle 117 (CauseType fame-event); rendered: world_summary_c117.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Uptown",
+        "popids": [
+          "POP-01211"
+        ]
+      },
+      {
+        "kind": "fame-event",
+        "label": "tier-decay | Yuki Ji — the spotlight moved on: Tier 3 -> 4",
+        "name": "Yuki Ji",
+        "ref": "Ripple_Ledger cycle 117 (CauseType fame-event); rendered: world_summary_c117.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00783"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "quiet-nightlife",
+    "score": 24,
+    "label": "OakTown Social (Temescal) · quiet night",
+    "named": "OakTown Social",
+    "hood": "Temescal",
+    "person": null,
+    "venue": null
+  },
+  "candidates": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "OakTown Social (Temescal) · quiet night",
+      "named": "OakTown Social",
+      "hood": "Temescal"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Desmond Morton at Oakland Asian Cultural Center (Chinatown)",
+      "named": "Oakland Asian Cultural Center",
+      "hood": "Chinatown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Darrin Davis at Eastlake Barbers (Eastlake)",
+      "named": "Eastlake Barbers",
+      "hood": "Eastlake"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Danny Horn at Eastlake Tap Room (Eastlake)",
+      "named": "Eastlake Tap Room",
+      "hood": "Eastlake"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Estuary Oyster House (Jack London)",
+      "named": "Estuary Oyster House",
+      "hood": "Jack London"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Eastlake Kitchen (Eastlake)",
+      "named": "Eastlake Kitchen",
+      "hood": "Eastlake"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Parkedge Diner (Eastlake)",
+      "named": "Parkedge Diner",
+      "hood": "Eastlake"
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Uptown Outdoor Gallery",
+      "named": "Uptown Outdoor Gallery",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Reaves Family Block Party",
+      "named": "The Reaves Family Block Party",
+      "hood": null
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Luis Taz — fame rise",
+      "named": "Luis Taz",
+      "hood": "Fruitvale"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Ines Sorensen — fame rise",
+      "named": "Ines Sorensen",
+      "hood": "Uptown"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Yuki Ji — fame rise",
+      "named": "Yuki Ji",
+      "hood": "Lake Merritt"
+    }
+  ],
+  "pulses": [
+    {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "OakTown Social (Temescal) · quiet night",
+      "named": "OakTown Social",
+      "hood": "Temescal",
+      "names": [
+        "OakTown Social"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "OakTown Social is open and quiet in Temescal. What that condition means is not yet established.",
+      "hookLine": "OakTown Social is open and quiet in Temescal.",
+      "sceneBits": [
+        "VENUE: OakTown Social",
+        "HOOD: Temescal",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1.02
+      },
+      "cycle": 117
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Desmond Morton at Oakland Asian Cultural Center (Chinatown)",
+      "named": "Oakland Asian Cultural Center",
+      "hood": "Chinatown",
+      "names": [
+        "Desmond Morton",
+        "Oakland Asian Cultural Center"
+      ],
+      "person": "Desmond Morton",
+      "venue": "Oakland Asian Cultural Center",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 117 (CauseType lifestyle-sighting); rendered: world_summary_c117.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Desmond Morton spotted at Oakland Asian Cultural Center in Chinatown — ground truth only, no invented companions",
+      "hookLine": "sighting | Desmond Morton spotted at Oakland Asian Cultural Center",
+      "sceneBits": [
+        "PERSON: Desmond Morton",
+        "VENUE: Oakland Asian Cultural Center",
+        "HOOD: Chinatown"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Darrin Davis at Eastlake Barbers (Eastlake)",
+      "named": "Eastlake Barbers",
+      "hood": "Eastlake",
+      "names": [
+        "Darrin Davis",
+        "Eastlake Barbers"
+      ],
+      "person": "Darrin Davis",
+      "venue": "Eastlake Barbers",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 117 (CauseType lifestyle-sighting); rendered: world_summary_c117.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Darrin Davis spotted at Eastlake Barbers in Eastlake — ground truth only, no invented companions",
+      "hookLine": "sighting | Darrin Davis spotted at Eastlake Barbers",
+      "sceneBits": [
+        "PERSON: Darrin Davis",
+        "VENUE: Eastlake Barbers",
+        "HOOD: Eastlake"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Danny Horn at Eastlake Tap Room (Eastlake)",
+      "named": "Eastlake Tap Room",
+      "hood": "Eastlake",
+      "names": [
+        "Danny Horn",
+        "Eastlake Tap Room"
+      ],
+      "person": "Danny Horn",
+      "venue": "Eastlake Tap Room",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 117 (CauseType lifestyle-sighting); rendered: world_summary_c117.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Danny Horn spotted at Eastlake Tap Room in Eastlake — ground truth only, no invented companions",
+      "hookLine": "sighting | Danny Horn spotted at Eastlake Tap Room",
+      "sceneBits": [
+        "PERSON: Danny Horn",
+        "VENUE: Eastlake Tap Room",
+        "HOOD: Eastlake"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Estuary Oyster House (Jack London)",
+      "named": "Estuary Oyster House",
+      "hood": "Jack London",
+      "names": [
+        "Estuary Oyster House"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Estuary Oyster House appears on the evening restaurant list in Jack London. What was happening there is not established.",
+      "hookLine": "Estuary Oyster House appears on the evening restaurant list in Jack London.",
+      "sceneBits": [
+        "VENUE: Estuary Oyster House",
+        "HOOD: Jack London"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Eastlake Kitchen (Eastlake)",
+      "named": "Eastlake Kitchen",
+      "hood": "Eastlake",
+      "names": [
+        "Eastlake Kitchen"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Eastlake Kitchen appears on the evening restaurant list in Eastlake. What was happening there is not established.",
+      "hookLine": "Eastlake Kitchen appears on the evening restaurant list in Eastlake.",
+      "sceneBits": [
+        "VENUE: Eastlake Kitchen",
+        "HOOD: Eastlake"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Parkedge Diner (Eastlake)",
+      "named": "Parkedge Diner",
+      "hood": "Eastlake",
+      "names": [
+        "Parkedge Diner"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Parkedge Diner appears on the evening restaurant list in Eastlake. What was happening there is not established.",
+      "hookLine": "Parkedge Diner appears on the evening restaurant list in Eastlake.",
+      "sceneBits": [
+        "VENUE: Parkedge Diner",
+        "HOOD: Eastlake"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Uptown Outdoor Gallery",
+      "named": "Uptown Outdoor Gallery",
+      "hood": null,
+      "names": [
+        "Uptown Outdoor Gallery"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: Uptown Outdoor Gallery — present-tense room, not calendar filler",
+      "hookLine": "Uptown Outdoor Gallery is on the evening board.",
+      "sceneBits": [
+        "EVENT: Uptown Outdoor Gallery",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Reaves Family Block Party",
+      "named": "The Reaves Family Block Party",
+      "hood": null,
+      "names": [
+        "The Reaves Family Block Party"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: The Reaves Family Block Party — present-tense room, not calendar filler",
+      "hookLine": "The Reaves Family Block Party is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Reaves Family Block Party",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Luis Taz — fame rise",
+      "named": "Luis Taz",
+      "hood": "Fruitvale",
+      "names": [
+        "Luis Taz"
+      ],
+      "person": "Luis Taz",
+      "popids": [
+        "POP-00298"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 117 (CauseType fame-event); rendered: world_summary_c117.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Luis Taz — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Luis Taz — the city keeps saying the name: Tier 4 -> 3",
+      "sceneBits": [
+        "PERSON: Luis Taz",
+        "HOOD: Fruitvale",
+        "LABEL: tier-climb | Luis Taz — the city keeps saying the name: Tier 4 -> 3"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Ines Sorensen — fame rise",
+      "named": "Ines Sorensen",
+      "hood": "Uptown",
+      "names": [
+        "Ines Sorensen"
+      ],
+      "person": "Ines Sorensen",
+      "popids": [
+        "POP-01211"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 117 (CauseType fame-event); rendered: world_summary_c117.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Ines Sorensen — city watching; do not invent the private life",
+      "hookLine": "tier-climb | Ines Sorensen — the city keeps saying the name: Tier 3 -> 2",
+      "sceneBits": [
+        "PERSON: Ines Sorensen",
+        "HOOD: Uptown",
+        "LABEL: tier-climb | Ines Sorensen — the city keeps saying the name: Tier 3 -> 2"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Yuki Ji — fame rise",
+      "named": "Yuki Ji",
+      "hood": "Lake Merritt",
+      "names": [
+        "Yuki Ji"
+      ],
+      "person": "Yuki Ji",
+      "popids": [
+        "POP-00783"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 117 (CauseType fame-event); rendered: world_summary_c117.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Yuki Ji — city watching; do not invent the private life",
+      "hookLine": "tier-decay | Yuki Ji — the spotlight moved on: Tier 3 -> 4",
+      "sceneBits": [
+        "PERSON: Yuki Ji",
+        "HOOD: Lake Merritt",
+        "LABEL: tier-decay | Yuki Ji — the spotlight moved on: Tier 3 -> 4"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Bay Area Alert; Spring Lineup; Oakland Baseball Tonight",
+      "named": "Bay Area Alert",
+      "hood": null,
+      "names": [
+        "Bay Area Alert",
+        "Spring Lineup",
+        "Oakland Baseball Tonight",
+        "One-on-One with TyJerome (PG)"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media TV",
+      "angle": "Evening TV slate — Bay Area Alert, Spring Lineup, Oakland Baseball Tonight; sports desk: Oakland Sports Tonight",
+      "hookLine": "On the box tonight: Bay Area Alert, Spring Lineup.",
+      "sceneBits": [
+        "TV: Bay Area Alert; Spring Lineup; Oakland Baseball Tonight; One-on-One with TyJerome (PG)",
+        "SPORTS BROADCAST: Oakland Sports Tonight"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Rockridge Garden Market",
+      "named": "Rockridge Garden Market",
+      "hood": null,
+      "names": [
+        "Rockridge Garden Market"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Rockridge Garden Market — present-tense room, not calendar filler",
+      "hookLine": "Rockridge Garden Market is on the evening board.",
+      "sceneBits": [
+        "EVENT: Rockridge Garden Market"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Dimond Emergency Town Briefing",
+      "named": "Dimond Emergency Town Briefing",
+      "hood": null,
+      "names": [
+        "Dimond Emergency Town Briefing"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Dimond Emergency Town Briefing — present-tense room, not calendar filler",
+      "hookLine": "Dimond Emergency Town Briefing is on the evening board.",
+      "sceneBits": [
+        "EVENT: Dimond Emergency Town Briefing"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "fast-food",
+      "score": 13,
+      "label": "SpeedyBurger (Downtown)",
+      "named": "SpeedyBurger",
+      "hood": "Downtown",
+      "names": [
+        "SpeedyBurger"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Fast food",
+      "angle": "SpeedyBurger appears on the evening fast-food list in Downtown. What was happening there is not established.",
+      "hookLine": "SpeedyBurger appears on the evening fast-food list in Downtown.",
+      "sceneBits": [
+        "VENUE: SpeedyBurger",
+        "HOOD: Downtown"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "movie-slate",
+      "score": 13,
+      "label": "Movies: New Bloom; Diamond City",
+      "named": "New Bloom",
+      "hood": null,
+      "names": [
+        "New Bloom",
+        "Diamond City"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media movies",
+      "angle": "Evening movie slate — New Bloom, Diamond City",
+      "hookLine": "Screens tonight: New Bloom, Diamond City.",
+      "sceneBits": [
+        "MOVIES: New Bloom; Diamond City"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Desmond Morton spotted (Riley famous list)",
+      "named": "Desmond Morton",
+      "hood": null,
+      "names": [
+        "Desmond Morton"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Desmond Morton is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Desmond Morton is being seen around town.",
+      "sceneBits": [
+        "NAME: Desmond Morton"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Darrin Davis spotted (Riley famous list)",
+      "named": "Darrin Davis",
+      "hood": null,
+      "names": [
+        "Darrin Davis"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Darrin Davis is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Darrin Davis is being seen around town.",
+      "sceneBits": [
+        "NAME: Darrin Davis"
+      ],
+      "cycle": 117
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Danny Horn spotted (Riley famous list)",
+      "named": "Danny Horn",
+      "hood": null,
+      "names": [
+        "Danny Horn"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Danny Horn is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Danny Horn is being seen around town.",
+      "sceneBits": [
+        "NAME: Danny Horn"
+      ],
+      "cycle": 117
+    }
+  ],
+  "recommend": {
+    "bag": "lifestyle",
+    "slug": "sharon-okafor",
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+    "reason": "top pulse quiet-nightlife → lifestyle",
+    "pulseClass": "quiet-nightlife",
+    "pulseLabel": "OakTown Social (Temescal) · quiet night"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Estuary Oyster House (Jack London)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "quiet-nightlife",
+      "label": "OakTown Social (Temescal) · quiet night",
+      "score": 32,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "quiet-nightlife",
+      "label": "OakTown Social (Temescal) · quiet night",
+      "score": 32,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "quiet-nightlife",
+      "label": "OakTown Social (Temescal) · quiet night",
+      "score": 32,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Desmond Morton at Oakland Asian Cultural Center (Chinatown)",
+      "score": 31,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "OakTown Social is open and quiet in Temescal. What that condition means is not yet established.",
+    "label": "OakTown Social (Temescal) · quiet night",
+    "hookLine": "OakTown Social is open and quiet in Temescal.",
+    "hood": "Temescal",
+    "pulseClass": "quiet-nightlife",
+    "citizens": [],
+    "popids": [],
+    "named": "OakTown Social",
+    "venue": "OakTown Social",
+    "ref": "world_summary ## Evening Texture · Nightlife",
+    "cycle": 117
+  },
+  "prewrite": {
+    "pulseClass": "quiet-nightlife",
+    "angle": "OakTown Social is open and quiet in Temescal. What that condition means is not yet established.",
+    "hookLine": "OakTown Social is open and quiet in Temescal.",
+    "anchorFacts": [
+      "NAMED: OakTown Social",
+      "HOOD: Temescal",
+      "VENUE: OakTown Social",
+      "HOOD: Temescal",
+      "EVENING RECORD: open and quiet"
+    ],
+    "bagRecommend": "lifestyle",
+    "bagSlug": "sharon-okafor"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Estuary Oyster House",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Eastlake Kitchen",
+        "hood": "Eastlake"
+      },
+      {
+        "name": "Parkedge Diner",
+        "hood": "Eastlake"
+      },
+      {
+        "name": "SpeedyBurger",
+        "hood": "Downtown"
+      },
+      {
+        "name": "OakTown Social",
+        "hood": "Temescal"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 3,
+      "vibe": "quiet",
+      "movement": "restricted",
+      "weatherImpact": 1.02
+    },
+    "cityEvents": [
+      "Rockridge Garden Market",
+      "Dimond Emergency Town Briefing",
+      "Uptown Outdoor Gallery",
+      "The Reaves Family Block Party"
+    ],
+    "tv": [
+      "Bay Area Alert",
+      "Spring Lineup",
+      "Oakland Baseball Tonight",
+      "One-on-One with TyJerome (PG)"
+    ],
+    "movies": [
+      "New Bloom",
+      "Diamond City"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c117.md ## Evening Texture",
+    "output/desk_signal_c117.json lanes.culture",
+    "docs/media/SHARON_LIFESTYLE_BAG.md"
+  ]
+}

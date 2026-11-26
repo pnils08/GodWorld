@@ -1,0 +1,13 @@
+{
+  "draft": "business_c117_business-desk_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "flags": [
+    {
+      "severity": "high",
+      "check": "invented-voice",
+      "issue": "Marcus Osei (POP-00036) cannot be quoted: INSTITUTIONAL"
+    }
+  ],
+  "checkFlags": [],
+  "contamination": [],
+  "summary": "All quotes match exact interview records, and economic claims align with ground truth."
+}

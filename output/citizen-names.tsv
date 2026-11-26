@@ -15,7 +15,7 @@ POP-00014	Tanya Cruz	Laurel
 POP-00015	DeShawn Hartley	Jack London
 POP-00016	Simon Leary	Rockridge
 POP-00017	Anthony Raines	Rockridge
-POP-00018	Benji Dillon	Rockridge
+POP-00018	Benji Dillon	Piedmont Ave
 POP-00019	Isley Kelley	Rockridge
 POP-00020	Elena Vásquez	Jack London
 POP-00021	Darrin Davis	Piedmont Ave
@@ -27,7 +27,7 @@ POP-00027	Philly Rodriguez	West Oakland
 POP-00028	Manfred Owens	Jack London
 POP-00029	Alisha Peña	Lake Merritt
 POP-00030	Derek Simmons	Jack London
-POP-00031	Martin Richards	Fruitvale
+POP-00031	Martin Richards	Piedmont Ave
 POP-00033	John Ellis	Laurel
 POP-00034	Avery Santana	Rockridge
 POP-00035	Laila Cortez	West Oakland
@@ -58,7 +58,6 @@ POP-00077	Julio Valencia	Uptown
 POP-00078	Sergio Aybar	Jack London
 POP-00079	Frank Reyna	Lake Merritt
 POP-00080	Richie Haynes	Piedmont Ave
-POP-00081	Carmen Mesa	Lake Merritt
 POP-00083	Chad Tipre	Fruitvale
 POP-00085	Richie Ramiro	Uptown
 POP-00091	Delmon Regan	Downtown
@@ -79,7 +78,7 @@ POP-00124	Steve Conrad	Rockridge
 POP-00125	Paul Skenes	Lake Merritt
 POP-00126	Orion Kerkering	Lake Merritt
 POP-00127	Mason Miller	Downtown
-POP-00128	Kris Bubic	West Oakland
+POP-00128	Kris Bubic	Lake Merritt
 POP-00129	Dalton Rushing	Chinatown
 POP-00131	Lorenzo Jordan	Downtown
 POP-00132	Tobias Jurko	Piedmont Ave
@@ -345,7 +344,7 @@ POP-00454	Amanda Hall	Laurel
 POP-00455	Ily Gonzalez	Uptown
 POP-00456	Bailey Allen	West Oakland
 POP-00457	Chole Kim	Fruitvale
-POP-00458	Riley Boon	Jack London
+POP-00458	Riley Boon	East Oakland
 POP-00459	Brielle Lewis	West Oakland
 POP-00460	Kenji Okafor	Rockridge
 POP-00461	Wesley Clark	West Oakland
@@ -574,8 +573,8 @@ POP-00738	Vivian Tse	Chinatown
 POP-00739	Karem Asante	West Oakland
 POP-00740	Miriam Shelton	Lake Merritt
 POP-00741	Hector Navarro	Temescal
-POP-00742	Maya Torres-Dillon	Rockridge
-POP-00743	Rick Dillon	Rockridge
+POP-00742	Maya Torres-Dillon	Piedmont Ave
+POP-00743	Rick Dillon	Piedmont Ave
 POP-00744	Tomas Renteria	Fruitvale
 POP-00745	Sonia Parikh	Fruitvale
 POP-00746	Shawn Neighbor	Fruitvale
@@ -858,7 +857,7 @@ POP-01046	Elliot Abraham	Jack London
 POP-01029	Miguel Allen	Fruitvale
 POP-01030	Elena Patel	West Oakland
 POP-01031	Aaliyah Yamamoto	West Oakland
-POP-01032	Sakura Foster	Fruitvale
+POP-01032	Sakura Foster	Piedmont Ave
 POP-01033	Cedric Nakamura	West Oakland
 POP-01034	Howard Perez	Piedmont Ave
 POP-01035	Kaila Brown	Rockridge
@@ -1062,9 +1061,9 @@ POP-01234	Tara Mehta	Glenview
 POP-01235	Milena Coleman	Baylight District
 POP-01236	Octavia Pena	Adams Point
 POP-01237	Kira Liu	Dimond
-POP-01238	Robert Mooney	
-POP-01239	Giancarlo Hernandez	
-POP-01240	Henry Calzado	
+POP-01238	Robert Mooney	Uptown
+POP-01239	Giancarlo Hernandez	West Oakland
+POP-01240	Henry Calzado	Fruitvale
 POP-01241	Sofia Nair	Downtown
 POP-01242	Dante Lopez	Brooklyn
 POP-01243	Omar Clark	Ivy Hill
@@ -1074,3 +1073,6 @@ POP-01246	Fatima McAllister	Adams Point
 POP-01247	Theo Rahimi	Eastlake
 POP-01248	Ximena Sasaki	West Oakland
 POP-01249	Paloma Vasquez	Grand Lake
+POP-01250	Ravi Cerrano	Fruitvale
+POP-01251	Elijah Davis	Grand Lake
+POP-01252	Yolanda Ghosh	San Antonio

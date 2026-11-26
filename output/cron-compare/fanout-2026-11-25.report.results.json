@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-25",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Elliot Marbury",
+      "desk": "sports",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/citizenVoice.js --batch=/root/GodWorld/output/cron-compare/sports_c117_p-slayer_packet-v2_asks.json --cycle=117\ncitizenVoice ERR: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:559534329568'.\n",
+      "checks": null
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Ines Sorensen",
+      "desk": "culture",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/citizenVoice.js --batch=/root/GodWorld/output/cron-compare/undocked_c117_nia-rook_packet-v2_asks.json --cycle=117\ncitizenVoice ERR: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:559534329568'.\n",
+      "checks": null
+    }
+  ],
+  "checkTotals": null,
+  "ranAt": "2026-11-25T19:17:52.726Z"
+}

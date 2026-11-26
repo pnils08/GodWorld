@@ -1,0 +1,65 @@
+{
+  "draft": "output/cron-compare/sports_c117_tanya-cruz_packet-v2_x-ai-grok-4-3.md",
+  "cycle": "117",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d5bb70fec6f7b974a2ce79ff6061979bbb5063ee4c9897c5581483d3cb90f12d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Accurately reports Mark Aitken's Colorado signing with verbatim authorized quotes from Aitken and Quintero.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-d8e8ff1ee3c7",
+    "lexicalObservations": [],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Ernesto Quintero",
+      "Mark Aitken"
+    ],
+    "unverified": [
+      "Gold Gloves"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0146,
+  "durationMs": 5182,
+  "parseError": false,
+  "ranAt": "2026-11-26T00:17:44.156Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 283,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d5bb70fec6f7b974a2ce79ff6061979bbb5063ee4c9897c5581483d3cb90f12d",
+    "costUsd": 0.0011
+  }
+}

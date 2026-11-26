@@ -1,0 +1,291 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "117",
+  "persona": "nia-rook",
+  "freeAngle": "free-rows",
+  "pass": false,
+  "reporterPicks": [],
+  "morningTools": [
+    {
+      "tool": "undocked_history",
+      "input": {
+        "pilot": "Daniela Kapoor"
+      },
+      "resultChars": 172
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Daniela Kapoor"
+      },
+      "resultChars": 190
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Daniela Kapoor",
+        "thread": true
+      },
+      "resultChars": 120
+    }
+  ],
+  "workerAnswers": [],
+  "workerAsksUsed": 0,
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Decide what, if anything, you want to write this cycle"
+    },
+    "signal": {
+      "kind": "own-pick",
+      "hood": null,
+      "score": null,
+      "src": "the record of C117"
+    },
+    "exposure": {
+      "basis": [
+        "own-pick"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01209",
+          "name": "Daniela Kapoor",
+          "profile": "Daniela Kapoor — UNDOCKED pilot",
+          "role": "UNDOCKED pilot",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "undocked-feed-row",
+          "evidence": {
+            "source": "output/spacemolt-show/feed/c117.json",
+            "episodeId": "undocked-pop01209-Y3C13-e2",
+            "pop": "POP-01209"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED episode: Jett Walker, Monday night. Standings: Marguerite Kimball-Ostrow leads the board — rank #1, 49.08 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Jett Walker — Plumber.",
+        "src": "undocked:undocked-pop00230-Y3C13",
+        "id": "F-0d0eb8474ea2"
+      },
+      {
+        "t": "FACT",
+        "text": "Jett Walker's Monday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Miaplacidus, Maplevale, Dubhe, Alfirk and Revati; mined 1 copper ore and 7 iron ore; earned Wanderer (9 points), Maiden Jump (5 points), Voyager I (3.6 points), Cartographer (2.7 points), Voyager II (0.9 points), Chronicler (0.6 points), Far Traveler (0.01 points), Jump Master (0.01 points) and Prospector I (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked:undocked-pop00230-Y3C13",
+        "id": "F-a97db28f7db2"
+      },
+      {
+        "t": "FACT",
+        "text": "Jett Walker — Plumber (ledger)",
+        "src": "undocked:undocked-pop00230-Y3C13",
+        "id": "F-44e74bfdf4e0"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED episode: David Okonkwo, Tuesday night. Standings: Marguerite Kimball-Ostrow leads the board — rank #1, 49.08 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: David Okonkwo — Retired Insurance Adjuster.",
+        "src": "undocked:undocked-pop00957-Y3C13",
+        "id": "F-c580a4921931"
+      },
+      {
+        "t": "FACT",
+        "text": "David Okonkwo's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; took the Local Sector Survey contract; mined 8 iron ore; earned Wanderer (9 points), First Steps (5 points), Maiden Jump (5 points), Voyager I (3.6 points), Cartographer (2.7 points), The Truth Is Out There (2.5 points), Chronicler (1.2 points), Voyager II (0.9 points), Far Traveler (0.01 points), Jump Master (0.01 points) and Prospector I (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked:undocked-pop00957-Y3C13",
+        "id": "F-08d72c8fa967"
+      },
+      {
+        "t": "FACT",
+        "text": "David Okonkwo — Retired Insurance Adjuster (ledger)",
+        "src": "undocked:undocked-pop00957-Y3C13",
+        "id": "F-913c516759d5"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED episode: Daniela Kapoor, Wednesday night. Standings: Marguerite Kimball-Ostrow leads the board — rank #1, 49.08 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Daniela Kapoor — Teacher.",
+        "src": "undocked:undocked-pop01209-Y3C13-e2",
+        "id": "F-79ce6af16677"
+      },
+      {
+        "t": "FACT",
+        "text": "Daniela Kapoor's Wednesday night on UNDOCKED: went through Hatysa, Ridgecrest, Cervantes, Miaplacidus, Mimosa, Electra, Tau Ceti, Alpha Centauri, Sol, Sirius, Nova Terra, Furud, Acrux, Botein and Diadem; mined 5 iron ore and 3 copper ore; earned Voyager I (4 points), Cartographer (3 points), Chronicler (1.2 points), Wanderer (1 point), Voyager II (1 point), Master Explorer (0.5 points), Far Traveler (0.01 points), Jump Master (0.01 points) and Prospector I (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "src": "undocked:undocked-pop01209-Y3C13-e2",
+        "id": "F-4fcd0b78e008"
+      },
+      {
+        "t": "FACT",
+        "text": "Daniela Kapoor — Teacher (ledger)",
+        "src": "undocked:undocked-pop01209-Y3C13-e2",
+        "id": "F-5d3630414e00"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "pass": "true when nothing here is a piece you want to write this cycle; then give only why",
+        "chase": "string — what you want to write this cycle and how you will go after it, in your own voice. Not JSON.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "the person's popid — from this record, or the popid citizen_lookup gives you",
+            "question": "string",
+            "basis": "string — what in their life ties them to the story you are chasing"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "A target is someone whose life touched the story you are chasing, whoever you want to hear from: a person on this record or anyone in the city (citizen_lookup gives their popid and their life). Up to four are asked. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-01209",
+        "name": "Daniela Kapoor",
+        "role": "UNDOCKED pilot",
+        "hood": null,
+        "profile": "Daniela Kapoor — UNDOCKED pilot",
+        "mode": "named",
+        "sourceKind": "undocked-feed-row",
+        "evidence": {
+          "source": "output/spacemolt-show/feed/c117.json",
+          "episodeId": "undocked-pop01209-Y3C13-e2",
+          "pop": "POP-01209"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "Daniela Kapoor’s Wednesday-night run and its exploration achievements.",
+      "angle": "Daniela Kapoor’s Wednesday-night run and its exploration achievements.",
+      "hood": null,
+      "citizens": [
+        "Daniela Kapoor (POP-01209)"
+      ],
+      "popids": [
+        "POP-01209"
+      ]
+    },
+    "approach": null
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I want to write about Daniela Kapoor’s exploratory night: what drew a teacher toward a route that kept opening outward, and what the achievement points capture—and leave out—about that run. I’ll start with her account, then check every claim against the episode record.",
+    "plan": {
+      "chase": "I want to write about Daniela Kapoor’s exploratory night: what drew a teacher toward a route that kept opening outward, and what the achievement points capture—and leave out—about that run. I’ll start with her account, then check every claim against the episode record.",
+      "focus": "Daniela Kapoor’s Wednesday-night run and its exploration achievements.",
+      "why": "The record describes Kapoor traveling through Hatysa, Ridgecrest, Cervantes, Miaplacidus, Mimosa, Electra, Tau Ceti, Alpha Centauri, Sol, Sirius, Nova Terra, Furud, Acrux, Botein and Diadem. It records points for exploration achievements, while the board leader remained Marguerite Kimball-Ostrow.",
+      "checks": [
+        "Ask Kapoor what shaped her route and whether she thought of the run as exploration.",
+        "Keep the episode’s recorded achievements and points distinct from any account of her motivations.",
+        "Do not imply that the board standings changed."
+      ],
+      "targets": [
+        {
+          "pop": "POP-01209",
+          "question": "What were you looking for as you traveled through those systems, and what did the exploration achievements mean to you during the run?",
+          "basis": "Kapoor is a teacher and was in the chair for the Wednesday-night episode; the record describes her route and exploration achievements."
+        }
+      ],
+      "interpretation": "The recorded route and achievements suggest an exploration-centered night, but the record does not establish Kapoor’s reasons for choosing it. Her perspective could make the points more than a tally without assuming what they meant to her.",
+      "unverifiedLead": [
+        "Whether Kapoor chose the route with exploration achievements in mind.",
+        "How she understood the relationship between her route and the points earned."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Jett Walker, Monday night",
+      "kind": "undocked",
+      "hood": "Rockridge",
+      "ref": "undocked:undocked-pop00230-Y3C13",
+      "popids": [
+        "POP-00230"
+      ]
+    },
+    {
+      "label": "UNDOCKED: David Okonkwo, Tuesday night",
+      "kind": "undocked",
+      "hood": "Lake Merritt",
+      "ref": "undocked:undocked-pop00957-Y3C13",
+      "popids": [
+        "POP-00957"
+      ]
+    },
+    {
+      "label": "UNDOCKED: Daniela Kapoor, Wednesday night",
+      "kind": "undocked",
+      "hood": "Glenview",
+      "ref": "undocked:undocked-pop01209-Y3C13-e2",
+      "popids": [
+        "POP-01209"
+      ]
+    }
+  ],
+  "laneEntries": 3,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-26T12:17:59.362Z"
+}

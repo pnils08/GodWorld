@@ -1,0 +1,17 @@
+{
+  "draft": "output/cron-compare/culture_c117_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 751,
+    "short": "The piece is a narrative feature with reporter commentary and interviews rather than verbatim posts from citizens' own pages framed solely by line, name, and city.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "f39afc01ff08e095b83bd361259d2e82b22abf652e45572f9e08b787b27977f2"
+  },
+  "ranAt": "2026-11-26T00:19:19.264Z"
+}

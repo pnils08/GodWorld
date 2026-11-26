@@ -1,0 +1,32 @@
+{
+  "cycle": 117,
+  "checks": [
+    {
+      "check": "no single office contradicts ITSELF within its own statements",
+      "pass": true,
+      "evidence": "Each office's C117 statements are internally consistent — e.g., mayor_gavel holds INIT-001 renewal pending verification while stabilization_fund verifies closeout and holds the queue; oari holds expansion while filing the D3 record; health_center files the Q3 audit and completes the walkthrough consistent with its own holdings; no office names two different statuses for the same initiative within its own text."
+    },
+    {
+      "check": "tracker updates use only contract phases",
+      "pass": true,
+      "evidence": "All ImplementationPhase values across mayor_gavel and the reporting agents are drawn from the contract phase set — disbursement-active, dispatch-live, design-phase, operational, construction-active, stalled, vote-scheduled, implementation-active, legislation-filed, announced — with no ad hoc or invented phase labels."
+    },
+    {
+      "check": "statements read as in-world civic voice",
+      "pass": true,
+      "evidence": "All seats write in-world civic register — e.g., council_d1 'Report that the Brooklyn service-audit baseline and the District 1 OARI evaluation remain incomplete and not citable' and council_d7 'Condition certification of ongoing operational oversight on verified filing of the Q3 clinical intake audit with HCAI and the Council Clerk' — with initiative IDs, contract phases, and 'cycle' as the city's public language per standing rule."
+    }
+  ],
+  "overall": "pass",
+  "issues": [],
+  "observations": [
+    "council_d3 and council_d5 both demand the D3 Fruitvale briefing record be executed and published before expansion advances; mayor_gavel and oari agree on holding expansion but differ on whether the record is published (oari reports the D3 record published in a public inspectable location; mayor_gavel states it is not evidenced) — cross-office disagreement on record status.",
+    "mayor_gavel and council_d6 both withhold/condition INIT-001 renewal on verified C114 closeout, while stabilization_fund reports the C114 closeout verified and published — divergence on closeout verification status, expected politics.",
+    "mayor_gavel records INIT-005 oversight certification withheld pending the Q3 audit filing, while health_center reports the Q3 intake audit filed with HCAI and Council Clerk per standing schedule — differing on filing completion.",
+    "council_d4 supports submitting INIT-012 ($2.5M ordinance) this cycle with filing claimed only after Clerk verification, while mayor_gavel moves INIT-012 to stalled for a missed filing deadline — phase-status divergence.",
+    "transit_hub reports schematics delivered and comment-and-response record open under Mayer & Associates, while mayor_gavel and council_d3 state preliminary schematics and the documented Fruitvale comment-and-response record are not evidenced — divergence on delivery status."
+  ],
+  "missingVoices": [
+    "council_d9"
+  ]
+}

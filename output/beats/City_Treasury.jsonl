@@ -21,3 +21,5 @@
 {"Cycle":"116","Entry":"REVENUE","Amount":"481","Counterparty":"TICKETS","BalanceAfter":"131644511","Note":"parking ticket, street sweeper, POP-01162"}
 {"Cycle":"116","Entry":"REVENUE","Amount":"436","Counterparty":"TICKETS","BalanceAfter":"131644947","Note":"ticket, cop car, POP-00248"}
 {"Cycle":"116","Entry":"REVENUE","Amount":"108884","Counterparty":"COURT","BalanceAfter":"131753831","Note":"24 cleared charges, fined at the hood rate"}
+{"Cycle":"117","Entry":"REVENUE","Amount":"5000000","Counterparty":"WEEKLY-ALLOCATION","BalanceAfter":"136753831","Note":"weekly budget allocation"}
+{"Cycle":"117","Entry":"REVENUE","Amount":"125905","Counterparty":"COURT","BalanceAfter":"136879736","Note":"28 cleared charges, fined at the hood rate"}

@@ -1,6 +1,6 @@
 # The pulse — what the pages say, C116
 
-Window C109–C116 · 1085 pages from 338 citizens (155 this Cycle) · index 2026-11-21T14:15:09.769Z
+Window C109–C116 · 1095 pages from 338 citizens (165 this Cycle) · index 2026-11-22T12:15:11.291Z
 
 _A sourcing signal and colour — never a published statistic. Write “the block is talking about rent again”, not a share._
 
@@ -85,7 +85,7 @@ _* a name on this Cycle's culture record_
 - Rico Valez, Musician — Fruitvale — C112 (1 page): “I've been feeling that energy, especially with Marin Tao's rise to fame.”  _[cp-POP-00632-c112-PRESS]_
 
 ## WHERE THE PAGES COME FROM
-West Oakland 49 · Rockridge 34 · Piedmont Ave 23 · Lake Merritt 29 · Fruitvale 29 · Chinatown 30 · Jack London 23 · Downtown 28 · Uptown 18 · Temescal 22
+West Oakland 49 · Rockridge 34 · Piedmont Ave 23 · Lake Merritt 29 · Chinatown 30 · Fruitvale 29 · Jack London 23 · Downtown 28 · Uptown 18 · Temescal 22
 
-Not counted: MEDIA-clock 313 · office holders 179 · no ledger row 5 · leak-guarded 0
+Not counted: MEDIA-clock 315 · office holders 183 · no ledger row 5 · leak-guarded 0
 

@@ -1,0 +1,89 @@
+{
+  "office": "stabilization_fund",
+  "agentDir": "civic-project-stabilization-fund",
+  "holder": "Marcus Webb",
+  "popid": "POP-00790",
+  "title": "OEWD Program Director (Stabilization Fund)",
+  "date": "2026-11-25",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Cycle 117 weekly report — Marcus Webb, OEWD Program Director, West Oakland Stabilization Fund (INIT-001)**\n\n**Where the money stands.** The Fund's authorization is $28 million. The tracker shows $20.2 million remaining this Cycle, down from $20.6 million at my last report — that $400,000 movement is the C114 tranche executing under the 23-day standard, and the tracker records Cycle 117 as the last disbursement cycle. The city's payments row for INIT-001, Cycle 117, carries no new entry. The four household grants I can name on the record — HH-0102-F027, HH-0109-F017, HH-0110-F019, HH-0113-F023, all West Oakland renters, last paid Cycles 109 through 113 — remain active with no flags. I'm still not quoting a cumulative number the sheet doesn't carry; the tranche lines are the authority.\n\n**The queue.** Nothing new in the payments ledger this Cycle. And I won't dress it up: the tracker's \"last disbursement\" line and the payments line have drifted apart — one says 117, the other shows no 117 row — and that gap is exactly the kind of thing that turns a clean record into a contested one. My closing task from last cycle, getting the next authorization batch to the Deputy Mayor's desk, remains open. That's what I answer for.\n\n**The charter renewal.** The tracker puts the next scheduled action — verify the C114 closeout, then Council charter-renewal consideration — at Cycle 118, not 117. So I'm correcting my own expectation from last week's report on the record: final action did not land this Cycle. What the row does hold: renewal support is contingent on the verified C114 closeout and Council action; the business-and-resident scope and the 23-day standard remain intact. The renewal vote fields are still blank and \"Standing.\" The roll call belongs to the Council, and I won't call it before they do.\n\n**The neighborhoods.** West Oakland reads housing pressure 6.5 this Cycle — up from 5.5 in my last report — with median rent $3,676 and median income $147,041, still on a growth trajectory. That rise in pressure is the whole argument for the queue not idling. I'm also noting on the record this Cycle's implementation effects: the Stabilization Fund and the Tenant Defense Fund both running as positive economic effects in West Oakland, set against the Youth Apprenticeship Pipeline sitting stalled — a negative sentiment and retail effect in this neighborhood, not somewhere else.\n\n**What I'm watching.** Cycle 118: verify the closeout, get the authorization batch in front of the Deputy Mayor, and see the charter renewal to a vote with scope and the 23-day clock intact. And reconcile the disbursement line with the payments record before anyone else does it for me.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-25T11:46:18.416Z",
+  "usage": {
+    "prompt_tokens": 27749,
+    "completion_tokens": 940,
+    "cost": 0.0024
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "The city's payments on INIT-001",
+        "from_cycle": 112
+      },
+      "resultChars": 83
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "West Oakland Stabilization Fund charter renewal"
+      },
+      "resultChars": 3301
+    },
+    {
+      "tool": "memory_recall",
+      "input": {
+        "query": "charter renewal council 117"
+      },
+      "resultChars": 3553
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Civic_Office_Ledger",
+        "from_cycle": 116
+      },
+      "resultChars": 6182
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Your initiative on the city's tracker (INIT-001)",
+        "from_cycle": 117
+      },
+      "resultChars": 3055
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Household_Ledger",
+        "match": "West Oakland",
+        "from_cycle": 116
+      },
+      "resultChars": 1838
+    }
+  ],
+  "memory": {
+    "searchedOn": "stabilization fund households rent grants",
+    "entries": 8,
+    "fromSearch": 6,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00790",
+    "id": "v6BgmbqTTeM5XMgmJUU6q9",
+    "customId": "cp-POP-00790-c117-CIVIC-datawake-2026-11-25"
+  }
+}

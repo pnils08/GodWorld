@@ -1,0 +1,187 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Travis Coles
+Team: Athletics
+Position: SP
+Jersey: #11
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: A
+Overall: 99
+MLB Service: 3.000
+Age: 22
+Bats: R
+Throws: R
+Height: 6'4"
+Weight: 216 lbs
+Drafted: Round 1 (2037)
+Secondary Position: NONE
+Hitter Tendency: PULL HITTER
+Born: SOUTH CAROLINA
+Canonical POPID: POP-00533
+
+--------------------------------------------------
+
+PITCH REPERTOIRE
+
+Pitch 1 — 4-Seam Fastball — 98 mph
+Pitch 2 — 12–6 Curve — 81 mph
+Pitch 3 — Slider — 88 mph
+Pitch 4 — Splitter — 91 mph
+Pitch 5 — Cutter — 96 mph
+
+--------------------------------------------------
+
+ATTRIBUTES (game screen)
+
+STA: 96
+H/9: 85
+K/9: 87
+BB/9: 82
+HR/9: 70
+PCLT: 79
+CTRL: 61
+VEL: 91
+BRK: 71
+FLD: 58
+ARM: 94
+ACC: 74
+REAC: 49
+
+--------------------------------------------------
+
+ATTRIBUTE HISTORY
+
+ATTR    2041 CARD  WAS      NOW   CHANGE
+STA     96         96        96    0
+H/9     82         82        85    +3
+K/9     81         81        87    +6
+BB/9    77         77        82    +5
+HR/9    67         65        70    +5
+PCLT    67         76        79    +3
+CTRL    91         58        61    +3
+VEL     71         91        91    0
+BRK     91         71        71    0
+FLD     55         55        58    +3
+ARM     91         91        94    +3
+ACC     71         71        74    +3
+REAC    46         46        49    +3
+
+NOW = the latest attributes screen.
+WAS = NOW value minus the change marker shown on that screen;
+the cycle of that earlier reading is not shown in the game.
+2041 CARD = the card on file in Drive; cycle not recorded.
+
+--------------------------------------------------
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   GS  W   L   SV  BS  HLD  IP      H    R   ER  HR  BB  SO   ERA
+2041  ATH   32  32  22  4   0   0   0    215.1   166  67  65  25  39  254  2.72
+2040  WSH   33  33  13  8   0   0   0    219.1   177  52  50  17  61  207  2.05
+2039  WSH   33  33  9   15  0   0   0    197.2   179  92  87  26  51  198  3.96
+
+All seasons read from the MLB Stats screens.
+
+--------------------------------------------------
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  WHIP  WPCT   QS  CG  SHO  HB  WP  TBF  WAR  K/9    BB/9  HR/9  FIP   ERC   PFR
+2041  ATH   0.95  .846   26  4   3    1   3   835  6.2  10.62  1.63  1.04  2.71  2.16  1.36
+2040  WSH   1.09  .619   26  1   1    3   4   873  5.6  8.49   2.50  0.70  3.00  2.44  1.22
+2039  WSH   1.16  .375   20  0   0    4   1   810  3.9  9.02   2.32  1.18  3.54  3.16  1.26
+
+QS 2041 (26) read from the screen by the Builder; seasons add to the
+career 72.
+
+--------------------------------------------------
+
+CAREER TOTALS (game career line)
+
+G: 98
+GS: 98
+W: 44
+L: 27
+SV: 0
+BS: 0
+HLD: 0
+IP: 632.1
+H: 522
+R: 211
+ER: 202
+HR: 68
+BB: 151
+SO: 659
+ERA: 2.88
+WHIP: 1.06
+WPCT: .620
+QS: 72
+CG: 5
+SHO: 4
+HB: 8
+WP: 8
+TBF: 2518
+WAR: 15.7
+K/9: 9.38
+BB/9: 2.15
+HR/9: 0.97
+FIP: 3.07
+ERC: 2.56
+PFR: 1.28
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2042: $21.0M
+2043: $21.0M
+2044: Arbitration
+2045–2051: Free Agent
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Option: 0/3 Used
+Playoff Eligible: -
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+
+QUIRKS
+
+- None (the game shows no Quirks tab for him)
+
+--------------------------------------------------
+
+AWARDS
+
+- Cy Young: 2041
+- 2x All-Star: 2040, 2041
+
+--------------------------------------------------
+
+NOTES
+
+- Acquired: 2040, Trade (WSH)
+
+--------------------------------------------------
+METADATA & VERIFICATION FOOTER
+--------------------------------------------------
+TS Code: TS-MLB-ATH-2041-00533
+Verification Tag: Screen-Checked
+Steward of Record: Claude Staged
+POPID: POP-00533
+==================================================

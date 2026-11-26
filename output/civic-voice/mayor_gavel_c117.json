@@ -1,0 +1,242 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 117,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "I am preserving Oakland's operating commitments while refusing to certify audits, briefings, filings, votes or construction milestones the C117 record does not show. Grand Lake has my YES with every Chen-Vega condition, West Oakland tenant defense follows the corrected C112 record, and the West Oakland Stabilization Fund keeps its business-and-resident scope and 23-day standard. INIT-008, INIT-012, INIT-013 and INIT-014 are stalled rather than given cosmetic progress, and the eleven-case complaint crosswalk still requires source records and Clerk-backed reconciliation.",
+  "statements": [
+    {
+      "statementId": "STMT-117-mayor_gavel-001",
+      "type": "policy_position",
+      "topic": "West Oakland Stabilization Fund closeout and charter renewal",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Carry forward closeout verification and Council consideration; support renewal only after verified C114 closeout, preserving the business-and-resident scope and 23-day standard.",
+      "quote": "West Oakland's fund keeps its scope and its 23-day standard, but renewal starts with verified closeout and ends with Council action.",
+      "fullStatement": "Oakland's $28 million West Oakland Stabilization Fund will not be renewed on a verbal assurance. I am keeping C114 closeout verification and Council charter-renewal consideration paired: my support is contingent on a verified closeout, and no renewal is claimed before Council acts. The charter must preserve the Fund's West Oakland business-and-resident scope and the 23-day processing standard. Downtown remains outside this Fund; INIT-008 is a separate, still-unauthorized measure. I appreciate Deputy Mayor Okoro's insistence on verification and Councilmember Carter's conditional support. Because the C117 packet supplies neither verification nor a Council result, this item carries forward rather than being checked off.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C117: Renewal support is contingent on verified C114 closeout and Council action; business-and-resident scope and the 23-day standard remain intact.",
+        "NextScheduledAction": "Verify C114 closeout, then conduct Council charter-renewal consideration with scope and 23-day standard intact",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-002",
+      "type": "policy_position",
+      "topic": "Alternative Response expansion hold and Fruitvale briefing record",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Hold expansion; require a complete published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review.",
+      "quote": "Alternative response expands on public evidence, not repeated directives: Fruitvale's briefing record and the D5 and Baylight next dates come first.",
+      "fullStatement": "Oakland's alternative-response work continues, but expansion stays held. Councilmembers Delgado and Rivers are right: a briefing directed is not a briefing delivered. Before any new district is added, the D3 Fruitvale record must show the actual date, venue, notice dates, accessibility and participation arrangements, and the district and Fruitvale data references, and it must be published. The responsible offices must also file written next dates for the D5 audit and Baylight feasibility review. The C117 packet supplies no completed record of those closing steps, so I am claiming none. We can strengthen the $12.5 million program without asking residents to accept an undocumented expansion.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C117: Expansion remains held pending a published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review.",
+        "NextScheduledAction": "Execute and publish the D3 Fruitvale briefing record; file written next dates for the D5 audit and Baylight feasibility review",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-003",
+      "type": "policy_position",
+      "topic": "Fruitvale Transit Hub schematics and community review",
+      "initiative": "Fruitvale Transit Hub Phase II — Visioning",
+      "decision": "Hold further design advancement until preliminary schematics and a documented Fruitvale public comment-and-response record are delivered and published.",
+      "quote": "Fruitvale will get a transit hub designed with its community, not a milestone declared while the schematics and responses remain missing.",
+      "fullStatement": "Fruitvale's $230 million transit hub is too important to advance on silence. The C86 Council authorization stands, and the project remains in design; that history is not in dispute. But the C117 packet still does not contain the promised preliminary schematics or a documented Fruitvale community review. I am therefore holding further design advancement. The design consultant must deliver the schematics, and the City must publish a comment-and-response record showing what residents raised and how the design team answered. Only then will I consider the next design step. Fruitvale's busy street trade and low crime are strengths to build on, not reasons to shortcut participation.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C117: Further design advancement is held; preliminary schematics and a documented Fruitvale public comment-and-response record are not evidenced in the packet.",
+        "NextScheduledAction": "Deliver preliminary schematics and publish the documented Fruitvale public comment-and-response record",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-004",
+      "type": "policy_position",
+      "topic": "Temescal Health Center oversight certification",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Keep the center operational while withholding oversight certification until the Q3 audit filing and merchant walkthrough are verified and documented.",
+      "quote": "Temescal's health center keeps serving patients; oversight certification waits for the Q3 filing and the Telegraph and 47th walkthrough.",
+      "fullStatement": "The Temescal Community Health Center is open, and it should keep serving patients. What is not open for interpretation is oversight. I am withholding certification of ongoing operational oversight until the Q3 clinical intake audit is verifiably filed with HCAI and the Council Clerk and the Telegraph & 47th merchant walkthrough is completed and documented. Councilmember Ashford's condition is reasonable: an audit promised is not an audit filed. The center's $45 million public investment deserves both accessible care and a clean public record. The C117 packet contains neither verification, so I am directing those two closing steps without disrupting operations.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C117: Oversight certification is withheld pending verified Q3 HCAI/Clerk filing and a documented Telegraph & 47th merchant walkthrough; operations continue.",
+        "NextScheduledAction": "File the Q3 intake audit with HCAI and the Council Clerk; document the Telegraph & 47th merchant walkthrough",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-005",
+      "type": "policy_position",
+      "topic": "Baylight construction milestone evidence review",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Declare no milestone passed; direct completion and publication of the evidence-file review while all remediation, hotline, dust-control and workforce oversight continues.",
+      "quote": "Baylight earns its next construction milestone through published evidence, while remediation oversight, dust control, hotline response and workforce coordination continue.",
+      "fullStatement": "Baylight's $2.1 billion transformation will be judged by evidence, not by how eagerly we want a construction headline. The C117 packet gives me an assembled evidence file—remediation verification, hotline and dust records, and Jack London workforce material—but no completed milestone review. I am directing that review to be conducted and published against the file, and I am declaring no milestone passed today. Independent remediation oversight, the 48-hour construction hotline, haul-route dust control and workforce coordination continue. Councilmember Tran's standard is the right one: if the evidence supports a pass, publish it; if it does not, say what remains.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C117: No construction milestone pass is declared; the evidence-file review must be published while remediation, hotline, dust and workforce oversight continue.",
+        "NextScheduledAction": "Conduct and publish the construction milestone review against the assembled evidence file",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-006",
+      "type": "initiative_response",
+      "topic": "Youth Apprenticeship placement-gap accountability",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Keep the initiative stalled pending publication of the placement-gap analysis and adjustment plan, including explicit West Oakland and Fruitvale review.",
+      "quote": "A first cohort report is not a gap analysis; the apprenticeship pipeline stays stalled until West Oakland and Fruitvale are expressly reviewed.",
+      "fullStatement": "Oakland's young people deserve placements, and the public deserves to know where the $12.5 million apprenticeship pipeline is falling short. The first cohort report exists, but the promised placement-gap analysis and adjustment plan still are not in the C117 packet, including the explicit West Oakland and Fruitvale review. I am keeping INIT-007 in stalled status and directing publication of both documents before claiming accountability restored. The adjustment plan must identify the gaps, the changes to recruitment and placement, and the next reporting checkpoint. We can recognize improvement across West Oakland, East Oakland and Fruitvale without using it to excuse an unfinished report.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "stalled",
+        "MilestoneNotes": "C117: Stalled pending publication of the placement-gap analysis and adjustment plan, with explicit West Oakland and Fruitvale review and a next reporting checkpoint.",
+        "NextScheduledAction": "Publish the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale review",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-007",
+      "type": "initiative_response",
+      "topic": "Downtown revitalization and Uptown planning stall",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Record INIT-008 as stalled because Uptown planning execution is not evidenced; keep the $15 million authorization pending and require a complete public planning record.",
+      "quote": "Downtown and Uptown deserve a real stabilization plan and a Council record, not another cycle of cosmetic momentum around pending money.",
+      "fullStatement": "Downtown and Uptown enter this decision with upbeat moods, busy street trade and low crime, and the Downtown transit snarl has eased. Those are reasons for disciplined planning, not a manufactured emergency. The Uptown stabilization planning execution due this cycle is not evidenced in the C117 packet. I am therefore recording INIT-008 as stalled rather than moving it on paper. The $15 million authorization remains pending before Council; no implementation or funding is announced. Before another floor ask, I want the Uptown scope, concrete timeline, Ashford benchmarks and committee record published together. That is how we turn a stalled file into a credible proposal.",
+      "trackerUpdates": {
+        "initiative": "INIT-008",
+        "ImplementationPhase": "stalled",
+        "MilestoneNotes": "C117: Uptown planning execution is not evidenced; INIT-008 is stalled, with the $15M authorization still pending Council and no implementation claimed.",
+        "NextScheduledAction": "Execute and publish Uptown stabilization planning with timeline, benchmarks and committee record",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-008",
+      "type": "policy_position",
+      "topic": "Grand Lake full-council decision and Clerk certification",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Back YES with every Chen-Vega condition, keep the measure vote-scheduled, and request a completed Clerk-certified roll call before claiming any outcome.",
+      "quote": "My Grand Lake YES includes every Chen-Vega condition, but a scheduled vote is not a certified roll call or enacted funding.",
+      "fullStatement": "Grand Lake's $2.5 million stabilization proposal has my YES, with every Chen-Vega milestone and audit condition intact. Councilmember Chen is right to insist on a certified record. The C117 packet contains no Clerk-certified roll call, so I am claiming no enactment, no vote total and no funding release. INIT-009 remains vote-scheduled while Council completes the recorded full-council decision and the Clerk certifies it. Grand Lake's current report is busy trade and low crime, alongside a flag for slipping mood and quieter storefronts. We can respond to that mixed picture with measurable conditions, without declaring either a victory or a crisis before the record exists.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "ImplementationPhase": "vote-scheduled",
+        "MilestoneNotes": "C117: Mayor backs YES with all Chen-Vega conditions; no Clerk-certified roll call or outcome is in the packet, and no enactment is claimed.",
+        "NextScheduledAction": "Hold and Clerk-certify the full-council roll call with all Chen-Vega conditions",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-009",
+      "type": "policy_position",
+      "topic": "West Oakland tenant-defense implementation and record correction",
+      "initiative": "West Oakland Tenant Defense Fund",
+      "decision": "Move forward on the corrected C112 implementation record, requiring publication of the legal-support analysis and documented intake opening without another committee vote.",
+      "quote": "West Oakland tenant defense passed at C112; now publish the legal analysis, open intake and stop asking a settled vote to repeat itself.",
+      "fullStatement": "West Oakland's $4.2 million tenant-defense fund is not waiting for another committee vote. The corrected record is clear: it passed 6-3 at C112 and was signed. This cycle is about implementation��publishing the legal-support analysis and opening intake. The C117 packet does not show either task completed, so I am not announcing that intake is open or inventing a launch date. I am directing the responsible offices to publish the analysis and the intake-opening record, with no further committee decision presented as pending. West Oakland begins this cycle upbeat, with busy trade and low crime; implementation should be just as factual and grounded.",
+      "trackerUpdates": {
+        "initiative": "INIT-010",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C117: C112 6-3 passage and signing control; no committee revote is pending, and legal-analysis publication and intake opening remain unverified.",
+        "NextScheduledAction": "Publish the legal-support analysis and document the opening of tenant-defense intake",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-010",
+      "type": "policy_position",
+      "topic": "Ivy Hill ordinance referral and committee hearing",
+      "initiative": "Ivy Hill Revitalization Initiative",
+      "decision": "Support committee referral and a hearing on the C113-filed ordinance while claiming no completed referral or hearing and keeping all Ivy Hill records separate.",
+      "quote": "Ivy Hill gets a committee hearing on its filed ordinance, with separate records for separate promises and no manufactured emergency.",
+      "fullStatement": "Ivy Hill deserves a hearing on the ordinance recorded as filed at C113, not a blur of similarly named promises. I support committee referral and a hearing on INIT-011, with separate records for INIT-011, INIT-013 and INIT-014, as Council President Vega recommended. The C117 packet does not include a completed referral or hearing record, so I am claiming neither today. The $2.5 million measure should be examined on current evidence: Ivy Hill has low crime, flat mood and slow trade, and a family dental practice is closing after eight weeks of decline, with zero jobs listed as lost. That is a serious local loss, not license to exaggerate or duplicate legislation.",
+      "trackerUpdates": {
+        "initiative": "INIT-011",
+        "ImplementationPhase": "legislation-filed",
+        "MilestoneNotes": "C117: Mayor backs committee referral and hearing on the C113-filed ordinance; no completed referral or hearing is evidenced, and records stay separate.",
+        "NextScheduledAction": "Complete committee referral and hearing on INIT-011 with separate records for INIT-013 and INIT-014",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-011",
+      "type": "initiative_response",
+      "topic": "Dimond legislation deadline and honest stall",
+      "initiative": "Dimond Revitalization Initiative",
+      "decision": "Record the missed filing deadline and move INIT-012 to stalled pending completed drafting, documented outreach and Clerk verification.",
+      "quote": "After four announcements, Dimond gets an honest stalled status and a verified drafting path, not a fifth promise without legislation.",
+      "fullStatement": "Dimond has waited through four announced cycles for legislation it can inspect. The C117 packet contains no Clerk-verified filing for the $2.5 million initiative, so I am recording the missed deadline and moving INIT-012 to stalled rather than issuing a fifth introduction. Before it returns, the ordinance must be complete, community input must be documented, and the Clerk must verify the filing. Dimond's high-severity culture spike and struggling street trade deserve attention, but the packet does not describe the underlying culture incident; I will not invent one. The Emergency Town Briefing record should inform the next draft once that record is supplied.",
+      "trackerUpdates": {
+        "initiative": "INIT-012",
+        "ImplementationPhase": "stalled",
+        "MilestoneNotes": "C117: Filing deadline missed; no Clerk-verified legislation is in the packet, so INIT-012 is stalled pending completed drafting, outreach and verification.",
+        "NextScheduledAction": "Complete drafting and outreach, then obtain Clerk-verified legislation",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-012",
+      "type": "initiative_response",
+      "topic": "Duplicative Ivy Hill filing hold",
+      "initiative": "Ivy Hill Community Revitalization",
+      "decision": "Move INIT-013 to stalled rather than file a duplicative measure; require a distinct scope and nonduplication record before any filing.",
+      "quote": "Ivy Hill needs one distinguishable purpose per measure; I will not manufacture a third filing just to make a calendar look busy.",
+      "fullStatement": "I will not file a third Ivy Hill measure simply to clear a calendar. INIT-013 remains a $2 million announcement with no Clerk-verified legislation in the C117 packet, and its relationship to the C113 Ivy Hill ordinance and the disputed INIT-014 record has not been documented. After three cycles without movement, I am recording this initiative as stalled. Before any filing, my office must publish a distinct scope and a nonduplication record explaining what this measure does that the other proposals do not. Ivy Hill's slow trade and flat mood call for disciplined work, not three paper answers to the same unanswered question.",
+      "trackerUpdates": {
+        "initiative": "INIT-013",
+        "ImplementationPhase": "stalled",
+        "MilestoneNotes": "C117: No verified filing or nonduplication record is supplied; INIT-013 is stalled pending a distinct scope and separation from INIT-011 and INIT-014.",
+        "NextScheduledAction": "Publish a distinct scope and nonduplication record before any Clerk-verified filing",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-013",
+      "type": "press_release",
+      "topic": "Complaint-response crosswalk and INIT-014 record correction",
+      "initiative": "Ivy Hill Community Support Initiative",
+      "decision": "Under promises P-d94459ae1189b667 and P-b87ef751a66c370d, direct an eleven-case source-record crosswalk and hold INIT-014 as stalled pending Clerk-backed filing and tracker reconciliation.",
+      "quote": "Eleven complaints, seven responses and no docket supplied: Oakland gets a reconciliation, not another assurance that the paperwork exists.",
+      "fullStatement": "The record correction is not finished. The C117 packet lists eleven complaints, while my C116 statements discussed ten, but it supplies neither the eleven complaint identifiers nor the seven response texts. I therefore cannot honestly publish the promised case-by-case crosswalk yet. My office will produce it from the source docket, identifying which cases each response covers and, for every case, the available docket reference, responsible office, proposed remedy and next date, with uncovered cases marked unresolved. On INIT-014, filing remains unverified: no Clerk docket is supplied. The C115 filed notation, C116 withdrawals and current failed/vote-scheduled tracker entries establish neither a completed filing nor a valid vote. I am holding Council review and recording INIT-014 as stalled pending Clerk-backed reconciliation, not declaring that filing never occurred.",
+      "trackerUpdates": {
+        "initiative": "INIT-014",
+        "ImplementationPhase": "stalled",
+        "MilestoneNotes": "C117: Clerk docket remains unverified; C115/C116 records conflict with failed/vote-scheduled entries, so review is stalled pending Clerk reconciliation.",
+        "NextScheduledAction": "Publish the eleven-case complaint crosswalk and obtain Clerk-backed INIT-014 filing and tracker reconciliation",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-014",
+      "type": "policy_position",
+      "topic": "Laurel cleanup scope, outreach and filing hold",
+      "initiative": "Laurel Neighborhood Patch and Clean-Up",
+      "decision": "Keep INIT-015 announced and carry forward the unfinished scope, outreach and Clerk-verified filing without claiming authorization or implementation.",
+      "quote": "Laurel gets a finished scope, real outreach and a Clerk-verified filing before advancement; a missed deadline is not legislation.",
+      "fullStatement": "Laurel's $6 million cleanup proposal stays announced, and I am not laundering a missed deadline into a filing claim. The scope and outreach are not documented as complete in the C117 packet, and there is no Clerk-verified legislation to point to. I am directing the team to finish the scope, document the outreach and obtain a Clerk filing reference before this measure advances. Until then, there is no $6 million authorization and no implementation start to announce. Laurel's steady trade and low crime are worth building on, and its flat mood is worth hearing. The way to respect residents is to bring them a finished, verifiable proposal—not another date we cannot keep.",
+      "trackerUpdates": {
+        "initiative": "INIT-015",
+        "ImplementationPhase": "announced",
+        "MilestoneNotes": "C117: Scope, outreach and Clerk-verified filing are not evidenced; INIT-015 stays announced, with no authorization or implementation claimed.",
+        "NextScheduledAction": "Complete scope and outreach, then obtain a Clerk-verified filing reference",
+        "NextActionCycle": 118
+      }
+    },
+    {
+      "statementId": "STMT-117-mayor_gavel-015",
+      "type": "public_remark",
+      "topic": "Neighborhood conditions, Dimond briefing and civic life",
+      "initiative": null,
+      "decision": "Request the Dimond Emergency Town Briefing record and factual next steps while recognizing faith-community responses and neighborhood conditions without inventing incident details or new programs.",
+      "quote": "Oakland can tell the truth about grief and still make room for joy; both deserve our presence, and neither needs embellishment.",
+      "fullStatement": "Oakland can hold grief, frustration and joy in the same week without reducing any neighborhood to a headline. Dimond's high-severity culture spike requires a factual public update; the packet does not describe the underlying incident, so I will not speculate. I am requesting the Emergency Town Briefing record and a responsible-office account of next steps. I am grateful to faith communities in Adams Point, Rockridge and East Oakland for emergency assistance, vigil and grief support. Adams Point's soured mood and Grand Lake's quieter storefronts deserve attention without a citywide crisis script. There is also good to celebrate: the Rockridge Garden Market, Uptown Outdoor Gallery and Reaves Family Block Party, busy trade across much of Oakland and low crime throughout the district report. With approval at 77, down two points, my answer is delivery, not defensiveness.",
+      "trackerUpdates": {}
+    }
+  ]
+}

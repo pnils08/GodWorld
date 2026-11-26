@@ -1,0 +1,494 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "117",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+        "anchorFacts": [
+          "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time.",
+          "The free agency question this page has carried since C112 has its answer, and it is not Oakland and it is not Anaheim. Mark Aitken has signed with the Colorado Rockies, one year for $21 million. The Angels were the team with the reported interest in C116, the A's were the team with the history, and Colorado is the team that closed. The money is almost exactly what he made in 2041, $21. 4M, so this was never about Aitken being priced as a player in decline.",
+          "He is coming off a . 283 season with 153 hits, 33 homeruns, 87 RBI and 3. 2 WAR in 540 at bats, a 93 overall first baseman with 3 Gold Gloves and the 2037 Playoff MVP, and he homered in the World Series that clinched the seventh title. The length is the detail that will be argued over. One year is a short commitment for a player at the top of the market, and it puts Aitken back in free agency after 2042.",
+          "Whether that reads as a door left open or simply the deal that was there, he has not said. What it leaves behind in Oakland is bigger than a lineup spot. Aitken is an Oakland native who grew up swinging a bat in East Oakland. He owns his place in Jack London, where he lives with his wife and three kids. He has been the A's player rep and community liaison, and he runs Aitken Little Leaguers, free baseball for East Oakland kids heading into its sixth year."
+        ],
+        "accessEvidence": {
+          "state": "ALLOTTED",
+          "facts": [
+            "clubhouse/sideline SET is the reporter's room"
+          ]
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "ALLOTTED",
+          "facts": []
+        },
+        "missing": [
+          "Packet player quotes",
+          "injury or team-response facts beyond the supplied record",
+          "the rest of the feed notes (8 more sentences not carried)"
+        ],
+        "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+        "sourcePointers": [
+          "output/world_summary_c117.md ## Sports",
+          "docs/media/TANYA_SIDELINE_BAG.md",
+          "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Jack London",
+      "score": null,
+      "src": "world_summary_c117.md ## Sports",
+      "nearby": [
+        {
+          "text": "A's | roster-move | (off-season) | Mark Aitken",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | re-signing | (off-season) | Vladimir Gonzalez",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Austin Reaves, Wendell Carter Jr, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Austin Reaves, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00003",
+          "name": "Mark Aitken",
+          "profile": "Mark Aitken — First Baseman, Colorado Rockies",
+          "role": "First Baseman, Colorado Rockies",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c117.md ## Sports",
+            "pop": "POP-00003",
+            "rowName": "Mark Aitken",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c117.md ## Sports",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00053",
+          "name": "Kevin Clark",
+          "profile": "Kevin Clark — Third Baseman, Oakland A's",
+          "role": "Third Baseman, Oakland A's",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c117.md ## Sports",
+            "pop": "POP-00053",
+            "rowName": "Kevin Clark",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00050",
+          "name": "Ernesto Quintero",
+          "profile": "Ernesto Quintero — 3B/1B , Oakland A's",
+          "role": "3B/1B , Oakland A's",
+          "hood": "Baylight District",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c117.md ## Sports",
+            "pop": "POP-00050",
+            "rowName": "Ernesto Quintero",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01239",
+          "name": "Giancarlo Hernandez",
+          "profile": "Giancarlo Hernandez — Third Baseman, Oakland A's",
+          "role": "Third Baseman, Oakland A's",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c117.md ## Sports",
+            "pop": "POP-01239",
+            "rowName": "Giancarlo Hernandez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "world_summary_c117.md ## Sports",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+        "src": "world_summary_c117.md ## Sports",
+        "id": "F-e84d26dbbeb3"
+      },
+      {
+        "t": "FACT",
+        "text": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time.",
+        "src": "world_summary_c117.md ## Sports",
+        "id": "F-02ff84fc3f61"
+      },
+      {
+        "t": "FACT",
+        "text": "The free agency question this page has carried since C112 has its answer, and it is not Oakland and it is not Anaheim. Mark Aitken has signed with the Colorado Rockies, one year for $21 million. The Angels were the team with the reported interest in C116, the A's were the team with the history, and Colorado is the team that closed. The money is almost exactly what he made in 2041, $21. 4M, so this was never about Aitken being priced as a player in decline.",
+        "src": "world_summary_c117.md ## Sports",
+        "id": "F-5eb1ea2b8c47"
+      },
+      {
+        "t": "FACT",
+        "text": "He is coming off a . 283 season with 153 hits, 33 homeruns, 87 RBI and 3. 2 WAR in 540 at bats, a 93 overall first baseman with 3 Gold Gloves and the 2037 Playoff MVP, and he homered in the World Series that clinched the seventh title. The length is the detail that will be argued over. One year is a short commitment for a player at the top of the market, and it puts Aitken back in free agency after 2042.",
+        "src": "world_summary_c117.md ## Sports",
+        "id": "F-152032517eae"
+      },
+      {
+        "t": "FACT",
+        "text": "Whether that reads as a door left open or simply the deal that was there, he has not said. What it leaves behind in Oakland is bigger than a lineup spot. Aitken is an Oakland native who grew up swinging a bat in East Oakland. He owns his place in Jack London, where he lives with his wife and three kids. He has been the A's player rep and community liaison, and he runs Aitken Little Leaguers, free baseball for East Oakland kids heading into its sixth year.",
+        "src": "world_summary_c117.md ## Sports",
+        "id": "F-a0123c97d21f"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "role": "First Baseman, Colorado Rockies",
+        "hood": "Jack London",
+        "profile": "Mark Aitken — First Baseman, Colorado Rockies",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c117.md ## Sports",
+          "pop": "POP-00003",
+          "rowName": "Mark Aitken",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c117.md ## Sports",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00053",
+        "name": "Kevin Clark",
+        "role": "Third Baseman, Oakland A's",
+        "hood": "Jack London",
+        "profile": "Kevin Clark — Third Baseman, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c117.md ## Sports",
+          "pop": "POP-00053",
+          "rowName": "Kevin Clark",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "hood": "Baylight District",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c117.md ## Sports",
+          "pop": "POP-00050",
+          "rowName": "Ernesto Quintero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01239",
+        "name": "Giancarlo Hernandez",
+        "role": "Third Baseman, Oakland A's",
+        "hood": "West Oakland",
+        "profile": "Giancarlo Hernandez — Third Baseman, Oakland A's",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c117.md ## Sports",
+          "pop": "POP-01239",
+          "rowName": "Giancarlo Hernandez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "world_summary_c117.md ## Sports",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+      "label": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+      "hookLine": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+      "kind": "sideline-signal",
+      "hood": "Jack London",
+      "popids": [
+        "POP-00003",
+        "POP-00018",
+        "POP-00053",
+        "POP-00050",
+        "POP-01239",
+        "POP-00001"
+      ],
+      "citizens": [
+        "Mark Aitken (POP-00003)",
+        "Benji Dillon (POP-00018)",
+        "Kevin Clark (POP-00053)",
+        "Ernesto Quintero (POP-00050)",
+        "Giancarlo Hernandez (POP-01239)",
+        "Vinnie Keane (POP-00001)"
+      ],
+      "ref": "world_summary_c117.md ## Sports",
+      "cycle": 117
+    },
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "I'm standing in the clubhouse hallway with my phone half-out, the way I always am when a roster move lands. Mark Aitken to Colorado, one year, $21 million. The number is almost exactly what he made last season, so this was never about the A's lowballing him. It's about the length. One year. That's the detail that keeps pulling at me. He's an Oakland kid, grew up swinging a bat in East Oakland, owns his place in Jack London, runs the Little Leaguers program heading into its sixth year. He's been the player rep, the community liaison. And he's leaving. Not for a bag — for a single season in Denver. That reads like a door left open, or it reads like a guy who needed to not be here for a minute.",
+    "plan": {
+      "chase": "I'm standing in the clubhouse hallway with my phone half-out, the way I always am when a roster move lands. Mark Aitken to Colorado, one year, $21 million. The number is almost exactly what he made last season, so this was never about the A's lowballing him. It's about the length. One year. That's the detail that keeps pulling at me. He's an Oakland kid, grew up swinging a bat in East Oakland, owns his place in Jack London, runs the Little Leaguers program heading into its sixth year. He's been the player rep, the community liaison. And he's leaving. Not for a bag — for a single season in Denver. That reads like a door left open, or it reads like a guy who needed to not be here for a minute.",
+      "focus": "The shape of Mark Aitken's departure from Oakland — one year, $21 million, and what the clubhouse and community presence he leaves behind actually looks like.",
+      "why": "The money matches his 2041 salary, so this isn't a decline story or a price story. The one-year length is the anomaly. It puts him back in free agency after 2042 and leaves Oakland with an empty lineup spot and an empty community anchor. That tension — door left open versus simply the deal that was there — is the story.",
+      "checks": [
+        "No invented player quotes — Aitken has not said anything, and I will not put words in his mouth.",
+        "No real-world Oakland venues — Jack London is supplied, but I won't name specific streets or businesses.",
+        "No new named people, institutions, events, dates, or numbers beyond the supplied record.",
+        "Clubhouse SET is authorized for scene, but no fabricated speech from players.",
+        "The feed notes are paraphrase, not quotes — nothing in quotation marks."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00003",
+          "question": "Mark Aitken signed one year with Colorado at nearly his exact 2041 salary — what does that length say about whether he sees himself returning to Oakland after 2042?",
+          "basis": "Supplied as the subject of the roster move; his Oakland ties, community role, and the one-year term are all in the packet facts."
+        },
+        {
+          "pop": "POP-00053",
+          "question": "As a current A's third baseman, how does the clubhouse absorb the loss of the player rep and community liaison without a replacement named?",
+          "basis": "Supplied as a current A's player; his presence in the same clubhouse makes him a natural observer of the absence."
+        },
+        {
+          "pop": "POP-00050",
+          "question": "As a 3B/1B on the roster, does Aitken's departure change how the corner infield spots are viewed this spring?",
+          "basis": "Supplied as a current A's player at the same position group; the lineup spot is directly affected."
+        }
+      ],
+      "interpretation": "The one-year deal is the tell. A player at the top of the market taking a single season at his current salary is not a player being priced out — it's a player choosing a shorter commitment. Whether that's a bridge back to Oakland or a clean exit is the open question. The city didn't hold on to its own this time, and the weight of that lands on the people left in the room.",
+      "unverifiedLead": [
+        "The clubhouse was quiet and low-lit when the news landed, with no formal statement from the team yet.",
+        "Aitken's Little Leaguers program continues into its sixth year, but its founder now plays in Colorado.",
+        "The one-year structure of the deal leaves Aitken back in free agency after 2042, which some in the room may read as a door left open."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | roster-move | (off-season) | Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | re-signing | (off-season) | Vladimir Gonzalez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Austin Reaves, Wendell Carter Jr, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01028",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Austin Reaves, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01024"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-25T12:16:55.227Z"
+}

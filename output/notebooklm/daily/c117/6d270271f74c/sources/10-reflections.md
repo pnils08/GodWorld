@@ -1,0 +1,9 @@
+# Piedmont Ave, in their own words
+
+## Wendell Carter Jr. — C / The Oaks
+
+> Man, 137-113 at home after that first loss? That’s exactly how you respond. We needed that. Denver’s a tough matchup — they can make you pay for any slip — but we came out locked in from the jump. Reaves with 32 in 22 minutes? That’s just disrespectful, but I love it. He’s been on one against them all season — 27 and 32 now. When he’s moving like that off screens, there’s nothing the defense can do. T. Jerome with another double-double off the bench, 14 and 11? That’s four straight in double figures for him, and he’s making the whole second unit click. That’s what wins you those tight stretches, having a guy who can come in and run the show without missing a beat. I just tried to stay steady, get my looks in the flow: 17 and 6 on 6-of-9. It’s one of those nights where everything feels simple because the ball’s moving. Everyone eats. And AJ with 15 more — that kid’s consistency at his age is scary. We’re 10-2, and the room feels… dominant. Not cocky, but there’s a belief that we can impose our will. We didn’t even need a big fourth-quarter push — we held them even and still won by 24. That’s control. The city’s buying in too. 94 percent full? Man, that energy is real. We feed off it. Better get used to it, Denver — we’re just getting started
+
+## Kimberly Cho — DEPUTY CHIEF OF OPERATIONS
+
+> Look, I've been in this job long enough to know that every open case in Temescal is somebody's front door, somebody's sense of safety. When we're looking at eight incidents and only making two arrests, the detectives go where the evidence is strongest and where the victim is most vulnerable—but I won't pretend that's always fair. The hard truth is we triage with what we've got, and the cases that stay open are the ones that keep me up at night, because I know the people on those blocks are still waiting for a knock on their door that might not come.

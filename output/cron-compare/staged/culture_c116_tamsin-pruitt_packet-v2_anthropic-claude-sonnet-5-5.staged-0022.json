@@ -57,7 +57,13 @@
       }
     ],
     "businesses": [],
-    "storylines": [],
+    "storylines": [
+      {
+        "slug": "INIT-002:dispatch-live",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
     "hoods": [],
     "claims": [
       {

@@ -1,0 +1,22 @@
+{
+  "model": "x-ai/grok-4.3",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Mark Aitken"
+      },
+      "resultChars": 3227,
+      "resultHead": "[C100 · edition] Origins - Mark Aitken Mark Aitken: The Complete Origins (Parts I-IV) By Hal Richmond, Senior Historian - The Richmond Archive Collection Part I The Corner and the Kid San Luis Obispo sits quiet between the hills and the Pacific — a place where ambition grows slower, steadier. Mark Aitken grew up there, the son of Mayor Richard Aitken and Carol Kent-Aitken, heir to the Chuck E. Cheese fortune. His uncle, on his mother's side, was tennis legend Andre Agassi. The boy was sharp even before he was steady. He won the Nat\n[C100 · edition] MARK AITKEN — FULL EXPANDED INTERVIEW + DUGOU"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Ernesto Quintero"
+      },
+      "resultChars": 3236,
+      "resultHead": "[earlier · archive] Ernesto Quintero was one of the only players still working. No coaches. No teammates. Just him, a bucket of baseballs, and a swing that looked like it was arguing with itself. Most of the swings were workmanlike. Hard, yes — everything he hits is hard — but routine. Line drives that stayed flat. Ground balls that hopped like they had weight. Nothing uncommon. Then he took one swing that didn’t match the rest. I didn’t see the ball’s path. I heard it. The contact didn’t echo the way it usually does in an empty park.\n[C100 · edition] P SLAYER HOW ERNESTO QUINTERO BREAKS THE D"
+    }
+  ],
+  "ranAt": "2026-11-26T00:17:38.623Z"
+}

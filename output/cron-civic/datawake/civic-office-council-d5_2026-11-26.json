@@ -1,0 +1,60 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-11-26",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Two things sit on my desk this week and I'm not separating them. The D3 Fruitvale briefing record for the Alternative Response Initiative gets executed and published — D3 families were promised they could read their own calls, and East Oakland's calls are already moving through this program, so our record gets filed alongside theirs. No expansion into a thing we cannot read the record of. And I'm filing written next dates on the D5 audit and the Baylight feasibility review, because 'we'll get to it' is how a neighborhood stops being able to trust the ladder it was handed. East Oakland's sentiment is on the floor this cycle and its crime index is running above the city's — that is not a reason to slow down, it is the reason to put dates on paper.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-002"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "OARI Fruitvale briefing record published with the D5 record filed alongside; written next dates set for the D5 audit and Baylight feasibility review.",
+  "ranAt": "2026-11-26T11:45:24.279Z",
+  "usage": {
+    "prompt_tokens": 7001,
+    "completion_tokens": 230,
+    "total_tokens": 7231,
+    "cost": 0.0014990885,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0014990885,
+      "upstream_inference_prompt_cost": 0.0013196885,
+      "upstream_inference_completions_cost": 0.0001794
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+  "evidenceReads": [],
+  "provider": "Crusoe",
+  "finishReason": "stop",
+  "elapsedMs": 1795,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00043",
+    "id": "6XbNLCvKLUexwyThXy7NJt",
+    "customId": "cp-POP-00043-c117-CIVIC-datawake-2026-11-26"
+  }
+}

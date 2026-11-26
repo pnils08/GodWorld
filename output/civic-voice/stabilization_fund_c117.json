@@ -1,0 +1,44 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 117,
+  "speaker": "Marcus Webb",
+  "cascadeSummary": "This cycle the C114 closeout verification and the charter-renewal consideration sit on the Council calendar, and the Grand Lake $2.5M roll call is held for the Clerk's certified record — both exactly where the package put them. I act by holding the queue at the 23-day standard, publishing the closeout record in the hearing, and keeping the Chen-Vega conditions stapled to the Grand Lake roll. No new vote is claimed, and no disbursement goes out without the authorization line behind it.",
+  "statements": [
+    {
+      "statementId": "STMT-117-stabilization_fund-001",
+      "type": "position",
+      "topic": "C114 closeout verification and Council charter-renewal consideration",
+      "initiative": "INIT-001",
+      "decision": "Hold the queue at the 23-day standard while the Council takes up the verified C114 closeout and charter renewal; no renewal claimed before the roll call.",
+      "quote": "The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries the proof, and the roll call belongs to the Council.",
+      "fullStatement": "West Oakland — the C114 closeout is verified and published, and the charter-renewal ordinance is on this cycle's Council calendar with the business-and-resident scope and the 23-day standard written into it. My job this cycle is not to announce a vote I don't control. It's to keep the queue moving: the next authorization batch gets walked to the Deputy Mayor's desk, the 23-day clock keeps running, and the hearing record carries the proof. On the ground that looks like what it always looks like — the check arriving before the notice, and a straight answer about the timeline when someone asks.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "MilestoneNotes": "C117: C114 closeout verified and published; charter renewal on Council calendar with business-and-resident scope and 23-day standard; queue held at standard."
+      }
+    },
+    {
+      "statementId": "STMT-117-stabilization_fund-002",
+      "type": "position",
+      "topic": "Grand Lake $2.5M full-council roll call with Chen-Vega conditions",
+      "initiative": "INIT-009",
+      "decision": "Hold and certify the full-council roll call with every Chen-Vega milestone and audit condition attached; maintain a YES position without claiming the outcome.",
+      "quote": "Grand Lake's two and a half million dollars walks into the council chamber with every milestone and audit condition still stapled to it — and I do not get to write the result.",
+      "fullStatement": "Grand Lake — the $2.5M decision is held and certified at the full Council this cycle with the Chen-Vega milestone and audit conditions intact. The Clerk's roll is the authority for the outcome; I don't get to write it. What I can do is make sure every condition is attached when it walks in, and that the certified record is what comes out. That's the same promise I made last cycle, and it's the same promise this cycle.",
+      "trackerUpdates": {
+        "initiative": "INIT-009",
+        "MilestoneNotes": "C117: Held and certified full-council roll call with Chen-Vega milestone and audit conditions intact; no outcome claimed."
+      }
+    },
+    {
+      "statementId": "STMT-117-stabilization_fund-003",
+      "type": "constituent",
+      "topic": "West Oakland queue and 23-day standard",
+      "initiative": "INIT-001",
+      "decision": "Keep the queue at the 23-day standard and publish the hearing record as the proof; next authorization batch goes to the Deputy Mayor's desk.",
+      "quote": "The rent does not wait for the ordinance and the vote doesn't come before the analysis — West Oakland gets the legal-support record first, and the 23-day clock keeps running while it does.",
+      "fullStatement": "West Oakland — the queue is not stopping while the paperwork goes to the record. The 23-day standard holds on what's already in motion, and the next authorization batch is the opening task of this cycle. The legal-support record and the tenant-defense intake stay on the same clock. What a reporter would see on the ground is the same thing every week: a check that arrives before the notice, and a straight answer when someone asks where their file is.",
+      "trackerUpdates": {}
+    }
+  ]
+}

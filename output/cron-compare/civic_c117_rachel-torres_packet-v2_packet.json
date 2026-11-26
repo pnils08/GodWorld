@@ -1,0 +1,656 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "rachel-torres",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "The gap between arrests and clearance in C117, with Temescal as the test case: how an incident gets counted, how an arrest gets counted, and how a clearance gets counted.",
+      "angle": "The gap between arrests and clearance in C117, with Temescal as the test case: how an incident gets counted, how an arrest gets counted, and how a clearance gets counted.",
+      "hood": null,
+      "citizens": [
+        "Kimberly Cho (POP-00137)",
+        "Dolores Nwachukwu (POP-01141)",
+        "Vanessa Tran-Muñoz (POP-01021)",
+        "Samantha Viteri (POP-00139)"
+      ],
+      "popids": [
+        "POP-00137",
+        "POP-01141",
+        "POP-01021",
+        "POP-00139"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/civic_c117_rachel-torres_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-01021",
+      "name": "Vanessa Tran-Muñoz",
+      "quote": "That call gets classified as a wellness response, and it counts in our incident total just like any other — but the outcome we record isn't 'no arrest,' it's 'resolved without enforcement,' which means the crew stayed, the person got connected to what they needed, and the situation didn't escalate. That's the outcome that matters to me.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; warm, tender with people; curious, open to new things; principled, plays it straight; fairly steady",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"That call gets classified as a wellness response, and it counts in our incident total just like any other — but the outcome we record isn't 'no arrest,' it's 'resolved without enforcement,' which means the crew stayed, the person got connected to what they needed, and the situation didn't escalate. That's the outcome that matters to me.\",\n  \"fact_ids\": [\"F-5c2d76122ad3\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5c2d76122ad3"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01021-cbe879ac53",
+        "authoredQuote": true,
+        "publishableQuote": "That call gets classified as a wellness response, and it counts in our incident total just like any other — but the outcome we record isn't 'no arrest,' it's 'resolved without enforcement,' which means the crew stayed, the person got connected to what they needed, and the situation didn't escalate. That's the outcome that matters to me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01021",
+          "name": "Vanessa Tran-Muñoz",
+          "role": "OARI Program Director",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "The West Oakland call this cycle ended without cuffs. How is a call like that classified, does it appear in the incident count, and what does OARI record as its outcome? Speak from your life."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40",
+            "src": "Simulation_Ledger profile for POP-01021",
+            "id": "F-5c2d76122ad3"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00139",
+      "name": "Samantha Viteri",
+      "quote": "Look, I can't walk you through specific case files — that's not how this works. But when a classification gets challenged, it lands on my desk because somebody on the street or in the ranks felt the paperwork didn't match what actually happened. That's the part people forget: we don't start with the file, we start with the doubt.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Look, I can't walk you through specific case files — that's not how this works. But when a classification gets challenged, it lands on my desk because somebody on the street or in the ranks felt the paperwork didn't match what actually happened. That's the part people forget: we don't start with the file, we start with the doubt.\",\"fact_ids\":[\"F-d47f720fe01a\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d47f720fe01a"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00139-c890fb6afb",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I can't walk you through specific case files — that's not how this works. But when a classification gets challenged, it lands on my desk because somebody on the street or in the ranks felt the paperwork didn't match what actually happened. That's the part people forget: we don't start with the file, we start with the doubt."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00139",
+          "name": "Samantha Viteri",
+          "role": "INTERNAL AFFAIRS DIVISION LEAD",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "Do any complaints or reviews tied to Temescal or Fruitvale incidents this cycle bear on how those incidents were classified or closed? If you can't discuss specific cases, can you say how classification disputes reach your division? Speak from your life."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50",
+            "src": "Simulation_Ledger profile for POP-00139",
+            "id": "F-d47f720fe01a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": "no matching current-cycle office statement; tier-2 adapter unavailable",
+  "interviews": [
+    {
+      "pop": "POP-00137",
+      "name": "Kimberly Cho",
+      "quote": null,
+      "disp": "draws people in, deep with them; close to family; somewhat warm",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words",
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Look, I've been in this job long enough to know that every open case in Temescal is somebody's front door, somebody's sense of safety. When we're looking at eight incidents and only making two arrests, the detectives go where the evidence is strongest and where the victim is most vulnerable—but I won't pretend that's always fair. The hard truth is we triage with what we've got, and the cases that stay open are the ones that keep me up at night, because I know the people on those blocks are still waiting for a knock on their door that might not come.\",\"fact_ids\":[\"F-a26db6a6b9c1\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00137",
+          "name": "Kimberly Cho",
+          "role": "DEPUTY CHIEF OF OPERATIONS",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "When a neighborhood logs about eight incidents in a cycle and the department makes about two arrests there, how are detectives assigned? What decides which Temescal property cases get follow-up and which stay open with no one working them? Speak from your life."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department — age 56",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department — age 56",
+            "src": "Simulation_Ledger profile for POP-00137",
+            "id": "F-a26db6a6b9c1"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01141",
+      "name": "Dolores Nwachukwu",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words",
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Most Temescal property cases start as a walk-in or a phone call — someone's car got broken into, or a garage got hit. If there's no suspect and no usable evidence, it gets a case number but no report, and it stays that way unless something else comes in. It only gets reclassified if a pattern shows up — say, three break-ins on the same block in a week — then we pull the calls together and open a proper report. Otherwise, it sits as a low-priority entry until the file's closed out, usually after 90 days with no new leads.\",\"fact_ids\":[\"F-0aa8846e6805\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01141",
+          "name": "Dolores Nwachukwu",
+          "role": "Police Captain",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "Walk me through a Temescal property case from the first call to the last entry in the file. At what point does it get a report, get reclassified, or get closed with no report filed? Speak from your life."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Dolores Nwachukwu — Police Captain — Oakland Police Department — age 48",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Dolores Nwachukwu — Police Captain — Oakland Police Department — age 48",
+            "src": "Simulation_Ledger profile for POP-01141",
+            "id": "F-0aa8846e6805"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01021",
+      "name": "Vanessa Tran-Muñoz",
+      "quote": "That call gets classified as a wellness response, and it counts in our incident total just like any other — but the outcome we record isn't 'no arrest,' it's 'resolved without enforcement,' which means the crew stayed, the person got connected to what they needed, and the situation didn't escalate. That's the outcome that matters to me.",
+      "disp": "can't switch off, working themselves thin; draws people in, deep with them; warm, tender with people; curious, open to new things; principled, plays it straight; fairly steady",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\n  \"answer\": \"quote\",\n  \"quote\": \"That call gets classified as a wellness response, and it counts in our incident total just like any other — but the outcome we record isn't 'no arrest,' it's 'resolved without enforcement,' which means the crew stayed, the person got connected to what they needed, and the situation didn't escalate. That's the outcome that matters to me.\",\n  \"fact_ids\": [\"F-5c2d76122ad3\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5c2d76122ad3"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01021-cbe879ac53",
+        "authoredQuote": true,
+        "publishableQuote": "That call gets classified as a wellness response, and it counts in our incident total just like any other — but the outcome we record isn't 'no arrest,' it's 'resolved without enforcement,' which means the crew stayed, the person got connected to what they needed, and the situation didn't escalate. That's the outcome that matters to me."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01021",
+          "name": "Vanessa Tran-Muñoz",
+          "role": "OARI Program Director",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "The West Oakland call this cycle ended without cuffs. How is a call like that classified, does it appear in the incident count, and what does OARI record as its outcome? Speak from your life."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40",
+            "src": "Simulation_Ledger profile for POP-01021",
+            "id": "F-5c2d76122ad3"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00139",
+      "name": "Samantha Viteri",
+      "quote": "Look, I can't walk you through specific case files — that's not how this works. But when a classification gets challenged, it lands on my desk because somebody on the street or in the ranks felt the paperwork didn't match what actually happened. That's the part people forget: we don't start with the file, we start with the doubt.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Look, I can't walk you through specific case files — that's not how this works. But when a classification gets challenged, it lands on my desk because somebody on the street or in the ranks felt the paperwork didn't match what actually happened. That's the part people forget: we don't start with the file, we start with the doubt.\",\"fact_ids\":[\"F-d47f720fe01a\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d47f720fe01a"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00139-c890fb6afb",
+        "authoredQuote": true,
+        "publishableQuote": "Look, I can't walk you through specific case files — that's not how this works. But when a classification gets challenged, it lands on my desk because somebody on the street or in the ranks felt the paperwork didn't match what actually happened. That's the part people forget: we don't start with the file, we start with the doubt."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00139",
+          "name": "Samantha Viteri",
+          "role": "INTERNAL AFFAIRS DIVISION LEAD",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "Do any complaints or reviews tied to Temescal or Fruitvale incidents this cycle bear on how those incidents were classified or closed? If you can't discuss specific cases, can you say how classification disputes reach your division? Speak from your life."
+        },
+        "signal": {
+          "kind": "interview",
+          "hood": null,
+          "focus": "",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50",
+          "evidence": [],
+          "editorialTarget": true,
+          "planTarget": null
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50",
+            "src": "Simulation_Ledger profile for POP-00139",
+            "id": "F-d47f720fe01a"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-24T19:16:28.322Z"
+}

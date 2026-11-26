@@ -1,0 +1,29 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-006)",
+  "consolidatedFrom": [
+    "STMT-117-council_d1-003 (Carter D1 — Oakland Youth Apprenticeship Pipeline — placement-gap analysis)",
+    "STMT-117-council_d3-003 (Delgado D3 — Oakland Youth Apprenticeship Pipeline — placement-gap analysis and adjustment...)",
+    "STMT-117-council_d5-002 (Rivers D5 — Oakland Youth Apprenticeship Pipeline — placement-gap analysis publication)",
+    "STMT-117-mayor_gavel-006 (Mayor gavel — Youth Apprenticeship placement-gap accountability)",
+    "STMT-117-mayor_open-008 (Mayor agenda — Placement-gap analysis and apprenticeship adjustment plan)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007",
+    "ImplementationPhase": "stalled",
+    "MilestoneNotes": "C117: Stalled pending publication of the placement-gap analysis and adjustment plan, with explicit West Oakland and Fruitvale review and a next reporting checkpoint.",
+    "NextScheduledAction": "Publish the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale review",
+    "NextActionCycle": 118,
+    "LastWorkCycle": 117,
+    "LastWorkSeat": "civic-office-council-d1, civic-office-council-d3"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-116-civic-office-council-d1-2026-11-17",
+      "MV-116-civic-office-council-d3-2026-11-16",
+      "MV-116-civic-office-council-d3-2026-11-19"
+    ]
+  }
+}

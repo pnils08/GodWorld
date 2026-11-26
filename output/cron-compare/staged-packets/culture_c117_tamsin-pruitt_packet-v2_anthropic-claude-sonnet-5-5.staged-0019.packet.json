@@ -1,0 +1,852 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "Manjit Singh's first rented place of their own in Fruitvale, with the water-heater choice and the pile-driver detail as the human texture.",
+    "approach": null,
+    "voice": null
+  },
+  "signal": {
+    "kind": "own-pick",
+    "hood": null,
+    "src": "own pick, C117",
+    "plan": {
+      "focus": "Manjit Singh's first rented place of their own in Fruitvale, with the water-heater choice and the pile-driver detail as the human texture."
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00766",
+        "name": "Manjit Singh",
+        "profile": "Manjit Singh — Senior Pastor / Faith Leader — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00128",
+        "name": "Kris Bubic",
+        "profile": "Kris Bubic — Retired former As / Bubic Burgers — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00766-2c3a721ef2",
+        "pop": "POP-00766",
+        "name": "Manjit Singh",
+        "quote": "The first thing I did in my new place was unpack my grandmother's old tea set; my friends from the community helped me move. I decided to prioritize getting the water heater fixed over a weekend trip because I wanted to settle in comfortably.",
+        "factIds": [
+          "F-3de27b4ba087",
+          "F-bca54340224b"
+        ],
+        "src": "packet.W2[POP-00766]"
+      },
+      {
+        "id": "Q-POP-00128-bad68e5450",
+        "pop": "POP-00128",
+        "name": "Kris Bubic",
+        "quote": "I moved to Lake Merritt because I wanted a change of scenery and a bit more space, and I'm taking the memories of my time in West Oakland with me, especially the community and the A's games.",
+        "factIds": [
+          "F-4b5c72b356af",
+          "F-7ee20956f69a"
+        ],
+        "src": "packet.W2[POP-00128]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Whether the move is tied to the Fruitvale Transit Hub Phase II or to nearby construction. Manjit attended a feedback session earlier, but nothing in the record connects it to the move.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Whether Manjit still serves at Gurdwara Singh Sabha, given the ledger title versus the C99 piece.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Whether Kris Bubic's overheard goodbye relates to the move. This is a hunch only.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C117",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c5606da08cb9"
+    },
+    {
+      "t": "FACT",
+      "text": "Nina Rines moved into a place of their own in Lake Merritt, renting (C117)",
+      "src": "output/beats/Household_Ledger.jsonl @C117",
+      "id": "F-232811ed7aa3"
+    },
+    {
+      "t": "FACT",
+      "text": "Nina Rines — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that near a quiet side street",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-4f3613a34599"
+    },
+    {
+      "t": "FACT",
+      "text": "Nina Rines — in their life, C117: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse near the lakeside path",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-8da7039bc633"
+    },
+    {
+      "t": "FACT",
+      "text": "Nina Rines — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-dc8751e5510c"
+    },
+    {
+      "t": "FACT",
+      "text": "Nina Rines — in their life, C117: caught themselves narrating the day as if telling it to someone gone",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-d55ba3b4fb01"
+    },
+    {
+      "t": "FACT",
+      "text": "Manjit Singh moved into a place of their own in Fruitvale, renting (C117)",
+      "src": "output/beats/Household_Ledger.jsonl @C117",
+      "id": "F-3de27b4ba087"
+    },
+    {
+      "t": "FACT",
+      "text": "Manjit Singh — in their life, C117: weighed a weekend trip against the water heater and picked the water heater",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-bca54340224b"
+    },
+    {
+      "t": "FACT",
+      "text": "Manjit Singh — in their life, C117: braced for the sound of pile drivers and realized they had already started tuning it out",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-0395a8b16d42"
+    },
+    {
+      "t": "FACT",
+      "text": "Manjit Singh — in their life, C117: caught themselves bragging a little about the neighborhood lately",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-2a4f37f49547"
+    },
+    {
+      "t": "FACT",
+      "text": "Manjit Singh — in their life, C117: went quiet with the rest of the room when a pilot fired on another ship for the first time, because everyone knew the board would count it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-66269a58d3e3"
+    },
+    {
+      "t": "FACT",
+      "text": "Manjit Singh — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)",
+      "src": "archive/ARTICLE_INDEX.jsonl 57235fd2f5166f60",
+      "id": "F-f4445ca49603"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — told the table that things were better the old way and did not take questions near a cafe near the clinics, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C117)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+      "id": "F-a27d2e56b802"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — in their life, C116: the health center staff unwind at the bar after their first busy week",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-4ef9d895ccc0"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-3b75cf29176f"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — in their life, C117: took the short way home to avoid the block where something was going on near a cafe near the clinics",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-5d45d0d50b2d"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — Lives already wrote this person: what the Cycle's turn reached them with (C116)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-28dec4a206f5"
+    },
+    {
+      "t": "FACT",
+      "text": "Ira Leu — the Tribune named them in a piece headlined The Lives Page, Cycle 116 (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 8d33a0ebd997a870",
+      "id": "F-8697bbd0df84"
+    },
+    {
+      "t": "FACT",
+      "text": "Tyrie Groin — heard someone at the cafe complain about the Baylight District noise and bit their tongue, Laurel — one of 4 people the Cycle's city turn reached (Baylight District — Final Council Vote is construction-active — ongoing sports effects in Jack London, Downtown; the city feels it through…) (C117)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+      "id": "F-747729b677e1"
+    },
+    {
+      "t": "FACT",
+      "text": "Tyrie Groin — in their life, C116: found another shop on the block keeping short hours",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-2062231ca9cb"
+    },
+    {
+      "t": "FACT",
+      "text": "Tyrie Groin — in their life, C117: caught themselves lowering their voice when talking about the block's future",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-886c449e7bd5"
+    },
+    {
+      "t": "FACT",
+      "text": "Pilar Ramirez — restocked the rig at shift change and counted the gauze twice near a small park, Lake Merritt — one of 4 people the Cycle's city turn reached (Oakland Youth Apprenticeship Pipeline is stalled — ongoing workforce effects in West Oakland, East Oakland, Fruitvale; the city feels it…) (C117)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+      "id": "F-f2019c4a0764"
+    },
+    {
+      "t": "FACT",
+      "text": "Pilar Ramirez — in their life, C116: talked with a stranger long enough to learn a name",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-8d2de88f0161"
+    },
+    {
+      "t": "FACT",
+      "text": "Pilar Ramirez — in their life, C116: checked in with a relative",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-6c790e4c16da"
+    },
+    {
+      "t": "FACT",
+      "text": "Pilar Ramirez — in their life, C117: asked Manfred whether Marguerite Kimball-Ostrow was on the board and then pretended they were asking for a friend",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-9d50d5275322"
+    },
+    {
+      "t": "FACT",
+      "text": "Pilar Ramirez — in their life, C117: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-0d83de0c5f17"
+    },
+    {
+      "t": "FACT",
+      "text": "Pilar Ramirez — the Tribune named them in a piece headlined Voices: What the A's Left Them (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl a6ec70d5d309e2f2",
+      "id": "F-c004cd82265c"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards and Sakura Foster — moved from Fruitvale to Piedmont Ave — moving up from Fruitvale, Piedmont Ave (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-31fce2e1135b"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards — in their life, C116: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-82d4b82e88c0"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-b032f0e6f0a6"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards — the Tribune named them in a piece headlined The A's Sold a Surplus Starter and Bought Into a Surplus Infield (Sports, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 7a70e91c91a93b40",
+      "id": "F-f7a1dabe626e"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards — the Tribune named them in a piece headlined Oakland raised him. I'm hoping he remembers that when the offers come in. (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 49c85253ac607231",
+      "id": "F-b5da21ca0802"
+    },
+    {
+      "t": "FACT",
+      "text": "Martin Richards — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 2ead09deff9943ce",
+      "id": "F-935d8e2d44b9"
+    },
+    {
+      "t": "FACT",
+      "text": "Sakura Foster — in their life, C117: chose the self-checkout to skip the usual few words with the cashier",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-f1d5f1f630fd"
+    },
+    {
+      "t": "FACT",
+      "text": "Sakura Foster — in their life, C117: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-bc20505d4fb5"
+    },
+    {
+      "t": "FACT",
+      "text": "Kris Bubic — moved from West Oakland to Lake Merritt — moving up from West Oakland, Lake Merritt (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-4b5c72b356af"
+    },
+    {
+      "t": "FACT",
+      "text": "Kris Bubic — in their life, C116: talked with a stranger long enough to learn a name near a campus quad",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-77890581b76c"
+    },
+    {
+      "t": "FACT",
+      "text": "Kris Bubic — in their life, C116: bought a new A's jersey and let the week's noise settle",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-314340ee4b41"
+    },
+    {
+      "t": "FACT",
+      "text": "Kris Bubic — in their life, C116: felt quietly lucky to call West Oakland home",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-76f3fe325b3d"
+    },
+    {
+      "t": "FACT",
+      "text": "Kris Bubic — in their life, C117: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-9085abee5a2e"
+    },
+    {
+      "t": "FACT",
+      "text": "Kris Bubic — the Tribune named them in a piece headlined What They Order on Tuesdays (Food & Hospitality, C87)",
+      "src": "archive/ARTICLE_INDEX.jsonl a02e57fd1a83a02e",
+      "id": "F-83e53fc9a755"
+    },
+    {
+      "t": "FACT",
+      "text": "Kris Bubic — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406",
+      "id": "F-bc4718ad883f"
+    },
+    {
+      "t": "FACT",
+      "text": "Riley Boon — moved from Jack London to East Oakland — moving for a better fit between household income and housing costs, East Oakland (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-f2baf93adea5"
+    },
+    {
+      "t": "FACT",
+      "text": "Riley Boon — in their life, C116: caught the coffee order coming out of their mouth before deciding to order it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-727f52f15356"
+    },
+    {
+      "t": "FACT",
+      "text": "Riley Boon — in their life, C116: walked past the bedroom that stays clean now and closed the door without going in",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-adcb5c36bfa9"
+    },
+    {
+      "t": "FACT",
+      "text": "Michael Corliss — graduated with their class in a joyful spring celebration, KONO (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-735e3e61c1a8"
+    },
+    {
+      "t": "FACT",
+      "text": "Michael Corliss — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-caeb36762af9"
+    },
+    {
+      "t": "FACT",
+      "text": "Michael Corliss — in their life, C116: looked up how something works and came away more amazed, not less near a mural-lined block",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-c3c10815ff78"
+    },
+    {
+      "t": "FACT",
+      "text": "Michael Corliss — in their life, C117: hung the new Oaks banner in the window facing the street",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-637f41aa0dee"
+    },
+    {
+      "t": "FACT",
+      "text": "Michael Corliss — in their life, C117: felt the neighborhood's DIY spirit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-4ef44ab37ab2"
+    },
+    {
+      "t": "FACT",
+      "text": "Michael Corliss — the Tribune named them in a piece headlined Who Owns KONO's Rent Pressure When Everyone Says Business Is Good? (Civic, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl a08c911e944106c2",
+      "id": "F-45c357a561cf"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C13, Spring, holiday=none",
+      "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+      "id": "F-f7ed4e9a474c"
+    },
+    {
+      "t": "FACT",
+      "text": "Kris Bubic — Retired former As / Bubic Burgers — Lake Merritt",
+      "src": "Simulation_Ledger profile for POP-00128",
+      "id": "F-7ee20956f69a"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-ed138bdd7f09",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c5606da08cb9",
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-232811ed7aa3",
+        "t": "FACT",
+        "text": "Nina Rines moved into a place of their own in Lake Merritt, renting (C117)",
+        "src": "output/beats/Household_Ledger.jsonl @C117"
+      },
+      {
+        "id": "F-4f3613a34599",
+        "t": "FACT",
+        "text": "Nina Rines — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that near a quiet side street",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-8da7039bc633",
+        "t": "FACT",
+        "text": "Nina Rines — in their life, C117: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse near the lakeside path",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-dc8751e5510c",
+        "t": "FACT",
+        "text": "Nina Rines — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-d55ba3b4fb01",
+        "t": "FACT",
+        "text": "Nina Rines — in their life, C117: caught themselves narrating the day as if telling it to someone gone",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-3de27b4ba087",
+        "t": "FACT",
+        "text": "Manjit Singh moved into a place of their own in Fruitvale, renting (C117)",
+        "src": "output/beats/Household_Ledger.jsonl @C117"
+      },
+      {
+        "id": "F-bca54340224b",
+        "t": "FACT",
+        "text": "Manjit Singh — in their life, C117: weighed a weekend trip against the water heater and picked the water heater",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-0395a8b16d42",
+        "t": "FACT",
+        "text": "Manjit Singh — in their life, C117: braced for the sound of pile drivers and realized they had already started tuning it out",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-2a4f37f49547",
+        "t": "FACT",
+        "text": "Manjit Singh — in their life, C117: caught themselves bragging a little about the neighborhood lately",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-66269a58d3e3",
+        "t": "FACT",
+        "text": "Manjit Singh — in their life, C117: went quiet with the rest of the room when a pilot fired on another ship for the first time, because everyone knew the board would count it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-f4445ca49603",
+        "t": "FACT",
+        "text": "Manjit Singh — the Tribune named them in a piece headlined A Week of Many Altars: Oakland's Thanksgiving Convergence (Culture, C99)",
+        "src": "archive/ARTICLE_INDEX.jsonl 57235fd2f5166f60"
+      },
+      {
+        "id": "F-a27d2e56b802",
+        "t": "FACT",
+        "text": "Ira Leu — told the table that things were better the old way and did not take questions near a cafe near the clinics, Temescal — one of 4 people the Cycle's city turn reached (Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117"
+      },
+      {
+        "id": "F-4ef9d895ccc0",
+        "t": "FACT",
+        "text": "Ira Leu — in their life, C116: the health center staff unwind at the bar after their first busy week",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-3b75cf29176f",
+        "t": "FACT",
+        "text": "Ira Leu — in their life, C116: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-5d45d0d50b2d",
+        "t": "FACT",
+        "text": "Ira Leu — in their life, C117: took the short way home to avoid the block where something was going on near a cafe near the clinics",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-28dec4a206f5",
+        "t": "FACT",
+        "text": "Ira Leu — Lives already wrote this person: what the Cycle's turn reached them with (C116)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-8697bbd0df84",
+        "t": "FACT",
+        "text": "Ira Leu — the Tribune named them in a piece headlined The Lives Page, Cycle 116 (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 8d33a0ebd997a870"
+      },
+      {
+        "id": "F-747729b677e1",
+        "t": "FACT",
+        "text": "Tyrie Groin — heard someone at the cafe complain about the Baylight District noise and bit their tongue, Laurel — one of 4 people the Cycle's city turn reached (Baylight District — Final Council Vote is construction-active — ongoing sports effects in Jack London, Downtown; the city feels it through…) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117"
+      },
+      {
+        "id": "F-2062231ca9cb",
+        "t": "FACT",
+        "text": "Tyrie Groin — in their life, C116: found another shop on the block keeping short hours",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-886c449e7bd5",
+        "t": "FACT",
+        "text": "Tyrie Groin — in their life, C117: caught themselves lowering their voice when talking about the block's future",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-f2019c4a0764",
+        "t": "FACT",
+        "text": "Pilar Ramirez — restocked the rig at shift change and counted the gauze twice near a small park, Lake Merritt — one of 4 people the Cycle's city turn reached (Oakland Youth Apprenticeship Pipeline is stalled — ongoing workforce effects in West Oakland, East Oakland, Fruitvale; the city feels it…) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117"
+      },
+      {
+        "id": "F-8d2de88f0161",
+        "t": "FACT",
+        "text": "Pilar Ramirez — in their life, C116: talked with a stranger long enough to learn a name",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-6c790e4c16da",
+        "t": "FACT",
+        "text": "Pilar Ramirez — in their life, C116: checked in with a relative",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-9d50d5275322",
+        "t": "FACT",
+        "text": "Pilar Ramirez — in their life, C117: asked Manfred whether Marguerite Kimball-Ostrow was on the board and then pretended they were asking for a friend",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-0d83de0c5f17",
+        "t": "FACT",
+        "text": "Pilar Ramirez — in their life, C117: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-c004cd82265c",
+        "t": "FACT",
+        "text": "Pilar Ramirez — the Tribune named them in a piece headlined Voices: What the A's Left Them (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl a6ec70d5d309e2f2"
+      },
+      {
+        "id": "F-31fce2e1135b",
+        "t": "FACT",
+        "text": "Martin Richards and Sakura Foster — moved from Fruitvale to Piedmont Ave — moving up from Fruitvale, Piedmont Ave (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-82d4b82e88c0",
+        "t": "FACT",
+        "text": "Martin Richards — in their life, C116: overheard a stranger asking the way to a new shop on the block and pointed them right to it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-b032f0e6f0a6",
+        "t": "FACT",
+        "text": "Martin Richards — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-f7a1dabe626e",
+        "t": "FACT",
+        "text": "Martin Richards — the Tribune named them in a piece headlined The A's Sold a Surplus Starter and Bought Into a Surplus Infield (Sports, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 7a70e91c91a93b40"
+      },
+      {
+        "id": "F-b5da21ca0802",
+        "t": "FACT",
+        "text": "Martin Richards — the Tribune named them in a piece headlined Oakland raised him. I'm hoping he remembers that when the offers come in. (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 49c85253ac607231"
+      },
+      {
+        "id": "F-935d8e2d44b9",
+        "t": "FACT",
+        "text": "Martin Richards — the Tribune named them in a piece headlined Keane's 2041 Strikeout Rate Is an Outlier on 127 At-Bats. Next Season Decides Whether It Is a New Baseline. (Sports, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 2ead09deff9943ce"
+      },
+      {
+        "id": "F-f1d5f1f630fd",
+        "t": "FACT",
+        "text": "Sakura Foster — in their life, C117: chose the self-checkout to skip the usual few words with the cashier",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-bc20505d4fb5",
+        "t": "FACT",
+        "text": "Sakura Foster — in their life, C117: carried three boxes of canned goods from the pantry truck and felt it in their lower back",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-4b5c72b356af",
+        "t": "FACT",
+        "text": "Kris Bubic — moved from West Oakland to Lake Merritt — moving up from West Oakland, Lake Merritt (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-77890581b76c",
+        "t": "FACT",
+        "text": "Kris Bubic — in their life, C116: talked with a stranger long enough to learn a name near a campus quad",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-314340ee4b41",
+        "t": "FACT",
+        "text": "Kris Bubic — in their life, C116: bought a new A's jersey and let the week's noise settle",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-76f3fe325b3d",
+        "t": "FACT",
+        "text": "Kris Bubic — in their life, C116: felt quietly lucky to call West Oakland home",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-9085abee5a2e",
+        "t": "FACT",
+        "text": "Kris Bubic — in their life, C117: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-83e53fc9a755",
+        "t": "FACT",
+        "text": "Kris Bubic — the Tribune named them in a piece headlined What They Order on Tuesdays (Food & Hospitality, C87)",
+        "src": "archive/ARTICLE_INDEX.jsonl a02e57fd1a83a02e"
+      },
+      {
+        "id": "F-bc4718ad883f",
+        "t": "FACT",
+        "text": "Kris Bubic — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406"
+      },
+      {
+        "id": "F-f2baf93adea5",
+        "t": "FACT",
+        "text": "Riley Boon — moved from Jack London to East Oakland — moving for a better fit between household income and housing costs, East Oakland (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-727f52f15356",
+        "t": "FACT",
+        "text": "Riley Boon — in their life, C116: caught the coffee order coming out of their mouth before deciding to order it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-adcb5c36bfa9",
+        "t": "FACT",
+        "text": "Riley Boon — in their life, C116: walked past the bedroom that stays clean now and closed the door without going in",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-735e3e61c1a8",
+        "t": "FACT",
+        "text": "Michael Corliss — graduated with their class in a joyful spring celebration, KONO (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-caeb36762af9",
+        "t": "FACT",
+        "text": "Michael Corliss — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-c3c10815ff78",
+        "t": "FACT",
+        "text": "Michael Corliss — in their life, C116: looked up how something works and came away more amazed, not less near a mural-lined block",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-637f41aa0dee",
+        "t": "FACT",
+        "text": "Michael Corliss — in their life, C117: hung the new Oaks banner in the window facing the street",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-4ef44ab37ab2",
+        "t": "FACT",
+        "text": "Michael Corliss — in their life, C117: felt the neighborhood's DIY spirit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-45c357a561cf",
+        "t": "FACT",
+        "text": "Michael Corliss — the Tribune named them in a piece headlined Who Owns KONO's Rent Pressure When Everyone Says Business Is Good? (Civic, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl a08c911e944106c2"
+      },
+      {
+        "id": "F-f7ed4e9a474c",
+        "t": "FACT",
+        "text": "Calendar: Y3C13, Spring, holiday=none",
+        "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-7ee20956f69a",
+        "t": "FACT",
+        "text": "Kris Bubic — Retired former As / Bubic Burgers — Lake Merritt",
+        "src": "Simulation_Ledger profile for POP-00128"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00766-2c3a721ef2",
+        "speakerId": "POP-00766",
+        "speakerName": "Manjit Singh",
+        "text": "The first thing I did in my new place was unpack my grandmother's old tea set; my friends from the community helped me move. I decided to prioritize getting the water heater fixed over a weekend trip because I wanted to settle in comfortably.",
+        "factIds": [
+          "F-3de27b4ba087",
+          "F-bca54340224b"
+        ],
+        "src": "packet.W2[POP-00766]"
+      },
+      {
+        "id": "Q-POP-00128-bad68e5450",
+        "speakerId": "POP-00128",
+        "speakerName": "Kris Bubic",
+        "text": "I moved to Lake Merritt because I wanted a change of scenery and a bit more space, and I'm taking the memories of my time in West Oakland with me, especially the community and the A's games.",
+        "factIds": [
+          "F-4b5c72b356af",
+          "F-7ee20956f69a"
+        ],
+        "src": "packet.W2[POP-00128]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00766",
+        "name": "Manjit Singh",
+        "profile": "Manjit Singh — Senior Pastor / Faith Leader — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00128",
+        "name": "Kris Bubic",
+        "profile": "Kris Bubic — Retired former As / Bubic Burgers — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Whether the move is tied to the Fruitvale Transit Hub Phase II or to nearby construction. Manjit attended a feedback session earlier, but nothing in the record connects it to the move.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Whether Manjit still serves at Gurdwara Singh Sabha, given the ledger title versus the C99 piece.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Whether Kris Bubic's overheard goodbye relates to the move. This is a hunch only.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [],
+    "textureConditions": [],
+    "forbiddenClaimClasses": []
+  }
+}

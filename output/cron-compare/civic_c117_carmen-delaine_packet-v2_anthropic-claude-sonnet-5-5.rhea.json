@@ -1,0 +1,112 @@
+{
+  "draft": "output/cron-compare/civic_c117_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "117",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "f5965da7db8eba01d3b31b655fe53c3efd1340e0241936a01b423c8ac9e9f324",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match civic voice statements verbatim, council roster is fully accurate, and initiative states align with ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-3",
+    "manifestId": "AM-303e8e00e3d9",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "7.8",
+          "110",
+          "113",
+          "400",
+          "115",
+          "108",
+          "47",
+          "4.2",
+          "84",
+          "90",
+          "109",
+          "3",
+          "4",
+          "7",
+          "8",
+          "9"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "executed under the 23-day standard.",
+          "ordered",
+          "transmitted.",
+          "under Deputy Mayor Okoro's authority",
+          "no Clerk-certified roll call or outcome,"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana",
+      "Brenda Okoro",
+      "Carmen Delaine",
+      "Denise Carter",
+      "Elliott Crane",
+      "Janae Rivers",
+      "Leonard Tran",
+      "Marcus Webb",
+      "Nina Chen",
+      "Ramon Vega",
+      "Rose Delgado",
+      "Terrence Mobley",
+      "Warren Ashford"
+    ],
+    "unverified": [
+      "Bay Tribune Civic Ledger",
+      "Commercial Stabilization",
+      "Stabilization Fund",
+      "Tenant Defense Fund",
+      "West Oakland Stabilization Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0155,
+  "durationMs": 7045,
+  "parseError": false,
+  "ranAt": "2026-11-24T00:15:54.366Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 913,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f5965da7db8eba01d3b31b655fe53c3efd1340e0241936a01b423c8ac9e9f324",
+    "costUsd": 0.0012
+  }
+}

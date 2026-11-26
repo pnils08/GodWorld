@@ -1,0 +1,31 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "ask_worker",
+      "input": {
+        "office": "SUPT-SCHOOLS",
+        "question": "The school quality index slipped this cycle, with the biggest drops (0.08 to 0.10) in Fruitvale, Grand Lake, Jack London, Uptown, Downtown and West Oakland, while funding and teacher quality held flat and enrollment ticked up. What is behind the dip, and what are your staff seeing in classrooms?"
+      },
+      "resultChars": 3720,
+      "resultHead": "Rosalind Achterberg, Superintendent of Schools, answered:\nAngela, before I explain anything, I have to correct a premise — and I'd rather do it now than have it in print.\n\n**The record I have in front of me doesn't match the numbers in your question.** You cite drops of 0.08 to 0.10 in Fruitvale, Grand Lake, Jack London, Uptown, Downtown and West Oakland. My current sheet shows:\n\n- **Fruitvale 7.2**, **Downtown 7.2**, **Jack London 7.3**, **Grand Lake 7.09**, **Uptown 7.03**, **West Oakland 7.92** — with teacher quality flat and funding flat exactly as you describe.\n\nBut I can't see the prior "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "school quality index"
+      },
+      "resultChars": 3305,
+      "resultHead": "[C112 · daily · Angela Reyes] Rockridge holds the top school quality index on the table this cycle, at 8.63, ahead of Baylight District and Piedmont Ave among the 22 neighborhoods ranked. Last cycle the same index read 8.7. The dip is small enough that it reads as a rounding question on a page. Inside the building, it is harder to find. Down the hall, Simone Adesanya, the school principal, has her own version of that point. She is not interested in defending a score, and she says so plainly. \"Honestly, that dip is a blip on a page to most of us\n[C116 · daily · Angela Reyes] What the Table Hold"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Karem Asante"
+      },
+      "resultChars": 188,
+      "resultHead": "No published piece from before C117 came back for \"Karem Asante\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    }
+  ],
+  "ranAt": "2026-11-25T00:17:53.126Z"
+}

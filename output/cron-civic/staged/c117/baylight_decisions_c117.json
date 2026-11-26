@@ -1,0 +1,21 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-005)",
+  "consolidatedFrom": [
+    "STMT-117-baylight_authority-001 (Ramos — Baylight construction milestone — review conducted, determination pending, st...)",
+    "STMT-117-baylight_authority-002 (Ramos — Jack London and Downtown improvement flags — recorded, not converted into con...)",
+    "STMT-117-council_d2-001 (Tran D2 — Baylight construction milestone evidence review)",
+    "STMT-117-mayor_gavel-005 (Mayor gavel — Baylight construction milestone evidence review)",
+    "STMT-117-mayor_open-004 (Mayor agenda — Fruitvale briefing, East Oakland audit, and Baylight feasibility record)",
+    "STMT-117-mayor_open-007 (Mayor agenda — Baylight construction milestone evidence review)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C117: No construction milestone pass is declared; the evidence-file review must be published while remediation, hotline, dust and workforce oversight continue.",
+    "NextScheduledAction": "Conduct and publish the construction milestone review against the assembled evidence file",
+    "NextActionCycle": 118
+  }
+}

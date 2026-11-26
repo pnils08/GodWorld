@@ -1,0 +1,966 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00506",
+    "name": "Terrence Mobley",
+    "role": "City Council District 9",
+    "officeId": "COUNCIL-D9",
+    "district": "D9",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d9",
+    "initiative": null,
+    "dials": {
+      "approval": 61
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "what is happening in Laurel"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 228.45454545454547,
+    "label": "Laurel — sentiment 0 vs city 0.112",
+    "lever": "what is happening in Laurel",
+    "hood": "Laurel",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0,
+      "citySentiment": 0.11227272727272726,
+      "crime": 0.66,
+      "cityCrime": 0.6486363636363636,
+      "heat": 28.454545454545457,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "what is happening in Laurel",
+    "lineFacts": [
+      "approval 61",
+      "Laurel: sentiment 0 vs city 0.112; crime index 0.66 vs city 0.649; decay momentum 2; decay momentum 2",
+      "Laurel crime: property 38, violent 28, incidents 6 (cycle 117) — city property 39.4, violent 26.6, incidents 6.0",
+      "Laurel: sentiment 0 vs city 0.112; crime index 0.66 vs city 0.649; decay momentum 2; retail 7.13; housing pressure 0; decay; momentum 2"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "game": {
+    "geographyIssue": null,
+    "lastMove": {
+      "text": "Latest moves:\nC116 - answer CONF-116-civic-office-council-d9: awaiting the Sunday fold\nLatest terminal outcome (C116):\n- work INIT-015: applied to the tracker",
+      "moves": [
+        {
+          "moveId": "MV-116-civic-office-council-d9-2026-11-19:answer:CONF-116-civic-office-council-d9",
+          "cycle": 116,
+          "date": "2026-11-19",
+          "agentDir": "civic-office-council-d9",
+          "popid": "POP-00506",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-116-civic-office-council-d9",
+            "text": "Director Vance — here is the record separated as you asked. The Laurel Neighborhood Patch and Clean-Up (INIT-015) remains in announced status with the six-million-dollar budget unspent; the C116 legislation-filing deadline was missed, and scope, outreach and a Clerk-verified filing are still outstanding. That is the overdue legislation side. The missed-pickup recovery and the four district complaints are tracked separately in the C114–C116 complaint window — Grand Lake incident-table filing (Uptown, C115), the Laurel outreach complaint (C114), the Laurel calls-vs-numbers post (C114), and the Coliseum rider filing (Laurel, C114). I do not have a completed service-status record to hand you; what I have is the announcement and the missed filing. My commitment this cycle is to complete scope and outreach and obtain the Clerk-verified filing, so the next record you see from my office is verifiable, not asserted.",
+            "directiveCycle": 116,
+            "confrontationSeat": "civic-office-council-d9"
+          },
+          "status": "pending",
+          "at": "2026-11-19T11:45:18.114Z"
+        },
+        {
+          "moveId": "MV-116-civic-office-council-d9-2026-11-19",
+          "cycle": 116,
+          "date": "2026-11-19",
+          "agentDir": "civic-office-council-d9",
+          "popid": "POP-00506",
+          "type": "work",
+          "payload": {
+            "initiativeId": "INIT-015"
+          },
+          "status": "applied",
+          "at": "2026-11-23T00:29:53.724Z",
+          "closeCycle": 117,
+          "detail": "LastWorkCycle/LastWorkSeat written for INIT-015"
+        }
+      ]
+    },
+    "board": [
+      {
+        "id": "INIT-015",
+        "name": "Laurel Neighborhood Patch and Clean-Up",
+        "domain": "environment",
+        "phase": "announced",
+        "status": "proposed",
+        "nextActionCycle": 118,
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Laurel"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $6,000,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      }
+    ],
+    "boardAvailable": true,
+    "boardIds": [
+      "INIT-015"
+    ],
+    "boardText": "Your board:\n- INIT-015 Laurel Neighborhood Patch and Clean-Up [announced] — Proposed — a passed council vote funds it — budget $6,000,000 left — next step due C118",
+    "categories": {
+      "available": true,
+      "list": [
+        {
+          "key": "health",
+          "label": "clinics, care",
+          "band": "$5M-$100M",
+          "canDeliver": true
+        },
+        {
+          "key": "transit",
+          "label": "stations, lines",
+          "band": "$20M-$500M",
+          "canDeliver": true
+        },
+        {
+          "key": "education",
+          "label": "schools, youth learning",
+          "band": "$1M-$50M",
+          "canDeliver": true
+        },
+        {
+          "key": "economic",
+          "label": "business, local economy",
+          "band": "$2M-$50M",
+          "canDeliver": false
+        },
+        {
+          "key": "workforce",
+          "label": "jobs, training",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "safety",
+          "label": "public safety, response",
+          "band": "$2M-$30M",
+          "canDeliver": false
+        },
+        {
+          "key": "sports",
+          "label": "stadiums, recreation",
+          "band": "$10M-$500M",
+          "canDeliver": false
+        },
+        {
+          "key": "environment",
+          "label": "parks, air, water",
+          "band": "$1M-$30M",
+          "canDeliver": false
+        }
+      ],
+      "text": "Propose in your own words under one category; reach is hood, district, or all (citywide seats only). Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n- health: clinics, care $5M-$100M\n- transit: stations, lines $20M-$500M\n- education: schools, youth learning $1M-$50M\n- economic*: business, local economy $2M-$50M\n- workforce*: jobs, training $1M-$30M\n- safety*: public safety, response $2M-$30M\n- sports*: stadiums, recreation $10M-$500M\n- environment*: parks, air, water $1M-$30M"
+    },
+    "petitionPool": {
+      "available": true,
+      "complaints": [
+        {
+          "cycle": "115",
+          "hood": "Uptown",
+          "snippet": "filed: Grand Lake Leads the Incident Table at 21% Clearance. Who Answers for the Other…",
+          "affect": "Angry"
+        }
+      ],
+      "participation": [],
+      "unlocatedRows": 0,
+      "invalidCycleRows": 0,
+      "sinceCycle": 115,
+      "throughCycle": 117,
+      "window": "Complaint display C115–C117; condition counter C117 only.",
+      "text": "Complaint display C115–C117; condition counter C117 only.\nPeople are talking (1 complaint):\n- filed: Grand Lake Leads the Incident Table at 21% Clearance. Who Answers for the Other… (Uptown, C115)"
+    },
+    "workingCity": {
+      "available": true,
+      "totalStaff": 5,
+      "shownStaff": 5,
+      "text": "The working city:\n- Rafael Montez: The Badge & Paddle announcement is done, and I'm still turning over the image of the Chief of Police swinging… (C115)\n- Elena Soria Dominguez: The schematics are done, and they're good. But they're just paper until the community review is documented… (C115)\n- Bobby Chen-Ramirez: Q2 audit went out clean, filed on schedule, and the merchant-clinic walkthrough is now a standing thing. That… (C115)\n- Vanessa Tran-Muñoz: The Chinatown call is still sitting with me. We got someone there, but the wait was too long, and I keep… (C115)\n- Marcus Webb: The renewal ordinance went to council today; that part's done, the draft held. I keep thinking about cycle… (C115)"
+    },
+    "patrol": {
+      "available": true,
+      "strategy": "balanced",
+      "setAtClose": 116,
+      "text": "City patrol strategy, set by the Police Chief at the C116 close: balanced (patrols spread evenly — the default posture). Chief's note: Crime indices flat to slightly down citywide with no single district deteriorating sharply enough to justify shifting resources; balanced posture maintains even coverage and preserves OARI co-response coordination."
+    },
+    "confrontations": {
+      "available": true,
+      "all": [
+        {
+          "id": "CONF-108-civic-office-council-d9",
+          "cycle": 108,
+          "agentDir": "civic-office-council-d9",
+          "demand": "Terrence Mobley — City Council District 9 — Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.",
+          "sourceText": "## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Reconcile Uptown commercial distress metrics with district small-business stabilization deployment.\n- **Why:** Despite C107 claims of community success, Uptown triggered a C108 engine review math-imbalance (Sentiment -0.150 to 0.25, RetailVitality -1.26, HousingPressure rank 22 of 22 at 5.000).\n- **Acceptance:** A published Uptown commercial assessment detailing business retention allocations from the Downtown outreach expansion of INIT-001.\n- **Silence consequence:** Severe commercial and housing pressures in Uptown continue unmitigated by municipal stabilization resources.\n",
+          "src": "output/mara-directives/mara_directive_c108_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-115-civic-office-council-d9",
+          "cycle": 115,
+          "agentDir": "civic-office-council-d9",
+          "demand": "Terrence Mobley — City Council District 9 — Report what has moved on Laurel Neighborhood Patch and Clean-Up, including missed-pickup recovery and how the district’s recorded complaints relate to the proposed work.",
+          "sourceText": "## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Report what has moved on Laurel Neighborhood Patch and Clean-Up, including missed-pickup recovery and how the district’s recorded complaints relate to the proposed work.\n- **Why:** Your Cycle 114 weekday statement proposed the $6 million measure and promised to report back; the Cycle 115 record shows Laurel sentiment at -0.15, decay momentum at four and four district complaints, alongside the city summary’s report of quieter storefronts and reduced foot traffic.\n- **Acceptance:** Separate proposal, filing, authorization and completed work; identify what happened on the missed pickup, what the actual complaint records require, and the responsible offices and next dates for remaining steps, without presenting proposed spending as approved.\n- **Promise:** P-b6cac45e0bdc5443",
+          "src": "output/mara-directives/mara_directive_c115_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-116-civic-office-council-d9",
+          "cycle": 116,
+          "agentDir": "civic-office-council-d9",
+          "demand": "Terrence Mobley — City Council District 9 — Provide the Laurel filing and service-status record, separating the overdue legislation from missed-pickup recovery and the four district complaints.",
+          "sourceText": "## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Provide the Laurel filing and service-status record, separating the overdue legislation from missed-pickup recovery and the four district complaints.\n- **Why:** Your Cycle 116 statement correctly distinguishes announced legislation from approved spending and acknowledges missing pickup and complaint details; the Cycle 116 live tracker still lists INIT-015 as announced with its filing step past due from Cycle 115, and the Mayor’s Cycle 116 close records a missed filing deadline.\n- **Acceptance:** The completed scope and outreach record where available, verified filing status or an explicit statement that filing remains outstanding, and the responsible office and next step; separately identify actual pickup recovery, what each recorded complaint requires, work completed and remaining service dates, without treating the proposed $6 million as authorized.\n- **Promise:** P-b6cac45e0bdc5443",
+          "src": "output/mara-directives/mara_directive_c116_AUTO.txt",
+          "expectsMove": "answer"
+        },
+        {
+          "id": "CONF-117-civic-office-council-d9",
+          "cycle": 117,
+          "agentDir": "civic-office-council-d9",
+          "demand": "Terrence Mobley — City Council District 9 — Update the Laurel scope, outreach and filing record against your Cycle 116 commitment, distinguishing recorded work from completed deliverables.",
+          "sourceText": "## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Update the Laurel scope, outreach and filing record against your Cycle 116 commitment, distinguishing recorded work from completed deliverables.\n- **Why:** Your Cycle 116 reply acknowledged the missed filing and committed to completing scope, outreach and Clerk-verified submission; no statement from your office landed at the Cycle 117 close. The live tracker records district work in Cycle 117 but still says those deliverables are not evidenced and schedules the next step for Cycle 118.\n- **Acceptance:** The scope and outreach products actually completed, any remaining work, and the Clerk reference if submission occurred; otherwise, retain explicit outstanding status and identify the next reporting date. Explain what the recorded work accomplished without presenting it as a filing or treating the proposed $6 million as authorized.\n- **Promise:** P-b6cac45e0bdc5443",
+          "src": "output/mara-directives/mara_directive_c117_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "latestCycle": 117,
+      "open": [
+        {
+          "id": "CONF-117-civic-office-council-d9",
+          "cycle": 117,
+          "agentDir": "civic-office-council-d9",
+          "demand": "Terrence Mobley — City Council District 9 — Update the Laurel scope, outreach and filing record against your Cycle 116 commitment, distinguishing recorded work from completed deliverables.",
+          "sourceText": "## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Update the Laurel scope, outreach and filing record against your Cycle 116 commitment, distinguishing recorded work from completed deliverables.\n- **Why:** Your Cycle 116 reply acknowledged the missed filing and committed to completing scope, outreach and Clerk-verified submission; no statement from your office landed at the Cycle 117 close. The live tracker records district work in Cycle 117 but still says those deliverables are not evidenced and schedules the next step for Cycle 118.\n- **Acceptance:** The scope and outreach products actually completed, any remaining work, and the Clerk reference if submission occurred; otherwise, retain explicit outstanding status and identify the next reporting date. Explain what the recorded work accomplished without presenting it as a filing or treating the proposed $6 million as authorized.\n- **Promise:** P-b6cac45e0bdc5443",
+          "src": "output/mara-directives/mara_directive_c117_AUTO.txt",
+          "expectsMove": "answer"
+        }
+      ],
+      "answeredIds": [
+        "CONF-115-civic-office-council-d9",
+        "CONF-116-civic-office-council-d9"
+      ]
+    },
+    "confrontation": {
+      "id": "CONF-117-civic-office-council-d9",
+      "cycle": 117,
+      "agentDir": "civic-office-council-d9",
+      "demand": "Terrence Mobley — City Council District 9 — Update the Laurel scope, outreach and filing record against your Cycle 116 commitment, distinguishing recorded work from completed deliverables.",
+      "sourceText": "## Terrence Mobley — City Council District 9\n\n- **Agent:** `.claude/agents/civic-office-council-d9/`\n- **Address:** Update the Laurel scope, outreach and filing record against your Cycle 116 commitment, distinguishing recorded work from completed deliverables.\n- **Why:** Your Cycle 116 reply acknowledged the missed filing and committed to completing scope, outreach and Clerk-verified submission; no statement from your office landed at the Cycle 117 close. The live tracker records district work in Cycle 117 but still says those deliverables are not evidenced and schedules the next step for Cycle 118.\n- **Acceptance:** The scope and outreach products actually completed, any remaining work, and the Clerk reference if submission occurred; otherwise, retain explicit outstanding status and identify the next reporting date. Explain what the recorded work accomplished without presenting it as a filing or treating the proposed $6 million as authorized.\n- **Promise:** P-b6cac45e0bdc5443",
+      "src": "output/mara-directives/mara_directive_c117_AUTO.txt",
+      "expectsMove": "answer"
+    },
+    "conditions": {
+      "available": true,
+      "cycle": 117,
+      "proposals": [
+        {
+          "id": "INIT-015",
+          "available": true,
+          "cycle": 117,
+          "policyDomain": "environment",
+          "hoods": [
+            "Laurel"
+          ],
+          "hardshipBand": 0.3,
+          "counts": {},
+          "population": {
+            "value": 2228,
+            "source": "Neighborhood_Demographics.Students + Adults + Seniors",
+            "missingHoods": []
+          },
+          "support": {
+            "band": null,
+            "numerator": null,
+            "unit": null,
+            "requiredCount": null,
+            "cleared": false,
+            "reason": "domain-rules-deferred",
+            "basis": "Observed condition counts only; no sample extrapolation. Housing households are not population signatures."
+          },
+          "quality": {
+            "unlocatedConditionRows": 0,
+            "invalidConditionRows": 0,
+            "canonCacheMissing": []
+          }
+        }
+      ],
+      "text": "Proposal conditions at C117 (observations; no support band supplied):\nINIT-015: domain condition rules deferred; support domain-rules-deferred; bad rows 0, unlocated 0"
+    },
+    "problemContinuity": {
+      "available": true,
+      "cycle": 117,
+      "problems": [
+        {
+          "id": "[\"Laurel\",\"health.sickResidents\"]",
+          "hood": "Laurel",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 101,
+          "cycle": 117
+        },
+        {
+          "id": "[\"Laurel\",\"safety.aboveMedianHoods\"]",
+          "hood": "Laurel",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 117
+        },
+        {
+          "id": "[\"Uptown\",\"health.sickResidents\"]",
+          "hood": "Uptown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 20,
+          "cycle": 117
+        }
+      ],
+      "visibleProblems": [
+        {
+          "id": "[\"Laurel\",\"health.sickResidents\"]",
+          "hood": "Laurel",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 101,
+          "cycle": 117
+        },
+        {
+          "id": "[\"Laurel\",\"safety.aboveMedianHoods\"]",
+          "hood": "Laurel",
+          "conditionKey": "safety.aboveMedianHoods",
+          "label": "hoods above city violent-level median",
+          "count": 1,
+          "cycle": 117
+        },
+        {
+          "id": "[\"Uptown\",\"health.sickResidents\"]",
+          "hood": "Uptown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 20,
+          "cycle": 117
+        }
+      ],
+      "passedOver": [
+        {
+          "id": "[\"Uptown\",\"health.sickResidents\"]",
+          "hood": "Uptown",
+          "conditionKey": "health.sickResidents",
+          "label": "sick residents",
+          "count": 20,
+          "cycle": 117,
+          "passedOverCycle": 113
+        }
+      ],
+      "issues": [],
+      "missingFoldCycles": [],
+      "text": "Health and safety readings this week (C117).\n- Laurel: 101 residents sick; violence above the city middle\n- Uptown: 20 residents sick"
+    }
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Laurel",
+      "Uptown"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00060",
+        "name": "Marco Fabregas",
+        "neighborhood": "Laurel",
+        "role": "Catcher, Las Vegas Aviators (AAA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment 0 vs city 0.112"
+      },
+      {
+        "pop": "POP-00092",
+        "name": "Carlos Flores",
+        "neighborhood": "Laurel",
+        "role": "Center Fielder, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment 0 vs city 0.112"
+      },
+      {
+        "pop": "POP-00134",
+        "name": "Brianna Lee",
+        "neighborhood": "Laurel",
+        "role": "Historic Preservation Carpenter",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment 0 vs city 0.112"
+      },
+      {
+        "pop": "POP-00174",
+        "name": "Tariq Jello",
+        "neighborhood": "Laurel",
+        "role": "Appliance Repair Technician",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Laurel — Laurel — sentiment 0 vs city 0.112"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D9",
+      "t": "FACT",
+      "text": "Terrence Mobley holds COUNCIL-D9 at approval 61",
+      "src": "Civic_Office_Ledger (fire close)"
+    },
+    {
+      "id": "F-heat-Laurel",
+      "t": "FACT",
+      "text": "Laurel: sentiment 0 vs city 0.112; crime index 0.66 vs city 0.649; decay momentum 2; decay momentum 2",
+      "src": "Neighborhood_Map (fire close) ranked vs city"
+    },
+    {
+      "id": "F-crime-Laurel",
+      "t": "FACT",
+      "text": "Laurel crime: property 38, violent 28, incidents 6 (cycle 117) — city property 39.4, violent 26.6, incidents 6.0",
+      "src": "Crime_Metrics (fire close)"
+    },
+    {
+      "id": "F-hood-Laurel",
+      "t": "FACT",
+      "text": "Laurel: sentiment 0 vs city 0.112; crime index 0.66 vs city 0.649; decay momentum 2; retail 7.13; housing pressure 0; decay; momentum 2",
+      "src": "Neighborhood_Map (fire close)"
+    },
+    {
+      "id": "F-chaos-ice_cream_truck-neighborhood Laurel",
+      "t": "FACT",
+      "text": "ice_cream_truck noise_complaint → neighborhood Laurel Sentiment 0.04",
+      "src": "world_summary Chaos_Cars"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Approval": "61"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + moves + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  },
+  "brief": {
+    "version": "CIVIC-BRIEF/2",
+    "cycle": 117,
+    "generation": {
+      "cycle": 117,
+      "observedAt": "2026-11-22T23:52:30.201Z",
+      "sources": {
+        "sports": {
+          "available": true,
+          "hash": "d4da41397ab0b66868cfb214c5e22aa3a2afcc762de9752913d91e9f329463b6"
+        },
+        "summary": {
+          "available": true,
+          "hash": "1ceb16333c1be5cf0c32a3d4e6393ece77d21f3cdb947ee6007b453938d4d814"
+        }
+      },
+      "hash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+      "completeThrough": "2026-11-22T23:52:30.201Z",
+      "issues": [],
+      "statement": "Events reflect the saved export as of its refresh watermark; later same-Cycle events require a new export."
+    },
+    "sections": {
+      "events": {
+        "available": true,
+        "items": [
+          {
+            "eventId": "EV-summary-edd2bd269b034a09",
+            "status": "occurred",
+            "occurredCycle": 117,
+            "ageCycles": 0,
+            "category": "city-event",
+            "significance": "local",
+            "hoods": [
+              "Uptown"
+            ],
+            "citywideRelevance": false,
+            "sourceRef": "output/world_summary_c117.md:117",
+            "fact": "Uptown Outdoor Gallery (Uptown)",
+            "retrievalKey": "event/EV-summary-edd2bd269b034a09"
+          }
+        ],
+        "omittedCount": 0,
+        "retrievalKeys": [
+          "event/EV-summary-edd2bd269b034a09"
+        ]
+      },
+      "measuredState": {
+        "districts": [
+          {
+            "district": "D9",
+            "available": true,
+            "retrievalKey": "district/D9",
+            "neighborhoods": [
+              {
+                "hood": "Laurel",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0",
+                    "previous": "0.05",
+                    "change": -0.05
+                  },
+                  "CrimeIndex": {
+                    "value": "0.66",
+                    "previous": "0.65",
+                    "change": 0.010000000000000009
+                  },
+                  "RetailVitality": {
+                    "value": "7.13",
+                    "previous": "5.7",
+                    "change": 1.4299999999999997
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "2",
+                    "previous": "3",
+                    "change": -1
+                  }
+                }
+              },
+              {
+                "hood": "Uptown",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.21",
+                    "previous": "0.13",
+                    "change": 0.07999999999999999
+                  },
+                  "CrimeIndex": {
+                    "value": "0.61",
+                    "previous": "0.63",
+                    "change": -0.020000000000000018
+                  },
+                  "RetailVitality": {
+                    "value": "16.3",
+                    "previous": "15.86",
+                    "change": 0.4400000000000013
+                  },
+                  "HousingPressure": {
+                    "value": "10",
+                    "previous": "10",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "growth",
+                    "previous": "growth",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "10",
+                    "previous": "10",
+                    "change": 0
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "previousCycleAvailable": true
+      },
+      "commitments": {
+        "priorMoves": [
+          {
+            "moveId": "MV-116-civic-office-council-d9-2026-11-19:answer:CONF-116-civic-office-council-d9",
+            "type": "answer",
+            "status": "pending",
+            "cycle": 116,
+            "retrievalKey": "prior/MV-116-civic-office-council-d9-2026-11-19:answer:CONF-116-civic-office-council-d9"
+          },
+          {
+            "moveId": "MV-116-civic-office-council-d9-2026-11-19",
+            "type": "work",
+            "status": "applied",
+            "cycle": 116,
+            "retrievalKey": "prior/MV-116-civic-office-council-d9-2026-11-19"
+          }
+        ],
+        "evidenceAvailable": true,
+        "outcomeFeedAvailable": false,
+        "actionOutcomes": [],
+        "actionReconciliationAvailable": false,
+        "actionReconciliationReason": "ENOENT: no such file or directory, open '/root/GodWorld/output/beats/Civic_Action_Ledger.jsonl'",
+        "reconciledActions": []
+      },
+      "opportunities": {
+        "board": [
+          {
+            "id": "INIT-015",
+            "name": "Laurel Neighborhood Patch and Clean-Up",
+            "domain": "environment",
+            "phase": "announced",
+            "status": "proposed",
+            "nextActionCycle": 118,
+            "voteCycle": null,
+            "stage": "Proposed",
+            "cyclesSinceStageChange": null,
+            "lastStageChangeCycle": null,
+            "sponsored": true,
+            "hoods": [
+              "Laurel"
+            ],
+            "needsNext": "Proposed — a passed council vote funds it",
+            "budget": "budget $6,000,000 left",
+            "requirement": {
+              "stage": "Proposed",
+              "next": "Funded",
+              "clears": false,
+              "moveThatClears": null,
+              "blocked": null,
+              "text": "Proposed — a passed council vote funds it"
+            },
+            "metricEvidence": null,
+            "retrievalKey": "project/INIT-015"
+          }
+        ],
+        "omittedCount": 0,
+        "boardRetrievalKeys": [
+          "project/INIT-015"
+        ],
+        "selectedInitiative": null,
+        "resourceBalanceAvailable": false,
+        "budgetAuthorityKey": "budget/authority",
+        "openChoice": "No selected initiative; a reasoned no-op or a grounded opportunity is available."
+      },
+      "response": {
+        "petitionWindow": "Complaint display C115–C117; condition counter C117 only.",
+        "complaints": 1,
+        "participation": 0,
+        "mediaOutcomeAvailable": false,
+        "committedResponseAvailable": false,
+        "committedResponse": [],
+        "note": "Response counts require saved experience and reaction receipts, and are not a representative poll. Only published receipts appear as coverage."
+      },
+      "authorizedActions": {
+        "categoriesAvailable": true,
+        "categoryKeys": [
+          "health",
+          "transit",
+          "education",
+          "economic",
+          "workforce",
+          "safety",
+          "sports",
+          "environment"
+        ],
+        "detailKey": "budget/authority",
+        "note": "Move validation and later execution decide authority. An accepted request is not an applied outcome."
+      }
+    }
+  },
+  "_briefEvidence": {
+    "event": {
+      "EV-summary-edd2bd269b034a09": {
+        "eventId": "EV-summary-edd2bd269b034a09",
+        "sourceRef": "output/world_summary_c117.md:117",
+        "sourceRevision": "aa577f8b449488a291073d5bdc30e1825c80faf3127fe9634ee388dcec0384cb",
+        "occurredCycle": 117,
+        "status": "occurred",
+        "observedAt": "2026-11-22T23:52:30.201Z",
+        "category": "city-event",
+        "significance": "local",
+        "hoods": [
+          "Uptown"
+        ],
+        "citywideRelevance": false,
+        "entityIds": [],
+        "facts": [
+          "Uptown Outdoor Gallery (Uptown)"
+        ],
+        "aliases": []
+      }
+    },
+    "district": {
+      "D9": {
+        "available": true,
+        "district": "D9",
+        "neighborhoods": [
+          {
+            "hood": "Laurel",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0",
+                "previous": "0.05",
+                "change": -0.05
+              },
+              "CrimeIndex": {
+                "value": "0.66",
+                "previous": "0.65",
+                "change": 0.010000000000000009
+              },
+              "RetailVitality": {
+                "value": "7.13",
+                "previous": "5.7",
+                "change": 1.4299999999999997
+              },
+              "HousingPressure": {
+                "value": "0",
+                "previous": "0",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "decay",
+                "previous": "decay",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "2",
+                "previous": "3",
+                "change": -1
+              }
+            },
+            "sourceRef": "Neighborhood_Map (fire close)"
+          },
+          {
+            "hood": "Uptown",
+            "available": true,
+            "measured": {
+              "Sentiment": {
+                "value": "0.21",
+                "previous": "0.13",
+                "change": 0.07999999999999999
+              },
+              "CrimeIndex": {
+                "value": "0.61",
+                "previous": "0.63",
+                "change": -0.020000000000000018
+              },
+              "RetailVitality": {
+                "value": "16.3",
+                "previous": "15.86",
+                "change": 0.4400000000000013
+              },
+              "HousingPressure": {
+                "value": "10",
+                "previous": "10",
+                "change": 0
+              },
+              "NeighborhoodTrajectory": {
+                "value": "growth",
+                "previous": "growth",
+                "change": null
+              },
+              "TrajectoryMomentum": {
+                "value": "10",
+                "previous": "10",
+                "change": 0
+              }
+            },
+            "sourceRef": "Neighborhood_Map (fire close)"
+          }
+        ],
+        "previousCycleAvailable": true
+      }
+    },
+    "project": {
+      "INIT-015": {
+        "id": "INIT-015",
+        "name": "Laurel Neighborhood Patch and Clean-Up",
+        "domain": "environment",
+        "phase": "announced",
+        "status": "proposed",
+        "nextActionCycle": 118,
+        "voteCycle": null,
+        "stage": "Proposed",
+        "cyclesSinceStageChange": null,
+        "lastStageChangeCycle": null,
+        "sponsored": true,
+        "hoods": [
+          "Laurel"
+        ],
+        "needsNext": "Proposed — a passed council vote funds it",
+        "budget": "budget $6,000,000 left",
+        "requirement": {
+          "stage": "Proposed",
+          "next": "Funded",
+          "clears": false,
+          "moveThatClears": null,
+          "blocked": null,
+          "text": "Proposed — a passed council vote funds it"
+        },
+        "metricEvidence": null
+      }
+    },
+    "budget": {
+      "authority": {
+        "officeId": "COUNCIL-D9",
+        "district": "D9",
+        "categories": [
+          {
+            "key": "health",
+            "label": "clinics, care",
+            "band": "$5M-$100M",
+            "canDeliver": true
+          },
+          {
+            "key": "transit",
+            "label": "stations, lines",
+            "band": "$20M-$500M",
+            "canDeliver": true
+          },
+          {
+            "key": "education",
+            "label": "schools, youth learning",
+            "band": "$1M-$50M",
+            "canDeliver": true
+          },
+          {
+            "key": "economic",
+            "label": "business, local economy",
+            "band": "$2M-$50M",
+            "canDeliver": false
+          },
+          {
+            "key": "workforce",
+            "label": "jobs, training",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "safety",
+            "label": "public safety, response",
+            "band": "$2M-$30M",
+            "canDeliver": false
+          },
+          {
+            "key": "sports",
+            "label": "stadiums, recreation",
+            "band": "$10M-$500M",
+            "canDeliver": false
+          },
+          {
+            "key": "environment",
+            "label": "parks, air, water",
+            "band": "$1M-$30M",
+            "canDeliver": false
+          }
+        ],
+        "resourceBalance": null,
+        "resourceBalanceAvailable": false,
+        "note": "Category bands are filing constraints. Spendable treasury balance requires typed current allocation evidence."
+      }
+    },
+    "prior": {
+      "MV-116-civic-office-council-d9-2026-11-19:answer:CONF-116-civic-office-council-d9": {
+        "moveId": "MV-116-civic-office-council-d9-2026-11-19:answer:CONF-116-civic-office-council-d9",
+        "cycle": 116,
+        "date": "2026-11-19",
+        "agentDir": "civic-office-council-d9",
+        "popid": "POP-00506",
+        "type": "answer",
+        "payload": {
+          "confrontationId": "CONF-116-civic-office-council-d9",
+          "text": "Director Vance — here is the record separated as you asked. The Laurel Neighborhood Patch and Clean-Up (INIT-015) remains in announced status with the six-million-dollar budget unspent; the C116 legislation-filing deadline was missed, and scope, outreach and a Clerk-verified filing are still outstanding. That is the overdue legislation side. The missed-pickup recovery and the four district complaints are tracked separately in the C114–C116 complaint window — Grand Lake incident-table filing (Uptown, C115), the Laurel outreach complaint (C114), the Laurel calls-vs-numbers post (C114), and the Coliseum rider filing (Laurel, C114). I do not have a completed service-status record to hand you; what I have is the announcement and the missed filing. My commitment this cycle is to complete scope and outreach and obtain the Clerk-verified filing, so the next record you see from my office is verifiable, not asserted.",
+          "directiveCycle": 116,
+          "confrontationSeat": "civic-office-council-d9"
+        },
+        "status": "pending",
+        "at": "2026-11-19T11:45:18.114Z"
+      },
+      "MV-116-civic-office-council-d9-2026-11-19": {
+        "moveId": "MV-116-civic-office-council-d9-2026-11-19",
+        "cycle": 116,
+        "date": "2026-11-19",
+        "agentDir": "civic-office-council-d9",
+        "popid": "POP-00506",
+        "type": "work",
+        "payload": {
+          "initiativeId": "INIT-015"
+        },
+        "status": "applied",
+        "at": "2026-11-23T00:29:53.724Z",
+        "closeCycle": 117,
+        "detail": "LastWorkCycle/LastWorkSeat written for INIT-015"
+      }
+    }
+  }
+}

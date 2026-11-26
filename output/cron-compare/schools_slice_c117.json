@@ -1,0 +1,1098 @@
+{
+  "version": "SCHOOLS-SLICE-3",
+  "empty": false,
+  "cycle": 117,
+  "kind": "beat-schools",
+  "seat": {
+    "slug": "angela-reyes",
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "desk": "civic",
+    "domain": "schools",
+    "builder": "buildSchoolsSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-schools",
+    "score": 100,
+    "label": "the schools and youth record of C117",
+    "hood": null,
+    "source": "output/beats/Neighborhood_Demographics.jsonl @C117"
+  },
+  "story": {
+    "kind": "beat-schools",
+    "angle": "the schools and youth record of C117",
+    "label": "the schools and youth record of C117",
+    "hookLine": "",
+    "hood": null,
+    "citizens": [
+      "Rick Walker (POP-00198)",
+      "Simone Adesanya (POP-00287)",
+      "Lee Coo (POP-00303)",
+      "Rico Fister (POP-00305)",
+      "Wiu Wiu (POP-00312)",
+      "Lila Bennington (POP-00317)",
+      "Isabel Lopes (POP-00325)",
+      "Kaila Jordache (POP-00352)",
+      "Jalen Serf (POP-00499)",
+      "Marcus Whitfield (POP-00532)",
+      "Winston Clarke (POP-00623)",
+      "Derry Webb (POP-00631)",
+      "Ripley Court (POP-00659)",
+      "Lo Thoop (POP-00667)",
+      "Karem Asante (POP-00739)",
+      "DeShawn Avery (POP-00728)",
+      "Rick Dillon (POP-00743)",
+      "Nour Santos (POP-00989)",
+      "Sadie Williams (POP-01014)",
+      "Riya Wough (POP-00983)",
+      "Kwame Jumper (POP-01002)",
+      "Salma Navarro (POP-00975)",
+      "Layla Scott (POP-01011)",
+      "Jerry Nelson (POP-00237)",
+      "Jaden Phillips (POP-00242)",
+      "Derlik Green (POP-00244)",
+      "Brady Lopez (POP-00256)",
+      "Jorge Wusther (POP-00297)",
+      "Cee Lee (POP-00320)",
+      "Philly Rodriguez (POP-00027)"
+    ],
+    "popids": [
+      "POP-00198",
+      "POP-00287",
+      "POP-00303",
+      "POP-00305",
+      "POP-00312",
+      "POP-00317",
+      "POP-00325",
+      "POP-00352",
+      "POP-00499",
+      "POP-00532",
+      "POP-00623",
+      "POP-00631",
+      "POP-00659",
+      "POP-00667",
+      "POP-00739",
+      "POP-00728",
+      "POP-00743",
+      "POP-00989",
+      "POP-01014",
+      "POP-00983",
+      "POP-01002",
+      "POP-00975",
+      "POP-01011",
+      "POP-00237",
+      "POP-00242",
+      "POP-00244",
+      "POP-00256",
+      "POP-00297",
+      "POP-00320",
+      "POP-00027"
+    ],
+    "ref": "output/beats/Neighborhood_Demographics.jsonl @C117",
+    "cycle": 117
+  },
+  "approach": " Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00198",
+      "name": "Rick Walker",
+      "role": "K-8 Teacher,Former Line cook",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale — age 59 — K-8 Teacher,Former Line cook at Oakland City Schools; C117: argued the team's case at work and won",
+      "why": "K-8 Teacher,Former Line cook at Oakland City Schools; C117: argued the team's case at work and won",
+      "age": 59
+    },
+    {
+      "popid": "POP-00287",
+      "name": "Simone Adesanya",
+      "role": "School Principal",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Simone Adesanya — School Principal — Rockridge — age 56 — School Principal at Oakland City Schools; C117: started the application and closed the tab after the first page",
+      "why": "School Principal at Oakland City Schools; C117: started the application and closed the tab after the first page",
+      "age": 56
+    },
+    {
+      "popid": "POP-00303",
+      "name": "Lee Coo",
+      "role": "School Psychologist",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lee Coo — School Psychologist — Piedmont Ave — age 45 — School Psychologist at Oakland City Schools; C117: spent the evening sorting a box of things that used to be someone's near a bench on the hospital grounds",
+      "why": "School Psychologist at Oakland City Schools; C117: spent the evening sorting a box of things that used to be someone's near a bench on the hospital grounds",
+      "age": 45
+    },
+    {
+      "popid": "POP-00305",
+      "name": "Rico Fister",
+      "role": "High School Science Teacher",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Rico Fister — High School Science Teacher — Rockridge — age 69 — High School Science Teacher at Oakland City Schools; C117: attended a professional development session nearby",
+      "why": "High School Science Teacher at Oakland City Schools; C117: attended a professional development session nearby",
+      "age": 69
+    },
+    {
+      "popid": "POP-00312",
+      "name": "Wiu Wiu",
+      "role": "High School Science Teacher",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Wiu Wiu — High School Science Teacher — Rockridge — age 70 — High School Science Teacher at Oakland City Schools; C117: felt quietly proud of how they handled something small",
+      "why": "High School Science Teacher at Oakland City Schools; C117: felt quietly proud of how they handled something small",
+      "age": 70
+    },
+    {
+      "popid": "POP-00317",
+      "name": "Lila Bennington",
+      "role": "Oakland City Schools Elementary Teacher",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Lila Bennington — Oakland City Schools Elementary Teacher — Fruitvale — age 53 — Oakland City Schools Elementary Teacher at Oakland City Schools; C117: re-read an old journal page and didn't recognize the handwriting mood",
+      "why": "Oakland City Schools Elementary Teacher at Oakland City Schools; C117: re-read an old journal page and didn't recognize the handwriting mood",
+      "age": 53
+    },
+    {
+      "popid": "POP-00325",
+      "name": "Isabel Lopes",
+      "role": "ESL Teacher",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Isabel Lopes — ESL Teacher — Fruitvale — age 42 — ESL Teacher at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+      "why": "ESL Teacher at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+      "age": 42
+    },
+    {
+      "popid": "POP-00352",
+      "name": "Kaila Jordache",
+      "role": "GED Program Instructor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Kaila Jordache — GED Program Instructor — Piedmont Ave — age 42 — GED Program Instructor at Oakland City Schools; C117: bought a new A's jersey and a sense of anticipation hangs in the air",
+      "why": "GED Program Instructor at Oakland City Schools; C117: bought a new A's jersey and a sense of anticipation hangs in the air",
+      "age": 42
+    },
+    {
+      "popid": "POP-00499",
+      "name": "Jalen Serf",
+      "role": "School Psychologist",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Jalen Serf — School Psychologist — Piedmont Ave — age 63 — School Psychologist at Oakland City Schools; C117: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+      "why": "School Psychologist at Oakland City Schools; C117: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+      "age": 63
+    },
+    {
+      "popid": "POP-00532",
+      "name": "Marcus Whitfield",
+      "role": "Youth Basketball Coach",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale — age 34 — Youth Basketball Coach at Oakland City Schools; C117: noticed the new streetlights went in before anyone had to ask near a taqueria patio",
+      "why": "Youth Basketball Coach at Oakland City Schools; C117: noticed the new streetlights went in before anyone had to ask near a taqueria patio",
+      "age": 34
+    },
+    {
+      "popid": "POP-00623",
+      "name": "Winston Clarke",
+      "role": "Retired Teacher",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Winston Clarke — Retired Teacher — Laurel — age 65 — Retired Teacher at Oakland City Schools; C117: recognized a face from years ago across the street",
+      "why": "Retired Teacher at Oakland City Schools; C117: recognized a face from years ago across the street",
+      "age": 65
+    },
+    {
+      "popid": "POP-00631",
+      "name": "Derry Webb",
+      "role": "Youth Basketball Coach",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Derry Webb — Youth Basketball Coach — Uptown — age 43 — Youth Basketball Coach at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+      "why": "Youth Basketball Coach at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+      "age": 43
+    },
+    {
+      "popid": "POP-00659",
+      "name": "Ripley Court",
+      "role": "STEM Program Coordinator",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Ripley Court — STEM Program Coordinator — Rockridge — age 46 — STEM Program Coordinator at Oakland City Schools; C117: weighed a weekend trip against the water heater and picked the water heater",
+      "why": "STEM Program Coordinator at Oakland City Schools; C117: weighed a weekend trip against the water heater and picked the water heater",
+      "age": 46
+    },
+    {
+      "popid": "POP-00667",
+      "name": "Lo Thoop",
+      "role": "Creative Writing Teacher",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Lo Thoop — Creative Writing Teacher — Jack London — age 68 — Creative Writing Teacher at Oakland City Schools; C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "why": "Creative Writing Teacher at Oakland City Schools; C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "age": 68
+    },
+    {
+      "popid": "POP-00739",
+      "name": "Karem Asante",
+      "role": "Youth Counselor",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+      "why": "Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+      "age": 34
+    },
+    {
+      "popid": "POP-00728",
+      "name": "DeShawn Avery",
+      "role": "Community College Student",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "DeShawn Avery — Community College Student — Fruitvale — age 35 — student, C117 in Fruitvale: found a quiet minute at a vendor by the transit stop and let the week's noise settle",
+      "why": "student, C117 in Fruitvale: found a quiet minute at a vendor by the transit stop and let the week's noise settle",
+      "age": 35
+    },
+    {
+      "popid": "POP-00743",
+      "name": "Rick Dillon",
+      "role": "Grade Schooler",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Rick Dillon — Grade Schooler — Piedmont Ave — age 12 — student, C117: moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+      "why": "student, C117: moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+      "age": 12
+    },
+    {
+      "popid": "POP-00989",
+      "name": "Nour Santos",
+      "role": "student",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Nour Santos — student — West Oakland — age 5 — student, C117 in West Oakland: picked things back up with Simone Limone",
+      "why": "student, C117 in West Oakland: picked things back up with Simone Limone",
+      "age": 5
+    },
+    {
+      "popid": "POP-01014",
+      "name": "Sadie Williams",
+      "role": "student",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Sadie Williams — student — Chinatown — age 8 — student, C117 in Chinatown: had not really talked to Abraham Wright in a while",
+      "why": "student, C117 in Chinatown: had not really talked to Abraham Wright in a while",
+      "age": 8
+    },
+    {
+      "popid": "POP-00983",
+      "name": "Riya Wough",
+      "role": "student",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Riya Wough — student — Downtown — age 10 — student, C117 in Downtown: picked things back up with Ally Scott",
+      "why": "student, C117 in Downtown: picked things back up with Ally Scott",
+      "age": 10
+    },
+    {
+      "popid": "POP-01002",
+      "name": "Kwame Jumper",
+      "role": "student",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Kwame Jumper — student — Downtown — age 17 — student, C117 in Downtown: had not really talked to Arman Gutierrez in a while",
+      "why": "student, C117 in Downtown: had not really talked to Arman Gutierrez in a while",
+      "age": 17
+    },
+    {
+      "popid": "POP-00975",
+      "name": "Salma Navarro",
+      "role": "student",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Salma Navarro — student — Temescal — age 13 — student, C117 in Temescal: had not really talked to Lo Thoop in a while",
+      "why": "student, C117 in Temescal: had not really talked to Lo Thoop in a while",
+      "age": 13
+    },
+    {
+      "popid": "POP-01011",
+      "name": "Layla Scott",
+      "role": "student",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Layla Scott — student — Lake Merritt — age 3 — student, C117 in Lake Merritt: picked things back up with Brenda Okoro",
+      "why": "student, C117 in Lake Merritt: picked things back up with Brenda Okoro",
+      "age": 3
+    },
+    {
+      "popid": "POP-00237",
+      "name": "Jerry Nelson",
+      "role": "Janitor",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Jerry Nelson — Janitor — Uptown — age 55 — C117 in Uptown: reflected on personal growth and understanding",
+      "why": "C117 in Uptown: reflected on personal growth and understanding",
+      "age": 55
+    },
+    {
+      "popid": "POP-00242",
+      "name": "Jaden Phillips",
+      "role": "Barista",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Jaden Phillips — Barista — Uptown — age 62 — C117 in Uptown: sought more information due to recent city events",
+      "why": "C117 in Uptown: sought more information due to recent city events",
+      "age": 62
+    },
+    {
+      "popid": "POP-00244",
+      "name": "Derlik Green",
+      "role": "Delivery Driver",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Derlik Green — Delivery Driver — Downtown — age 42 — C117 in Downtown: felt renewed motivation to learn as the season shifted",
+      "why": "C117 in Downtown: felt renewed motivation to learn as the season shifted",
+      "age": 42
+    },
+    {
+      "popid": "POP-00256",
+      "name": "Brady Lopez",
+      "role": "Dishwasher",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Brady Lopez — Dishwasher — Piedmont Ave — age 59 — C117 in Piedmont Ave: reflected on personal growth and understanding",
+      "why": "C117 in Piedmont Ave: reflected on personal growth and understanding",
+      "age": 59
+    },
+    {
+      "popid": "POP-00297",
+      "name": "Jorge Wusther",
+      "role": "Nurse aide",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Jorge Wusther — Nurse aide — Uptown — age 65 — C117 in Uptown: spent time learning new skills informally",
+      "why": "C117 in Uptown: spent time learning new skills informally",
+      "age": 65
+    },
+    {
+      "popid": "POP-00320",
+      "name": "Cee Lee",
+      "role": "Autonomous Systems Engineer",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt — age 62 — C117 in Lake Merritt: spent time learning new skills informally",
+      "why": "C117 in Lake Merritt: spent time learning new skills informally",
+      "age": 62
+    },
+    {
+      "popid": "POP-00027",
+      "name": "Philly Rodriguez",
+      "role": "Casino Manager",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Philly Rodriguez — Casino Manager — West Oakland — age 30 — C117 in West Oakland: felt energy from seasonal change near a campus quad",
+      "why": "C117 in West Oakland: felt energy from seasonal change near a campus quad",
+      "age": 30
+    }
+  ],
+  "facts": [
+    {
+      "text": "Enrollment moved: Piedmont Ave +3 students, East Oakland +2 students, Temescal +2 students, West Oakland +1 students, Laurel +1 students, Adams Point +1 students, Jack London +1 students, Fruitvale +1 students, Downtown +1 students, Grand Lake +1 students, Eastlake +1 students, Dimond +1 students, Glenview +1 students, Chinatown +1 students, Ivy Hill +1 students, San Antonio +1 students vs C116",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C117"
+    },
+    {
+      "text": "Adams Point: school quality index 7.91 (was 7.92 at C116), graduation 89.48%, college-ready 62.53%, teacher quality 7.9, funding 13,000, 278 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Baylight District: school quality index 8.33 (was 8.3 at C116), graduation 91.06%, college-ready 66.38%, teacher quality 8.2, funding 14,500, 65 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Brooklyn: school quality index 8.22 (was 8.2 at C116), graduation 90.82%, college-ready 65.84%, teacher quality 8.2, funding 14,500, 351 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Chinatown: school quality index 6.81 (was 6.82 at C116), graduation 85.32%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 315 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Dimond: school quality index 6.83 (was 6.84 at C116), graduation 85.32%, college-ready 52.49%, teacher quality 6.9, funding 12,000, 355 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Downtown: school quality index 7.2 (was 7.28 at C116), graduation 88.77%, college-ready 61.65%, teacher quality 8.2, funding 14,500, 245 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "East Oakland: school quality index 6.57 (was 6.61 at C116), graduation 84.09%, college-ready 49.79%, teacher quality 6.68, funding 11,000, 486 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Eastlake: school quality index 6.9 (was 6.91 at C116), graduation 85.48%, college-ready 52.87%, teacher quality 6.9, funding 12,000, 315 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Fruitvale: school quality index 7.2 (was 7.3 at C116), graduation 88.2%, college-ready 59.5%, teacher quality 7.9, funding 13,000, 427 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Glenview: school quality index 6.81 (was 6.83 at C116), graduation 85.31%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 388 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Grand Lake: school quality index 7.09 (was 7.18 at C116), graduation 87.84%, college-ready 58.8%, teacher quality 7.9, funding 13,000, 319 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Ivy Hill: school quality index 6.66 (was 6.69 at C116), graduation 84.26%, college-ready 50.21%, teacher quality 6.68, funding 11,000, 329 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Jack London: school quality index 7.3 (was 7.39 at C116), graduation 89.09%, college-ready 62.1%, teacher quality 8.2, funding 14,500, 203 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "KONO: school quality index 6.85 (was 6.89 at C116), graduation 85.44%, college-ready 52.77%, teacher quality 6.9, funding 12,000, 60 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Lake Merritt: school quality index 8.04 (was 8 at C116), graduation 90.2%, college-ready 64.32%, teacher quality 8.2, funding 14,500, 59 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Laurel: school quality index 7.91 (was 7.92 at C116), graduation 89.46%, college-ready 62.51%, teacher quality 7.9, funding 13,000, 339 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Piedmont Ave: school quality index 8.3 (was 8.28 at C116), graduation 91.69%, college-ready 68.53%, teacher quality 8.2, funding 14,500, 256 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Rockridge: school quality index 8.36 (was 8.4 at C116), graduation 93.61%, college-ready 73.53%, teacher quality 9.13, funding 15,000, 250 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "San Antonio: school quality index 6.6 (was 6.64 at C116), graduation 84.18%, college-ready 50.02%, teacher quality 6.68, funding 11,000, 392 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Temescal: school quality index 6.21 (was 6.25 at C116), graduation 83.53%, college-ready 53%, teacher quality 6.8, funding 11,500, 316 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Uptown: school quality index 7.03 (was 7.12 at C116), graduation 87.63%, college-ready 58.39%, teacher quality 7.9, funding 13,000, 63 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "West Oakland: school quality index 7.92 (was 8 at C116), graduation 90.5%, college-ready 65.07%, teacher quality 8.2, funding 14,500, 327 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    {
+      "text": "Oakland City Schools (Education), City-wide — 5,201 employees, growing 7.2% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C117"
+    },
+    {
+      "text": "Oakland Community College District (Education), City-wide — 1,800 employees, growing 7.0% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00035 @C117"
+    },
+    {
+      "text": "Firehouse 29 West Oakland Baseball Academy (Sports), West Oakland — 20 employees, growing 5.0% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00103 @C117"
+    },
+    {
+      "text": "Harrison Street Chinese School (Education), Chinatown — 15 employees, growing 2.0% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00207 @C117"
+    },
+    {
+      "text": "Hillside Preparatory (Private School), Rockridge — 15 employees, growing 3.3% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00226 @C117"
+    },
+    {
+      "text": "Early Shift Childcare (Preschool & Early Education), San Antonio — 15 employees, growing 0.6% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00261 @C117"
+    },
+    {
+      "text": "MacArthur Tutoring Center (Tutoring), Laurel — 15 employees, growing 1.1% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00279 @C117"
+    },
+    {
+      "text": "Laurel Music School (Music School), Laurel — 9 employees, growing 2.4% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00281 @C117"
+    },
+    {
+      "text": "Oakland City College — Laurel Campus (Education), Laurel — 15 employees, growing 0.9% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00284 @C117"
+    },
+    {
+      "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-002 @C117"
+    },
+    {
+      "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-003 @C117"
+    },
+    {
+      "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-004 @C117"
+    },
+    {
+      "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-005 @C117"
+    },
+    {
+      "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-006 @C117"
+    },
+    {
+      "text": "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-007 @C117"
+    },
+    {
+      "text": "Oakland Youth Apprenticeship Pipeline (economic), Baylight District, since C86",
+      "src": "output/beats/Community_Programs.jsonl PRG-008 @C117"
+    },
+    {
+      "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-017 @C117"
+    },
+    {
+      "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+      "src": "output/beats/Community_Programs.jsonl PRG-019 @C117"
+    },
+    {
+      "text": "Foothill Baptist Tabernacle Academy (tech-education), East Oakland, since C88",
+      "src": "output/beats/Community_Programs.jsonl PRG-030 @C117"
+    },
+    {
+      "text": "Darrin Davis Youth Community Events (), City-wide — founded by Darrin Davis",
+      "src": "output/beats/Community_Programs.jsonl PRG-033 @C117"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "the schools and youth record of C117",
+    "hookLine": "",
+    "anchorFacts": [
+      "Enrollment moved: Piedmont Ave +3 students, East Oakland +2 students, Temescal +2 students, West Oakland +1 students, Laurel +1 students, Adams Point +1 students, Jack London +1 students, Fruitvale +1 students, Downtown +1 students, Grand Lake +1 students, Eastlake +1 students, Dimond +1 students, Glenview +1 students, Chinatown +1 students, Ivy Hill +1 students, San Antonio +1 students vs C116",
+      "Adams Point: school quality index 7.91 (was 7.92 at C116), graduation 89.48%, college-ready 62.53%, teacher quality 7.9, funding 13,000, 278 students",
+      "Baylight District: school quality index 8.33 (was 8.3 at C116), graduation 91.06%, college-ready 66.38%, teacher quality 8.2, funding 14,500, 65 students",
+      "Brooklyn: school quality index 8.22 (was 8.2 at C116), graduation 90.82%, college-ready 65.84%, teacher quality 8.2, funding 14,500, 351 students",
+      "Chinatown: school quality index 6.81 (was 6.82 at C116), graduation 85.32%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 315 students",
+      "Dimond: school quality index 6.83 (was 6.84 at C116), graduation 85.32%, college-ready 52.49%, teacher quality 6.9, funding 12,000, 355 students",
+      "Downtown: school quality index 7.2 (was 7.28 at C116), graduation 88.77%, college-ready 61.65%, teacher quality 8.2, funding 14,500, 245 students",
+      "East Oakland: school quality index 6.57 (was 6.61 at C116), graduation 84.09%, college-ready 49.79%, teacher quality 6.68, funding 11,000, 486 students",
+      "Eastlake: school quality index 6.9 (was 6.91 at C116), graduation 85.48%, college-ready 52.87%, teacher quality 6.9, funding 12,000, 315 students",
+      "Fruitvale: school quality index 7.2 (was 7.3 at C116), graduation 88.2%, college-ready 59.5%, teacher quality 7.9, funding 13,000, 427 students",
+      "Glenview: school quality index 6.81 (was 6.83 at C116), graduation 85.31%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 388 students",
+      "Grand Lake: school quality index 7.09 (was 7.18 at C116), graduation 87.84%, college-ready 58.8%, teacher quality 7.9, funding 13,000, 319 students",
+      "Ivy Hill: school quality index 6.66 (was 6.69 at C116), graduation 84.26%, college-ready 50.21%, teacher quality 6.68, funding 11,000, 329 students",
+      "Jack London: school quality index 7.3 (was 7.39 at C116), graduation 89.09%, college-ready 62.1%, teacher quality 8.2, funding 14,500, 203 students",
+      "KONO: school quality index 6.85 (was 6.89 at C116), graduation 85.44%, college-ready 52.77%, teacher quality 6.9, funding 12,000, 60 students",
+      "Lake Merritt: school quality index 8.04 (was 8 at C116), graduation 90.2%, college-ready 64.32%, teacher quality 8.2, funding 14,500, 59 students",
+      "Laurel: school quality index 7.91 (was 7.92 at C116), graduation 89.46%, college-ready 62.51%, teacher quality 7.9, funding 13,000, 339 students",
+      "Piedmont Ave: school quality index 8.3 (was 8.28 at C116), graduation 91.69%, college-ready 68.53%, teacher quality 8.2, funding 14,500, 256 students",
+      "Rockridge: school quality index 8.36 (was 8.4 at C116), graduation 93.61%, college-ready 73.53%, teacher quality 9.13, funding 15,000, 250 students",
+      "San Antonio: school quality index 6.6 (was 6.64 at C116), graduation 84.18%, college-ready 50.02%, teacher quality 6.68, funding 11,000, 392 students",
+      "Temescal: school quality index 6.21 (was 6.25 at C116), graduation 83.53%, college-ready 53%, teacher quality 6.8, funding 11,500, 316 students",
+      "Uptown: school quality index 7.03 (was 7.12 at C116), graduation 87.63%, college-ready 58.39%, teacher quality 7.9, funding 13,000, 63 students",
+      "West Oakland: school quality index 7.92 (was 8 at C116), graduation 90.5%, college-ready 65.07%, teacher quality 8.2, funding 14,500, 327 students",
+      "Oakland City Schools (Education), City-wide — 5,201 employees, growing 7.2% a year",
+      "Oakland Community College District (Education), City-wide — 1,800 employees, growing 7.0% a year",
+      "Firehouse 29 West Oakland Baseball Academy (Sports), West Oakland — 20 employees, growing 5.0% a year",
+      "Harrison Street Chinese School (Education), Chinatown — 15 employees, growing 2.0% a year",
+      "Hillside Preparatory (Private School), Rockridge — 15 employees, growing 3.3% a year",
+      "Early Shift Childcare (Preschool & Early Education), San Antonio — 15 employees, growing 0.6% a year",
+      "MacArthur Tutoring Center (Tutoring), Laurel — 15 employees, growing 1.1% a year",
+      "Laurel Music School (Music School), Laurel — 9 employees, growing 2.4% a year",
+      "Oakland City College — Laurel Campus (Education), Laurel — 15 employees, growing 0.9% a year",
+      "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+      "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+      "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+      "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+      "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+      "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+      "Oakland Youth Apprenticeship Pipeline (economic), Baylight District, since C86",
+      "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+      "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+      "Foothill Baptist Tabernacle Academy (tech-education), East Oakland, since C88",
+      "Darrin Davis Youth Community Events (), City-wide — founded by Darrin Davis"
+    ],
+    "evidence": [
+      {
+        "text": "Enrollment moved: Piedmont Ave +3 students, East Oakland +2 students, Temescal +2 students, West Oakland +1 students, Laurel +1 students, Adams Point +1 students, Jack London +1 students, Fruitvale +1 students, Downtown +1 students, Grand Lake +1 students, Eastlake +1 students, Dimond +1 students, Glenview +1 students, Chinatown +1 students, Ivy Hill +1 students, San Antonio +1 students vs C116",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C117"
+      },
+      {
+        "text": "Adams Point: school quality index 7.91 (was 7.92 at C116), graduation 89.48%, college-ready 62.53%, teacher quality 7.9, funding 13,000, 278 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Baylight District: school quality index 8.33 (was 8.3 at C116), graduation 91.06%, college-ready 66.38%, teacher quality 8.2, funding 14,500, 65 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Brooklyn: school quality index 8.22 (was 8.2 at C116), graduation 90.82%, college-ready 65.84%, teacher quality 8.2, funding 14,500, 351 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Chinatown: school quality index 6.81 (was 6.82 at C116), graduation 85.32%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 315 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Dimond: school quality index 6.83 (was 6.84 at C116), graduation 85.32%, college-ready 52.49%, teacher quality 6.9, funding 12,000, 355 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Downtown: school quality index 7.2 (was 7.28 at C116), graduation 88.77%, college-ready 61.65%, teacher quality 8.2, funding 14,500, 245 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "East Oakland: school quality index 6.57 (was 6.61 at C116), graduation 84.09%, college-ready 49.79%, teacher quality 6.68, funding 11,000, 486 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Eastlake: school quality index 6.9 (was 6.91 at C116), graduation 85.48%, college-ready 52.87%, teacher quality 6.9, funding 12,000, 315 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Fruitvale: school quality index 7.2 (was 7.3 at C116), graduation 88.2%, college-ready 59.5%, teacher quality 7.9, funding 13,000, 427 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Glenview: school quality index 6.81 (was 6.83 at C116), graduation 85.31%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 388 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Grand Lake: school quality index 7.09 (was 7.18 at C116), graduation 87.84%, college-ready 58.8%, teacher quality 7.9, funding 13,000, 319 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Ivy Hill: school quality index 6.66 (was 6.69 at C116), graduation 84.26%, college-ready 50.21%, teacher quality 6.68, funding 11,000, 329 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Jack London: school quality index 7.3 (was 7.39 at C116), graduation 89.09%, college-ready 62.1%, teacher quality 8.2, funding 14,500, 203 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "KONO: school quality index 6.85 (was 6.89 at C116), graduation 85.44%, college-ready 52.77%, teacher quality 6.9, funding 12,000, 60 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Lake Merritt: school quality index 8.04 (was 8 at C116), graduation 90.2%, college-ready 64.32%, teacher quality 8.2, funding 14,500, 59 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Laurel: school quality index 7.91 (was 7.92 at C116), graduation 89.46%, college-ready 62.51%, teacher quality 7.9, funding 13,000, 339 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Piedmont Ave: school quality index 8.3 (was 8.28 at C116), graduation 91.69%, college-ready 68.53%, teacher quality 8.2, funding 14,500, 256 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Rockridge: school quality index 8.36 (was 8.4 at C116), graduation 93.61%, college-ready 73.53%, teacher quality 9.13, funding 15,000, 250 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "San Antonio: school quality index 6.6 (was 6.64 at C116), graduation 84.18%, college-ready 50.02%, teacher quality 6.68, funding 11,000, 392 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Temescal: school quality index 6.21 (was 6.25 at C116), graduation 83.53%, college-ready 53%, teacher quality 6.8, funding 11,500, 316 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Uptown: school quality index 7.03 (was 7.12 at C116), graduation 87.63%, college-ready 58.39%, teacher quality 7.9, funding 13,000, 63 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "West Oakland: school quality index 7.92 (was 8 at C116), graduation 90.5%, college-ready 65.07%, teacher quality 8.2, funding 14,500, 327 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "text": "Oakland City Schools (Education), City-wide — 5,201 employees, growing 7.2% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C117"
+      },
+      {
+        "text": "Oakland Community College District (Education), City-wide — 1,800 employees, growing 7.0% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00035 @C117"
+      },
+      {
+        "text": "Firehouse 29 West Oakland Baseball Academy (Sports), West Oakland — 20 employees, growing 5.0% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00103 @C117"
+      },
+      {
+        "text": "Harrison Street Chinese School (Education), Chinatown — 15 employees, growing 2.0% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00207 @C117"
+      },
+      {
+        "text": "Hillside Preparatory (Private School), Rockridge — 15 employees, growing 3.3% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00226 @C117"
+      },
+      {
+        "text": "Early Shift Childcare (Preschool & Early Education), San Antonio — 15 employees, growing 0.6% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00261 @C117"
+      },
+      {
+        "text": "MacArthur Tutoring Center (Tutoring), Laurel — 15 employees, growing 1.1% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00279 @C117"
+      },
+      {
+        "text": "Laurel Music School (Music School), Laurel — 9 employees, growing 2.4% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00281 @C117"
+      },
+      {
+        "text": "Oakland City College — Laurel Campus (Education), Laurel — 15 employees, growing 0.9% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00284 @C117"
+      },
+      {
+        "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-002 @C117"
+      },
+      {
+        "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-003 @C117"
+      },
+      {
+        "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-004 @C117"
+      },
+      {
+        "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-005 @C117"
+      },
+      {
+        "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-006 @C117"
+      },
+      {
+        "text": "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-007 @C117"
+      },
+      {
+        "text": "Oakland Youth Apprenticeship Pipeline (economic), Baylight District, since C86",
+        "src": "output/beats/Community_Programs.jsonl PRG-008 @C117"
+      },
+      {
+        "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-017 @C117"
+      },
+      {
+        "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+        "src": "output/beats/Community_Programs.jsonl PRG-019 @C117"
+      },
+      {
+        "text": "Foothill Baptist Tabernacle Academy (tech-education), East Oakland, since C88",
+        "src": "output/beats/Community_Programs.jsonl PRG-030 @C117"
+      },
+      {
+        "text": "Darrin Davis Youth Community Events (), City-wide — founded by Darrin Davis",
+        "src": "output/beats/Community_Programs.jsonl PRG-033 @C117"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 116
+    },
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "factCap": 43,
+    "peopleCap": 30,
+    "roomIsYours": ""
+  },
+  "table": [
+    {
+      "hood": "Rockridge",
+      "students": 250,
+      "sqi": 8.36,
+      "grad": 93.61,
+      "college": 73.53,
+      "teacher": 9.13,
+      "funding": 15000
+    },
+    {
+      "hood": "Baylight District",
+      "students": 65,
+      "sqi": 8.33,
+      "grad": 91.06,
+      "college": 66.38,
+      "teacher": 8.2,
+      "funding": 14500
+    },
+    {
+      "hood": "Piedmont Ave",
+      "students": 256,
+      "sqi": 8.3,
+      "grad": 91.69,
+      "college": 68.53,
+      "teacher": 8.2,
+      "funding": 14500
+    },
+    {
+      "hood": "Brooklyn",
+      "students": 351,
+      "sqi": 8.22,
+      "grad": 90.82,
+      "college": 65.84,
+      "teacher": 8.2,
+      "funding": 14500
+    },
+    {
+      "hood": "Lake Merritt",
+      "students": 59,
+      "sqi": 8.04,
+      "grad": 90.2,
+      "college": 64.32,
+      "teacher": 8.2,
+      "funding": 14500
+    },
+    {
+      "hood": "West Oakland",
+      "students": 327,
+      "sqi": 7.92,
+      "grad": 90.5,
+      "college": 65.07,
+      "teacher": 8.2,
+      "funding": 14500
+    },
+    {
+      "hood": "Laurel",
+      "students": 339,
+      "sqi": 7.91,
+      "grad": 89.46,
+      "college": 62.51,
+      "teacher": 7.9,
+      "funding": 13000
+    },
+    {
+      "hood": "Adams Point",
+      "students": 278,
+      "sqi": 7.91,
+      "grad": 89.48,
+      "college": 62.53,
+      "teacher": 7.9,
+      "funding": 13000
+    },
+    {
+      "hood": "Jack London",
+      "students": 203,
+      "sqi": 7.3,
+      "grad": 89.09,
+      "college": 62.1,
+      "teacher": 8.2,
+      "funding": 14500
+    },
+    {
+      "hood": "Fruitvale",
+      "students": 427,
+      "sqi": 7.2,
+      "grad": 88.2,
+      "college": 59.5,
+      "teacher": 7.9,
+      "funding": 13000
+    },
+    {
+      "hood": "Downtown",
+      "students": 245,
+      "sqi": 7.2,
+      "grad": 88.77,
+      "college": 61.65,
+      "teacher": 8.2,
+      "funding": 14500
+    },
+    {
+      "hood": "Grand Lake",
+      "students": 319,
+      "sqi": 7.09,
+      "grad": 87.84,
+      "college": 58.8,
+      "teacher": 7.9,
+      "funding": 13000
+    },
+    {
+      "hood": "Uptown",
+      "students": 63,
+      "sqi": 7.03,
+      "grad": 87.63,
+      "college": 58.39,
+      "teacher": 7.9,
+      "funding": 13000
+    },
+    {
+      "hood": "Eastlake",
+      "students": 315,
+      "sqi": 6.9,
+      "grad": 85.48,
+      "college": 52.87,
+      "teacher": 6.9,
+      "funding": 12000
+    },
+    {
+      "hood": "KONO",
+      "students": 60,
+      "sqi": 6.85,
+      "grad": 85.44,
+      "college": 52.77,
+      "teacher": 6.9,
+      "funding": 12000
+    },
+    {
+      "hood": "Dimond",
+      "students": 355,
+      "sqi": 6.83,
+      "grad": 85.32,
+      "college": 52.49,
+      "teacher": 6.9,
+      "funding": 12000
+    },
+    {
+      "hood": "Glenview",
+      "students": 388,
+      "sqi": 6.81,
+      "grad": 85.31,
+      "college": 52.47,
+      "teacher": 6.9,
+      "funding": 12000
+    },
+    {
+      "hood": "Chinatown",
+      "students": 315,
+      "sqi": 6.81,
+      "grad": 85.32,
+      "college": 52.47,
+      "teacher": 6.9,
+      "funding": 12000
+    },
+    {
+      "hood": "Ivy Hill",
+      "students": 329,
+      "sqi": 6.66,
+      "grad": 84.26,
+      "college": 50.21,
+      "teacher": 6.68,
+      "funding": 11000
+    },
+    {
+      "hood": "San Antonio",
+      "students": 392,
+      "sqi": 6.6,
+      "grad": 84.18,
+      "college": 50.02,
+      "teacher": 6.68,
+      "funding": 11000
+    },
+    {
+      "hood": "East Oakland",
+      "students": 486,
+      "sqi": 6.57,
+      "grad": 84.09,
+      "college": 49.79,
+      "teacher": 6.68,
+      "funding": 11000
+    },
+    {
+      "hood": "Temescal",
+      "students": 316,
+      "sqi": 6.21,
+      "grad": 83.53,
+      "college": 53,
+      "teacher": 6.8,
+      "funding": 11500
+    }
+  ],
+  "enrollmentMoves": [
+    {
+      "hood": "Piedmont Ave",
+      "from": 253,
+      "to": 256
+    },
+    {
+      "hood": "East Oakland",
+      "from": 484,
+      "to": 486
+    },
+    {
+      "hood": "Temescal",
+      "from": 314,
+      "to": 316
+    },
+    {
+      "hood": "West Oakland",
+      "from": 326,
+      "to": 327
+    },
+    {
+      "hood": "Laurel",
+      "from": 338,
+      "to": 339
+    },
+    {
+      "hood": "Adams Point",
+      "from": 277,
+      "to": 278
+    },
+    {
+      "hood": "Jack London",
+      "from": 202,
+      "to": 203
+    },
+    {
+      "hood": "Fruitvale",
+      "from": 426,
+      "to": 427
+    },
+    {
+      "hood": "Downtown",
+      "from": 244,
+      "to": 245
+    },
+    {
+      "hood": "Grand Lake",
+      "from": 318,
+      "to": 319
+    },
+    {
+      "hood": "Eastlake",
+      "from": 314,
+      "to": 315
+    },
+    {
+      "hood": "Dimond",
+      "from": 354,
+      "to": 355
+    },
+    {
+      "hood": "Glenview",
+      "from": 387,
+      "to": 388
+    },
+    {
+      "hood": "Chinatown",
+      "from": 314,
+      "to": 315
+    },
+    {
+      "hood": "Ivy Hill",
+      "from": 328,
+      "to": 329
+    },
+    {
+      "hood": "San Antonio",
+      "from": 391,
+      "to": 392
+    }
+  ],
+  "pointers": [
+    "output/beats/Neighborhood_Demographics.jsonl @C117"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-11-25",
+  "cycle": 117,
+  "model": "google/gemini-3.8-flash",
+  "statement": "District 8 is directing administrative oversight to Adams Point following the local activation of the emergency assistance fund and sentiment dropping to -0.06, while requiring clear procedural documentation before conflating independent community initiatives with unrecorded municipal dockets.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-117-civic-office-council-d8",
+        "text": "Departmental action on Eastlake service requests remains undocumented in certified ledgers, with no open municipal work orders formally recorded. Reconciling the reporting windows confirms the current display covers Cycle 115 through Cycle 117 while condition counters reflect Cycle 117 only—recording two prior Lake Merritt complaints from Cycle 115 and six constructive civic participation entries, with zero complaints logged for Eastlake. In Adams Point, while Adams Point United Methodist has activated an emergency assistance fund, no formal request for municipal coordination has been filed with or received by the city.",
+        "directiveCycle": 117,
+        "confrontationSeat": "civic-office-council-d8"
+      }
+    },
+    {
+      "type": "canvass",
+      "payload": {
+        "hood": "Adams Point",
+        "note": "Examine neighborhood conditions and verify local coordination in Adams Point following the emergency assistance fund activation."
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "2",
+  "ranAt": "2026-11-25T11:45:33.021Z",
+  "usage": {
+    "prompt_tokens": 6665,
+    "completion_tokens": 2079,
+    "total_tokens": 8744,
+    "cost": 0.012795,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.012795,
+      "upstream_inference_prompt_cost": 0.00499875,
+      "upstream_inference_completions_cost": 0.00779625
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1770,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+  "evidenceReads": [],
+  "provider": "Google",
+  "finishReason": "stop",
+  "elapsedMs": 19296,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00505",
+    "id": "mKttJayXcVhP6C6vov3vyJ",
+    "customId": "cp-POP-00505-c117-CIVIC-datawake-2026-11-25"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "117",
+  "persona": "selena-grant",
+  "byline": "Selena Grant",
+  "bylinePopid": "POP-00591",
+  "article": "output/cron-compare/staged/sports_c117_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Austin Reaves",
+        "role": "mentioned",
+        "popid": "POP-01027",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Oaks — team-update C117 · 11-2 · W2",
+        "sourceRef": "output/beats/Oakland_Sports_Feed.jsonl @C117"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-def879833c5f",
+    "draftSha256": "b9d8d7e6c87bcc7a0b601d818c1dcc05d389f2a8398b7517a288979292cf3771",
+    "verdict": "output/cron-compare/sports_c117_selena-grant_packet-v2_openai-gpt-5-6-luna.rhea.json",
+    "ranAt": "2026-11-25T00:18:50.455Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 400",
+      "words": 510,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "b9d8d7e6c87bcc7a0b601d818c1dcc05d389f2a8398b7517a288979292cf3771",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-25T00:18:53.965Z"
+}

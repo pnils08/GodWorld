@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-011",
+  "initiativeId": "INIT-011",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-010)",
+  "consolidatedFrom": [
+    "STMT-117-mayor_gavel-010 (Mayor gavel — Ivy Hill ordinance referral and committee hearing)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-011",
+    "ImplementationPhase": "legislation-filed",
+    "MilestoneNotes": "C117: Mayor backs committee referral and hearing on the C113-filed ordinance; no completed referral or hearing is evidenced, and records stay separate.",
+    "NextScheduledAction": "Complete committee referral and hearing on INIT-011 with separate records for INIT-013 and INIT-014",
+    "NextActionCycle": 118
+  }
+}

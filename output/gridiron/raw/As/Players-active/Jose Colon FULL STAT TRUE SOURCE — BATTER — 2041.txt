@@ -1,0 +1,175 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Jose Colon
+Team: Athletics
+Position: C
+Jersey: #17
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: A
+Overall: 84
+MLB Service: 3.107
+Age: 27
+Bats: S
+Throws: R
+Height: 6'1"
+Weight: 191 lbs
+Drafted: Round 5 (2032)
+Secondary Position: 3B, LF
+Hitter Tendency: OPPOSITE
+Born: DOMINICAN REPUBLIC
+Canonical POPID: POP-00599
+
+--------------------------------------------------
+
+ATTRIBUTES (game screen)
+
+CON R: 68
+CON L: 73
+POW R: 65
+POW L: 76
+VIS: 62
+DISC: 68
+CLT: 60
+BUNT: 41
+DBUNT: 29
+DUR: 74
+FLD: 75
+ARM: 72
+ACC: 72
+REAC: 77
+BLK: 69
+SPD: 36
+STEAL: 35
+BR AGG: 47
+
+--------------------------------------------------
+
+ATTRIBUTE HISTORY
+
+ATTR    2041 CARD  WAS      NOW   CHANGE
+CON R   68         66        68    +2
+CON L   73         71        73    +2
+POW R   74         62        65    +3
+POW L   77         73        76    +3
+VIS     64         59        62    +3
+DISC    59         66        68    +2
+CLT     71         58        60    +2
+BUNT    35         38        41    +3
+DBUNT   42         27        29    +2
+DUR     82         71        74    +3
+FLD     80         72        75    +3
+ARM     85         68        72    +4
+ACC     70         69        72    +3
+REAC    78         75        77    +2
+BLK     -          66        69    +3
+SPD     61         36        36    0
+STEAL   53         35        35    0
+BR AGG  49         47        47    0
+
+NOW = the latest attributes screen.
+WAS = NOW value minus the change marker shown on that screen;
+the cycle of that earlier reading is not shown in the game.
+2041 CARD = the card on file in Drive; it has no
+BLK value; cycle not recorded.
+
+--------------------------------------------------
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G    AB   R    H    2B  3B  HR  RBI  BB   SO   SB  CS  AVG   OBP   SLG
+2041  ATH   97   332  45   83   13  1   16  42   16   53   7   2   .250  .290  .440
+2040  ATH   115  420  60   120  20  1   16  61   47   101  12  3   .286  .362  .452
+2039  ATH   103  359  54   99   18  2   19  53   27   82   8   3   .276  .329  .496
+2038  ATH   21   70   9    20   2   0   2   7    7    15   2   0   .286  .351  .400
+2037  ATH   5    16   2    1    0   0   0   0    0    2    0   0   .062  .062  .062
+2036  MIL   9    30   2    6    0   0   1   4    3    11   2   0   .200  .273  .300
+
+--------------------------------------------------
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS    PA   SF  SAC  GIDP  HBP  IBB  TB   SB%    PO    A    E    FLD%   INN      WAR
+2041  ATH   .730   352  1   0    4     3    1    146  .778   939   46   5    .995   836.2    1.7
+2040  ATH   .814   473  2   0    7     4    1    190  .800   1107  77   1    .999   1030.1   5.2
+2039  ATH   .825   395  5   0    6     4    1    178  .727   1040  62   1    .999   925.2    4.4
+2038  ATH   .751   77   0   0    2     0    0    28   1.000  166   18   0    1.000  180.2    0.8
+2037  ATH   .124   16   0   0    1     0    0    1    .000   14    1    0    1.000  36.0     -0.2
+2036  MIL   .573   33   0   0    0     0    0    9    1.000  71    5    0    1.000  79.0     0.2
+
+--------------------------------------------------
+
+CAREER TOTALS
+
+G: 350
+AB: 1227
+R: 172
+H: 329
+2B: 53
+3B: 4
+HR: 54
+RBI: 167
+BB: 100
+SO: 264
+SB: 31
+CS: 8
+AVG: .268
+OBP: .327
+SLG: .450
+OPS: .777
+PA: 1346
+TB: 552
+SB%: .795
+PO: 3337
+A: 209
+E: 7
+FLD%: .998
+INN: 3088.1
+WAR: 12.2
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2042–2044: Arbitration
+2045–2051: Free Agent
+Salary: not shown on the contract screen
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Option: 3/3 Used
+Playoff Eligible: -
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+
+QUIRKS
+
+- Arm Strength Specialist
+
+--------------------------------------------------
+
+AWARDS
+
+
+--------------------------------------------------
+METADATA & VERIFICATION FOOTER
+--------------------------------------------------
+TS Code: TS-MLB-ATH-2041-00599
+Verification Tag: Screen-Checked
+Steward of Record: Claude Staged
+POPID: POP-00599
+==================================================

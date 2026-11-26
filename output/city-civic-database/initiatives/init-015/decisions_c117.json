@@ -1,0 +1,23 @@
+{
+  "initiative": "INIT-015",
+  "initiativeId": "INIT-015",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-014)",
+  "consolidatedFrom": [
+    "STMT-117-mayor_gavel-014 (Mayor gavel — Laurel cleanup scope, outreach and filing hold)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-015",
+    "ImplementationPhase": "announced",
+    "MilestoneNotes": "C117: Scope, outreach and Clerk-verified filing are not evidenced; INIT-015 stays announced, with no authorization or implementation claimed.",
+    "NextScheduledAction": "Complete scope and outreach, then obtain a Clerk-verified filing reference",
+    "NextActionCycle": 118,
+    "LastWorkCycle": 117,
+    "LastWorkSeat": "civic-office-council-d9"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-116-civic-office-council-d9-2026-11-19"
+    ]
+  }
+}

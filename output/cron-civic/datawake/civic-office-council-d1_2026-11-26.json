@@ -1,0 +1,60 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-11-26",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Brooklyn is at sentiment -0.01 against a city line of 0.112 — still underwater even after climbing from -0.04, while its retail vitality jumped from 7.31 to 9.35 and its crime index sits at 0.65, flat enough to city that nobody can call it a spike. I read that as a neighborhood keeping its record honestly: the storefronts are breathing again, the mood is not caught up yet, and the health readings still show 64 residents sick with violence above the city middle. West Oakland, my other turf, is in growth with sentiment 0.41 and crime down to 0.54, but housing pressure ticked up a full point to 6.5 — I am not going to let that number sit unwatched. This week I am spending my one move where the record is thinnest: the Oakland Youth Apprenticeship Pipeline has been stalled, and the young people who signed up deserve a path, not a sign-up sheet. I revive it with a work move and ask for the placement accounting on my own district's youth in writing.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-007"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "0",
+  "ranAt": "2026-11-26T11:45:18.184Z",
+  "usage": {
+    "prompt_tokens": 6955,
+    "completion_tokens": 273,
+    "total_tokens": 7228,
+    "cost": 0.00059345,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00059345,
+      "upstream_inference_prompt_cost": 0.00034775,
+      "upstream_inference_completions_cost": 0.0002457
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+  "evidenceReads": [],
+  "provider": "Particle AI",
+  "finishReason": "stop",
+  "elapsedMs": 2670,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00501",
+    "id": "qGM3BaxmApxPKFkvCi6yDm",
+    "customId": "cp-POP-00501-c117-CIVIC-datawake-2026-11-26"
+  }
+}

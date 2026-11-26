@@ -6,19 +6,19 @@
     "to": 116,
     "cycles": 8
   },
-  "generatedAt": "2026-11-21T14:15:09.958Z",
+  "generatedAt": "2026-11-22T12:15:11.451Z",
   "index": {
-    "generatedAt": "2026-11-21T14:15:09.769Z",
-    "rows": 3009,
+    "generatedAt": "2026-11-22T12:15:11.291Z",
+    "rows": 3025,
     "liveCycle": 116
   },
   "counted": {
-    "docs": 1085,
+    "docs": 1095,
     "citizens": 338,
-    "thisCycleDocs": 155,
+    "thisCycleDocs": 165,
     "excluded": {
-      "media": 313,
-      "officials": 179,
+      "media": 315,
+      "officials": 183,
       "noLedger": 5,
       "outOfWindow": 1427,
       "leak": 0
@@ -620,23 +620,23 @@
     },
     {
       "hood": "Piedmont Ave",
-      "docs": 114,
+      "docs": 116,
       "citizens": 23
     },
     {
       "hood": "Lake Merritt",
-      "docs": 106,
+      "docs": 108,
       "citizens": 29
+    },
+    {
+      "hood": "Chinatown",
+      "docs": 85,
+      "citizens": 30
     },
     {
       "hood": "Fruitvale",
       "docs": 84,
       "citizens": 29
-    },
-    {
-      "hood": "Chinatown",
-      "docs": 84,
-      "citizens": 30
     },
     {
       "hood": "Jack London",
@@ -645,12 +645,12 @@
     },
     {
       "hood": "Downtown",
-      "docs": 65,
+      "docs": 68,
       "citizens": 28
     },
     {
       "hood": "Uptown",
-      "docs": 62,
+      "docs": 64,
       "citizens": 18
     },
     {

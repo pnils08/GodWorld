@@ -1,0 +1,625 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00011",
+      "name": "Carmen Delaine",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup."
+    },
+    "signal": {
+      "kind": "initiative",
+      "hood": "West Oakland",
+      "score": null,
+      "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+      "nearby": [
+        {
+          "text": "Avery Santana (mayor gavel): Carry forward closeout verification and Council consideration; support renewal only after verified C114 closeout, preserving the business-and-resident scope and 23-day standard. — \"West Oakla",
+          "src": "output/civic-voice/mayor_gavel_c117.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Hold expansion; require a complete published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review. — \"Alternative response expands on public ev",
+          "src": "output/civic-voice/mayor_gavel_c117.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Hold further design advancement until preliminary schematics and a documented Fruitvale public comment-and-response record are delivered and published. — \"Fruitvale will get a transit hub des",
+          "src": "output/civic-voice/mayor_gavel_c117.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Keep the center operational while withholding oversight certification until the Q3 audit filing and merchant walkthrough are verified and documented. — \"Temescal's health center keeps serving",
+          "src": "output/civic-voice/mayor_gavel_c117.json"
+        },
+        {
+          "text": "Avery Santana (mayor gavel): Declare no milestone passed; direct completion and publication of the evidence-file review while all remediation, hotline, dust-control and workforce oversight continues. — \"Baylight earns it",
+          "src": "output/civic-voice/mayor_gavel_c117.json"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00501",
+          "name": "Denise Carter",
+          "profile": "Denise Carter — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/council_d1_c117.json",
+            "statementId": "STMT-117-council_d1-001",
+            "initiativeId": "INIT-001",
+            "topic": "West Oakland Stabilization Fund — charter renewal"
+          }
+        },
+        {
+          "pop": "POP-00037",
+          "name": "Brenda Okoro",
+          "profile": "Brenda Okoro — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/okoro_c117.json",
+            "statementId": "STMT-117-okoro-001",
+            "initiativeId": "INIT-001",
+            "topic": "West Oakland Stabilization Fund — verified closeout before Council renewal"
+          }
+        },
+        {
+          "pop": "POP-00790",
+          "name": "Marcus Webb",
+          "profile": "Marcus Webb — civic office holder",
+          "role": "civic office holder",
+          "hood": null,
+          "mode": "offices",
+          "sourceKind": "office-record",
+          "evidence": {
+            "source": "output/civic-voice/stabilization_fund_c117.json",
+            "statementId": "STMT-117-stabilization_fund-001",
+            "initiativeId": "INIT-001",
+            "topic": "C114 closeout verification and Council charter-renewal consideration"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-ed7372980acc"
+      },
+      {
+        "t": "FACT",
+        "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-81ce2e8cdcdd"
+      },
+      {
+        "t": "FACT",
+        "text": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-776b42039de0"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — budget $28M; vote requirement 6-3; voted Cycle 78; outcome PASSED [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-92a4620a5dcc"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund vote record — Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely) [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-1798adf32762"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — proposed by Avery Santana [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-1e481982a23d"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — mayoral action: signed, Cycle 78 [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-ef8545e60c61"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — implementation phase disbursement-active; neighborhoods West Oakland; policy domain economic [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-8182a0357bb6"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — budget total $28,000,000; remaining $20,200,000; last disbursement Cycle 117 [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-731670570069"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — next scheduled action: Verify C114 closeout, then conduct Council charter-renewal consideration with scope and 23-day standard intact, Cycle 118 [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-285e5c40c8d2"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund milestone — C116: Charter renewal kept on Council calendar; final action requires verified C114 closeout, business-and-resident scope and the 23-day standard. [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-b8abe94929a0"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund milestone — C117: Renewal support is contingent on verified C114 closeout and Council action; business-and-resident scope and the 23-day standard remain intact. [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-e5dd792ab349"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown Economic Revitalization — status proposed, phase stalled, budget $15M [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-c12289b5ef45"
+      },
+      {
+        "t": "FACT",
+        "text": "Commercial Stabilization for Grand Lake — status proposed, phase vote-scheduled, VoteCycle 118, budget $2.5M [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-4998a77329a2"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Hill Community Revitalization — status proposed, phase stalled, budget $2M [Initiative_Tracker]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-2389a9de2f06"
+      },
+      {
+        "t": "FACT",
+        "text": "Mayor — Avery Santana — approval 77 — active [Civic_Office_Ledger]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-26e9c8e96c20"
+      },
+      {
+        "t": "FACT",
+        "text": "District Attorney — Clarissa Dane — approval 65 — active [Civic_Office_Ledger]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-0b31a5d5145b"
+      },
+      {
+        "t": "FACT",
+        "text": "Public Defender — Caleb Reyes — approval 65 — active [Civic_Office_Ledger]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-d061490ba32a"
+      },
+      {
+        "t": "FACT",
+        "text": "City Council District 1 — Denise Carter — approval 63 — active [Civic_Office_Ledger]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-474bb31fdd4a"
+      },
+      {
+        "t": "FACT",
+        "text": "City Council District 2 — Leonard Tran — approval 69 — active [Civic_Office_Ledger]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-c770c9a4aa8f"
+      },
+      {
+        "t": "FACT",
+        "text": "City treasury this cycle took in $5.1M: $5M the weekly budget allocation, $125,905 court money on 28 cleared charges [City_Treasury]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-6d77a8cfef99"
+      },
+      {
+        "t": "FACT",
+        "text": "City treasury balance at the close: $136.9M (from $131.8M) [City_Treasury]",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "id": "F-9157d67f2dae"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "offices",
+    "candidates": [
+      {
+        "pop": "POP-00501",
+        "name": "Denise Carter",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Denise Carter — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/council_d1_c117.json",
+          "statementId": "STMT-117-council_d1-001",
+          "initiativeId": "INIT-001",
+          "topic": "West Oakland Stabilization Fund — charter renewal"
+        }
+      },
+      {
+        "pop": "POP-00037",
+        "name": "Brenda Okoro",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Brenda Okoro — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/okoro_c117.json",
+          "statementId": "STMT-117-okoro-001",
+          "initiativeId": "INIT-001",
+          "topic": "West Oakland Stabilization Fund — verified closeout before Council renewal"
+        }
+      },
+      {
+        "pop": "POP-00790",
+        "name": "Marcus Webb",
+        "role": "civic office holder",
+        "hood": null,
+        "profile": "Marcus Webb — civic office holder",
+        "mode": "offices",
+        "sourceKind": "office-record",
+        "evidence": {
+          "source": "output/civic-voice/stabilization_fund_c117.json",
+          "statementId": "STMT-117-stabilization_fund-001",
+          "initiativeId": "INIT-001",
+          "topic": "C114 closeout verification and Council charter-renewal consideration"
+        }
+      }
+    ],
+    "officeRecords": [
+      {
+        "sourceKind": "office-record",
+        "cycle": 117,
+        "officeSlug": "council_d1",
+        "statementId": "STMT-117-council_d1-001",
+        "quote": "The Fund was never hood-wide relief, and it was never housing — it is West Oakland businesses and neighbors, with the 23-day clock kept honest. I verified nothing by wishing it.",
+        "topic": "West Oakland Stabilization Fund — charter renewal",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/council_d1_c117.json",
+        "holderPopid": "POP-00501",
+        "speakerName": "Denise Carter"
+      },
+      {
+        "sourceKind": "office-record",
+        "cycle": 117,
+        "officeSlug": "okoro",
+        "statementId": "STMT-117-okoro-001",
+        "quote": "West Oakland gets a verified closeout and a faithful charter renewal — not a shortcut around the businesses and residents this fund serves.",
+        "topic": "West Oakland Stabilization Fund — verified closeout before Council renewal",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/okoro_c117.json",
+        "holderPopid": "POP-00037",
+        "speakerName": "Brenda Okoro"
+      },
+      {
+        "sourceKind": "office-record",
+        "cycle": 117,
+        "officeSlug": "stabilization_fund",
+        "statementId": "STMT-117-stabilization_fund-001",
+        "quote": "The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries the proof, and the roll call belongs to the Council.",
+        "topic": "C114 closeout verification and Council charter-renewal consideration",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/stabilization_fund_c117.json",
+        "holderPopid": "POP-00790",
+        "speakerName": "Marcus Webb"
+      },
+      {
+        "sourceKind": "office-record",
+        "cycle": 117,
+        "officeSlug": "stabilization_fund",
+        "statementId": "STMT-117-stabilization_fund-003",
+        "quote": "The rent does not wait for the ordinance and the vote doesn't come before the analysis — West Oakland gets the legal-support record first, and the 23-day clock keeps running while it does.",
+        "topic": "West Oakland queue and 23-day standard",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/stabilization_fund_c117.json",
+        "holderPopid": "POP-00790",
+        "speakerName": "Marcus Webb"
+      }
+    ]
+  },
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    },
+    "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "carmen-delaine",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "domain": "civic-ledger"
+    },
+    "pulse": {
+      "className": "civic-ledger",
+      "score": 55,
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hood": "West Oakland",
+      "source": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "West Oakland Stabilization Fund — budget $28M; vote requirement 6-3; voted Cycle 78; outcome PASSED [Initiative_Tracker]",
+        "West Oakland Stabilization Fund vote record — Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely) [Initiative_Tracker]",
+        "West Oakland Stabilization Fund — proposed by Avery Santana [Initiative_Tracker]",
+        "West Oakland Stabilization Fund — mayoral action: signed, Cycle 78 [Initiative_Tracker]",
+        "West Oakland Stabilization Fund — implementation phase disbursement-active; neighborhoods West Oakland; policy domain economic [Initiative_Tracker]",
+        "West Oakland Stabilization Fund — budget total $28,000,000; remaining $20,200,000; last disbursement Cycle 117 [Initiative_Tracker]",
+        "West Oakland Stabilization Fund — next scheduled action: Verify C114 closeout, then conduct Council charter-renewal consideration with scope and 23-day standard intact, Cycle 118 [Initiative_Tracker]",
+        "West Oakland Stabilization Fund milestone — C116: Charter renewal kept on Council calendar; final action requires verified C114 closeout, business-and-resident scope and the 23-day standard. [Initiative_Tracker]",
+        "West Oakland Stabilization Fund milestone — C117: Renewal support is contingent on verified C114 closeout and Council action; business-and-resident scope and the 23-day standard remain intact. [Initiative_Tracker]",
+        "Downtown Economic Revitalization — status proposed, phase stalled, budget $15M [Initiative_Tracker]",
+        "Commercial Stabilization for Grand Lake — status proposed, phase vote-scheduled, VoteCycle 118, budget $2.5M [Initiative_Tracker]",
+        "Ivy Hill Community Revitalization — status proposed, phase stalled, budget $2M [Initiative_Tracker]",
+        "Mayor — Avery Santana — approval 77 — active [Civic_Office_Ledger]",
+        "District Attorney — Clarissa Dane — approval 65 — active [Civic_Office_Ledger]",
+        "Public Defender — Caleb Reyes — approval 65 — active [Civic_Office_Ledger]",
+        "City Council District 1 — Denise Carter — approval 63 — active [Civic_Office_Ledger]",
+        "City Council District 2 — Leonard Tran — approval 69 — active [Civic_Office_Ledger]",
+        "City treasury this cycle took in $5.1M: $5M the weekly budget allocation, $125,905 court money on 28 cleared charges [City_Treasury]",
+        "City treasury balance at the close: $136.9M (from $131.8M) [City_Treasury]"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+      ]
+    },
+    "candidates": [
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 55,
+        "kind": "initiative",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "hood": "West Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 16
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 55,
+        "kind": "vote",
+        "label": "West Oakland Stabilization Fund | Verify C114 closeout and conduct Council charter-renewal consideration C117",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 17
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 55,
+        "kind": "initiative",
+        "label": "Oakland Alternative Response Initiative | Status passed | phase dispatch-live",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002); storyline INIT-002:dispatch-live",
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 18
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 55,
+        "kind": "vote",
+        "label": "Oakland Alternative Response Initiative | Execute and publish D3 Fruitvale briefing record; file D5 and Baylight next dates C117",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002); storyline INIT-002:dispatch-live",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 19
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 55,
+        "kind": "initiative",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Status passed | phase design-phase",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003); storyline INIT-003:design-phase",
+        "hood": "Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 20
+      },
+      {
+        "actionId": null,
+        "effectReceiptIds": [],
+        "score": 55,
+        "kind": "vote",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Deliver schematics and conduct documented Fruitvale community review C117",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003); storyline INIT-003:design-phase",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 21
+      }
+    ],
+    "pointers": [
+      "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+      "Initiative_Tracker (InitiativeID INIT-002); storyline INIT-002:dispatch-live",
+      "Initiative_Tracker (InitiativeID INIT-003); storyline INIT-003:design-phase"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "text": "The Fund is in disbursement-active phase with $20.2M still on the table, and the next scheduled action is verify the C114 closeout before Council considers renewal. That's the clock I'm watching. The tracker says the closeout verification is the gate, and the mayor's own language is conditional — support renewal only after verified closeout. But the tracker also says the last disbursement happened this cycle, C117. So money is moving while the closeout that's supposed to gate renewal remains unverified. That's the seam. I want to know whether the disbursement that just happened was authorized under the old charter terms or under the assumption renewal passes. Because if the Fund is spending",
+    "plan": {
+      "chase": "The Fund is in disbursement-active phase with $20.2M still on the table, and the next scheduled action is verify the C114 closeout before Council considers renewal. That's the clock I'm watching. The tracker says the closeout verification is the gate, and the mayor's own language is conditional — support renewal only after verified closeout. But the tracker also says the last disbursement happened this cycle, C117. So money is moving while the closeout that's supposed to gate renewal remains unverified. That's the seam. I want to know whether the disbursement that just happened was authorized under the old charter terms or under the assumption renewal passes. Because if the Fund is spending ",
+      "focus": "Whether the C117 disbursement moved before the C114 closeout verification that is supposed to gate charter renewal — and who authorized that order.",
+      "why": "The tracker lists the next scheduled action as verify C114 closeout, then conduct renewal consideration. But it also shows a disbursement in the same cycle the verification is still pending. That sequencing gap is the story: money moving on a clock that hasn't been certified.",
+      "checks": [
+        "Pull the C117 disbursement record and see what authorization line it cites.",
+        "Check whether the C114 closeout verification has been published or is still outstanding.",
+        "Compare the 23-day standard and business-and-resident scope language against the disbursement terms.",
+        "Ask whether the $20.2M remaining reflects a drawdown that assumed renewal or a conservative hold."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00790",
+          "question": "Was the C117 disbursement authorized before or after the C114 closeout verification was completed, and what condition in the Fund's charter permitted that order?",
+          "basis": "Marcus Webb's statement is the one attached directly to the stabilization fund record, and the tracker shows both a pending verification and a same-cycle disbursement."
+        },
+        {
+          "pop": "POP-00037",
+          "question": "Does your position that renewal requires verified closeout also apply to the disbursement that just occurred, or is disbursement on a separate clock from renewal?",
+          "basis": "Okoro's statement explicitly conditions renewal on verified closeout, which raises the question of whether the same standard applies to active disbursement."
+        },
+        {
+          "pop": "POP-00501",
+          "question": "As a Council member who will vote on renewal, what did you understand the C117 disbursement to be contingent on, and does the unverified closeout change your reading of the Fund's current authority?",
+          "basis": "Carter is on the Council and will be part of the renewal consideration; her understanding of the disbursement's authorization is directly relevant to the sequencing question."
+        }
+      ],
+      "interpretation": "The Fund is spending while its own gate for renewal remains unverified. That could be routine — disbursements and closeouts often run on different tracks — but the tracker frames verification as the condition for renewal, not for spending. If the disbursement moved without the verification, the order of operations is the story. If it moved with a separate authorization, then the renewal question is genuinely gated and the disbursement is a non-story. Either way, the answer is in the authorizatio",
+      "unverifiedLead": [
+        "The C117 disbursement may have been processed under a standing disbursement schedule that predates the C114 closeout question, which would make the sequencing a non-issue — but that schedule has not been confirmed.",
+        "There may be internal correspondence from the Fund administrator flagging the closeout as overdue before the C117 disbursement was approved."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Carry forward closeout verification and Council consideration; support renewal only after verified C114 closeout, preserving the business-and-resident scope and 23-day standard. — \"West Oakla",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold expansion; require a complete published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review. — \"Alternative response expands on public ev",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold further design advancement until preliminary schematics and a documented Fruitvale public comment-and-response record are delivered and published. — \"Fruitvale will get a transit hub des",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep the center operational while withholding oversight certification until the Q3 audit filing and merchant walkthrough are verified and documented. — \"Temescal's health center keeps serving",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Declare no milestone passed; direct completion and publication of the evidence-file review while all remediation, hotline, dust-control and workforce oversight continues. — \"Baylight earns it",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 135,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-23T12:15:34.257Z"
+}

@@ -1,0 +1,1796 @@
+{
+  "date": "2026-11-23",
+  "cycle": 117,
+  "quotas": {
+    "grid": [
+      "carmen-delaine",
+      "business-desk",
+      "lila-mezran",
+      "trevor-shimizu",
+      "anthony-raines",
+      "tamsin-pruitt"
+    ],
+    "weekday": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "beatDomain": "CIVIC",
+      "persona": "carmen-delaine",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 1,
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "kind": "initiative",
+        "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "hood": "West Oakland",
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "carmen-delaine",
+      "pulse": {
+        "className": "civic-ledger",
+        "score": 55,
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hood": "West Oakland",
+        "source": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+          "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+          "West Oakland Stabilization Fund — budget $28M; vote requirement 6-3; voted Cycle 78; outcome PASSED [Initiative_Tracker]",
+          "West Oakland Stabilization Fund vote record — Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely) [Initiative_Tracker]",
+          "West Oakland Stabilization Fund — proposed by Avery Santana [Initiative_Tracker]",
+          "West Oakland Stabilization Fund — mayoral action: signed, Cycle 78 [Initiative_Tracker]",
+          "West Oakland Stabilization Fund — implementation phase disbursement-active; neighborhoods West Oakland; policy domain economic [Initiative_Tracker]",
+          "West Oakland Stabilization Fund — budget total $28,000,000; remaining $20,200,000; last disbursement Cycle 117 [Initiative_Tracker]",
+          "West Oakland Stabilization Fund — next scheduled action: Verify C114 closeout, then conduct Council charter-renewal consideration with scope and 23-day standard intact, Cycle 118 [Initiative_Tracker]",
+          "West Oakland Stabilization Fund milestone — C116: Charter renewal kept on Council calendar; final action requires verified C114 closeout, business-and-resident scope and the 23-day standard. [Initiative_Tracker]",
+          "West Oakland Stabilization Fund milestone — C117: Renewal support is contingent on verified C114 closeout and Council action; business-and-resident scope and the 23-day standard remain intact. [Initiative_Tracker]",
+          "Downtown Economic Revitalization — status proposed, phase stalled, budget $15M [Initiative_Tracker]",
+          "Commercial Stabilization for Grand Lake — status proposed, phase vote-scheduled, VoteCycle 118, budget $2.5M [Initiative_Tracker]",
+          "Ivy Hill Community Revitalization — status proposed, phase stalled, budget $2M [Initiative_Tracker]",
+          "Mayor — Avery Santana — approval 77 — active [Civic_Office_Ledger]",
+          "District Attorney — Clarissa Dane — approval 65 — active [Civic_Office_Ledger]",
+          "Public Defender — Caleb Reyes — approval 65 — active [Civic_Office_Ledger]",
+          "City Council District 1 — Denise Carter — approval 63 — active [Civic_Office_Ledger]",
+          "City Council District 2 — Leonard Tran — approval 69 — active [Civic_Office_Ledger]",
+          "City treasury this cycle took in $5.1M: $5M the weekly budget allocation, $125,905 court money on 28 cleared charges [City_Treasury]",
+          "City treasury balance at the close: $136.9M (from $131.8M) [City_Treasury]"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+        ]
+      },
+      "wakePackage": "CARMEN-LEP2-3",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "gridDay": 1,
+      "story": {
+        "kind": "beat-economy",
+        "angle": "the economy record of C117",
+        "label": "the economy record of C117",
+        "hookLine": "",
+        "hood": null,
+        "citizens": [
+          "Ramon Vega (POP-00042)",
+          "Lorenzo Jordan (POP-00131)",
+          "Jonas Patel (POP-00142)",
+          "Gregory Mims (POP-00023)",
+          "Philly Rodriguez (POP-00027)",
+          "Manfred Owens (POP-00028)",
+          "Tobias Jurko (POP-00132)",
+          "Mina Linas (POP-00135)",
+          "Joel Henry (POP-00299)",
+          "Tara Ellison (POP-00546)",
+          "Sarah Corliss (POP-00595)",
+          "Michael Corliss (POP-00596)",
+          "Sarah Huang (POP-01049)",
+          "Nina Reyes (POP-01057)",
+          "Pixel Pete (POP-01064)",
+          "Kai Tanaka (POP-01068)",
+          "Rosa Martinez (POP-01070)",
+          "Claire Ashford (POP-01071)",
+          "Li Wei (POP-01073)",
+          "Marcus Duval (POP-01075)",
+          "Naomi Castellanos (POP-01098)",
+          "Cameron Wallen (POP-00180)",
+          "Patrick When (POP-00208)",
+          "Jerry Nelson (POP-00237)",
+          "Xanny Allen (POP-00243)"
+        ],
+        "popids": [
+          "POP-00042",
+          "POP-00131",
+          "POP-00142",
+          "POP-00023",
+          "POP-00027",
+          "POP-00028",
+          "POP-00132",
+          "POP-00135",
+          "POP-00299",
+          "POP-00546",
+          "POP-00595",
+          "POP-00596",
+          "POP-01049",
+          "POP-01057",
+          "POP-01064",
+          "POP-01068",
+          "POP-01070",
+          "POP-01071",
+          "POP-01073",
+          "POP-01075",
+          "POP-01098",
+          "POP-00180",
+          "POP-00208",
+          "POP-00237",
+          "POP-00243"
+        ],
+        "ref": "the economy record of C117",
+        "cycle": 117
+      },
+      "beatSlice": true,
+      "beatSeat": "business-desk",
+      "pulse": {
+        "className": "beat-economy",
+        "score": 100,
+        "label": "the economy record of C117",
+        "hood": null,
+        "source": "the economy record of C117"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "the economy record of C117",
+        "hookLine": "",
+        "anchorFacts": [
+          "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 jobs, 1 up, 0 down); Community Platform 1 (350 jobs, 1 up, 0 down); Housing & Social Services 1 (320 jobs, 1 up, 0 down); Architecture 4 (292 jobs, 2 up, 2 down); Nightlife & Entertainment 9 (280 jobs, 6 up, 3 down); Sports 2 (270 jobs, 2 up, 0 down); Media & Journalism 4 (269 jobs, 3 up, 1 down); Restaurant & Dining 27 (264 jobs, 19 up, 8 down); Retail 31 (241 jobs, 16 up, 15 down); Legal & Judicial 1 (222 jobs, 1 up, 0 down); As Stadium 1 (110 jobs, 1 up, 0 down); Faith Organization 9 (103 jobs, 9 up, 0 down); Services 19 (101 jobs, 14 up, 5 down); Agent Communication 1 (100 jobs, 1 up, 0 down); Community Services 1 (94 jobs, 0 up, 1 down); Cafe / dining 10 (91 jobs, 5 up, 4 down); AI Research 1 (86 jobs, 1 up, 0 down); Food & Beverage 5 (62 jobs, 3 up, 2 down); Coworking / Tech Hub 1 (62 jobs, 1 up, 0 down); Civic Tech 2 (51 jobs, 0 up, 2 down); Public Safety / Crisis Response 1 (47 jobs, 1 up, 0 down); Tech 1 (45 jobs, 1 up, 0 down); Tech / Applied Robotics 1 (45 jobs, 1 up, 0 down); Tech / Data Infrastructure 1 (45 jobs, 1 up, 0 down); Tech / Software 1 (45 jobs, 1 up, 0 down); Urban Systems Intelligence Firm 1 (41 jobs, 0 up, 0 down); Veterinary Clinic 1 (38 jobs, 1 up, 0 down); Optometry Clinic 1 (38 jobs, 0 up, 1 down); Urgent Care Clinic 1 (38 jobs, 0 up, 1 down); Pediatric Clinic 1 (38 jobs, 1 up, 0 down); Medical Specialists 1 (38 jobs, 0 up, 1 down); Home Health Agency 1 (38 jobs, 1 up, 0 down); Real Estate 2 (37 jobs, 1 up, 1 down); Fast Food & Quick Service 1 (31 jobs, 0 up, 1 down); Construction Supply 1 (30 jobs, 1 up, 0 down); Cafe / gallery 1 (30 jobs, 1 up, 0 down); Bar / lounge 1 (30 jobs, 1 up, 0 down); Retail & Food 1 (30 jobs, 1 up, 0 down); Sports Bar & Dining 1 (30 jobs, 1 up, 0 down); Finance & Banking 1 (26 jobs, 1 up, 0 down); Law Firm 1 (26 jobs, 1 up, 0 down); Real Estate Finance 1 (26 jobs, 1 up, 0 down); Staffing Agency / Professional Services 1 (26 jobs, 1 up, 0 down); Estate Law 1 (26 jobs, 1 up, 0 down); Wealth Management / Finance 1 (26 jobs, 0 up, 1 down); Management Consulting 1 (26 jobs, 1 up, 0 down); Credit Union / Finance 1 (26 jobs, 1 up, 0 down); Biotech 1 (25 jobs, 1 up, 0 down); Community Development 2 (25 jobs, 2 up, 0 down); Development 1 (25 jobs, 1 up, 0 down); Cafe 2 (22 jobs, 2 up, 0 down); Sports Analytics 1 (20 jobs, 0 up, 1 down); Theater / Historic Landmark 2 (18 jobs, 2 up, 0 down); Transit & Infrastructure 1 (18 jobs, 1 up, 0 down); Tutoring 1 (15 jobs, 1 up, 0 down); Preschool & Early Education 1 (15 jobs, 1 up, 0 down); Private School 1 (15 jobs, 1 up, 0 down); Hospitality 1 (14 jobs, 1 up, 0 down); Venture Capital 1 (12 jobs, 0 up, 1 down); Hair Salon / Services 2 (12 jobs, 1 up, 1 down); Cigar Lounge 1 (11 jobs, 1 up, 0 down); Wine Bar 1 (11 jobs, 1 up, 0 down); Bar / Saloon / Historic Landmark 1 (11 jobs, 1 up, 0 down); Comedy Club 1 (11 jobs, 1 up, 0 down); Brewery 1 (11 jobs, 1 up, 0 down); Dance Club / Nightlife & Entertainment 1 (11 jobs, 1 up, 0 down); Late-Night Restaurant & Dining 1 (11 jobs, 1 up, 0 down); Bar / Lounge 1 (11 jobs, 1 up, 0 down); Korean Restaurant 1 (11 jobs, 1 up, 0 down); Coffee Roaster 1 (11 jobs, 1 up, 0 down); Bakery 1 (11 jobs, 1 up, 0 down); Fusion Restaurant 1 (11 jobs, 1 up, 0 down); Brunch Restaurant 1 (11 jobs, 1 up, 0 down); Karaoke Bar 1 (11 jobs, 1 up, 0 down); Bar 1 (11 jobs, 1 up, 0 down); Ramen Bar 1 (11 jobs, 1 up, 0 down); Small Plates & Natural Wine Bar 1 (11 jobs, 1 up, 0 down); Private Club 1 (11 jobs, 1 up, 0 down); Workforce Development 1 (11 jobs, 1 up, 0 down); Ice Cream / Dessert Cafe 1 (11 jobs, 0 up, 1 down); Taquería / Restaurant 1 (11 jobs, 1 up, 0 down); Vietnamese Restaurant 1 (11 jobs, 1 up, 0 down); Gentlemen's Club / Adult Entertainment 1 (11 jobs, 0 up, 1 down); Pool Hall & Bar 1 (11 jobs, 0 up, 1 down); Farmers Market 1 (11 jobs, 0 up, 1 down); Social Club 1 (11 jobs, 0 up, 1 down); Sports Bar & Grill 1 (11 jobs, 1 up, 0 down); Bakery / Patisserie 1 (11 jobs, 0 up, 1 down); Pizzeria / Restaurant & Dining 1 (11 jobs, 0 up, 1 down); Talent Management 1 (10 jobs, 1 up, 0 down); Bar / nightlife 1 (10 jobs, 1 up, 0 down); Music Venue 1 (9 jobs, 1 up, 0 down); Design Studio 1 (9 jobs, 1 up, 0 down); Theater Company / Performance Space 1 (9 jobs, 1 up, 0 down); Art Gallery 1 (9 jobs, 1 up, 0 down); Music School 1 (9 jobs, 1 up, 0 down); Artist Studios 1 (9 jobs, 1 up, 0 down); Movie Theater 1 (9 jobs, 0 up, 1 down); Synagogue 1 (6 jobs, 0 up, 1 down); Industrial Supply / Services 1 (6 jobs, 1 up, 0 down); Climbing Gym / Services 1 (6 jobs, 1 up, 0 down); Youth Recreation / Community 1 (6 jobs, 1 up, 0 down); Auto Repair / Services 1 (6 jobs, 1 up, 0 down); Community Kitchen 1 (6 jobs, 1 up, 0 down); Outdoor Rental / Services 1 (6 jobs, 1 up, 0 down); Property Management / Real Estate 1 (6 jobs, 1 up, 0 down); Cultural Center / Community / Historic Landmark 1 (6 jobs, 1 up, 0 down); Stadium / Historic Landmark 1 (6 jobs, 1 up, 0 down); Church 1 (5 jobs, 1 up, 0 down); Herbalist & Tea Shop 1 (4 jobs, 1 up, 0 down); Korean Grocery 1 (4 jobs, 1 up, 0 down); Wholesale Grocery 1 (4 jobs, 1 up, 0 down); Pharmacy / Retail 1 (4 jobs, 1 up, 0 down); Wine Shop 1 (4 jobs, 1 up, 0 down); Garden Center / Retail 1 (4 jobs, 0 up, 1 down); Wine & Spirits Shop 1 (4 jobs, 1 up, 0 down); Hardware Store 1 (4 jobs, 1 up, 0 down); Butcher Shop 1 (4 jobs, 0 up, 1 down); Grocery 1 (4 jobs, 1 up, 0 down); Quinceañera & Formalwear Boutique 1 (4 jobs, 1 up, 0 down); Mexican Grocery 1 (4 jobs, 1 up, 0 down); Pawn & Jewelry Shop 1 (4 jobs, 0 up, 1 down); Antiques Shop 1 (4 jobs, 1 up, 0 down); Women's Boutique 1 (4 jobs, 0 up, 1 down); Bike Shop 1 (4 jobs, 1 up, 0 down); Toy Store 1 (4 jobs, 0 up, 1 down); Jewelry Store 1 (4 jobs, 0 up, 1 down); Children's Boutique 1 (4 jobs, 0 up, 1 down); Men's Clothing Store 1 (4 jobs, 1 up, 0 down); Florist Shop 1 (4 jobs, 1 up, 0 down); Corporate 1 (3 jobs, 1 up, 0 down); Faith / Methodist 1 (1 jobs, 1 up, 0 down); Science 1 (0 jobs, 1 up, 0 down) — the rest of the ledger is on Business_Ledger",
+          "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+          "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+          "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+          "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+          "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+          "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+          "Hillside Family Dental (Healthcare), Glenview — 0 employees, revenue $936k, growing -0.7% a year — since C116: yearly growth rate +0.5 pts, revenue -$131, -3 employees",
+          "Bay Tribune (Media & Journalism), Downtown — 63 employees, revenue $19.9M, growing 14.3% a year — since C116: yearly growth rate -0.4 pts, revenue +$54k, +1 employees",
+          "Ridgeline Studio (Architecture), Uptown — 62 employees, revenue $33.1M, growing 16.1% a year — since C116: yearly growth rate -0.2 pts, revenue +$102k, +1 employees",
+          "Atlas Bay Architects (Architecture), Downtown — 87 employees, revenue $43.0M, growing 13.2% a year — since C116: yearly growth rate +0.2 pts, revenue +$109k, +1 employees",
+          "Bayline 6 (Media & Journalism), Jack London — 143 employees, revenue $46.7M, growing 12.9% a year — since C116: yearly growth rate +0.1 pts, revenue +$116k, +1 employees",
+          "DigitalOcean (Cloud Infrastructure), Baylight District — 801 employees, revenue $522.4M, growing 5.2% a year — since C116: yearly growth rate -0.1 pts, revenue +$520k, +1 employees",
+          "Marine Systems (Science), Baylight District — 0 employees, growing -1.8% a year — since C116: yearly growth rate +1.0 pts",
+          "Slopeview Hardware (Retail), Glenview — 7 employees, revenue $630k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+          "Ivy Hill Market (Retail), Ivy Hill — 0 employees, revenue $513k, growing -4.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$463",
+          "Ivy Hill Cafe (Cafe / dining), Ivy Hill — 0 employees, revenue $311k, growing -2.4% a year — since C116: yearly growth rate +1.0 pts, revenue -$146",
+          "Ivy Cleaners (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.9% a year — since C116: yearly growth rate +1.0 pts, revenue -$93",
+          "Fold Laundry (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.8% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+          "Shift Change Kitchen (Restaurant & Dining), San Antonio — 12 employees, revenue $866k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$108",
+          "Lakeshore Cigar Club (Cigar Lounge), Lake Merritt — 11 employees, revenue $722k, growing 4.5% a year — since C116: yearly growth rate +1.0 pts, revenue +$629",
+          "Grand Avenue Wine Bar (Wine Bar), Lake Merritt — 11 employees, revenue $722k, growing 4.8% a year — since C116: yearly growth rate +1.0 pts, revenue +$664",
+          "Baylight Construction Authority (Construction), Baylight District — 451 employees, revenue $31.4M, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$16k",
+          "Lucky Harbor Herbalist & Tea (Herbalist & Tea Shop), Chinatown — 4 employees, revenue $381k, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$199",
+          "Seoul Corner Market (Korean Grocery), KONO — 4 employees, revenue $381k, growing 2.4% a year — since C116: yearly growth rate +1.0 pts, revenue +$178",
+          "Ridgeline Ventures (Venture Capital), Lake Merritt — 12 employees, revenue $4.6M, growing 16.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+          "Gridiron Analytics (Sports Analytics), Temescal — 20 employees, revenue $3.0M, growing 25.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+          "Fruitvale Community Clinic (Healthcare), Fruitvale — 38 employees, revenue $8.2M, growing 13.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$21k",
+          "Coliseum District Development (Real Estate), East Oakland — 31 employees, revenue $19.7M, growing 9.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$34k",
+          "Fruitvale Diner (Restaurant & Dining), Fruitvale — 2 employees, revenue $208k, growing 11.9% a year — since C116: yearly growth rate -1.0 pts, revenue +$475",
+          "Midnight Bistro (Restaurant & Dining), Downtown — 2 employees, revenue $253k, growing 12.5% a year — since C116: yearly growth rate -1.0 pts, revenue +$607",
+          "Estuary Architects (Architecture), Lake Merritt — 45 employees, growing 10.0% a year — since C116: yearly growth rate -1.0 pts",
+          "Romano's (Food & Beverage), Dimond — 16 employees, revenue $1.4M, growing 4.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$1k",
+          "Port Grind (Food & Beverage), Grand Lake — 9 employees, revenue $1.0M, growing 12.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$2k",
+          "B'nai Tikvah Synagogue (Synagogue), Piedmont Ave — 6 employees, revenue $382k, growing 2.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$204",
+          "business-closure | closure: Ivy Hill Family Dental (Healthcare) — 0 jobs | Ivy Hill | mag -25 | targets BIZ-00153",
+          "carryover | carryover: cycle 1 of 4 | Adams Point | mag -8 | targets BIZ-00061",
+          "carryover | carryover: cycle 2 of 4 | Baylight District | mag -8 | targets BIZ-00105",
+          "carryover | carryover: cycle 3 of 4 | Ivy Hill | mag -8 | targets BIZ-00150",
+          "sector-impact:services/retail | Oakland Casino Town lost 3 employees | Baylight District | mag -8 | targets BIZ-00100",
+          "Casino C117: 17 undocked wagers placed, 14 sports wagers placed; 2 settled, 15 voided",
+          "Casino house float: $246k",
+          "Maria Keen won on undocked (no) — staked $385, paid $705",
+          "Jax Caldera lost on undocked (neg) — staked $428, the house kept it",
+          "Downtown: median income $123k, median rent $3k, housing pressure 10, trajectory growth",
+          "Temescal: median income $68k, median rent $2k, housing pressure 0.5, trajectory steady",
+          "Laurel: median income $86k, median rent $2k, housing pressure 0, trajectory decay",
+          "West Oakland: median income $147k, median rent $4k, housing pressure 6.5, trajectory growth",
+          "Fruitvale: median income $100k, median rent $3k, housing pressure 10, trajectory growth",
+          "Jack London: median income $121k, median rent $3k, housing pressure 10, trajectory growth",
+          "Rockridge: median income $162k, median rent $4k, housing pressure 3.5, trajectory steady",
+          "Adams Point: median income $94k, median rent $2k, housing pressure 0, trajectory decay",
+          "Grand Lake: median income $107k, median rent $3k, housing pressure 6, trajectory growth",
+          "Piedmont Ave: median income $151k, median rent $4k, housing pressure 1.5, trajectory growth",
+          "Chinatown: median income $85k, median rent $2k, housing pressure 0, trajectory steady",
+          "Brooklyn: median income $129k, median rent $3k, housing pressure 0, trajectory decay",
+          "Eastlake: median income $83k, median rent $2k, housing pressure 0, trajectory decay",
+          "Glenview: median income $81k, median rent $2k, housing pressure 0, trajectory decay",
+          "Dimond: median income $79k, median rent $2k, housing pressure 0, trajectory decay",
+          "Ivy Hill: median income $77k, median rent $2k, housing pressure 0, trajectory decay",
+          "San Antonio: median income $69k, median rent $2k, housing pressure 0, trajectory decay",
+          "KONO: median income $83k, median rent $2k, housing pressure 1, trajectory steady",
+          "Lake Merritt: median income $186k, median rent $5k, housing pressure 0, trajectory steady",
+          "Uptown: median income $99k, median rent $2k, housing pressure 10, trajectory growth",
+          "Baylight District: median income $139k, median rent $3k, housing pressure 0, trajectory steady",
+          "East Oakland: median income $72k, median rent $2k, housing pressure 0, trajectory steady",
+          "City treasury C117: revenue $5.0M (weekly budget allocation), balance after $136.8M",
+          "City treasury C117: revenue $126k (28 cleared charges, fined at the hood rate), balance after $136.9M"
+        ],
+        "evidence": [
+          {
+            "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 jobs, 1 up, 0 down); Community Platform 1 (350 jobs, 1 up, 0 down); Housing & Social Services 1 (320 jobs, 1 up, 0 down); Architecture 4 (292 jobs, 2 up, 2 down); Nightlife & Entertainment 9 (280 jobs, 6 up, 3 down); Sports 2 (270 jobs, 2 up, 0 down); Media & Journalism 4 (269 jobs, 3 up, 1 down); Restaurant & Dining 27 (264 jobs, 19 up, 8 down); Retail 31 (241 jobs, 16 up, 15 down); Legal & Judicial 1 (222 jobs, 1 up, 0 down); As Stadium 1 (110 jobs, 1 up, 0 down); Faith Organization 9 (103 jobs, 9 up, 0 down); Services 19 (101 jobs, 14 up, 5 down); Agent Communication 1 (100 jobs, 1 up, 0 down); Community Services 1 (94 jobs, 0 up, 1 down); Cafe / dining 10 (91 jobs, 5 up, 4 down); AI Research 1 (86 jobs, 1 up, 0 down); Food & Beverage 5 (62 jobs, 3 up, 2 down); Coworking / Tech Hub 1 (62 jobs, 1 up, 0 down); Civic Tech 2 (51 jobs, 0 up, 2 down); Public Safety / Crisis Response 1 (47 jobs, 1 up, 0 down); Tech 1 (45 jobs, 1 up, 0 down); Tech / Applied Robotics 1 (45 jobs, 1 up, 0 down); Tech / Data Infrastructure 1 (45 jobs, 1 up, 0 down); Tech / Software 1 (45 jobs, 1 up, 0 down); Urban Systems Intelligence Firm 1 (41 jobs, 0 up, 0 down); Veterinary Clinic 1 (38 jobs, 1 up, 0 down); Optometry Clinic 1 (38 jobs, 0 up, 1 down); Urgent Care Clinic 1 (38 jobs, 0 up, 1 down); Pediatric Clinic 1 (38 jobs, 1 up, 0 down); Medical Specialists 1 (38 jobs, 0 up, 1 down); Home Health Agency 1 (38 jobs, 1 up, 0 down); Real Estate 2 (37 jobs, 1 up, 1 down); Fast Food & Quick Service 1 (31 jobs, 0 up, 1 down); Construction Supply 1 (30 jobs, 1 up, 0 down); Cafe / gallery 1 (30 jobs, 1 up, 0 down); Bar / lounge 1 (30 jobs, 1 up, 0 down); Retail & Food 1 (30 jobs, 1 up, 0 down); Sports Bar & Dining 1 (30 jobs, 1 up, 0 down); Finance & Banking 1 (26 jobs, 1 up, 0 down); Law Firm 1 (26 jobs, 1 up, 0 down); Real Estate Finance 1 (26 jobs, 1 up, 0 down); Staffing Agency / Professional Services 1 (26 jobs, 1 up, 0 down); Estate Law 1 (26 jobs, 1 up, 0 down); Wealth Management / Finance 1 (26 jobs, 0 up, 1 down); Management Consulting 1 (26 jobs, 1 up, 0 down); Credit Union / Finance 1 (26 jobs, 1 up, 0 down); Biotech 1 (25 jobs, 1 up, 0 down); Community Development 2 (25 jobs, 2 up, 0 down); Development 1 (25 jobs, 1 up, 0 down); Cafe 2 (22 jobs, 2 up, 0 down); Sports Analytics 1 (20 jobs, 0 up, 1 down); Theater / Historic Landmark 2 (18 jobs, 2 up, 0 down); Transit & Infrastructure 1 (18 jobs, 1 up, 0 down); Tutoring 1 (15 jobs, 1 up, 0 down); Preschool & Early Education 1 (15 jobs, 1 up, 0 down); Private School 1 (15 jobs, 1 up, 0 down); Hospitality 1 (14 jobs, 1 up, 0 down); Venture Capital 1 (12 jobs, 0 up, 1 down); Hair Salon / Services 2 (12 jobs, 1 up, 1 down); Cigar Lounge 1 (11 jobs, 1 up, 0 down); Wine Bar 1 (11 jobs, 1 up, 0 down); Bar / Saloon / Historic Landmark 1 (11 jobs, 1 up, 0 down); Comedy Club 1 (11 jobs, 1 up, 0 down); Brewery 1 (11 jobs, 1 up, 0 down); Dance Club / Nightlife & Entertainment 1 (11 jobs, 1 up, 0 down); Late-Night Restaurant & Dining 1 (11 jobs, 1 up, 0 down); Bar / Lounge 1 (11 jobs, 1 up, 0 down); Korean Restaurant 1 (11 jobs, 1 up, 0 down); Coffee Roaster 1 (11 jobs, 1 up, 0 down); Bakery 1 (11 jobs, 1 up, 0 down); Fusion Restaurant 1 (11 jobs, 1 up, 0 down); Brunch Restaurant 1 (11 jobs, 1 up, 0 down); Karaoke Bar 1 (11 jobs, 1 up, 0 down); Bar 1 (11 jobs, 1 up, 0 down); Ramen Bar 1 (11 jobs, 1 up, 0 down); Small Plates & Natural Wine Bar 1 (11 jobs, 1 up, 0 down); Private Club 1 (11 jobs, 1 up, 0 down); Workforce Development 1 (11 jobs, 1 up, 0 down); Ice Cream / Dessert Cafe 1 (11 jobs, 0 up, 1 down); Taquería / Restaurant 1 (11 jobs, 1 up, 0 down); Vietnamese Restaurant 1 (11 jobs, 1 up, 0 down); Gentlemen's Club / Adult Entertainment 1 (11 jobs, 0 up, 1 down); Pool Hall & Bar 1 (11 jobs, 0 up, 1 down); Farmers Market 1 (11 jobs, 0 up, 1 down); Social Club 1 (11 jobs, 0 up, 1 down); Sports Bar & Grill 1 (11 jobs, 1 up, 0 down); Bakery / Patisserie 1 (11 jobs, 0 up, 1 down); Pizzeria / Restaurant & Dining 1 (11 jobs, 0 up, 1 down); Talent Management 1 (10 jobs, 1 up, 0 down); Bar / nightlife 1 (10 jobs, 1 up, 0 down); Music Venue 1 (9 jobs, 1 up, 0 down); Design Studio 1 (9 jobs, 1 up, 0 down); Theater Company / Performance Space 1 (9 jobs, 1 up, 0 down); Art Gallery 1 (9 jobs, 1 up, 0 down); Music School 1 (9 jobs, 1 up, 0 down); Artist Studios 1 (9 jobs, 1 up, 0 down); Movie Theater 1 (9 jobs, 0 up, 1 down); Synagogue 1 (6 jobs, 0 up, 1 down); Industrial Supply / Services 1 (6 jobs, 1 up, 0 down); Climbing Gym / Services 1 (6 jobs, 1 up, 0 down); Youth Recreation / Community 1 (6 jobs, 1 up, 0 down); Auto Repair / Services 1 (6 jobs, 1 up, 0 down); Community Kitchen 1 (6 jobs, 1 up, 0 down); Outdoor Rental / Services 1 (6 jobs, 1 up, 0 down); Property Management / Real Estate 1 (6 jobs, 1 up, 0 down); Cultural Center / Community / Historic Landmark 1 (6 jobs, 1 up, 0 down); Stadium / Historic Landmark 1 (6 jobs, 1 up, 0 down); Church 1 (5 jobs, 1 up, 0 down); Herbalist & Tea Shop 1 (4 jobs, 1 up, 0 down); Korean Grocery 1 (4 jobs, 1 up, 0 down); Wholesale Grocery 1 (4 jobs, 1 up, 0 down); Pharmacy / Retail 1 (4 jobs, 1 up, 0 down); Wine Shop 1 (4 jobs, 1 up, 0 down); Garden Center / Retail 1 (4 jobs, 0 up, 1 down); Wine & Spirits Shop 1 (4 jobs, 1 up, 0 down); Hardware Store 1 (4 jobs, 1 up, 0 down); Butcher Shop 1 (4 jobs, 0 up, 1 down); Grocery 1 (4 jobs, 1 up, 0 down); Quinceañera & Formalwear Boutique 1 (4 jobs, 1 up, 0 down); Mexican Grocery 1 (4 jobs, 1 up, 0 down); Pawn & Jewelry Shop 1 (4 jobs, 0 up, 1 down); Antiques Shop 1 (4 jobs, 1 up, 0 down); Women's Boutique 1 (4 jobs, 0 up, 1 down); Bike Shop 1 (4 jobs, 1 up, 0 down); Toy Store 1 (4 jobs, 0 up, 1 down); Jewelry Store 1 (4 jobs, 0 up, 1 down); Children's Boutique 1 (4 jobs, 0 up, 1 down); Men's Clothing Store 1 (4 jobs, 1 up, 0 down); Florist Shop 1 (4 jobs, 1 up, 0 down); Corporate 1 (3 jobs, 1 up, 0 down); Faith / Methodist 1 (1 jobs, 1 up, 0 down); Science 1 (0 jobs, 1 up, 0 down) — the rest of the ledger is on Business_Ledger",
+            "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/"
+          },
+          {
+            "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/"
+          },
+          {
+            "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/"
+          },
+          {
+            "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/"
+          },
+          {
+            "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/"
+          },
+          {
+            "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/"
+          },
+          {
+            "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/"
+          },
+          {
+            "text": "Hillside Family Dental (Healthcare), Glenview — 0 employees, revenue $936k, growing -0.7% a year — since C116: yearly growth rate +0.5 pts, revenue -$131, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00141 vs prev/"
+          },
+          {
+            "text": "Bay Tribune (Media & Journalism), Downtown — 63 employees, revenue $19.9M, growing 14.3% a year — since C116: yearly growth rate -0.4 pts, revenue +$54k, +1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00018 vs prev/"
+          },
+          {
+            "text": "Ridgeline Studio (Architecture), Uptown — 62 employees, revenue $33.1M, growing 16.1% a year — since C116: yearly growth rate -0.2 pts, revenue +$102k, +1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00053 vs prev/"
+          },
+          {
+            "text": "Atlas Bay Architects (Architecture), Downtown — 87 employees, revenue $43.0M, growing 13.2% a year — since C116: yearly growth rate +0.2 pts, revenue +$109k, +1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00089 vs prev/"
+          },
+          {
+            "text": "Bayline 6 (Media & Journalism), Jack London — 143 employees, revenue $46.7M, growing 12.9% a year — since C116: yearly growth rate +0.1 pts, revenue +$116k, +1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00183 vs prev/"
+          },
+          {
+            "text": "DigitalOcean (Cloud Infrastructure), Baylight District — 801 employees, revenue $522.4M, growing 5.2% a year — since C116: yearly growth rate -0.1 pts, revenue +$520k, +1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00002 vs prev/"
+          },
+          {
+            "text": "Marine Systems (Science), Baylight District — 0 employees, growing -1.8% a year — since C116: yearly growth rate +1.0 pts",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00105 vs prev/"
+          },
+          {
+            "text": "Slopeview Hardware (Retail), Glenview — 7 employees, revenue $630k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00143 vs prev/"
+          },
+          {
+            "text": "Ivy Hill Market (Retail), Ivy Hill — 0 employees, revenue $513k, growing -4.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$463",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00150 vs prev/"
+          },
+          {
+            "text": "Ivy Hill Cafe (Cafe / dining), Ivy Hill — 0 employees, revenue $311k, growing -2.4% a year — since C116: yearly growth rate +1.0 pts, revenue -$146",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00151 vs prev/"
+          },
+          {
+            "text": "Ivy Cleaners (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.9% a year — since C116: yearly growth rate +1.0 pts, revenue -$93",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00152 vs prev/"
+          },
+          {
+            "text": "Fold Laundry (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.8% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00155 vs prev/"
+          },
+          {
+            "text": "Shift Change Kitchen (Restaurant & Dining), San Antonio — 12 employees, revenue $866k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$108",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00172 vs prev/"
+          },
+          {
+            "text": "Lakeshore Cigar Club (Cigar Lounge), Lake Merritt — 11 employees, revenue $722k, growing 4.5% a year — since C116: yearly growth rate +1.0 pts, revenue +$629",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00241 vs prev/"
+          },
+          {
+            "text": "Grand Avenue Wine Bar (Wine Bar), Lake Merritt — 11 employees, revenue $722k, growing 4.8% a year — since C116: yearly growth rate +1.0 pts, revenue +$664",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00242 vs prev/"
+          },
+          {
+            "text": "Baylight Construction Authority (Construction), Baylight District — 451 employees, revenue $31.4M, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$16k",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00020 vs prev/"
+          },
+          {
+            "text": "Lucky Harbor Herbalist & Tea (Herbalist & Tea Shop), Chinatown — 4 employees, revenue $381k, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$199",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00206 vs prev/"
+          },
+          {
+            "text": "Seoul Corner Market (Korean Grocery), KONO — 4 employees, revenue $381k, growing 2.4% a year — since C116: yearly growth rate +1.0 pts, revenue +$178",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00215 vs prev/"
+          },
+          {
+            "text": "Ridgeline Ventures (Venture Capital), Lake Merritt — 12 employees, revenue $4.6M, growing 16.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00007 vs prev/"
+          },
+          {
+            "text": "Gridiron Analytics (Sports Analytics), Temescal — 20 employees, revenue $3.0M, growing 25.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00008 vs prev/"
+          },
+          {
+            "text": "Fruitvale Community Clinic (Healthcare), Fruitvale — 38 employees, revenue $8.2M, growing 13.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$21k",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00026 vs prev/"
+          },
+          {
+            "text": "Coliseum District Development (Real Estate), East Oakland — 31 employees, revenue $19.7M, growing 9.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$34k",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00029 vs prev/"
+          },
+          {
+            "text": "Fruitvale Diner (Restaurant & Dining), Fruitvale — 2 employees, revenue $208k, growing 11.9% a year — since C116: yearly growth rate -1.0 pts, revenue +$475",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00045 vs prev/"
+          },
+          {
+            "text": "Midnight Bistro (Restaurant & Dining), Downtown — 2 employees, revenue $253k, growing 12.5% a year — since C116: yearly growth rate -1.0 pts, revenue +$607",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00049 vs prev/"
+          },
+          {
+            "text": "Estuary Architects (Architecture), Lake Merritt — 45 employees, growing 10.0% a year — since C116: yearly growth rate -1.0 pts",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00055 vs prev/"
+          },
+          {
+            "text": "Romano's (Food & Beverage), Dimond — 16 employees, revenue $1.4M, growing 4.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$1k",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00075 vs prev/"
+          },
+          {
+            "text": "Port Grind (Food & Beverage), Grand Lake — 9 employees, revenue $1.0M, growing 12.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$2k",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00076 vs prev/"
+          },
+          {
+            "text": "B'nai Tikvah Synagogue (Synagogue), Piedmont Ave — 6 employees, revenue $382k, growing 2.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$204",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00092 vs prev/"
+          },
+          {
+            "text": "business-closure | closure: Ivy Hill Family Dental (Healthcare) — 0 jobs | Ivy Hill | mag -25 | targets BIZ-00153",
+            "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+          },
+          {
+            "text": "carryover | carryover: cycle 1 of 4 | Adams Point | mag -8 | targets BIZ-00061",
+            "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+          },
+          {
+            "text": "carryover | carryover: cycle 2 of 4 | Baylight District | mag -8 | targets BIZ-00105",
+            "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+          },
+          {
+            "text": "carryover | carryover: cycle 3 of 4 | Ivy Hill | mag -8 | targets BIZ-00150",
+            "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+          },
+          {
+            "text": "sector-impact:services/retail | Oakland Casino Town lost 3 employees | Baylight District | mag -8 | targets BIZ-00100",
+            "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+          },
+          {
+            "text": "Casino C117: 17 undocked wagers placed, 14 sports wagers placed; 2 settled, 15 voided",
+            "src": "output/beats/Casino_Ledger.jsonl @C117"
+          },
+          {
+            "text": "Casino house float: $246k",
+            "src": "output/beats/Casino_Ledger.jsonl HOUSE"
+          },
+          {
+            "text": "Maria Keen won on undocked (no) — staked $385, paid $705",
+            "src": "output/beats/Casino_Ledger.jsonl 0f679cb015012003"
+          },
+          {
+            "text": "Jax Caldera lost on undocked (neg) — staked $428, the house kept it",
+            "src": "output/beats/Casino_Ledger.jsonl 91a9400c9b3e9a11"
+          },
+          {
+            "text": "Downtown: median income $123k, median rent $3k, housing pressure 10, trajectory growth",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Temescal: median income $68k, median rent $2k, housing pressure 0.5, trajectory steady",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Laurel: median income $86k, median rent $2k, housing pressure 0, trajectory decay",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "West Oakland: median income $147k, median rent $4k, housing pressure 6.5, trajectory growth",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Fruitvale: median income $100k, median rent $3k, housing pressure 10, trajectory growth",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Jack London: median income $121k, median rent $3k, housing pressure 10, trajectory growth",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Rockridge: median income $162k, median rent $4k, housing pressure 3.5, trajectory steady",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Adams Point: median income $94k, median rent $2k, housing pressure 0, trajectory decay",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Grand Lake: median income $107k, median rent $3k, housing pressure 6, trajectory growth",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Piedmont Ave: median income $151k, median rent $4k, housing pressure 1.5, trajectory growth",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Chinatown: median income $85k, median rent $2k, housing pressure 0, trajectory steady",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Brooklyn: median income $129k, median rent $3k, housing pressure 0, trajectory decay",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Eastlake: median income $83k, median rent $2k, housing pressure 0, trajectory decay",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Glenview: median income $81k, median rent $2k, housing pressure 0, trajectory decay",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Dimond: median income $79k, median rent $2k, housing pressure 0, trajectory decay",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Ivy Hill: median income $77k, median rent $2k, housing pressure 0, trajectory decay",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "San Antonio: median income $69k, median rent $2k, housing pressure 0, trajectory decay",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "KONO: median income $83k, median rent $2k, housing pressure 1, trajectory steady",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Lake Merritt: median income $186k, median rent $5k, housing pressure 0, trajectory steady",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Uptown: median income $99k, median rent $2k, housing pressure 10, trajectory growth",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "Baylight District: median income $139k, median rent $3k, housing pressure 0, trajectory steady",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "East Oakland: median income $72k, median rent $2k, housing pressure 0, trajectory steady",
+            "src": "output/beats/Neighborhood_Map.jsonl @C117"
+          },
+          {
+            "text": "City treasury C117: revenue $5.0M (weekly budget allocation), balance after $136.8M",
+            "src": "output/beats/City_Treasury.jsonl @C117"
+          },
+          {
+            "text": "City treasury C117: revenue $126k (28 cleared charges, fined at the hood rate), balance after $136.9M",
+            "src": "output/beats/City_Treasury.jsonl @C117"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 116
+        },
+        "hooks": [],
+        "note": null,
+        "pageVoices": [],
+        "factCap": 68,
+        "peopleCap": 25,
+        "roomIsYours": ""
+      },
+      "wakePackage": "JORDAN-LEP2-3",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Dr. Lila Mezran",
+      "popid": "POP-00154",
+      "beatDomain": "HEALTH",
+      "persona": "lila-mezran",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 1,
+      "story": {
+        "kind": "beat-health",
+        "angle": "Chinatown carries the most sick residents (133) | 7 named on the hospital and cause records",
+        "label": "Chinatown carries the most sick residents (133) | 7 named on the hospital and cause records",
+        "hookLine": "Yu Zen is one of 7 residents on the record this cycle; Chinatown carries the most illness; 68 in hospital care citywide, 68 beds occupied.",
+        "hood": "Chinatown",
+        "citizens": [
+          "Yu Zen (POP-00194)",
+          "Deacon Seymour (POP-00528)",
+          "Maurice Franklin (POP-00801)",
+          "Joaquín Nakamura (POP-00248)",
+          "Coen Cartier (POP-00338)",
+          "Ronnie Lar (POP-00261)",
+          "Jerald Jensen (POP-00280)"
+        ],
+        "popids": [
+          "POP-00194",
+          "POP-00528",
+          "POP-00801",
+          "POP-00248",
+          "POP-00338",
+          "POP-00261",
+          "POP-00280"
+        ],
+        "ref": "output/beats/Neighborhood_Demographics.jsonl Sick @C117 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
+        "cycle": 117
+      },
+      "beatSlice": true,
+      "beatSeat": "lila-mezran",
+      "pulse": {
+        "className": "beat-health",
+        "score": 100,
+        "label": "Chinatown carries the most sick residents (133) | 7 named on the hospital and cause records",
+        "hood": "Chinatown",
+        "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C117 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "Chinatown carries the most sick residents (133) | 7 named on the hospital and cause records",
+        "hookLine": "Yu Zen is one of 7 residents on the record this cycle; Chinatown carries the most illness; 68 in hospital care citywide, 68 beds occupied.",
+        "anchorFacts": [
+          "Sick residents by neighborhood: Chinatown 133 (+1 vs C116), East Oakland 113 (-1 vs C116), Ivy Hill 109 (-3 vs C116), Fruitvale 108 (+1 vs C116), San Antonio 104 (-1 vs C116), Laurel 101 (-3 vs C116), Grand Lake 96 (-2 vs C116), Rockridge 96 (+0 vs C116) — 1,717 across 22 neighborhoods",
+          "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+          "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+          "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+          "The city illness rate stands at 3.9%, with 34 hospital admissions this cycle and 68 in care at the close.",
+          "Joaquín Nakamura slept badly for a few nights running (Uptown).",
+          "Coen Cartier prioritized their health after a scare (Chinatown).",
+          "Ronnie Lar got back into a morning walk routine (Fruitvale).",
+          "Jerald Jensen cooked healthier meals all week and felt the difference (West Oakland).",
+          "Citywide hospital this cycle: 34 admissions (0 tracked, 34 other residents); 68 in care at the close, 68 beds occupied; 34 left",
+          "Chinatown: 133 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+          "Adams Point: 81 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "Dimond: 88 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "East Oakland: 113 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+          "Eastlake: 85 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked"
+        ],
+        "evidence": [
+          {
+            "text": "Sick residents by neighborhood: Chinatown 133 (+1 vs C116), East Oakland 113 (-1 vs C116), Ivy Hill 109 (-3 vs C116), Fruitvale 108 (+1 vs C116), San Antonio 104 (-1 vs C116), Laurel 101 (-3 vs C116), Grand Lake 96 (-2 vs C116), Rockridge 96 (+0 vs C116) — 1,717 across 22 neighborhoods",
+            "src": "output/beats/Neighborhood_Demographics.jsonl Sick @C117"
+          },
+          {
+            "text": "Yu Zen (Rockridge) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00194"
+          },
+          {
+            "text": "Deacon Seymour (Lake Merritt) — in hospital care, active, admitted C105 after a workplace accident",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00528"
+          },
+          {
+            "text": "Maurice Franklin (Rockridge) — in hospital care, active, admitted C106 after severe seasonal flu",
+            "src": "output/beats/Hospital_Ledger.jsonl POP-00801"
+          },
+          {
+            "text": "The city illness rate stands at 3.9%, with 34 hospital admissions this cycle and 68 in care at the close.",
+            "src": "output/world_summary_c117.md \"## City State\""
+          },
+          {
+            "text": "Joaquín Nakamura slept badly for a few nights running (Uptown).",
+            "src": "output/world_summary_c117.md \"## Who Lived It ### Health\""
+          },
+          {
+            "text": "Coen Cartier prioritized their health after a scare (Chinatown).",
+            "src": "output/world_summary_c117.md \"## Who Lived It ### Health\""
+          },
+          {
+            "text": "Ronnie Lar got back into a morning walk routine (Fruitvale).",
+            "src": "output/world_summary_c117.md \"## Who Lived It ### Recovering\""
+          },
+          {
+            "text": "Jerald Jensen cooked healthier meals all week and felt the difference (West Oakland).",
+            "src": "output/world_summary_c117.md \"## Who Lived It ### Recovering\""
+          },
+          {
+            "text": "Citywide hospital this cycle: 34 admissions (0 tracked, 34 other residents); 68 in care at the close, 68 beds occupied; 34 left",
+            "src": "output/beats/Care_Justice_Census.jsonl hospital @C117 city"
+          },
+          {
+            "text": "Chinatown: 133 sick residents → 3 admissions → 6 in care at the close (0 tracked, 6 other residents) → 6 beds occupied; tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl hospital @C117 Chinatown"
+          },
+          {
+            "text": "Adams Point: 81 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl hospital @C117 Adams Point"
+          },
+          {
+            "text": "Dimond: 88 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl hospital @C117 Dimond"
+          },
+          {
+            "text": "East Oakland: 113 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl hospital @C117 East Oakland"
+          },
+          {
+            "text": "Eastlake: 85 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked",
+            "src": "output/beats/Care_Justice_Census.jsonl hospital @C117 Eastlake"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_ON_DISK",
+          "vs": 116
+        },
+        "hooks": [],
+        "note": null,
+        "pageVoices": [],
+        "roomIsYours": "the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift"
+      },
+      "wakePackage": "LILA-LEP2-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Trevor Shimizu",
+      "popid": "POP-00155",
+      "beatDomain": "INFRASTRUCTURE",
+      "persona": "trevor-shimizu",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "gridDay": 1,
+      "story": {
+        "kind": "beat-transit",
+        "angle": "12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+        "label": "12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record",
+        "hookLine": "12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.",
+        "hood": null,
+        "citizens": [
+          "Evan Lewis (POP-00200)",
+          "Joel Wren (POP-00218)",
+          "Jerald Jensen (POP-00280)",
+          "Coen Cartier (POP-00338)",
+          "Calvin Mwangi (POP-00573)",
+          "Eleanor Rivera (POP-00617)",
+          "Elena Soria Dominguez (POP-00791)",
+          "Ivy Tran (POP-01037)",
+          "Ximena Mehta (POP-01039)",
+          "Rosario Medina (POP-01053)",
+          "Delia Vargas-Ruiz (POP-01054)",
+          "Jerome Pittman (POP-01055)",
+          "Marisol Quintero (POP-01212)",
+          "Darnell Oyelaran (POP-01213)",
+          "Priya Raghunathan (POP-01214)",
+          "Tomás Villaseñor (POP-01215)",
+          "Mags Corliss (POP-00005)",
+          "Dana Reeve (POP-00010)",
+          "Alisha Peña (POP-00029)",
+          "John Ellis (POP-00033)",
+          "Babe Bono (POP-00047)",
+          "Julio Valencia (POP-00077)",
+          "Stephan Kollars (POP-00118)",
+          "Leonard Briggs (POP-00138)"
+        ],
+        "popids": [
+          "POP-00200",
+          "POP-00218",
+          "POP-00280",
+          "POP-00338",
+          "POP-00573",
+          "POP-00617",
+          "POP-00791",
+          "POP-01037",
+          "POP-01039",
+          "POP-01053",
+          "POP-01054",
+          "POP-01055",
+          "POP-01212",
+          "POP-01213",
+          "POP-01214",
+          "POP-01215",
+          "POP-00005",
+          "POP-00010",
+          "POP-00029",
+          "POP-00033",
+          "POP-00047",
+          "POP-00077",
+          "POP-00118",
+          "POP-00138"
+        ],
+        "ref": "output/beats/Transit_Metrics.jsonl Cycle 117",
+        "cycle": 117
+      },
+      "beatSlice": true,
+      "beatSeat": "trevor-shimizu",
+      "pulse": {
+        "className": "beat-transit",
+        "score": 100,
+        "label": "12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record",
+        "hood": null,
+        "source": "output/beats/Transit_Metrics.jsonl Cycle 117"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
+        "hookLine": "12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.",
+        "anchorFacts": [
+          "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+          "The week on the line — every cause on the record this cycle, once: breeze; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Lake Merritt, Temescal; events in Lake Merritt; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; game day (Jack London); events in West Oakland; events in Temescal, Rockridge; events in Rockridge, Piedmont Ave ×2; game day (Jack London, Downtown)",
+          "Weather this cycle: breeze, 59°F (7 cycles of clear)",
+          "Game on the sports feed this cycle: Oaks at KONO — One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnovers. That makes 27 and 32 in his two games against Denver this season. T. Jerome kept his run going off the bench with a 14-point, 11-assist double-double in 25 minutes on 5 of 8 shooting and 4 of 5 from three. He has scored in double figures four straight games: 19, 28, 23 and 14. Wendell Carter Jr. had 17 points and 6 rebounds on 6 of 9, his third straight game in double figures after 17 and 14, and AJ Dybantsa added 15 on 7 of 11 after 18 and 19 in his last two. As a team the Oaks shot 48 of 92, 52 percent, and 21 of 43 from three, 49 percent, with 31 assists, though they turned it over 22 times. The Oaks move to 10-2 and remain 2-1 in Cup play. (the rider lift is real only where a station row says \"game day\")",
+          "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oakland trailed 25-14 after one and 59-44 at the half, down 15. The Oaks cut it to 78-74 after a 30-19 third quarter and won the fourth 24-18, outscoring Golden State 54-37 in the second half. Austin Reaves led the Oaks again with 23 points, 6 rebounds, 5 assists and 3 steals in 33 minutes on 9 of 17 shooting and 3 of 6 from three. T. Jerome scored 17 in 23 minutes on 7 of 13 and 3 of 8 from three with no turnovers, his fifth straight game in double figures: 19, 28, 23, 14 and 17. AJ Dybantsa added 12, getting to the line for 5 of 7, his fourth straight game in double figures after 18, 19 and 15. As a team the Oaks shot 39 of 88, 44 percent, and 9 of 34 from three, with 23 assists and 23 turnovers, and won it in the second half. The Oaks move to 11-2 and 3-1 in Cup play. (the rider lift is real only where a station row says \"game day\")",
+          "Chaos car on the line this cycle: bart_train — clean run → neighborhood Lake Merritt (TransitDelay 0). A train hit carries one cycle: it reaches the platforms on NEXT cycle's station rows as \"BART train: … (last week)\"",
+          "8 stations + 10 corridors on the record this cycle; total ridership 71,090 (C116: 68,505)",
+          "12th St Oakland City Center: ridership 14,175 (+1,962 vs C116), on-time 77% (-4 pts) — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14)",
+          "Rockridge: ridership 5,945 (+1,388 vs C116), on-time 82% — breeze; base: ledger; events in Rockridge, Piedmont Ave ×2; crowded platforms (city transit congestion 0.14)",
+          "Fruitvale: ridership 8,007 (-1,336 vs C116), on-time 85% (+2 pts) — breeze; base: ledger; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; crowded platforms (city transit congestion 0.14)",
+          "Lake Merritt: ridership 7,430 (+716 vs C116), on-time 84% (+7 pts) — breeze; base: ledger; events in Lake Merritt; crowded platforms (city transit congestion 0.14)",
+          "Coliseum: ridership 8,209 (-699 vs C116), on-time 82% (-1 pts) — breeze; base: ledger; events in East Oakland; crowded platforms (city transit congestion 0.14)",
+          "West Oakland: ridership 9,100 (+327 vs C116), on-time 86% (+7 pts) — breeze; base: ledger; game day (Jack London); events in West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14)",
+          "MacArthur: ridership 4,368 (+196 vs C116), on-time 85% (+7 pts) — breeze; base: ledger; events in Temescal, Rockridge; crowded platforms (city transit congestion 0.14)",
+          "19th St Oakland: ridership 13,856 (+31 vs C116), on-time 81% (+3 pts) — breeze; base: ledger; game day (Downtown); events in Lake Merritt, Temescal; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14)",
+          "I-880 North: traffic index 100 (+11 vs C116) — breeze; base: ledger; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+          "I-880 South: traffic index 93 (+1 vs C116) — breeze; base: ledger",
+          "I-580 East: traffic index 82 (-1 vs C116) — breeze; base: ledger",
+          "I-580 West: traffic index 80 (-1 vs C116) — breeze; base: ledger",
+          "I-980: traffic index 100 (+14 vs C116) — breeze; base: ledger; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+          "Broadway: traffic index 73 (+1 vs C116) — breeze; base: ledger; game day (Downtown)",
+          "International Blvd: traffic index 84 (+11 vs C116) — breeze; base: ledger",
+          "MacArthur Blvd: traffic index 77 (+7 vs C116) — breeze; base: ledger",
+          "Telegraph Ave: traffic index 79 (+2 vs C116) — breeze; base: ledger; game day (Downtown)",
+          "Grand Ave: traffic index 65 (+1 vs C116) — breeze; base: ledger"
+        ],
+        "evidence": [
+          {
+            "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117 Factors (frame)"
+          },
+          {
+            "text": "The week on the line — every cause on the record this cycle, once: breeze; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Lake Merritt, Temescal; events in Lake Merritt; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; game day (Jack London); events in West Oakland; events in Temescal, Rockridge; events in Rockridge, Piedmont Ave ×2; game day (Jack London, Downtown)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117 Factors"
+          },
+          {
+            "text": "Weather this cycle: breeze, 59°F (7 cycles of clear)",
+            "src": "output/beats/Cycle_Weather.jsonl CycleID 117"
+          },
+          {
+            "text": "Game on the sports feed this cycle: Oaks at KONO — One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnovers. That makes 27 and 32 in his two games against Denver this season. T. Jerome kept his run going off the bench with a 14-point, 11-assist double-double in 25 minutes on 5 of 8 shooting and 4 of 5 from three. He has scored in double figures four straight games: 19, 28, 23 and 14. Wendell Carter Jr. had 17 points and 6 rebounds on 6 of 9, his third straight game in double figures after 17 and 14, and AJ Dybantsa added 15 on 7 of 11 after 18 and 19 in his last two. As a team the Oaks shot 48 of 92, 52 percent, and 21 of 43 from three, 49 percent, with 31 assists, though they turned it over 22 times. The Oaks move to 10-2 and remain 2-1 in Cup play. (the rider lift is real only where a station row says \"game day\")",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 117"
+          },
+          {
+            "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oakland trailed 25-14 after one and 59-44 at the half, down 15. The Oaks cut it to 78-74 after a 30-19 third quarter and won the fourth 24-18, outscoring Golden State 54-37 in the second half. Austin Reaves led the Oaks again with 23 points, 6 rebounds, 5 assists and 3 steals in 33 minutes on 9 of 17 shooting and 3 of 6 from three. T. Jerome scored 17 in 23 minutes on 7 of 13 and 3 of 8 from three with no turnovers, his fifth straight game in double figures: 19, 28, 23, 14 and 17. AJ Dybantsa added 12, getting to the line for 5 of 7, his fourth straight game in double figures after 18, 19 and 15. As a team the Oaks shot 39 of 88, 44 percent, and 9 of 34 from three, with 23 assists and 23 turnovers, and won it in the second half. The Oaks move to 11-2 and 3-1 in Cup play. (the rider lift is real only where a station row says \"game day\")",
+            "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 117"
+          },
+          {
+            "text": "Chaos car on the line this cycle: bart_train — clean run → neighborhood Lake Merritt (TransitDelay 0). A train hit carries one cycle: it reaches the platforms on NEXT cycle's station rows as \"BART train: … (last week)\"",
+            "src": "output/world_summary_c117.md ## Chaos Events"
+          },
+          {
+            "text": "8 stations + 10 corridors on the record this cycle; total ridership 71,090 (C116: 68,505)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "12th St Oakland City Center: ridership 14,175 (+1,962 vs C116), on-time 77% (-4 pts) — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "Rockridge: ridership 5,945 (+1,388 vs C116), on-time 82% — breeze; base: ledger; events in Rockridge, Piedmont Ave ×2; crowded platforms (city transit congestion 0.14)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "Fruitvale: ridership 8,007 (-1,336 vs C116), on-time 85% (+2 pts) — breeze; base: ledger; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; crowded platforms (city transit congestion 0.14)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "Lake Merritt: ridership 7,430 (+716 vs C116), on-time 84% (+7 pts) — breeze; base: ledger; events in Lake Merritt; crowded platforms (city transit congestion 0.14)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "Coliseum: ridership 8,209 (-699 vs C116), on-time 82% (-1 pts) — breeze; base: ledger; events in East Oakland; crowded platforms (city transit congestion 0.14)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "West Oakland: ridership 9,100 (+327 vs C116), on-time 86% (+7 pts) — breeze; base: ledger; game day (Jack London); events in West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "MacArthur: ridership 4,368 (+196 vs C116), on-time 85% (+7 pts) — breeze; base: ledger; events in Temescal, Rockridge; crowded platforms (city transit congestion 0.14)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "19th St Oakland: ridership 13,856 (+31 vs C116), on-time 81% (+3 pts) — breeze; base: ledger; game day (Downtown); events in Lake Merritt, Temescal; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "I-880 North: traffic index 100 (+11 vs C116) — breeze; base: ledger; game day (Jack London, Downtown); Baylight District — Final Council Vote: construction-active",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "I-880 South: traffic index 93 (+1 vs C116) — breeze; base: ledger",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "I-580 East: traffic index 82 (-1 vs C116) — breeze; base: ledger",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "I-580 West: traffic index 80 (-1 vs C116) — breeze; base: ledger",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "I-980: traffic index 100 (+14 vs C116) — breeze; base: ledger; game day (Downtown); Baylight District — Final Council Vote: construction-active",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "Broadway: traffic index 73 (+1 vs C116) — breeze; base: ledger; game day (Downtown)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "International Blvd: traffic index 84 (+11 vs C116) — breeze; base: ledger",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "MacArthur Blvd: traffic index 77 (+7 vs C116) — breeze; base: ledger",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "Telegraph Ave: traffic index 79 (+2 vs C116) — breeze; base: ledger; game day (Downtown)",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          },
+          {
+            "text": "Grand Ave: traffic index 65 (+1 vs C116) — breeze; base: ledger",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": {
+          "state": "PRIOR_CYCLE_IN_TABLE",
+          "vs": 116
+        },
+        "hooks": [
+          {
+            "text": "Multiple infrastructure signals detected. Could be coincidence or early pattern.",
+            "angle": "general coverage",
+            "domain": "INFRASTRUCTURE",
+            "hood": null,
+            "priority": 2
+          },
+          {
+            "text": "Story seed 3bc9d285 (Fruitvale): Isaac Renteria, Kai Tanaka, Martin Richards, Marisol Trujillo — Isaac Renteria — went to bed without mentioning the small thing that bothered them; Kai Tanaka — watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them; Martin Richards — recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for; Marisol Trujillo — told the story as if they had been there when they had only heard it",
+            "angle": "GENERAL"
+          },
+          {
+            "text": "Story seed 20aed258 (Jack London): Talia Finch, Brian Adams, Marcus Walker, Travis Golin — Talia Finch — showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would; Brian Adams — picked a favorite Oak before the team had even settled its rotation; Marcus Walker — heard the block erupt through an open window when the final play landed; Travis Golin — saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+            "angle": "CIVIC"
+          },
+          {
+            "text": "Story seed 8d4e0496 (Downtown): Tao Lee, Aisha Toure, Jillian Tort, Cristina Booker — Tao Lee — argued the bullpen order at the barbershop like it was city policy; Aisha Toure — remembered a kindness never returned and decided it was too late to matter; Jillian Tort — wandered through the late-night market stalls, clutching a paper cup of hot tea; Cristina Booker — overheard a goodbye at the corner that sounded permanent, and carried it a block",
+            "angle": "SAFETY"
+          },
+          {
+            "text": "Story seed d11ba782 (West Oakland): Sidney Tumolo, Alexa Ward, Lucinda Tanaka, Ariana Reyes — Sidney Tumolo — felt glad when the kid across the hall got scolded on the landing; Alexa Ward — put on their good suit for the Sunday service because some traditions still matter; Lucinda Tanaka — said they had called when the thought alone had been enough near an old warehouse corridor; Ariana Reyes — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+            "angle": "SAFETY"
+          }
+        ],
+        "note": null,
+        "pageVoices": [],
+        "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first"
+      },
+      "wakePackage": "TREVOR-LEP2-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Anthony Raines",
+      "popid": "POP-00017",
+      "beatDomain": "SPORTS_ANALYTICS",
+      "persona": "anthony-raines",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "gridDay": 1,
+      "story": {
+        "kind": "sports-analytics",
+        "angle": "The A's move on the feed is a board-architecture question first: does the fit close a hole or stack redundancy — Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "label": "A's · re-signing — Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "hookLine": "Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "hood": "Jack London",
+        "pulseClass": "roster-architecture",
+        "team": "A's",
+        "eventKind": "re-signing",
+        "citizens": [
+          "Mariano Rosales (POP-00555)"
+        ],
+        "popids": [
+          "POP-00555"
+        ],
+        "ref": "world_summary_c117.md ## Sports",
+        "cycle": 117
+      },
+      "anthonySlice": true,
+      "analytic": true,
+      "pulse": {
+        "className": "roster-architecture",
+        "score": 92,
+        "label": "A's · re-signing — Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "team": "A's",
+        "eventKind": "re-signing",
+        "seasonType": "off-season",
+        "storyAngle": "Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "hasStats": true,
+        "record": "-",
+        "streak": "-",
+        "foilNumber": "1.7WAR",
+        "feedCycle": 117
+      },
+      "bag": {
+        "tools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 2,
+            "name": "Role-Fit Architecture"
+          }
+        ],
+        "claim": "The A's move on the feed is a board-architecture question first: does the fit close a hole or stack redundancy — Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "foilNumber": "1.7WAR"
+      },
+      "prewrite": {
+        "reporter": "Anthony Raines",
+        "bagTools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 2,
+            "name": "Role-Fit Architecture"
+          }
+        ],
+        "lineFacts": [
+          "Feed line: Mariano Rosales/5yr/$88M/$17.6M AAV/2042-2046/FA 2047",
+          "Feed line: Mariano Rosales/2041/63.2IP/1.84ERA/8-3/42SV/82SO/14BB/1.7WAR/All-Star",
+          "Feed line: Mariano Rosales/95OVR/age 27/$10.1M 2041",
+          "Feed line: Mariano Rosales/4-seam 96mph/2-seam 94mph/changeup 84mph",
+          "Event kind (feed): A's — re-signing (off-season)",
+          "NamesUsed (feed): Mariano Rosales (CP)"
+        ],
+        "dossierFacts": [
+          "Mariano Rosales TrueSource: 2041 REGULAR SEASON — Games: 60 Games Started: 0 Wins: 8 Losses: 3 Saves: 42 Blown Saves: 3 Holds: 2 Innings Pitched: 63.2 Hits Allowed: 35 Runs Allow | WAR: 1.7 | AWARDS (Career Reference) - All-Star (2041) - AL Saves Leader (42 SV, 2041)"
+        ],
+        "feedFacts": [
+          "StoryAngle: Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+          "Notes: Mariano Rosales came to Oakland in C39 as the young arm in the trade that sent five-time All-Star closer Edmundo Pena to Baltimore, a 26-year-old with A potential and an 89 overall, and the question then was whether he was ready to replace a legend. In C83 he was named the closer on a one-year, $10.1 million deal with free agency waiting at the end of it. That free agency is off the table now. Rosales has signed a five-year contract at $17.6 million a year, $88 million in all, running 2042 through 2046 with no contract option, and he would not reach free agency until 2047. He earned the raise in the season the A's went 127-35 and won the seventh World Series. Rosales went 8-3 with 42 saves and a 1.84 ERA in 63.2 innings, struck out 82 and walked 14, finished with 1.7 WAR and made the All-Star team, one of seven A's selected in C99. The one mark on the year came in World Series game 2, when he and Clark Saryan each gave up 2 runs in relief of Travis Coles. He goes into the new deal at 27, with a 95 overall that is still climbing, a 96 mph four-seam fastball, a 94 mph two-seamer and an 84 mph changeup. The Utah-born right-hander, a second round pick in 2035, lives in Jack London. The deal also answers part of the bullpen question this page raised in C114, whether the A's would spend on a high-end arm or turn the late innings over to rookies Saryan and Julio Valencia. The ninth inning stays with Rosales."
+        ],
+        "claim": "The A's move on the feed is a board-architecture question first: does the fit close a hole or stack redundancy — Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+        ],
+        "foilNumber": "1.7WAR",
+        "anchorFacts": [
+          "Feed line: Mariano Rosales/5yr/$88M/$17.6M AAV/2042-2046/FA 2047",
+          "Feed line: Mariano Rosales/2041/63.2IP/1.84ERA/8-3/42SV/82SO/14BB/1.7WAR/All-Star",
+          "Feed line: Mariano Rosales/95OVR/age 27/$10.1M 2041",
+          "Feed line: Mariano Rosales/4-seam 96mph/2-seam 94mph/changeup 84mph"
+        ],
+        "hooks": []
+      },
+      "wakePackage": "ANTHONY-LEP2-3",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Tamsin Pruitt",
+      "popid": "POP-01210",
+      "beatDomain": "COMMUNITY",
+      "persona": "tamsin-pruitt",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "gridDay": 1,
+      "story": {
+        "kind": "beat-lives",
+        "angle": "The lives of C117: 11 people — Serg Cerrano welcomed a new child, Fruitvale",
+        "label": "Serg Cerrano welcomed a new child, Fruitvale",
+        "hookLine": "Serg Cerrano first. The event is the lead; one true detail; what came next only if the record says.",
+        "hood": "Fruitvale",
+        "citizens": [
+          "Serg Cerrano (POP-00523)",
+          "Joseph Cramp (POP-00272)",
+          "Travis Paiz (POP-00222)",
+          "Jocelyn Santo (POP-00547)",
+          "Alma Lewis (POP-00304)",
+          "Inga Creator (POP-00196)",
+          "Dimmie Washington (POP-00511)",
+          "Gloria Liu (POP-00827)",
+          "Paul Skenes (POP-00125)",
+          "Cathy Skeet (POP-00308)",
+          "Robert Corliss (POP-00594)",
+          "Benji Dillon (POP-00018)",
+          "Maya Torres-Dillon (POP-00742)",
+          "Rick Dillon (POP-00743)"
+        ],
+        "popids": [
+          "POP-00523",
+          "POP-00272",
+          "POP-00222",
+          "POP-00547",
+          "POP-00304",
+          "POP-00196",
+          "POP-00511",
+          "POP-00827",
+          "POP-00125",
+          "POP-00308",
+          "POP-00594",
+          "POP-00018",
+          "POP-00742",
+          "POP-00743"
+        ],
+        "ref": "output/beats/Lived_Events.jsonl @C117 batch 45e0d8",
+        "cycle": 117
+      },
+      "beatSlice": true,
+      "beatSeat": "tamsin-pruitt",
+      "pulse": {
+        "className": "beat-lives",
+        "score": 100,
+        "label": "Serg Cerrano welcomed a new child, Fruitvale",
+        "hood": "Fruitvale",
+        "source": "output/beats/Lived_Events.jsonl @C117 batch 45e0d8"
+      },
+      "prewrite": {
+        "schema": "BEAT-SLICE-1",
+        "method": "BEAT_TAB_FACTS",
+        "missing": [],
+        "angle": "The lives of C117: 11 people — Serg Cerrano welcomed a new child, Fruitvale",
+        "hookLine": "Serg Cerrano first. The event is the lead; one true detail; what came next only if the record says.",
+        "anchorFacts": [
+          "Serg Cerrano welcomed a new child, Fruitvale (C117). What came next: the record does not say yet",
+          "Serg Cerrano — in their life, C117: set the table for one though their sister had said she might stop by",
+          "Serg Cerrano — in their life, C117: felt the city's pace pulling them forward",
+          "Serg Cerrano — in their life, C117: walked by the new place on the corner and decided from the sidewalk it wasn't for them near a taqueria patio",
+          "Serg Cerrano — in their life, C117: ran the numbers on staying put another year",
+          "Joseph Cramp was promoted; the record lists their work as Janitor, Downtown (C117). What came next: the record does not say yet",
+          "Joseph Cramp — in their life, C116: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+          "Joseph Cramp — in their life, C117: Promoted at City of Oakland after 28 years as a Janitor.",
+          "Joseph Cramp — in their life, C117: started the application and closed the tab after the first page",
+          "Joseph Cramp — in their life, C117: held the door and got a whole conversation for it",
+          "Travis Paiz and Jocelyn Santo set up a household together in Lake Merritt, renting (C117)",
+          "Travis Paiz — in their life, C116: wrapped the good dishes twice and labeled the box in block letters",
+          "Travis Paiz — in their life, C116: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+          "Travis Paiz — in their life, C117: married Jocelyn Santo; a household begins in Lake Merritt",
+          "Travis Paiz — in their life, C117: listened to the ninth inning on the porch radio and let the street hear it too",
+          "Jocelyn Santo — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+          "Jocelyn Santo — in their life, C117: married Travis Paiz; a household begins in Lake Merritt",
+          "Jocelyn Santo — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+          "Jocelyn Santo — in their life, C117: ordered in for the third night and asked for it to be left at the door",
+          "Alma Lewis moved into a place of their own in Rockridge, renting (C117)",
+          "Alma Lewis — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+          "Alma Lewis — in their life, C117: A manager at Port of Oakland put their name forward for the open lead role.",
+          "Alma Lewis — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+          "Alma Lewis — in their life, C117: brought home a new plant and picked its spot carefully",
+          "Inga Creator — spent an afternoon at the sound archive listening to recordings near a late-night counter, Uptown — one of 4 people the Cycle's civic turn reached (Citywide reaction: last week's Tribune CIVIC coverage rated +3 (positive, 2 articles, Carmen Delaine).) (C117)",
+          "Inga Creator — in their life, C116: caught themselves bragging a little about the neighborhood lately",
+          "Dimmie Washington — checked the Civis Systems Field livestream just to see if the grass had been laid down yet near a local pop-up, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund is disbursement-active — ongoing economic effects in West Oakland; the city feels it through these…) (C117)",
+          "Dimmie Washington — in their life, C116: let the phone ring twice before answering so it wouldn't seem like they'd been waiting",
+          "Dimmie Washington — in their life, C116: A nurse coming off shift in West Oakland said she sees them around more than she expected to.",
+          "Dimmie Washington — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+          "Dimmie Washington — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near an old warehouse corridor",
+          "Gloria Liu — gave a whole afternoon to a hobby without once checking the clock, Rockridge — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C117)",
+          "Gloria Liu — in their life, C116: overheard coworkers talking about last night's scene near College Avenue",
+          "Gloria Liu — in their life, C116: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+          "Gloria Liu — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "Gloria Liu — the Tribune named them in a piece headlined One More Backpack in Rockridge (Civic, C116)",
+          "Gloria Liu — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+          "Paul Skenes — enjoying the familiar rhythm of spring prep, Lake Merritt (C117 — what happened in their life, not words they said)",
+          "Paul Skenes — in their life, C116: ran into neighbors at Lake Merritt Blossom Walk",
+          "Paul Skenes — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+          "Paul Skenes — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+          "Paul Skenes — the Tribune named them in a piece headlined The Dismantling: When Championships Require Sacrifice (Sports)",
+          "Cathy Skeet — swapped seed packets with a neighbor over the fence, Chinatown (C117 — what happened in their life, not words they said)",
+          "Cathy Skeet — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+          "Cathy Skeet — in their life, C117: carried three boxes of canned goods from the pantry truck and felt it in their lower back near a small bakery line",
+          "Cathy Skeet — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+          "Cathy Skeet — in their life, C117: the kids could say Soo Loo before they could say the mayor's name",
+          "Robert Corliss — let the afternoon go by without finding one thing that needed them, Lake Merritt (C117 — what happened in their life, not words they said)",
+          "Robert Corliss — in their life, C116: still feeling the energy from last night's city buzz",
+          "Robert Corliss — in their life, C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+          "Robert Corliss — in their life, C117: kept a small promise to themselves nobody else knew about",
+          "Robert Corliss — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+          "Benji Dillon and Maya Torres-Dillon and Rick Dillon — moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit, Piedmont Ave (C117 — what happened in their life, not words they said)",
+          "Benji Dillon — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner",
+          "Benji Dillon — in their life, C117: took the job at the back of the fellowship hall, the one nobody talks during",
+          "Benji Dillon — in their life, C117: cancelled the standing coffee date and sent nothing in its place",
+          "Benji Dillon — in their life, C117: Dillon Clinic returned $7631 to the line this week",
+          "Benji Dillon — Lives already wrote this person: a moment the record kept (C115), a moment the record kept (C116)",
+          "Benji Dillon — the Tribune named them in a piece headlined Benji Dillon Doesn't Think It's a Big Change, and That's the Story (Culture, C116)",
+          "Benji Dillon — the Tribune named them in a piece headlined The Hello That Outlasts the Headline (Culture, C116)",
+          "Benji Dillon — the Tribune named them in a piece headlined The Lives of C116 (Culture, C116)",
+          "Maya Torres-Dillon — in their life, C116: heard a shopkeeper say the family name like it still meant something",
+          "Maya Torres-Dillon — in their life, C117: took the long way home just to check the Baylight fence line's progress near a cafe on the avenue",
+          "Maya Torres-Dillon — in their life, C117: read the Tribune's front page twice — once for the news, once to see who was in it",
+          "Maya Torres-Dillon — in their life, C117: wore the green-and-gold cap to the corner store and got three nods for it near College Avenue",
+          "Maya Torres-Dillon — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+          "Maya Torres-Dillon — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+          "Maya Torres-Dillon — the Tribune named them in a piece headlined The Top Mark, From the Pickup Line (Civic, C112)",
+          "Rick Dillon — in their life, C117: traded the good sticker for the rare one and called it a fair deal",
+          "Rick Dillon — the Tribune named them in a piece headlined The Lives Page, Cycle 116 (Culture, C116)",
+          "Rick Dillon — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+          "Rick Dillon — the Tribune named them in a piece headlined The Rockridge Equation (Civic, C106)"
+        ],
+        "evidence": [
+          {
+            "text": "Serg Cerrano welcomed a new child, Fruitvale (C117). What came next: the record does not say yet",
+            "src": "output/beats/Lived_Events.jsonl @C117",
+            "id": "birth:POP-00523:117",
+            "kind": "birth",
+            "eventCycle": 117,
+            "popid": "POP-00523"
+          },
+          {
+            "text": "Serg Cerrano — in their life, C117: set the table for one though their sister had said she might stop by",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00523"
+          },
+          {
+            "text": "Serg Cerrano — in their life, C117: felt the city's pace pulling them forward",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00523"
+          },
+          {
+            "text": "Serg Cerrano — in their life, C117: walked by the new place on the corner and decided from the sidewalk it wasn't for them near a taqueria patio",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00523"
+          },
+          {
+            "text": "Serg Cerrano — in their life, C117: ran the numbers on staying put another year",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00523"
+          },
+          {
+            "text": "Joseph Cramp was promoted; the record lists their work as Janitor, Downtown (C117). What came next: the record does not say yet",
+            "src": "output/beats/Lived_Events.jsonl @C117",
+            "id": "promotion:POP-00272:117",
+            "kind": "promotion",
+            "eventCycle": 117,
+            "popid": "POP-00272"
+          },
+          {
+            "text": "Joseph Cramp — in their life, C116: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00272"
+          },
+          {
+            "text": "Joseph Cramp — in their life, C117: Promoted at City of Oakland after 28 years as a Janitor.",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00272"
+          },
+          {
+            "text": "Joseph Cramp — in their life, C117: started the application and closed the tab after the first page",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00272"
+          },
+          {
+            "text": "Joseph Cramp — in their life, C117: held the door and got a whole conversation for it",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00272"
+          },
+          {
+            "text": "Travis Paiz and Jocelyn Santo set up a household together in Lake Merritt, renting (C117)",
+            "src": "output/beats/Household_Ledger.jsonl @C117",
+            "id": "household:HH-0117-M738:117",
+            "kind": "household",
+            "popid": "POP-00222"
+          },
+          {
+            "text": "Travis Paiz — in their life, C116: wrapped the good dishes twice and labeled the box in block letters",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00222"
+          },
+          {
+            "text": "Travis Paiz — in their life, C116: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00222"
+          },
+          {
+            "text": "Travis Paiz — in their life, C117: married Jocelyn Santo; a household begins in Lake Merritt",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00222"
+          },
+          {
+            "text": "Travis Paiz — in their life, C117: listened to the ninth inning on the porch radio and let the street hear it too",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00222"
+          },
+          {
+            "text": "Jocelyn Santo — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00547"
+          },
+          {
+            "text": "Jocelyn Santo — in their life, C117: married Travis Paiz; a household begins in Lake Merritt",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00547"
+          },
+          {
+            "text": "Jocelyn Santo — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00547"
+          },
+          {
+            "text": "Jocelyn Santo — in their life, C117: ordered in for the third night and asked for it to be left at the door",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00547"
+          },
+          {
+            "text": "Alma Lewis moved into a place of their own in Rockridge, renting (C117)",
+            "src": "output/beats/Household_Ledger.jsonl @C117",
+            "id": "household:HH-0117-F001:117",
+            "kind": "household",
+            "popid": "POP-00304"
+          },
+          {
+            "text": "Alma Lewis — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00304"
+          },
+          {
+            "text": "Alma Lewis — in their life, C117: A manager at Port of Oakland put their name forward for the open lead role.",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00304"
+          },
+          {
+            "text": "Alma Lewis — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00304"
+          },
+          {
+            "text": "Alma Lewis — in their life, C117: brought home a new plant and picked its spot carefully",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00304"
+          },
+          {
+            "text": "Inga Creator — spent an afternoon at the sound archive listening to recordings near a late-night counter, Uptown — one of 4 people the Cycle's civic turn reached (Citywide reaction: last week's Tribune CIVIC coverage rated +3 (positive, 2 articles, Carmen Delaine).) (C117)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+            "id": "seed:d2ac5a81:117:POP-00196",
+            "kind": "seed",
+            "popid": "POP-00196"
+          },
+          {
+            "text": "Inga Creator — in their life, C116: caught themselves bragging a little about the neighborhood lately",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00196"
+          },
+          {
+            "text": "Dimmie Washington — checked the Civis Systems Field livestream just to see if the grass had been laid down yet near a local pop-up, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund is disbursement-active — ongoing economic effects in West Oakland; the city feels it through these…) (C117)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+            "id": "seed:bacd0fbe:117:POP-00511",
+            "kind": "seed",
+            "popid": "POP-00511"
+          },
+          {
+            "text": "Dimmie Washington — in their life, C116: let the phone ring twice before answering so it wouldn't seem like they'd been waiting",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00511"
+          },
+          {
+            "text": "Dimmie Washington — in their life, C116: A nurse coming off shift in West Oakland said she sees them around more than she expected to.",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00511"
+          },
+          {
+            "text": "Dimmie Washington — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00511"
+          },
+          {
+            "text": "Dimmie Washington — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near an old warehouse corridor",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00511"
+          },
+          {
+            "text": "Gloria Liu — gave a whole afternoon to a hobby without once checking the clock, Rockridge — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C117)",
+            "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+            "id": "seed:1db81f8c:117:POP-00827",
+            "kind": "seed",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Gloria Liu — in their life, C116: overheard coworkers talking about last night's scene near College Avenue",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Gloria Liu — in their life, C116: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Gloria Liu — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Gloria Liu — the Tribune named them in a piece headlined One More Backpack in Rockridge (Civic, C116)",
+            "src": "archive/ARTICLE_INDEX.jsonl 084e661bc365baac",
+            "kind": "thread",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Gloria Liu — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+            "src": "archive/ARTICLE_INDEX.jsonl b63e37fc93f94a10",
+            "kind": "thread",
+            "popid": "POP-00827"
+          },
+          {
+            "text": "Paul Skenes — enjoying the familiar rhythm of spring prep, Lake Merritt (C117 — what happened in their life, not words they said)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "id": "moment:POP-00125:117:PostCareer-Fandom-Up-S",
+            "kind": "moment",
+            "popid": "POP-00125"
+          },
+          {
+            "text": "Paul Skenes — in their life, C116: ran into neighbors at Lake Merritt Blossom Walk",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00125"
+          },
+          {
+            "text": "Paul Skenes — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+            "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406",
+            "kind": "thread",
+            "popid": "POP-00125"
+          },
+          {
+            "text": "Paul Skenes — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+            "src": "archive/ARTICLE_INDEX.jsonl 416d45676c73f82e",
+            "kind": "thread",
+            "popid": "POP-00125"
+          },
+          {
+            "text": "Paul Skenes — the Tribune named them in a piece headlined The Dismantling: When Championships Require Sacrifice (Sports)",
+            "src": "archive/ARTICLE_INDEX.jsonl 7e63265639c2c2a1",
+            "kind": "thread",
+            "popid": "POP-00125"
+          },
+          {
+            "text": "Cathy Skeet — swapped seed packets with a neighbor over the fence, Chinatown (C117 — what happened in their life, not words they said)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "id": "moment:POP-00308:117:PostCareer-Sociability-Up-S",
+            "kind": "moment",
+            "popid": "POP-00308"
+          },
+          {
+            "text": "Cathy Skeet — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00308"
+          },
+          {
+            "text": "Cathy Skeet — in their life, C117: carried three boxes of canned goods from the pantry truck and felt it in their lower back near a small bakery line",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00308"
+          },
+          {
+            "text": "Cathy Skeet — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00308"
+          },
+          {
+            "text": "Cathy Skeet — in their life, C117: the kids could say Soo Loo before they could say the mayor's name",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00308"
+          },
+          {
+            "text": "Robert Corliss — let the afternoon go by without finding one thing that needed them, Lake Merritt (C117 — what happened in their life, not words they said)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "id": "moment:POP-00594:117:PostCareer-Drive-Down-S",
+            "kind": "moment",
+            "popid": "POP-00594"
+          },
+          {
+            "text": "Robert Corliss — in their life, C116: still feeling the energy from last night's city buzz",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00594"
+          },
+          {
+            "text": "Robert Corliss — in their life, C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00594"
+          },
+          {
+            "text": "Robert Corliss — in their life, C117: kept a small promise to themselves nobody else knew about",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00594"
+          },
+          {
+            "text": "Robert Corliss — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00594"
+          },
+          {
+            "text": "Benji Dillon and Maya Torres-Dillon and Rick Dillon — moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit, Piedmont Ave (C117 — what happened in their life, not words they said)",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "id": "moment:POP-00018:117:Relocation-Composure-Up-M",
+            "kind": "moment",
+            "popid": "POP-00018"
+          },
+          {
+            "text": "Benji Dillon — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00018"
+          },
+          {
+            "text": "Benji Dillon — in their life, C117: took the job at the back of the fellowship hall, the one nobody talks during",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00018"
+          },
+          {
+            "text": "Benji Dillon — in their life, C117: cancelled the standing coffee date and sent nothing in its place",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00018"
+          },
+          {
+            "text": "Benji Dillon — in their life, C117: Dillon Clinic returned $7631 to the line this week",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00018"
+          },
+          {
+            "text": "Benji Dillon — Lives already wrote this person: a moment the record kept (C115), a moment the record kept (C116)",
+            "src": "output/cron-compare/lives_covered.json",
+            "kind": "thread",
+            "popid": "POP-00018"
+          },
+          {
+            "text": "Benji Dillon — the Tribune named them in a piece headlined Benji Dillon Doesn't Think It's a Big Change, and That's the Story (Culture, C116)",
+            "src": "archive/ARTICLE_INDEX.jsonl 8456db33639d2f5a",
+            "kind": "thread",
+            "popid": "POP-00018"
+          },
+          {
+            "text": "Benji Dillon — the Tribune named them in a piece headlined The Hello That Outlasts the Headline (Culture, C116)",
+            "src": "archive/ARTICLE_INDEX.jsonl 4b64f99d2cdc97f4",
+            "kind": "thread",
+            "popid": "POP-00018"
+          },
+          {
+            "text": "Benji Dillon — the Tribune named them in a piece headlined The Lives of C116 (Culture, C116)",
+            "src": "archive/ARTICLE_INDEX.jsonl 3b65ffe55b35b067",
+            "kind": "thread",
+            "popid": "POP-00018"
+          },
+          {
+            "text": "Maya Torres-Dillon — in their life, C116: heard a shopkeeper say the family name like it still meant something",
+            "src": "output/beats/LifeHistory_Log.jsonl @C116",
+            "kind": "thread",
+            "popid": "POP-00742"
+          },
+          {
+            "text": "Maya Torres-Dillon — in their life, C117: took the long way home just to check the Baylight fence line's progress near a cafe on the avenue",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00742"
+          },
+          {
+            "text": "Maya Torres-Dillon — in their life, C117: read the Tribune's front page twice — once for the news, once to see who was in it",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00742"
+          },
+          {
+            "text": "Maya Torres-Dillon — in their life, C117: wore the green-and-gold cap to the corner store and got three nods for it near College Avenue",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00742"
+          },
+          {
+            "text": "Maya Torres-Dillon — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+            "src": "archive/ARTICLE_INDEX.jsonl b63e37fc93f94a10",
+            "kind": "thread",
+            "popid": "POP-00742"
+          },
+          {
+            "text": "Maya Torres-Dillon — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+            "src": "archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4",
+            "kind": "thread",
+            "popid": "POP-00742"
+          },
+          {
+            "text": "Maya Torres-Dillon — the Tribune named them in a piece headlined The Top Mark, From the Pickup Line (Civic, C112)",
+            "src": "archive/ARTICLE_INDEX.jsonl 8c87a6065e349ed1",
+            "kind": "thread",
+            "popid": "POP-00742"
+          },
+          {
+            "text": "Rick Dillon — in their life, C117: traded the good sticker for the rare one and called it a fair deal",
+            "src": "output/beats/LifeHistory_Log.jsonl @C117",
+            "kind": "thread",
+            "popid": "POP-00743"
+          },
+          {
+            "text": "Rick Dillon — the Tribune named them in a piece headlined The Lives Page, Cycle 116 (Culture, C116)",
+            "src": "archive/ARTICLE_INDEX.jsonl fccceb837d077903",
+            "kind": "thread",
+            "popid": "POP-00743"
+          },
+          {
+            "text": "Rick Dillon — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+            "src": "archive/ARTICLE_INDEX.jsonl b63e37fc93f94a10",
+            "kind": "thread",
+            "popid": "POP-00743"
+          },
+          {
+            "text": "Rick Dillon — the Tribune named them in a piece headlined The Rockridge Equation (Civic, C106)",
+            "src": "archive/ARTICLE_INDEX.jsonl cbe42dea89a8cbe4",
+            "kind": "thread",
+            "popid": "POP-00743"
+          }
+        ],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ],
+        "deltas": null,
+        "hooks": [
+          {
+            "text": "good news landed for one of them and the whole house wore it for days",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Chinatown",
+            "priority": 4
+          },
+          {
+            "text": "A family bought their home in Laurel",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "Laurel",
+            "priority": 3
+          },
+          {
+            "text": "A family bought their home in West Oakland",
+            "angle": "observational analysis",
+            "domain": "COMMUNITY",
+            "hood": "West Oakland",
+            "priority": 3
+          },
+          {
+            "text": "The Dillon household (3) moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Piedmont Ave",
+            "priority": 5
+          },
+          {
+            "text": "The Richards household (2) moved from Fruitvale to Piedmont Ave — moving up from Fruitvale",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Piedmont Ave",
+            "priority": 5
+          },
+          {
+            "text": "Kris Bubic moved from West Oakland to Lake Merritt — moving up from West Oakland",
+            "angle": "desk rotation",
+            "domain": "COMMUNITY",
+            "hood": "Lake Merritt",
+            "priority": 5
+          }
+        ],
+        "note": "none of today's people has written their own page this Cycle — no quotes",
+        "pageVoices": [],
+        "factCap": 120,
+        "peopleCap": 16,
+        "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented"
+      },
+      "wakePackage": "TAMSIN-LIVES-2",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "UNDOCKED show beat: current episode and standings from the approved feed; earlier episodes from the approved show history.",
+      "gridDay": 1,
+      "story": {
+        "ref": "undocked:undocked-pop01209-Y3C13",
+        "label": "UNDOCKED: Daniela Kapoor, Sunday night",
+        "kind": "undocked",
+        "angle": "UNDOCKED episode: Daniela Kapoor, Sunday night. Standings: Marguerite Kimball-Ostrow leads the board — rank #1, 49.08 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Daniela Kapoor — Teacher.",
+        "facts": [
+          "Daniela Kapoor's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline and Maplevale; mined 8 copper ore, 15 iron ore and 1 antimatter containment cell; earned Wanderer (8 points), Maiden Jump (5 points), Voyager I (3.2 points), The Truth Is Out There (2.5 points), Cartographer (2.4 points), Chronicler (1.2 points), Voyager II (0.8 points), Prospector I (0.02 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+          "Daniela Kapoor — Teacher (ledger)"
+        ],
+        "citizens": [
+          "Daniela Kapoor — Teacher, UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-01209"
+        ],
+        "hood": "Glenview"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-2",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "rosterAbsent": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Carmen Delaine",
+        "persona": "carmen-delaine",
+        "wakePackage": "CARMEN-LEP2-3"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-3"
+      },
+      {
+        "name": "Dr. Lila Mezran",
+        "persona": "lila-mezran",
+        "wakePackage": "LILA-LEP2-2"
+      },
+      {
+        "name": "Trevor Shimizu",
+        "persona": "trevor-shimizu",
+        "wakePackage": "TREVOR-LEP2-2"
+      },
+      {
+        "name": "Anthony Raines",
+        "persona": "anthony-raines",
+        "wakePackage": "ANTHONY-LEP2-3"
+      },
+      {
+        "name": "Tamsin Pruitt",
+        "persona": "tamsin-pruitt",
+        "wakePackage": "TAMSIN-LIVES-2"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-2"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": false,
+    "forced": false,
+    "reason": "themed-week grid — Jax seated on his day only",
+    "top": null,
+    "reportPath": null
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=carmen-delaine,business-desk,lila-mezran,trevor-shimizu,anthony-raines,tamsin-pruitt,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": true,
+    "reason": "pulse=roster-architecture score=92 foil=1.7WAR"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": false,
+    "reason": "no business desk or Mason assignment in rota",
+    "dropped": []
+  },
+  "beatEnrich": {
+    "enriched": true,
+    "reason": "seats=4 tamsin-pruitt/beat-lives:Fruitvale, trevor-shimizu/beat-transit:—, lila-mezran/beat-health:Chinatown, business-desk/beat-economy:—",
+    "seats": [
+      "tamsin-pruitt/beat-lives:Fruitvale",
+      "trevor-shimizu/beat-transit:—",
+      "lila-mezran/beat-health:Chinatown",
+      "business-desk/beat-economy:—"
+    ],
+    "dropped": []
+  },
+  "eveningEnrich": {
+    "enriched": false,
+    "reason": "no evening-consumer assignment in rota",
+    "seats": []
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "carmen-delaine",
+        "domain": "civic-ledger",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active"
+      }
+    ]
+  },
+  "builtAt": "2026-11-23T12:15:07.125Z"
+}

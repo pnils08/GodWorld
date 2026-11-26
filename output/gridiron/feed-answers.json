@@ -1,0 +1,26 @@
+{
+ "C117:00d0595e839c": {
+  "cycle": 117,
+  "question": "Based on the data, what should Oakland A's starting line up in 2042, consider positions with one spot for a DH, active players only",
+  "tries": 2,
+  "officeId": "GIA-HITTING",
+  "name": "Dawson Nguyen",
+  "title": "Sports Analytics Lead, Gridiron Analytics",
+  "finish": "stop",
+  "text": "Mike — here’s the 2042 lineup I’d write, active major-leaguers only, one DH:\n\n| Spot | Player | Position |\n|---:|---|---|\n| 1 | Danny Horn | CF |\n| 2 | Isley Kelley | SS |\n| 3 | Eric Taveras | 2B |\n| 4 | Vladimir Gonzalez | LF |\n| 5 | Ernesto Quintero | 1B |\n| 6 | Darrin Davis | DH |\n| 7 | Frank Reyna | RF |\n| 8 | Jose Colon | C |\n| 9 | Giancarlo Hernandez | 3B |\n\nWhy this card:\n\n- **Horn in CF and leading off** — 99 overall, 98 fielding, 92 speed, .382 OBP last year, 80 SB. Even with the discipline drop, he’s the engine.\n- **Kelley at SS, second** — 89 overall, 7.4 WAR, 85 fielding, .355 OBP, 31 HR. Age 34 but durability 91.\n- **Taveras at 2B, third** — 96 overall, 54 HR, 124 RBI, 99 power vs RHP. Tumolo is the better defender, but Taveras’s bat is too big to sit.\n- **Gonzalez in LF, cleanup** — 91 overall, 99 clutch, 94 contact vs RHP, discipline 80. Put his bat in the middle.\n- **Quintero at 1B, fifth** — he’s the only active major-leaguer listed with 1B eligibility, and he gave us 46 HR, 92 RBI, 5.8 WAR last year.\n- **Davis at DH, sixth** — 33 and fielding 59, so DH protects him; still 87 power vs RHP and a .305/.350/.594 line in 2041.\n- **Reyna in RF, seventh** — arm 86, fielding 70, and he slugged .683 in his 46-game look. His arm belongs in RF; Gonzalez has the arm for LF.\n- **Colon at C, eighth** — 84 overall over Calzado’s 75, better fielding, switch-hitter, and more power.\n- **Hernandez at 3B, ninth** — the bat is lighter, but 96 fielding and 70 arm at third is the best defensive alignment with Quintero at first.\n\nBench/rotation: **Calzado** backs up catcher, **Morton** is the first outfield bat, **Clark** is the pinch-hitter/3B alternative, and **Tumolo** is the defensive 2B option. I’m not putting any Las Vegas names in the Opening Day lineup.",
+  "head": "**Gridiron Analytics — Dawson Nguyen, Sports Analytics Lead, Gridiron Analytics** (C117)\n> Based on the data, what should Oakland A's starting line up in 2042, consider positions with one spot for a DH, active players only\n\n",
+  "sent": true
+ },
+ "C117:b22de0804c6a": {
+  "cycle": 117,
+  "question": "Recap the Carmen Mesa trade, was it the right move based on the data? Are the A's better suited with a 3B with high defensive metrics over offensive?",
+  "tries": 1,
+  "officeId": "GIA-PITCHING",
+  "name": "Wesley Clark",
+  "title": "Sports Analytics Lead, Gridiron Analytics",
+  "finish": "stop",
+  "text": "Mike — here's what I can say, and where my records run out.\n\n**The trade as I have it:** Carmen Mesa went to the Phillies with Porter Broadway and Jose Fuentes for Giancarlo Hernandez and Antone Baez. That's the transaction as it's on the record. What I do not have is Mesa's season line, his ratings, or anything else in my pitcher records — he isn't in the A's pitcher file. My books hold the nine arms in the organization right now, and Mesa isn't one of them. So I can't hand you a data verdict on his value, and I won't fake one. The Tribune's Anthony Raines wrote the trade up; the feed has Hernandez at a 96 fielding grade, 80 reaction, 70 arm, 65/68 contact splits, 78 overall, A potential. That's the piece of the ledger I can actually read.\n\n**On the pitching side:** this is where I have standing. The A's went into 2042 with Ramos (91, 23-1 last year), Rivas (92), Ellis (86, 20-3), Coles (99, 22 years old, 6.2 WAR, 254 strikeouts), and Almanzar (85, trending up) — five starters for five slots, and Coles and Almanzar both arrived or broke out recently. That is what a surplus looks like. Trading a 22-year-old arm out of a system where the rotation is already five deep is the defensible half of this deal, and it's the half I can back with numbers.\n\n**On glove-first third base:** I don't run the position-player analysis, and my records don't carry a defensive run-value model for infielders. What I'd say as a matter of method: a 96 fielding grade at third is a real asset, but the trade only pays if Hernandez's bat holds up enough that the glove isn't covering for a hole — and the feed's own note says the A's already had two A-potential players at the position. Buying into a surplus to fix a surplus needs a second move or it's just a different logjam. That's a roster-construction question for you and the staff, not a pitching question, and I'd rather say so than dress it up.\n\n**Bottom line:** the pitching side of the trade I can defend on the numbers. The Mesa side I can't grade, because my records don't hold him. If you want the honest answer to \"was it right,\" the data I have covers half the question — ask me again once he has a season on the books somewhere I can read it.",
+  "head": "**Gridiron Analytics — Wesley Clark, Sports Analytics Lead, Gridiron Analytics** (C117)\n> Recap the Carmen Mesa trade, was it the right move based on the data? Are the A's better suited with a 3B with high defensive metrics over offensive?\n\n",
+  "sent": true
+ }
+}

@@ -1,0 +1,103 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Marco Fabregas
+Team: Las Vegas Aviators (AAA)
+Position: C
+Jersey: #24
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: B
+Overall: 72
+MLB Service: 0.009
+Age: 24
+Bats: L
+Throws: R
+Height: 5'10"
+Weight: 175 lbs
+Drafted: Round 1 (2038)
+Secondary Position: NONE
+Hitter Tendency: PULL HITTER
+Born: DOMINICAN REPUBLIC
+Canonical POPID: POP-00060
+
+--------------------------------------------------
+
+ATTRIBUTES (game screen)
+
+CON R: 74
+CON L: 51
+POW R: 64
+POW L: 63
+VIS: 49
+DISC: 60
+CLT: 54
+BUNT: 39
+DBUNT: 25
+DUR: 60
+FLD: 63
+ARM: 54
+ACC: 47
+REAC: 51
+BLK: 73
+SPD: 32
+STEAL: 25
+BR AGG: 49
+
+--------------------------------------------------
+
+ATTRIBUTE HISTORY
+
+ATTR    WAS      NOW   CHANGE
+CON R   73        74    +1
+CON L   47        51    +4
+POW R   64        64    0
+POW L   61        63    +2
+VIS     47        49    +2
+DISC    58        60    +2
+CLT     51        54    +3
+BUNT    36        39    +3
+DBUNT   23        25    +2
+DUR     58        60    +2
+FLD     61        63    +2
+ARM     50        54    +4
+ACC     44        47    +3
+REAC    49        51    +2
+BLK     71        73    +2
+SPD     32        32    0
+STEAL   23        25    +2
+BR AGG  48        49    +1
+
+NOW = the latest attributes screen.
+WAS = NOW value minus the change marker shown on that screen;
+the cycle of that earlier reading is not shown in the game.
+
+--------------------------------------------------
+
+MLB STATS
+
+No MLB experience (minor leaguer; no MLB stats). Screen shows 0.009 MLB service, recorded as shown.
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+Not captured (CONTRACT screen not provided)
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+Level: AAA (Las Vegas Aviators)
+Not otherwise captured (no roster screen provided)
+
+--------------------------------------------------
+METADATA & VERIFICATION FOOTER
+--------------------------------------------------
+TS Code: TS-MLB-ATH-2041-00060
+Verification Tag: Screen-Checked
+Steward of Record: Claude Staged
+POPID: POP-00060
+==================================================

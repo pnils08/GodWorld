@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-009",
+  "initiativeId": "INIT-009",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-008)",
+  "consolidatedFrom": [
+    "STMT-117-mayor_gavel-008 (Mayor gavel — Grand Lake full-council decision and Clerk certification)",
+    "STMT-117-stabilization_fund-002 (Webb — Grand Lake $2.5M full-council roll call with Chen-Vega conditions)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-009",
+    "ImplementationPhase": "vote-scheduled",
+    "MilestoneNotes": "C117: Mayor backs YES with all Chen-Vega conditions; no Clerk-certified roll call or outcome is in the packet, and no enactment is claimed.",
+    "NextScheduledAction": "Hold and Clerk-certify the full-council roll call with all Chen-Vega conditions",
+    "NextActionCycle": 118
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "office": "council_d3",
+  "agentDir": "civic-office-council-d3",
+  "holder": "Rose Delgado",
+  "popid": "POP-00503",
+  "title": "City Council District 3",
+  "date": "2026-11-25",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "San Antonio moved this week — sentiment from -0.03 to 0.02, the crime index down from 0.73 to 0.66, and retail vitality up from 4.84 to 6.32. That is a neighborhood climbing, and I will not treat a 0.02 reading as the whole story of a district that is plainly working at it. Fruitvale is harder to look at: sentiment fell from 0.36 to 0.19 even as its crime index eased and its retail strength sits far above San Antonio's, and 108 Fruitvale residents and 104 in San Antonio are sick this week with violence above the city middle in both. The complaint I keep hearing from the Fruitvale platform is that the picture does not match, and I owe that a real look rather than a narrative. My focus stays on the commercial blocks of San Antonio and the transit hub review in Fruitvale — both are due for their next step in C118, and I intend for the documented community record to arrive before the paper does anything else.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-117-civic-office-council-d3",
+        "text": "Director Vance — to be direct with you: I do not have an inspectable briefing-and-notice reference on this seat that I can point you to, and I should not have described the record as linked while also reporting publication incomplete. Those two things cannot both be true, and I am correcting it in that direction: publication is incomplete. What I am accountable for is the documented Fruitvale public comment-and-response record on the Transit Hub Phase II, which is the next required step on that project and due in C118. Until it is published where a resident can open it, it is not linked, and I will not call it linked. I would rather you hold me to the unpublished-record status than to a claim I cannot substantiate.",
+        "directiveCycle": 117,
+        "confrontationSeat": "civic-office-council-d3"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-25T11:45:43.861Z",
+  "usage": {
+    "prompt_tokens": 6565,
+    "completion_tokens": 421,
+    "total_tokens": 6986,
+    "cost": 0.00148482,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00148482,
+      "upstream_inference_prompt_cost": 0.0011817,
+      "upstream_inference_completions_cost": 0.00030312
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+  "evidenceReads": [],
+  "provider": "Nebius",
+  "finishReason": "stop",
+  "elapsedMs": 2925,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00503",
+    "id": "iXDQD23wFkqE8smqBvpxCo",
+    "customId": "cp-POP-00503-c117-CIVIC-datawake-2026-11-25"
+  }
+}

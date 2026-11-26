@@ -1,0 +1,24 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Joseph Cramp",
+        "thread": true
+      },
+      "resultChars": 1733,
+      "resultHead": "Joseph Cramp — role: Janitor; neighborhood: Downtown; born: 1990; wealth: 7; careerStage: senior; employerBiz: BIZ-00017; skills: Government & Civic; popid: POP-00272\nJoseph Cramp (POP-00272) — 26 life-history entries on the record; last 15, oldest first:\nY3C8 — [Relationship] felt social atmosphere shift due to today's happenings\nY3C8 — [Daily-Composure-Up-S] felt a quiet tradeoff settle into place\nY3C8 — [Micro-Event-Composure-Down-S] drove the whole way home without remembering a single turn near a civic plaza\nY3C8 — [Civic Perception-Composure-Up-S] saw an Oakland Alternative Response Init"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Jocelyn Santo",
+        "thread": true
+      },
+      "resultChars": 1876,
+      "resultHead": "Jocelyn Santo — role: Yoga Instructor; neighborhood: Lake Merritt; born: 2007; wealth: 3; careerStage: mid-career; employerBiz: SELF_EMPLOYED; skills: Small Business; popid: POP-00547\nJocelyn Santo (POP-00547) — 23 life-history entries on the record; last 15, oldest first:\nY3C9 — [Neighborhood-Composure-Up-S] dodged the running groups circling the lake and found a quiet bench near the pergola\nY3C9 — [Bond] Travis Paiz became a real friend, not just a colleague\nY3C9 — [Strain] the lease renewal letter sat on the table for three days\nY3C10 — [Faith] stopped by a community program run out of Cath"
+    }
+  ],
+  "ranAt": "2026-11-26T00:19:15.441Z"
+}

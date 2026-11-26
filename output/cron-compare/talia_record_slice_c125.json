@@ -1,0 +1,15 @@
+{
+  "version": "TALIA-RECORD-1",
+  "empty": true,
+  "cycle": 125,
+  "kind": "beat-sports-oaks-ground",
+  "seat": {
+    "slug": "talia-finch",
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "desk": "sports",
+    "domain": "sports"
+  },
+  "reason": "no row for the Oaks on the sports feed for C124–C125",
+  "approach": " Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+}

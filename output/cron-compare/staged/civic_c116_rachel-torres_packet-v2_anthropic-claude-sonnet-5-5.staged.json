@@ -28,7 +28,13 @@
       }
     ],
     "businesses": [],
-    "storylines": [],
+    "storylines": [
+      {
+        "slug": "INIT-006:complete",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
     "hoods": [
       "Downtown"
     ],

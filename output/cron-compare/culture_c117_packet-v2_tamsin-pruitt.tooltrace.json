@@ -1,0 +1,58 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Sarah Corliss",
+        "thread": true
+      },
+      "resultChars": 1807,
+      "resultHead": "Sarah Corliss — role: Capacity Analyst, DigitalOcean; neighborhood: Jack London; born: 2016; wealth: 5; careerStage: entry-level; employerBiz: BIZ-00002; skills: Professional; popid: POP-00595\nSarah Corliss (POP-00595) — 26 life-history entries on the record; last 15, oldest first:\nY3C7 — [Personal] heard a kid explain something to a parent with total authority and grinned\nY3C7 — [Daily] one of the kids asked a question at dinner that stopped the room\nY3C7 — [Lifestyle] looked up how something works and came away more amazed, not less\nY3C8 — [Daily-Warmth-Up-S] found a forgotten photograph tuc"
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Terrence Wussin",
+        "thread": true
+      },
+      "resultChars": 2014,
+      "resultHead": "Terrence Wussin — role: Security Guard; neighborhood: Jack London; born: 1999; wealth: 5; careerStage: mid-career; employerBiz: BIZ-00017; skills: Government & Civic; popid: POP-00788\nTerrence Wussin (POP-00788) — 20 life-history entries on the record; last 15, oldest first:\nY3C6 — [Civic Perception] stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence\nY3C6 — [PrevEvening] left the playoff watch party with hoarse vocals and sticky shoes\nY3C6 — [Civic Perception] attended a community feedback session for the Fruitvale Transit Hub P"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Sarah Corliss"
+      },
+      "resultChars": 614,
+      "resultHead": "[C88 · edition] - Use engine language in education context. - Overuse Theo Banks (appeared in both Angela articles — rest next edition). - Reveal Sarah Corliss / DigitalOcean connection. TONE: Oakland's education system functions. Schools are maintained. Teachers stay. The default is health, not crisis.\n[C88 · supplemental] - Use engine language in education context. - Overuse Theo Banks (appeared in both Angela articles — rest next edition). - Reveal Sarah Corliss / DigitalOcean connection. TONE: Oakland's education system functions. Schools are maintained. Teachers stay. The default is healt"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "DigitalOcean Jack London"
+      },
+      "resultChars": 541,
+      "resultHead": "[C84 · supplemental] OAKLAND TECH LANDSCAPE — CANONICAL DATA: — 9 companies confirmed: Anthropic (Jack London), DigitalOcean (Embarcadero West), Discord (Uptown), Moltbook (Adams Point), Ridgeline Ventures (Lake Merritt), Gridiron Analytics (Temescal), Oakmesh Systems (West Oakland), Portside Bio (Brooklyn Basin), Tenth Street Digital (Old Oakland) — Employee counts: Anthropic ~240, DigitalOcean ~300, Discord ~90, Moltbook ~60, Ridgeline 4 partners, Gridiron 11, Oakmesh 35, Portside 14, Tenth Street 5. Total ~760 direct. — Anthropic av"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Business_Ledger",
+        "match": "DigitalOcean"
+      },
+      "resultChars": 216,
+      "resultHead": "BIZ_ID | Name | Sector | Neighborhood | Employee_Count | Avg_Salary | Annual_Revenue | Growth_Rate | Key_Personnel\nBIZ-00002 | DigitalOcean | Cloud Infrastructure | Baylight District | 801 | 153677 | 522423168 | 5.18"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Business_Ledger",
+        "match": "BIZ-00017"
+      },
+      "resultChars": 211,
+      "resultHead": "BIZ_ID | Name | Sector | Neighborhood | Employee_Count | Avg_Salary | Annual_Revenue | Growth_Rate | Key_Personnel\nBIZ-00017 | City of Oakland | Municipal Government | Downtown | 1201 | 88000 | 461625031 | 12.59"
+    }
+  ],
+  "ranAt": "2026-11-26T00:18:26.126Z"
+}

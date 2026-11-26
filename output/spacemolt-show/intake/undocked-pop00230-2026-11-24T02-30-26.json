@@ -1,0 +1,52 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-24T02:55:34.807Z",
+  "POPID": "POP-00230",
+  "Cycle": 117,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00230-2026-11-24T02-30-26",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00230-2026-11-24T02-30-26.json",
+  "Holder": "Jett Walker",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Jett Walker credits=0 systems=sol,alpha_centauri,tau_ceti,electra,mimosa,miaplacidus,maplevale,dubhe,alfirk,revati",
+  "DecidedAt": "2026-11-24T02:55:34.809Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 117,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00230",
+    "Holder": "Jett Walker",
+    "EpisodeId": "undocked-pop00230-Y3C13",
+    "CreditsDelta": 0,
+    "PointsDelta": 21.82,
+    "Systems": [
+      "sol",
+      "alpha_centauri",
+      "tau_ceti",
+      "electra",
+      "mimosa",
+      "miaplacidus",
+      "maplevale",
+      "dubhe",
+      "alfirk",
+      "revati"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00230-2026-11-24T02-30-26.json"
+  },
+  "PointsDelta": 21.82
+}

@@ -1,0 +1,226 @@
+{
+  "empty": false,
+  "cycle": 117,
+  "kind": "hal-archive",
+  "desk": "sports",
+  "journalist": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "persona": "hal-richmond",
+    "bagDoc": "docs/media/HAL_ARCHIVE_BAG.md"
+  },
+  "pulse": {
+    "className": "era-door",
+    "score": 84,
+    "label": "A's — roster-move — supplied C117 line card",
+    "team": "A's",
+    "eventKind": "roster-move",
+    "seasonType": "off-season",
+    "storyAngle": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+    "hasStats": true,
+    "record": "-",
+    "streak": "-",
+    "foilNumber": "3.2WAR",
+    "closingNote": "the line that holds",
+    "feedCycle": 117
+  },
+  "bag": {
+    "modes": [
+      {
+        "id": 6,
+        "name": "What He Became"
+      },
+      {
+        "id": 8,
+        "name": "The Archive Entry"
+      }
+    ],
+    "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+    "closingNote": "the line that holds",
+    "claim": "Present fact: 3.2WAR on the feed. Archive claim: the man behind the line — Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time Close toward the line that holds."
+  },
+  "friction": {
+    "a": "Present feed fact: Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+    "b": "Wire copy / FO strategy / bleacher heat that skips time",
+    "frame": "Present first, then echo — end on the line that holds."
+  },
+  "prewrite": {
+    "reporter": "Hal Richmond",
+    "bagModes": [
+      {
+        "id": 6,
+        "name": "What He Became"
+      },
+      {
+        "id": 8,
+        "name": "The Archive Entry"
+      }
+    ],
+    "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+    "presentFacts": [
+      "Event (feed): A's — roster-move (off-season)",
+      "Cycle: C117"
+    ],
+    "dossierFacts": [
+      "Mark Aitken TrueSource: 2041 REGULAR SEASON G: 138 PA: 572 AB: 540 R: 84 H: 153 2B: 23 3B: 0 HR: 33 RBI: 87 BB: 25 SO: 65 HBP: 3 SF: 3 SAC: 1 GIDP: 7 AVG: 0.283 OBP: 0.317 SL | WAR: 3.2 | AWARDS (Career Reference) - Rookie of the Year (2032) - Gold Glove (2032, 2038, 2039) - Si"
+    ],
+    "closingNote": "the line that holds",
+    "priorFiling": "NONE — wall may still inject at wake",
+    "claim": "Present fact: 3.2WAR on the feed. Archive claim: the man behind the line — Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time Close toward the line that holds.",
+    "foilNumber": "3.2WAR",
+    "missing": [
+      "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+      "No invented seasons or franchise history beyond packet + feed",
+      "No x-stats / barrel% / invented OPS+",
+      "Not a business-desk storefront assignment",
+      "Not P Slayer charge; not Anthony board architecture as spine"
+    ],
+    "hooks": [
+      {
+        "text": "Oaks big win. The game that mattered, who delivered, fan energy in Jack London.",
+        "angle": "conflict/tension coverage",
+        "hood": "Jack London"
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "text": "Oaks big win. The game that mattered, who delivered, fan energy in Jack London.",
+      "angle": "conflict/tension coverage",
+      "hood": "Jack London"
+    }
+  ],
+  "seeds": [],
+  "priorTakes": [],
+  "story": {
+    "angle": "What the supplied C117 line card establishes, and what history remains unsupplied.",
+    "label": "A's — roster-move — supplied C117 line card",
+    "hookLine": "A's — roster-move — supplied C117 line card",
+    "hood": "Jack London",
+    "pulseClass": "era-door",
+    "team": "A's",
+    "eventKind": "roster-move",
+    "closingNote": "the line that holds",
+    "citizens": [
+      "Mark Aitken (POP-00003)"
+    ],
+    "popids": [
+      "POP-00003"
+    ],
+    "ref": "world_summary_c117.md ## Sports",
+    "cycle": 117
+  },
+  "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+  "players": [
+    {
+      "name": "Mark Aitken",
+      "popid": "POP-00003",
+      "role": "First Baseman, Colorado Rockies",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Jack London",
+    "record": "-",
+    "streak": "-",
+    "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+  },
+  "candidates": [
+    {
+      "score": 84,
+      "cycle": 117,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+      "priorHits": 0
+    },
+    {
+      "score": 78,
+      "cycle": 117,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Danny Horn said he was the best player in baseball. Then he hit .338 with 56 homeruns and 80 steals",
+      "priorHits": 0
+    },
+    {
+      "score": 78,
+      "cycle": 117,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+      "priorHits": 0
+    },
+    {
+      "score": 74,
+      "cycle": 117,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+      "priorHits": 0
+    },
+    {
+      "score": 74,
+      "cycle": 116,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "priorHits": 0
+    },
+    {
+      "score": 73,
+      "cycle": 116,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+      "priorHits": 0
+    },
+    {
+      "score": 73,
+      "cycle": 116,
+      "team": "Oaks",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would",
+      "priorHits": 0
+    },
+    {
+      "score": 70,
+      "cycle": 116,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "The bat or the glove? Kevin Clark's .327 against Giancarlo Hernandez's 96 fielding for third base",
+      "priorHits": 0
+    },
+    {
+      "score": 70,
+      "cycle": 116,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "The Angels show strong interest in A's free agent Mark Aitken, the Oakland native whose whole life is in Jack London",
+      "priorHits": 0
+    },
+    {
+      "score": 68,
+      "cycle": 115,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "It's official: Vinnie Keane retires. Undrafted to undeniable, and staying in Grand Lake.",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c117.md ## Sports",
+    "docs/media/HAL_ARCHIVE_BAG.md",
+    "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+  ]
+}

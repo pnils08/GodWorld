@@ -1,0 +1,36 @@
+{
+  "office": "transit_hub",
+  "cycle": 117,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "The council and mayor both hold further design advancement on the comment-and-response record, and that record is still open, so I'm not advancing the phase — I'm letting the low-severity flag pass and putting the work where it belongs: the answer desk, the numbered log, and a written next date for every unfinished response. The tracker's 'complete' entry for INIT-003 closes the C86 authorization and selected-consultant history, not the design review. I'm telling Mara Vance plainly that the record is unfinished and naming where it lives and who owns it.",
+  "statements": [
+    {
+      "statementId": "STMT-117-transit_hub-001",
+      "type": "decision",
+      "topic": "INIT-003 complete-entry versus open design review — where the unfinished work lives",
+      "initiative": "Fruitvale Transit Hub Phase II — Visioning",
+      "decision": "Hold further design advancement at the C86 authorization; treat the INIT-003 'complete' tracker entry as closing the visioning and council-authorization history only; keep the comment-and-response record open, owned by Mayer & Associates under the community oversight provision, with the next public reporting date on the C117 calendar.",
+      "quote": "The tracker says 'complete' because the council done its part at C86 — it does not say the schematics answered every Fruitvale comment, and I won't pretend it does.",
+      "fullStatement": "Elena Soria Dominguez — Transit Hub Planning Lead. There's a 'complete' on the tracker next to INIT-003 and I need to be honest about what it means: it means the C86 authorization is history, the visioning framework is binding, and the contract and oversight provisions are executed. It does not mean every design condition is satisfied. The schematics are delivered — Mayer & Associates handed them over, they're on the table at the Chavez branch at eye level, and the numbered comment log sits under them, comment, answer, date, signature. But the comment-and-response record isn't finished. So further design advancement stays held at the authorization, exactly as the council and the mayor directed. The unfinished responses live in the log itself — the Fruitvale community review record — and the next reporting date is on the C117 calendar; the responsible owner is Mayer & Associates under the community oversight provision, with my office reviewing. What a reporter would see if they walked in this week: the binders, the open log, and a date on the wall. That's the whole test. A flag passing at low severity doesn't change any of that, and a calendar reminder never built a station.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "MilestoneNotes": "C117: Design advancement held at C86; schematics delivered, comment-and-response record open, tracker 'complete' = authorization history only."
+      }
+    },
+    {
+      "statementId": "STMT-117-transit_hub-002",
+      "type": "constituent",
+      "topic": "Fruitvale answer desk and the public comment log",
+      "initiative": null,
+      "decision": "Keep the answer desk and numbered comment log staffed at the Chavez branch this cycle, logging every comment in the language it came in and committing to a written answer with a date before the drawings move.",
+      "quote": "My kids walk to the BART station past these drawings, and so do yours — that's the only reason I care what a log says.",
+      "fullStatement": "Elena Soria Dominguez — I don't answer for Fruitvale from a cubicle. I answer for it because my kids walk to the BART station past these drawings, and so do yours. So this cycle, the answer desk stays open at the Chavez branch. Every comment gets a number, every number gets a written answer with a date and a signature, and the answer is logged in the language the comment came in. That's not a formality to me — it's the difference between a $230 million project that answers Fruitvale and one that talks past it. If I'm standing on that platform, I see families, workers, kids with backpacks. They need to know their comment landed somewhere that actually answers.",
+      "trackerUpdates": {}
+    }
+  ],
+  "maraAnswer": {
+    "confrontationId": "CONF-116-civic-project-transit-hub",
+    "kind": "answer",
+    "text": "Mara, here's what's true. The INIT-003 'complete' entry closes the C86 authorization and selected-consultant history — the $230M budget, the visioning framework, the executed contract with community oversight — and nothing beyond that. It does not close the design review. The preliminary schematics are delivered by Mayer & Associates; the documented Fruitvale community review is a numbered comment log at the Chavez branch, and the comment-and-response record still has unfinished responses. Further design advancement stays held until that record is published, per the council and mayor's gate. The tracker correction needed: the 'complete' entry should carry a note that it reflects authorization history, not a finding that every design condition is satisfied — it currently reads as a terminal state. The location of unfinished work is the Fruitvale community review record / comment-and-response log. Responsible owner: Mayer & Associates, under the community oversight provision, with my office reviewing. Next reporting date: the C117 calendar entry for schematics delivery and documented community review. I will not treat a complete flag as proof the design conditions are met."
+  }
+}

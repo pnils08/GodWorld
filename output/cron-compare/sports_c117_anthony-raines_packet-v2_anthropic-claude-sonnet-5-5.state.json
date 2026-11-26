@@ -1,0 +1,405 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00017",
+    "name": "Anthony Raines",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The A's move on the feed is a board-architecture question first: does the fit close a hole or stack redundancy — Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+    "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Numbers as the card or feed prints them, named to their source. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-analytics",
+      "pulseClass": "roster-architecture",
+      "bagTools": [
+        "1 Box-Card Read",
+        "2 Role-Fit Architecture"
+      ],
+      "claim": "The A's move on the feed is a board-architecture question first: does the fit close a hole or stack redundancy — Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+      "lineFacts": [
+        "Feed line: Mariano Rosales/5yr/$88M/$17.6M AAV/2042-2046/FA 2047",
+        "Feed line: Mariano Rosales/2041/63.2IP/1.84ERA/8-3/42SV/82SO/14BB/1.7WAR/All-Star",
+        "Feed line: Mariano Rosales/95OVR/age 27/$10.1M 2041",
+        "Feed line: Mariano Rosales/4-seam 96mph/2-seam 94mph/changeup 84mph",
+        "Event kind (feed): A's — re-signing (off-season)",
+        "NamesUsed (feed): Mariano Rosales (CP)"
+      ],
+      "missing": [
+        "x-stats / barrel% / launch angle / OAA not on feed",
+        "contracts or salaries not printed on this feed row",
+        "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)"
+      ],
+      "sceneRule": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers.",
+      "sourcePointers": [
+        "output/world_summary_c117.md ## Sports",
+        "docs/media/ANTHONY_ANALYSIS_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "sports-analytics",
+    "hood": "Jack London",
+    "src": "world_summary_c117.md ## Sports",
+    "plan": {
+      "focus": "Whether the Rosales re-signing is a foundation move or a redundancy — and what it signals about the A's priorities with the infield still unsettled after Aitken's departure."
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Anthony Raines",
+        "text": "Whether the A's made a competitive offer to Aitken before he signed with Colorado — the feed doesn't say, and the timing of the Rosales deal relative to Aitken's departure could tell us about the front office's sequencing.",
+        "usable": false
+      },
+      {
+        "from": "Anthony Raines",
+        "text": "Whether the Clark–Hernandez third-base competition is expected to resolve before spring training or carry into the season — the feed lists both as candidates but gives no timeline.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C117",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c5606da08cb9"
+    },
+    {
+      "t": "FACT",
+      "text": "A's · re-signing — Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-dec499b02123"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-2e5e03964957"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Mariano Rosales/5yr/$88M/$17.6M AAV/2042-2046/FA 2047",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-e4d11f184d1f"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Mariano Rosales/2041/63.2IP/1.84ERA/8-3/42SV/82SO/14BB/1.7WAR/All-Star",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-fcdb725e6c9c"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Mariano Rosales/95OVR/age 27/$10.1M 2041",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-9062ef915c05"
+    },
+    {
+      "t": "FACT",
+      "text": "Feed line: Mariano Rosales/4-seam 96mph/2-seam 94mph/changeup 84mph",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-c2a90058b772"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C13, Spring, holiday=none",
+      "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+      "id": "F-f7ed4e9a474c"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2041 ATH: 60 G, 0 GS, 8-3, 42 SV, 63.2 IP, 35 H, 13 ER, 6 HR, 14 BB, 82 SO, ERA 1.84",
+      "src": "tool:dossier_read:Mariano Rosales",
+      "id": "F-cc25a49e0ea5"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2040 BAL: 58 G, 0 GS, 1-5, 38 SV, 56.0 IP, 56 H, 26 ER, 8 HR, 13 BB, 56 SO, ERA 4.18",
+      "src": "tool:dossier_read:Mariano Rosales",
+      "id": "F-99737c123208"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2039 BAL: 67 G, 0 GS, 10-6, 2 SV, 77.2 IP, 52 H, 18 ER, 4 HR, 26 BB, 77 SO, ERA 2.09",
+      "src": "tool:dossier_read:Mariano Rosales",
+      "id": "F-47af787770ba"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2038 BAL: 83 G, 0 GS, 7-9, 1 SV, 89.2 IP, 93 H, 41 ER, 7 HR, 24 BB, 61 SO, ERA 4.11",
+      "src": "tool:dossier_read:Mariano Rosales",
+      "id": "F-dac4f77578eb"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2041 rates (63.2 IP): 11.6 K per 9, 2.0 BB per 9, 5.86 K per BB (worked from the season line)",
+      "src": "tool:dossier_read:Mariano Rosales",
+      "id": "F-65b87ce0527e"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2040 rates (56.0 IP): 9.0 K per 9, 2.1 BB per 9, 4.31 K per BB (worked from the season line)",
+      "src": "tool:dossier_read:Mariano Rosales",
+      "id": "F-29d942e22f56"
+    },
+    {
+      "t": "FACT",
+      "text": "Mariano Rosales 2039 rates (77.2 IP): 8.9 K per 9, 3.0 BB per 9, 2.96 K per BB (worked from the season line)",
+      "src": "tool:dossier_read:Mariano Rosales",
+      "id": "F-7bbaf39825e6"
+    },
+    {
+      "t": "FACT",
+      "text": "83 | spring-training | roster-move | A's | Mariano Rosales | Mariano Rosales (26, 89 OVR) named closer replacing 5x All-Star Edmundo Pena. Power arm from Utah — 96 mph fastball, 99 VEL attribute. 38 saves and 5 blown saves with Baltimore in 2040. One-year $10.1M deal then free agent. Replaces a decade of dominance with raw arm talent and something to prove. | 38SV/5BS 1.23WHIP (2040 BAL) | 0-0 | replacing-legend | hungry | closer-battle | Lake Merritt",
+      "src": "tool:sheet_read:Oakland_Sports_Feed Rosales",
+      "id": "F-7a1158415e7b"
+    },
+    {
+      "t": "FACT",
+      "text": "114 | off-season | rumor | A's | Ian Devine (RP), Louis Cross (RP), Hitoki Ka (RP), Mariano Rosales (CL), Clark Saryan (RP), Julio Valencia (CL) | The A's paid Ian Devine and Louis Cross a combined $22 million this past season, and when October came Devine was left off the playoff roster and rookie Clark Saryan took his spot. Cross finished at 0.9 WAR. Hitoki Ka was the best arm in the pen with a 0.90 ERA and Mariano Rosales saved 42, but the cracks showed in World Series game 2 when Saryan and",
+      "src": "tool:sheet_read:Oakland_Sports_Feed Rosales",
+      "id": "F-ce294964b091"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Evaluate one Packet-backed sports line, roster fit, or feed delta with correctly attributed numbers and explicit sample limits. The board is read through the tools — the player's TrueSource card for the career line, the archive for his Statcast card, the PANDAS method and prior coverage, the feed for this cycle — never recalled. One sourced analytic claim is success; fan heat, elegy, and invented advanced metrics are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "precise third-person sports analysis",
+      "targetWords": "evidence-bounded",
+      "opening": "the strongest Packet-backed player line or roster fact"
+    },
+    "authorizedTexture": [
+      "plain-language comparison of supplied player lines with each statistic kept with its named subject",
+      "a cautious variance or role-fit interpretation explicitly limited by the supplied sample",
+      "an unnamed quiet press-box or clubhouse transition that adds no person, venue, event, result, statistic, or team act"
+    ],
+    "textureConditions": [
+      "every named player, team, venue, institution, league, organization, and source must come from the Packet",
+      "every statistic, record, streak, result, roster move, role, award, contract, salary, injury, date, and sample claim requires Packet support",
+      "an unresolved feed subject may be named only as supplied and may not receive a POPID, biography, role beyond the supplied label, quote, or interview",
+      "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity",
+      "a number from a TrueSource card, a Statcast card or the feed enters only through a tool call, printed as returned and named to its source; a method (PANDAS, Paper Cuts) shapes the reasoning and supplies no number of its own"
+    ],
+    "canonBlockers": [
+      "a statistic attributed to the wrong player or two player lines merged into one subject",
+      "alternate feed spellings presented as distinct people or silently assigned an invented identity",
+      "an invented advanced metric, projection, split, roster fact, contract, salary, award, injury, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "fan we, emotional crowd consensus, or historical elegy replacing the analytic claim"
+    ]
+  },
+  "manifest": {
+    "id": "AM-08fb1893bf65",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c5606da08cb9",
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-dec499b02123",
+        "t": "FACT",
+        "text": "A's · re-signing — Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-2e5e03964957",
+        "t": "FACT",
+        "text": "Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-e4d11f184d1f",
+        "t": "FACT",
+        "text": "Feed line: Mariano Rosales/5yr/$88M/$17.6M AAV/2042-2046/FA 2047",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-fcdb725e6c9c",
+        "t": "FACT",
+        "text": "Feed line: Mariano Rosales/2041/63.2IP/1.84ERA/8-3/42SV/82SO/14BB/1.7WAR/All-Star",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-9062ef915c05",
+        "t": "FACT",
+        "text": "Feed line: Mariano Rosales/95OVR/age 27/$10.1M 2041",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-c2a90058b772",
+        "t": "FACT",
+        "text": "Feed line: Mariano Rosales/4-seam 96mph/2-seam 94mph/changeup 84mph",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-f7ed4e9a474c",
+        "t": "FACT",
+        "text": "Calendar: Y3C13, Spring, holiday=none",
+        "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-cc25a49e0ea5",
+        "t": "FACT",
+        "text": "Mariano Rosales 2041 ATH: 60 G, 0 GS, 8-3, 42 SV, 63.2 IP, 35 H, 13 ER, 6 HR, 14 BB, 82 SO, ERA 1.84",
+        "src": "tool:dossier_read:Mariano Rosales"
+      },
+      {
+        "id": "F-99737c123208",
+        "t": "FACT",
+        "text": "Mariano Rosales 2040 BAL: 58 G, 0 GS, 1-5, 38 SV, 56.0 IP, 56 H, 26 ER, 8 HR, 13 BB, 56 SO, ERA 4.18",
+        "src": "tool:dossier_read:Mariano Rosales"
+      },
+      {
+        "id": "F-47af787770ba",
+        "t": "FACT",
+        "text": "Mariano Rosales 2039 BAL: 67 G, 0 GS, 10-6, 2 SV, 77.2 IP, 52 H, 18 ER, 4 HR, 26 BB, 77 SO, ERA 2.09",
+        "src": "tool:dossier_read:Mariano Rosales"
+      },
+      {
+        "id": "F-dac4f77578eb",
+        "t": "FACT",
+        "text": "Mariano Rosales 2038 BAL: 83 G, 0 GS, 7-9, 1 SV, 89.2 IP, 93 H, 41 ER, 7 HR, 24 BB, 61 SO, ERA 4.11",
+        "src": "tool:dossier_read:Mariano Rosales"
+      },
+      {
+        "id": "F-65b87ce0527e",
+        "t": "FACT",
+        "text": "Mariano Rosales 2041 rates (63.2 IP): 11.6 K per 9, 2.0 BB per 9, 5.86 K per BB (worked from the season line)",
+        "src": "tool:dossier_read:Mariano Rosales"
+      },
+      {
+        "id": "F-29d942e22f56",
+        "t": "FACT",
+        "text": "Mariano Rosales 2040 rates (56.0 IP): 9.0 K per 9, 2.1 BB per 9, 4.31 K per BB (worked from the season line)",
+        "src": "tool:dossier_read:Mariano Rosales"
+      },
+      {
+        "id": "F-7bbaf39825e6",
+        "t": "FACT",
+        "text": "Mariano Rosales 2039 rates (77.2 IP): 8.9 K per 9, 3.0 BB per 9, 2.96 K per BB (worked from the season line)",
+        "src": "tool:dossier_read:Mariano Rosales"
+      },
+      {
+        "id": "F-7a1158415e7b",
+        "t": "FACT",
+        "text": "83 | spring-training | roster-move | A's | Mariano Rosales | Mariano Rosales (26, 89 OVR) named closer replacing 5x All-Star Edmundo Pena. Power arm from Utah — 96 mph fastball, 99 VEL attribute. 38 saves and 5 blown saves with Baltimore in 2040. One-year $10.1M deal then free agent. Replaces a decade of dominance with raw arm talent and something to prove. | 38SV/5BS 1.23WHIP (2040 BAL) | 0-0 | replacing-legend | hungry | closer-battle | Lake Merritt",
+        "src": "tool:sheet_read:Oakland_Sports_Feed Rosales"
+      },
+      {
+        "id": "F-ce294964b091",
+        "t": "FACT",
+        "text": "114 | off-season | rumor | A's | Ian Devine (RP), Louis Cross (RP), Hitoki Ka (RP), Mariano Rosales (CL), Clark Saryan (RP), Julio Valencia (CL) | The A's paid Ian Devine and Louis Cross a combined $22 million this past season, and when October came Devine was left off the playoff roster and rookie Clark Saryan took his spot. Cross finished at 0.9 WAR. Hitoki Ka was the best arm in the pen with a 0.90 ERA and Mariano Rosales saved 42, but the cracks showed in World Series game 2 when Saryan and",
+        "src": "tool:sheet_read:Oakland_Sports_Feed Rosales"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Anthony Raines",
+        "text": "Whether the A's made a competitive offer to Aitken before he signed with Colorado — the feed doesn't say, and the timing of the Rosales deal relative to Aitken's departure could tell us about the front office's sequencing.",
+        "publishable": false
+      },
+      {
+        "from": "Anthony Raines",
+        "text": "Whether the Clark–Hernandez third-base competition is expected to resolve before spring training or carry into the season — the feed lists both as candidates but gives no timeline.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language comparison of supplied player lines with each statistic kept with its named subject",
+      "a cautious variance or role-fit interpretation explicitly limited by the supplied sample",
+      "an unnamed quiet press-box or clubhouse transition that adds no person, venue, event, result, statistic, or team act"
+    ],
+    "textureConditions": [
+      "every named player, team, venue, institution, league, organization, and source must come from the Packet",
+      "every statistic, record, streak, result, roster move, role, award, contract, salary, injury, date, and sample claim requires Packet support",
+      "an unresolved feed subject may be named only as supplied and may not receive a POPID, biography, role beyond the supplied label, quote, or interview",
+      "single-game production may support a feed-delta observation but not an unsupported season projection or new player identity",
+      "a number from a TrueSource card, a Statcast card or the feed enters only through a tool call, printed as returned and named to its source; a method (PANDAS, Paper Cuts) shapes the reasoning and supplies no number of its own"
+    ],
+    "forbiddenClaimClasses": [],
+    "toolFacts": [
+      "F-cc25a49e0ea5",
+      "F-99737c123208",
+      "F-47af787770ba",
+      "F-dac4f77578eb",
+      "F-65b87ce0527e",
+      "F-29d942e22f56",
+      "F-7bbaf39825e6",
+      "F-7a1158415e7b",
+      "F-ce294964b091"
+    ]
+  }
+}

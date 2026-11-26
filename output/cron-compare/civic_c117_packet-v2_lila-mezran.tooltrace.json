@@ -1,0 +1,41 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Chinatown sick residents hospital"
+      },
+      "resultChars": 2215,
+      "resultHead": "[C116 · daily · Dr. Lila Mezran] # Six Beds in Chinatown, and No Names Attached Chinatown's line on the hospital census has barely moved in the cycles the paper has followed it. Three residents were admitted this cycle and three left. The neighborhood opened with six in care and closed with six in care, in six occupied beds. None of the six is tracked by name. The census records them as \"other residents,\" which means the city counts them and has no record of who they are. The neighborhood's sick count for this cycle is 132. That is three fewer tha\n[C113 · daily · Dr. Lila Mezran] The census li"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Care_Justice_Census",
+        "match": "Chinatown"
+      },
+      "resultChars": 2185,
+      "resultHead": "Cycle | System | GeographicScope | Neighborhood | IntakeType | PopulationBasis | CoveredPopulation | MethodVersion | Completeness | TotalIntakes | TrackedIntakes | OtherResidentIntakes | OccupancyMeasure | OpeningOccupancy | ClosingOccupancy | TrackedOccupancy | OtherResidentOccupancy | BedsOccupied | TransfersIn | TransfersOut | Exits | Corrections\n116 | hospital | neighborhood | Chinatown | all | hood-table | 2212 | cj-2 | complete | 3 | 0 | 3 | in-care | 6 | 6 | 0 | 6 | 6 | 0 | 0 | 3 | 0\n116 | judicial | neighborhood | Chinatown | arrest | hood-table | 2212 | cj-2 | complete | 1 | 0 | 1 | i"
+    },
+    {
+      "tool": "ask_worker",
+      "input": {
+        "office": "EMS-DIR",
+        "question": "Chinatown has the most sick residents (133) but only 3 admissions and 6 in care at close. What is driving illness there, and does the hospital count reflect the real load? Also, how many of the 68 in care are named in the ledger versus unnamed?"
+      },
+      "resultChars": 1694,
+      "resultHead": "Priya Narang, EMS Director, answered:\nLila — a few things, and I want to be straight with you about what I can and can't say.\n\nOn Chinatown: I don't have a confirmed cause. What I can tell you is that the 133 sick figure is a count of residents reporting illness in the neighborhood, and Chinatown is the densest part of the city with the largest senior population per bed — 398 seniors in a population of roughly 2,200. It has been sitting at 3 admissions and 6 in care every cycle since at least Cycle 110, flat, eight cycles running. That flatness tells me we're seeing a steady baseline of illnes"
+    },
+    {
+      "tool": "ask_worker",
+      "input": {
+        "office": "MED-EXAM",
+        "question": "Are any residents waiting on a cause of death or cause determination this cycle, and does anything involve Chinatown? What is on file for hospital residents admitted at C105/C106?"
+      },
+      "resultChars": 1694,
+      "resultHead": "Jonas Patel, Medical Examiner, answered:\n**On the record — Cycle 117, Office of the Medical Examiner**\n\n**Residents waiting on a cause:** Three names sit on that sheet, and none of them is a death. Marcus Osei (Chinatown, 67) is recovering from a car accident; Elliott Crane (Uptown, 79) is recovering from a broken leg; Ariana Lee (Piedmont Ave, 42) remains in serious condition, on file with cancer. These are open determinations of injury and illness, not cause-of-death questions.\n\n**Chinatown:** Yes — one of the three is Chinatown's. Marcus Osei, recovering, car accident. Nothing fatal, and no"
+    }
+  ],
+  "ranAt": "2026-11-24T00:18:32.385Z"
+}

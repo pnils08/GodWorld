@@ -1,0 +1,48 @@
+{
+  "office": "health_center",
+  "cycle": 117,
+  "speaker": "Bobby Chen-Ramirez",
+  "cascadeSummary": "The Q3 filing and the Telegraph & 47th walkthrough are the two things owed before oversight gets certified, so I'm executing both this cycle — not announcing them, recording them. The audit goes to HCAI and the Clerk; the walkthrough puts shopkeepers and my front-desk staff in the same rooms so the filing has a walking tour behind it. A clinic that sits empty is a monument; the paper has to survive a walk down Telegraph.",
+  "statements": [
+    {
+      "statementId": "STMT-117-health_center-001",
+      "type": "decision",
+      "topic": "Q3 clinical intake audit filing with HCAI and Council Clerk",
+      "initiative": "INIT-005",
+      "decision": "File the Q3 clinical intake audit with HCAI and the Council Clerk this cycle, on the standing quarterly schedule established at C115.",
+      "quote": "A filing that can't survive a walking tour isn't worth the paper I print it on — so the Q3 audit goes in the same week the shopkeepers walk the building.",
+      "fullStatement": "The Q3 intake audit is not a formality and it's not a stunt for the gavel. It goes to HCAI and to the Clerk this cycle, on the same standing schedule we set at C115 — because I'd rather hand over the numbers than have somebody come ask for them. The Q2 went out clean and on time; Q3 goes out the same way. Benchmarks aren't an insult, they're a filing requirement, and this neighborhood is owed the proof on the record, not promised it in a press release.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "MilestoneNotes": "C117: Q3 intake audit filed with HCAI and Council Clerk per standing schedule.",
+        "NextScheduledAction": "Q4 intake audit filing with HCAI and Council Clerk",
+        "NextActionCycle": 121
+      }
+    },
+    {
+      "statementId": "STMT-117-health_center-002",
+      "type": "decision",
+      "topic": "Telegraph & 47th merchant-clinic verification walkthrough",
+      "initiative": "INIT-005",
+      "decision": "Complete and document the recurring Telegraph & 47th merchant-clinic verification walkthrough this cycle, with shopkeepers and front-desk staff walking the building together.",
+      "quote": "The shopkeepers across the street see more of this clinic's real traffic than any dashboard I get — they get a walkthrough and a say.",
+      "fullStatement": "The walkthrough happens this cycle, and it happens with the right people in the room: the shopkeepers at Telegraph and 47th, and my front-desk staff who actually see who walks in the door. We go room to room, we look at the intake desk, we look at where the 2.3-mile gap actually bites, and we write it down. This is the institutionalized version from C115 — same questions, same columns, every cycle. The audit is how the neighborhood checks the work; the walkthrough is the check that the audit didn't get written in a room by itself.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "MilestoneNotes": "C117: Telegraph & 47th merchant-clinic walkthrough completed and documented.",
+        "NextScheduledAction": "Recurring Telegraph & 47th merchant-clinic walkthrough",
+        "NextActionCycle": 121
+      }
+    },
+    {
+      "statementId": "STMT-117-health_center-003",
+      "type": "position",
+      "topic": "Working-door test and the 2.3-mile gap",
+      "initiative": "INIT-005",
+      "decision": "Hold the working-door test front and center through Q3: the audit and walkthrough are measured against whether someone can actually get here without two buses.",
+      "quote": "A clinic that sits empty isn't a clinic — it's a monument. Ours is a working building, and the audit is how the neighborhood checks the work.",
+      "fullStatement": "I keep coming back to the same test: can Mrs. Okafor get here without two buses, and does the door open when she does. The paperwork passes, the inspections pass — but the thing I don't get to see from my desk is her face when she finds out the trip is doable. So the Q3 audit and the walkthrough get read through that lens, not just through the columns. The 2.3-mile gap isn't a statistic on my wall; it's the distance between a plan that passes and a door that actually opens. That's the working-door test, and it's the one I answer to.",
+      "trackerUpdates": {}
+    }
+  ]
+}

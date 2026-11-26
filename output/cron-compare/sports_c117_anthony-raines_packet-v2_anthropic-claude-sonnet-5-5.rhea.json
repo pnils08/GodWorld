@@ -1,0 +1,80 @@
+{
+  "draft": "output/cron-compare/sports_c117_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "117",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "3130bae67f3bc7b6f5f2a27e95a6581b4a81400e002badf133ab6d318ff3e16a",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All contract details, 2041 stats, pitch mix, and bullpen roster references for Mariano Rosales strictly match canon ground truth with zero hallucinations or unverified quotes.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-3",
+    "manifestId": "AM-08fb1893bf65",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "2046",
+          "106",
+          "127",
+          "-35"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Clark Saryan",
+      "Hitoki Ka",
+      "Ian Devine",
+      "Julio Valencia",
+      "Louis Cross",
+      "Mariano Rosales",
+      "Travis Coles"
+    ],
+    "unverified": [
+      "World Series"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0145,
+  "durationMs": 7056,
+  "parseError": false,
+  "ranAt": "2026-11-24T00:21:08.329Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 855,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "3130bae67f3bc7b6f5f2a27e95a6581b4a81400e002badf133ab6d318ff3e16a",
+    "costUsd": 0.0015
+  }
+}

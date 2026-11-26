@@ -1,0 +1,169 @@
+{
+  "loggedAt": "2026-11-26T12:17:59.412Z",
+  "cycle": 117,
+  "writersWithFiles": [
+    "Anthony Raines",
+    "Hal Richmond",
+    "P Slayer",
+    "Simon Leary",
+    "Tanya Cruz",
+    "Selena Grant",
+    "Talia Finch"
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "team": "A's",
+      "eventType": "roster-move",
+      "eventTrigger": "departed",
+      "snippet": "Mark Aitken signs with Colorado, one y",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 2,
+      "team": "A's",
+      "eventType": "re-signing",
+      "eventTrigger": "re-signed",
+      "snippet": "Vladimir Gonzalez gets five years and ",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 3,
+      "team": "A's",
+      "eventType": "player-feature",
+      "eventTrigger": "community-outreach",
+      "snippet": "Danny Horn said he was the best player",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 4,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "big-win",
+      "snippet": "Austin Reaves scores 32 in 22 minutes ",
+      "writers": [
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 5,
+      "team": "Oaks",
+      "eventType": "game-result",
+      "eventTrigger": "rivalry",
+      "snippet": "Down 15 at the half, the Oaks come bac",
+      "writers": [
+        "Anthony Raines",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 6,
+      "team": "Oaks",
+      "eventType": "player-feature",
+      "eventTrigger": "milestone",
+      "snippet": "The Oaks' highest-paid player is playi",
+      "writers": [
+        "Anthony Raines",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 7,
+      "team": "Oaks",
+      "eventType": "team-update",
+      "eventTrigger": "comeback",
+      "snippet": "The Oaks finish. Down 15 at the half i",
+      "writers": [
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz",
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    },
+    {
+      "n": 8,
+      "team": "A's",
+      "eventType": "re-signing",
+      "eventTrigger": "re-signed",
+      "snippet": "Mariano Rosales gets five years and $8",
+      "writers": [
+        "Anthony Raines",
+        "Hal Richmond",
+        "P Slayer",
+        "Simon Leary",
+        "Tanya Cruz"
+      ],
+      "shared": [
+        "world summary"
+      ],
+      "stranded": false,
+      "unprobeable": false
+    }
+  ],
+  "stranded": 0
+}

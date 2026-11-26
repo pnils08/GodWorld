@@ -1,0 +1,41 @@
+{
+  "office": "oari",
+  "agentDir": "civic-project-oari",
+  "holder": "Vanessa Tran-Muñoz",
+  "popid": "POP-01021",
+  "title": "OARI Program Director",
+  "date": "2026-11-26",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "# OARI Weekly Report — Cycle 118\n**Vanessa Tran-Muñoz, Program Director, Oakland Alternative Response Initiative**\n\n**What changed since my last report.**\n\nI'll be straight with you from the top, because the change this Cycle is small and the work is not.\n\nThe OARI van ran one call this Cycle, in West Oakland, and it deescalated — a crisis ended without cuffs, and the block saw it happen. That's the same shape as last week's single call, and I'm not going to dress one good call up as a trend. It's one call, it went the way it should, and I'm grateful for it.\n\nEverything else on the sheet is quiet, and I've said before that quiet is not the same as fine. Across all 22 neighborhoods we track, mental-health-crisis and substance-treatment intakes are zero — zero in, zero in care, zero beds. Payments on INIT-002 this Cycle: none. The city's safety-and-health event ledger: no entries. So the only thing I can count this week is one van call. I report what the record shows, and I don't dress it up.\n\n**Where the initiative stands.**\n\nINIT-002 remains in dispatch-live. The budget stands at $10,576,923.04 remaining against the $12.5M approved. And here is the part I have to say plainly, again: the next scheduled action was due this Cycle — the D3 Fruitvale briefing record — and the tracker shows it not executed. The written next dates for the D5 audit and the Baylight feasibility review are not filed either. The hold carries forward to Cycle 118 with the same three items outstanding, and the tracker is right to carry it.\n\nI told you last Cycle I intended to report a published briefing, not another promise. I don't have that for you. I'm not going to explain it away. The council's condition — district-level Fruitvale data and a real community briefing before any expansion — is not satisfied by a quiet week or a single good van call, and I won't let it be described as though it were. Expansion stays held.\n\nThe Chinatown call still sits with me. We got someone there, and the wait was too long. That's the gap zeroes on a sheet will never show you, and it's why the Fruitvale numbers have to be honest — not just complete — before anybody calls this progress.\n\nThe three commitments stand, and I'll put them in writing again so they're on the record: execute and publish the D3 Fruitvale briefing record, file firm next dates for the D5 audit and the Baylight feasibility review, and stop letting this hold slip a Cycle at a time. Next Cycle I will report what actually happened, not what I hoped would.\n\n— Vanessa Tran-Muñoz",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-26T11:46:19.655Z",
+  "usage": {
+    "prompt_tokens": 4017,
+    "completion_tokens": 587,
+    "cost": 0.0006
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "crisis response mental health dispatch",
+    "entries": 8,
+    "fromSearch": 6,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-01021",
+    "id": "yZ4W4ZX6VKRKEjVS5atPwG",
+    "customId": "cp-POP-01021-c117-CIVIC-datawake-2026-11-26"
+  }
+}

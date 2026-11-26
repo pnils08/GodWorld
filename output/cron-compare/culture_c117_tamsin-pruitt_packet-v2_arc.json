@@ -1,0 +1,22 @@
+{
+  "status": "arc-seed",
+  "cycle": "117",
+  "desk": "culture",
+  "persona": "tamsin-pruitt",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00766",
+      "name": "Manjit Singh",
+      "quote": "The first thing I did in my new place was unpack my grandmother's old tea set; my friends from the community helped me move. I decided to prioritize getting the water heater fixed over a weekend trip because I wanted to settle in comfortably."
+    },
+    {
+      "pop": "POP-00128",
+      "name": "Kris Bubic",
+      "quote": "I moved to Lake Merritt because I wanted a change of scenery and a bit more space, and I'm taking the memories of my time in West Oakland with me, especially the community and the A's games."
+    }
+  ],
+  "claim": "The first thing I did in my new place was unpack my grandmother's old tea set; my friends from the community helped me move. I decided to prioritize getting the water heater fixed over a weekend trip because I wanted to settle in comfortably.",
+  "src": "citizenVoice PRESS c117",
+  "ranAt": "2026-11-24T19:17:12.637Z"
+}

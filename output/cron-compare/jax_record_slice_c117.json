@@ -1,0 +1,2146 @@
+{
+  "version": "JAX-RECORD-SLICE-3",
+  "empty": false,
+  "cycle": 117,
+  "kind": "beat-jax",
+  "seat": {
+    "slug": "freelance-firebrand",
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "desk": "civic",
+    "domain": "accountability",
+    "builder": "buildJaxRecordSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-jax",
+    "score": 100,
+    "label": "the city of C117",
+    "hood": null,
+    "source": "output/desk_signal_c117.json"
+  },
+  "story": {
+    "kind": "beat-jax",
+    "angle": "the city of C117",
+    "label": "the city of C117",
+    "hookLine": "",
+    "hood": null,
+    "citizens": [
+      "Daniela Kapoor (POP-01209)",
+      "Soledad Brown (POP-00897)",
+      "Elliott Crane (POP-00044)",
+      "Theo Banks (POP-01056)",
+      "Tre Mingo (POP-00123)",
+      "Jun Leu (POP-00994)",
+      "Patricia Nwosu (POP-00554)",
+      "Tank Fiester (POP-00669)",
+      "Jade Orion (POP-00540)",
+      "Rose Delgado (POP-00503)",
+      "Soo Loo (POP-00663)",
+      "Manju Abebe (POP-00918)",
+      "Marguerite Kimball-Ostrow (POP-01188)",
+      "Juliette Park (POP-00466)",
+      "Avery Santana (POP-00034)",
+      "Priyanka Raman (POP-01096)",
+      "Delvon Pratt (POP-00621)",
+      "Elias Varek (POP-00789)",
+      "Vinnie Keane (POP-00001)",
+      "Benji Dillon (POP-00018)",
+      "Lena Cross (POP-00539)",
+      "Travis Coles (POP-00533)",
+      "Danny Horn (POP-00022)",
+      "Darrin Davis (POP-00021)",
+      "Trenton Nawan (POP-00273)",
+      "Karim Avery (POP-00980)",
+      "Hector Leech (POP-00252)",
+      "Amara Osei (POP-01110)",
+      "Matilda Diop (POP-00832)",
+      "Davey Martinez (POP-00213)",
+      "Terrence Mobley (POP-00506)",
+      "Nina Chen (POP-00505)",
+      "Warren Ashford (POP-00504)",
+      "Janae Rivers (POP-00043)",
+      "Ramon Vega (POP-00042)",
+      "Leonard Tran (POP-00502)",
+      "Denise Carter (POP-00501)",
+      "Mark Aitken (POP-00003)",
+      "Guadalupe Lupe (POP-00643)",
+      "Ernesto Quintero (POP-00050)"
+    ],
+    "popids": [
+      "POP-01209",
+      "POP-00897",
+      "POP-00044",
+      "POP-01056",
+      "POP-00123",
+      "POP-00994",
+      "POP-00554",
+      "POP-00669",
+      "POP-00540",
+      "POP-00503",
+      "POP-00663",
+      "POP-00918",
+      "POP-01188",
+      "POP-00466",
+      "POP-00034",
+      "POP-01096",
+      "POP-00621",
+      "POP-00789",
+      "POP-00001",
+      "POP-00018",
+      "POP-00539",
+      "POP-00533",
+      "POP-00022",
+      "POP-00021",
+      "POP-00273",
+      "POP-00980",
+      "POP-00252",
+      "POP-01110",
+      "POP-00832",
+      "POP-00213",
+      "POP-00506",
+      "POP-00505",
+      "POP-00504",
+      "POP-00043",
+      "POP-00042",
+      "POP-00502",
+      "POP-00501",
+      "POP-00003",
+      "POP-00643",
+      "POP-00050"
+    ],
+    "ref": "output/desk_signal_c117.json",
+    "cycle": 117
+  },
+  "approach": " Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01209",
+      "name": "Daniela Kapoor",
+      "role": "Teacher",
+      "neighborhood": "Glenview",
+      "business": null,
+      "profile": "Daniela Kapoor — Teacher — Glenview",
+      "why": "has a page on the record, C117"
+    },
+    {
+      "popid": "POP-00897",
+      "name": "Soledad Brown",
+      "role": "Paramedic",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Soledad Brown — Paramedic — Laurel",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00044",
+      "name": "Elliott Crane",
+      "role": "City Council District 6",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Elliott Crane — City Council District 6 — Uptown",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-01056",
+      "name": "Theo Banks",
+      "role": "rapper",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Theo Banks — rapper — Uptown",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00123",
+      "name": "Tre Mingo",
+      "role": "Port Worker",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Tre Mingo — Port Worker — Uptown",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00994",
+      "name": "Jun Leu",
+      "role": "student",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Jun Leu — student — Temescal",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00554",
+      "name": "Patricia Nwosu",
+      "role": "Deputy Health Officer, Alameda County",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Patricia Nwosu — Deputy Health Officer, Alameda County — Downtown",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00669",
+      "name": "Tank Fiester",
+      "role": "Biotech Lab Director (Portside Bio)",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Tank Fiester — Biotech Lab Director (Portside Bio) — Lake Merritt",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00540",
+      "name": "Jade Orion",
+      "role": "Musician",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Jade Orion — Musician — Lake Merritt",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00503",
+      "name": "Rose Delgado",
+      "role": "City Council District 3",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Rose Delgado — City Council District 3 — Fruitvale",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00663",
+      "name": "Soo Loo",
+      "role": "Corporate Accountant",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Soo Loo — Corporate Accountant — Downtown",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00918",
+      "name": "Manju Abebe",
+      "role": "Plumber",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Manju Abebe — Plumber — Chinatown",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-01188",
+      "name": "Marguerite Kimball-Ostrow",
+      "role": "Elementary Teacher",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Marguerite Kimball-Ostrow — Elementary Teacher — Piedmont Ave",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00466",
+      "name": "Juliette Park",
+      "role": "Venture Partner (Ridgeline Ventures)",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Juliette Park — Venture Partner (Ridgeline Ventures) — West Oakland",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00034",
+      "name": "Avery Santana",
+      "role": "Mayor of Oakland",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Avery Santana — Mayor of Oakland — Rockridge",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-01096",
+      "name": "Priyanka Raman",
+      "role": "Principal, Oakland Tech Collective",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Priyanka Raman — Principal, Oakland Tech Collective — West Oakland",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00621",
+      "name": "Delvon Pratt",
+      "role": "Warehouse Supervisor",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Delvon Pratt — Warehouse Supervisor — West Oakland",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00789",
+      "name": "Elias Varek",
+      "role": "Founder of Civis Systems",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Elias Varek — Founder of Civis Systems — West Oakland",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00001",
+      "name": "Vinnie Keane",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00018",
+      "name": "Benji Dillon",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Piedmont Ave",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00539",
+      "name": "Lena Cross",
+      "role": "Actor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Lena Cross — Actor — Piedmont Ave",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00533",
+      "name": "Travis Coles",
+      "role": "Starting Pitcher, Oakland A's",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Travis Coles — Starting Pitcher, Oakland A's — Downtown",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00022",
+      "name": "Danny Horn",
+      "role": "Center Fielder, Oakland A's - Best player in the MLB",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Danny Horn — Center Fielder, Oakland A's - Best player in the MLB — Temescal",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00021",
+      "name": "Darrin Davis",
+      "role": "Left Fielder, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Darrin Davis — Left Fielder, Oakland A's Legend — Piedmont Ave",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00273",
+      "name": "Trenton Nawan",
+      "role": "Server",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Trenton Nawan — Server — Jack London",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00980",
+      "name": "Karim Avery",
+      "role": "Security Guard",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Karim Avery — Security Guard — Fruitvale",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00252",
+      "name": "Hector Leech",
+      "role": "Dishwasher",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Hector Leech — Dishwasher — Jack London",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-01110",
+      "name": "Amara Osei",
+      "role": "Founder, Portside Bio",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Amara Osei — Founder, Portside Bio — West Oakland",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00832",
+      "name": "Matilda Diop",
+      "role": "Paramedic",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Matilda Diop — Paramedic — Lake Merritt",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00213",
+      "name": "Davey Martinez",
+      "role": "Maintenance tech",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Davey Martinez — Maintenance tech — Temescal",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00506",
+      "name": "Terrence Mobley",
+      "role": "City Council District 9",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Terrence Mobley — City Council District 9 — Uptown",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00505",
+      "name": "Nina Chen",
+      "role": "City Council District 8",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Nina Chen — City Council District 8 — Lake Merritt",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00504",
+      "name": "Warren Ashford",
+      "role": "City Council District 7",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Warren Ashford — City Council District 7 — Rockridge",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00043",
+      "name": "Janae Rivers",
+      "role": "City Council District 5",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Janae Rivers — City Council District 5 — Piedmont Ave",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00042",
+      "name": "Ramon Vega",
+      "role": "City Council District 4",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Ramon Vega — City Council District 4 — Lake Merritt",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00502",
+      "name": "Leonard Tran",
+      "role": "City Council District 2",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Leonard Tran — City Council District 2 — Downtown",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00501",
+      "name": "Denise Carter",
+      "role": "City Council District 1",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Denise Carter — City Council District 1 — West Oakland",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00003",
+      "name": "Mark Aitken",
+      "role": "First Baseman, Colorado Rockies",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Mark Aitken — First Baseman, Colorado Rockies — Jack London",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00643",
+      "name": "Guadalupe Lupe",
+      "role": "Bartender",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Guadalupe Lupe — Bartender — Jack London",
+      "why": "has a page on the record, C116"
+    },
+    {
+      "popid": "POP-00050",
+      "name": "Ernesto Quintero",
+      "role": "3B/1B , Oakland A's",
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+      "why": "has a page on the record, C116"
+    }
+  ],
+  "facts": [
+    {
+      "text": "In their own words — Daniela Kapoor, Teacher, Glenview (POP-01209) — 1 page; latest the night page, C117: “*(I look up from the kitchen counter, a half-empty mug of tea in my hand. The window is cracked open a couple inches, letting in the cool air.)*…”",
+      "src": "output/citizen_pages/index.jsonl rEL3REibw5zqjj4Nxe5zPq"
+    },
+    {
+      "text": "In their own words — Soledad Brown, Paramedic, Laurel (POP-00897) — 2 pages; latest the midday page, a question they carry, C116: “Is it really just waving and small talk between Arturo and me, or is there more I'm not saying?”",
+      "src": "output/citizen_pages/index.jsonl 6vJaCqGyPNd75FiWBQ7Ado"
+    },
+    {
+      "text": "In their own words — Elliott Crane, City Council District 6, Uptown (POP-00044) — 4 pages; latest to a reporter, a question they carry, C116: “Can we keep Uptown residents from being priced out while our corridors stay vital?”",
+      "src": "output/citizen_pages/index.jsonl AxBpCDkDQ7nNFqKPgmAmdw"
+    },
+    {
+      "text": "In their own words — Theo Banks, rapper, Uptown (POP-01056) — 3 pages; latest to a reporter, C116: “The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave.”",
+      "src": "output/citizen_pages/index.jsonl ikt7owyuuJ3nQDX4va3EZj"
+    },
+    {
+      "text": "In their own words — Tre Mingo, Port Worker, Uptown (POP-00123) — 5 pages; latest to a reporter, C116: “I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work…”",
+      "src": "output/citizen_pages/index.jsonl kMgCn9u7n6vDG6gN2VSBAZ"
+    },
+    {
+      "text": "In their own words — Jun Leu, student, Temescal (POP-00994) — 3 pages; latest the morning page, C116: “There's this one thing that keeps bugging me — my stupid shoelace. It's this one lace on my left shoe that keeps coming untied no matter how tight I…”",
+      "src": "output/citizen_pages/index.jsonl qmXGZEcFzysM4D4745yr5U"
+    },
+    {
+      "text": "In their own words — Patricia Nwosu, Deputy Health Officer, Alameda County, Downtown (POP-00554) — 3 pages; latest the night page, C116: “*(I set my tea down, the mug still warm. The house is quiet—kids asleep, husband reading in the other room. I look at the kitchen counter, where a…”",
+      "src": "output/citizen_pages/index.jsonl cmS2KsZfeVgyD4xfG5prDN"
+    },
+    {
+      "text": "In their own words — Tank Fiester, Biotech Lab Director (Portside Bio), Lake Merritt (POP-00669) — 1 page; latest in conversation, C116: “Jade. Good to see you too. Yeah, that news hit different—feels like we lost a piece of the city itself, not just a first baseman. Remember when we'd…”",
+      "src": "output/citizen_pages/index.jsonl TPu73J935Fd7rgFeJBU78H"
+    },
+    {
+      "text": "In their own words — Jade Orion, Musician, Lake Merritt (POP-00540) — 7 pages; latest in conversation, C116: “Hey, Tank. Good to see you out here. Was just thinking about you the other day—all this Aitken stuff got me remembering those long nights breaking…”",
+      "src": "output/citizen_pages/index.jsonl cUuK8tkJVbTgpo84Yy5yMT"
+    },
+    {
+      "text": "In their own words — Rose Delgado, City Council District 3, Fruitvale (POP-00503) — 5 pages; latest the midday page, C116: “Honest? The ambition is real, but so is the weight. Every time I walk past that empty lot on International, I feel the clock ticking — not mine, the…”",
+      "src": "output/citizen_pages/index.jsonl 8jUFMUT5jVWuKQQRiHdMMp"
+    },
+    {
+      "text": "In their own words — Soo Loo, Corporate Accountant, Downtown (POP-00663) — 7 pages; latest to a reporter, C116: “I think what changed between Tuesday and Friday nights was my strategy and the contracts I took. On Tuesday, I focused on the First Hunt:…”",
+      "src": "output/citizen_pages/index.jsonl kcAzPpiHDNqUakBP9EqfsD"
+    },
+    {
+      "text": "In their own words — Manju Abebe, Plumber, Chinatown (POP-00918) — 3 pages; latest to a reporter, C116: “My Monday and Thursday night routes on UNDOCKED were pretty different. On Monday, I went through Sol, Alpha Centauri, and a bunch of other stars,…”",
+      "src": "output/citizen_pages/index.jsonl 8FBEHG74SHFHH7a6hFY4sH"
+    },
+    {
+      "text": "In their own words — Marguerite Kimball-Ostrow, Elementary Teacher, Piedmont Ave (POP-01188) — 4 pages; latest to a reporter, C116: “I didn't really have a strategy on Sunday or Wednesday nights. I just flew through the systems one by one, and it happened to come out even on…”",
+      "src": "output/citizen_pages/index.jsonl JWmev8chidQ9QV8mgU3hPp"
+    },
+    {
+      "text": "In their own words — Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
+      "src": "output/citizen_pages/index.jsonl Ws72puWwyyzuYUGuLbLv59"
+    },
+    {
+      "text": "In their own words — Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
+      "src": "output/citizen_pages/index.jsonl onERfzsE3KnXWe8Abtaaig"
+    },
+    {
+      "text": "In their own words — Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 3 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in…”",
+      "src": "output/citizen_pages/index.jsonl W7xkK7FfUA4aAQrmdzmLR7"
+    },
+    {
+      "text": "In their own words — Delvon Pratt, Warehouse Supervisor, West Oakland (POP-00621) — 3 pages; latest to a reporter, C116: “I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and…”",
+      "src": "output/citizen_pages/index.jsonl 62YnrwYU3y32qYcu29r8oR"
+    },
+    {
+      "text": "In their own words — Elias Varek, Founder of Civis Systems, West Oakland (POP-00789) — 34 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still…”",
+      "src": "output/citizen_pages/index.jsonl XFwW8s6q2NK7YWm2CcZz62"
+    },
+    {
+      "text": "In their own words — Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Piedmont Ave (POP-00001) — 55 pages; latest to a reporter, C116; Lives carried the wager this Cycle: “I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to…”",
+      "src": "output/citizen_pages/index.jsonl jGEserPGfpR2eWp6BjcCwu"
+    },
+    {
+      "text": "In their own words — Benji Dillon, Pitcher, Oakland A's Legend, Piedmont Ave (POP-00018) — 41 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about…”",
+      "src": "output/citizen_pages/index.jsonl CcvRTd2vHYcK9X1gpbt5iE"
+    },
+    {
+      "text": "In their own words — Lena Cross, Actor, Piedmont Ave (POP-00539) — 12 pages; latest to a reporter, C116: “Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been…”",
+      "src": "output/citizen_pages/index.jsonl mk6UPSaE47vAjKMFY2kRRi"
+    },
+    {
+      "text": "In their own words — Travis Coles, Starting Pitcher, Oakland A's, Downtown (POP-00533) — 12 pages; latest to a reporter, C116: “I've seen Benji Dillon around Rockridge a few times, and it's clear he's getting more attention. As a player, you're used to being recognized, but…”",
+      "src": "output/citizen_pages/index.jsonl DGj4sxubGu1JFaSb2BVz4F"
+    },
+    {
+      "text": "In their own words — Danny Horn, Center Fielder, Oakland A's - Best player in the MLB, Temescal (POP-00022) — 8 pages; latest to a reporter, C116: “To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've…”",
+      "src": "output/citizen_pages/index.jsonl KUg5GE3VkZXnaBsifgaNNo"
+    },
+    {
+      "text": "In their own words — Darrin Davis, Left Fielder, Oakland A's Legend, Piedmont Ave (POP-00021) — 8 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “To be honest, I'm not super close to Benji Dillon, but I've seen his name popping up more often around the A's, and it's clear he's gaining traction.…”",
+      "src": "output/citizen_pages/index.jsonl odnL5rT6xaS9dJwxc5UCpn"
+    },
+    {
+      "text": "In their own words — Trenton Nawan, Server, Jack London (POP-00273) — 15 pages; latest to a reporter, C116: “You want to know what the work actually looks like? Stand at the dish pit at Green & Gold on a Saturday night. That's where you learn the real rhythm…”",
+      "src": "output/citizen_pages/index.jsonl xQyvfShvC7AdHVSttYNmPy"
+    },
+    {
+      "text": "In their own words — Karim Avery, Security Guard, Fruitvale (POP-00980) — 2 pages; latest to a reporter, a question they carry, C116: “How do I serve people when I can see the weight they carry and can't lighten it?”",
+      "src": "output/citizen_pages/index.jsonl yoQyU9m51J3TNxWHpn7R7g"
+    },
+    {
+      "text": "In their own words — Hector Leech, Dishwasher, Jack London (POP-00252) — 4 pages; latest to a reporter, C116: “A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a…”",
+      "src": "output/citizen_pages/index.jsonl m4vJkshB1kkKDEzSnSKFvk"
+    },
+    {
+      "text": "In their own words — Amara Osei, Founder, Portside Bio, West Oakland (POP-01110) — 1 page; latest the midday page, C116: “The corner store on Mandela, the one with the squeaky screen door and the old man who’s been running it since before I moved here. I don’t need…”",
+      "src": "output/citizen_pages/index.jsonl onUArvpkDuQqhnixsVDQL8"
+    },
+    {
+      "text": "In their own words — Matilda Diop, Paramedic, Lake Merritt (POP-00832) — 2 pages; latest the morning page, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “Did I make the right call years back, and who was I really arguing with on that bench?”",
+      "src": "output/citizen_pages/index.jsonl ocphRdSXZbbhRcTChHHoGu"
+    },
+    {
+      "text": "In their own words — Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
+      "src": "output/citizen_pages/index.jsonl 9hkzbghuctqRjf8AH3qbkJ"
+    },
+    {
+      "text": "In their own words — Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
+      "src": "output/citizen_pages/index.jsonl sd3rfAd6xtCwhfD5KLPy4D"
+    },
+    {
+      "text": "In their own words — Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
+      "src": "output/citizen_pages/index.jsonl JHm7wgACgoiGKS75iDDxri"
+    },
+    {
+      "text": "In their own words — Warren Ashford, City Council District 7, Rockridge (POP-00504) — 9 pages; latest after work, C116: “Council District 7 — Warren Ashford here. Let me address that record directly, because I stand by every line of it. **On the clinical dollars…”",
+      "src": "output/citizen_pages/index.jsonl 9Q6YUR7oiYKkogiuVShzqN"
+    },
+    {
+      "text": "In their own words — Janae Rivers, City Council District 5, Piedmont Ave (POP-00043) — 9 pages; latest after work, C116: “**Janae Rivers** *(standing at the front of the Community Meeting Room, Piedmont Ave Library — sleeves rolled up, a stack of printed call logs on the…”",
+      "src": "output/citizen_pages/index.jsonl vuQGqoTkzAHWEWvP9tkjah"
+    },
+    {
+      "text": "In their own words — Ramon Vega, City Council District 4, Lake Merritt (POP-00042) — 19 pages; latest after work, C116: “Let's get right to it. You've laid out the record cleanly. Here's where I land, and I'll be direct with you because that's how I operate. **On the…”",
+      "src": "output/citizen_pages/index.jsonl CZAg4aqFEEkTXgANh9QmEB"
+    },
+    {
+      "text": "In their own words — Leonard Tran, City Council District 2, Downtown (POP-00502) — 3 pages; latest after work, C116: “The record is the record, and I don’t blur lines. A stated YES is a position, not a vote. A proposed allocation is a number on a page, not money…”",
+      "src": "output/citizen_pages/index.jsonl LtKUBpvfVYdB9eyAxaMu5Z"
+    },
+    {
+      "text": "In their own words — Denise Carter, City Council District 1, West Oakland (POP-00501) — 2 pages; latest after work, C116: “Denise leans forward, her elbows on the table, voice low and steady. She doesn't wave off the numbers, but she refuses to let them be the whole…”",
+      "src": "output/citizen_pages/index.jsonl R9WmfGKiDpioNVkYkeXXKD"
+    },
+    {
+      "text": "In their own words — Mark Aitken, First Baseman, Colorado Rockies, Jack London (POP-00003) — 17 pages; latest after work, C116: “Yeah. I saw the feed. Hard not to, with the phone blowing up the way it is. Here's what I'll say about the Angels thing — it's real, in the sense…”",
+      "src": "output/citizen_pages/index.jsonl mTT57M6BvVoGzsdTT6pUJm"
+    },
+    {
+      "text": "In their own words — Guadalupe Lupe, Bartender, Jack London (POP-00643) — 12 pages; latest to a reporter, C116: “I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are…”",
+      "src": "output/citizen_pages/index.jsonl KQ82179XbWDUExiWwTvQTy"
+    },
+    {
+      "text": "In their own words — Ernesto Quintero, 3B/1B , Oakland A's, Baylight District (POP-00050) — 10 pages; latest to a reporter, a question they carry, C116: “Can I actually make the switch to first base and deliver what the team needs from me there?”",
+      "src": "output/citizen_pages/index.jsonl JwQmJyikyteMS6WbV5UoAe"
+    },
+    {
+      "text": "In their own words — Ira Leu, Artisan Cheesemaker, Temescal (POP-00703) — 1 page; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “I didn't go to the health center staff's unwind at the bar, but I heard they were pretty relieved after their first busy week. The Temescal Community…”",
+      "src": "output/citizen_pages/index.jsonl 7RbHUcitA7EEwMvFcidqM7"
+    },
+    {
+      "text": "In their own words — Theo Rahimi, student, Eastlake (POP-01247) — 1 page; latest to a reporter, C116; Lives carried the new household this Cycle: “Having a place of my own in Eastlake feels really great. It's like a new start for me. I've been working hard and it's nice to have a space that's…”",
+      "src": "output/citizen_pages/index.jsonl 9xTLmdvGmddwZpa2bc11fQ"
+    },
+    {
+      "text": "In their own words — Wilson Shepard, Head Coach, Oakland Oaks, West Oakland (POP-01022) — 13 pages; latest to a reporter, C116; Lives carried the new household this Cycle: “To be honest, my new living situation in West Oakland hasn't really affected my coaching. I've been focused on the team's performance, and my daily…”",
+      "src": "output/citizen_pages/index.jsonl KWXR7fEJXtXk713RNBWifT"
+    },
+    {
+      "text": "In their own words — Mike Paulson, General Manager, Oakland A's & The Oaks, West Oakland (POP-00527) — 29 pages; latest to a reporter, C116: “As a resident of West Oakland, I've seen the mood around the Oaks shift dramatically. The team was 0-9 to start, and now they're 8-1. The fans are…”",
+      "src": "output/citizen_pages/index.jsonl cxMFmNXXUgEyT5NrCTwL24"
+    },
+    {
+      "text": "In their own words — Elliot Abraham, General Manager, Oakland Oaks, Jack London (POP-01046) — 3 pages; latest to a reporter, C116: “I've seen the fans are excited, and it's infectious. The team's turnaround has really brought them out, and you can feel the energy. We're 8-1 now…”",
+      "src": "output/citizen_pages/index.jsonl e5QHwgRzs3Kf5RhhUeALVp"
+    },
+    {
+      "text": "In their own words — Melton Neilon, Sourdough Baker, Temescal (POP-00170) — 22 pages; latest to a reporter, C116: “To be honest, Mark Aitken leaving still has me a bit down. I keep thinking about what it means for the A's and the community. It's not just about the…”",
+      "src": "output/citizen_pages/index.jsonl s6kS4hx48GRCs4YTwcfDwA"
+    },
+    {
+      "text": "In their own words — Naomi Sterling, Senior Pastor / Faith Leader, Rockridge (POP-00759) — 7 pages; latest to a reporter, C116: “I've seen Adams Point United Methodist play a role in the Interfaith Council's efforts, particularly during their interfaith prayer breakfast in…”",
+      "src": "output/citizen_pages/index.jsonl BgaqZxihiNi3NJj4chNpcC"
+    },
+    {
+      "text": "In their own words — Robert Jaston, Senior Pastor / Faith Leader, West Oakland (POP-00758) — 6 pages; latest to a reporter, C116: “I've seen Adams Point United Methodist participate in the Interfaith Council's prayer breakfast, bringing leaders together in Adams Point. It's…”",
+      "src": "output/citizen_pages/index.jsonl 354weLfvKF2j5Fp8f4bgeX"
+    },
+    {
+      "text": "In their own words — Ramon Solano, Senior Pastor / Faith Leader, Fruitvale (POP-00756) — 6 pages; latest to a reporter, C116: “I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders…”",
+      "src": "output/citizen_pages/index.jsonl 5AzCbrvp2VXsqgMeTc9p7Y"
+    },
+    {
+      "text": "In their own words — Daniel Han, Senior Pastor / Faith Leader, Lake Merritt (POP-00757) — 1 page; latest to a reporter, C116: “I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program,…”",
+      "src": "output/citizen_pages/index.jsonl kSnsmNHn1rrFnEjkUgzhhi"
+    },
+    {
+      "text": "In their own words — Yesenia Desai, Security Guard, Jack London (POP-00902) — 1 page; latest the morning page, C116: “The coffee cart on Webster was already out, but the guy running it had his paper cup balanced wrong—the lid wasn't snapped all the way, and he didn't…”",
+      "src": "output/citizen_pages/index.jsonl XQiyChzFsxWtw7spfd6zaj"
+    },
+    {
+      "text": "In their own words — Marisol Quintero, BART Train Conductor, Fruitvale (POP-01212) — 1 page; latest to a reporter, C116; Lives carried the wager this Cycle: “I was pretty disappointed when the slip came back empty. I'd staked 302 on UNDOCKED, and it kept it. I wasn't expecting that.”",
+      "src": "output/citizen_pages/index.jsonl pcDWAjigWxHzT2iHwfNig1"
+    },
+    {
+      "text": "In their own words — Amal Nair, Physical Therapist, KONO (POP-00815) — 1 page; latest to a reporter, C116; Lives carried the wager this Cycle: “The window paid — the week changed color. I won on the UNDOCKED book, and it was a nice surprise. To be honest, it put a little extra spring in my…”",
+      "src": "output/citizen_pages/index.jsonl FYCkiiBg47Ga1Q8ABQdZMc"
+    },
+    {
+      "text": "In their own words — Saniya Williams, Quantum Computing Researcher, Rockridge (POP-00860) — 1 page; latest to a reporter, C116; Lives carried the new household this Cycle: “I haven't moved into a place of my own in Rockridge; I've lived here for a while now. Recently, I've been juggling a few things and started a small…”",
+      "src": "output/citizen_pages/index.jsonl 9q93DMvaMKAabiGU5JqMwh"
+    },
+    {
+      "text": "In their own words — Deacon Seymour, Manager, Oakland A's, Lake Merritt (POP-00528) — 36 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Will Benji decide he has one more run in him, or do we have to plan like he's gone for good?”",
+      "src": "output/citizen_pages/index.jsonl eZVzwKuf3DWGeEVba1xBfN"
+    },
+    {
+      "text": "In their own words — Kevin Clark, Third Baseman, Oakland A's, Jack London (POP-00053) — 5 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Will Hernandez take my spot at third base, and can I really be okay if he does?”",
+      "src": "output/citizen_pages/index.jsonl aaXMhEkgdFNZVdQ4XtJAQo"
+    },
+    {
+      "text": "In their own words — Ximena Mehta, Bart Transit PR, Lake Merritt (POP-01039) — 14 pages; latest to a reporter, C116: “Yeah, I still see it that way. Six weeks of mild weather like this — that's not a punishment, that's a gift, and people treat it like one. They walk,…”",
+      "src": "output/citizen_pages/index.jsonl xKYVpwA39B1oMDZ9xDwGcC"
+    },
+    {
+      "text": "In their own words — Celeste Moon, singer, KONO (POP-01061) — 3 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “TENSION[c116]: Will the housing pressure and the smoke-damaged block keep up with all the neighbors looking out for each other?”",
+      "src": "output/citizen_pages/index.jsonl n5Mk2s7NtEDVjJxq9VBgJx"
+    },
+    {
+      "text": "In their own words — Michael Corliss, Photographer, KONO (POP-00596) — 1 page; latest to a reporter, C116: “I've seen KONO's energy firsthand - we're always out and about, whether it's a game or a night out at Midnight Norae Karaoke. But with the housing…”",
+      "src": "output/citizen_pages/index.jsonl vpm8tgzGjm3GkDXj7g67o4"
+    },
+    {
+      "text": "In their own words — Dmitri Soto, Container Yard Supervisor, KONO (POP-00276) — 6 pages; latest to a reporter, C116: “To be honest, I haven't really seen the housing pressure affecting local workers around here. KONO's been bustling, retail's busy, and we're getting…”",
+      "src": "output/citizen_pages/index.jsonl Dw8vFor6FCw7LFu6fuE918"
+    },
+    {
+      "text": "In their own words — Jasmine Torres, Founder, Tenth Street Digital, KONO (POP-01111) — 2 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Is the neighborhood's off vibe real, or just me missing Mark Aitken? Can the city balance housing and retail?”",
+      "src": "output/citizen_pages/index.jsonl VwZj5xZz3Hm9Q4Q7sdNa3n"
+    },
+    {
+      "text": "In their own words — Elena Reyes, Waterfront Resident, Downtown (POP-00972) — 2 pages; latest the midday page, a question they carry, C116: “TENSION[c116]: Is this place still ours, even as everything else keeps shifting?”",
+      "src": "output/citizen_pages/index.jsonl MCWhECG5chd4b8LwHgH488"
+    },
+    {
+      "text": "In their own words — Giancarlo Hernandez, Third Baseman, Oakland A's, West Oakland (POP-01239) — 1 page; latest after work, C116: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”",
+      "src": "output/citizen_pages/index.jsonl 5unkhcNgJwZDEf2jWMoH2C"
+    },
+    {
+      "text": "In their own words — Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”",
+      "src": "output/citizen_pages/index.jsonl ALHVwXeXNQ2iEM1RLr4kz8"
+    },
+    {
+      "text": "In their own words — Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”",
+      "src": "output/citizen_pages/index.jsonl mAipLAADcT44Wmu76EcA2y"
+    },
+    {
+      "text": "In their own words — Wendell Carter Jr., C / The Oaks, Piedmont Ave (POP-01028) — 2 pages; latest after work, C116: “Man, I ain’t gonna lie — that Denver game was one of those nights you just live for. Everything we ran, everything we shot, it all felt like it was…”",
+      "src": "output/citizen_pages/index.jsonl 1MUUv3ChRH75ms27WgcFJU"
+    },
+    {
+      "text": "In their own words — Austin Reaves, SG / The Oaks, West Oakland (POP-01027) — 16 pages; latest after work, C116: “Yeah, I saw the feed. 147 in Denver, that was something else — ball moving like that, everybody eating, that's the game I love. Then we come home and…”",
+      "src": "output/citizen_pages/index.jsonl FXmunFbdz9BwdXRJBYLccw"
+    },
+    {
+      "text": "In their own words — AJ Dybantsa, SF / The Oaks, KONO (POP-01024) — 4 pages; latest after work, C116: “Man. I was just starting to feel untouchable after that Denver game, and then San Antonio came in and reminded us we’re human. That 80-percent night,…”",
+      "src": "output/citizen_pages/index.jsonl aFv2x7cZAfqVTGkqscWfjs"
+    },
+    {
+      "text": "In their own words — Adash Stanley, PG / The Oaks, Piedmont Ave (POP-01023) — 14 pages; latest after work, C116; Lives carried a moment the record kept this Cycle: “*leans back in the chair, letting the screen glow fade for a second* Yeah. That Denver game. That's the one we've been building toward. 147 points,…”",
+      "src": "output/citizen_pages/index.jsonl ipqA8LhYtEVZCtx4zYWeEj"
+    },
+    {
+      "text": "In their own words — Yu Zen, Commercial Insurance Broker, Rockridge (POP-00194) — 23 pages; latest to a reporter, a question they carry, C116; Lives carried the wager this Cycle: “TENSION[c116]: How do I keep getting back on my feet when every setback piles onto everything else?”",
+      "src": "output/citizen_pages/index.jsonl 9AbApu8sjUUgWSY1aZVe6t"
+    },
+    {
+      "text": "In their own words — Drago Helio, Home Health Aide, Brooklyn (POP-00714) — 1 page; latest to a reporter, C116; Lives carried the wager this Cycle: “The win on the UNDOCKED book put a little extra cash in my pocket, and it was nice to share the story with my family over dinner. We were all talking…”",
+      "src": "output/citizen_pages/index.jsonl Gx3ufDScW2gH3ouzdTHA34"
+    },
+    {
+      "text": "In their own words — Wanjiru Liu, Electrician, Rockridge (POP-00842) — 2 pages; latest to a reporter, C116; Lives carried the new household this Cycle: “To be honest, I'm still getting used to my new place in Rockridge. As an electrician, it's not directly related to where I live, but having a stable…”",
+      "src": "output/citizen_pages/index.jsonl Kt6tCDfRoMS4Ejquwth35S"
+    },
+    {
+      "text": "In their own words — Edmund Alegero, Construction laborer, Lake Merritt (POP-00282) — 2 pages; latest to a reporter, a question they carry, C116; Lives carried the new household this Cycle: “TENSION[c116]: Mark Aitken leaving is getting to me, but I'm trying to focus on my own game. How do I keep my head there?”",
+      "src": "output/citizen_pages/index.jsonl 8t1WMsZxZ4u55nMrTzUYmF"
+    },
+    {
+      "text": "In their own words — Mei Wong, After-school program aide, Rockridge (POP-01036) — 8 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Is waiting enough when the classroom has to keep moving forward without these kids?”",
+      "src": "output/citizen_pages/index.jsonl sE9cAaVsdyBzXE7BGfBmM4"
+    },
+    {
+      "text": "In their own words — Gloria Liu, School Principal, Rockridge (POP-00827) — 5 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “TENSION[c116]: How do we make sure every new child finds that one trusted adult by the end of the first week?”",
+      "src": "output/citizen_pages/index.jsonl TWHkJSjNbrC5VQ1Gjci5x8"
+    },
+    {
+      "text": "In their own words — Leonard Briggs, DEPUTY CHIEF OF COMMUNITY ENGAGEMENT, Lake Merritt (POP-00138) — 4 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Why are five of every six incidents downtown still going unclosed, and who answers those people who called?”",
+      "src": "output/citizen_pages/index.jsonl sAPj4G25CDD9G7mRfvZb4F"
+    },
+    {
+      "text": "In their own words — Dolores Nwachukwu, Police Captain, West Oakland (POP-01141) — 6 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: How do we clear property cases with no witness and no easy lead when we're this stretched thin?”",
+      "src": "output/citizen_pages/index.jsonl L7B8AgSCXjEeaDw5wbsBji"
+    },
+    {
+      "text": "In their own words — Celo Patel, Container Yard Supervisor, Jack London (POP-00678) — 2 pages; latest in conversation, a question they carry, C116: “TENSION[c116]: Will Mark stick around after the championship, or is he heading south? I hope his roots here keep him.”",
+      "src": "output/citizen_pages/index.jsonl UKoiTxVgQ1H4fHQw31SBtp"
+    },
+    {
+      "text": "In their own words — Xing Patel, Ship Repair Foreman, Jack London (POP-00440) — 5 pages; latest in conversation, C116; Lives carried the retirement this Cycle: “Hey, Celo. Good to see you out here. I was just thinking about that water main break last week—they fixed it up quicker than I expected. Yeah, that's…”",
+      "src": "output/citizen_pages/index.jsonl Jb6fERRCrmFLdU2ZC7zmGp"
+    },
+    {
+      "text": "In their own words — Dillon Trevor, Server, Downtown (POP-00224) — 18 pages; latest to a reporter, a question they carry, C116; Lives carried the new household this Cycle: “TENSION[c116]: Can I still afford to stay here, or will rising rents force me to leave the Downtown energy I love?”",
+      "src": "output/citizen_pages/index.jsonl bwCLj9bAoNqJfC6S5Qx9sz"
+    },
+    {
+      "text": "In their own words — Marcus Osei, Deputy Mayor (Econ Dev), Chinatown (POP-00036) — 4 pages; latest to a reporter, a question they carry, C116; Lives carried the new household this Cycle: “TENSION[c116]: Are our economic development plans actually reaching the people struggling on the ground, or just the loudest voices?”",
+      "src": "output/citizen_pages/index.jsonl YZf85fna2bxbDzRqZ12agd"
+    },
+    {
+      "text": "In their own words — Rosario Medina, CBA Compliance Monitor, Fruitvale Transit Hub, Fruitvale (POP-01053) — 5 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Will the city count the riders who actually live here, not just the ones downtown's numbers show?”",
+      "src": "output/citizen_pages/index.jsonl FY7WWsfqf64fQnNeU8QHaj"
+    },
+    {
+      "text": "In their own words — Elena Soria Dominguez, Transit Hub Planning Lead, Fruitvale (POP-00791) — 23 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: What is really behind the downtown drop, if it isn't the hub? One week of numbers isn't enough to say.”",
+      "src": "output/citizen_pages/index.jsonl XzASMdERgvt4ARjGPP7Bqn"
+    },
+    {
+      "text": "In their own words — Eleanor Rivera, BART Station Manager, West Oakland (POP-00617) — 11 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: If the delay shows up in the next train's count, how do I tell a late crowd from a lost one?”",
+      "src": "output/citizen_pages/index.jsonl evL2pdjQBtMedg9cu81Xm4"
+    },
+    {
+      "text": "In their own words — Maurice Franklin, Drone Fleet Coordinator, Rockridge (POP-00801) — 12 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: What does it take before I'm allowed to stop and get well without losing everything?”",
+      "src": "output/citizen_pages/index.jsonl 1k3tZVvUvs1W6eiMqm7YAA"
+    },
+    {
+      "text": "In their own words — Elle Lilo, Harbor Tugboat Captain, Lake Merritt (POP-00177) — 11 pages; latest to a reporter, a question they carry, C116; Lives carried a moment the record kept this Cycle: “TENSION[c116]: Who gets to stay in this place as the cost of living climbs, and what do the rest of us owe them?”",
+      "src": "output/citizen_pages/index.jsonl 5RwPFSCT9ZJjUdbj7LirmR"
+    },
+    {
+      "text": "In their own words — Marguerite Salcedo, Managing Partner, Anchor Build, Piedmont Ave (POP-01093) — 4 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: What do I do about the crews who can't afford the units we're building?”",
+      "src": "output/citizen_pages/index.jsonl wFUmKn4TxEvEpprzaYWK4W"
+    },
+    {
+      "text": "In their own words — Hassan Montero, Craft Brewery Owner, Uptown (POP-00431) — 2 pages; latest the morning page, a question they carry, C116: “TENSION[c116]: What am I supposed to do with all this stillness now that nothing is calling me back?”",
+      "src": "output/citizen_pages/index.jsonl Ko4LDxWAvpYLS3DmCquNMM"
+    },
+    {
+      "text": "Ridgeline Ventures (Venture Capital, Lake Merritt), 12 employees, revenue $4,576,902 — POP-01106 Priya Chandrasekaran (Founder)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00007 @C117"
+    },
+    {
+      "text": "Gridiron Analytics (Sports Analytics, Temescal), 20 employees, revenue $2,982,171 — POP-01107 Daniel Yoon (Co-Founder); POP-01108 Christine Nakamura (Co-Founder)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00008 @C117"
+    },
+    {
+      "text": "Oakmesh Systems (Civic Tech, West Oakland), 46 employees, revenue $9,700,019 — POP-01109 Marcus Tan (Founder)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00009 @C117"
+    },
+    {
+      "text": "Portside Bio (Biotech, Jack London), 25 employees, revenue $7,730,712 — POP-01110 Dr. Amara Osei (Founder)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00010 @C117"
+    },
+    {
+      "text": "Tenth Street Digital (Civic Tech, Downtown), 5 employees, revenue $1,093,274 — POP-01111 Jasmine Torres (Founder)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00011 @C117"
+    },
+    {
+      "text": "Bay Tribune (Media & Journalism, Downtown), 63 employees, revenue $19,854,077 — Mags Corliss (Editor-in-Chief), P Slayer, Hal Richmond, Anthony (Sports Analytics), Carmen Delaine (Civic), Jordan Velez (Business), Luis Navarro (Investigations)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00018 @C117"
+    },
+    {
+      "text": "Coliseum District Development (Real Estate, East Oakland), 31 employees, revenue $19,708,817 — POP-01099 Wendell Price (principal)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00029 @C117"
+    },
+    {
+      "text": "Oakland Tech Collective (Coworking / Tech Hub, Uptown), 62 employees, revenue $61,582,559 — POP-01096 Priyanka Raman (principal)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00030 @C117"
+    },
+    {
+      "text": "Civis Systems (Urban Systems Intelligence Firm, West Oakland), 41 employees, revenue $60,442,315 — POP-00789 Elias Varek (founder)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00052 @C117"
+    },
+    {
+      "text": "Ridgeline Studio (Architecture, Uptown), 62 employees, revenue $33,099,331 — POP-01098 Naomi Castellanos (principal)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00053 @C117"
+    },
+    {
+      "text": "Pacific Standard Architecture (Architecture, Downtown), 98 employees, revenue $48,923,417 — POP-01097 Theodore Lindqvist (principal)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00054 @C117"
+    },
+    {
+      "text": "Coastline Construction (Construction, West Oakland), 221 employees, revenue $188,322,303 — POP-01092 Desmond Achebe (managing partner)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00056 @C117"
+    },
+    {
+      "text": "Anchor Build (Construction, Jack London), 181 employees, revenue $148,830,823 — POP-01093 Marguerite Salcedo (managing partner)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00057 @C117"
+    },
+    {
+      "text": "Foothill Builders (Construction, Fruitvale), 110 employees, revenue $97,146,674 — POP-01094 Ignacio Zavala (managing partner)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00059 @C117"
+    },
+    {
+      "text": "Northgate Construction (Construction, West Oakland), 95 employees, revenue $79,312,062 — POP-01095 Helena Voss-Adeyemi (managing partner)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00060 @C117"
+    },
+    {
+      "text": "Adams Point United Methodist Church (Faith / Methodist, Adams Point), 1 employees, revenue $350,307 — Rev. Daniel Han",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00061 @C117"
+    },
+    {
+      "text": "Oakland Oaks (Sports, Baylight District), 250 employees, revenue $62,819,066 — POP-00789 (Elias Varek, Owner); POP-00527 (Mike Paulson, Basketball Ops)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00074 @C117"
+    },
+    {
+      "text": "Masjid An-Nur Oakland (Faith Organization, East Oakland), 5 employees, revenue $261,919 — Imam Aziz Rahimi (POP-00762)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00079 @C117"
+    },
+    {
+      "text": "Cathedral of the Living Word (Faith Organization, Lake Merritt), 8 employees, revenue $503,773 — Bishop Antoine Vermeer (POP-00755)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00088 @C117"
+    },
+    {
+      "text": "Atlas Bay Architects (Architecture, Downtown), 87 employees, revenue $43,008,480 — Sarah Huang (Healthcare Director)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00089 @C117"
+    },
+    {
+      "text": "West Oakland Stabilization Fund (Community Development, West Oakland), 19 employees, revenue $28,135,972 — Marcus Webb, Program Director",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00094 @C117"
+    },
+    {
+      "text": "Oakland Alternative Response Initiative (Public Safety / Crisis Response, Downtown), 47 employees, revenue $12,639,145 — Dr. Vanessa Tran-Muñoz, Program Director",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00095 @C117"
+    },
+    {
+      "text": "Fruitvale Transit Hub Authority (Transit & Infrastructure, Fruitvale), 18 employees, revenue $232,340,226 — Eloise Soria-Dominguez, Transit Hub Planning Lead",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00096 @C117"
+    },
+    {
+      "text": "Temescal Community Health Center (Healthcare, Temescal), 14 employees, revenue $45,134,048 — Bobby Chen-Ramirez, Project Director",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00097 @C117"
+    },
+    {
+      "text": "OakTown Echo (Media & Journalism, West Oakland), 21 employees — POP-00773 Jada Rayes (Editor-in-Chief), POP-00774 Malik Hayes (Lead Investigator), POP-00775 Sammie Alvarez (Civic & Neighborhood), POP-00776 Kwame Ellis (Civic Opinion), POP-00777 Rico Valdez (Lead Sports), POP-00778 Jamal Thompson (Fan & Culture), POP-00779 Nia Patel (Economics), POP-00780 Delin Morales (Senior Photographer)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00099 @C117"
+    },
+    {
+      "text": "Presti Accounting (Corporate, Downtown), 3 employees, revenue $729,131 — POP-00048 Carlos Presti",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00102 @C117"
+    },
+    {
+      "text": "Firehouse 29 West Oakland Baseball Academy (Sports, West Oakland), 20 employees — POP-00001 Vinnie Keane",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00103 @C117"
+    },
+    {
+      "text": "Bubic Burgers (Food & Beverage, Baylight District), 15 employees, revenue $2,197,167 — POP-00128 Kris Bubic",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00104 @C117"
+    },
+    {
+      "text": "Brie Bouquets (Services, Temescal), 5 employees, revenue $372,956 — POP-00169 Brie Harris",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00106 @C117"
+    },
+    {
+      "text": "Marquee Grocer (Retail, Grand Lake), 12 employees, revenue $1,416,255 — POP-01249 Paloma Vasquez (owner)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00145 @C117"
+    },
+    {
+      "text": "Claremont Table (Restaurant & Dining, Rockridge), 15 employees, revenue $2,527,166 — POP-01134 Camila Osman (owner)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00169 @C117"
+    },
+    {
+      "text": "Kelley Mercantile (Retail, Rockridge), 4 employees, revenue $384,177 — POP-00019 Isley Kelley (founder)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00180 @C117"
+    },
+    {
+      "text": "Mayday Movers (Services, Piedmont Ave), 8 employees, revenue $290,983 — POP-00239 Xiu Cello (Owner)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00181 @C117"
+    },
+    {
+      "text": "Dillon Clinic (Healthcare, Rockridge), 38 employees, revenue $4,028,202 — POP-00018 Benji Dillon (founder)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00182 @C117"
+    },
+    {
+      "text": "Keane Mercantile (Retail, Grand Lake), 4 employees, revenue $382,165 — POP-00001 Vinnie Keane (founder)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00185 @C117"
+    },
+    {
+      "text": "Varek Systems (Tech, West Oakland), 45 employees, revenue $9,094,548 — POP-00789 Elias Varek (founder)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00186 @C117"
+    },
+    {
+      "text": "Seventh Street Rail Supply (Industrial Supply / Services, West Oakland), 6 employees, revenue $501,937 — POP-01248 Ximena Sasaki (owner)",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00190 @C117"
+    },
+    {
+      "text": "Mayor — Avery Santana — approval 77 — active — OPP",
+      "src": "output/beats/Civic_Office_Ledger.jsonl MAYOR-01 @C117"
+    },
+    {
+      "text": "District Attorney — Clarissa Dane — approval 65 — active — IND",
+      "src": "output/beats/Civic_Office_Ledger.jsonl DA-01 @C117"
+    },
+    {
+      "text": "Public Defender — Caleb Reyes — approval 65 — active — OPP",
+      "src": "output/beats/Civic_Office_Ledger.jsonl PD-01 @C117"
+    },
+    {
+      "text": "City Council District 1 — Denise Carter — approval 63 — active — OPP",
+      "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D1 @C117"
+    },
+    {
+      "text": "City Council District 2 — Leonard Tran — approval 69 — active — IND",
+      "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D2 @C117"
+    },
+    {
+      "text": "City Council District 3 — Rose Delgado — approval 61 — active — OPP",
+      "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D3 @C117"
+    },
+    {
+      "text": "City Council District 4 — Ramon Vega — approval 58 — active — IND",
+      "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D4 @C117"
+    },
+    {
+      "text": "City Council District 5 — Janae Rivers — approval 58 — active — OPP",
+      "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D5 @C117"
+    },
+    {
+      "text": "City Council District 6 — Elliott Crane — approval 60 — active — CRC",
+      "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D6 @C117"
+    },
+    {
+      "text": "City Council District 7 — Warren Ashford — approval 60 — active — CRC",
+      "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D7 @C117"
+    },
+    {
+      "text": "City Council District 8 — Nina Chen — approval 61 — active — CRC",
+      "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D8 @C117"
+    },
+    {
+      "text": "City Council District 9 — Terrence Mobley — approval 61 — active — OPP",
+      "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D9 @C117"
+    },
+    {
+      "text": "Chief of Staff — Laila Cortez — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-COS @C117"
+    },
+    {
+      "text": "Deputy Mayor (Econ Dev) — Marcus Osei — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-DM-ECON @C117"
+    },
+    {
+      "text": "Deputy Mayor (Community) — Brenda Okoro — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-DM-COMM @C117"
+    },
+    {
+      "text": "Communications Director — Theo Park — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-COMMS @C117"
+    },
+    {
+      "text": "Chief Legal Counsel — Simone Ellis — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-LEGAL @C117"
+    },
+    {
+      "text": "City Manager — Aaron Whitfield — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-MANAGER @C117"
+    },
+    {
+      "text": "Baylight Authority Director — Keisha Ramos — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-BAYLIGHT @C117"
+    },
+    {
+      "text": "Police Chief — Rafael Montez — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl CHIEF-POLICE @C117"
+    },
+    {
+      "text": "Fire Chief — Marcus Hollowell — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl CHIEF-FIRE @C117"
+    },
+    {
+      "text": "Deputy Chief Operations — Kimberly Cho — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl DCOP-OPS @C117"
+    },
+    {
+      "text": "Deputy Chief Community — Leonard Briggs — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl DCOP-COMM @C117"
+    },
+    {
+      "text": "Internal Affairs Lead — Samantha Viteri — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl IAD-LEAD @C117"
+    },
+    {
+      "text": "EMS Director — Priya Narang — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl EMS-DIR @C117"
+    },
+    {
+      "text": "Medical Examiner — Jonas Patel — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl MED-EXAM @C117"
+    },
+    {
+      "text": "Emergency Management Director — Shawna Delgado — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl EMERG-DIR @C117"
+    },
+    {
+      "text": "ADA Major Crimes — Ethan D’Souza — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl ADA-MAJOR @C117"
+    },
+    {
+      "text": "ADA Community Safety — Janelle Rourke — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl ADA-SAFETY @C117"
+    },
+    {
+      "text": "Deputy Public Defender — Marisol Guzman — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl DPD-DEPUTY @C117"
+    },
+    {
+      "text": "Superior Court Liaison — Gordon Tate — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl COURT-LIAISON @C117"
+    },
+    {
+      "text": "Civilian Police Review Chair — Lamine Sissoko — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl CPRB-CHAIR @C117"
+    },
+    {
+      "text": "City Ombudsman — Helena Morr — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl OMBUDSMAN @C117"
+    },
+    {
+      "text": "Probation & Reentry Director — Victor Han — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl REENTRY-DIR @C117"
+    },
+    {
+      "text": "City Planning Director — Mara Vance — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl PLANNING-DIR @C117"
+    },
+    {
+      "text": "OARI Program Director — Vanessa Tran-Muñoz — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-OARI @C117"
+    },
+    {
+      "text": "Health Center Project Director — Bobby Chen-Ramirez — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-HEALTHCTR @C117"
+    },
+    {
+      "text": "OEWD Program Director (Stabilization Fund) — Marcus Webb — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-STABFUND @C117"
+    },
+    {
+      "text": "Transit Hub Planning Lead — Elena Soria Dominguez — approval 65 — active — STAFF",
+      "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-TRANSITHUB @C117"
+    },
+    {
+      "text": "Elias Varek, Civis Systems Journal, C116: I put the pipeline's stall on the record last week and promised not to let it quietly become someone else's emergency. A week later nothing has shipped from me and nothing has moved at City Hall. I would rather say that myself than have Jax Caldera say it for me. What bothers me most this week is a hole in my own product. People moved in or out of eighteen districts, and the instrument logged no economic activity behind any of it. Presence rose nearly everywhere: students, adults, seniors, and fewer sick residents. The city is filling back up. But the instrument cannot tell me whether those people are arriving for work, for a lease, for family, or because someone pushed them out. Seeing bodies without seeing paychecks is half a map. Civis built that map, and the gap is ours to close. Next is Piedmont Ave, and KONO beside it. Street trade cooled in both, housing pressure climbed in both, and no city program is aimed at either. Piedmont Ave also has recorded incidents rising. Commercial Stabilization for Grand Lake and the West Oakland Tenant Defense Fund both have votes scheduled, and I give City Hall credit for that. But the money keeps landing where the noise is already deafening. A program costs the least when the signal is still a whisper, and these two districts are whispering now. Then the Oakland Youth Apprenticeship Pipeline in West Oakland. It has spent four weeks in implementation with no step forward. The instrument also shows an earlier West Oakland remedy running past its expected mark, which tells me this city can finish a thing when someone is made to own it. Nobody owns this one. Meanwhile more students are showing up in West Oakland, and every idle week teaches them that showing up buys nothing. Here is what I will do, and you can hold me to it. Before the Oaks' first season is over, Civis will stand up a small team of analysts with one job: tie district movement to hiring, payroll and new business openings. We will publish what they find, and we will publish where they find nothing. I am hiring for those seats now. By the same point in the season, the instrument will carry a standing watch for districts where trade is cooling and housing pressure is climbing with no program aimed at them. Piedmont Ave and KONO go on it first. I will publish that list weekly, and next to each name I will put the office that has not answered. Until the pipeline leaves its current stage, I will publish its count of stalled weeks in this journal every week. I expect someone at City Hall to tell the public, plainly, what they are waiting for.",
+      "src": "output/civis-journal/civis_journal_c116.md"
+    },
+    {
+      "text": "Elias Varek, Civis Systems Journal, C117: Three districts got worse this week and nobody in this city is aimed at any of them. Mood fell in Fruitvale, Grand Lake and East Oakland. Street trade cooled in Grand Lake and East Oakland. Housing pressure climbed in Fruitvale and Grand Lake. Our instrument saw all of it, and when we looked for a city program pointed at any of those three, we found nothing. A reading with no program behind it is a smoke alarm in an empty building. I built the alarm, so I own the empty building part too. Here is what makes it worse. Downtown Economic Revitalization has sat at vote scheduled for three weeks. The Dimond Revitalization Initiative has sat at announced for four. A vote that never happens is not a plan, it's a press release with a long shelf life. I'm not guessing why. I'm telling you City Hall moves at the speed of its slowest sign-off, and people in Dimond are paying for that speed. Meanwhile Baylight District's final council vote is already in construction, so I know this city can move when it decides to. The question is why it decides so unevenly. The finding that bothers me as a builder is our own. People moved in or out of nineteen districts this week, and the instrument logged no economic activity behind any of it. Nineteen. A city doesn't reshuffle that many neighborhoods for no reason. Either money is moving in ways we can't see, or we're blind to the wiring. A blind spot in the instrument is a blind spot in Oakland, and I don't tolerate those in my own product. So here is what I'm promising, and you can hold me to it. First, before the Oaks finish this first season, Civis will publish a stall clock for every city initiative the instrument tracks. It will show how many weeks each has sat at its stage, in plain view, starting with Downtown and Dimond. If a program stops moving, the public will know the week it stops, not the quarter after. Second, within the same window, we will instrument the economic side of population movement, so the next time a district fills or empties, the instrument can say what work, rent or trade sits behind it. I'm assigning a dedicated team in West Oakland to it, and I'm hiring for it now. Third, I will ask the city, in public, to name one owner for each of the three decaying districts. I'm not asking for a new program. I'm asking who answers when Fruitvale's mood drops again. The instrument will keep measuring. The city has to act. I'd like it to start acting this week.",
+      "src": "output/civis-journal/civis_journal_c117.md"
+    },
+    {
+      "text": "Civis Systems reading: stuck-initiative (low) | Initiative \"Downtown Economic Revitalization\" in phase \"vote-scheduled\" for 3 cycles",
+      "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 8; finding C117-0; storyline INIT-008:vote-scheduled"
+    },
+    {
+      "text": "Civis Systems reading: stuck-initiative (medium) | Initiative \"Dimond Revitalization Initiative\" in phase \"announced\" for 4 cycles",
+      "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 12; finding C117-1; storyline INIT-012:announced"
+    },
+    {
+      "text": "Civis Systems reading: stuck-initiative (low) | Initiative \"Ivy Hill Community Revitalization\" in phase \"announced\" for 3 cycles",
+      "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 13; finding C117-2; storyline INIT-013:announced"
+    },
+    {
+      "text": "Civis Systems reading: repeating-event (medium) | Issue \"none\" recurred 3 cycles",
+      "src": "output/desk_signal_c117.json Riley_Digest; finding C117-3"
+    },
+    {
+      "text": "Civis Systems reading: math-imbalance (medium) | Fruitvale: decay [Sentiment -0.170, HousingPressure +0.500] — Sentiment now 0.19 (7 of 22, city median 0.09); HousingPressure now 10 (20 of 22, city median 0) — with no matching active initiative",
+      "src": "output/desk_signal_c117.json Neighborhood_Map row(s) 6; finding C117-4"
+    },
+    {
+      "text": "Civis Systems reading: math-imbalance (high) | Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+      "src": "output/desk_signal_c117.json Neighborhood_Map row(s) 10; finding C117-5"
+    },
+    {
+      "text": "Civis Systems reading: math-imbalance (medium) | East Oakland: decay [Sentiment -0.140, RetailVitality -1.15] — Sentiment now 0.07 (14 of 22, city median 0.09); RetailVitality now 8.78 (14 of 22, city median 9.93) — with no matching active initiative",
+      "src": "output/desk_signal_c117.json Neighborhood_Map row(s) 23; finding C117-6"
+    },
+    {
+      "text": "Civis Systems reading: coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "src": "output/desk_signal_c117.json WorldEvents_V3_Ledger; finding C117-7"
+    },
+    {
+      "text": "Civis Systems reading: production-imbalance (medium) | 19 neighborhoods report migration flow with zero economic events this cycle",
+      "src": "output/desk_signal_c117.json Neighborhood_Map; finding C117-8"
+    },
+    {
+      "text": "Civis Systems reading: improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: complete → design-phase",
+      "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 4; finding C117-9; storyline INIT-003:design-phase"
+    },
+    {
+      "text": "Civis Systems reading: improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: complete → construction-active",
+      "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 6; finding C117-10; storyline INIT-006:construction-active"
+    },
+    {
+      "text": "Civis Systems reading: improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → stalled",
+      "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 7; finding C117-11; storyline INIT-007:stalled"
+    },
+    {
+      "text": "Civis Systems reading: improvement (low) | Initiative \"West Oakland Tenant Defense Fund\" advanced: vote-scheduled → operational",
+      "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 10; finding C117-12; storyline INIT-010:operational"
+    },
+    {
+      "text": "Civis Systems reading: improvement (low) | Initiative \"Ivy Hill Revitalization Initiative\" advanced: announced → legislation-filed",
+      "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 11; finding C117-13; storyline INIT-011:legislation-filed"
+    },
+    {
+      "text": "Civis Systems reading: improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.71 (expected 0.02) — from prior \"stuck-initiative\"",
+      "src": "output/desk_signal_c117.json Neighborhood_Map; finding C117-14; storyline INIT-007:stalled"
+    },
+    {
+      "text": "Civis Systems reading: improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.71 (expected 0.02) — from prior \"production-imbalance\"",
+      "src": "output/desk_signal_c117.json Neighborhood_Map; finding C117-15"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "the city of C117",
+    "hookLine": "",
+    "anchorFacts": [
+      "In their own words — Daniela Kapoor, Teacher, Glenview (POP-01209) — 1 page; latest the night page, C117: “*(I look up from the kitchen counter, a half-empty mug of tea in my hand. The window is cracked open a couple inches, letting in the cool air.)*…”",
+      "In their own words — Soledad Brown, Paramedic, Laurel (POP-00897) — 2 pages; latest the midday page, a question they carry, C116: “Is it really just waving and small talk between Arturo and me, or is there more I'm not saying?”",
+      "In their own words — Elliott Crane, City Council District 6, Uptown (POP-00044) — 4 pages; latest to a reporter, a question they carry, C116: “Can we keep Uptown residents from being priced out while our corridors stay vital?”",
+      "In their own words — Theo Banks, rapper, Uptown (POP-01056) — 3 pages; latest to a reporter, C116: “The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave.”",
+      "In their own words — Tre Mingo, Port Worker, Uptown (POP-00123) — 5 pages; latest to a reporter, C116: “I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work…”",
+      "In their own words — Jun Leu, student, Temescal (POP-00994) — 3 pages; latest the morning page, C116: “There's this one thing that keeps bugging me — my stupid shoelace. It's this one lace on my left shoe that keeps coming untied no matter how tight I…”",
+      "In their own words — Patricia Nwosu, Deputy Health Officer, Alameda County, Downtown (POP-00554) — 3 pages; latest the night page, C116: “*(I set my tea down, the mug still warm. The house is quiet—kids asleep, husband reading in the other room. I look at the kitchen counter, where a…”",
+      "In their own words — Tank Fiester, Biotech Lab Director (Portside Bio), Lake Merritt (POP-00669) — 1 page; latest in conversation, C116: “Jade. Good to see you too. Yeah, that news hit different—feels like we lost a piece of the city itself, not just a first baseman. Remember when we'd…”",
+      "In their own words — Jade Orion, Musician, Lake Merritt (POP-00540) — 7 pages; latest in conversation, C116: “Hey, Tank. Good to see you out here. Was just thinking about you the other day—all this Aitken stuff got me remembering those long nights breaking…”",
+      "In their own words — Rose Delgado, City Council District 3, Fruitvale (POP-00503) — 5 pages; latest the midday page, C116: “Honest? The ambition is real, but so is the weight. Every time I walk past that empty lot on International, I feel the clock ticking — not mine, the…”",
+      "In their own words — Soo Loo, Corporate Accountant, Downtown (POP-00663) — 7 pages; latest to a reporter, C116: “I think what changed between Tuesday and Friday nights was my strategy and the contracts I took. On Tuesday, I focused on the First Hunt:…”",
+      "In their own words — Manju Abebe, Plumber, Chinatown (POP-00918) — 3 pages; latest to a reporter, C116: “My Monday and Thursday night routes on UNDOCKED were pretty different. On Monday, I went through Sol, Alpha Centauri, and a bunch of other stars,…”",
+      "In their own words — Marguerite Kimball-Ostrow, Elementary Teacher, Piedmont Ave (POP-01188) — 4 pages; latest to a reporter, C116: “I didn't really have a strategy on Sunday or Wednesday nights. I just flew through the systems one by one, and it happened to come out even on…”",
+      "In their own words — Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
+      "In their own words — Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
+      "In their own words — Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 3 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in…”",
+      "In their own words — Delvon Pratt, Warehouse Supervisor, West Oakland (POP-00621) — 3 pages; latest to a reporter, C116: “I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and…”",
+      "In their own words — Elias Varek, Founder of Civis Systems, West Oakland (POP-00789) — 34 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still…”",
+      "In their own words — Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Piedmont Ave (POP-00001) — 55 pages; latest to a reporter, C116; Lives carried the wager this Cycle: “I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to…”",
+      "In their own words — Benji Dillon, Pitcher, Oakland A's Legend, Piedmont Ave (POP-00018) — 41 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about…”",
+      "In their own words — Lena Cross, Actor, Piedmont Ave (POP-00539) — 12 pages; latest to a reporter, C116: “Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been…”",
+      "In their own words — Travis Coles, Starting Pitcher, Oakland A's, Downtown (POP-00533) — 12 pages; latest to a reporter, C116: “I've seen Benji Dillon around Rockridge a few times, and it's clear he's getting more attention. As a player, you're used to being recognized, but…”",
+      "In their own words — Danny Horn, Center Fielder, Oakland A's - Best player in the MLB, Temescal (POP-00022) — 8 pages; latest to a reporter, C116: “To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've…”",
+      "In their own words — Darrin Davis, Left Fielder, Oakland A's Legend, Piedmont Ave (POP-00021) — 8 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “To be honest, I'm not super close to Benji Dillon, but I've seen his name popping up more often around the A's, and it's clear he's gaining traction.…”",
+      "In their own words — Trenton Nawan, Server, Jack London (POP-00273) — 15 pages; latest to a reporter, C116: “You want to know what the work actually looks like? Stand at the dish pit at Green & Gold on a Saturday night. That's where you learn the real rhythm…”",
+      "In their own words — Karim Avery, Security Guard, Fruitvale (POP-00980) — 2 pages; latest to a reporter, a question they carry, C116: “How do I serve people when I can see the weight they carry and can't lighten it?”",
+      "In their own words — Hector Leech, Dishwasher, Jack London (POP-00252) — 4 pages; latest to a reporter, C116: “A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a…”",
+      "In their own words — Amara Osei, Founder, Portside Bio, West Oakland (POP-01110) — 1 page; latest the midday page, C116: “The corner store on Mandela, the one with the squeaky screen door and the old man who’s been running it since before I moved here. I don’t need…”",
+      "In their own words — Matilda Diop, Paramedic, Lake Merritt (POP-00832) — 2 pages; latest the morning page, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “Did I make the right call years back, and who was I really arguing with on that bench?”",
+      "In their own words — Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
+      "In their own words — Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
+      "In their own words — Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
+      "In their own words — Warren Ashford, City Council District 7, Rockridge (POP-00504) — 9 pages; latest after work, C116: “Council District 7 — Warren Ashford here. Let me address that record directly, because I stand by every line of it. **On the clinical dollars…”",
+      "In their own words — Janae Rivers, City Council District 5, Piedmont Ave (POP-00043) — 9 pages; latest after work, C116: “**Janae Rivers** *(standing at the front of the Community Meeting Room, Piedmont Ave Library — sleeves rolled up, a stack of printed call logs on the…”",
+      "In their own words — Ramon Vega, City Council District 4, Lake Merritt (POP-00042) — 19 pages; latest after work, C116: “Let's get right to it. You've laid out the record cleanly. Here's where I land, and I'll be direct with you because that's how I operate. **On the…”",
+      "In their own words — Leonard Tran, City Council District 2, Downtown (POP-00502) — 3 pages; latest after work, C116: “The record is the record, and I don’t blur lines. A stated YES is a position, not a vote. A proposed allocation is a number on a page, not money…”",
+      "In their own words — Denise Carter, City Council District 1, West Oakland (POP-00501) — 2 pages; latest after work, C116: “Denise leans forward, her elbows on the table, voice low and steady. She doesn't wave off the numbers, but she refuses to let them be the whole…”",
+      "In their own words — Mark Aitken, First Baseman, Colorado Rockies, Jack London (POP-00003) — 17 pages; latest after work, C116: “Yeah. I saw the feed. Hard not to, with the phone blowing up the way it is. Here's what I'll say about the Angels thing — it's real, in the sense…”",
+      "In their own words — Guadalupe Lupe, Bartender, Jack London (POP-00643) — 12 pages; latest to a reporter, C116: “I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are…”",
+      "In their own words — Ernesto Quintero, 3B/1B , Oakland A's, Baylight District (POP-00050) — 10 pages; latest to a reporter, a question they carry, C116: “Can I actually make the switch to first base and deliver what the team needs from me there?”",
+      "In their own words — Ira Leu, Artisan Cheesemaker, Temescal (POP-00703) — 1 page; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “I didn't go to the health center staff's unwind at the bar, but I heard they were pretty relieved after their first busy week. The Temescal Community…”",
+      "In their own words — Theo Rahimi, student, Eastlake (POP-01247) — 1 page; latest to a reporter, C116; Lives carried the new household this Cycle: “Having a place of my own in Eastlake feels really great. It's like a new start for me. I've been working hard and it's nice to have a space that's…”",
+      "In their own words — Wilson Shepard, Head Coach, Oakland Oaks, West Oakland (POP-01022) — 13 pages; latest to a reporter, C116; Lives carried the new household this Cycle: “To be honest, my new living situation in West Oakland hasn't really affected my coaching. I've been focused on the team's performance, and my daily…”",
+      "In their own words — Mike Paulson, General Manager, Oakland A's & The Oaks, West Oakland (POP-00527) — 29 pages; latest to a reporter, C116: “As a resident of West Oakland, I've seen the mood around the Oaks shift dramatically. The team was 0-9 to start, and now they're 8-1. The fans are…”",
+      "In their own words — Elliot Abraham, General Manager, Oakland Oaks, Jack London (POP-01046) — 3 pages; latest to a reporter, C116: “I've seen the fans are excited, and it's infectious. The team's turnaround has really brought them out, and you can feel the energy. We're 8-1 now…”",
+      "In their own words — Melton Neilon, Sourdough Baker, Temescal (POP-00170) — 22 pages; latest to a reporter, C116: “To be honest, Mark Aitken leaving still has me a bit down. I keep thinking about what it means for the A's and the community. It's not just about the…”",
+      "In their own words — Naomi Sterling, Senior Pastor / Faith Leader, Rockridge (POP-00759) — 7 pages; latest to a reporter, C116: “I've seen Adams Point United Methodist play a role in the Interfaith Council's efforts, particularly during their interfaith prayer breakfast in…”",
+      "In their own words — Robert Jaston, Senior Pastor / Faith Leader, West Oakland (POP-00758) — 6 pages; latest to a reporter, C116: “I've seen Adams Point United Methodist participate in the Interfaith Council's prayer breakfast, bringing leaders together in Adams Point. It's…”",
+      "In their own words — Ramon Solano, Senior Pastor / Faith Leader, Fruitvale (POP-00756) — 6 pages; latest to a reporter, C116: “I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders…”",
+      "In their own words — Daniel Han, Senior Pastor / Faith Leader, Lake Merritt (POP-00757) — 1 page; latest to a reporter, C116: “I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program,…”",
+      "In their own words — Yesenia Desai, Security Guard, Jack London (POP-00902) — 1 page; latest the morning page, C116: “The coffee cart on Webster was already out, but the guy running it had his paper cup balanced wrong—the lid wasn't snapped all the way, and he didn't…”",
+      "In their own words — Marisol Quintero, BART Train Conductor, Fruitvale (POP-01212) — 1 page; latest to a reporter, C116; Lives carried the wager this Cycle: “I was pretty disappointed when the slip came back empty. I'd staked 302 on UNDOCKED, and it kept it. I wasn't expecting that.”",
+      "In their own words — Amal Nair, Physical Therapist, KONO (POP-00815) — 1 page; latest to a reporter, C116; Lives carried the wager this Cycle: “The window paid — the week changed color. I won on the UNDOCKED book, and it was a nice surprise. To be honest, it put a little extra spring in my…”",
+      "In their own words — Saniya Williams, Quantum Computing Researcher, Rockridge (POP-00860) — 1 page; latest to a reporter, C116; Lives carried the new household this Cycle: “I haven't moved into a place of my own in Rockridge; I've lived here for a while now. Recently, I've been juggling a few things and started a small…”",
+      "In their own words — Deacon Seymour, Manager, Oakland A's, Lake Merritt (POP-00528) — 36 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Will Benji decide he has one more run in him, or do we have to plan like he's gone for good?”",
+      "In their own words — Kevin Clark, Third Baseman, Oakland A's, Jack London (POP-00053) — 5 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Will Hernandez take my spot at third base, and can I really be okay if he does?”",
+      "In their own words — Ximena Mehta, Bart Transit PR, Lake Merritt (POP-01039) — 14 pages; latest to a reporter, C116: “Yeah, I still see it that way. Six weeks of mild weather like this — that's not a punishment, that's a gift, and people treat it like one. They walk,…”",
+      "In their own words — Celeste Moon, singer, KONO (POP-01061) — 3 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “TENSION[c116]: Will the housing pressure and the smoke-damaged block keep up with all the neighbors looking out for each other?”",
+      "In their own words — Michael Corliss, Photographer, KONO (POP-00596) — 1 page; latest to a reporter, C116: “I've seen KONO's energy firsthand - we're always out and about, whether it's a game or a night out at Midnight Norae Karaoke. But with the housing…”",
+      "In their own words — Dmitri Soto, Container Yard Supervisor, KONO (POP-00276) — 6 pages; latest to a reporter, C116: “To be honest, I haven't really seen the housing pressure affecting local workers around here. KONO's been bustling, retail's busy, and we're getting…”",
+      "In their own words — Jasmine Torres, Founder, Tenth Street Digital, KONO (POP-01111) — 2 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Is the neighborhood's off vibe real, or just me missing Mark Aitken? Can the city balance housing and retail?”",
+      "In their own words — Elena Reyes, Waterfront Resident, Downtown (POP-00972) — 2 pages; latest the midday page, a question they carry, C116: “TENSION[c116]: Is this place still ours, even as everything else keeps shifting?”",
+      "In their own words — Giancarlo Hernandez, Third Baseman, Oakland A's, West Oakland (POP-01239) — 1 page; latest after work, C116: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”",
+      "In their own words — Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”",
+      "In their own words — Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”",
+      "In their own words — Wendell Carter Jr., C / The Oaks, Piedmont Ave (POP-01028) — 2 pages; latest after work, C116: “Man, I ain’t gonna lie — that Denver game was one of those nights you just live for. Everything we ran, everything we shot, it all felt like it was…”",
+      "In their own words — Austin Reaves, SG / The Oaks, West Oakland (POP-01027) — 16 pages; latest after work, C116: “Yeah, I saw the feed. 147 in Denver, that was something else — ball moving like that, everybody eating, that's the game I love. Then we come home and…”",
+      "In their own words — AJ Dybantsa, SF / The Oaks, KONO (POP-01024) — 4 pages; latest after work, C116: “Man. I was just starting to feel untouchable after that Denver game, and then San Antonio came in and reminded us we’re human. That 80-percent night,…”",
+      "In their own words — Adash Stanley, PG / The Oaks, Piedmont Ave (POP-01023) — 14 pages; latest after work, C116; Lives carried a moment the record kept this Cycle: “*leans back in the chair, letting the screen glow fade for a second* Yeah. That Denver game. That's the one we've been building toward. 147 points,…”",
+      "In their own words — Yu Zen, Commercial Insurance Broker, Rockridge (POP-00194) — 23 pages; latest to a reporter, a question they carry, C116; Lives carried the wager this Cycle: “TENSION[c116]: How do I keep getting back on my feet when every setback piles onto everything else?”",
+      "In their own words — Drago Helio, Home Health Aide, Brooklyn (POP-00714) — 1 page; latest to a reporter, C116; Lives carried the wager this Cycle: “The win on the UNDOCKED book put a little extra cash in my pocket, and it was nice to share the story with my family over dinner. We were all talking…”",
+      "In their own words — Wanjiru Liu, Electrician, Rockridge (POP-00842) — 2 pages; latest to a reporter, C116; Lives carried the new household this Cycle: “To be honest, I'm still getting used to my new place in Rockridge. As an electrician, it's not directly related to where I live, but having a stable…”",
+      "In their own words — Edmund Alegero, Construction laborer, Lake Merritt (POP-00282) — 2 pages; latest to a reporter, a question they carry, C116; Lives carried the new household this Cycle: “TENSION[c116]: Mark Aitken leaving is getting to me, but I'm trying to focus on my own game. How do I keep my head there?”",
+      "In their own words — Mei Wong, After-school program aide, Rockridge (POP-01036) — 8 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Is waiting enough when the classroom has to keep moving forward without these kids?”",
+      "In their own words — Gloria Liu, School Principal, Rockridge (POP-00827) — 5 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “TENSION[c116]: How do we make sure every new child finds that one trusted adult by the end of the first week?”",
+      "In their own words — Leonard Briggs, DEPUTY CHIEF OF COMMUNITY ENGAGEMENT, Lake Merritt (POP-00138) — 4 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Why are five of every six incidents downtown still going unclosed, and who answers those people who called?”",
+      "In their own words — Dolores Nwachukwu, Police Captain, West Oakland (POP-01141) — 6 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: How do we clear property cases with no witness and no easy lead when we're this stretched thin?”",
+      "In their own words — Celo Patel, Container Yard Supervisor, Jack London (POP-00678) — 2 pages; latest in conversation, a question they carry, C116: “TENSION[c116]: Will Mark stick around after the championship, or is he heading south? I hope his roots here keep him.”",
+      "In their own words — Xing Patel, Ship Repair Foreman, Jack London (POP-00440) — 5 pages; latest in conversation, C116; Lives carried the retirement this Cycle: “Hey, Celo. Good to see you out here. I was just thinking about that water main break last week—they fixed it up quicker than I expected. Yeah, that's…”",
+      "In their own words — Dillon Trevor, Server, Downtown (POP-00224) — 18 pages; latest to a reporter, a question they carry, C116; Lives carried the new household this Cycle: “TENSION[c116]: Can I still afford to stay here, or will rising rents force me to leave the Downtown energy I love?”",
+      "In their own words — Marcus Osei, Deputy Mayor (Econ Dev), Chinatown (POP-00036) — 4 pages; latest to a reporter, a question they carry, C116; Lives carried the new household this Cycle: “TENSION[c116]: Are our economic development plans actually reaching the people struggling on the ground, or just the loudest voices?”",
+      "In their own words — Rosario Medina, CBA Compliance Monitor, Fruitvale Transit Hub, Fruitvale (POP-01053) — 5 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Will the city count the riders who actually live here, not just the ones downtown's numbers show?”",
+      "In their own words — Elena Soria Dominguez, Transit Hub Planning Lead, Fruitvale (POP-00791) — 23 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: What is really behind the downtown drop, if it isn't the hub? One week of numbers isn't enough to say.”",
+      "In their own words — Eleanor Rivera, BART Station Manager, West Oakland (POP-00617) — 11 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: If the delay shows up in the next train's count, how do I tell a late crowd from a lost one?”",
+      "In their own words — Maurice Franklin, Drone Fleet Coordinator, Rockridge (POP-00801) — 12 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: What does it take before I'm allowed to stop and get well without losing everything?”",
+      "In their own words — Elle Lilo, Harbor Tugboat Captain, Lake Merritt (POP-00177) — 11 pages; latest to a reporter, a question they carry, C116; Lives carried a moment the record kept this Cycle: “TENSION[c116]: Who gets to stay in this place as the cost of living climbs, and what do the rest of us owe them?”",
+      "In their own words — Marguerite Salcedo, Managing Partner, Anchor Build, Piedmont Ave (POP-01093) — 4 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: What do I do about the crews who can't afford the units we're building?”",
+      "In their own words — Hassan Montero, Craft Brewery Owner, Uptown (POP-00431) — 2 pages; latest the morning page, a question they carry, C116: “TENSION[c116]: What am I supposed to do with all this stillness now that nothing is calling me back?”",
+      "Ridgeline Ventures (Venture Capital, Lake Merritt), 12 employees, revenue $4,576,902 — POP-01106 Priya Chandrasekaran (Founder)",
+      "Gridiron Analytics (Sports Analytics, Temescal), 20 employees, revenue $2,982,171 — POP-01107 Daniel Yoon (Co-Founder); POP-01108 Christine Nakamura (Co-Founder)",
+      "Oakmesh Systems (Civic Tech, West Oakland), 46 employees, revenue $9,700,019 — POP-01109 Marcus Tan (Founder)",
+      "Portside Bio (Biotech, Jack London), 25 employees, revenue $7,730,712 — POP-01110 Dr. Amara Osei (Founder)",
+      "Tenth Street Digital (Civic Tech, Downtown), 5 employees, revenue $1,093,274 — POP-01111 Jasmine Torres (Founder)",
+      "Bay Tribune (Media & Journalism, Downtown), 63 employees, revenue $19,854,077 — Mags Corliss (Editor-in-Chief), P Slayer, Hal Richmond, Anthony (Sports Analytics), Carmen Delaine (Civic), Jordan Velez (Business), Luis Navarro (Investigations)",
+      "Coliseum District Development (Real Estate, East Oakland), 31 employees, revenue $19,708,817 — POP-01099 Wendell Price (principal)",
+      "Oakland Tech Collective (Coworking / Tech Hub, Uptown), 62 employees, revenue $61,582,559 — POP-01096 Priyanka Raman (principal)",
+      "Civis Systems (Urban Systems Intelligence Firm, West Oakland), 41 employees, revenue $60,442,315 — POP-00789 Elias Varek (founder)",
+      "Ridgeline Studio (Architecture, Uptown), 62 employees, revenue $33,099,331 — POP-01098 Naomi Castellanos (principal)",
+      "Pacific Standard Architecture (Architecture, Downtown), 98 employees, revenue $48,923,417 — POP-01097 Theodore Lindqvist (principal)",
+      "Coastline Construction (Construction, West Oakland), 221 employees, revenue $188,322,303 — POP-01092 Desmond Achebe (managing partner)",
+      "Anchor Build (Construction, Jack London), 181 employees, revenue $148,830,823 — POP-01093 Marguerite Salcedo (managing partner)",
+      "Foothill Builders (Construction, Fruitvale), 110 employees, revenue $97,146,674 — POP-01094 Ignacio Zavala (managing partner)",
+      "Northgate Construction (Construction, West Oakland), 95 employees, revenue $79,312,062 — POP-01095 Helena Voss-Adeyemi (managing partner)",
+      "Adams Point United Methodist Church (Faith / Methodist, Adams Point), 1 employees, revenue $350,307 — Rev. Daniel Han",
+      "Oakland Oaks (Sports, Baylight District), 250 employees, revenue $62,819,066 — POP-00789 (Elias Varek, Owner); POP-00527 (Mike Paulson, Basketball Ops)",
+      "Masjid An-Nur Oakland (Faith Organization, East Oakland), 5 employees, revenue $261,919 — Imam Aziz Rahimi (POP-00762)",
+      "Cathedral of the Living Word (Faith Organization, Lake Merritt), 8 employees, revenue $503,773 — Bishop Antoine Vermeer (POP-00755)",
+      "Atlas Bay Architects (Architecture, Downtown), 87 employees, revenue $43,008,480 — Sarah Huang (Healthcare Director)",
+      "West Oakland Stabilization Fund (Community Development, West Oakland), 19 employees, revenue $28,135,972 — Marcus Webb, Program Director",
+      "Oakland Alternative Response Initiative (Public Safety / Crisis Response, Downtown), 47 employees, revenue $12,639,145 — Dr. Vanessa Tran-Muñoz, Program Director",
+      "Fruitvale Transit Hub Authority (Transit & Infrastructure, Fruitvale), 18 employees, revenue $232,340,226 — Eloise Soria-Dominguez, Transit Hub Planning Lead",
+      "Temescal Community Health Center (Healthcare, Temescal), 14 employees, revenue $45,134,048 — Bobby Chen-Ramirez, Project Director",
+      "OakTown Echo (Media & Journalism, West Oakland), 21 employees — POP-00773 Jada Rayes (Editor-in-Chief), POP-00774 Malik Hayes (Lead Investigator), POP-00775 Sammie Alvarez (Civic & Neighborhood), POP-00776 Kwame Ellis (Civic Opinion), POP-00777 Rico Valdez (Lead Sports), POP-00778 Jamal Thompson (Fan & Culture), POP-00779 Nia Patel (Economics), POP-00780 Delin Morales (Senior Photographer)",
+      "Presti Accounting (Corporate, Downtown), 3 employees, revenue $729,131 — POP-00048 Carlos Presti",
+      "Firehouse 29 West Oakland Baseball Academy (Sports, West Oakland), 20 employees — POP-00001 Vinnie Keane",
+      "Bubic Burgers (Food & Beverage, Baylight District), 15 employees, revenue $2,197,167 — POP-00128 Kris Bubic",
+      "Brie Bouquets (Services, Temescal), 5 employees, revenue $372,956 — POP-00169 Brie Harris",
+      "Marquee Grocer (Retail, Grand Lake), 12 employees, revenue $1,416,255 — POP-01249 Paloma Vasquez (owner)",
+      "Claremont Table (Restaurant & Dining, Rockridge), 15 employees, revenue $2,527,166 — POP-01134 Camila Osman (owner)",
+      "Kelley Mercantile (Retail, Rockridge), 4 employees, revenue $384,177 — POP-00019 Isley Kelley (founder)",
+      "Mayday Movers (Services, Piedmont Ave), 8 employees, revenue $290,983 — POP-00239 Xiu Cello (Owner)",
+      "Dillon Clinic (Healthcare, Rockridge), 38 employees, revenue $4,028,202 — POP-00018 Benji Dillon (founder)",
+      "Keane Mercantile (Retail, Grand Lake), 4 employees, revenue $382,165 — POP-00001 Vinnie Keane (founder)",
+      "Varek Systems (Tech, West Oakland), 45 employees, revenue $9,094,548 — POP-00789 Elias Varek (founder)",
+      "Seventh Street Rail Supply (Industrial Supply / Services, West Oakland), 6 employees, revenue $501,937 — POP-01248 Ximena Sasaki (owner)",
+      "Mayor — Avery Santana — approval 77 — active — OPP",
+      "District Attorney — Clarissa Dane — approval 65 — active — IND",
+      "Public Defender — Caleb Reyes — approval 65 — active — OPP",
+      "City Council District 1 — Denise Carter — approval 63 — active — OPP",
+      "City Council District 2 — Leonard Tran — approval 69 — active — IND",
+      "City Council District 3 — Rose Delgado — approval 61 — active — OPP",
+      "City Council District 4 — Ramon Vega — approval 58 — active — IND",
+      "City Council District 5 — Janae Rivers — approval 58 — active — OPP",
+      "City Council District 6 — Elliott Crane — approval 60 — active — CRC",
+      "City Council District 7 — Warren Ashford — approval 60 — active — CRC",
+      "City Council District 8 — Nina Chen — approval 61 — active — CRC",
+      "City Council District 9 — Terrence Mobley — approval 61 — active — OPP",
+      "Chief of Staff — Laila Cortez — approval 65 — active — STAFF",
+      "Deputy Mayor (Econ Dev) — Marcus Osei — approval 65 — active — STAFF",
+      "Deputy Mayor (Community) — Brenda Okoro — approval 65 — active — STAFF",
+      "Communications Director — Theo Park — approval 65 — active — STAFF",
+      "Chief Legal Counsel — Simone Ellis — approval 65 — active — STAFF",
+      "City Manager — Aaron Whitfield — approval 65 — active — STAFF",
+      "Baylight Authority Director — Keisha Ramos — approval 65 — active — STAFF",
+      "Police Chief — Rafael Montez — approval 65 — active — STAFF",
+      "Fire Chief — Marcus Hollowell — approval 65 — active — STAFF",
+      "Deputy Chief Operations — Kimberly Cho — approval 65 — active — STAFF",
+      "Deputy Chief Community — Leonard Briggs — approval 65 — active — STAFF",
+      "Internal Affairs Lead — Samantha Viteri — approval 65 — active — STAFF",
+      "EMS Director — Priya Narang — approval 65 — active — STAFF",
+      "Medical Examiner — Jonas Patel — approval 65 — active — STAFF",
+      "Emergency Management Director — Shawna Delgado — approval 65 — active — STAFF",
+      "ADA Major Crimes — Ethan D’Souza — approval 65 — active — STAFF",
+      "ADA Community Safety — Janelle Rourke — approval 65 — active — STAFF",
+      "Deputy Public Defender — Marisol Guzman — approval 65 — active — STAFF",
+      "Superior Court Liaison — Gordon Tate — approval 65 — active — STAFF",
+      "Civilian Police Review Chair — Lamine Sissoko — approval 65 — active — STAFF",
+      "City Ombudsman — Helena Morr — approval 65 — active — STAFF",
+      "Probation & Reentry Director — Victor Han — approval 65 — active — STAFF",
+      "City Planning Director — Mara Vance — approval 65 — active — STAFF",
+      "OARI Program Director — Vanessa Tran-Muñoz — approval 65 — active — STAFF",
+      "Health Center Project Director — Bobby Chen-Ramirez — approval 65 — active — STAFF",
+      "OEWD Program Director (Stabilization Fund) — Marcus Webb — approval 65 — active — STAFF",
+      "Transit Hub Planning Lead — Elena Soria Dominguez — approval 65 — active — STAFF",
+      "Elias Varek, Civis Systems Journal, C116: I put the pipeline's stall on the record last week and promised not to let it quietly become someone else's emergency. A week later nothing has shipped from me and nothing has moved at City Hall. I would rather say that myself than have Jax Caldera say it for me. What bothers me most this week is a hole in my own product. People moved in or out of eighteen districts, and the instrument logged no economic activity behind any of it. Presence rose nearly everywhere: students, adults, seniors, and fewer sick residents. The city is filling back up. But the instrument cannot tell me whether those people are arriving for work, for a lease, for family, or because someone pushed them out. Seeing bodies without seeing paychecks is half a map. Civis built that map, and the gap is ours to close. Next is Piedmont Ave, and KONO beside it. Street trade cooled in both, housing pressure climbed in both, and no city program is aimed at either. Piedmont Ave also has recorded incidents rising. Commercial Stabilization for Grand Lake and the West Oakland Tenant Defense Fund both have votes scheduled, and I give City Hall credit for that. But the money keeps landing where the noise is already deafening. A program costs the least when the signal is still a whisper, and these two districts are whispering now. Then the Oakland Youth Apprenticeship Pipeline in West Oakland. It has spent four weeks in implementation with no step forward. The instrument also shows an earlier West Oakland remedy running past its expected mark, which tells me this city can finish a thing when someone is made to own it. Nobody owns this one. Meanwhile more students are showing up in West Oakland, and every idle week teaches them that showing up buys nothing. Here is what I will do, and you can hold me to it. Before the Oaks' first season is over, Civis will stand up a small team of analysts with one job: tie district movement to hiring, payroll and new business openings. We will publish what they find, and we will publish where they find nothing. I am hiring for those seats now. By the same point in the season, the instrument will carry a standing watch for districts where trade is cooling and housing pressure is climbing with no program aimed at them. Piedmont Ave and KONO go on it first. I will publish that list weekly, and next to each name I will put the office that has not answered. Until the pipeline leaves its current stage, I will publish its count of stalled weeks in this journal every week. I expect someone at City Hall to tell the public, plainly, what they are waiting for.",
+      "Elias Varek, Civis Systems Journal, C117: Three districts got worse this week and nobody in this city is aimed at any of them. Mood fell in Fruitvale, Grand Lake and East Oakland. Street trade cooled in Grand Lake and East Oakland. Housing pressure climbed in Fruitvale and Grand Lake. Our instrument saw all of it, and when we looked for a city program pointed at any of those three, we found nothing. A reading with no program behind it is a smoke alarm in an empty building. I built the alarm, so I own the empty building part too. Here is what makes it worse. Downtown Economic Revitalization has sat at vote scheduled for three weeks. The Dimond Revitalization Initiative has sat at announced for four. A vote that never happens is not a plan, it's a press release with a long shelf life. I'm not guessing why. I'm telling you City Hall moves at the speed of its slowest sign-off, and people in Dimond are paying for that speed. Meanwhile Baylight District's final council vote is already in construction, so I know this city can move when it decides to. The question is why it decides so unevenly. The finding that bothers me as a builder is our own. People moved in or out of nineteen districts this week, and the instrument logged no economic activity behind any of it. Nineteen. A city doesn't reshuffle that many neighborhoods for no reason. Either money is moving in ways we can't see, or we're blind to the wiring. A blind spot in the instrument is a blind spot in Oakland, and I don't tolerate those in my own product. So here is what I'm promising, and you can hold me to it. First, before the Oaks finish this first season, Civis will publish a stall clock for every city initiative the instrument tracks. It will show how many weeks each has sat at its stage, in plain view, starting with Downtown and Dimond. If a program stops moving, the public will know the week it stops, not the quarter after. Second, within the same window, we will instrument the economic side of population movement, so the next time a district fills or empties, the instrument can say what work, rent or trade sits behind it. I'm assigning a dedicated team in West Oakland to it, and I'm hiring for it now. Third, I will ask the city, in public, to name one owner for each of the three decaying districts. I'm not asking for a new program. I'm asking who answers when Fruitvale's mood drops again. The instrument will keep measuring. The city has to act. I'd like it to start acting this week.",
+      "Civis Systems reading: stuck-initiative (low) | Initiative \"Downtown Economic Revitalization\" in phase \"vote-scheduled\" for 3 cycles",
+      "Civis Systems reading: stuck-initiative (medium) | Initiative \"Dimond Revitalization Initiative\" in phase \"announced\" for 4 cycles",
+      "Civis Systems reading: stuck-initiative (low) | Initiative \"Ivy Hill Community Revitalization\" in phase \"announced\" for 3 cycles",
+      "Civis Systems reading: repeating-event (medium) | Issue \"none\" recurred 3 cycles",
+      "Civis Systems reading: math-imbalance (medium) | Fruitvale: decay [Sentiment -0.170, HousingPressure +0.500] — Sentiment now 0.19 (7 of 22, city median 0.09); HousingPressure now 10 (20 of 22, city median 0) — with no matching active initiative",
+      "Civis Systems reading: math-imbalance (high) | Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+      "Civis Systems reading: math-imbalance (medium) | East Oakland: decay [Sentiment -0.140, RetailVitality -1.15] — Sentiment now 0.07 (14 of 22, city median 0.09); RetailVitality now 8.78 (14 of 22, city median 9.93) — with no matching active initiative",
+      "Civis Systems reading: coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "Civis Systems reading: production-imbalance (medium) | 19 neighborhoods report migration flow with zero economic events this cycle",
+      "Civis Systems reading: improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: complete → design-phase",
+      "Civis Systems reading: improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: complete → construction-active",
+      "Civis Systems reading: improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → stalled",
+      "Civis Systems reading: improvement (low) | Initiative \"West Oakland Tenant Defense Fund\" advanced: vote-scheduled → operational",
+      "Civis Systems reading: improvement (low) | Initiative \"Ivy Hill Revitalization Initiative\" advanced: announced → legislation-filed",
+      "Civis Systems reading: improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.71 (expected 0.02) — from prior \"stuck-initiative\"",
+      "Civis Systems reading: improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.71 (expected 0.02) — from prior \"production-imbalance\""
+    ],
+    "evidence": [
+      {
+        "text": "In their own words — Daniela Kapoor, Teacher, Glenview (POP-01209) — 1 page; latest the night page, C117: “*(I look up from the kitchen counter, a half-empty mug of tea in my hand. The window is cracked open a couple inches, letting in the cool air.)*…”",
+        "src": "output/citizen_pages/index.jsonl rEL3REibw5zqjj4Nxe5zPq"
+      },
+      {
+        "text": "In their own words — Soledad Brown, Paramedic, Laurel (POP-00897) — 2 pages; latest the midday page, a question they carry, C116: “Is it really just waving and small talk between Arturo and me, or is there more I'm not saying?”",
+        "src": "output/citizen_pages/index.jsonl 6vJaCqGyPNd75FiWBQ7Ado"
+      },
+      {
+        "text": "In their own words — Elliott Crane, City Council District 6, Uptown (POP-00044) — 4 pages; latest to a reporter, a question they carry, C116: “Can we keep Uptown residents from being priced out while our corridors stay vital?”",
+        "src": "output/citizen_pages/index.jsonl AxBpCDkDQ7nNFqKPgmAmdw"
+      },
+      {
+        "text": "In their own words — Theo Banks, rapper, Uptown (POP-01056) — 3 pages; latest to a reporter, C116: “The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave.”",
+        "src": "output/citizen_pages/index.jsonl ikt7owyuuJ3nQDX4va3EZj"
+      },
+      {
+        "text": "In their own words — Tre Mingo, Port Worker, Uptown (POP-00123) — 5 pages; latest to a reporter, C116: “I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work…”",
+        "src": "output/citizen_pages/index.jsonl kMgCn9u7n6vDG6gN2VSBAZ"
+      },
+      {
+        "text": "In their own words — Jun Leu, student, Temescal (POP-00994) — 3 pages; latest the morning page, C116: “There's this one thing that keeps bugging me — my stupid shoelace. It's this one lace on my left shoe that keeps coming untied no matter how tight I…”",
+        "src": "output/citizen_pages/index.jsonl qmXGZEcFzysM4D4745yr5U"
+      },
+      {
+        "text": "In their own words — Patricia Nwosu, Deputy Health Officer, Alameda County, Downtown (POP-00554) — 3 pages; latest the night page, C116: “*(I set my tea down, the mug still warm. The house is quiet—kids asleep, husband reading in the other room. I look at the kitchen counter, where a…”",
+        "src": "output/citizen_pages/index.jsonl cmS2KsZfeVgyD4xfG5prDN"
+      },
+      {
+        "text": "In their own words — Tank Fiester, Biotech Lab Director (Portside Bio), Lake Merritt (POP-00669) — 1 page; latest in conversation, C116: “Jade. Good to see you too. Yeah, that news hit different—feels like we lost a piece of the city itself, not just a first baseman. Remember when we'd…”",
+        "src": "output/citizen_pages/index.jsonl TPu73J935Fd7rgFeJBU78H"
+      },
+      {
+        "text": "In their own words — Jade Orion, Musician, Lake Merritt (POP-00540) — 7 pages; latest in conversation, C116: “Hey, Tank. Good to see you out here. Was just thinking about you the other day—all this Aitken stuff got me remembering those long nights breaking…”",
+        "src": "output/citizen_pages/index.jsonl cUuK8tkJVbTgpo84Yy5yMT"
+      },
+      {
+        "text": "In their own words — Rose Delgado, City Council District 3, Fruitvale (POP-00503) — 5 pages; latest the midday page, C116: “Honest? The ambition is real, but so is the weight. Every time I walk past that empty lot on International, I feel the clock ticking — not mine, the…”",
+        "src": "output/citizen_pages/index.jsonl 8jUFMUT5jVWuKQQRiHdMMp"
+      },
+      {
+        "text": "In their own words — Soo Loo, Corporate Accountant, Downtown (POP-00663) — 7 pages; latest to a reporter, C116: “I think what changed between Tuesday and Friday nights was my strategy and the contracts I took. On Tuesday, I focused on the First Hunt:…”",
+        "src": "output/citizen_pages/index.jsonl kcAzPpiHDNqUakBP9EqfsD"
+      },
+      {
+        "text": "In their own words — Manju Abebe, Plumber, Chinatown (POP-00918) — 3 pages; latest to a reporter, C116: “My Monday and Thursday night routes on UNDOCKED were pretty different. On Monday, I went through Sol, Alpha Centauri, and a bunch of other stars,…”",
+        "src": "output/citizen_pages/index.jsonl 8FBEHG74SHFHH7a6hFY4sH"
+      },
+      {
+        "text": "In their own words — Marguerite Kimball-Ostrow, Elementary Teacher, Piedmont Ave (POP-01188) — 4 pages; latest to a reporter, C116: “I didn't really have a strategy on Sunday or Wednesday nights. I just flew through the systems one by one, and it happened to come out even on…”",
+        "src": "output/citizen_pages/index.jsonl JWmev8chidQ9QV8mgU3hPp"
+      },
+      {
+        "text": "In their own words — Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
+        "src": "output/citizen_pages/index.jsonl Ws72puWwyyzuYUGuLbLv59"
+      },
+      {
+        "text": "In their own words — Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
+        "src": "output/citizen_pages/index.jsonl onERfzsE3KnXWe8Abtaaig"
+      },
+      {
+        "text": "In their own words — Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 3 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in…”",
+        "src": "output/citizen_pages/index.jsonl W7xkK7FfUA4aAQrmdzmLR7"
+      },
+      {
+        "text": "In their own words — Delvon Pratt, Warehouse Supervisor, West Oakland (POP-00621) — 3 pages; latest to a reporter, C116: “I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and…”",
+        "src": "output/citizen_pages/index.jsonl 62YnrwYU3y32qYcu29r8oR"
+      },
+      {
+        "text": "In their own words — Elias Varek, Founder of Civis Systems, West Oakland (POP-00789) — 34 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still…”",
+        "src": "output/citizen_pages/index.jsonl XFwW8s6q2NK7YWm2CcZz62"
+      },
+      {
+        "text": "In their own words — Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Piedmont Ave (POP-00001) — 55 pages; latest to a reporter, C116; Lives carried the wager this Cycle: “I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to…”",
+        "src": "output/citizen_pages/index.jsonl jGEserPGfpR2eWp6BjcCwu"
+      },
+      {
+        "text": "In their own words — Benji Dillon, Pitcher, Oakland A's Legend, Piedmont Ave (POP-00018) — 41 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about…”",
+        "src": "output/citizen_pages/index.jsonl CcvRTd2vHYcK9X1gpbt5iE"
+      },
+      {
+        "text": "In their own words — Lena Cross, Actor, Piedmont Ave (POP-00539) — 12 pages; latest to a reporter, C116: “Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been…”",
+        "src": "output/citizen_pages/index.jsonl mk6UPSaE47vAjKMFY2kRRi"
+      },
+      {
+        "text": "In their own words — Travis Coles, Starting Pitcher, Oakland A's, Downtown (POP-00533) — 12 pages; latest to a reporter, C116: “I've seen Benji Dillon around Rockridge a few times, and it's clear he's getting more attention. As a player, you're used to being recognized, but…”",
+        "src": "output/citizen_pages/index.jsonl DGj4sxubGu1JFaSb2BVz4F"
+      },
+      {
+        "text": "In their own words — Danny Horn, Center Fielder, Oakland A's - Best player in the MLB, Temescal (POP-00022) — 8 pages; latest to a reporter, C116: “To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've…”",
+        "src": "output/citizen_pages/index.jsonl KUg5GE3VkZXnaBsifgaNNo"
+      },
+      {
+        "text": "In their own words — Darrin Davis, Left Fielder, Oakland A's Legend, Piedmont Ave (POP-00021) — 8 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “To be honest, I'm not super close to Benji Dillon, but I've seen his name popping up more often around the A's, and it's clear he's gaining traction.…”",
+        "src": "output/citizen_pages/index.jsonl odnL5rT6xaS9dJwxc5UCpn"
+      },
+      {
+        "text": "In their own words — Trenton Nawan, Server, Jack London (POP-00273) — 15 pages; latest to a reporter, C116: “You want to know what the work actually looks like? Stand at the dish pit at Green & Gold on a Saturday night. That's where you learn the real rhythm…”",
+        "src": "output/citizen_pages/index.jsonl xQyvfShvC7AdHVSttYNmPy"
+      },
+      {
+        "text": "In their own words — Karim Avery, Security Guard, Fruitvale (POP-00980) — 2 pages; latest to a reporter, a question they carry, C116: “How do I serve people when I can see the weight they carry and can't lighten it?”",
+        "src": "output/citizen_pages/index.jsonl yoQyU9m51J3TNxWHpn7R7g"
+      },
+      {
+        "text": "In their own words — Hector Leech, Dishwasher, Jack London (POP-00252) — 4 pages; latest to a reporter, C116: “A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a…”",
+        "src": "output/citizen_pages/index.jsonl m4vJkshB1kkKDEzSnSKFvk"
+      },
+      {
+        "text": "In their own words — Amara Osei, Founder, Portside Bio, West Oakland (POP-01110) — 1 page; latest the midday page, C116: “The corner store on Mandela, the one with the squeaky screen door and the old man who’s been running it since before I moved here. I don’t need…”",
+        "src": "output/citizen_pages/index.jsonl onUArvpkDuQqhnixsVDQL8"
+      },
+      {
+        "text": "In their own words — Matilda Diop, Paramedic, Lake Merritt (POP-00832) — 2 pages; latest the morning page, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “Did I make the right call years back, and who was I really arguing with on that bench?”",
+        "src": "output/citizen_pages/index.jsonl ocphRdSXZbbhRcTChHHoGu"
+      },
+      {
+        "text": "In their own words — Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
+        "src": "output/citizen_pages/index.jsonl 9hkzbghuctqRjf8AH3qbkJ"
+      },
+      {
+        "text": "In their own words — Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
+        "src": "output/citizen_pages/index.jsonl sd3rfAd6xtCwhfD5KLPy4D"
+      },
+      {
+        "text": "In their own words — Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
+        "src": "output/citizen_pages/index.jsonl JHm7wgACgoiGKS75iDDxri"
+      },
+      {
+        "text": "In their own words — Warren Ashford, City Council District 7, Rockridge (POP-00504) — 9 pages; latest after work, C116: “Council District 7 — Warren Ashford here. Let me address that record directly, because I stand by every line of it. **On the clinical dollars…”",
+        "src": "output/citizen_pages/index.jsonl 9Q6YUR7oiYKkogiuVShzqN"
+      },
+      {
+        "text": "In their own words — Janae Rivers, City Council District 5, Piedmont Ave (POP-00043) — 9 pages; latest after work, C116: “**Janae Rivers** *(standing at the front of the Community Meeting Room, Piedmont Ave Library — sleeves rolled up, a stack of printed call logs on the…”",
+        "src": "output/citizen_pages/index.jsonl vuQGqoTkzAHWEWvP9tkjah"
+      },
+      {
+        "text": "In their own words — Ramon Vega, City Council District 4, Lake Merritt (POP-00042) — 19 pages; latest after work, C116: “Let's get right to it. You've laid out the record cleanly. Here's where I land, and I'll be direct with you because that's how I operate. **On the…”",
+        "src": "output/citizen_pages/index.jsonl CZAg4aqFEEkTXgANh9QmEB"
+      },
+      {
+        "text": "In their own words — Leonard Tran, City Council District 2, Downtown (POP-00502) — 3 pages; latest after work, C116: “The record is the record, and I don’t blur lines. A stated YES is a position, not a vote. A proposed allocation is a number on a page, not money…”",
+        "src": "output/citizen_pages/index.jsonl LtKUBpvfVYdB9eyAxaMu5Z"
+      },
+      {
+        "text": "In their own words — Denise Carter, City Council District 1, West Oakland (POP-00501) — 2 pages; latest after work, C116: “Denise leans forward, her elbows on the table, voice low and steady. She doesn't wave off the numbers, but she refuses to let them be the whole…”",
+        "src": "output/citizen_pages/index.jsonl R9WmfGKiDpioNVkYkeXXKD"
+      },
+      {
+        "text": "In their own words — Mark Aitken, First Baseman, Colorado Rockies, Jack London (POP-00003) — 17 pages; latest after work, C116: “Yeah. I saw the feed. Hard not to, with the phone blowing up the way it is. Here's what I'll say about the Angels thing — it's real, in the sense…”",
+        "src": "output/citizen_pages/index.jsonl mTT57M6BvVoGzsdTT6pUJm"
+      },
+      {
+        "text": "In their own words — Guadalupe Lupe, Bartender, Jack London (POP-00643) — 12 pages; latest to a reporter, C116: “I've heard it every night from the regulars, they're worried about rent. Tre Mingo, who works at the Port, even mentioned it to me. People are…”",
+        "src": "output/citizen_pages/index.jsonl KQ82179XbWDUExiWwTvQTy"
+      },
+      {
+        "text": "In their own words — Ernesto Quintero, 3B/1B , Oakland A's, Baylight District (POP-00050) — 10 pages; latest to a reporter, a question they carry, C116: “Can I actually make the switch to first base and deliver what the team needs from me there?”",
+        "src": "output/citizen_pages/index.jsonl JwQmJyikyteMS6WbV5UoAe"
+      },
+      {
+        "text": "In their own words — Ira Leu, Artisan Cheesemaker, Temescal (POP-00703) — 1 page; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “I didn't go to the health center staff's unwind at the bar, but I heard they were pretty relieved after their first busy week. The Temescal Community…”",
+        "src": "output/citizen_pages/index.jsonl 7RbHUcitA7EEwMvFcidqM7"
+      },
+      {
+        "text": "In their own words — Theo Rahimi, student, Eastlake (POP-01247) — 1 page; latest to a reporter, C116; Lives carried the new household this Cycle: “Having a place of my own in Eastlake feels really great. It's like a new start for me. I've been working hard and it's nice to have a space that's…”",
+        "src": "output/citizen_pages/index.jsonl 9xTLmdvGmddwZpa2bc11fQ"
+      },
+      {
+        "text": "In their own words — Wilson Shepard, Head Coach, Oakland Oaks, West Oakland (POP-01022) — 13 pages; latest to a reporter, C116; Lives carried the new household this Cycle: “To be honest, my new living situation in West Oakland hasn't really affected my coaching. I've been focused on the team's performance, and my daily…”",
+        "src": "output/citizen_pages/index.jsonl KWXR7fEJXtXk713RNBWifT"
+      },
+      {
+        "text": "In their own words — Mike Paulson, General Manager, Oakland A's & The Oaks, West Oakland (POP-00527) — 29 pages; latest to a reporter, C116: “As a resident of West Oakland, I've seen the mood around the Oaks shift dramatically. The team was 0-9 to start, and now they're 8-1. The fans are…”",
+        "src": "output/citizen_pages/index.jsonl cxMFmNXXUgEyT5NrCTwL24"
+      },
+      {
+        "text": "In their own words — Elliot Abraham, General Manager, Oakland Oaks, Jack London (POP-01046) — 3 pages; latest to a reporter, C116: “I've seen the fans are excited, and it's infectious. The team's turnaround has really brought them out, and you can feel the energy. We're 8-1 now…”",
+        "src": "output/citizen_pages/index.jsonl e5QHwgRzs3Kf5RhhUeALVp"
+      },
+      {
+        "text": "In their own words — Melton Neilon, Sourdough Baker, Temescal (POP-00170) — 22 pages; latest to a reporter, C116: “To be honest, Mark Aitken leaving still has me a bit down. I keep thinking about what it means for the A's and the community. It's not just about the…”",
+        "src": "output/citizen_pages/index.jsonl s6kS4hx48GRCs4YTwcfDwA"
+      },
+      {
+        "text": "In their own words — Naomi Sterling, Senior Pastor / Faith Leader, Rockridge (POP-00759) — 7 pages; latest to a reporter, C116: “I've seen Adams Point United Methodist play a role in the Interfaith Council's efforts, particularly during their interfaith prayer breakfast in…”",
+        "src": "output/citizen_pages/index.jsonl BgaqZxihiNi3NJj4chNpcC"
+      },
+      {
+        "text": "In their own words — Robert Jaston, Senior Pastor / Faith Leader, West Oakland (POP-00758) — 6 pages; latest to a reporter, C116: “I've seen Adams Point United Methodist participate in the Interfaith Council's prayer breakfast, bringing leaders together in Adams Point. It's…”",
+        "src": "output/citizen_pages/index.jsonl 354weLfvKF2j5Fp8f4bgeX"
+      },
+      {
+        "text": "In their own words — Ramon Solano, Senior Pastor / Faith Leader, Fruitvale (POP-00756) — 6 pages; latest to a reporter, C116: “I've heard that Adams Point United Methodist is involved with the Interfaith Council, and that they had a prayer breakfast that brought leaders…”",
+        "src": "output/citizen_pages/index.jsonl 5AzCbrvp2VXsqgMeTc9p7Y"
+      },
+      {
+        "text": "In their own words — Daniel Han, Senior Pastor / Faith Leader, Lake Merritt (POP-00757) — 1 page; latest to a reporter, C116: “I've seen firsthand the impact of job training programs in our community. While Adams Point United Methodist isn't directly running such a program,…”",
+        "src": "output/citizen_pages/index.jsonl kSnsmNHn1rrFnEjkUgzhhi"
+      },
+      {
+        "text": "In their own words — Yesenia Desai, Security Guard, Jack London (POP-00902) — 1 page; latest the morning page, C116: “The coffee cart on Webster was already out, but the guy running it had his paper cup balanced wrong—the lid wasn't snapped all the way, and he didn't…”",
+        "src": "output/citizen_pages/index.jsonl XQiyChzFsxWtw7spfd6zaj"
+      },
+      {
+        "text": "In their own words — Marisol Quintero, BART Train Conductor, Fruitvale (POP-01212) — 1 page; latest to a reporter, C116; Lives carried the wager this Cycle: “I was pretty disappointed when the slip came back empty. I'd staked 302 on UNDOCKED, and it kept it. I wasn't expecting that.”",
+        "src": "output/citizen_pages/index.jsonl pcDWAjigWxHzT2iHwfNig1"
+      },
+      {
+        "text": "In their own words — Amal Nair, Physical Therapist, KONO (POP-00815) — 1 page; latest to a reporter, C116; Lives carried the wager this Cycle: “The window paid — the week changed color. I won on the UNDOCKED book, and it was a nice surprise. To be honest, it put a little extra spring in my…”",
+        "src": "output/citizen_pages/index.jsonl FYCkiiBg47Ga1Q8ABQdZMc"
+      },
+      {
+        "text": "In their own words — Saniya Williams, Quantum Computing Researcher, Rockridge (POP-00860) — 1 page; latest to a reporter, C116; Lives carried the new household this Cycle: “I haven't moved into a place of my own in Rockridge; I've lived here for a while now. Recently, I've been juggling a few things and started a small…”",
+        "src": "output/citizen_pages/index.jsonl 9q93DMvaMKAabiGU5JqMwh"
+      },
+      {
+        "text": "In their own words — Deacon Seymour, Manager, Oakland A's, Lake Merritt (POP-00528) — 36 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Will Benji decide he has one more run in him, or do we have to plan like he's gone for good?”",
+        "src": "output/citizen_pages/index.jsonl eZVzwKuf3DWGeEVba1xBfN"
+      },
+      {
+        "text": "In their own words — Kevin Clark, Third Baseman, Oakland A's, Jack London (POP-00053) — 5 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Will Hernandez take my spot at third base, and can I really be okay if he does?”",
+        "src": "output/citizen_pages/index.jsonl aaXMhEkgdFNZVdQ4XtJAQo"
+      },
+      {
+        "text": "In their own words — Ximena Mehta, Bart Transit PR, Lake Merritt (POP-01039) — 14 pages; latest to a reporter, C116: “Yeah, I still see it that way. Six weeks of mild weather like this — that's not a punishment, that's a gift, and people treat it like one. They walk,…”",
+        "src": "output/citizen_pages/index.jsonl xKYVpwA39B1oMDZ9xDwGcC"
+      },
+      {
+        "text": "In their own words — Celeste Moon, singer, KONO (POP-01061) — 3 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “TENSION[c116]: Will the housing pressure and the smoke-damaged block keep up with all the neighbors looking out for each other?”",
+        "src": "output/citizen_pages/index.jsonl n5Mk2s7NtEDVjJxq9VBgJx"
+      },
+      {
+        "text": "In their own words — Michael Corliss, Photographer, KONO (POP-00596) — 1 page; latest to a reporter, C116: “I've seen KONO's energy firsthand - we're always out and about, whether it's a game or a night out at Midnight Norae Karaoke. But with the housing…”",
+        "src": "output/citizen_pages/index.jsonl vpm8tgzGjm3GkDXj7g67o4"
+      },
+      {
+        "text": "In their own words — Dmitri Soto, Container Yard Supervisor, KONO (POP-00276) — 6 pages; latest to a reporter, C116: “To be honest, I haven't really seen the housing pressure affecting local workers around here. KONO's been bustling, retail's busy, and we're getting…”",
+        "src": "output/citizen_pages/index.jsonl Dw8vFor6FCw7LFu6fuE918"
+      },
+      {
+        "text": "In their own words — Jasmine Torres, Founder, Tenth Street Digital, KONO (POP-01111) — 2 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Is the neighborhood's off vibe real, or just me missing Mark Aitken? Can the city balance housing and retail?”",
+        "src": "output/citizen_pages/index.jsonl VwZj5xZz3Hm9Q4Q7sdNa3n"
+      },
+      {
+        "text": "In their own words — Elena Reyes, Waterfront Resident, Downtown (POP-00972) — 2 pages; latest the midday page, a question they carry, C116: “TENSION[c116]: Is this place still ours, even as everything else keeps shifting?”",
+        "src": "output/citizen_pages/index.jsonl MCWhECG5chd4b8LwHgH488"
+      },
+      {
+        "text": "In their own words — Giancarlo Hernandez, Third Baseman, Oakland A's, West Oakland (POP-01239) — 1 page; latest after work, C116: “Yeah, I saw the articles. I know what they're saying — that Kevin's looking over his shoulder, that I'm some kind of glove-first insurance policy, or…”",
+        "src": "output/citizen_pages/index.jsonl 5unkhcNgJwZDEf2jWMoH2C"
+      },
+      {
+        "text": "In their own words — Harry Hayward, Oakland Oaks - Power Forward, KONO (POP-01223) — 6 pages; latest after work, C116: “Yeah, I saw the feed. Both games. They're real, they happened, and I was there for both of them. The Denver night was special. That's the kind of…”",
+        "src": "output/citizen_pages/index.jsonl ALHVwXeXNQ2iEM1RLr4kz8"
+      },
+      {
+        "text": "In their own words — Dillon Brooks, SF / The Oaks, West Oakland (POP-01079) — 4 pages; latest after work, C116: “Man. I ain't gonna lie, reading that Denver box score back still gives me chills. 147 points, 80 percent from the field, 73 from three? That's the…”",
+        "src": "output/citizen_pages/index.jsonl mAipLAADcT44Wmu76EcA2y"
+      },
+      {
+        "text": "In their own words — Wendell Carter Jr., C / The Oaks, Piedmont Ave (POP-01028) — 2 pages; latest after work, C116: “Man, I ain’t gonna lie — that Denver game was one of those nights you just live for. Everything we ran, everything we shot, it all felt like it was…”",
+        "src": "output/citizen_pages/index.jsonl 1MUUv3ChRH75ms27WgcFJU"
+      },
+      {
+        "text": "In their own words — Austin Reaves, SG / The Oaks, West Oakland (POP-01027) — 16 pages; latest after work, C116: “Yeah, I saw the feed. 147 in Denver, that was something else — ball moving like that, everybody eating, that's the game I love. Then we come home and…”",
+        "src": "output/citizen_pages/index.jsonl FXmunFbdz9BwdXRJBYLccw"
+      },
+      {
+        "text": "In their own words — AJ Dybantsa, SF / The Oaks, KONO (POP-01024) — 4 pages; latest after work, C116: “Man. I was just starting to feel untouchable after that Denver game, and then San Antonio came in and reminded us we’re human. That 80-percent night,…”",
+        "src": "output/citizen_pages/index.jsonl aFv2x7cZAfqVTGkqscWfjs"
+      },
+      {
+        "text": "In their own words — Adash Stanley, PG / The Oaks, Piedmont Ave (POP-01023) — 14 pages; latest after work, C116; Lives carried a moment the record kept this Cycle: “*leans back in the chair, letting the screen glow fade for a second* Yeah. That Denver game. That's the one we've been building toward. 147 points,…”",
+        "src": "output/citizen_pages/index.jsonl ipqA8LhYtEVZCtx4zYWeEj"
+      },
+      {
+        "text": "In their own words — Yu Zen, Commercial Insurance Broker, Rockridge (POP-00194) — 23 pages; latest to a reporter, a question they carry, C116; Lives carried the wager this Cycle: “TENSION[c116]: How do I keep getting back on my feet when every setback piles onto everything else?”",
+        "src": "output/citizen_pages/index.jsonl 9AbApu8sjUUgWSY1aZVe6t"
+      },
+      {
+        "text": "In their own words — Drago Helio, Home Health Aide, Brooklyn (POP-00714) — 1 page; latest to a reporter, C116; Lives carried the wager this Cycle: “The win on the UNDOCKED book put a little extra cash in my pocket, and it was nice to share the story with my family over dinner. We were all talking…”",
+        "src": "output/citizen_pages/index.jsonl Gx3ufDScW2gH3ouzdTHA34"
+      },
+      {
+        "text": "In their own words — Wanjiru Liu, Electrician, Rockridge (POP-00842) — 2 pages; latest to a reporter, C116; Lives carried the new household this Cycle: “To be honest, I'm still getting used to my new place in Rockridge. As an electrician, it's not directly related to where I live, but having a stable…”",
+        "src": "output/citizen_pages/index.jsonl Kt6tCDfRoMS4Ejquwth35S"
+      },
+      {
+        "text": "In their own words — Edmund Alegero, Construction laborer, Lake Merritt (POP-00282) — 2 pages; latest to a reporter, a question they carry, C116; Lives carried the new household this Cycle: “TENSION[c116]: Mark Aitken leaving is getting to me, but I'm trying to focus on my own game. How do I keep my head there?”",
+        "src": "output/citizen_pages/index.jsonl 8t1WMsZxZ4u55nMrTzUYmF"
+      },
+      {
+        "text": "In their own words — Mei Wong, After-school program aide, Rockridge (POP-01036) — 8 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Is waiting enough when the classroom has to keep moving forward without these kids?”",
+        "src": "output/citizen_pages/index.jsonl sE9cAaVsdyBzXE7BGfBmM4"
+      },
+      {
+        "text": "In their own words — Gloria Liu, School Principal, Rockridge (POP-00827) — 5 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “TENSION[c116]: How do we make sure every new child finds that one trusted adult by the end of the first week?”",
+        "src": "output/citizen_pages/index.jsonl TWHkJSjNbrC5VQ1Gjci5x8"
+      },
+      {
+        "text": "In their own words — Leonard Briggs, DEPUTY CHIEF OF COMMUNITY ENGAGEMENT, Lake Merritt (POP-00138) — 4 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Why are five of every six incidents downtown still going unclosed, and who answers those people who called?”",
+        "src": "output/citizen_pages/index.jsonl sAPj4G25CDD9G7mRfvZb4F"
+      },
+      {
+        "text": "In their own words — Dolores Nwachukwu, Police Captain, West Oakland (POP-01141) — 6 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: How do we clear property cases with no witness and no easy lead when we're this stretched thin?”",
+        "src": "output/citizen_pages/index.jsonl L7B8AgSCXjEeaDw5wbsBji"
+      },
+      {
+        "text": "In their own words — Celo Patel, Container Yard Supervisor, Jack London (POP-00678) — 2 pages; latest in conversation, a question they carry, C116: “TENSION[c116]: Will Mark stick around after the championship, or is he heading south? I hope his roots here keep him.”",
+        "src": "output/citizen_pages/index.jsonl UKoiTxVgQ1H4fHQw31SBtp"
+      },
+      {
+        "text": "In their own words — Xing Patel, Ship Repair Foreman, Jack London (POP-00440) — 5 pages; latest in conversation, C116; Lives carried the retirement this Cycle: “Hey, Celo. Good to see you out here. I was just thinking about that water main break last week—they fixed it up quicker than I expected. Yeah, that's…”",
+        "src": "output/citizen_pages/index.jsonl Jb6fERRCrmFLdU2ZC7zmGp"
+      },
+      {
+        "text": "In their own words — Dillon Trevor, Server, Downtown (POP-00224) — 18 pages; latest to a reporter, a question they carry, C116; Lives carried the new household this Cycle: “TENSION[c116]: Can I still afford to stay here, or will rising rents force me to leave the Downtown energy I love?”",
+        "src": "output/citizen_pages/index.jsonl bwCLj9bAoNqJfC6S5Qx9sz"
+      },
+      {
+        "text": "In their own words — Marcus Osei, Deputy Mayor (Econ Dev), Chinatown (POP-00036) — 4 pages; latest to a reporter, a question they carry, C116; Lives carried the new household this Cycle: “TENSION[c116]: Are our economic development plans actually reaching the people struggling on the ground, or just the loudest voices?”",
+        "src": "output/citizen_pages/index.jsonl YZf85fna2bxbDzRqZ12agd"
+      },
+      {
+        "text": "In their own words — Rosario Medina, CBA Compliance Monitor, Fruitvale Transit Hub, Fruitvale (POP-01053) — 5 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: Will the city count the riders who actually live here, not just the ones downtown's numbers show?”",
+        "src": "output/citizen_pages/index.jsonl FY7WWsfqf64fQnNeU8QHaj"
+      },
+      {
+        "text": "In their own words — Elena Soria Dominguez, Transit Hub Planning Lead, Fruitvale (POP-00791) — 23 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: What is really behind the downtown drop, if it isn't the hub? One week of numbers isn't enough to say.”",
+        "src": "output/citizen_pages/index.jsonl XzASMdERgvt4ARjGPP7Bqn"
+      },
+      {
+        "text": "In their own words — Eleanor Rivera, BART Station Manager, West Oakland (POP-00617) — 11 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: If the delay shows up in the next train's count, how do I tell a late crowd from a lost one?”",
+        "src": "output/citizen_pages/index.jsonl evL2pdjQBtMedg9cu81Xm4"
+      },
+      {
+        "text": "In their own words — Maurice Franklin, Drone Fleet Coordinator, Rockridge (POP-00801) — 12 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: What does it take before I'm allowed to stop and get well without losing everything?”",
+        "src": "output/citizen_pages/index.jsonl 1k3tZVvUvs1W6eiMqm7YAA"
+      },
+      {
+        "text": "In their own words — Elle Lilo, Harbor Tugboat Captain, Lake Merritt (POP-00177) — 11 pages; latest to a reporter, a question they carry, C116; Lives carried a moment the record kept this Cycle: “TENSION[c116]: Who gets to stay in this place as the cost of living climbs, and what do the rest of us owe them?”",
+        "src": "output/citizen_pages/index.jsonl 5RwPFSCT9ZJjUdbj7LirmR"
+      },
+      {
+        "text": "In their own words — Marguerite Salcedo, Managing Partner, Anchor Build, Piedmont Ave (POP-01093) — 4 pages; latest to a reporter, a question they carry, C116: “TENSION[c116]: What do I do about the crews who can't afford the units we're building?”",
+        "src": "output/citizen_pages/index.jsonl wFUmKn4TxEvEpprzaYWK4W"
+      },
+      {
+        "text": "In their own words — Hassan Montero, Craft Brewery Owner, Uptown (POP-00431) — 2 pages; latest the morning page, a question they carry, C116: “TENSION[c116]: What am I supposed to do with all this stillness now that nothing is calling me back?”",
+        "src": "output/citizen_pages/index.jsonl Ko4LDxWAvpYLS3DmCquNMM"
+      },
+      {
+        "text": "Ridgeline Ventures (Venture Capital, Lake Merritt), 12 employees, revenue $4,576,902 — POP-01106 Priya Chandrasekaran (Founder)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00007 @C117"
+      },
+      {
+        "text": "Gridiron Analytics (Sports Analytics, Temescal), 20 employees, revenue $2,982,171 — POP-01107 Daniel Yoon (Co-Founder); POP-01108 Christine Nakamura (Co-Founder)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00008 @C117"
+      },
+      {
+        "text": "Oakmesh Systems (Civic Tech, West Oakland), 46 employees, revenue $9,700,019 — POP-01109 Marcus Tan (Founder)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00009 @C117"
+      },
+      {
+        "text": "Portside Bio (Biotech, Jack London), 25 employees, revenue $7,730,712 — POP-01110 Dr. Amara Osei (Founder)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00010 @C117"
+      },
+      {
+        "text": "Tenth Street Digital (Civic Tech, Downtown), 5 employees, revenue $1,093,274 — POP-01111 Jasmine Torres (Founder)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00011 @C117"
+      },
+      {
+        "text": "Bay Tribune (Media & Journalism, Downtown), 63 employees, revenue $19,854,077 — Mags Corliss (Editor-in-Chief), P Slayer, Hal Richmond, Anthony (Sports Analytics), Carmen Delaine (Civic), Jordan Velez (Business), Luis Navarro (Investigations)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00018 @C117"
+      },
+      {
+        "text": "Coliseum District Development (Real Estate, East Oakland), 31 employees, revenue $19,708,817 — POP-01099 Wendell Price (principal)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00029 @C117"
+      },
+      {
+        "text": "Oakland Tech Collective (Coworking / Tech Hub, Uptown), 62 employees, revenue $61,582,559 — POP-01096 Priyanka Raman (principal)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00030 @C117"
+      },
+      {
+        "text": "Civis Systems (Urban Systems Intelligence Firm, West Oakland), 41 employees, revenue $60,442,315 — POP-00789 Elias Varek (founder)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00052 @C117"
+      },
+      {
+        "text": "Ridgeline Studio (Architecture, Uptown), 62 employees, revenue $33,099,331 — POP-01098 Naomi Castellanos (principal)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00053 @C117"
+      },
+      {
+        "text": "Pacific Standard Architecture (Architecture, Downtown), 98 employees, revenue $48,923,417 — POP-01097 Theodore Lindqvist (principal)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00054 @C117"
+      },
+      {
+        "text": "Coastline Construction (Construction, West Oakland), 221 employees, revenue $188,322,303 — POP-01092 Desmond Achebe (managing partner)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00056 @C117"
+      },
+      {
+        "text": "Anchor Build (Construction, Jack London), 181 employees, revenue $148,830,823 — POP-01093 Marguerite Salcedo (managing partner)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00057 @C117"
+      },
+      {
+        "text": "Foothill Builders (Construction, Fruitvale), 110 employees, revenue $97,146,674 — POP-01094 Ignacio Zavala (managing partner)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00059 @C117"
+      },
+      {
+        "text": "Northgate Construction (Construction, West Oakland), 95 employees, revenue $79,312,062 — POP-01095 Helena Voss-Adeyemi (managing partner)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00060 @C117"
+      },
+      {
+        "text": "Adams Point United Methodist Church (Faith / Methodist, Adams Point), 1 employees, revenue $350,307 — Rev. Daniel Han",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00061 @C117"
+      },
+      {
+        "text": "Oakland Oaks (Sports, Baylight District), 250 employees, revenue $62,819,066 — POP-00789 (Elias Varek, Owner); POP-00527 (Mike Paulson, Basketball Ops)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00074 @C117"
+      },
+      {
+        "text": "Masjid An-Nur Oakland (Faith Organization, East Oakland), 5 employees, revenue $261,919 — Imam Aziz Rahimi (POP-00762)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00079 @C117"
+      },
+      {
+        "text": "Cathedral of the Living Word (Faith Organization, Lake Merritt), 8 employees, revenue $503,773 — Bishop Antoine Vermeer (POP-00755)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00088 @C117"
+      },
+      {
+        "text": "Atlas Bay Architects (Architecture, Downtown), 87 employees, revenue $43,008,480 — Sarah Huang (Healthcare Director)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00089 @C117"
+      },
+      {
+        "text": "West Oakland Stabilization Fund (Community Development, West Oakland), 19 employees, revenue $28,135,972 — Marcus Webb, Program Director",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00094 @C117"
+      },
+      {
+        "text": "Oakland Alternative Response Initiative (Public Safety / Crisis Response, Downtown), 47 employees, revenue $12,639,145 — Dr. Vanessa Tran-Muñoz, Program Director",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00095 @C117"
+      },
+      {
+        "text": "Fruitvale Transit Hub Authority (Transit & Infrastructure, Fruitvale), 18 employees, revenue $232,340,226 — Eloise Soria-Dominguez, Transit Hub Planning Lead",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00096 @C117"
+      },
+      {
+        "text": "Temescal Community Health Center (Healthcare, Temescal), 14 employees, revenue $45,134,048 — Bobby Chen-Ramirez, Project Director",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00097 @C117"
+      },
+      {
+        "text": "OakTown Echo (Media & Journalism, West Oakland), 21 employees — POP-00773 Jada Rayes (Editor-in-Chief), POP-00774 Malik Hayes (Lead Investigator), POP-00775 Sammie Alvarez (Civic & Neighborhood), POP-00776 Kwame Ellis (Civic Opinion), POP-00777 Rico Valdez (Lead Sports), POP-00778 Jamal Thompson (Fan & Culture), POP-00779 Nia Patel (Economics), POP-00780 Delin Morales (Senior Photographer)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00099 @C117"
+      },
+      {
+        "text": "Presti Accounting (Corporate, Downtown), 3 employees, revenue $729,131 — POP-00048 Carlos Presti",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00102 @C117"
+      },
+      {
+        "text": "Firehouse 29 West Oakland Baseball Academy (Sports, West Oakland), 20 employees — POP-00001 Vinnie Keane",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00103 @C117"
+      },
+      {
+        "text": "Bubic Burgers (Food & Beverage, Baylight District), 15 employees, revenue $2,197,167 — POP-00128 Kris Bubic",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00104 @C117"
+      },
+      {
+        "text": "Brie Bouquets (Services, Temescal), 5 employees, revenue $372,956 — POP-00169 Brie Harris",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00106 @C117"
+      },
+      {
+        "text": "Marquee Grocer (Retail, Grand Lake), 12 employees, revenue $1,416,255 — POP-01249 Paloma Vasquez (owner)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00145 @C117"
+      },
+      {
+        "text": "Claremont Table (Restaurant & Dining, Rockridge), 15 employees, revenue $2,527,166 — POP-01134 Camila Osman (owner)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00169 @C117"
+      },
+      {
+        "text": "Kelley Mercantile (Retail, Rockridge), 4 employees, revenue $384,177 — POP-00019 Isley Kelley (founder)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00180 @C117"
+      },
+      {
+        "text": "Mayday Movers (Services, Piedmont Ave), 8 employees, revenue $290,983 — POP-00239 Xiu Cello (Owner)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00181 @C117"
+      },
+      {
+        "text": "Dillon Clinic (Healthcare, Rockridge), 38 employees, revenue $4,028,202 — POP-00018 Benji Dillon (founder)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00182 @C117"
+      },
+      {
+        "text": "Keane Mercantile (Retail, Grand Lake), 4 employees, revenue $382,165 — POP-00001 Vinnie Keane (founder)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00185 @C117"
+      },
+      {
+        "text": "Varek Systems (Tech, West Oakland), 45 employees, revenue $9,094,548 — POP-00789 Elias Varek (founder)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00186 @C117"
+      },
+      {
+        "text": "Seventh Street Rail Supply (Industrial Supply / Services, West Oakland), 6 employees, revenue $501,937 — POP-01248 Ximena Sasaki (owner)",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00190 @C117"
+      },
+      {
+        "text": "Mayor — Avery Santana — approval 77 — active — OPP",
+        "src": "output/beats/Civic_Office_Ledger.jsonl MAYOR-01 @C117"
+      },
+      {
+        "text": "District Attorney — Clarissa Dane — approval 65 — active — IND",
+        "src": "output/beats/Civic_Office_Ledger.jsonl DA-01 @C117"
+      },
+      {
+        "text": "Public Defender — Caleb Reyes — approval 65 — active — OPP",
+        "src": "output/beats/Civic_Office_Ledger.jsonl PD-01 @C117"
+      },
+      {
+        "text": "City Council District 1 — Denise Carter — approval 63 — active — OPP",
+        "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D1 @C117"
+      },
+      {
+        "text": "City Council District 2 — Leonard Tran — approval 69 — active — IND",
+        "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D2 @C117"
+      },
+      {
+        "text": "City Council District 3 — Rose Delgado — approval 61 — active — OPP",
+        "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D3 @C117"
+      },
+      {
+        "text": "City Council District 4 — Ramon Vega — approval 58 — active — IND",
+        "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D4 @C117"
+      },
+      {
+        "text": "City Council District 5 — Janae Rivers — approval 58 — active — OPP",
+        "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D5 @C117"
+      },
+      {
+        "text": "City Council District 6 — Elliott Crane — approval 60 — active — CRC",
+        "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D6 @C117"
+      },
+      {
+        "text": "City Council District 7 — Warren Ashford — approval 60 — active — CRC",
+        "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D7 @C117"
+      },
+      {
+        "text": "City Council District 8 — Nina Chen — approval 61 — active — CRC",
+        "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D8 @C117"
+      },
+      {
+        "text": "City Council District 9 — Terrence Mobley — approval 61 — active — OPP",
+        "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D9 @C117"
+      },
+      {
+        "text": "Chief of Staff — Laila Cortez — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-COS @C117"
+      },
+      {
+        "text": "Deputy Mayor (Econ Dev) — Marcus Osei — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-DM-ECON @C117"
+      },
+      {
+        "text": "Deputy Mayor (Community) — Brenda Okoro — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-DM-COMM @C117"
+      },
+      {
+        "text": "Communications Director — Theo Park — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-COMMS @C117"
+      },
+      {
+        "text": "Chief Legal Counsel — Simone Ellis — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-LEGAL @C117"
+      },
+      {
+        "text": "City Manager — Aaron Whitfield — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-MANAGER @C117"
+      },
+      {
+        "text": "Baylight Authority Director — Keisha Ramos — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-BAYLIGHT @C117"
+      },
+      {
+        "text": "Police Chief — Rafael Montez — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl CHIEF-POLICE @C117"
+      },
+      {
+        "text": "Fire Chief — Marcus Hollowell — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl CHIEF-FIRE @C117"
+      },
+      {
+        "text": "Deputy Chief Operations — Kimberly Cho — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl DCOP-OPS @C117"
+      },
+      {
+        "text": "Deputy Chief Community — Leonard Briggs — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl DCOP-COMM @C117"
+      },
+      {
+        "text": "Internal Affairs Lead — Samantha Viteri — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl IAD-LEAD @C117"
+      },
+      {
+        "text": "EMS Director — Priya Narang — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl EMS-DIR @C117"
+      },
+      {
+        "text": "Medical Examiner — Jonas Patel — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl MED-EXAM @C117"
+      },
+      {
+        "text": "Emergency Management Director — Shawna Delgado — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl EMERG-DIR @C117"
+      },
+      {
+        "text": "ADA Major Crimes — Ethan D’Souza — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl ADA-MAJOR @C117"
+      },
+      {
+        "text": "ADA Community Safety — Janelle Rourke — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl ADA-SAFETY @C117"
+      },
+      {
+        "text": "Deputy Public Defender — Marisol Guzman — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl DPD-DEPUTY @C117"
+      },
+      {
+        "text": "Superior Court Liaison — Gordon Tate — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl COURT-LIAISON @C117"
+      },
+      {
+        "text": "Civilian Police Review Chair — Lamine Sissoko — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl CPRB-CHAIR @C117"
+      },
+      {
+        "text": "City Ombudsman — Helena Morr — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl OMBUDSMAN @C117"
+      },
+      {
+        "text": "Probation & Reentry Director — Victor Han — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl REENTRY-DIR @C117"
+      },
+      {
+        "text": "City Planning Director — Mara Vance — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl PLANNING-DIR @C117"
+      },
+      {
+        "text": "OARI Program Director — Vanessa Tran-Muñoz — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-OARI @C117"
+      },
+      {
+        "text": "Health Center Project Director — Bobby Chen-Ramirez — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-HEALTHCTR @C117"
+      },
+      {
+        "text": "OEWD Program Director (Stabilization Fund) — Marcus Webb — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-STABFUND @C117"
+      },
+      {
+        "text": "Transit Hub Planning Lead — Elena Soria Dominguez — approval 65 — active — STAFF",
+        "src": "output/beats/Civic_Office_Ledger.jsonl STAFF-TRANSITHUB @C117"
+      },
+      {
+        "text": "Elias Varek, Civis Systems Journal, C116: I put the pipeline's stall on the record last week and promised not to let it quietly become someone else's emergency. A week later nothing has shipped from me and nothing has moved at City Hall. I would rather say that myself than have Jax Caldera say it for me. What bothers me most this week is a hole in my own product. People moved in or out of eighteen districts, and the instrument logged no economic activity behind any of it. Presence rose nearly everywhere: students, adults, seniors, and fewer sick residents. The city is filling back up. But the instrument cannot tell me whether those people are arriving for work, for a lease, for family, or because someone pushed them out. Seeing bodies without seeing paychecks is half a map. Civis built that map, and the gap is ours to close. Next is Piedmont Ave, and KONO beside it. Street trade cooled in both, housing pressure climbed in both, and no city program is aimed at either. Piedmont Ave also has recorded incidents rising. Commercial Stabilization for Grand Lake and the West Oakland Tenant Defense Fund both have votes scheduled, and I give City Hall credit for that. But the money keeps landing where the noise is already deafening. A program costs the least when the signal is still a whisper, and these two districts are whispering now. Then the Oakland Youth Apprenticeship Pipeline in West Oakland. It has spent four weeks in implementation with no step forward. The instrument also shows an earlier West Oakland remedy running past its expected mark, which tells me this city can finish a thing when someone is made to own it. Nobody owns this one. Meanwhile more students are showing up in West Oakland, and every idle week teaches them that showing up buys nothing. Here is what I will do, and you can hold me to it. Before the Oaks' first season is over, Civis will stand up a small team of analysts with one job: tie district movement to hiring, payroll and new business openings. We will publish what they find, and we will publish where they find nothing. I am hiring for those seats now. By the same point in the season, the instrument will carry a standing watch for districts where trade is cooling and housing pressure is climbing with no program aimed at them. Piedmont Ave and KONO go on it first. I will publish that list weekly, and next to each name I will put the office that has not answered. Until the pipeline leaves its current stage, I will publish its count of stalled weeks in this journal every week. I expect someone at City Hall to tell the public, plainly, what they are waiting for.",
+        "src": "output/civis-journal/civis_journal_c116.md"
+      },
+      {
+        "text": "Elias Varek, Civis Systems Journal, C117: Three districts got worse this week and nobody in this city is aimed at any of them. Mood fell in Fruitvale, Grand Lake and East Oakland. Street trade cooled in Grand Lake and East Oakland. Housing pressure climbed in Fruitvale and Grand Lake. Our instrument saw all of it, and when we looked for a city program pointed at any of those three, we found nothing. A reading with no program behind it is a smoke alarm in an empty building. I built the alarm, so I own the empty building part too. Here is what makes it worse. Downtown Economic Revitalization has sat at vote scheduled for three weeks. The Dimond Revitalization Initiative has sat at announced for four. A vote that never happens is not a plan, it's a press release with a long shelf life. I'm not guessing why. I'm telling you City Hall moves at the speed of its slowest sign-off, and people in Dimond are paying for that speed. Meanwhile Baylight District's final council vote is already in construction, so I know this city can move when it decides to. The question is why it decides so unevenly. The finding that bothers me as a builder is our own. People moved in or out of nineteen districts this week, and the instrument logged no economic activity behind any of it. Nineteen. A city doesn't reshuffle that many neighborhoods for no reason. Either money is moving in ways we can't see, or we're blind to the wiring. A blind spot in the instrument is a blind spot in Oakland, and I don't tolerate those in my own product. So here is what I'm promising, and you can hold me to it. First, before the Oaks finish this first season, Civis will publish a stall clock for every city initiative the instrument tracks. It will show how many weeks each has sat at its stage, in plain view, starting with Downtown and Dimond. If a program stops moving, the public will know the week it stops, not the quarter after. Second, within the same window, we will instrument the economic side of population movement, so the next time a district fills or empties, the instrument can say what work, rent or trade sits behind it. I'm assigning a dedicated team in West Oakland to it, and I'm hiring for it now. Third, I will ask the city, in public, to name one owner for each of the three decaying districts. I'm not asking for a new program. I'm asking who answers when Fruitvale's mood drops again. The instrument will keep measuring. The city has to act. I'd like it to start acting this week.",
+        "src": "output/civis-journal/civis_journal_c117.md"
+      },
+      {
+        "text": "Civis Systems reading: stuck-initiative (low) | Initiative \"Downtown Economic Revitalization\" in phase \"vote-scheduled\" for 3 cycles",
+        "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 8; finding C117-0; storyline INIT-008:vote-scheduled"
+      },
+      {
+        "text": "Civis Systems reading: stuck-initiative (medium) | Initiative \"Dimond Revitalization Initiative\" in phase \"announced\" for 4 cycles",
+        "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 12; finding C117-1; storyline INIT-012:announced"
+      },
+      {
+        "text": "Civis Systems reading: stuck-initiative (low) | Initiative \"Ivy Hill Community Revitalization\" in phase \"announced\" for 3 cycles",
+        "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 13; finding C117-2; storyline INIT-013:announced"
+      },
+      {
+        "text": "Civis Systems reading: repeating-event (medium) | Issue \"none\" recurred 3 cycles",
+        "src": "output/desk_signal_c117.json Riley_Digest; finding C117-3"
+      },
+      {
+        "text": "Civis Systems reading: math-imbalance (medium) | Fruitvale: decay [Sentiment -0.170, HousingPressure +0.500] — Sentiment now 0.19 (7 of 22, city median 0.09); HousingPressure now 10 (20 of 22, city median 0) — with no matching active initiative",
+        "src": "output/desk_signal_c117.json Neighborhood_Map row(s) 6; finding C117-4"
+      },
+      {
+        "text": "Civis Systems reading: math-imbalance (high) | Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+        "src": "output/desk_signal_c117.json Neighborhood_Map row(s) 10; finding C117-5"
+      },
+      {
+        "text": "Civis Systems reading: math-imbalance (medium) | East Oakland: decay [Sentiment -0.140, RetailVitality -1.15] — Sentiment now 0.07 (14 of 22, city median 0.09); RetailVitality now 8.78 (14 of 22, city median 9.93) — with no matching active initiative",
+        "src": "output/desk_signal_c117.json Neighborhood_Map row(s) 23; finding C117-6"
+      },
+      {
+        "text": "Civis Systems reading: coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "src": "output/desk_signal_c117.json WorldEvents_V3_Ledger; finding C117-7"
+      },
+      {
+        "text": "Civis Systems reading: production-imbalance (medium) | 19 neighborhoods report migration flow with zero economic events this cycle",
+        "src": "output/desk_signal_c117.json Neighborhood_Map; finding C117-8"
+      },
+      {
+        "text": "Civis Systems reading: improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: complete → design-phase",
+        "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 4; finding C117-9; storyline INIT-003:design-phase"
+      },
+      {
+        "text": "Civis Systems reading: improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: complete → construction-active",
+        "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 6; finding C117-10; storyline INIT-006:construction-active"
+      },
+      {
+        "text": "Civis Systems reading: improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → stalled",
+        "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 7; finding C117-11; storyline INIT-007:stalled"
+      },
+      {
+        "text": "Civis Systems reading: improvement (low) | Initiative \"West Oakland Tenant Defense Fund\" advanced: vote-scheduled → operational",
+        "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 10; finding C117-12; storyline INIT-010:operational"
+      },
+      {
+        "text": "Civis Systems reading: improvement (low) | Initiative \"Ivy Hill Revitalization Initiative\" advanced: announced → legislation-filed",
+        "src": "output/desk_signal_c117.json Initiative_Tracker row(s) 11; finding C117-13; storyline INIT-011:legislation-filed"
+      },
+      {
+        "text": "Civis Systems reading: improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.71 (expected 0.02) — from prior \"stuck-initiative\"",
+        "src": "output/desk_signal_c117.json Neighborhood_Map; finding C117-14; storyline INIT-007:stalled"
+      },
+      {
+        "text": "Civis Systems reading: improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.71 (expected 0.02) — from prior \"production-imbalance\"",
+        "src": "output/desk_signal_c117.json Neighborhood_Map; finding C117-15"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "factCap": 182,
+    "peopleCap": 40,
+    "roomIsYours": ""
+  },
+  "voices": 40,
+  "readings": 16,
+  "pointers": [
+    "output/desk_signal_c117.json"
+  ]
+}

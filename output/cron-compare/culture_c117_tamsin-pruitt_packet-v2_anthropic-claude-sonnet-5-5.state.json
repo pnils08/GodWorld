@@ -1,0 +1,802 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "Sarah Corliss's first time opening DigitalOcean alone, with Terrence Wussin's first place of his own as a possible companion item, both in Jack London.",
+    "approach": null,
+    "voice": null
+  },
+  "signal": {
+    "kind": "own-pick",
+    "hood": null,
+    "src": "own pick, C117",
+    "plan": {
+      "focus": "Sarah Corliss's first time opening DigitalOcean alone, with Terrence Wussin's first place of his own as a possible companion item, both in Jack London."
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Her father teaching her to keep score by hand may tie to why her first A's game story is one she keeps retelling. That is a hunch until she says so.",
+        "usable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Sarah and Terrence may know each other from the neighborhood. Nothing in the record says so.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C117",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c5606da08cb9"
+    },
+    {
+      "t": "FACT",
+      "text": "Terrence Wussin moved into a place of their own in Jack London, renting (C117)",
+      "src": "output/beats/Household_Ledger.jsonl @C117",
+      "id": "F-f47ae42f73b5"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Webb moved into a place of their own in Downtown, renting (C117)",
+      "src": "output/beats/Household_Ledger.jsonl @C117",
+      "id": "F-e9dfb9e97cb6"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Webb — in their life, C117: realized the same seven meals had rotated for a month, and shrugged",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-3b075f045729"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Webb — in their life, C117: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture near a busy plaza",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-91e4fbbf78f2"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Webb — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-9ad6d149851b"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Webb — in their life, C117: Named in a hard light — UsageCount now 2 (a Bay Tribune civic desk piece, C116)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-ad9ef0160385"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Webb — the Tribune named them in a piece headlined The Fund Says Its Closeout Is Published. The Tracker Says It Isn't Verified. (Civic Ledger, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl fc00896713ebaac2",
+      "id": "F-298b19f0f4fd"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Webb — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6aedd777086b1ceb",
+      "id": "F-ca434c8484b4"
+    },
+    {
+      "t": "FACT",
+      "text": "Marcus Webb — the Tribune named them in a piece headlined Baylight District: The Vote Is Recorded. So What Is Still Waiting? (Civic, C113)",
+      "src": "archive/ARTICLE_INDEX.jsonl 88bfdec446c313bf",
+      "id": "F-fa3b7e3d0129"
+    },
+    {
+      "t": "FACT",
+      "text": "Yvette Hwang — noticed the new streetlights went in before anyone had to ask, Uptown — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Ivy Hill, East Oakland) (C117)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+      "id": "F-66f59525d36a"
+    },
+    {
+      "t": "FACT",
+      "text": "Yvette Hwang — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-bf36ed55d650"
+    },
+    {
+      "t": "FACT",
+      "text": "Patrick Hill — recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for, Laurel — one of 4 people the Cycle's community turn reached (Edition coverage lifted the city: traffic +0.02, retail +0.032, nightlife +0.04, publicSpaces +0.056, communityEngagement +0.09,…) (C117)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+      "id": "F-93e79b3ea76d"
+    },
+    {
+      "t": "FACT",
+      "text": "Patrick Hill — in their life, C116: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-7a763cc0b5d6"
+    },
+    {
+      "t": "FACT",
+      "text": "Patrick Hill — in their life, C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-d179d84a3619"
+    },
+    {
+      "t": "FACT",
+      "text": "Patrick Hill — the Tribune named them in a piece headlined The Line Cooks Who Won’t Stop Moving: Kitchen Culture During High-Signal Cycles (Food)",
+      "src": "archive/ARTICLE_INDEX.jsonl 1825580de141a995",
+      "id": "F-975c31455f8a"
+    },
+    {
+      "t": "FACT",
+      "text": "Sidney Tumolo — felt glad when the kid across the hall got scolded on the landing, West Oakland — one of 4 people the Cycle's safety turn reached (OARI talks it down — a crisis ended without cuffs, and the data point everyone cites.) (C117)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+      "id": "F-8ada67da86f1"
+    },
+    {
+      "t": "FACT",
+      "text": "Sidney Tumolo — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-1684c3b6de74"
+    },
+    {
+      "t": "FACT",
+      "text": "Sidney Tumolo — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-d9a95431f3d1"
+    },
+    {
+      "t": "FACT",
+      "text": "Sidney Tumolo — in their life, C117: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-98b1d027fdb2"
+    },
+    {
+      "t": "FACT",
+      "text": "Sidney Tumolo — in their life, C117: put the paintbrush back in the jar without finishing the canvas",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-5d0fe05aee28"
+    },
+    {
+      "t": "FACT",
+      "text": "Sidney Tumolo — the Tribune named them in a piece headlined Taveras's 54 Home Runs Sit Outside Seven Seasons of His Own Record (Sports, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 754314993768e11d",
+      "id": "F-aad9d9ebc44f"
+    },
+    {
+      "t": "FACT",
+      "text": "Sidney Tumolo — the Tribune named them in a piece headlined What Comes Next: Seymour's A's Emerge From Spring With a Record and a Question (Sports, C86)",
+      "src": "archive/ARTICLE_INDEX.jsonl 06b741fe768ab758",
+      "id": "F-ce250e78ca75"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — Civis Systems returned $489704 to the line this week, West Oakland (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-efa570a42c1b"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C117: The A's have been told they open next season at Civis Systems Field in the Baylight District. Civis Systems bought the naming rights in C94, and locals have already dubbed the place The Town. In C97 Mike Paulson described seeing the foundation and pillars in place, with housing, retail and corporate headquarters going up around the stadium. With the off-season under way and the defending champions' Opening Day getting closer: Is Civis Systems Field on track to open on Opening Day as promised? Will the ballpark be fully finished for the first pitch, or will parts of it still be under construction? Will the housing, retail and roads around the stadium be ready for game-day crowds, or will fans be walking through a construction zone? Is there a backup plan if the schedule slips?",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-a2130ed5a308"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C117: caught the recap at the counter this morning and stayed for the second retelling",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-d49c02c5bcf1"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C117: stopped to watch the game replay on the bar tv, leaning against the counter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-c0ea5f7a2194"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — in their life, C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-e602cb0278a5"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — Lives already wrote this person: a moment the record kept (C116)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-fe9e80809ae7"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined The Ones Who Keep Showing Up (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 640a84367dd32fdd",
+      "id": "F-dd2213c6d839"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 116 (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 8d33a0ebd997a870",
+      "id": "F-310eb003a15f"
+    },
+    {
+      "t": "FACT",
+      "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4da79b355f8b8455",
+      "id": "F-ef923c4b81a5"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — Kelley Mercantile returned $2073 to the line this week, Rockridge (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-0313ed35bfe6"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-9ae7ffb60c88"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C117: got recognized by a stranger who'd read about them in the Tribune",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-8f92b2b4a316"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C117: remembered a kindness never returned and decided it was too late to matter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-5141aa6bf5aa"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — in their life, C117: took the long way around the block to miss the people on the corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-70276cda5883"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — Lives already wrote this person: a moment the record kept (C116)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-3c3fe4652d9d"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives of C116 (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3b65ffe55b35b067",
+      "id": "F-0286b3ba85b6"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+      "src": "archive/ARTICLE_INDEX.jsonl bbb67f9b172a6d89",
+      "id": "F-47ea2ea5836c"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a",
+      "id": "F-8e0b9adee5f9"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — Keane Mercantile returned $2055 to the line this week, Piedmont Ave (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-55388ba560a3"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-19a009e21989"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near a bench on the hospital grounds",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-d3d921cc4e66"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C117: put on their good suit for the Sunday service because some traditions still matter",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-7c949cffd843"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — in their life, C117: headed over to The Kelley Family Block Party in Rockridge last night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-9094d1c03616"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — Lives already wrote this person: the wager (C116)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-d9eee0a419a8"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — the Tribune named them in a piece headlined Benji Dillon Doesn't Think It's a Big Change, and That's the Story (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 8456db33639d2f5a",
+      "id": "F-983e85a76b54"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — the Tribune named them in a piece headlined The Ones Who Keep Showing Up (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 640a84367dd32fdd",
+      "id": "F-1c09d733dc74"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — the Tribune named them in a piece headlined The Hello That Outlasts the Headline (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4b64f99d2cdc97f4",
+      "id": "F-f2deb04cf1ca"
+    },
+    {
+      "t": "FACT",
+      "text": "Sarah Corliss — Was handed the keys at DigitalOcean to open on their own for the first time., Jack London (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-4dc3cb2d3193"
+    },
+    {
+      "t": "FACT",
+      "text": "Sarah Corliss — in their life, C116: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-538e81bdfbc7"
+    },
+    {
+      "t": "FACT",
+      "text": "Sarah Corliss — in their life, C117: told the story of their first A's game again, and nobody minded",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-01c80a2ee9da"
+    },
+    {
+      "t": "FACT",
+      "text": "Sarah Corliss — in their life, C117: griped about Jack London over dinner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-f401ebe91818"
+    },
+    {
+      "t": "FACT",
+      "text": "Sarah Corliss — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5",
+      "id": "F-b6a1f56ca024"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C13, Spring, holiday=none",
+      "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+      "id": "F-f7ed4e9a474c"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-b441aac5f81c",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c5606da08cb9",
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-f47ae42f73b5",
+        "t": "FACT",
+        "text": "Terrence Wussin moved into a place of their own in Jack London, renting (C117)",
+        "src": "output/beats/Household_Ledger.jsonl @C117"
+      },
+      {
+        "id": "F-e9dfb9e97cb6",
+        "t": "FACT",
+        "text": "Marcus Webb moved into a place of their own in Downtown, renting (C117)",
+        "src": "output/beats/Household_Ledger.jsonl @C117"
+      },
+      {
+        "id": "F-3b075f045729",
+        "t": "FACT",
+        "text": "Marcus Webb — in their life, C117: realized the same seven meals had rotated for a month, and shrugged",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-91e4fbbf78f2",
+        "t": "FACT",
+        "text": "Marcus Webb — in their life, C117: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture near a busy plaza",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-9ad6d149851b",
+        "t": "FACT",
+        "text": "Marcus Webb — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-ad9ef0160385",
+        "t": "FACT",
+        "text": "Marcus Webb — in their life, C117: Named in a hard light — UsageCount now 2 (a Bay Tribune civic desk piece, C116)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-298b19f0f4fd",
+        "t": "FACT",
+        "text": "Marcus Webb — the Tribune named them in a piece headlined The Fund Says Its Closeout Is Published. The Tracker Says It Isn't Verified. (Civic Ledger, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl fc00896713ebaac2"
+      },
+      {
+        "id": "F-ca434c8484b4",
+        "t": "FACT",
+        "text": "Marcus Webb — the Tribune named them in a piece headlined The Fund Has Moved $7 Million Out of $28 Million. The Record Names Two Households. (Civic, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6aedd777086b1ceb"
+      },
+      {
+        "id": "F-fa3b7e3d0129",
+        "t": "FACT",
+        "text": "Marcus Webb — the Tribune named them in a piece headlined Baylight District: The Vote Is Recorded. So What Is Still Waiting? (Civic, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 88bfdec446c313bf"
+      },
+      {
+        "id": "F-66f59525d36a",
+        "t": "FACT",
+        "text": "Yvette Hwang — noticed the new streetlights went in before anyone had to ask, Uptown — one of 4 people the Cycle's city turn reached (Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Ivy Hill, East Oakland) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117"
+      },
+      {
+        "id": "F-bf36ed55d650",
+        "t": "FACT",
+        "text": "Yvette Hwang — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-93e79b3ea76d",
+        "t": "FACT",
+        "text": "Patrick Hill — recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for, Laurel — one of 4 people the Cycle's community turn reached (Edition coverage lifted the city: traffic +0.02, retail +0.032, nightlife +0.04, publicSpaces +0.056, communityEngagement +0.09,…) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117"
+      },
+      {
+        "id": "F-7a763cc0b5d6",
+        "t": "FACT",
+        "text": "Patrick Hill — in their life, C116: counted cranes on the skyline from the bus stop and got a different number than yesterday",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-d179d84a3619",
+        "t": "FACT",
+        "text": "Patrick Hill — in their life, C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-975c31455f8a",
+        "t": "FACT",
+        "text": "Patrick Hill — the Tribune named them in a piece headlined The Line Cooks Who Won’t Stop Moving: Kitchen Culture During High-Signal Cycles (Food)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1825580de141a995"
+      },
+      {
+        "id": "F-8ada67da86f1",
+        "t": "FACT",
+        "text": "Sidney Tumolo — felt glad when the kid across the hall got scolded on the landing, West Oakland — one of 4 people the Cycle's safety turn reached (OARI talks it down — a crisis ended without cuffs, and the data point everyone cites.) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117"
+      },
+      {
+        "id": "F-1684c3b6de74",
+        "t": "FACT",
+        "text": "Sidney Tumolo — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-d9a95431f3d1",
+        "t": "FACT",
+        "text": "Sidney Tumolo — in their life, C116: stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-98b1d027fdb2",
+        "t": "FACT",
+        "text": "Sidney Tumolo — in their life, C117: showed up to set up the chairs in the fellowship hall because if they didn't do it, no one would",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-5d0fe05aee28",
+        "t": "FACT",
+        "text": "Sidney Tumolo — in their life, C117: put the paintbrush back in the jar without finishing the canvas",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-aad9d9ebc44f",
+        "t": "FACT",
+        "text": "Sidney Tumolo — the Tribune named them in a piece headlined Taveras's 54 Home Runs Sit Outside Seven Seasons of His Own Record (Sports, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 754314993768e11d"
+      },
+      {
+        "id": "F-ce250e78ca75",
+        "t": "FACT",
+        "text": "Sidney Tumolo — the Tribune named them in a piece headlined What Comes Next: Seymour's A's Emerge From Spring With a Record and a Question (Sports, C86)",
+        "src": "archive/ARTICLE_INDEX.jsonl 06b741fe768ab758"
+      },
+      {
+        "id": "F-efa570a42c1b",
+        "t": "FACT",
+        "text": "Elias Varek — Civis Systems returned $489704 to the line this week, West Oakland (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-a2130ed5a308",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C117: The A's have been told they open next season at Civis Systems Field in the Baylight District. Civis Systems bought the naming rights in C94, and locals have already dubbed the place The Town. In C97 Mike Paulson described seeing the foundation and pillars in place, with housing, retail and corporate headquarters going up around the stadium. With the off-season under way and the defending champions' Opening Day getting closer: Is Civis Systems Field on track to open on Opening Day as promised? Will the ballpark be fully finished for the first pitch, or will parts of it still be under construction? Will the housing, retail and roads around the stadium be ready for game-day crowds, or will fans be walking through a construction zone? Is there a backup plan if the schedule slips?",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-d49c02c5bcf1",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C117: caught the recap at the counter this morning and stayed for the second retelling",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-c0ea5f7a2194",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C117: stopped to watch the game replay on the bar tv, leaning against the counter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-e602cb0278a5",
+        "t": "FACT",
+        "text": "Elias Varek — in their life, C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-fe9e80809ae7",
+        "t": "FACT",
+        "text": "Elias Varek — Lives already wrote this person: a moment the record kept (C116)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-dd2213c6d839",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined The Ones Who Keep Showing Up (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 640a84367dd32fdd"
+      },
+      {
+        "id": "F-310eb003a15f",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 116 (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 8d33a0ebd997a870"
+      },
+      {
+        "id": "F-ef923c4b81a5",
+        "t": "FACT",
+        "text": "Elias Varek — the Tribune named them in a piece headlined The Lives Page, Cycle 115 (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4da79b355f8b8455"
+      },
+      {
+        "id": "F-0313ed35bfe6",
+        "t": "FACT",
+        "text": "Isley Kelley — Kelley Mercantile returned $2073 to the line this week, Rockridge (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-9ae7ffb60c88",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-8f92b2b4a316",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C117: got recognized by a stranger who'd read about them in the Tribune",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-5141aa6bf5aa",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C117: remembered a kindness never returned and decided it was too late to matter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-70276cda5883",
+        "t": "FACT",
+        "text": "Isley Kelley — in their life, C117: took the long way around the block to miss the people on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-3c3fe4652d9d",
+        "t": "FACT",
+        "text": "Isley Kelley — Lives already wrote this person: a moment the record kept (C116)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-0286b3ba85b6",
+        "t": "FACT",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives of C116 (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3b65ffe55b35b067"
+      },
+      {
+        "id": "F-47ea2ea5836c",
+        "t": "FACT",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives of C115 (Culture, C115)",
+        "src": "archive/ARTICLE_INDEX.jsonl bbb67f9b172a6d89"
+      },
+      {
+        "id": "F-8e0b9adee5f9",
+        "t": "FACT",
+        "text": "Isley Kelley — the Tribune named them in a piece headlined The Lives Page, Cycle 114 (Culture, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 9746e4e747ffdd0a"
+      },
+      {
+        "id": "F-55388ba560a3",
+        "t": "FACT",
+        "text": "Vinnie Keane — Keane Mercantile returned $2055 to the line this week, Piedmont Ave (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-19a009e21989",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-d3d921cc4e66",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near a bench on the hospital grounds",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-7c949cffd843",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C117: put on their good suit for the Sunday service because some traditions still matter",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-9094d1c03616",
+        "t": "FACT",
+        "text": "Vinnie Keane — in their life, C117: headed over to The Kelley Family Block Party in Rockridge last night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-d9eee0a419a8",
+        "t": "FACT",
+        "text": "Vinnie Keane — Lives already wrote this person: the wager (C116)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-983e85a76b54",
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined Benji Dillon Doesn't Think It's a Big Change, and That's the Story (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 8456db33639d2f5a"
+      },
+      {
+        "id": "F-1c09d733dc74",
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined The Ones Who Keep Showing Up (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 640a84367dd32fdd"
+      },
+      {
+        "id": "F-f2deb04cf1ca",
+        "t": "FACT",
+        "text": "Vinnie Keane — the Tribune named them in a piece headlined The Hello That Outlasts the Headline (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4b64f99d2cdc97f4"
+      },
+      {
+        "id": "F-4dc3cb2d3193",
+        "t": "FACT",
+        "text": "Sarah Corliss — Was handed the keys at DigitalOcean to open on their own for the first time., Jack London (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-538e81bdfbc7",
+        "t": "FACT",
+        "text": "Sarah Corliss — in their life, C116: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-01c80a2ee9da",
+        "t": "FACT",
+        "text": "Sarah Corliss — in their life, C117: told the story of their first A's game again, and nobody minded",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-f401ebe91818",
+        "t": "FACT",
+        "text": "Sarah Corliss — in their life, C117: griped about Jack London over dinner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-b6a1f56ca024",
+        "t": "FACT",
+        "text": "Sarah Corliss — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5"
+      },
+      {
+        "id": "F-f7ed4e9a474c",
+        "t": "FACT",
+        "text": "Calendar: Y3C13, Spring, holiday=none",
+        "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Her father teaching her to keep score by hand may tie to why her first A's game story is one she keeps retelling. That is a hunch until she says so.",
+        "publishable": false
+      },
+      {
+        "from": "Tamsin Pruitt",
+        "text": "Sarah and Terrence may know each other from the neighborhood. Nothing in the record says so.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [],
+    "textureConditions": [],
+    "forbiddenClaimClasses": []
+  }
+}

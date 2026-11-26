@@ -1,0 +1,41 @@
+{
+  "office": "worker_emerg_dir",
+  "agentDir": "worker-emerg-dir",
+  "holder": "Shawna Delgado",
+  "popid": "POP-00152",
+  "title": "Emergency Management Director",
+  "date": "2026-11-26",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Shawna Delgado, Emergency Management Director — Weekly Report, Cycle 117.\n\n**Weather.** Cycle 117 came in as a breeze, 59 degrees, impact 1.02, no advisories and no alerts. That makes seven consecutive clear cycles. Nothing was entered on the city's weather event ledger for the cycle, and nothing on the environment side of that ledger either. The only note worth making is the one I flagged last week: the streak is now longer than any I have reported, and I said then that a run this long tends to end with a single high-impact event rather than a gradual one. That remains a readiness note, not a warning. My office is not drifting on an empty ledger, but I will not pretend a seventh clear cycle tells me anything about the eighth.\n\n**Crisis arcs.** This is the change that matters. There are no crisis arcs open this cycle. The Downtown Transit Snarl has resolved — it eased back within city range after three cycles and closed out this cycle at effect 0.02, the resolution logged as a crisis-event on the ledger. Last week I said I would not close that arc while Downtown's housing pressure stood at 10.00 against a citywide 2.52, and I want to be plain on the record: the arc closed on transit tension easing, not because that housing ratio moved. I have no entry this cycle telling me it did. So the transit snarl is behind us as a tracked crisis; the pressure that fed it is still the thing I would keep in front of the council, and I would expect it to be what reopens the corridor if anything does.\n\n**Shock and pattern flags.** Shock flag: none. Pattern flag: none. Civic load: minor-variance. Same reading as last week — the city absorbed the cycle without displacement.\n\n**What I am watching into Cycle 118.** First, whether the transit resolution holds now that the arc is closed, or whether the corridor re-enters the ledger from the same underlying pressure. Second, the streak, for the reason above. Third, with the crisis board empty for the first time in my recent reporting, this is the cycle to check that our readiness posture and public messaging still reflect a quiet city rather than an untested one.\n\n**Bottom line for the record:** no active weather threat, no open crisis arcs, the Downtown Transit Snarl resolved this cycle, no shock or pattern flags, citywide civic load within minor variance. The caveat on the record is that Downtown housing pressure was not what closed that arc, and I have no record showing it has eased. Nothing in this cycle requires a mayoral decision or a public advisory from this office.\n\nThat is my report for Cycle 117.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-26T11:45:50.742Z",
+  "usage": {
+    "prompt_tokens": 2326,
+    "completion_tokens": 559,
+    "cost": 0.0006
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "crisis emergency weather alerts",
+    "entries": 1,
+    "fromSearch": 1,
+    "newest": 0,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00152",
+    "id": "PfE6LBkoRbGbGTfHy7ozPz",
+    "customId": "cp-POP-00152-c117-CIVIC-datawake-2026-11-26"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "117",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "angela-reyes",
+  "byline": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "beatDomain": "EDUCATION"
+  },
+  "laneEntries": 135,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "ask_worker",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 3,
+  "wordCount": 714,
+  "targetWords": null,
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 714,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "49377c5a134a9e4d52542f2af59eb967556c7e32c64b0c1ba483ad8128706156",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c117_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "press logs { quiet: true }\n{\n  \"popId\": \"POP-00156\",\n  \"name\": \"Angela Reyes\",\n  \"recorded\": true,\n  \"text\": \"Six Neighborhoods Slipped Eight to Ten Hundredths, and the Superintendent Won't Say Why\"\n}"
+  },
+  "ranAt": "2026-11-25T00:18:23.434Z"
+}

@@ -1,0 +1,543 @@
+{
+  "version": "TRENDS-SLICE-7",
+  "empty": false,
+  "cycle": 117,
+  "kind": "beat-trends",
+  "seat": {
+    "slug": "celeste-tran",
+    "name": "Celeste Tran",
+    "popid": "POP-00164",
+    "desk": "wire",
+    "domain": "trends",
+    "builder": "buildTrendsSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "generatedAt": "2026-11-26T12:15:27.527Z",
+    "docs": 1061,
+    "citizens": 330
+  },
+  "story": {
+    "kind": "beat-trends",
+    "angle": "the trends record of C117",
+    "label": "the trends record of C117",
+    "hookLine": "",
+    "hood": null,
+    "citizens": [
+      "Kevin Ham (POP-00103)",
+      "Jeff Mateo (POP-00106)",
+      "Carlo Jist (POP-00167)",
+      "Yu Zen (POP-00194)",
+      "Jemeal Brim (POP-00226)",
+      "Jori Clame (POP-00232)",
+      "Mason Walt (POP-00233)",
+      "Tevan Walker (POP-00270)",
+      "Marcus Wright (POP-00288)",
+      "Den Blue (POP-00296)",
+      "Theo Park (POP-00038)",
+      "Dalton Rushing (POP-00129)",
+      "Brianna Lee (POP-00134)",
+      "Kimberly Cho (POP-00137)",
+      "Sofia Jordan (POP-00171)",
+      "Omar Lingio (POP-00206)",
+      "Vinnie Keane (POP-00001)",
+      "Alisha Peña (POP-00029)",
+      "Ramon Vega (POP-00042)",
+      "Benji Dillon (POP-00018)",
+      "Elliott Crane (POP-00044)",
+      "Gregory Mims (POP-00023)",
+      "Delmon Regan (POP-00091)",
+      "Eric Clove (POP-00045)",
+      "Omar Amici (POP-00263)",
+      "Eleanor Rivera (POP-00617)"
+    ],
+    "popids": [
+      "POP-00103",
+      "POP-00106",
+      "POP-00167",
+      "POP-00194",
+      "POP-00226",
+      "POP-00232",
+      "POP-00233",
+      "POP-00270",
+      "POP-00288",
+      "POP-00296",
+      "POP-00038",
+      "POP-00129",
+      "POP-00134",
+      "POP-00137",
+      "POP-00171",
+      "POP-00206",
+      "POP-00001",
+      "POP-00029",
+      "POP-00042",
+      "POP-00018",
+      "POP-00044",
+      "POP-00023",
+      "POP-00091",
+      "POP-00045",
+      "POP-00263",
+      "POP-00617"
+    ],
+    "ref": "the trends record of C117",
+    "cycle": 117
+  },
+  "approach": " Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00103",
+      "name": "Kevin Ham",
+      "role": "Second Baseman, Stockton Ports (A)",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Kevin Ham — Second Baseman, Stockton Ports (A) — Uptown — UNDOCKED audience, C117: said a captain who hands fuel to a stranger out there has done more than one who sold a full hold, and the board agrees near a street mural",
+      "why": "UNDOCKED audience, C117: said a captain who hands fuel to a stranger out there has done more than one who sold a full hold, and the board agrees near a street mural"
+    },
+    {
+      "popid": "POP-00106",
+      "name": "Jeff Mateo",
+      "role": "First Baseman, Stockton Ports (A)",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Jeff Mateo — First Baseman, Stockton Ports (A) — Chinatown — UNDOCKED audience, C117: heard two strangers on the 12 arguing Soo Loo's sell like it was civic business near a herb shop",
+      "why": "UNDOCKED audience, C117: heard two strangers on the 12 arguing Soo Loo's sell like it was civic business near a herb shop"
+    },
+    {
+      "popid": "POP-00167",
+      "name": "Carlo Jist",
+      "role": "Medical Social Worker",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Carlo Jist — Medical Social Worker — Lake Merritt — UNDOCKED audience, C117: the bar went silent for UNDOCKED the way it used to for a late A's lead",
+      "why": "UNDOCKED audience, C117: the bar went silent for UNDOCKED the way it used to for a late A's lead"
+    },
+    {
+      "popid": "POP-00194",
+      "name": "Yu Zen",
+      "role": "Commercial Insurance Broker",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Yu Zen — Commercial Insurance Broker — Rockridge — UNDOCKED audience, C117: argued at the bar that Marguerite Kimball-Ostrow only leads because nobody has flown a real contract yet",
+      "why": "UNDOCKED audience, C117: argued at the bar that Marguerite Kimball-Ostrow only leads because nobody has flown a real contract yet"
+    },
+    {
+      "popid": "POP-00226",
+      "name": "Jemeal Brim",
+      "role": "Bakery worker",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Jemeal Brim — Bakery worker — Piedmont Ave — UNDOCKED audience, C117: made a night of it for UNDOCKED — chairs in the hallway, someone keeping score on a napkin",
+      "why": "UNDOCKED audience, C117: made a night of it for UNDOCKED — chairs in the hallway, someone keeping score on a napkin"
+    },
+    {
+      "popid": "POP-00232",
+      "name": "Jori Clame",
+      "role": "Server",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Jori Clame — Server — Laurel — UNDOCKED audience, C117: said the lottery is the only honest draw in the city and then refused to explain what that meant",
+      "why": "UNDOCKED audience, C117: said the lottery is the only honest draw in the city and then refused to explain what that meant"
+    },
+    {
+      "popid": "POP-00233",
+      "name": "Mason Walt",
+      "role": "Electrician",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Mason Walt — Electrician — Rockridge — UNDOCKED audience, C117: said a captain who hands fuel to a stranger out there has done more than one who sold a full hold, and the board agrees",
+      "why": "UNDOCKED audience, C117: said a captain who hands fuel to a stranger out there has done more than one who sold a full hold, and the board agrees"
+    },
+    {
+      "popid": "POP-00270",
+      "name": "Tevan Walker",
+      "role": "Bus driver",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Tevan Walker — Bus driver — Laurel — UNDOCKED audience, C117: said the lottery is the only honest draw in the city and then refused to explain what that meant",
+      "why": "UNDOCKED audience, C117: said the lottery is the only honest draw in the city and then refused to explain what that meant"
+    },
+    {
+      "popid": "POP-00288",
+      "name": "Marcus Wright",
+      "role": "Server",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Marcus Wright — Server — West Oakland — UNDOCKED audience, C117: argued that the first jump out of home space is the only mark that matters and everything after it is just distance",
+      "why": "UNDOCKED audience, C117: argued that the first jump out of home space is the only mark that matters and everything after it is just distance"
+    },
+    {
+      "popid": "POP-00296",
+      "name": "Den Blue",
+      "role": "Nurse aide",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Den Blue — Nurse aide — Piedmont Ave — UNDOCKED audience, C117: said the lottery is the only honest draw in the city and then refused to explain what that meant",
+      "why": "UNDOCKED audience, C117: said the lottery is the only honest draw in the city and then refused to explain what that meant"
+    },
+    {
+      "popid": "POP-00038",
+      "name": "Theo Park",
+      "role": "Communications Director",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Theo Park — Communications Director — Rockridge — game night shaped their day, C117: heard the block erupt through an open window when the final play landed near a coffee line",
+      "why": "game night shaped their day, C117: heard the block erupt through an open window when the final play landed near a coffee line"
+    },
+    {
+      "popid": "POP-00129",
+      "name": "Dalton Rushing",
+      "role": "Retired former As, Youth Baseball Coach",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Dalton Rushing — Retired former As, Youth Baseball Coach — Chinatown — game night shaped their day, C117: caught the recap at the counter this morning and stayed for the second retelling",
+      "why": "game night shaped their day, C117: caught the recap at the counter this morning and stayed for the second retelling"
+    },
+    {
+      "popid": "POP-00134",
+      "name": "Brianna Lee",
+      "role": "Historic Preservation Carpenter",
+      "neighborhood": "Laurel",
+      "business": null,
+      "profile": "Brianna Lee — Historic Preservation Carpenter — Laurel — game night shaped their day, C117: caught the recap at the counter this morning and stayed for the second retelling",
+      "why": "game night shaped their day, C117: caught the recap at the counter this morning and stayed for the second retelling"
+    },
+    {
+      "popid": "POP-00137",
+      "name": "Kimberly Cho",
+      "role": "DEPUTY CHIEF OF OPERATIONS",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Piedmont Ave — game night shaped their day, C117: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+      "why": "game night shaped their day, C117: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse"
+    },
+    {
+      "popid": "POP-00171",
+      "name": "Sofia Jordan",
+      "role": "Environmental Consultant",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Sofia Jordan — Environmental Consultant — Downtown — game night shaped their day, C117: heard the block erupt through an open window when the final play landed",
+      "why": "game night shaped their day, C117: heard the block erupt through an open window when the final play landed"
+    },
+    {
+      "popid": "POP-00206",
+      "name": "Omar Lingio",
+      "role": "Vintage Clothing Store Owner",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Omar Lingio — Vintage Clothing Store Owner — Temescal — game night shaped their day, C117: heard the block erupt through an open window when the final play landed",
+      "why": "game night shaped their day, C117: heard the block erupt through an open window when the final play landed"
+    },
+    {
+      "popid": "POP-00001",
+      "name": "Vinnie Keane",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave — one of 40 citizens this cycle who the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "why": "one of 40 citizens this cycle who the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever."
+    },
+    {
+      "popid": "POP-00029",
+      "name": "Alisha Peña",
+      "role": "Female Model",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Alisha Peña — Female Model — Lake Merritt — one of 40 citizens this cycle who grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "why": "one of 40 citizens this cycle who grabbed coffee from the cart outside the hospital before the morning rush hit"
+    },
+    {
+      "popid": "POP-00042",
+      "name": "Ramon Vega",
+      "role": "City Council District 4",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Ramon Vega — City Council District 4 — Lake Merritt — one of 40 citizens this cycle who read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "why": "one of 40 citizens this cycle who read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots"
+    },
+    {
+      "popid": "POP-00018",
+      "name": "Benji Dillon",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Piedmont Ave — one of 31 citizens this cycle who recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "why": "one of 31 citizens this cycle who recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for"
+    },
+    {
+      "popid": "POP-00044",
+      "name": "Elliott Crane",
+      "role": "City Council District 6",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Elliott Crane — City Council District 6 — Uptown — one of 28 citizens this cycle who painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "why": "one of 28 citizens this cycle who painted over graffiti on the recreation center wall alongside five neighbors they barely knew"
+    },
+    {
+      "popid": "POP-00023",
+      "name": "Gregory Mims",
+      "role": "Organized Crime",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Gregory Mims — Organized Crime — West Oakland — one of 27 citizens this cycle who saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "why": "one of 27 citizens this cycle who saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner"
+    },
+    {
+      "popid": "POP-00091",
+      "name": "Delmon Regan",
+      "role": "Relief Pitcher, Midland RockHounds (AA)",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Delmon Regan — Relief Pitcher, Midland RockHounds (AA) — Downtown — one of 26 citizens this cycle who watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+      "why": "one of 26 citizens this cycle who watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them"
+    },
+    {
+      "popid": "POP-00045",
+      "name": "Eric Clove",
+      "role": "Ethics Commission",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Eric Clove — Ethics Commission — Rockridge — one of 22 citizens this cycle who the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+      "why": "one of 22 citizens this cycle who the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere."
+    },
+    {
+      "popid": "POP-00263",
+      "name": "Omar Amici",
+      "role": "Construction laborer",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Omar Amici — Construction laborer — Uptown",
+      "why": "has been saying it on their own page — rent, C115: “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”"
+    },
+    {
+      "popid": "POP-00617",
+      "name": "Eleanor Rivera",
+      "role": "BART Station Manager",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Eleanor Rivera — BART Station Manager — West Oakland",
+      "why": "has been saying it on their own page — transit, C117: “Game days at 12th are a different animal — you can feel it before you even see the platform.”"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Movement vs C116: Piedmont Ave +18 people, Temescal +9 people, West Oakland +7 people, Eastlake +7 people, San Antonio +7 people",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C117"
+    },
+    {
+      "text": "Evening media TV: Bay Area Alert, Spring Lineup, Oakland Baseball Tonight, One-on-One with TyJerome (PG)",
+      "src": "output/world_summary_c117.md ## Evening Texture"
+    },
+    {
+      "text": "Evening media movies: New Bloom, Diamond City",
+      "src": "output/world_summary_c117.md ## Evening Texture"
+    },
+    {
+      "text": "Sports broadcast: Oakland Sports Tonight",
+      "src": "output/world_summary_c117.md ## Evening Texture"
+    },
+    {
+      "text": "Streaming trend: political commentary surge",
+      "src": "output/world_summary_c117.md ## Evening Texture"
+    },
+    {
+      "text": "City mood C115 0.13 → C116 0.09 → C117 0.22",
+      "src": "output/world_summary_c117.md (Riley_Digest CitySentiment)"
+    },
+    {
+      "text": "UNDOCKED audience C117: 65 citizens in 17 neighborhoods — 21 watch, 20 argue, 15 wager, 9 lottery",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 Undocked-Audience"
+    },
+    {
+      "text": "game-night-texture | The town watched — game night shaped 47 citizen day(s) (streak W1) | mag 47 | targets POP-00005|POP-00038|POP-00129|POP-00134|POP-00137|POP-00153|POP-00171|POP-00206|POP-00216|POP-00251|POP-00253|POP-00278|POP-00345|POP-00484|POP-00499|POP-00503|POP-00506|POP-00540|POP-00542|POP-00589|+27 more",
+      "src": "output/world_summary_c117.md ## What Moved › game-night-texture (Ripple_Ledger)"
+    },
+    {
+      "text": "40 citizens in 12 neighborhoods, C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "40 citizens in 13 neighborhoods, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "40 citizens in 12 neighborhoods, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "40 citizens in 11 neighborhoods, C117: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "38 citizens in 14 neighborhoods, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "33 citizens in 11 neighborhoods, C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "31 citizens in 12 neighborhoods, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "28 citizens in 10 neighborhoods, C117: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "27 citizens in 13 neighborhoods, C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "26 citizens in 12 neighborhoods, C117: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "26 citizens in 13 neighborhoods, C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    },
+    {
+      "text": "22 citizens in 14 neighborhoods, C117: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "the trends record of C117",
+    "hookLine": "",
+    "anchorFacts": [
+      "Movement vs C116: Piedmont Ave +18 people, Temescal +9 people, West Oakland +7 people, Eastlake +7 people, San Antonio +7 people",
+      "Evening media TV: Bay Area Alert, Spring Lineup, Oakland Baseball Tonight, One-on-One with TyJerome (PG)",
+      "Evening media movies: New Bloom, Diamond City",
+      "Sports broadcast: Oakland Sports Tonight",
+      "Streaming trend: political commentary surge",
+      "City mood C115 0.13 → C116 0.09 → C117 0.22",
+      "UNDOCKED audience C117: 65 citizens in 17 neighborhoods — 21 watch, 20 argue, 15 wager, 9 lottery",
+      "game-night-texture | The town watched — game night shaped 47 citizen day(s) (streak W1) | mag 47 | targets POP-00005|POP-00038|POP-00129|POP-00134|POP-00137|POP-00153|POP-00171|POP-00206|POP-00216|POP-00251|POP-00253|POP-00278|POP-00345|POP-00484|POP-00499|POP-00503|POP-00506|POP-00540|POP-00542|POP-00589|+27 more",
+      "40 citizens in 12 neighborhoods, C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+      "40 citizens in 13 neighborhoods, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+      "40 citizens in 12 neighborhoods, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "40 citizens in 11 neighborhoods, C117: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "38 citizens in 14 neighborhoods, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+      "33 citizens in 11 neighborhoods, C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+      "31 citizens in 12 neighborhoods, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+      "28 citizens in 10 neighborhoods, C117: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+      "27 citizens in 13 neighborhoods, C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+      "26 citizens in 12 neighborhoods, C117: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "26 citizens in 13 neighborhoods, C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+      "22 citizens in 14 neighborhoods, C117: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere."
+    ],
+    "evidence": [
+      {
+        "text": "Movement vs C116: Piedmont Ave +18 people, Temescal +9 people, West Oakland +7 people, Eastlake +7 people, San Antonio +7 people",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C117"
+      },
+      {
+        "text": "Evening media TV: Bay Area Alert, Spring Lineup, Oakland Baseball Tonight, One-on-One with TyJerome (PG)",
+        "src": "output/world_summary_c117.md ## Evening Texture"
+      },
+      {
+        "text": "Evening media movies: New Bloom, Diamond City",
+        "src": "output/world_summary_c117.md ## Evening Texture"
+      },
+      {
+        "text": "Sports broadcast: Oakland Sports Tonight",
+        "src": "output/world_summary_c117.md ## Evening Texture"
+      },
+      {
+        "text": "Streaming trend: political commentary surge",
+        "src": "output/world_summary_c117.md ## Evening Texture"
+      },
+      {
+        "text": "City mood C115 0.13 → C116 0.09 → C117 0.22",
+        "src": "output/world_summary_c117.md (Riley_Digest CitySentiment)"
+      },
+      {
+        "text": "UNDOCKED audience C117: 65 citizens in 17 neighborhoods — 21 watch, 20 argue, 15 wager, 9 lottery",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 Undocked-Audience"
+      },
+      {
+        "text": "game-night-texture | The town watched — game night shaped 47 citizen day(s) (streak W1) | mag 47 | targets POP-00005|POP-00038|POP-00129|POP-00134|POP-00137|POP-00153|POP-00171|POP-00206|POP-00216|POP-00251|POP-00253|POP-00278|POP-00345|POP-00484|POP-00499|POP-00503|POP-00506|POP-00540|POP-00542|POP-00589|+27 more",
+        "src": "output/world_summary_c117.md ## What Moved › game-night-texture (Ripple_Ledger)"
+      },
+      {
+        "text": "40 citizens in 12 neighborhoods, C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "40 citizens in 13 neighborhoods, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "40 citizens in 12 neighborhoods, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "40 citizens in 11 neighborhoods, C117: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "38 citizens in 14 neighborhoods, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "33 citizens in 11 neighborhoods, C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "31 citizens in 12 neighborhoods, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "28 citizens in 10 neighborhoods, C117: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "27 citizens in 13 neighborhoods, C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "26 citizens in 12 neighborhoods, C117: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "26 citizens in 13 neighborhoods, C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      },
+      {
+        "text": "22 citizens in 14 neighborhoods, C117: the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117 (shared line, counted)"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_ON_DISK",
+      "vs": 116
+    },
+    "hooks": [],
+    "note": null,
+    "pageVoices": [
+      "the A's — fading; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Piedmont Ave), on their own page at C116 (not an interview — colour only, never a quote): “Mark Aitken leaving the A's was a tough pill to swallow, but I'm proud of what he's done for the city, and I know he'll keep making a difference wherever he goes.”",
+      "rent — fading; dozens of citizens over the last two months, still talking this week. Loudest: Omar Amici (Uptown), on their own page at C115 (not an interview — colour only, never a quote): “The streets are busier than ever, and it seems like every other place is a for-rent sign these days.”",
+      "transit — fading; dozens of citizens over the last two months, still talking this week. Loudest: Eleanor Rivera (West Oakland), on their own page at C117 (not an interview — colour only, never a quote): “Game days at 12th are a different animal — you can feel it before you even see the platform.”",
+      "the clinic — fading; dozens of citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C116 (not an interview — colour only, never a quote): “The walk from Rockridge to the hospital is a straight shot down College Avenue, past the shops and the families out on the sidewalks, then over toward Broadway.”",
+      "the Oaks — fading; a dozen or so citizens over the last two months, still talking this week. Loudest: Elias Varek (West Oakland), on their own page at C117 (not an interview — colour only, never a quote): “The Oaks at 11.6% on $62.8M?”"
+    ],
+    "factCap": 20,
+    "peopleCap": 40,
+    "roomIsYours": ""
+  },
+  "talkedAbout": 0,
+  "appeared": 0,
+  "moves": 22,
+  "undocked": 65,
+  "pointers": [
+    "the trends record of C117"
+  ]
+}

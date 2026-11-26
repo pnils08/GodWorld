@@ -1,0 +1,43 @@
+# TrueSource Card Tracker (Oakland A's)
+
+Cards rebuilt or built from in-game screens. Updated after each card.
+Saved in Drive: TrueSource_Cards > As.
+
+## Players (28)
+
+| Player | Pos | Level | Card | Drive folder |
+|---|---|---|---|---|
+| Vinnie Keane | DH/3B/2B | MLB | rebuilt | Players-inactive |
+| Danny Horn | CF | MLB | rebuilt | Players-active |
+| Ernesto Quintero | 1B/3B/DH | MLB | rebuilt | Players-active |
+| Jose Colon | C | MLB | rebuilt | Players-active |
+| Travis Coles | SP | MLB | rebuilt | Players-active |
+| Sidney Tumolo | 2B | MLB | rebuilt | Players-active |
+| Pablo Almanzar | SP | MLB | rebuilt | Players-active |
+| Hitoki Ka | RP | MLB | rebuilt | Players-active |
+| Kevin Clark | 3B | MLB | rebuilt | Players-active |
+| Vladimir Gonzalez | RF | MLB | rebuilt | Players-active |
+| Mariano Rosales | CP | MLB | rebuilt | Players-active |
+| Arturo Ramos | SP | MLB | rebuilt | Players-active |
+| John Ellis | SP | MLB | rebuilt | Players-active |
+| Henry Rivas | SP | MLB | rebuilt | Players-active |
+| Eric Taveras | 2B | MLB | rebuilt | Players-active |
+| Isley Kelley | SS | MLB | rebuilt | Players-active |
+| Darrin Davis | LF | MLB | rebuilt | Players-active |
+| Desmond Morton | LF | MLB | rebuilt | Players-active |
+| Frank Reyna | RF | MLB | rebuilt | Players-active |
+| Henry Calzado | C | MLB | new | Players-active |
+| Mark Aitken | 1B | signed with Colorado for 2042 | rebuilt | Players-inactive |
+| Giancarlo Hernandez | 3B | AAA | new | Players-active |
+| Sergio Aybar | C | AAA | new | Players-active |
+| Marco Fabregas | C | AAA | new | Players-active |
+| Tommy Fry | SS | AAA | new | Players-active |
+| Bobby Hendricks | RF | AAA | new | Players-active |
+| Norman Kirkland | 2B | AAA | new | Players-active |
+| Benji Dillon | SP | Free Agent | rebuilt | Players-inactive |
+
+## Staff (1)
+
+| Record | Drive folder |
+|---|---|
+| A's coaching staff 2042 (COACHING_STAFF_2042.txt) | Coaches-Active |

@@ -1,0 +1,2213 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "angela-reyes",
+  "freeAngle": "free-rows",
+  "pass": false,
+  "morningTools": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Demographics",
+        "match": "Fruitvale"
+      },
+      "resultChars": 244
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "school quality index Fruitvale Jack London Downtown"
+      },
+      "resultChars": 227
+    }
+  ],
+  "workerAnswers": [],
+  "workerAsksUsed": 0,
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00156",
+      "name": "Angela Reyes",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Decide what, if anything, you want to write this cycle"
+    },
+    "signal": {
+      "kind": "own-pick",
+      "hood": null,
+      "score": null,
+      "src": "the record of C117"
+    },
+    "exposure": {
+      "basis": [
+        "own-pick"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale — age 59 — K-8 Teacher,Former Line cook at Oakland City Schools; C117: argued the team's case at work and won",
+          "role": "K-8 Teacher,Former Line cook",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00198",
+            "rowName": "Rick Walker",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00287",
+          "name": "Simone Adesanya",
+          "profile": "Simone Adesanya — School Principal — Rockridge — age 56 — School Principal at Oakland City Schools; C117: started the application and closed the tab after the first page",
+          "role": "School Principal",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00287",
+            "rowName": "Simone Adesanya",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00303",
+          "name": "Lee Coo",
+          "profile": "Lee Coo — School Psychologist — Piedmont Ave — age 45 — School Psychologist at Oakland City Schools; C117: spent the evening sorting a box of things that used to be someone's near a bench on the hospital grounds",
+          "role": "School Psychologist",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00303",
+            "rowName": "Lee Coo",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00305",
+          "name": "Rico Fister",
+          "profile": "Rico Fister — High School Science Teacher — Rockridge — age 69 — High School Science Teacher at Oakland City Schools; C117: attended a professional development session nearby",
+          "role": "High School Science Teacher",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00305",
+            "rowName": "Rico Fister",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00312",
+          "name": "Wiu Wiu",
+          "profile": "Wiu Wiu — High School Science Teacher — Rockridge — age 70 — High School Science Teacher at Oakland City Schools; C117: felt quietly proud of how they handled something small",
+          "role": "High School Science Teacher",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00312",
+            "rowName": "Wiu Wiu",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00317",
+          "name": "Lila Bennington",
+          "profile": "Lila Bennington — Oakland City Schools Elementary Teacher — Fruitvale — age 53 — Oakland City Schools Elementary Teacher at Oakland City Schools; C117: re-read an old journal page and didn't recognize the handwriting mood",
+          "role": "Oakland City Schools Elementary Teacher",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00317",
+            "rowName": "Lila Bennington",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00325",
+          "name": "Isabel Lopes",
+          "profile": "Isabel Lopes — ESL Teacher — Fruitvale — age 42 — ESL Teacher at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+          "role": "ESL Teacher",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00325",
+            "rowName": "Isabel Lopes",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00352",
+          "name": "Kaila Jordache",
+          "profile": "Kaila Jordache — GED Program Instructor — Piedmont Ave — age 42 — GED Program Instructor at Oakland City Schools; C117: bought a new A's jersey and a sense of anticipation hangs in the air",
+          "role": "GED Program Instructor",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00352",
+            "rowName": "Kaila Jordache",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00499",
+          "name": "Jalen Serf",
+          "profile": "Jalen Serf — School Psychologist — Piedmont Ave — age 63 — School Psychologist at Oakland City Schools; C117: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+          "role": "School Psychologist",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00499",
+            "rowName": "Jalen Serf",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00532",
+          "name": "Marcus Whitfield",
+          "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale — age 34 — Youth Basketball Coach at Oakland City Schools; C117: noticed the new streetlights went in before anyone had to ask near a taqueria patio",
+          "role": "Youth Basketball Coach",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00532",
+            "rowName": "Marcus Whitfield",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00623",
+          "name": "Winston Clarke",
+          "profile": "Winston Clarke — Retired Teacher — Laurel — age 65 — Retired Teacher at Oakland City Schools; C117: recognized a face from years ago across the street",
+          "role": "Retired Teacher",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00623",
+            "rowName": "Winston Clarke",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00631",
+          "name": "Derry Webb",
+          "profile": "Derry Webb — Youth Basketball Coach — Uptown — age 43 — Youth Basketball Coach at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+          "role": "Youth Basketball Coach",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00631",
+            "rowName": "Derry Webb",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00659",
+          "name": "Ripley Court",
+          "profile": "Ripley Court — STEM Program Coordinator — Rockridge — age 46 — STEM Program Coordinator at Oakland City Schools; C117: weighed a weekend trip against the water heater and picked the water heater",
+          "role": "STEM Program Coordinator",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00659",
+            "rowName": "Ripley Court",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00667",
+          "name": "Lo Thoop",
+          "profile": "Lo Thoop — Creative Writing Teacher — Jack London — age 68 — Creative Writing Teacher at Oakland City Schools; C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+          "role": "Creative Writing Teacher",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00667",
+            "rowName": "Lo Thoop",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00739",
+          "name": "Karem Asante",
+          "profile": "Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+          "role": "Youth Counselor",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00739",
+            "rowName": "Karem Asante",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00728",
+          "name": "DeShawn Avery",
+          "profile": "DeShawn Avery — Community College Student — Fruitvale — age 35 — student, C117 in Fruitvale: found a quiet minute at a vendor by the transit stop and let the week's noise settle",
+          "role": "Community College Student",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00728",
+            "rowName": "DeShawn Avery",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00743",
+          "name": "Rick Dillon",
+          "profile": "Rick Dillon — Grade Schooler — Piedmont Ave — age 12 — student, C117: moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+          "role": "Grade Schooler",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00743",
+            "rowName": "Rick Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00989",
+          "name": "Nour Santos",
+          "profile": "Nour Santos — student — West Oakland — age 5 — student, C117 in West Oakland: picked things back up with Simone Limone",
+          "role": "student",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00989",
+            "rowName": "Nour Santos",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01014",
+          "name": "Sadie Williams",
+          "profile": "Sadie Williams — student — Chinatown — age 8 — student, C117 in Chinatown: had not really talked to Abraham Wright in a while",
+          "role": "student",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-01014",
+            "rowName": "Sadie Williams",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00983",
+          "name": "Riya Wough",
+          "profile": "Riya Wough — student — Downtown — age 10 — student, C117 in Downtown: picked things back up with Ally Scott",
+          "role": "student",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00983",
+            "rowName": "Riya Wough",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01002",
+          "name": "Kwame Jumper",
+          "profile": "Kwame Jumper — student — Downtown — age 17 — student, C117 in Downtown: had not really talked to Arman Gutierrez in a while",
+          "role": "student",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-01002",
+            "rowName": "Kwame Jumper",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00975",
+          "name": "Salma Navarro",
+          "profile": "Salma Navarro — student — Temescal — age 13 — student, C117 in Temescal: had not really talked to Lo Thoop in a while",
+          "role": "student",
+          "hood": "Temescal",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00975",
+            "rowName": "Salma Navarro",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01011",
+          "name": "Layla Scott",
+          "profile": "Layla Scott — student — Lake Merritt — age 3 — student, C117 in Lake Merritt: picked things back up with Brenda Okoro",
+          "role": "student",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-01011",
+            "rowName": "Layla Scott",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00237",
+          "name": "Jerry Nelson",
+          "profile": "Jerry Nelson — Janitor — Uptown — age 55 — C117 in Uptown: reflected on personal growth and understanding",
+          "role": "Janitor",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00237",
+            "rowName": "Jerry Nelson",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00242",
+          "name": "Jaden Phillips",
+          "profile": "Jaden Phillips — Barista — Uptown — age 62 — C117 in Uptown: sought more information due to recent city events",
+          "role": "Barista",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00242",
+            "rowName": "Jaden Phillips",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00244",
+          "name": "Derlik Green",
+          "profile": "Derlik Green — Delivery Driver — Downtown — age 42 — C117 in Downtown: felt renewed motivation to learn as the season shifted",
+          "role": "Delivery Driver",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00244",
+            "rowName": "Derlik Green",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00256",
+          "name": "Brady Lopez",
+          "profile": "Brady Lopez — Dishwasher — Piedmont Ave — age 59 — C117 in Piedmont Ave: reflected on personal growth and understanding",
+          "role": "Dishwasher",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00256",
+            "rowName": "Brady Lopez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00297",
+          "name": "Jorge Wusther",
+          "profile": "Jorge Wusther — Nurse aide — Uptown — age 65 — C117 in Uptown: spent time learning new skills informally",
+          "role": "Nurse aide",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00297",
+            "rowName": "Jorge Wusther",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00320",
+          "name": "Cee Lee",
+          "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt — age 62 — C117 in Lake Merritt: spent time learning new skills informally",
+          "role": "Autonomous Systems Engineer",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00320",
+            "rowName": "Cee Lee",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00027",
+          "name": "Philly Rodriguez",
+          "profile": "Philly Rodriguez — Casino Manager — West Oakland — age 30 — C117 in West Oakland: felt energy from seasonal change near a campus quad",
+          "role": "Casino Manager",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+            "pop": "POP-00027",
+            "rowName": "Philly Rodriguez",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "Enrollment moved: Piedmont Ave +3 students, East Oakland +2 students, Temescal +2 students, West Oakland +1 students, Laurel +1 students, Adams Point +1 students, Jack London +1 students, Fruitvale +1 students, Downtown +1 students, Grand Lake +1 students, Eastlake +1 students, Dimond +1 students, Glenview +1 students, Chinatown +1 students, Ivy Hill +1 students, San Antonio +1 students vs C116",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C117",
+        "id": "F-8f298785e744"
+      },
+      {
+        "t": "FACT",
+        "text": "Adams Point: school quality index 7.91 (was 7.92 at C116), graduation 89.48%, college-ready 62.53%, teacher quality 7.9, funding 13,000, 278 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-3d99edee8e88"
+      },
+      {
+        "t": "FACT",
+        "text": "Baylight District: school quality index 8.33 (was 8.3 at C116), graduation 91.06%, college-ready 66.38%, teacher quality 8.2, funding 14,500, 65 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-74e32f746215"
+      },
+      {
+        "t": "FACT",
+        "text": "Brooklyn: school quality index 8.22 (was 8.2 at C116), graduation 90.82%, college-ready 65.84%, teacher quality 8.2, funding 14,500, 351 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-08f1741f46ad"
+      },
+      {
+        "t": "FACT",
+        "text": "Chinatown: school quality index 6.81 (was 6.82 at C116), graduation 85.32%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 315 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-1a3923635bc2"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond: school quality index 6.83 (was 6.84 at C116), graduation 85.32%, college-ready 52.49%, teacher quality 6.9, funding 12,000, 355 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-38ee2cc149ff"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: school quality index 7.2 (was 7.28 at C116), graduation 88.77%, college-ready 61.65%, teacher quality 8.2, funding 14,500, 245 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-ee109c07faa7"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland: school quality index 6.57 (was 6.61 at C116), graduation 84.09%, college-ready 49.79%, teacher quality 6.68, funding 11,000, 486 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-6275c5cbd66d"
+      },
+      {
+        "t": "FACT",
+        "text": "Eastlake: school quality index 6.9 (was 6.91 at C116), graduation 85.48%, college-ready 52.87%, teacher quality 6.9, funding 12,000, 315 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-693ce4ae7dd4"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale: school quality index 7.2 (was 7.3 at C116), graduation 88.2%, college-ready 59.5%, teacher quality 7.9, funding 13,000, 427 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-6d63697f3443"
+      },
+      {
+        "t": "FACT",
+        "text": "Glenview: school quality index 6.81 (was 6.83 at C116), graduation 85.31%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 388 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-a713cdf7107a"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake: school quality index 7.09 (was 7.18 at C116), graduation 87.84%, college-ready 58.8%, teacher quality 7.9, funding 13,000, 319 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-5150e1cb6c7e"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Hill: school quality index 6.66 (was 6.69 at C116), graduation 84.26%, college-ready 50.21%, teacher quality 6.68, funding 11,000, 329 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-e1c98943c04d"
+      },
+      {
+        "t": "FACT",
+        "text": "Jack London: school quality index 7.3 (was 7.39 at C116), graduation 89.09%, college-ready 62.1%, teacher quality 8.2, funding 14,500, 203 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-b95726fa93bc"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO: school quality index 6.85 (was 6.89 at C116), graduation 85.44%, college-ready 52.77%, teacher quality 6.9, funding 12,000, 60 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-998aff65bcd0"
+      },
+      {
+        "t": "FACT",
+        "text": "Lake Merritt: school quality index 8.04 (was 8 at C116), graduation 90.2%, college-ready 64.32%, teacher quality 8.2, funding 14,500, 59 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-1b269834dbce"
+      },
+      {
+        "t": "FACT",
+        "text": "Laurel: school quality index 7.91 (was 7.92 at C116), graduation 89.46%, college-ready 62.51%, teacher quality 7.9, funding 13,000, 339 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-82c308264f76"
+      },
+      {
+        "t": "FACT",
+        "text": "Piedmont Ave: school quality index 8.3 (was 8.28 at C116), graduation 91.69%, college-ready 68.53%, teacher quality 8.2, funding 14,500, 256 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-b3e4889f8764"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: school quality index 8.36 (was 8.4 at C116), graduation 93.61%, college-ready 73.53%, teacher quality 9.13, funding 15,000, 250 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-d244ff2117b3"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio: school quality index 6.6 (was 6.64 at C116), graduation 84.18%, college-ready 50.02%, teacher quality 6.68, funding 11,000, 392 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-b6ceb918f6fa"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal: school quality index 6.21 (was 6.25 at C116), graduation 83.53%, college-ready 53%, teacher quality 6.8, funding 11,500, 316 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-29ec39dc691f"
+      },
+      {
+        "t": "FACT",
+        "text": "Uptown: school quality index 7.03 (was 7.12 at C116), graduation 87.63%, college-ready 58.39%, teacher quality 7.9, funding 13,000, 63 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-b4dfe152b4cd"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland: school quality index 7.92 (was 8 at C116), graduation 90.5%, college-ready 65.07%, teacher quality 8.2, funding 14,500, 327 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+        "id": "F-3180bed6e475"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland City Schools (Education), City-wide — 5,201 employees, growing 7.2% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C117",
+        "id": "F-cbba9716c14d"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Community College District (Education), City-wide — 1,800 employees, growing 7.0% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00035 @C117",
+        "id": "F-6777b5db3b99"
+      },
+      {
+        "t": "FACT",
+        "text": "Firehouse 29 West Oakland Baseball Academy (Sports), West Oakland — 20 employees, growing 5.0% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00103 @C117",
+        "id": "F-e0d51554dfb5"
+      },
+      {
+        "t": "FACT",
+        "text": "Harrison Street Chinese School (Education), Chinatown — 15 employees, growing 2.0% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00207 @C117",
+        "id": "F-822a124a026c"
+      },
+      {
+        "t": "FACT",
+        "text": "Hillside Preparatory (Private School), Rockridge — 15 employees, growing 3.3% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00226 @C117",
+        "id": "F-ad25f201cf64"
+      },
+      {
+        "t": "FACT",
+        "text": "Early Shift Childcare (Preschool & Early Education), San Antonio — 15 employees, growing 0.6% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00261 @C117",
+        "id": "F-c9b54a4ef520"
+      },
+      {
+        "t": "FACT",
+        "text": "MacArthur Tutoring Center (Tutoring), Laurel — 15 employees, growing 1.1% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00279 @C117",
+        "id": "F-202a6f6063e9"
+      },
+      {
+        "t": "FACT",
+        "text": "Laurel Music School (Music School), Laurel — 9 employees, growing 2.4% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00281 @C117",
+        "id": "F-b252526e93bf"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland City College — Laurel Campus (Education), Laurel — 15 employees, growing 0.9% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00284 @C117",
+        "id": "F-8523cce1a779"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-002 @C117",
+        "id": "F-d8386c125a83"
+      },
+      {
+        "t": "FACT",
+        "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-003 @C117",
+        "id": "F-5b7c0e4b71d6"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-004 @C117",
+        "id": "F-ab145363d7b4"
+      },
+      {
+        "t": "FACT",
+        "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-005 @C117",
+        "id": "F-15dd3d475266"
+      },
+      {
+        "t": "FACT",
+        "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-006 @C117",
+        "id": "F-73dfa42c0293"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-007 @C117",
+        "id": "F-5ca0e8720ccc"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Youth Apprenticeship Pipeline (economic), Baylight District, since C86",
+        "src": "output/beats/Community_Programs.jsonl PRG-008 @C117",
+        "id": "F-09d9ee8e7bdf"
+      },
+      {
+        "t": "FACT",
+        "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-017 @C117",
+        "id": "F-4aff83ff48b4"
+      },
+      {
+        "t": "FACT",
+        "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+        "src": "output/beats/Community_Programs.jsonl PRG-019 @C117",
+        "id": "F-ff9b22910a2c"
+      },
+      {
+        "t": "FACT",
+        "text": "Foothill Baptist Tabernacle Academy (tech-education), East Oakland, since C88",
+        "src": "output/beats/Community_Programs.jsonl PRG-030 @C117",
+        "id": "F-4d4aa3997e40"
+      },
+      {
+        "t": "FACT",
+        "text": "Darrin Davis Youth Community Events (), City-wide — founded by Darrin Davis",
+        "src": "output/beats/Community_Programs.jsonl PRG-033 @C117",
+        "id": "F-7658af683162"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "pass": "true when nothing here is a piece you want to write this cycle; then give only why",
+        "chase": "string — what you want to write this cycle and how you will go after it, in your own voice. Not JSON.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "A target is someone you want to hear from; each must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "workplace",
+    "candidates": [
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "hood": "Fruitvale",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale — age 59 — K-8 Teacher,Former Line cook at Oakland City Schools; C117: argued the team's case at work and won",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00198",
+          "rowName": "Rick Walker",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00287",
+        "name": "Simone Adesanya",
+        "role": "School Principal",
+        "hood": "Rockridge",
+        "profile": "Simone Adesanya — School Principal — Rockridge — age 56 — School Principal at Oakland City Schools; C117: started the application and closed the tab after the first page",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00287",
+          "rowName": "Simone Adesanya",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00303",
+        "name": "Lee Coo",
+        "role": "School Psychologist",
+        "hood": "Piedmont Ave",
+        "profile": "Lee Coo — School Psychologist — Piedmont Ave — age 45 — School Psychologist at Oakland City Schools; C117: spent the evening sorting a box of things that used to be someone's near a bench on the hospital grounds",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00303",
+          "rowName": "Lee Coo",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00305",
+        "name": "Rico Fister",
+        "role": "High School Science Teacher",
+        "hood": "Rockridge",
+        "profile": "Rico Fister — High School Science Teacher — Rockridge — age 69 — High School Science Teacher at Oakland City Schools; C117: attended a professional development session nearby",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00305",
+          "rowName": "Rico Fister",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00312",
+        "name": "Wiu Wiu",
+        "role": "High School Science Teacher",
+        "hood": "Rockridge",
+        "profile": "Wiu Wiu — High School Science Teacher — Rockridge — age 70 — High School Science Teacher at Oakland City Schools; C117: felt quietly proud of how they handled something small",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00312",
+          "rowName": "Wiu Wiu",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00317",
+        "name": "Lila Bennington",
+        "role": "Oakland City Schools Elementary Teacher",
+        "hood": "Fruitvale",
+        "profile": "Lila Bennington — Oakland City Schools Elementary Teacher — Fruitvale — age 53 — Oakland City Schools Elementary Teacher at Oakland City Schools; C117: re-read an old journal page and didn't recognize the handwriting mood",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00317",
+          "rowName": "Lila Bennington",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00325",
+        "name": "Isabel Lopes",
+        "role": "ESL Teacher",
+        "hood": "Fruitvale",
+        "profile": "Isabel Lopes — ESL Teacher — Fruitvale — age 42 — ESL Teacher at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00325",
+          "rowName": "Isabel Lopes",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00352",
+        "name": "Kaila Jordache",
+        "role": "GED Program Instructor",
+        "hood": "Piedmont Ave",
+        "profile": "Kaila Jordache — GED Program Instructor — Piedmont Ave — age 42 — GED Program Instructor at Oakland City Schools; C117: bought a new A's jersey and a sense of anticipation hangs in the air",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00352",
+          "rowName": "Kaila Jordache",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00499",
+        "name": "Jalen Serf",
+        "role": "School Psychologist",
+        "hood": "Piedmont Ave",
+        "profile": "Jalen Serf — School Psychologist — Piedmont Ave — age 63 — School Psychologist at Oakland City Schools; C117: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00499",
+          "rowName": "Jalen Serf",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00532",
+        "name": "Marcus Whitfield",
+        "role": "Youth Basketball Coach",
+        "hood": "Fruitvale",
+        "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale — age 34 — Youth Basketball Coach at Oakland City Schools; C117: noticed the new streetlights went in before anyone had to ask near a taqueria patio",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00532",
+          "rowName": "Marcus Whitfield",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00623",
+        "name": "Winston Clarke",
+        "role": "Retired Teacher",
+        "hood": "Laurel",
+        "profile": "Winston Clarke — Retired Teacher — Laurel — age 65 — Retired Teacher at Oakland City Schools; C117: recognized a face from years ago across the street",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00623",
+          "rowName": "Winston Clarke",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00631",
+        "name": "Derry Webb",
+        "role": "Youth Basketball Coach",
+        "hood": "Uptown",
+        "profile": "Derry Webb — Youth Basketball Coach — Uptown — age 43 — Youth Basketball Coach at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00631",
+          "rowName": "Derry Webb",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00659",
+        "name": "Ripley Court",
+        "role": "STEM Program Coordinator",
+        "hood": "Rockridge",
+        "profile": "Ripley Court — STEM Program Coordinator — Rockridge — age 46 — STEM Program Coordinator at Oakland City Schools; C117: weighed a weekend trip against the water heater and picked the water heater",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00659",
+          "rowName": "Ripley Court",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00667",
+        "name": "Lo Thoop",
+        "role": "Creative Writing Teacher",
+        "hood": "Jack London",
+        "profile": "Lo Thoop — Creative Writing Teacher — Jack London — age 68 — Creative Writing Teacher at Oakland City Schools; C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00667",
+          "rowName": "Lo Thoop",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00739",
+        "name": "Karem Asante",
+        "role": "Youth Counselor",
+        "hood": "West Oakland",
+        "profile": "Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00739",
+          "rowName": "Karem Asante",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00728",
+        "name": "DeShawn Avery",
+        "role": "Community College Student",
+        "hood": "Fruitvale",
+        "profile": "DeShawn Avery — Community College Student — Fruitvale — age 35 — student, C117 in Fruitvale: found a quiet minute at a vendor by the transit stop and let the week's noise settle",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00728",
+          "rowName": "DeShawn Avery",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00743",
+        "name": "Rick Dillon",
+        "role": "Grade Schooler",
+        "hood": "Piedmont Ave",
+        "profile": "Rick Dillon — Grade Schooler — Piedmont Ave — age 12 — student, C117: moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00743",
+          "rowName": "Rick Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00989",
+        "name": "Nour Santos",
+        "role": "student",
+        "hood": "West Oakland",
+        "profile": "Nour Santos — student — West Oakland — age 5 — student, C117 in West Oakland: picked things back up with Simone Limone",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00989",
+          "rowName": "Nour Santos",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01014",
+        "name": "Sadie Williams",
+        "role": "student",
+        "hood": "Chinatown",
+        "profile": "Sadie Williams — student — Chinatown — age 8 — student, C117 in Chinatown: had not really talked to Abraham Wright in a while",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-01014",
+          "rowName": "Sadie Williams",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00983",
+        "name": "Riya Wough",
+        "role": "student",
+        "hood": "Downtown",
+        "profile": "Riya Wough — student — Downtown — age 10 — student, C117 in Downtown: picked things back up with Ally Scott",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00983",
+          "rowName": "Riya Wough",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01002",
+        "name": "Kwame Jumper",
+        "role": "student",
+        "hood": "Downtown",
+        "profile": "Kwame Jumper — student — Downtown — age 17 — student, C117 in Downtown: had not really talked to Arman Gutierrez in a while",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-01002",
+          "rowName": "Kwame Jumper",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00975",
+        "name": "Salma Navarro",
+        "role": "student",
+        "hood": "Temescal",
+        "profile": "Salma Navarro — student — Temescal — age 13 — student, C117 in Temescal: had not really talked to Lo Thoop in a while",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00975",
+          "rowName": "Salma Navarro",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01011",
+        "name": "Layla Scott",
+        "role": "student",
+        "hood": "Lake Merritt",
+        "profile": "Layla Scott — student — Lake Merritt — age 3 — student, C117 in Lake Merritt: picked things back up with Brenda Okoro",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-01011",
+          "rowName": "Layla Scott",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00237",
+        "name": "Jerry Nelson",
+        "role": "Janitor",
+        "hood": "Uptown",
+        "profile": "Jerry Nelson — Janitor — Uptown — age 55 — C117 in Uptown: reflected on personal growth and understanding",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00237",
+          "rowName": "Jerry Nelson",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00242",
+        "name": "Jaden Phillips",
+        "role": "Barista",
+        "hood": "Uptown",
+        "profile": "Jaden Phillips — Barista — Uptown — age 62 — C117 in Uptown: sought more information due to recent city events",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00242",
+          "rowName": "Jaden Phillips",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00244",
+        "name": "Derlik Green",
+        "role": "Delivery Driver",
+        "hood": "Downtown",
+        "profile": "Derlik Green — Delivery Driver — Downtown — age 42 — C117 in Downtown: felt renewed motivation to learn as the season shifted",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00244",
+          "rowName": "Derlik Green",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00256",
+        "name": "Brady Lopez",
+        "role": "Dishwasher",
+        "hood": "Piedmont Ave",
+        "profile": "Brady Lopez — Dishwasher — Piedmont Ave — age 59 — C117 in Piedmont Ave: reflected on personal growth and understanding",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00256",
+          "rowName": "Brady Lopez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00297",
+        "name": "Jorge Wusther",
+        "role": "Nurse aide",
+        "hood": "Uptown",
+        "profile": "Jorge Wusther — Nurse aide — Uptown — age 65 — C117 in Uptown: spent time learning new skills informally",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00297",
+          "rowName": "Jorge Wusther",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00320",
+        "name": "Cee Lee",
+        "role": "Autonomous Systems Engineer",
+        "hood": "Lake Merritt",
+        "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt — age 62 — C117 in Lake Merritt: spent time learning new skills informally",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00320",
+          "rowName": "Cee Lee",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00027",
+        "name": "Philly Rodriguez",
+        "role": "Casino Manager",
+        "hood": "West Oakland",
+        "profile": "Philly Rodriguez — Casino Manager — West Oakland — age 30 — C117 in West Oakland: felt energy from seasonal change near a campus quad",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Neighborhood_Demographics.jsonl @C117",
+          "pop": "POP-00027",
+          "rowName": "Philly Rodriguez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00742",
+        "name": "Maya Torres-Dillon",
+        "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+        "hood": null,
+        "profile": "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00742",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00825",
+        "name": "Imogen Soto",
+        "role": "After-School Program Director",
+        "hood": null,
+        "profile": "Imogen Soto — After-School Program Director",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00825",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-00847",
+        "name": "Caroline Cabrera",
+        "role": "After-School Program Director",
+        "hood": null,
+        "profile": "Caroline Cabrera — After-School Program Director",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-00847",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01036",
+        "name": "Mei Wong",
+        "role": "After-school program aide",
+        "hood": null,
+        "profile": "Mei Wong — After-school program aide",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01036",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01047",
+        "name": "Maria Conteras",
+        "role": "High School Teacher",
+        "hood": null,
+        "profile": "Maria Conteras — High School Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01047",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01183",
+        "name": "Rosalind Achterberg",
+        "role": "Superintendent of Schools",
+        "hood": null,
+        "profile": "Rosalind Achterberg — Superintendent of Schools",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01183",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01184",
+        "name": "Dominic Okeke-Brandt",
+        "role": "Deputy Superintendent",
+        "hood": null,
+        "profile": "Dominic Okeke-Brandt — Deputy Superintendent",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01184",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01185",
+        "name": "Lourdes Quiroga",
+        "role": "School Principal",
+        "hood": null,
+        "profile": "Lourdes Quiroga — School Principal",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01185",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01186",
+        "name": "Everett Maddox",
+        "role": "School Principal",
+        "hood": null,
+        "profile": "Everett Maddox — School Principal",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01186",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01187",
+        "name": "Thuy Pham-Larsen",
+        "role": "Special Education Director",
+        "hood": null,
+        "profile": "Thuy Pham-Larsen — Special Education Director",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01187",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01188",
+        "name": "Marguerite Kimball-Ostrow",
+        "role": "Elementary Teacher",
+        "hood": null,
+        "profile": "Marguerite Kimball-Ostrow — Elementary Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01188",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01189",
+        "name": "Tobiah Nakagawa",
+        "role": "Middle School Math Teacher",
+        "hood": null,
+        "profile": "Tobiah Nakagawa — Middle School Math Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01189",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01190",
+        "name": "Adaeze Onwuka",
+        "role": "High School English Teacher",
+        "hood": null,
+        "profile": "Adaeze Onwuka — High School English Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01190",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01191",
+        "name": "Rafael Santillan",
+        "role": "Kindergarten Teacher",
+        "hood": null,
+        "profile": "Rafael Santillan — Kindergarten Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01191",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01192",
+        "name": "Bernadette Whitaker-Lund",
+        "role": "School Counselor",
+        "hood": null,
+        "profile": "Bernadette Whitaker-Lund — School Counselor",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01192",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01193",
+        "name": "Caspian Yarbrough",
+        "role": "Band and Music Teacher",
+        "hood": null,
+        "profile": "Caspian Yarbrough — Band and Music Teacher",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01193",
+          "status": "Active"
+        }
+      },
+      {
+        "pop": "POP-01194",
+        "name": "Solveig Anand",
+        "role": "School Nurse",
+        "hood": null,
+        "profile": "Solveig Anand — School Nurse",
+        "mode": "workplace",
+        "sourceKind": "active-roster",
+        "evidence": {
+          "source": "output/beats/Employment_Roster.jsonl",
+          "bizId": "BIZ-00016",
+          "pop": "POP-01194",
+          "status": "Active"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "Steady schools week: a small index dip in six neighborhoods against flat funding and teacher quality and slightly rising enrollment. I'll check whether the dip reflects anything teachers see in classrooms.",
+      "angle": "Steady schools week: a small index dip in six neighborhoods against flat funding and teacher quality and slightly rising enrollment. I'll check whether the dip reflects anything teachers see in classrooms.",
+      "hood": null,
+      "citizens": [
+        "Isabel Lopes (POP-00325)",
+        "Lila Bennington (POP-00317)",
+        "Lo Thoop (POP-00667)",
+        "Karem Asante (POP-00739)",
+        "Rick Walker (POP-00198)"
+      ],
+      "popids": [
+        "POP-00325",
+        "POP-00317",
+        "POP-00667",
+        "POP-00739",
+        "POP-00198"
+      ]
+    },
+    "approach": null
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "SCHOOLS-SLICE-3",
+    "kind": "beat-schools",
+    "seat": {
+      "slug": "angela-reyes",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "desk": "civic",
+      "domain": "schools",
+      "builder": "buildSchoolsSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-schools",
+      "score": 100,
+      "label": "the schools and youth record of C117",
+      "hood": null,
+      "source": "output/beats/Neighborhood_Demographics.jsonl @C117"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "the schools and youth record of C117",
+      "hookLine": "",
+      "anchorFacts": [
+        "Enrollment moved: Piedmont Ave +3 students, East Oakland +2 students, Temescal +2 students, West Oakland +1 students, Laurel +1 students, Adams Point +1 students, Jack London +1 students, Fruitvale +1 students, Downtown +1 students, Grand Lake +1 students, Eastlake +1 students, Dimond +1 students, Glenview +1 students, Chinatown +1 students, Ivy Hill +1 students, San Antonio +1 students vs C116",
+        "Adams Point: school quality index 7.91 (was 7.92 at C116), graduation 89.48%, college-ready 62.53%, teacher quality 7.9, funding 13,000, 278 students",
+        "Baylight District: school quality index 8.33 (was 8.3 at C116), graduation 91.06%, college-ready 66.38%, teacher quality 8.2, funding 14,500, 65 students",
+        "Brooklyn: school quality index 8.22 (was 8.2 at C116), graduation 90.82%, college-ready 65.84%, teacher quality 8.2, funding 14,500, 351 students",
+        "Chinatown: school quality index 6.81 (was 6.82 at C116), graduation 85.32%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 315 students",
+        "Dimond: school quality index 6.83 (was 6.84 at C116), graduation 85.32%, college-ready 52.49%, teacher quality 6.9, funding 12,000, 355 students",
+        "Downtown: school quality index 7.2 (was 7.28 at C116), graduation 88.77%, college-ready 61.65%, teacher quality 8.2, funding 14,500, 245 students",
+        "East Oakland: school quality index 6.57 (was 6.61 at C116), graduation 84.09%, college-ready 49.79%, teacher quality 6.68, funding 11,000, 486 students",
+        "Eastlake: school quality index 6.9 (was 6.91 at C116), graduation 85.48%, college-ready 52.87%, teacher quality 6.9, funding 12,000, 315 students",
+        "Fruitvale: school quality index 7.2 (was 7.3 at C116), graduation 88.2%, college-ready 59.5%, teacher quality 7.9, funding 13,000, 427 students",
+        "Glenview: school quality index 6.81 (was 6.83 at C116), graduation 85.31%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 388 students",
+        "Grand Lake: school quality index 7.09 (was 7.18 at C116), graduation 87.84%, college-ready 58.8%, teacher quality 7.9, funding 13,000, 319 students",
+        "Ivy Hill: school quality index 6.66 (was 6.69 at C116), graduation 84.26%, college-ready 50.21%, teacher quality 6.68, funding 11,000, 329 students",
+        "Jack London: school quality index 7.3 (was 7.39 at C116), graduation 89.09%, college-ready 62.1%, teacher quality 8.2, funding 14,500, 203 students",
+        "KONO: school quality index 6.85 (was 6.89 at C116), graduation 85.44%, college-ready 52.77%, teacher quality 6.9, funding 12,000, 60 students",
+        "Lake Merritt: school quality index 8.04 (was 8 at C116), graduation 90.2%, college-ready 64.32%, teacher quality 8.2, funding 14,500, 59 students",
+        "Laurel: school quality index 7.91 (was 7.92 at C116), graduation 89.46%, college-ready 62.51%, teacher quality 7.9, funding 13,000, 339 students",
+        "Piedmont Ave: school quality index 8.3 (was 8.28 at C116), graduation 91.69%, college-ready 68.53%, teacher quality 8.2, funding 14,500, 256 students",
+        "Rockridge: school quality index 8.36 (was 8.4 at C116), graduation 93.61%, college-ready 73.53%, teacher quality 9.13, funding 15,000, 250 students",
+        "San Antonio: school quality index 6.6 (was 6.64 at C116), graduation 84.18%, college-ready 50.02%, teacher quality 6.68, funding 11,000, 392 students",
+        "Temescal: school quality index 6.21 (was 6.25 at C116), graduation 83.53%, college-ready 53%, teacher quality 6.8, funding 11,500, 316 students",
+        "Uptown: school quality index 7.03 (was 7.12 at C116), graduation 87.63%, college-ready 58.39%, teacher quality 7.9, funding 13,000, 63 students",
+        "West Oakland: school quality index 7.92 (was 8 at C116), graduation 90.5%, college-ready 65.07%, teacher quality 8.2, funding 14,500, 327 students",
+        "Oakland City Schools (Education), City-wide — 5,201 employees, growing 7.2% a year",
+        "Oakland Community College District (Education), City-wide — 1,800 employees, growing 7.0% a year",
+        "Firehouse 29 West Oakland Baseball Academy (Sports), West Oakland — 20 employees, growing 5.0% a year",
+        "Harrison Street Chinese School (Education), Chinatown — 15 employees, growing 2.0% a year",
+        "Hillside Preparatory (Private School), Rockridge — 15 employees, growing 3.3% a year",
+        "Early Shift Childcare (Preschool & Early Education), San Antonio — 15 employees, growing 0.6% a year",
+        "MacArthur Tutoring Center (Tutoring), Laurel — 15 employees, growing 1.1% a year",
+        "Laurel Music School (Music School), Laurel — 9 employees, growing 2.4% a year",
+        "Oakland City College — Laurel Campus (Education), Laurel — 15 employees, growing 0.9% a year",
+        "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+        "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+        "Oakland Youth Apprenticeship Pipeline (economic), Baylight District, since C86",
+        "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+        "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+        "Foothill Baptist Tabernacle Academy (tech-education), East Oakland, since C88",
+        "Darrin Davis Youth Community Events (), City-wide — founded by Darrin Davis"
+      ],
+      "evidence": [
+        {
+          "text": "Enrollment moved: Piedmont Ave +3 students, East Oakland +2 students, Temescal +2 students, West Oakland +1 students, Laurel +1 students, Adams Point +1 students, Jack London +1 students, Fruitvale +1 students, Downtown +1 students, Grand Lake +1 students, Eastlake +1 students, Dimond +1 students, Glenview +1 students, Chinatown +1 students, Ivy Hill +1 students, San Antonio +1 students vs C116",
+          "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C117"
+        },
+        {
+          "text": "Adams Point: school quality index 7.91 (was 7.92 at C116), graduation 89.48%, college-ready 62.53%, teacher quality 7.9, funding 13,000, 278 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Baylight District: school quality index 8.33 (was 8.3 at C116), graduation 91.06%, college-ready 66.38%, teacher quality 8.2, funding 14,500, 65 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Brooklyn: school quality index 8.22 (was 8.2 at C116), graduation 90.82%, college-ready 65.84%, teacher quality 8.2, funding 14,500, 351 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Chinatown: school quality index 6.81 (was 6.82 at C116), graduation 85.32%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 315 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Dimond: school quality index 6.83 (was 6.84 at C116), graduation 85.32%, college-ready 52.49%, teacher quality 6.9, funding 12,000, 355 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Downtown: school quality index 7.2 (was 7.28 at C116), graduation 88.77%, college-ready 61.65%, teacher quality 8.2, funding 14,500, 245 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "East Oakland: school quality index 6.57 (was 6.61 at C116), graduation 84.09%, college-ready 49.79%, teacher quality 6.68, funding 11,000, 486 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Eastlake: school quality index 6.9 (was 6.91 at C116), graduation 85.48%, college-ready 52.87%, teacher quality 6.9, funding 12,000, 315 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Fruitvale: school quality index 7.2 (was 7.3 at C116), graduation 88.2%, college-ready 59.5%, teacher quality 7.9, funding 13,000, 427 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Glenview: school quality index 6.81 (was 6.83 at C116), graduation 85.31%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 388 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Grand Lake: school quality index 7.09 (was 7.18 at C116), graduation 87.84%, college-ready 58.8%, teacher quality 7.9, funding 13,000, 319 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Ivy Hill: school quality index 6.66 (was 6.69 at C116), graduation 84.26%, college-ready 50.21%, teacher quality 6.68, funding 11,000, 329 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Jack London: school quality index 7.3 (was 7.39 at C116), graduation 89.09%, college-ready 62.1%, teacher quality 8.2, funding 14,500, 203 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "KONO: school quality index 6.85 (was 6.89 at C116), graduation 85.44%, college-ready 52.77%, teacher quality 6.9, funding 12,000, 60 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Lake Merritt: school quality index 8.04 (was 8 at C116), graduation 90.2%, college-ready 64.32%, teacher quality 8.2, funding 14,500, 59 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Laurel: school quality index 7.91 (was 7.92 at C116), graduation 89.46%, college-ready 62.51%, teacher quality 7.9, funding 13,000, 339 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Piedmont Ave: school quality index 8.3 (was 8.28 at C116), graduation 91.69%, college-ready 68.53%, teacher quality 8.2, funding 14,500, 256 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Rockridge: school quality index 8.36 (was 8.4 at C116), graduation 93.61%, college-ready 73.53%, teacher quality 9.13, funding 15,000, 250 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "San Antonio: school quality index 6.6 (was 6.64 at C116), graduation 84.18%, college-ready 50.02%, teacher quality 6.68, funding 11,000, 392 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Temescal: school quality index 6.21 (was 6.25 at C116), graduation 83.53%, college-ready 53%, teacher quality 6.8, funding 11,500, 316 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Uptown: school quality index 7.03 (was 7.12 at C116), graduation 87.63%, college-ready 58.39%, teacher quality 7.9, funding 13,000, 63 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "West Oakland: school quality index 7.92 (was 8 at C116), graduation 90.5%, college-ready 65.07%, teacher quality 8.2, funding 14,500, 327 students",
+          "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+        },
+        {
+          "text": "Oakland City Schools (Education), City-wide — 5,201 employees, growing 7.2% a year",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C117"
+        },
+        {
+          "text": "Oakland Community College District (Education), City-wide — 1,800 employees, growing 7.0% a year",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00035 @C117"
+        },
+        {
+          "text": "Firehouse 29 West Oakland Baseball Academy (Sports), West Oakland — 20 employees, growing 5.0% a year",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00103 @C117"
+        },
+        {
+          "text": "Harrison Street Chinese School (Education), Chinatown — 15 employees, growing 2.0% a year",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00207 @C117"
+        },
+        {
+          "text": "Hillside Preparatory (Private School), Rockridge — 15 employees, growing 3.3% a year",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00226 @C117"
+        },
+        {
+          "text": "Early Shift Childcare (Preschool & Early Education), San Antonio — 15 employees, growing 0.6% a year",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00261 @C117"
+        },
+        {
+          "text": "MacArthur Tutoring Center (Tutoring), Laurel — 15 employees, growing 1.1% a year",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00279 @C117"
+        },
+        {
+          "text": "Laurel Music School (Music School), Laurel — 9 employees, growing 2.4% a year",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00281 @C117"
+        },
+        {
+          "text": "Oakland City College — Laurel Campus (Education), Laurel — 15 employees, growing 0.9% a year",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00284 @C117"
+        },
+        {
+          "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-002 @C117"
+        },
+        {
+          "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-003 @C117"
+        },
+        {
+          "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-004 @C117"
+        },
+        {
+          "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-005 @C117"
+        },
+        {
+          "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-006 @C117"
+        },
+        {
+          "text": "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-007 @C117"
+        },
+        {
+          "text": "Oakland Youth Apprenticeship Pipeline (economic), Baylight District, since C86",
+          "src": "output/beats/Community_Programs.jsonl PRG-008 @C117"
+        },
+        {
+          "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+          "src": "output/beats/Community_Programs.jsonl PRG-017 @C117"
+        },
+        {
+          "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+          "src": "output/beats/Community_Programs.jsonl PRG-019 @C117"
+        },
+        {
+          "text": "Foothill Baptist Tabernacle Academy (tech-education), East Oakland, since C88",
+          "src": "output/beats/Community_Programs.jsonl PRG-030 @C117"
+        },
+        {
+          "text": "Darrin Davis Youth Community Events (), City-wide — founded by Darrin Davis",
+          "src": "output/beats/Community_Programs.jsonl PRG-033 @C117"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 116
+      },
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "factCap": 43,
+      "peopleCap": 30,
+      "roomIsYours": ""
+    },
+    "citizens": [
+      {
+        "popid": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook — Fruitvale — age 59 — K-8 Teacher,Former Line cook at Oakland City Schools; C117: argued the team's case at work and won",
+        "why": "K-8 Teacher,Former Line cook at Oakland City Schools; C117: argued the team's case at work and won",
+        "age": 59
+      },
+      {
+        "popid": "POP-00287",
+        "name": "Simone Adesanya",
+        "role": "School Principal",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Simone Adesanya — School Principal — Rockridge — age 56 — School Principal at Oakland City Schools; C117: started the application and closed the tab after the first page",
+        "why": "School Principal at Oakland City Schools; C117: started the application and closed the tab after the first page",
+        "age": 56
+      },
+      {
+        "popid": "POP-00303",
+        "name": "Lee Coo",
+        "role": "School Psychologist",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Lee Coo — School Psychologist — Piedmont Ave — age 45 — School Psychologist at Oakland City Schools; C117: spent the evening sorting a box of things that used to be someone's near a bench on the hospital grounds",
+        "why": "School Psychologist at Oakland City Schools; C117: spent the evening sorting a box of things that used to be someone's near a bench on the hospital grounds",
+        "age": 45
+      },
+      {
+        "popid": "POP-00305",
+        "name": "Rico Fister",
+        "role": "High School Science Teacher",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Rico Fister — High School Science Teacher — Rockridge — age 69 — High School Science Teacher at Oakland City Schools; C117: attended a professional development session nearby",
+        "why": "High School Science Teacher at Oakland City Schools; C117: attended a professional development session nearby",
+        "age": 69
+      },
+      {
+        "popid": "POP-00312",
+        "name": "Wiu Wiu",
+        "role": "High School Science Teacher",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Wiu Wiu — High School Science Teacher — Rockridge — age 70 — High School Science Teacher at Oakland City Schools; C117: felt quietly proud of how they handled something small",
+        "why": "High School Science Teacher at Oakland City Schools; C117: felt quietly proud of how they handled something small",
+        "age": 70
+      },
+      {
+        "popid": "POP-00317",
+        "name": "Lila Bennington",
+        "role": "Oakland City Schools Elementary Teacher",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Lila Bennington — Oakland City Schools Elementary Teacher — Fruitvale — age 53 — Oakland City Schools Elementary Teacher at Oakland City Schools; C117: re-read an old journal page and didn't recognize the handwriting mood",
+        "why": "Oakland City Schools Elementary Teacher at Oakland City Schools; C117: re-read an old journal page and didn't recognize the handwriting mood",
+        "age": 53
+      },
+      {
+        "popid": "POP-00325",
+        "name": "Isabel Lopes",
+        "role": "ESL Teacher",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Isabel Lopes — ESL Teacher — Fruitvale — age 42 — ESL Teacher at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+        "why": "ESL Teacher at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+        "age": 42
+      },
+      {
+        "popid": "POP-00352",
+        "name": "Kaila Jordache",
+        "role": "GED Program Instructor",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Kaila Jordache — GED Program Instructor — Piedmont Ave — age 42 — GED Program Instructor at Oakland City Schools; C117: bought a new A's jersey and a sense of anticipation hangs in the air",
+        "why": "GED Program Instructor at Oakland City Schools; C117: bought a new A's jersey and a sense of anticipation hangs in the air",
+        "age": 42
+      },
+      {
+        "popid": "POP-00499",
+        "name": "Jalen Serf",
+        "role": "School Psychologist",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Jalen Serf — School Psychologist — Piedmont Ave — age 63 — School Psychologist at Oakland City Schools; C117: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+        "why": "School Psychologist at Oakland City Schools; C117: watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+        "age": 63
+      },
+      {
+        "popid": "POP-00532",
+        "name": "Marcus Whitfield",
+        "role": "Youth Basketball Coach",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Marcus Whitfield — Youth Basketball Coach — Fruitvale — age 34 — Youth Basketball Coach at Oakland City Schools; C117: noticed the new streetlights went in before anyone had to ask near a taqueria patio",
+        "why": "Youth Basketball Coach at Oakland City Schools; C117: noticed the new streetlights went in before anyone had to ask near a taqueria patio",
+        "age": 34
+      },
+      {
+        "popid": "POP-00623",
+        "name": "Winston Clarke",
+        "role": "Retired Teacher",
+        "neighborhood": "Laurel",
+        "business": null,
+        "profile": "Winston Clarke — Retired Teacher — Laurel — age 65 — Retired Teacher at Oakland City Schools; C117: recognized a face from years ago across the street",
+        "why": "Retired Teacher at Oakland City Schools; C117: recognized a face from years ago across the street",
+        "age": 65
+      },
+      {
+        "popid": "POP-00631",
+        "name": "Derry Webb",
+        "role": "Youth Basketball Coach",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Derry Webb — Youth Basketball Coach — Uptown — age 43 — Youth Basketball Coach at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+        "why": "Youth Basketball Coach at Oakland City Schools; C117: noticed the calendar squares all look alike lately, and couldn't decide if that's peace",
+        "age": 43
+      },
+      {
+        "popid": "POP-00659",
+        "name": "Ripley Court",
+        "role": "STEM Program Coordinator",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Ripley Court — STEM Program Coordinator — Rockridge — age 46 — STEM Program Coordinator at Oakland City Schools; C117: weighed a weekend trip against the water heater and picked the water heater",
+        "why": "STEM Program Coordinator at Oakland City Schools; C117: weighed a weekend trip against the water heater and picked the water heater",
+        "age": 46
+      },
+      {
+        "popid": "POP-00667",
+        "name": "Lo Thoop",
+        "role": "Creative Writing Teacher",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Lo Thoop — Creative Writing Teacher — Jack London — age 68 — Creative Writing Teacher at Oakland City Schools; C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "why": "Creative Writing Teacher at Oakland City Schools; C117: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "age": 68
+      },
+      {
+        "popid": "POP-00739",
+        "name": "Karem Asante",
+        "role": "Youth Counselor",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+        "why": "Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+        "age": 34
+      },
+      {
+        "popid": "POP-00728",
+        "name": "DeShawn Avery",
+        "role": "Community College Student",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "DeShawn Avery — Community College Student — Fruitvale — age 35 — student, C117 in Fruitvale: found a quiet minute at a vendor by the transit stop and let the week's noise settle",
+        "why": "student, C117 in Fruitvale: found a quiet minute at a vendor by the transit stop and let the week's noise settle",
+        "age": 35
+      },
+      {
+        "popid": "POP-00743",
+        "name": "Rick Dillon",
+        "role": "Grade Schooler",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Rick Dillon — Grade Schooler — Piedmont Ave — age 12 — student, C117: moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+        "why": "student, C117: moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+        "age": 12
+      },
+      {
+        "popid": "POP-00989",
+        "name": "Nour Santos",
+        "role": "student",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Nour Santos — student — West Oakland — age 5 — student, C117 in West Oakland: picked things back up with Simone Limone",
+        "why": "student, C117 in West Oakland: picked things back up with Simone Limone",
+        "age": 5
+      },
+      {
+        "popid": "POP-01014",
+        "name": "Sadie Williams",
+        "role": "student",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Sadie Williams — student — Chinatown — age 8 — student, C117 in Chinatown: had not really talked to Abraham Wright in a while",
+        "why": "student, C117 in Chinatown: had not really talked to Abraham Wright in a while",
+        "age": 8
+      },
+      {
+        "popid": "POP-00983",
+        "name": "Riya Wough",
+        "role": "student",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Riya Wough — student — Downtown — age 10 — student, C117 in Downtown: picked things back up with Ally Scott",
+        "why": "student, C117 in Downtown: picked things back up with Ally Scott",
+        "age": 10
+      },
+      {
+        "popid": "POP-01002",
+        "name": "Kwame Jumper",
+        "role": "student",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Kwame Jumper — student — Downtown — age 17 — student, C117 in Downtown: had not really talked to Arman Gutierrez in a while",
+        "why": "student, C117 in Downtown: had not really talked to Arman Gutierrez in a while",
+        "age": 17
+      },
+      {
+        "popid": "POP-00975",
+        "name": "Salma Navarro",
+        "role": "student",
+        "neighborhood": "Temescal",
+        "business": null,
+        "profile": "Salma Navarro — student — Temescal — age 13 — student, C117 in Temescal: had not really talked to Lo Thoop in a while",
+        "why": "student, C117 in Temescal: had not really talked to Lo Thoop in a while",
+        "age": 13
+      },
+      {
+        "popid": "POP-01011",
+        "name": "Layla Scott",
+        "role": "student",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Layla Scott — student — Lake Merritt — age 3 — student, C117 in Lake Merritt: picked things back up with Brenda Okoro",
+        "why": "student, C117 in Lake Merritt: picked things back up with Brenda Okoro",
+        "age": 3
+      },
+      {
+        "popid": "POP-00237",
+        "name": "Jerry Nelson",
+        "role": "Janitor",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Jerry Nelson — Janitor — Uptown — age 55 — C117 in Uptown: reflected on personal growth and understanding",
+        "why": "C117 in Uptown: reflected on personal growth and understanding",
+        "age": 55
+      },
+      {
+        "popid": "POP-00242",
+        "name": "Jaden Phillips",
+        "role": "Barista",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Jaden Phillips — Barista — Uptown — age 62 — C117 in Uptown: sought more information due to recent city events",
+        "why": "C117 in Uptown: sought more information due to recent city events",
+        "age": 62
+      },
+      {
+        "popid": "POP-00244",
+        "name": "Derlik Green",
+        "role": "Delivery Driver",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Derlik Green — Delivery Driver — Downtown — age 42 — C117 in Downtown: felt renewed motivation to learn as the season shifted",
+        "why": "C117 in Downtown: felt renewed motivation to learn as the season shifted",
+        "age": 42
+      },
+      {
+        "popid": "POP-00256",
+        "name": "Brady Lopez",
+        "role": "Dishwasher",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Brady Lopez — Dishwasher — Piedmont Ave — age 59 — C117 in Piedmont Ave: reflected on personal growth and understanding",
+        "why": "C117 in Piedmont Ave: reflected on personal growth and understanding",
+        "age": 59
+      },
+      {
+        "popid": "POP-00297",
+        "name": "Jorge Wusther",
+        "role": "Nurse aide",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Jorge Wusther — Nurse aide — Uptown — age 65 — C117 in Uptown: spent time learning new skills informally",
+        "why": "C117 in Uptown: spent time learning new skills informally",
+        "age": 65
+      },
+      {
+        "popid": "POP-00320",
+        "name": "Cee Lee",
+        "role": "Autonomous Systems Engineer",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Cee Lee — Autonomous Systems Engineer — Lake Merritt — age 62 — C117 in Lake Merritt: spent time learning new skills informally",
+        "why": "C117 in Lake Merritt: spent time learning new skills informally",
+        "age": 62
+      },
+      {
+        "popid": "POP-00027",
+        "name": "Philly Rodriguez",
+        "role": "Casino Manager",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Philly Rodriguez — Casino Manager — West Oakland — age 30 — C117 in West Oakland: felt energy from seasonal change near a campus quad",
+        "why": "C117 in West Oakland: felt energy from seasonal change near a campus quad",
+        "age": 30
+      }
+    ],
+    "pointers": [
+      "output/beats/Neighborhood_Demographics.jsonl @C117"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "text": "I want to write a short, steady-state piece about the week the schools numbers barely moved. The word that matters is \"regular.\" Most neighborhoods slipped or gained by a hundredth or two. Six slid by about a tenth: Jack London (7.39 to 7.3), Fruitvale (7.3 to 7.2), Grand Lake (7.18 to 7.09), Uptown (7.12 to 7.03), Downtown (7.28 to 7.2) and West Oakland (8.0 to 7.92). Enrollment ticked up by one to three students in nearly every neighborhood. Teacher quality and funding didn't change anywhere. So the question is why the index dipped where nothing else did. I don't know yet whether it's a real change in classrooms, a rounding artifact or a measurement quirk. I'll go at it the way I'd go at a",
+    "plan": {
+      "chase": "I want to write a short, steady-state piece about the week the schools numbers barely moved. The word that matters is \"regular.\" Most neighborhoods slipped or gained by a hundredth or two. Six slid by about a tenth: Jack London (7.39 to 7.3), Fruitvale (7.3 to 7.2), Grand Lake (7.18 to 7.09), Uptown (7.12 to 7.03), Downtown (7.28 to 7.2) and West Oakland (8.0 to 7.92). Enrollment ticked up by one to three students in nearly every neighborhood. Teacher quality and funding didn't change anywhere. So the question is why the index dipped where nothing else did. I don't know yet whether it's a real change in classrooms, a rounding artifact or a measurement quirk. I'll go at it the way I'd go at a",
+      "focus": "Steady schools week: a small index dip in six neighborhoods against flat funding and teacher quality and slightly rising enrollment. I'll check whether the dip reflects anything teachers see in classrooms.",
+      "why": "My beat is stability. A near-flat week with a consistent tenth-of-a-point slide in six neighborhoods, set against flat funding and teacher quality and rising enrollment, is worth checking. It could be nothing, and saying that clearly is also the story. I haven't found earlier Tribune coverage of this, so I'm treating it as fresh.",
+      "checks": [
+        "Confirm the C116 and C117 index values for all six neighborhoods against the Neighborhood_Demographics sheet.",
+        "Ask the Deputy Mayor for community development how the school quality index is built and whether a dip of about 0.1 means anything.",
+        "Confirm that funding and teacher quality were unchanged in those neighborhoods.",
+        "Check whether the Tribune has covered these neighborhoods' schools before, since the recall search returned nothing.",
+        "Verify the enrollment increases are as small as the sheet says before I describe them as growth."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00325",
+          "question": "You said the calendar squares all look alike lately. What does a regular week look like in your ESL classroom now? Have you noticed anything in attendance, behavior or how new students are settling in?",
+          "basis": "Fruitvale ESL teacher. Fruitvale's index fell from 7.3 to 7.2 while enrollment rose by one. Her C117 note about sameness could be peace or stagnation."
+        },
+        {
+          "pop": "POP-00317",
+          "question": "What do you notice first in your elementary classroom these days, and has anything shifted in attendance or mood this fall?",
+          "basis": "Fruitvale elementary teacher in the same neighborhood as the index dip. She offers a second classroom view."
+        },
+        {
+          "pop": "POP-00667",
+          "question": "As a creative writing teacher in Jack London, what changes do you see in your students' writing or engagement? Jack London's index slipped from 7.39 to 7.3. Does that match what you see?",
+          "basis": "Jack London creative writing teacher, age 68. The neighborhood's index fell about 0.09 with only 203 students and funding unchanged."
+        },
+        {
+          "pop": "POP-00739",
+          "question": "You sit in a lot of meetings and see kids one on one. What are West Oakland students bringing in, and is there a change behind the index slipping from 8.0 to 7.92?",
+          "basis": "West Oakland youth counselor. The index fell there while enrollment rose by one student."
+        },
+        {
+          "pop": "POP-00198",
+          "question": "You went from the kitchen to the classroom and argued the team's case at work. How do sports talk and school routines interact for your Fruitvale K-8 students right now?",
+          "basis": "Fruitvale K-8 teacher and former line cook. He adds a human, team-spirited angle, and Fruitvale is one of the six dipping neighborhoods."
+        }
+      ],
+      "interpretation": "A tenth-of-a-point drop in six neighborhoods that otherwise look unchanged could be noise or a lagging indicator. Enrollment is rising slightly and funding hasn't moved, so I don't see a crisis. The more likely story is that regular held, and I need teachers' eyes to confirm it.",
+      "unverifiedLead": [
+        "The dip might come from how the index is calculated rather than anything in classrooms.",
+        "Teachers describing sameness (Isabel Lopes) might mean calm, or they might mean stuck. I can't tell which without asking.",
+        "The Oakland Alternative Response Initiative may be affecting how safe Jack London families feel, going by Lo Thoop's note, but that is only a hunch."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Carry forward closeout verification and Council consideration; support renewal only after verified C114 closeout, preserving the business-and-resident scope and 23-day standard. — \"West Oakla",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold expansion; require a complete published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review. — \"Alternative response expands on public ev",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold further design advancement until preliminary schematics and a documented Fruitvale public comment-and-response record are delivered and published. — \"Fruitvale will get a transit hub des",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep the center operational while withholding oversight certification until the Q3 audit filing and merchant walkthrough are verified and documented. — \"Temescal's health center keeps serving",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Declare no milestone passed; direct completion and publication of the evidence-file review while all remediation, hotline, dust-control and workforce oversight continues. — \"Baylight earns it",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 135,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-24T12:16:47.026Z"
+}

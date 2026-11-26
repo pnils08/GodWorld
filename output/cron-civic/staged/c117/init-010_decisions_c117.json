@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-010",
+  "initiativeId": "INIT-010",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-009)",
+  "consolidatedFrom": [
+    "STMT-117-mayor_gavel-009 (Mayor gavel — West Oakland tenant-defense implementation and record correction)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-010",
+    "ImplementationPhase": "implementation-active",
+    "MilestoneNotes": "C117: C112 6-3 passage and signing control; no committee revote is pending, and legal-analysis publication and intake opening remain unverified.",
+    "NextScheduledAction": "Publish the legal-support analysis and document the opening of tenant-defense intake",
+    "NextActionCycle": 118
+  }
+}

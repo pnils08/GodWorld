@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-23",
+  "cycle": 117,
+  "results": [
+    {
+      "office": "civic-office-mayor",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-mayor_2026-11-23.json"
+    },
+    {
+      "office": "civic-office-council-d1",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d1_2026-11-23.json"
+    },
+    {
+      "office": "civic-office-council-d5",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d5_2026-11-23.json"
+    },
+    {
+      "office": "worker-ems-dir",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/worker-ems-dir_2026-11-23.json"
+    },
+    {
+      "office": "worker-med-exam",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/worker-med-exam_2026-11-23.json"
+    },
+    {
+      "office": "civic-project-health-center",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-project-health-center_2026-11-23.json"
+    },
+    {
+      "office": "civic-project-oari",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-project-oari_2026-11-23.json"
+    }
+  ],
+  "owed": null,
+  "ranAt": "2026-11-23T11:48:10.409Z"
+}

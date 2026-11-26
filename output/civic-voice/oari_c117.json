@@ -1,0 +1,44 @@
+{
+  "office": "oari",
+  "cycle": 117,
+  "speaker": "Vanessa Tran-Muñoz",
+  "cascadeSummary": "The Council and the Mayor held expansion and directed the same two things I was already executing: a published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review. This cycle I am closing the operational loop rather than relitigating the hold — the Fruitvale record goes into a public, pullable location with the district and Fruitvale data references intact, and the D5 audit and Baylight review get concrete dates filed with the Clerk, not open-ended status. I am holding expansion in my own voice because a briefing record is a promise residents can read, not a press release, and I will not declare any oversight file complete before the records exist.",
+  "statements": [
+    {
+      "statementId": "STMT-117-oari-001",
+      "type": "decision",
+      "topic": "D3 Fruitvale briefing record — publication and pullable public access",
+      "initiative": "INIT-002",
+      "decision": "Hold expansion; publish the executed D3 Fruitvale briefing record in a public, inspectable location with district-level and Fruitvale data references, participation arrangements, and notice dates preserved",
+      "quote": "Fruitvale can pull the record and read the numbers for its own streets — a briefing that can't be pulled isn't a record, it's a press release.",
+      "fullStatement": "Fruitvale can pull the record and read the numbers for its own streets — a briefing that can't be pulled isn't a record, it's a press release. This cycle the D3 Fruitvale briefing record goes where it can be inspected: the executed record with the district-level and Fruitvale data references, the notice dates, the venue and accessibility arrangements, and the documented community participation, all in one place residents and reporters can open without asking my office for a favor. I am not dressing a partial file as a finished answer, and expansion stays held. What I am doing is making sure that when a Fruitvale neighbor walks into the library branch or pulls the portal page, the record answers them — the streets, the numbers, the room, the dates. That is what a briefing is worth.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "MilestoneNotes": "C117: D3 Fruitvale briefing record published in public inspectable location with data refs, notice, venue, accessibility, participation preserved."
+      }
+    },
+    {
+      "statementId": "STMT-117-oari-002",
+      "type": "decision",
+      "topic": "D5 audit and Baylight feasibility review — written next dates filed",
+      "initiative": "INIT-002",
+      "decision": "File written next dates with the Clerk for the D5 audit and the Baylight feasibility review this cycle, replacing open-ended status with dated commitments, while expansion remains held",
+      "quote": "Feasibility first, authorization second, and never the other way around — a next date on the record is how you keep that sequence honest.",
+      "fullStatement": "Feasibility first, authorization second, and never the other way around — a next date on the record is how you keep that sequence honest. This cycle I am filing written next dates for the D5 East Oakland audit and the Baylight feasibility review with the Clerk, so neither item sits in open-ended status waiting for someone to remember it. East Oakland's calls are already inside this program, and they are owed an audit with a date on it, not a promise of momentum. Baylight gets a feasibility record with a calendar entry, not an authorization slipped in ahead of the evidence. Expansion stays held until those records exist. One briefing does not finish an oversight file, and I am not going to let a date on the wall stand in for the file itself.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "MilestoneNotes": "C117: Written next dates filed with Clerk for D5 audit and Baylight feasibility review; expansion remains held."
+      }
+    },
+    {
+      "statementId": "STMT-117-oari-003",
+      "type": "statement",
+      "topic": "Constituents — West Oakland calm and East Oakland grief, what the crews see on the ground",
+      "initiative": null,
+      "decision": "Carry the D1 and D5 operational presence forward without expansion, keeping evening and weekend bilingual coverage running while the records are assembled",
+      "quote": "West Oakland's calm isn't a City Hall press release — it's neighbors and the crews who show up for them, and that doesn't pause while we file paperwork.",
+      "fullStatement": "West Oakland's calm isn't a City Hall press release — it's neighbors and the crews who show up for them, and that doesn't pause while we file paperwork. The D1 teams keep their evening and weekend bilingual coverage running exactly as they have been; the record-keeping happens around them, not instead of them. In East Oakland, Masjid An-Nur's community grief gathering this week is the kind of moment where a crisis line and a familiar face matter more than a slide deck — our D5 crews are present and steady, and the audit dates I am filing are for that community's benefit, not for a hearing room. In Fruitvale, the mood has slipped and I hear it; the briefing record going public is part of how we answer that, because neighbors deserve to see what was promised and what the streets actually got. That is the work on the ground this cycle: coverage steady, records honest, expansion held.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "draft": "output/cron-compare/sports_c117_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "117",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "6d7419e40a002e111fd1b9caf7e83d4f6f1d8b3eaf0bfb3d841d4d2ecb91ebd8",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Travis Coles command analysis and staff comparisons fully verified against sports ledger and canon history.",
+  "review": {
+    "profileId": "data-desk",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "packageVersion": "MARBURY-LEP2-2",
+    "manifestId": "AM-44829836d1ec",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "83",
+          "98"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Clark Saryan",
+      "Elliot Marbury",
+      "Henry Rivas",
+      "Travis Coles"
+    ],
+    "unverified": [
+      "Data Desk",
+      "World Series"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0151,
+  "durationMs": 10873,
+  "parseError": false,
+  "ranAt": "2026-11-26T00:16:40.765Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 788,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "6d7419e40a002e111fd1b9caf7e83d4f6f1d8b3eaf0bfb3d841d4d2ecb91ebd8",
+    "costUsd": 0.0014
+  }
+}

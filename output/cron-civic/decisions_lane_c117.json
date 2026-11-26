@@ -1,0 +1,488 @@
+{
+  "cycle": 117,
+  "entries": [
+    {
+      "label": "Avery Santana (mayor gavel): Carry forward closeout verification and Council consideration; support renewal only after verified C114 closeout, preserving the business-and-resident scope and 23-day standard. — \"West Oakla",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold expansion; require a complete published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review. — \"Alternative response expands on public ev",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold further design advancement until preliminary schematics and a documented Fruitvale public comment-and-response record are delivered and published. — \"Fruitvale will get a transit hub des",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep the center operational while withholding oversight certification until the Q3 audit filing and merchant walkthrough are verified and documented. — \"Temescal's health center keeps serving",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Declare no milestone passed; direct completion and publication of the evidence-file review while all remediation, hotline, dust-control and workforce oversight continues. — \"Baylight earns it",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep the initiative stalled pending publication of the placement-gap analysis and adjustment plan, including explicit West Oakland and Fruitvale review. — \"A first cohort report is not a gap ",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Record INIT-008 as stalled because Uptown planning execution is not evidenced; keep the $15 million authorization pending and require a complete public planning record. — \"Downtown and Uptown",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Back YES with every Chen-Vega condition, keep the measure vote-scheduled, and request a completed Clerk-certified roll call before claiming any outcome. — \"My Grand Lake YES includes every Ch",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Move forward on the corrected C112 implementation record, requiring publication of the legal-support analysis and documented intake opening without another committee vote. — \"West Oakland ten",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Support committee referral and a hearing on the C113-filed ordinance while claiming no completed referral or hearing and keeping all Ivy Hill records separate. — \"Ivy Hill gets a committee he",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Record the missed filing deadline and move INIT-012 to stalled pending completed drafting, documented outreach and Clerk verification. — \"After four announcements, Dimond gets an honest stall",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Move INIT-013 to stalled rather than file a duplicative measure; require a distinct scope and nonduplication record before any filing. — \"Ivy Hill needs one distinguishable purpose per measur",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Under promises P-d94459ae1189b667 and P-b87ef751a66c370d, direct an eleven-case source-record crosswalk and hold INIT-014 as stalled pending Clerk-backed filing and tracker reconciliation. — ",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep INIT-015 announced and carry forward the unfinished scope, outreach and Clerk-verified filing without claiming authorization or implementation. — \"Laurel gets a finished scope, real outr",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Request the Dimond Emergency Town Briefing record and factual next steps while recognizing faith-community responses and neighborhood conditions without inventing incident details or new prog",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Rose Delgado (council d3): Hold expansion; require execution and publication of the D3 Fruitvale briefing record with the actual date, venue, notice dates, accessibility and participation arrangements, and the district a",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d3_c117.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Rose Delgado (council d3): Hold further design advancement at the C86 authorization; require the contracted design consultant to deliver preliminary schematics and conduct a documented Fruitvale community review this cyc",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d3_c117.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Rose Delgado (council d3): Require the placement-gap analysis and adjustment plan with explicit Fruitvale and West Oakland review to be published this cycle, and record implementation as stalled until that publication ex",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d3_c117.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Rose Delgado (council d3): Hold San Antonio commercial blocks as an active district matter, with the next public update and a named district office point of contact rather than a footnote. — \"San Antonio is climbing, not",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d3_c117.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Brenda Okoro (okoro): Hold the C114 closeout verification and Council charter-renewal consideration on this cycle's calendar; no renewal claimed before verification and Council action, with business-and-resident scope an",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/okoro_c117.json",
+      "popids": [
+        "POP-00037"
+      ]
+    },
+    {
+      "label": "Brenda Okoro (okoro): Hold and certify the full-council roll call with all Chen-Vega milestone and audit conditions intact; maintain a YES position without claiming an outcome. — \"Public money deserves public proof — Gra",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/okoro_c117.json",
+      "popids": [
+        "POP-00037"
+      ]
+    },
+    {
+      "label": "Brenda Okoro (okoro): Support the Dimond Emergency Town Briefing as the public factual record and next steps for the culture spike, without speculating on causes or linking the separate faith-community responses; commit ",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/okoro_c117.json",
+      "popids": [
+        "POP-00037"
+      ]
+    },
+    {
+      "label": "Brenda Okoro (okoro): Let the Laurel filing deadline pass with INIT-015 held in announced status and let the duplicative Ivy Hill filing (INIT-013) pass rather than submit an overlapping measure; no filing or authorizati",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/okoro_c117.json",
+      "popids": [
+        "POP-00037"
+      ]
+    },
+    {
+      "label": "Nina Chen (council d8): Vote YES on the full-council roll call with Chen-Vega milestone and audit conditions intact, withholding any claim of enactment until certification by the City Clerk. — \"A floor vote is an individ",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d8_c117.json",
+      "popids": [
+        "POP-00505"
+      ]
+    },
+    {
+      "label": "Nina Chen (council d8): Confirm Eastlake baseline maintenance allocations remain unauthorized pending Public Works docketing, and order an official Clerk-verified complaint reconciliation identifying missing case records",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d8_c117.json",
+      "popids": [
+        "POP-00505"
+      ]
+    },
+    {
+      "label": "Janae Rivers (council d5): Hold expansion of the Oakland Alternative Response Initiative: require execution and publication of the D3 Fruitvale briefing record and a written next date for the D5 audit and Baylight feasib",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d5_c117.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Janae Rivers (council d5): Require publication this cycle of an inspectable placement-gap analysis and adjustment plan that separately identifies West Oakland and Fruitvale placement reach, documented gaps, specific corr",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d5_c117.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Janae Rivers (council d5): Carry East Oakland's complaint into the Clerk-checked crosswalk with a named office and a next date, and hold the Masjid An-Nur Oakland community grief gathering visible as city life — with att",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d5_c117.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Leonard Tran (council d2): Conduct and publish the scheduled review against the assembled evidence file; declare no milestone passed unless the evidence supports it, and continue oversight. — \"A review is not a pass; the",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d2_c117.json",
+      "popids": [
+        "POP-00502"
+      ]
+    },
+    {
+      "label": "Leonard Tran (council d2): Require a published, executable Uptown stabilization plan with a concrete timeline and Ashford benchmarks, seek a recorded committee decision, and keep the $15 million authorization pending; if",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d2_c117.json",
+      "popids": [
+        "POP-00502"
+      ]
+    },
+    {
+      "label": "Leonard Tran (council d2): Recognize the positive activity in Downtown and Jack London, attend to Chinatown's flat mood and Baylight's slow trade, and seek practical follow-through for neighborhood businesses without dec",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d2_c117.json",
+      "popids": [
+        "POP-00502"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Direct the responsible public health authorities to publish an evidence-based update and schedule a public briefing on the Piedmont Avenue health spike without creating new administrative bure",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c117.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Vote YES on Commercial Stabilization for Grand Lake with all Chen-Vega audit milestones and reporting conditions intact. — \"Public capital earns my vote when enforceable audits and transparent",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c117.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Elliott Crane (council d6): Require verified C114 closeout accounting and audit documentation before scheduling any Council vote on charter renewal. — \"A charter renewal cannot outpace the ledger; West Oakland deserves v",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d6_c117.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Vote YES on Council charter-renewal consideration, contingent on verified C114 closeout, with business-and-resident scope and the 23-day standard preserved. — \"The Fund was never hood-wide rel",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c117.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Support publishing the legal-support analysis and opening tenant-defense intake this cycle, with the C116 record corrected to reflect 6-3 passage at C112 and signature. — \"The Tenant Defense F",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c117.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Require publication of the placement-gap analysis and adjustment plan this cycle with explicit West Oakland and Fruitvale review; do not claim completion or success without placement evidence.",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c117.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Support executing and publishing the D3 Fruitvale briefing record and filing written next dates for the D5 audit and Baylight feasibility review; continue holding expansion until all three rec",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c117.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Report that the Brooklyn service-audit baseline and the District 1 OARI evaluation remain incomplete and not citable; identify the missing records, the responsible offices, the specific assist",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c117.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Denise Carter (council d1): Recognize West Oakland's improved mood and hold Brooklyn's remaining questions open with a named next date; request Director Vance's cross-department records request as the concrete deliverabl",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d1_c117.json",
+      "popids": [
+        "POP-00501"
+      ]
+    },
+    {
+      "label": "Warren Ashford (council d7): Condition certification of ongoing operational oversight on verified filing of the Q3 clinical intake audit with HCAI and the Council Clerk, and completion of the Telegraph & 47th merchant wa",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d7_c117.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "Warren Ashford (council d7): Direct Planning and Building to complete standard structural safety inspections and require Finance to account for emergency deployment costs without off-budget commercial subsidies. — \"Follo",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d7_c117.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "Warren Ashford (council d7): Vote YES on INIT-009 roll call strictly contingent upon retaining all Chen-Vega milestone and audit conditions certified by the Clerk. — \"Accountability triggers make the difference between a",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d7_c117.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): Support committee referral and a hearing this cycle on the ordinance recorded as filed at C113, with separate records for INIT-011, INIT-013, and INIT-014. — \"A filed ordinance deserves a hearing",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c117.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): Support completing and submitting the announced $2.5 million ordinance this cycle, with filing claimed only after Clerk verification. — \"Four cycles announced is enough; Dimond needs a verifiable",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c117.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): Hold INIT-013 and let this filing deadline pass until its distinct scope and nonduplication with INIT-011 and INIT-014 are documented. — \"I will not file another Ivy Hill measure simply to make a",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c117.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): Withhold Council review or a vote until the Clerk provides a filing reference or confirms no filing, and the basis for the tracker disposition is documented. — \"A contested tracker entry is not a",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c117.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): Seek the documented conclusions of the Glenview civic response meeting, work performed, remaining issues, responsible department, and next update date. — \"A meeting is not a work record; Glenview",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c117.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): Support a factual public record and next steps for the Dimond briefing; request confirmation of the missed pickup's recovery status and any remaining service step. — \"Dimond deserves an honest ac",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c117.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): Keep attention on Ivy Hill's mixed conditions and seek an account of any available city support for the closing business, without promising an outcome or adding a duplicative initiative. — \"A bus",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c117.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Ramon Vega (council d4): Support a Clerk-checked crosswalk that identifies missing complaint coverage and fields rather than supplying unsupported details. — \"A blank field should be marked blank, not filled with a guess",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/council_d4_c117.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "Marcus Webb (stabilization fund): Hold the queue at the 23-day standard while the Council takes up the verified C114 closeout and charter renewal; no renewal claimed before the roll call. — \"The closeout is published, th",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/stabilization_fund_c117.json",
+      "popids": [
+        "POP-00790"
+      ]
+    },
+    {
+      "label": "Marcus Webb (stabilization fund): Hold and certify the full-council roll call with every Chen-Vega milestone and audit condition attached; maintain a YES position without claiming the outcome. — \"Grand Lake's two and a h",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/stabilization_fund_c117.json",
+      "popids": [
+        "POP-00790"
+      ]
+    },
+    {
+      "label": "Marcus Webb (stabilization fund): Keep the queue at the 23-day standard and publish the hearing record as the proof; next authorization batch goes to the Deputy Mayor's desk. — \"The rent does not wait for the ordinance a",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/stabilization_fund_c117.json",
+      "popids": [
+        "POP-00790"
+      ]
+    },
+    {
+      "label": "Vanessa Tran-Muñoz (oari): Hold expansion; publish the executed D3 Fruitvale briefing record in a public, inspectable location with district-level and Fruitvale data references, participation arrangements, and notice dat",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/oari_c117.json",
+      "popids": [
+        "POP-01021"
+      ]
+    },
+    {
+      "label": "Vanessa Tran-Muñoz (oari): File written next dates with the Clerk for the D5 audit and the Baylight feasibility review this cycle, replacing open-ended status with dated commitments, while expansion remains held — \"Feasi",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/oari_c117.json",
+      "popids": [
+        "POP-01021"
+      ]
+    },
+    {
+      "label": "Vanessa Tran-Muñoz (oari): Carry the D1 and D5 operational presence forward without expansion, keeping evening and weekend bilingual coverage running while the records are assembled — \"West Oakland's calm isn't a City Ha",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/oari_c117.json",
+      "popids": [
+        "POP-01021"
+      ]
+    },
+    {
+      "label": "Bobby Chen-Ramirez (health center): File the Q3 clinical intake audit with HCAI and the Council Clerk this cycle, on the standing quarterly schedule established at C115. — \"A filing that can't survive a walking tour isn'",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/health_center_c117.json",
+      "popids": [
+        "POP-00792"
+      ]
+    },
+    {
+      "label": "Bobby Chen-Ramirez (health center): Complete and document the recurring Telegraph & 47th merchant-clinic verification walkthrough this cycle, with shopkeepers and front-desk staff walking the building together. — \"The sh",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/health_center_c117.json",
+      "popids": [
+        "POP-00792"
+      ]
+    },
+    {
+      "label": "Bobby Chen-Ramirez (health center): Hold the working-door test front and center through Q3: the audit and walkthrough are measured against whether someone can actually get here without two buses. — \"A clinic that sits em",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/health_center_c117.json",
+      "popids": [
+        "POP-00792"
+      ]
+    },
+    {
+      "label": "Elena Soria Dominguez (transit hub): Hold further design advancement at the C86 authorization; treat the INIT-003 'complete' tracker entry as closing the visioning and council-authorization history only; keep the comment",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/transit_hub_c117.json",
+      "popids": [
+        "POP-00791"
+      ]
+    },
+    {
+      "label": "Elena Soria Dominguez (transit hub): Keep the answer desk and numbered comment log staffed at the Chavez branch this cycle, logging every comment in the language it came in and committing to a written answer with a date ",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/transit_hub_c117.json",
+      "popids": [
+        "POP-00791"
+      ]
+    },
+    {
+      "label": "Keisha Ramos (baylight authority): Hold the construction milestone determination pending; publish the scope and basis of the C115 completed entry, the evidence-file location, remaining determination work, responsibility,",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/baylight_authority_c117.json",
+      "popids": [
+        "POP-00041"
+      ]
+    },
+    {
+      "label": "Keisha Ramos (baylight authority): Note the low-severity improvement flags on the record and continue remediation, hotline, dust-control, and workforce oversight without claiming a milestone. — \"An improvement flag tells",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/baylight_authority_c117.json",
+      "popids": [
+        "POP-00041"
+      ]
+    }
+  ],
+  "builtAt": "2026-11-23T00:29:54.542Z"
+}

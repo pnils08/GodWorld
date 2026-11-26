@@ -1,0 +1,59 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "117",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c117_nia-rook_packet-v2_openai-gpt-6-luna.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Daniela Kapoor",
+        "role": "quoted-source",
+        "popid": "POP-01209"
+      },
+      {
+        "name": "Marguerite Kimball-Ostrow",
+        "role": "mentioned",
+        "popid": "POP-01188",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Sunday night was a great flight on UNDOCKED. I was happy with how it went, I mined some good resources and jumped around to different systems. I went through Sol, Alpha Centauri, and a few others, and managed to earn a bunch of achievements. It was a lot of fun.",
+        "sourceRef": "citizenVoice PRESS Daniela Kapoor"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-5cb0ac74da0e",
+    "draftSha256": "278c04f5f503a745d290fbb524c029c2906c593a6299178d235e08ebd1f9d4bf",
+    "verdict": "output/cron-compare/undocked_c117_nia-rook_packet-v2_openai-gpt-6-luna.rhea.json",
+    "ranAt": "2026-11-24T00:23:08.806Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 408,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "278c04f5f503a745d290fbb524c029c2906c593a6299178d235e08ebd1f9d4bf",
+      "costUsd": 0.0008
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-24T00:23:11.513Z"
+}

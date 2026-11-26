@@ -1,0 +1,1312 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01210",
+    "name": "Tamsin Pruitt",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The lives of C117: 11 people — Serg Cerrano welcomed a new child, Fruitvale",
+    "approach": "Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent p",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "lives",
+      "hood": "Fruitvale",
+      "facts": [
+        "Serg Cerrano welcomed a new child, Fruitvale (C117). What came next: the record does not say yet",
+        "Serg Cerrano — in their life, C117: set the table for one though their sister had said she might stop by",
+        "Serg Cerrano — in their life, C117: felt the city's pace pulling them forward",
+        "Serg Cerrano — in their life, C117: walked by the new place on the corner and decided from the sidewalk it wasn't for them near a taqueria patio",
+        "Serg Cerrano — in their life, C117: ran the numbers on staying put another year",
+        "Joseph Cramp was promoted; the record lists their work as Janitor, Downtown (C117). What came next: the record does not say yet",
+        "Joseph Cramp — in their life, C116: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+        "Joseph Cramp — in their life, C117: Promoted at City of Oakland after 28 years as a Janitor.",
+        "Joseph Cramp — in their life, C117: started the application and closed the tab after the first page",
+        "Joseph Cramp — in their life, C117: held the door and got a whole conversation for it",
+        "Travis Paiz and Jocelyn Santo set up a household together in Lake Merritt, renting (C117)",
+        "Travis Paiz — in their life, C116: wrapped the good dishes twice and labeled the box in block letters",
+        "Travis Paiz — in their life, C116: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+        "Travis Paiz — in their life, C117: married Jocelyn Santo; a household begins in Lake Merritt",
+        "Travis Paiz — in their life, C117: listened to the ninth inning on the porch radio and let the street hear it too",
+        "Jocelyn Santo — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Jocelyn Santo — in their life, C117: married Travis Paiz; a household begins in Lake Merritt",
+        "Jocelyn Santo — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+        "Jocelyn Santo — in their life, C117: ordered in for the third night and asked for it to be left at the door",
+        "Alma Lewis moved into a place of their own in Rockridge, renting (C117)",
+        "Alma Lewis — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+        "Alma Lewis — in their life, C117: A manager at Port of Oakland put their name forward for the open lead role.",
+        "Alma Lewis — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Alma Lewis — in their life, C117: brought home a new plant and picked its spot carefully",
+        "Inga Creator — spent an afternoon at the sound archive listening to recordings near a late-night counter, Uptown — one of 4 people the Cycle's civic turn reached (Citywide reaction: last week's Tribune CIVIC coverage rated +3 (positive, 2 articles, Carmen Delaine).) (C117)",
+        "Inga Creator — in their life, C116: caught themselves bragging a little about the neighborhood lately",
+        "Dimmie Washington — checked the Civis Systems Field livestream just to see if the grass had been laid down yet near a local pop-up, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund is disbursement-active — ongoing economic effects in West Oakland; the city feels it through these…) (C117)",
+        "Dimmie Washington — in their life, C116: let the phone ring twice before answering so it wouldn't seem like they'd been waiting",
+        "Dimmie Washington — in their life, C116: A nurse coming off shift in West Oakland said she sees them around more than she expected to.",
+        "Dimmie Washington — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+        "Dimmie Washington — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near an old warehouse corridor",
+        "Gloria Liu — gave a whole afternoon to a hobby without once checking the clock, Rockridge — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C117)",
+        "Gloria Liu — in their life, C116: overheard coworkers talking about last night's scene near College Avenue",
+        "Gloria Liu — in their life, C116: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "Gloria Liu — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Gloria Liu — the Tribune named them in a piece headlined One More Backpack in Rockridge (Civic, C116)",
+        "Gloria Liu — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+        "Paul Skenes — enjoying the familiar rhythm of spring prep, Lake Merritt (C117 — what happened in their life, not words they said)",
+        "Paul Skenes — in their life, C116: ran into neighbors at Lake Merritt Blossom Walk",
+        "Paul Skenes — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+        "Paul Skenes — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+        "Paul Skenes — the Tribune named them in a piece headlined The Dismantling: When Championships Require Sacrifice (Sports)",
+        "Cathy Skeet — swapped seed packets with a neighbor over the fence, Chinatown (C117 — what happened in their life, not words they said)",
+        "Cathy Skeet — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Cathy Skeet — in their life, C117: carried three boxes of canned goods from the pantry truck and felt it in their lower back near a small bakery line",
+        "Cathy Skeet — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+        "Cathy Skeet — in their life, C117: the kids could say Soo Loo before they could say the mayor's name",
+        "Robert Corliss — let the afternoon go by without finding one thing that needed them, Lake Merritt (C117 — what happened in their life, not words they said)",
+        "Robert Corliss — in their life, C116: still feeling the energy from last night's city buzz",
+        "Robert Corliss — in their life, C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "Robert Corliss — in their life, C117: kept a small promise to themselves nobody else knew about",
+        "Robert Corliss — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+        "Benji Dillon and Maya Torres-Dillon and Rick Dillon — moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit, Piedmont Ave (C117 — what happened in their life, not words they said)",
+        "Benji Dillon — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner",
+        "Benji Dillon — in their life, C117: took the job at the back of the fellowship hall, the one nobody talks during",
+        "Benji Dillon — in their life, C117: cancelled the standing coffee date and sent nothing in its place",
+        "Benji Dillon — in their life, C117: Dillon Clinic returned $7631 to the line this week",
+        "Benji Dillon — Lives already wrote this person: a moment the record kept (C115), a moment the record kept (C116)",
+        "Benji Dillon — the Tribune named them in a piece headlined Benji Dillon Doesn't Think It's a Big Change, and That's the Story (Culture, C116)",
+        "Benji Dillon — the Tribune named them in a piece headlined The Hello That Outlasts the Headline (Culture, C116)",
+        "Benji Dillon — the Tribune named them in a piece headlined The Lives of C116 (Culture, C116)",
+        "Maya Torres-Dillon — in their life, C116: heard a shopkeeper say the family name like it still meant something",
+        "Maya Torres-Dillon — in their life, C117: took the long way home just to check the Baylight fence line's progress near a cafe on the avenue",
+        "Maya Torres-Dillon — in their life, C117: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "Maya Torres-Dillon — in their life, C117: wore the green-and-gold cap to the corner store and got three nods for it near College Avenue",
+        "Maya Torres-Dillon — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+        "Maya Torres-Dillon — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+        "Maya Torres-Dillon — the Tribune named them in a piece headlined The Top Mark, From the Pickup Line (Civic, C112)",
+        "Rick Dillon — in their life, C117: traded the good sticker for the rare one and called it a fair deal",
+        "Rick Dillon — the Tribune named them in a piece headlined The Lives Page, Cycle 116 (Culture, C116)",
+        "Rick Dillon — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+        "Rick Dillon — the Tribune named them in a piece headlined The Rockridge Equation (Civic, C106)"
+      ],
+      "priorCycle": null,
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "engineHooks": [
+        "good news landed for one of them and the whole house wore it for days (observational analysis)",
+        "A family bought their home in Laurel (observational analysis)",
+        "A family bought their home in West Oakland (observational analysis)",
+        "The Dillon household (3) moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit (desk rotation)"
+      ],
+      "roomIsYours": "the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-lives",
+    "hood": "Fruitvale",
+    "src": "output/beats/Lived_Events.jsonl @C117 batch 45e0d8",
+    "plan": {
+      "focus": "The lives of people in Fruitvale, C117"
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00523",
+        "name": "Serg Cerrano",
+        "profile": "Serg Cerrano — Mover — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00272",
+        "name": "Joseph Cramp",
+        "profile": "Joseph Cramp — Janitor — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00222",
+        "name": "Travis Paiz",
+        "profile": "Travis Paiz — Mover — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00547",
+        "name": "Jocelyn Santo",
+        "profile": "Jocelyn Santo — Yoga Instructor — Lake Merritt",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00523-13e380bc53",
+        "pop": "POP-00523",
+        "name": "Serg Cerrano",
+        "quote": "After welcoming my new child, I felt the city's pace pulling me forward. Life's been busy, and I've been close to family a lot lately.",
+        "factIds": [
+          "F-267b376eabba",
+          "F-793f830a7ed3"
+        ],
+        "src": "packet.W2[POP-00523]"
+      },
+      {
+        "id": "Q-POP-00272-b971553872",
+        "pop": "POP-00272",
+        "name": "Joseph Cramp",
+        "quote": "I've been a Janitor for 28 years, and I just got promoted. To be honest, it's still sinking in. It means more responsibilities, more fires to put out before noon, but it's a win for me. I'm not sure what comes next, but I'm ready to take it on.",
+        "factIds": [
+          "F-28b07ef27512",
+          "F-38ddc99d218f"
+        ],
+        "src": "packet.W2[POP-00272]"
+      },
+      {
+        "id": "Q-POP-00222-bb889af6cb",
+        "pop": "POP-00222",
+        "name": "Travis Paiz",
+        "quote": "Setting up the household with Jocelyn was a whirlwind, to be honest. We just got married and were eager to start our life together. It's been a lot of work, but we're getting into a groove. We've got our routines down, and it's nice having someone to share the responsibilities with. Our little one is the light of our lives, and it's been great watching them adjust to our new setup.",
+        "factIds": [
+          "F-55694e59ff5f",
+          "F-530903564989",
+          "F-dbf5b3e61c10"
+        ],
+        "src": "packet.W2[POP-00222]"
+      },
+      {
+        "id": "Q-POP-00547-1ec47340a4",
+        "pop": "POP-00547",
+        "name": "Jocelyn Santo",
+        "quote": "Setting up a household with Travis has been a whirlwind, to be honest. We just got married and are still figuring things out. It's been a big adjustment, but I'm excited to start this new chapter with him in Lake Merritt.",
+        "factIds": [
+          "F-55694e59ff5f",
+          "F-530903564989",
+          "F-dbf5b3e61c10"
+        ],
+        "src": "packet.W2[POP-00547]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The community in Fruitvale is vibrant and dynamic, with many individuals experiencing significant life events.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C117",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c5606da08cb9"
+    },
+    {
+      "t": "FACT",
+      "text": "Serg Cerrano welcomed a new child, Fruitvale",
+      "src": "output/beats/Lived_Events.jsonl @C117 batch 45e0d8",
+      "id": "F-267b376eabba"
+    },
+    {
+      "t": "FACT",
+      "text": "Serg Cerrano first. The event is the lead; one true detail; what came next only if the record says.",
+      "src": "output/beats/Lived_Events.jsonl @C117 batch 45e0d8",
+      "id": "F-c83e7f00c276"
+    },
+    {
+      "t": "FACT",
+      "text": "Serg Cerrano welcomed a new child, Fruitvale (C117). What came next: the record does not say yet",
+      "src": "output/beats/Lived_Events.jsonl @C117",
+      "id": "F-1f3dc7959e14"
+    },
+    {
+      "t": "FACT",
+      "text": "Serg Cerrano — in their life, C117: set the table for one though their sister had said she might stop by",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-8bef746f92f5"
+    },
+    {
+      "t": "FACT",
+      "text": "Serg Cerrano — in their life, C117: felt the city's pace pulling them forward",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-793f830a7ed3"
+    },
+    {
+      "t": "FACT",
+      "text": "Serg Cerrano — in their life, C117: walked by the new place on the corner and decided from the sidewalk it wasn't for them near a taqueria patio",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-7d610545d4b5"
+    },
+    {
+      "t": "FACT",
+      "text": "Serg Cerrano — in their life, C117: ran the numbers on staying put another year",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-78c1faed7346"
+    },
+    {
+      "t": "FACT",
+      "text": "Joseph Cramp was promoted; the record lists their work as Janitor, Downtown (C117). What came next: the record does not say yet",
+      "src": "output/beats/Lived_Events.jsonl @C117",
+      "id": "F-38ddc99d218f"
+    },
+    {
+      "t": "FACT",
+      "text": "Joseph Cramp — in their life, C116: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-4bd009080cdc"
+    },
+    {
+      "t": "FACT",
+      "text": "Joseph Cramp — in their life, C117: Promoted at City of Oakland after 28 years as a Janitor.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-28b07ef27512"
+    },
+    {
+      "t": "FACT",
+      "text": "Joseph Cramp — in their life, C117: started the application and closed the tab after the first page",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-a71634eb8356"
+    },
+    {
+      "t": "FACT",
+      "text": "Joseph Cramp — in their life, C117: held the door and got a whole conversation for it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-76fe720cc8bd"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Paiz and Jocelyn Santo set up a household together in Lake Merritt, renting (C117)",
+      "src": "output/beats/Household_Ledger.jsonl @C117",
+      "id": "F-55694e59ff5f"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Paiz — in their life, C116: wrapped the good dishes twice and labeled the box in block letters",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-d86b9784d0a5"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Paiz — in their life, C116: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-addd90423233"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Paiz — in their life, C117: married Jocelyn Santo; a household begins in Lake Merritt",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-530903564989"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Paiz — in their life, C117: listened to the ninth inning on the porch radio and let the street hear it too",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-049544b41836"
+    },
+    {
+      "t": "FACT",
+      "text": "Jocelyn Santo — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-98e163023f7a"
+    },
+    {
+      "t": "FACT",
+      "text": "Jocelyn Santo — in their life, C117: married Travis Paiz; a household begins in Lake Merritt",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-dbf5b3e61c10"
+    },
+    {
+      "t": "FACT",
+      "text": "Jocelyn Santo — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-5c559d098f4e"
+    },
+    {
+      "t": "FACT",
+      "text": "Jocelyn Santo — in their life, C117: ordered in for the third night and asked for it to be left at the door",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-360089f9b801"
+    },
+    {
+      "t": "FACT",
+      "text": "Alma Lewis moved into a place of their own in Rockridge, renting (C117)",
+      "src": "output/beats/Household_Ledger.jsonl @C117",
+      "id": "F-27f92b4425bb"
+    },
+    {
+      "t": "FACT",
+      "text": "Alma Lewis — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-684860067d6c"
+    },
+    {
+      "t": "FACT",
+      "text": "Alma Lewis — in their life, C117: A manager at Port of Oakland put their name forward for the open lead role.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-d6a91ed77f93"
+    },
+    {
+      "t": "FACT",
+      "text": "Alma Lewis — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-1d733f7a1653"
+    },
+    {
+      "t": "FACT",
+      "text": "Alma Lewis — in their life, C117: brought home a new plant and picked its spot carefully",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-106210de2317"
+    },
+    {
+      "t": "FACT",
+      "text": "Inga Creator — spent an afternoon at the sound archive listening to recordings near a late-night counter, Uptown — one of 4 people the Cycle's civic turn reached (Citywide reaction: last week's Tribune CIVIC coverage rated +3 (positive, 2 articles, Carmen Delaine).) (C117)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+      "id": "F-3ff7a2fbecb2"
+    },
+    {
+      "t": "FACT",
+      "text": "Inga Creator — in their life, C116: caught themselves bragging a little about the neighborhood lately",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-0fa53ab3be78"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimmie Washington — checked the Civis Systems Field livestream just to see if the grass had been laid down yet near a local pop-up, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund is disbursement-active — ongoing economic effects in West Oakland; the city feels it through these…) (C117)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+      "id": "F-76a66f2c0e8a"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimmie Washington — in their life, C116: let the phone ring twice before answering so it wouldn't seem like they'd been waiting",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-6fda37ddb489"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimmie Washington — in their life, C116: A nurse coming off shift in West Oakland said she sees them around more than she expected to.",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-093e0e7c4e2b"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimmie Washington — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-35c5687dd7e9"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimmie Washington — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near an old warehouse corridor",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-6b251313b406"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — gave a whole afternoon to a hobby without once checking the clock, Rockridge — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C117)",
+      "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+      "id": "F-4971dda34ad1"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — in their life, C116: overheard coworkers talking about last night's scene near College Avenue",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-21dddab5ba1a"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — in their life, C116: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-fb3aa96aa24c"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-88ca9124f20c"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — the Tribune named them in a piece headlined One More Backpack in Rockridge (Civic, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 084e661bc365baac",
+      "id": "F-86b5edc392fd"
+    },
+    {
+      "t": "FACT",
+      "text": "Gloria Liu — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl b63e37fc93f94a10",
+      "id": "F-f1930c75e03c"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — enjoying the familiar rhythm of spring prep, Lake Merritt (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-18169d060f68"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — in their life, C116: ran into neighbors at Lake Merritt Blossom Walk",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-e2774a8815c2"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406",
+      "id": "F-bf4f19967edc"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl 416d45676c73f82e",
+      "id": "F-fbb200508957"
+    },
+    {
+      "t": "FACT",
+      "text": "Paul Skenes — the Tribune named them in a piece headlined The Dismantling: When Championships Require Sacrifice (Sports)",
+      "src": "archive/ARTICLE_INDEX.jsonl 7e63265639c2c2a1",
+      "id": "F-6566b970d5d0"
+    },
+    {
+      "t": "FACT",
+      "text": "Cathy Skeet — swapped seed packets with a neighbor over the fence, Chinatown (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-5dd5d09a67b2"
+    },
+    {
+      "t": "FACT",
+      "text": "Cathy Skeet — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-7a61443afa16"
+    },
+    {
+      "t": "FACT",
+      "text": "Cathy Skeet — in their life, C117: carried three boxes of canned goods from the pantry truck and felt it in their lower back near a small bakery line",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-b07211a97ba8"
+    },
+    {
+      "t": "FACT",
+      "text": "Cathy Skeet — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-75b41c762e44"
+    },
+    {
+      "t": "FACT",
+      "text": "Cathy Skeet — in their life, C117: the kids could say Soo Loo before they could say the mayor's name",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-c5312ea79ad3"
+    },
+    {
+      "t": "FACT",
+      "text": "Robert Corliss — let the afternoon go by without finding one thing that needed them, Lake Merritt (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-5b54455a82ac"
+    },
+    {
+      "t": "FACT",
+      "text": "Robert Corliss — in their life, C116: still feeling the energy from last night's city buzz",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-cac35aeafd4f"
+    },
+    {
+      "t": "FACT",
+      "text": "Robert Corliss — in their life, C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-e43ae161f3e3"
+    },
+    {
+      "t": "FACT",
+      "text": "Robert Corliss — in their life, C117: kept a small promise to themselves nobody else knew about",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-6c7ce1da712a"
+    },
+    {
+      "t": "FACT",
+      "text": "Robert Corliss — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-361a5e1d4ad5"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon and Maya Torres-Dillon and Rick Dillon — moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit, Piedmont Ave (C117 — what happened in their life, not words they said)",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-dd8a7194ca45"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-60893fbf7442"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C117: took the job at the back of the fellowship hall, the one nobody talks during",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-96c41510789b"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C117: cancelled the standing coffee date and sent nothing in its place",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-e2a75917b63d"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — in their life, C117: Dillon Clinic returned $7631 to the line this week",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-f7d4f8e4843f"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — Lives already wrote this person: a moment the record kept (C115), a moment the record kept (C116)",
+      "src": "output/cron-compare/lives_covered.json",
+      "id": "F-84ee37c7186f"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — the Tribune named them in a piece headlined Benji Dillon Doesn't Think It's a Big Change, and That's the Story (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 8456db33639d2f5a",
+      "id": "F-5f96f6900e91"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Hello That Outlasts the Headline (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 4b64f99d2cdc97f4",
+      "id": "F-ea68c9f3c2fb"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon — the Tribune named them in a piece headlined The Lives of C116 (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl 3b65ffe55b35b067",
+      "id": "F-e3559d6248b1"
+    },
+    {
+      "t": "FACT",
+      "text": "Maya Torres-Dillon — in their life, C116: heard a shopkeeper say the family name like it still meant something",
+      "src": "output/beats/LifeHistory_Log.jsonl @C116",
+      "id": "F-72433367f621"
+    },
+    {
+      "t": "FACT",
+      "text": "Maya Torres-Dillon — in their life, C117: took the long way home just to check the Baylight fence line's progress near a cafe on the avenue",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-f7154b1f06cc"
+    },
+    {
+      "t": "FACT",
+      "text": "Maya Torres-Dillon — in their life, C117: read the Tribune's front page twice — once for the news, once to see who was in it",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-3b2b5c4b77e5"
+    },
+    {
+      "t": "FACT",
+      "text": "Maya Torres-Dillon — in their life, C117: wore the green-and-gold cap to the corner store and got three nods for it near College Avenue",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-acdc3624bb0b"
+    },
+    {
+      "t": "FACT",
+      "text": "Maya Torres-Dillon — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl b63e37fc93f94a10",
+      "id": "F-c59fcccf4178"
+    },
+    {
+      "t": "FACT",
+      "text": "Maya Torres-Dillon — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4",
+      "id": "F-b393e9eae134"
+    },
+    {
+      "t": "FACT",
+      "text": "Maya Torres-Dillon — the Tribune named them in a piece headlined The Top Mark, From the Pickup Line (Civic, C112)",
+      "src": "archive/ARTICLE_INDEX.jsonl 8c87a6065e349ed1",
+      "id": "F-e653c2ce7bf5"
+    },
+    {
+      "t": "FACT",
+      "text": "Rick Dillon — in their life, C117: traded the good sticker for the rare one and called it a fair deal",
+      "src": "output/beats/LifeHistory_Log.jsonl @C117",
+      "id": "F-fa6d9a899d61"
+    },
+    {
+      "t": "FACT",
+      "text": "Rick Dillon — the Tribune named them in a piece headlined The Lives Page, Cycle 116 (Culture, C116)",
+      "src": "archive/ARTICLE_INDEX.jsonl fccceb837d077903",
+      "id": "F-29b4744eeeae"
+    },
+    {
+      "t": "FACT",
+      "text": "Rick Dillon — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+      "src": "archive/ARTICLE_INDEX.jsonl b63e37fc93f94a10",
+      "id": "F-a4cf7529a9af"
+    },
+    {
+      "t": "FACT",
+      "text": "Rick Dillon — the Tribune named them in a piece headlined The Rockridge Equation (Civic, C106)",
+      "src": "archive/ARTICLE_INDEX.jsonl cbe42dea89a8cbe4",
+      "id": "F-77528bbfdc5d"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C13, Spring, holiday=none",
+      "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+      "id": "F-f7ed4e9a474c"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tamsin-lives-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
+      "targetWords": "450-1200",
+      "opening": "the heaviest event on the slice, stated as it happened to the named person"
+    },
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "canonBlockers": [
+      "any person, event, quote, venue, employer or family member not on the slice",
+      "a paraphrased or invented quote",
+      "a cause, diagnosis or outcome the record does not state",
+      "a statistic, rate or trend claim — the page is people, not numbers",
+      "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
+      "raw engine labels or decimals printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-b66aead01c23",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c5606da08cb9",
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-267b376eabba",
+        "t": "FACT",
+        "text": "Serg Cerrano welcomed a new child, Fruitvale",
+        "src": "output/beats/Lived_Events.jsonl @C117 batch 45e0d8"
+      },
+      {
+        "id": "F-c83e7f00c276",
+        "t": "FACT",
+        "text": "Serg Cerrano first. The event is the lead; one true detail; what came next only if the record says.",
+        "src": "output/beats/Lived_Events.jsonl @C117 batch 45e0d8"
+      },
+      {
+        "id": "F-1f3dc7959e14",
+        "t": "FACT",
+        "text": "Serg Cerrano welcomed a new child, Fruitvale (C117). What came next: the record does not say yet",
+        "src": "output/beats/Lived_Events.jsonl @C117"
+      },
+      {
+        "id": "F-8bef746f92f5",
+        "t": "FACT",
+        "text": "Serg Cerrano — in their life, C117: set the table for one though their sister had said she might stop by",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-793f830a7ed3",
+        "t": "FACT",
+        "text": "Serg Cerrano — in their life, C117: felt the city's pace pulling them forward",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-7d610545d4b5",
+        "t": "FACT",
+        "text": "Serg Cerrano — in their life, C117: walked by the new place on the corner and decided from the sidewalk it wasn't for them near a taqueria patio",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-78c1faed7346",
+        "t": "FACT",
+        "text": "Serg Cerrano — in their life, C117: ran the numbers on staying put another year",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-38ddc99d218f",
+        "t": "FACT",
+        "text": "Joseph Cramp was promoted; the record lists their work as Janitor, Downtown (C117). What came next: the record does not say yet",
+        "src": "output/beats/Lived_Events.jsonl @C117"
+      },
+      {
+        "id": "F-4bd009080cdc",
+        "t": "FACT",
+        "text": "Joseph Cramp — in their life, C116: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-28b07ef27512",
+        "t": "FACT",
+        "text": "Joseph Cramp — in their life, C117: Promoted at City of Oakland after 28 years as a Janitor.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-a71634eb8356",
+        "t": "FACT",
+        "text": "Joseph Cramp — in their life, C117: started the application and closed the tab after the first page",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-76fe720cc8bd",
+        "t": "FACT",
+        "text": "Joseph Cramp — in their life, C117: held the door and got a whole conversation for it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-55694e59ff5f",
+        "t": "FACT",
+        "text": "Travis Paiz and Jocelyn Santo set up a household together in Lake Merritt, renting (C117)",
+        "src": "output/beats/Household_Ledger.jsonl @C117"
+      },
+      {
+        "id": "F-d86b9784d0a5",
+        "t": "FACT",
+        "text": "Travis Paiz — in their life, C116: wrapped the good dishes twice and labeled the box in block letters",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-addd90423233",
+        "t": "FACT",
+        "text": "Travis Paiz — in their life, C116: overheard a goodbye at the corner that sounded permanent, and carried it a block",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-530903564989",
+        "t": "FACT",
+        "text": "Travis Paiz — in their life, C117: married Jocelyn Santo; a household begins in Lake Merritt",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-049544b41836",
+        "t": "FACT",
+        "text": "Travis Paiz — in their life, C117: listened to the ninth inning on the porch radio and let the street hear it too",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-98e163023f7a",
+        "t": "FACT",
+        "text": "Jocelyn Santo — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-dbf5b3e61c10",
+        "t": "FACT",
+        "text": "Jocelyn Santo — in their life, C117: married Travis Paiz; a household begins in Lake Merritt",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-5c559d098f4e",
+        "t": "FACT",
+        "text": "Jocelyn Santo — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-360089f9b801",
+        "t": "FACT",
+        "text": "Jocelyn Santo — in their life, C117: ordered in for the third night and asked for it to be left at the door",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-27f92b4425bb",
+        "t": "FACT",
+        "text": "Alma Lewis moved into a place of their own in Rockridge, renting (C117)",
+        "src": "output/beats/Household_Ledger.jsonl @C117"
+      },
+      {
+        "id": "F-684860067d6c",
+        "t": "FACT",
+        "text": "Alma Lewis — in their life, C116: the bartender wiping down counters while discussing the stalled train delays with a regular",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-d6a91ed77f93",
+        "t": "FACT",
+        "text": "Alma Lewis — in their life, C117: A manager at Port of Oakland put their name forward for the open lead role.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-1d733f7a1653",
+        "t": "FACT",
+        "text": "Alma Lewis — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-106210de2317",
+        "t": "FACT",
+        "text": "Alma Lewis — in their life, C117: brought home a new plant and picked its spot carefully",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-3ff7a2fbecb2",
+        "t": "FACT",
+        "text": "Inga Creator — spent an afternoon at the sound archive listening to recordings near a late-night counter, Uptown — one of 4 people the Cycle's civic turn reached (Citywide reaction: last week's Tribune CIVIC coverage rated +3 (positive, 2 articles, Carmen Delaine).) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117"
+      },
+      {
+        "id": "F-0fa53ab3be78",
+        "t": "FACT",
+        "text": "Inga Creator — in their life, C116: caught themselves bragging a little about the neighborhood lately",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-76a66f2c0e8a",
+        "t": "FACT",
+        "text": "Dimmie Washington — checked the Civis Systems Field livestream just to see if the grass had been laid down yet near a local pop-up, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland Stabilization Fund is disbursement-active — ongoing economic effects in West Oakland; the city feels it through these…) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117"
+      },
+      {
+        "id": "F-6fda37ddb489",
+        "t": "FACT",
+        "text": "Dimmie Washington — in their life, C116: let the phone ring twice before answering so it wouldn't seem like they'd been waiting",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-093e0e7c4e2b",
+        "t": "FACT",
+        "text": "Dimmie Washington — in their life, C116: A nurse coming off shift in West Oakland said she sees them around more than she expected to.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-35c5687dd7e9",
+        "t": "FACT",
+        "text": "Dimmie Washington — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-6b251313b406",
+        "t": "FACT",
+        "text": "Dimmie Washington — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near an old warehouse corridor",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-4971dda34ad1",
+        "t": "FACT",
+        "text": "Gloria Liu — gave a whole afternoon to a hobby without once checking the clock, Rockridge — one of 4 people the Cycle's city turn reached (Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels…) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117"
+      },
+      {
+        "id": "F-21dddab5ba1a",
+        "t": "FACT",
+        "text": "Gloria Liu — in their life, C116: overheard coworkers talking about last night's scene near College Avenue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-fb3aa96aa24c",
+        "t": "FACT",
+        "text": "Gloria Liu — in their life, C116: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-88ca9124f20c",
+        "t": "FACT",
+        "text": "Gloria Liu — in their life, C116: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-86b5edc392fd",
+        "t": "FACT",
+        "text": "Gloria Liu — the Tribune named them in a piece headlined One More Backpack in Rockridge (Civic, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 084e661bc365baac"
+      },
+      {
+        "id": "F-f1930c75e03c",
+        "t": "FACT",
+        "text": "Gloria Liu — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl b63e37fc93f94a10"
+      },
+      {
+        "id": "F-18169d060f68",
+        "t": "FACT",
+        "text": "Paul Skenes — enjoying the familiar rhythm of spring prep, Lake Merritt (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-e2774a8815c2",
+        "t": "FACT",
+        "text": "Paul Skenes — in their life, C116: ran into neighbors at Lake Merritt Blossom Walk",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-bf4f19967edc",
+        "t": "FACT",
+        "text": "Paul Skenes — the Tribune named them in a piece headlined Unsung Architects of a Dynasty (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl 1ab41325cca00406"
+      },
+      {
+        "id": "F-fbb200508957",
+        "t": "FACT",
+        "text": "Paul Skenes — the Tribune named them in a piece headlined Offseason Efficiency Analysis: When Desperation Meets Asset Management (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl 416d45676c73f82e"
+      },
+      {
+        "id": "F-6566b970d5d0",
+        "t": "FACT",
+        "text": "Paul Skenes — the Tribune named them in a piece headlined The Dismantling: When Championships Require Sacrifice (Sports)",
+        "src": "archive/ARTICLE_INDEX.jsonl 7e63265639c2c2a1"
+      },
+      {
+        "id": "F-5dd5d09a67b2",
+        "t": "FACT",
+        "text": "Cathy Skeet — swapped seed packets with a neighbor over the fence, Chinatown (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-7a61443afa16",
+        "t": "FACT",
+        "text": "Cathy Skeet — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-b07211a97ba8",
+        "t": "FACT",
+        "text": "Cathy Skeet — in their life, C117: carried three boxes of canned goods from the pantry truck and felt it in their lower back near a small bakery line",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-75b41c762e44",
+        "t": "FACT",
+        "text": "Cathy Skeet — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-c5312ea79ad3",
+        "t": "FACT",
+        "text": "Cathy Skeet — in their life, C117: the kids could say Soo Loo before they could say the mayor's name",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-5b54455a82ac",
+        "t": "FACT",
+        "text": "Robert Corliss — let the afternoon go by without finding one thing that needed them, Lake Merritt (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-cac35aeafd4f",
+        "t": "FACT",
+        "text": "Robert Corliss — in their life, C116: still feeling the energy from last night's city buzz",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-e43ae161f3e3",
+        "t": "FACT",
+        "text": "Robert Corliss — in their life, C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-6c7ce1da712a",
+        "t": "FACT",
+        "text": "Robert Corliss — in their life, C117: kept a small promise to themselves nobody else knew about",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-361a5e1d4ad5",
+        "t": "FACT",
+        "text": "Robert Corliss — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-dd8a7194ca45",
+        "t": "FACT",
+        "text": "Benji Dillon and Maya Torres-Dillon and Rick Dillon — moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit, Piedmont Ave (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-60893fbf7442",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C117: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-96c41510789b",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C117: took the job at the back of the fellowship hall, the one nobody talks during",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-e2a75917b63d",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C117: cancelled the standing coffee date and sent nothing in its place",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-f7d4f8e4843f",
+        "t": "FACT",
+        "text": "Benji Dillon — in their life, C117: Dillon Clinic returned $7631 to the line this week",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-84ee37c7186f",
+        "t": "FACT",
+        "text": "Benji Dillon — Lives already wrote this person: a moment the record kept (C115), a moment the record kept (C116)",
+        "src": "output/cron-compare/lives_covered.json"
+      },
+      {
+        "id": "F-5f96f6900e91",
+        "t": "FACT",
+        "text": "Benji Dillon — the Tribune named them in a piece headlined Benji Dillon Doesn't Think It's a Big Change, and That's the Story (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 8456db33639d2f5a"
+      },
+      {
+        "id": "F-ea68c9f3c2fb",
+        "t": "FACT",
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Hello That Outlasts the Headline (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 4b64f99d2cdc97f4"
+      },
+      {
+        "id": "F-e3559d6248b1",
+        "t": "FACT",
+        "text": "Benji Dillon — the Tribune named them in a piece headlined The Lives of C116 (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl 3b65ffe55b35b067"
+      },
+      {
+        "id": "F-72433367f621",
+        "t": "FACT",
+        "text": "Maya Torres-Dillon — in their life, C116: heard a shopkeeper say the family name like it still meant something",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116"
+      },
+      {
+        "id": "F-f7154b1f06cc",
+        "t": "FACT",
+        "text": "Maya Torres-Dillon — in their life, C117: took the long way home just to check the Baylight fence line's progress near a cafe on the avenue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-3b2b5c4b77e5",
+        "t": "FACT",
+        "text": "Maya Torres-Dillon — in their life, C117: read the Tribune's front page twice — once for the news, once to see who was in it",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-acdc3624bb0b",
+        "t": "FACT",
+        "text": "Maya Torres-Dillon — in their life, C117: wore the green-and-gold cap to the corner store and got three nods for it near College Avenue",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-c59fcccf4178",
+        "t": "FACT",
+        "text": "Maya Torres-Dillon — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl b63e37fc93f94a10"
+      },
+      {
+        "id": "F-b393e9eae134",
+        "t": "FACT",
+        "text": "Maya Torres-Dillon — the Tribune named them in a piece headlined Rockridge Wine Bar Says \"Steady.\" The Map Says Decay. Who Answers? (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl 77223d1e2e7334d4"
+      },
+      {
+        "id": "F-e653c2ce7bf5",
+        "t": "FACT",
+        "text": "Maya Torres-Dillon — the Tribune named them in a piece headlined The Top Mark, From the Pickup Line (Civic, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl 8c87a6065e349ed1"
+      },
+      {
+        "id": "F-fa6d9a899d61",
+        "t": "FACT",
+        "text": "Rick Dillon — in their life, C117: traded the good sticker for the rare one and called it a fair deal",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117"
+      },
+      {
+        "id": "F-29b4744eeeae",
+        "t": "FACT",
+        "text": "Rick Dillon — the Tribune named them in a piece headlined The Lives Page, Cycle 116 (Culture, C116)",
+        "src": "archive/ARTICLE_INDEX.jsonl fccceb837d077903"
+      },
+      {
+        "id": "F-a4cf7529a9af",
+        "t": "FACT",
+        "text": "Rick Dillon — the Tribune named them in a piece headlined At Rockridge pickup, the strongest school record in the city slips by five hundredths and the hallways keep their hours (Civic, C114)",
+        "src": "archive/ARTICLE_INDEX.jsonl b63e37fc93f94a10"
+      },
+      {
+        "id": "F-77528bbfdc5d",
+        "t": "FACT",
+        "text": "Rick Dillon — the Tribune named them in a piece headlined The Rockridge Equation (Civic, C106)",
+        "src": "archive/ARTICLE_INDEX.jsonl cbe42dea89a8cbe4"
+      },
+      {
+        "id": "F-f7ed4e9a474c",
+        "t": "FACT",
+        "text": "Calendar: Y3C13, Spring, holiday=none",
+        "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00523-13e380bc53",
+        "speakerId": "POP-00523",
+        "speakerName": "Serg Cerrano",
+        "text": "After welcoming my new child, I felt the city's pace pulling me forward. Life's been busy, and I've been close to family a lot lately.",
+        "factIds": [
+          "F-267b376eabba",
+          "F-793f830a7ed3"
+        ],
+        "src": "packet.W2[POP-00523]"
+      },
+      {
+        "id": "Q-POP-00272-b971553872",
+        "speakerId": "POP-00272",
+        "speakerName": "Joseph Cramp",
+        "text": "I've been a Janitor for 28 years, and I just got promoted. To be honest, it's still sinking in. It means more responsibilities, more fires to put out before noon, but it's a win for me. I'm not sure what comes next, but I'm ready to take it on.",
+        "factIds": [
+          "F-28b07ef27512",
+          "F-38ddc99d218f"
+        ],
+        "src": "packet.W2[POP-00272]"
+      },
+      {
+        "id": "Q-POP-00222-bb889af6cb",
+        "speakerId": "POP-00222",
+        "speakerName": "Travis Paiz",
+        "text": "Setting up the household with Jocelyn was a whirlwind, to be honest. We just got married and were eager to start our life together. It's been a lot of work, but we're getting into a groove. We've got our routines down, and it's nice having someone to share the responsibilities with. Our little one is the light of our lives, and it's been great watching them adjust to our new setup.",
+        "factIds": [
+          "F-55694e59ff5f",
+          "F-530903564989",
+          "F-dbf5b3e61c10"
+        ],
+        "src": "packet.W2[POP-00222]"
+      },
+      {
+        "id": "Q-POP-00547-1ec47340a4",
+        "speakerId": "POP-00547",
+        "speakerName": "Jocelyn Santo",
+        "text": "Setting up a household with Travis has been a whirlwind, to be honest. We just got married and are still figuring things out. It's been a big adjustment, but I'm excited to start this new chapter with him in Lake Merritt.",
+        "factIds": [
+          "F-55694e59ff5f",
+          "F-530903564989",
+          "F-dbf5b3e61c10"
+        ],
+        "src": "packet.W2[POP-00547]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00523",
+        "name": "Serg Cerrano",
+        "profile": "Serg Cerrano — Mover — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00272",
+        "name": "Joseph Cramp",
+        "profile": "Joseph Cramp — Janitor — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00222",
+        "name": "Travis Paiz",
+        "profile": "Travis Paiz — Mover — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00547",
+        "name": "Jocelyn Santo",
+        "profile": "Jocelyn Santo — Yoga Instructor — Lake Merritt",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tamsin Pruitt",
+        "text": "The community in Fruitvale is vibrant and dynamic, with many individuals experiencing significant life events.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
+      "the frame around a supplied fact — what a promotion to the supplied role means in plain words, without inventing the workplace",
+      "the neighborhood the slice names as where the person lives, without an invented street scene",
+      "the order and pacing of the passages — heaviest first, one person at a time"
+    ],
+    "textureConditions": [
+      "every person, event, role, employer, neighborhood, hospital stay, household and family tie must come from the slice",
+      "a quote appears only verbatim from the person's own supplied page; nothing paraphrased into quotation marks",
+      "what came next appears only when a later Cycle's supplied record holds it",
+      "a thin day (few events) is written as a short page, not padded"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

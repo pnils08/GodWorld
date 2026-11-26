@@ -1,0 +1,69 @@
+{
+  "date": "2026-11-24",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "angle",
+        "capHits": 0
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": false,
+      "error": "free W1 Packet has nothing on the record to show the seat",
+      "checks": null
+    }
+  ],
+  "checkTotals": {
+    "seats": 5,
+    "toolSeats": 0,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 0,
+    "graded": 0,
+    "gradeSum": 0,
+    "gradeMax": []
+  },
+  "ranAt": "2026-11-24T12:17:19.367Z"
+}

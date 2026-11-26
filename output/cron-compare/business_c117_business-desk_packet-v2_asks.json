@@ -1,0 +1,446 @@
+[
+  {
+    "pop": "POP-00027",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00027\",\"name\":\"Philly Rodriguez\",\"role\":\"Casino Manager\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"You manage the floor at Oakland Casino Town, and the casino lost 3 people this cycle. Who went, was it layoffs or attrition, and what are the remaining staff's hours and pay like now? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"own-pick\",\"hood\":null,\"focus\":\"Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch\",\"evidence\":[{\"id\":\"EV-04b6db5e25\",\"src\":\"own pick, C117\",\"text\":\"Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C117\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c5606da08cb9\"},{\"t\":\"FACT\",\"text\":\"All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 vs prev/\",\"id\":\"F-d2036d9993b1\"},{\"t\":\"FACT\",\"text\":\"Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/\",\"id\":\"F-efd9ebd3280e\"},{\"t\":\"FACT\",\"text\":\"Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/\",\"id\":\"F-453ce66b090f\"},{\"t\":\"FACT\",\"text\":\"Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/\",\"id\":\"F-f7a1edd68e81\"},{\"t\":\"FACT\",\"text\":\"Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/\",\"id\":\"F-98d7f078ab1d\"},{\"t\":\"FACT\",\"text\":\"Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/\",\"id\":\"F-e2a697fe208c\"},{\"t\":\"FACT\",\"text\":\"Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/\",\"id\":\"F-a794c94d37ad\"},{\"t\":\"FACT\",\"text\":\"Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch\",\"src\":\"Simulation_Ledger profile for POP-00027\",\"id\":\"F-835eac28e335\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00027",
+        "name": "Philly Rodriguez",
+        "role": "Casino Manager",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "You manage the floor at Oakland Casino Town, and the casino lost 3 people this cycle. Who went, was it layoffs or attrition, and what are the remaining staff's hours and pay like now? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "own-pick",
+        "hood": null,
+        "focus": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+        "evidence": [
+          {
+            "id": "EV-04b6db5e25",
+            "src": "own pick, C117",
+            "text": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C117",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c5606da08cb9"
+        },
+        {
+          "t": "FACT",
+          "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+          "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/",
+          "id": "F-d2036d9993b1"
+        },
+        {
+          "t": "FACT",
+          "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/",
+          "id": "F-efd9ebd3280e"
+        },
+        {
+          "t": "FACT",
+          "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/",
+          "id": "F-453ce66b090f"
+        },
+        {
+          "t": "FACT",
+          "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/",
+          "id": "F-f7a1edd68e81"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/",
+          "id": "F-98d7f078ab1d"
+        },
+        {
+          "t": "FACT",
+          "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/",
+          "id": "F-e2a697fe208c"
+        },
+        {
+          "t": "FACT",
+          "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/",
+          "id": "F-a794c94d37ad"
+        },
+        {
+          "t": "FACT",
+          "text": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+          "src": "Simulation_Ledger profile for POP-00027",
+          "id": "F-835eac28e335"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00028",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00028\",\"name\":\"Manfred Owens\",\"role\":\"Booky\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"You work the book at the casino and live in Jack London. Has your shift or your volume changed, and who is picking up the work of the three who left? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"own-pick\",\"hood\":null,\"focus\":\"Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day\",\"evidence\":[{\"id\":\"EV-a8c93d3049\",\"src\":\"own pick, C117\",\"text\":\"Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C117\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c5606da08cb9\"},{\"t\":\"FACT\",\"text\":\"All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 vs prev/\",\"id\":\"F-d2036d9993b1\"},{\"t\":\"FACT\",\"text\":\"Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/\",\"id\":\"F-efd9ebd3280e\"},{\"t\":\"FACT\",\"text\":\"Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/\",\"id\":\"F-453ce66b090f\"},{\"t\":\"FACT\",\"text\":\"Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/\",\"id\":\"F-f7a1edd68e81\"},{\"t\":\"FACT\",\"text\":\"Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/\",\"id\":\"F-98d7f078ab1d\"},{\"t\":\"FACT\",\"text\":\"Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/\",\"id\":\"F-e2a697fe208c\"},{\"t\":\"FACT\",\"text\":\"Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/\",\"id\":\"F-a794c94d37ad\"},{\"t\":\"FACT\",\"text\":\"Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day\",\"src\":\"Simulation_Ledger profile for POP-00028\",\"id\":\"F-1bca48dc2528\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00028",
+        "name": "Manfred Owens",
+        "role": "Booky",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "You work the book at the casino and live in Jack London. Has your shift or your volume changed, and who is picking up the work of the three who left? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "own-pick",
+        "hood": null,
+        "focus": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+        "evidence": [
+          {
+            "id": "EV-a8c93d3049",
+            "src": "own pick, C117",
+            "text": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C117",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c5606da08cb9"
+        },
+        {
+          "t": "FACT",
+          "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+          "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/",
+          "id": "F-d2036d9993b1"
+        },
+        {
+          "t": "FACT",
+          "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/",
+          "id": "F-efd9ebd3280e"
+        },
+        {
+          "t": "FACT",
+          "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/",
+          "id": "F-453ce66b090f"
+        },
+        {
+          "t": "FACT",
+          "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/",
+          "id": "F-f7a1edd68e81"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/",
+          "id": "F-98d7f078ab1d"
+        },
+        {
+          "t": "FACT",
+          "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/",
+          "id": "F-e2a697fe208c"
+        },
+        {
+          "t": "FACT",
+          "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/",
+          "id": "F-a794c94d37ad"
+        },
+        {
+          "t": "FACT",
+          "text": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+          "src": "Simulation_Ledger profile for POP-00028",
+          "id": "F-1bca48dc2528"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00023",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00023\",\"name\":\"Gregory Mims\",\"role\":\"Organized Crime\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"What have you seen change around the casino and West Oakland as staffing shrank, and is the neighborhood feeling any benefit from the casino? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"own-pick\",\"hood\":null,\"focus\":\"Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Gregory Mims — Organized Crime — West Oakland — Organized Crime at Oakland Casino Town (-3 employees this cycle); C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner\",\"evidence\":[{\"id\":\"EV-3c5cecf7db\",\"src\":\"own pick, C117\",\"text\":\"Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C117\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c5606da08cb9\"},{\"t\":\"FACT\",\"text\":\"All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 vs prev/\",\"id\":\"F-d2036d9993b1\"},{\"t\":\"FACT\",\"text\":\"Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/\",\"id\":\"F-efd9ebd3280e\"},{\"t\":\"FACT\",\"text\":\"Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/\",\"id\":\"F-453ce66b090f\"},{\"t\":\"FACT\",\"text\":\"Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/\",\"id\":\"F-f7a1edd68e81\"},{\"t\":\"FACT\",\"text\":\"Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/\",\"id\":\"F-98d7f078ab1d\"},{\"t\":\"FACT\",\"text\":\"Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/\",\"id\":\"F-e2a697fe208c\"},{\"t\":\"FACT\",\"text\":\"Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees\",\"src\":\"output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/\",\"id\":\"F-a794c94d37ad\"},{\"t\":\"FACT\",\"text\":\"Gregory Mims — Organized Crime — West Oakland — Organized Crime at Oakland Casino Town (-3 employees this cycle); C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner\",\"src\":\"Simulation_Ledger profile for POP-00023\",\"id\":\"F-4ce695ee84aa\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00023",
+        "name": "Gregory Mims",
+        "role": "Organized Crime",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "What have you seen change around the casino and West Oakland as staffing shrank, and is the neighborhood feeling any benefit from the casino? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "own-pick",
+        "hood": null,
+        "focus": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Gregory Mims — Organized Crime — West Oakland — Organized Crime at Oakland Casino Town (-3 employees this cycle); C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "evidence": [
+          {
+            "id": "EV-3c5cecf7db",
+            "src": "own pick, C117",
+            "text": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C117",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c5606da08cb9"
+        },
+        {
+          "t": "FACT",
+          "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+          "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/",
+          "id": "F-d2036d9993b1"
+        },
+        {
+          "t": "FACT",
+          "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/",
+          "id": "F-efd9ebd3280e"
+        },
+        {
+          "t": "FACT",
+          "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/",
+          "id": "F-453ce66b090f"
+        },
+        {
+          "t": "FACT",
+          "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/",
+          "id": "F-f7a1edd68e81"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/",
+          "id": "F-98d7f078ab1d"
+        },
+        {
+          "t": "FACT",
+          "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/",
+          "id": "F-e2a697fe208c"
+        },
+        {
+          "t": "FACT",
+          "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/",
+          "id": "F-a794c94d37ad"
+        },
+        {
+          "t": "FACT",
+          "text": "Gregory Mims — Organized Crime — West Oakland — Organized Crime at Oakland Casino Town (-3 employees this cycle); C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+          "src": "Simulation_Ledger profile for POP-00023",
+          "id": "F-4ce695ee84aa"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

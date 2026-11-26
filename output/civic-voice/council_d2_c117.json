@@ -1,0 +1,56 @@
+{
+  "office": "council_d2",
+  "cycle": 117,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I support publishing the Baylight milestone review, but no construction milestone should be declared passed without evidence supporting it; oversight continues. For Downtown revitalization, I want an executable Uptown plan and a recorded committee decision, with the $15 million authorization remaining pending. D2’s current conditions call for practical attention to local businesses and neighborhood life, not a crisis declaration.",
+  "statements": [
+    {
+      "statementId": "STMT-117-council_d2-001",
+      "type": "statement",
+      "topic": "Baylight construction milestone evidence review",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Conduct and publish the scheduled review against the assembled evidence file; declare no milestone passed unless the evidence supports it, and continue oversight.",
+      "quote": "A review is not a pass; the evidence has to earn that conclusion.",
+      "fullStatement": "The construction milestone review is due, and the assembled evidence file should be examined and published for the public. I support the review, not a presumption that a milestone has been achieved. The packet describes the evidence assembled but does not give me a finding that remediation, hotline, dust-control, and workforce records together support a pass. Unless the review establishes that, no pass should be declared. Independent oversight and the existing protections should continue while the work is assessed.",
+      "disposition": "statement",
+      "actionAsked": "Conduct and publish the evidence-file review; declare no milestone pass without supporting evidence and continue oversight.",
+      "tone": "evidence-driven",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d2-002",
+      "type": "statement",
+      "topic": "Uptown stabilization execution and Downtown committee decision",
+      "initiative": "Downtown Economic Revitalization",
+      "decision": "Require a published, executable Uptown stabilization plan with a concrete timeline and Ashford benchmarks, seek a recorded committee decision, and keep the $15 million authorization pending; if delivery fails, record the missed phase rather than extend with another announcement.",
+      "quote": "Downtown needs a plan people can inspect and a decision the record can show.",
+      "fullStatement": "The Uptown stabilization planning commitment is due this cycle. After three cycles at the same stage, another announcement is not a substitute for an executable plan with a concrete timeline and the Ashford benchmarks attached. I want the committee's decision recorded as well, whether or not the plan is delivered. The $15 million authorization remains pending; this statement does not approve or appropriate it. If the required work is not produced, record the missed phase plainly rather than describing an extension as progress.",
+      "disposition": "statement",
+      "actionAsked": "Publish the executable Uptown plan and timeline, record the committee decision, and document a missed phase if delivery fails; keep authorization pending.",
+      "tone": "quiet-substantive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d2-003",
+      "type": "statement",
+      "topic": "D2 neighborhood conditions and civic life",
+      "initiative": null,
+      "decision": "Recognize the positive activity in Downtown and Jack London, attend to Chinatown's flat mood and Baylight's slow trade, and seek practical follow-through for neighborhood businesses without declaring a crisis or proposing unsupported spending.",
+      "quote": "Good conditions deserve attention too, and attention should be grounded in what neighbors are experiencing.",
+      "fullStatement": "Downtown and Jack London are upbeat, with busy street trade and low crime; Chinatown has busy trade but a flat mood, and Baylight is mildly positive while trade remains slow. Those conditions call for attentive, practical work, not a crisis label or a claim that one indicator proves a project result. I also welcome the community health fair hosted by Telegraph Presbyterian Fellowship in Downtown as part of the neighborhood's civic life. I want city follow-through to stay grounded in current conditions and the needs of local businesses.",
+      "disposition": "statement",
+      "actionAsked": "Keep attention on D2 neighborhood conditions and local business needs, and ground any follow-through in current evidence.",
+      "tone": "district-focused",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

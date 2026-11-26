@@ -1,0 +1,226 @@
+{
+  "date": "2026-11-23",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 913,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 720,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Coen Cartier prioritized their health after a scare (Chinatown).",
+            "run": "coen cartier health scare chinatown"
+          }
+        ],
+        "words": 905,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Trevor Shimizu",
+      "desk": "civic",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 3,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 887,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 4,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 855,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [
+          {
+            "text": "Serg Cerrano welcomed a new child, Fruitvale",
+            "run": "serg cerrano welcomed a new child"
+          },
+          {
+            "text": "Serg Cerrano welcomed a new child, Fruitvale (C117). What came next: the record does not say yet",
+            "run": "serg cerrano welcomed a new child"
+          },
+          {
+            "text": "Serg Cerrano — in their life, C117: set the table for one though their sister had said she might stop by",
+            "run": "set the table for one though"
+          },
+          {
+            "text": "Serg Cerrano — in their life, C117: walked by the new place on the corner and decided from the sidewalk it wasn't for them near a taqueria patio",
+            "run": "the new place on the corner"
+          },
+          {
+            "text": "Serg Cerrano — in their life, C117: ran the numbers on staying put another year",
+            "run": "ran the numbers on staying put"
+          },
+          {
+            "text": "Joseph Cramp — in their life, C116: a DJ spins records at a crowded bar near Broadway, the bassline thumping through the foggy night",
+            "run": "records at a crowded bar near"
+          },
+          {
+            "text": "Joseph Cramp — in their life, C117: Promoted at City of Oakland after 28 years as a Janitor.",
+            "run": "city of oakland after 28 years"
+          },
+          {
+            "text": "Joseph Cramp — in their life, C117: started the application and closed the tab after the first page",
+            "run": "application and closed the tab after"
+          },
+          {
+            "text": "Joseph Cramp — in their life, C117: held the door and got a whole conversation for it",
+            "run": "door and got a whole conversation"
+          },
+          {
+            "text": "Travis Paiz — in their life, C116: wrapped the good dishes twice and labeled the box in block letters",
+            "run": "wrapped the good dishes twice and"
+          },
+          {
+            "text": "Travis Paiz — in their life, C117: listened to the ninth inning on the porch radio and let the street hear it too",
+            "run": "to the ninth inning on the"
+          },
+          {
+            "text": "Jocelyn Santo — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Jocelyn Santo — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+            "run": "saw the sign up sheet for"
+          },
+          {
+            "text": "Jocelyn Santo — in their life, C117: ordered in for the third night and asked for it to be left at the door",
+            "run": "ordered in for the third night"
+          },
+          {
+            "text": "Alma Lewis — in their life, C117: A manager at Port of Oakland put their name forward for the open lead role.",
+            "run": "name forward for the open lead"
+          },
+          {
+            "text": "Alma Lewis — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Alma Lewis — in their life, C117: brought home a new plant and picked its spot carefully",
+            "run": "brought home a new plant and"
+          },
+          {
+            "text": "Dimmie Washington — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+            "run": "saw the sign up sheet for"
+          },
+          {
+            "text": "Cathy Skeet — in their life, C116: grabbed coffee from the cart outside the hospital before the morning rush hit",
+            "run": "grabbed coffee from the cart outside"
+          },
+          {
+            "text": "Benji Dillon — in their life, C117: took the job at the back of the fellowship hall, the one nobody talks during",
+            "run": "took the job at the back"
+          },
+          {
+            "text": "Benji Dillon — in their life, C117: cancelled the standing coffee date and sent nothing in its place",
+            "run": "cancelled the standing coffee date and"
+          },
+          {
+            "text": "Maya Torres-Dillon — in their life, C117: read the Tribune's front page twice — once for the news, once to see who was in it",
+            "run": "read the tribunes front page twice"
+          },
+          {
+            "text": "Maya Torres-Dillon — in their life, C117: wore the green-and-gold cap to the corner store and got three nods for it near College Avenue",
+            "run": "wore the green and gold cap"
+          },
+          {
+            "text": "Rick Dillon — in their life, C117: traded the good sticker for the rare one and called it a fair deal",
+            "run": "traded the good sticker for the"
+          }
+        ],
+        "words": 1167,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true,
+      "checks": {
+        "stage": "write",
+        "toolCalls": 6,
+        "capHits": 0,
+        "thin": false,
+        "verbatim": [],
+        "words": 408,
+        "contractScore": 3,
+        "contractMax": 3
+      }
+    }
+  ],
+  "checkTotals": {
+    "seats": 7,
+    "toolSeats": 7,
+    "capHits": 0,
+    "thin": 0,
+    "verbatim": 2,
+    "graded": 7,
+    "gradeSum": 21,
+    "gradeMax": [
+      3
+    ]
+  },
+  "ranAt": "2026-11-24T00:23:36.065Z"
+}

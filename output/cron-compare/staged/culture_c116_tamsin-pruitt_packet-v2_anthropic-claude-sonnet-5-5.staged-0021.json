@@ -76,7 +76,28 @@
       }
     ],
     "businesses": [],
-    "storylines": [],
+    "storylines": [
+      {
+        "slug": "INIT-001:disbursement-active",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      },
+      {
+        "slug": "INIT-002:dispatch-live",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      },
+      {
+        "slug": "INIT-003:complete",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      },
+      {
+        "slug": "INIT-005:operational",
+        "verb": "referenced",
+        "attachedBy": "stepAttach"
+      }
+    ],
     "hoods": [],
     "claims": [
       {

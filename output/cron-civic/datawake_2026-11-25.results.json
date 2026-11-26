@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-25",
+  "cycle": 117,
+  "results": [
+    {
+      "office": "civic-office-council-d8",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d8_2026-11-25.json"
+    },
+    {
+      "office": "civic-office-council-d3",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d3_2026-11-25.json"
+    },
+    {
+      "office": "civic-office-council-d4",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d4_2026-11-25.json"
+    },
+    {
+      "office": "civic-project-stabilization-fund",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-project-stabilization-fund_2026-11-25.json"
+    },
+    {
+      "office": "civic-project-transit-hub",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-project-transit-hub_2026-11-25.json"
+    },
+    {
+      "office": "civic-office-okoro",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-okoro_2026-11-25.json"
+    },
+    {
+      "office": "civic-office-police-chief",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-police-chief_2026-11-25.json"
+    }
+  ],
+  "owed": null,
+  "ranAt": "2026-11-25T11:46:58.988Z"
+}

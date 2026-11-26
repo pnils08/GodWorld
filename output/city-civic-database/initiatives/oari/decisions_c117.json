@@ -1,0 +1,27 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-117-council_d1-005 (Carter D1 — Brooklyn service-audit baseline and D1 OARI evaluation — answer to Director V...)",
+    "STMT-117-mayor_gavel-002 (Mayor gavel — Alternative Response expansion hold and Fruitvale briefing record)",
+    "STMT-117-oari-001 (Tran-Muñoz — D3 Fruitvale briefing record — publication and pullable public access)",
+    "STMT-117-oari-002 (Tran-Muñoz — D5 audit and Baylight feasibility review — written next dates filed)",
+    "STMT-117-oari-003 (Tran-Muñoz — Constituents — West Oakland calm and East Oakland grief, what the crews see o...)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "ImplementationPhase": "dispatch-live",
+    "MilestoneNotes": "C117: Expansion remains held pending a published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review.",
+    "NextScheduledAction": "Execute and publish the D3 Fruitvale briefing record; file written next dates for the D5 audit and Baylight feasibility review",
+    "NextActionCycle": 118,
+    "LastWorkCycle": 117,
+    "LastWorkSeat": "civic-office-council-d5"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-116-civic-office-council-d5-2026-11-17"
+    ]
+  }
+}

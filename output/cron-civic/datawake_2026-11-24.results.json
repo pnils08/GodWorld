@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-24",
+  "cycle": 117,
+  "results": [
+    {
+      "office": "civic-office-council-d6",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d6_2026-11-24.json"
+    },
+    {
+      "office": "civic-office-council-d2",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d2_2026-11-24.json"
+    },
+    {
+      "office": "civic-office-council-d7",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-council-d7_2026-11-24.json"
+    },
+    {
+      "office": "worker-staff-dm-econ",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/worker-staff-dm-econ_2026-11-24.json"
+    },
+    {
+      "office": "worker-staff-manager",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/worker-staff-manager_2026-11-24.json"
+    },
+    {
+      "office": "civic-office-baylight-authority",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-baylight-authority_2026-11-24.json"
+    },
+    {
+      "office": "civic-office-district-attorney",
+      "ok": true,
+      "dutyKind": "regular",
+      "eventKeys": [],
+      "out": "output/cron-civic/datawake/civic-office-district-attorney_2026-11-24.json"
+    }
+  ],
+  "owed": null,
+  "ranAt": "2026-11-24T11:47:39.057Z"
+}

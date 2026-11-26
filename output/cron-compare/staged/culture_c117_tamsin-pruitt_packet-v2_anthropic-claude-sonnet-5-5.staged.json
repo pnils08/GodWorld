@@ -1,0 +1,95 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "117",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c117_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Serg Cerrano",
+        "role": "quoted-source",
+        "popid": "POP-00523"
+      },
+      {
+        "name": "Joseph Cramp",
+        "role": "quoted-source",
+        "popid": "POP-00272"
+      },
+      {
+        "name": "Travis Paiz",
+        "role": "quoted-source",
+        "popid": "POP-00222"
+      },
+      {
+        "name": "Jocelyn Santo",
+        "role": "quoted-source",
+        "popid": "POP-00547"
+      },
+      {
+        "name": "Alma Lewis",
+        "role": "mentioned",
+        "popid": "POP-00304",
+        "floor": true
+      },
+      {
+        "name": "Benji Dillon",
+        "role": "mentioned",
+        "popid": "POP-00018",
+        "floor": true
+      },
+      {
+        "name": "Maya Torres-Dillon",
+        "role": "mentioned",
+        "popid": "POP-00742",
+        "floor": true
+      },
+      {
+        "name": "Rick Dillon",
+        "role": "mentioned",
+        "popid": "POP-00743",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "After welcoming my new child, I felt the city's pace pulling me forward. Life's been busy, and I've been close to family a lot lately.",
+        "sourceRef": "citizenVoice PRESS Serg Cerrano"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "c5209545203b6eeef477aecdb56cd9fa047da1313416167cc9c66c678b165cfe",
+    "verdict": null,
+    "ranAt": "2026-11-24T00:22:22.918Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 450",
+      "words": 1167,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "c5209545203b6eeef477aecdb56cd9fa047da1313416167cc9c66c678b165cfe"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-24T00:22:22.918Z"
+}

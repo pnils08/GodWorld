@@ -1,0 +1,65 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "117",
+  "persona": "ines-sorensen",
+  "byline": "Ines Sorensen",
+  "bylinePopid": "POP-01211",
+  "article": "output/cron-compare/staged/culture_c117_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Jocelyn Santo",
+        "role": "quoted-source",
+        "popid": "POP-00547"
+      },
+      {
+        "name": "Joseph Cramp",
+        "role": "quoted-source",
+        "popid": "POP-00272"
+      },
+      {
+        "name": "Travis Paiz",
+        "role": "mentioned",
+        "popid": "POP-00222",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "(Joseph lets out a low, dry chuckle, rubbing the back of his neck with a calloused hand. He glances down at his work shoes, then back up at the reporter, his voice warm but steady.) \"First fire? Honestly, it's probably not the dramatic one folks expect. It's the supply closet inventory on the third floor of the Civic Center. That's the one that's been a slow bleed for years—nobody's kept a proper …",
+        "sourceRef": "citizenVoice PRESS Joseph Cramp"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "f39afc01ff08e095b83bd361259d2e82b22abf652e45572f9e08b787b27977f2",
+    "verdict": null,
+    "ranAt": "2026-11-26T00:19:19.842Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": false,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 751,
+      "short": "The piece is a narrative feature with reporter commentary and interviews rather than verbatim posts from citizens' own pages framed solely by line, name, and city.",
+      "score": 2,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "f39afc01ff08e095b83bd361259d2e82b22abf652e45572f9e08b787b27977f2"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-26T00:19:19.842Z"
+}

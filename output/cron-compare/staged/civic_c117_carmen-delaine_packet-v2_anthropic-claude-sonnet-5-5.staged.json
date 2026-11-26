@@ -1,0 +1,124 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c117_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Denise Carter",
+        "role": "quoted-source",
+        "popid": "POP-00501"
+      },
+      {
+        "name": "Brenda Okoro",
+        "role": "quoted-source",
+        "popid": "POP-00037"
+      },
+      {
+        "name": "Marcus Webb",
+        "role": "quoted-source",
+        "popid": "POP-00790"
+      },
+      {
+        "name": "Avery Santana",
+        "role": "mentioned",
+        "popid": "POP-00034",
+        "floor": true
+      },
+      {
+        "name": "Elliott Crane",
+        "role": "mentioned",
+        "popid": "POP-00044",
+        "floor": true
+      },
+      {
+        "name": "Janae Rivers",
+        "role": "mentioned",
+        "popid": "POP-00043",
+        "floor": true
+      },
+      {
+        "name": "Leonard Tran",
+        "role": "mentioned",
+        "popid": "POP-00502",
+        "floor": true
+      },
+      {
+        "name": "Nina Chen",
+        "role": "mentioned",
+        "popid": "POP-00505",
+        "floor": true
+      },
+      {
+        "name": "Ramon Vega",
+        "role": "mentioned",
+        "popid": "POP-00042",
+        "floor": true
+      },
+      {
+        "name": "Rose Delgado",
+        "role": "mentioned",
+        "popid": "POP-00503",
+        "floor": true
+      },
+      {
+        "name": "Terrence Mobley",
+        "role": "mentioned",
+        "popid": "POP-00506",
+        "floor": true
+      },
+      {
+        "name": "Warren Ashford",
+        "role": "mentioned",
+        "popid": "POP-00504",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "INIT-001:disbursement-active",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "The Fund was never hood-wide relief, and it was never housing — it is West Oakland businesses and neighbors, with the 23-day clock kept honest. I verified nothing by wishing it.",
+        "sourceRef": "citizenVoice PRESS Denise Carter"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-303e8e00e3d9",
+    "draftSha256": "f5965da7db8eba01d3b31b655fe53c3efd1340e0241936a01b423c8ac9e9f324",
+    "verdict": "output/cron-compare/civic_c117_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-24T00:15:54.366Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 500",
+      "words": 913,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "f5965da7db8eba01d3b31b655fe53c3efd1340e0241936a01b423c8ac9e9f324",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-24T00:16:00.234Z"
+}

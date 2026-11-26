@@ -1,0 +1,63 @@
+{
+  "office": "council_d9",
+  "agentDir": "civic-office-council-d9",
+  "holder": "Terrence Mobley",
+  "popid": "POP-00506",
+  "title": "City Council District 9",
+  "date": "2026-11-26",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Laurel is holding flat this week — sentiment at zero against a city reading of 0.112, crime index 0.66 against a city 0.649, and trajectory still marked decay, though retail vitality climbed to 7.13 and momentum eased from 3 to 2. Uptown, by contrast, is growing: sentiment 0.21, retail 16.3, momentum steady at 10. I'm not going to dress a flat Laurel reading up as a crisis, and I won't dress it up as a win either. What I owe the Planning Director is the honest ledger — what is recorded, what is actually delivered, and what residents can verify. The Laurel patch and clean-up remains where it was: announced, proposed, waiting on a council vote before a dollar of the six million moves. I intend to say that plainly and to keep pressing for a scope and filing dates neighbors can check.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-117-civic-office-council-d9",
+        "text": "Director Vance — here is the Laurel record against my Cycle 116 commitment, separating what is recorded from what is completed. Recorded: INIT-015, Laurel Neighborhood Patch and Clean-Up, sits at announced/Proposed with the full $6,000,000 unspent and the next step due C118; my C116 work move was applied to the tracker, and the Cycle 116 legislation-filing deadline passed without a filing. Completed: no scope document, no outreach record, and no Clerk entry are in hand for Laurel — I am not going to claim deliverables that don't exist. Laurel's readings this cycle are sentiment 0 against a city 0.112, crime index 0.66 against 0.649, retail vitality 7.13, trajectory decay with momentum 2. What I want done: a defined scope, a documented resident outreach record, and a verifiable Clerk entry for INIT-015 before the C118 next step, so neighbors can read for themselves what is proposed versus what was picked up. Until a council vote funds it, the clean-up is a proposal, not a service.",
+        "directiveCycle": 117,
+        "confrontationSeat": "civic-office-council-d9"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-26T11:45:10.486Z",
+  "usage": {
+    "prompt_tokens": 6166,
+    "completion_tokens": 475,
+    "total_tokens": 6641,
+    "cost": 0.00145188,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00145188,
+      "upstream_inference_prompt_cost": 0.00110988,
+      "upstream_inference_completions_cost": 0.000342
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+  "evidenceReads": [],
+  "provider": "Nebius",
+  "finishReason": "stop",
+  "elapsedMs": 2528,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00506",
+    "id": "xyuXJNuc7DY3EtVMuY3Uqb",
+    "customId": "cp-POP-00506-c117-CIVIC-datawake-2026-11-26"
+  }
+}

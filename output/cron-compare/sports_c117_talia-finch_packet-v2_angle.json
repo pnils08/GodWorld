@@ -1,0 +1,1325 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "117",
+  "persona": "talia-finch",
+  "freeAngle": "free-rows",
+  "pass": false,
+  "reporterPicks": [],
+  "morningTools": [
+    {
+      "tool": "memory_recall",
+      "input": {
+        "query": "Oaks West Oakland bars regulars same room Austin Reaves"
+      },
+      "resultChars": 868
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Business_Ledger",
+        "match": "Oaks"
+      },
+      "resultChars": 278
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Oaks West Oakland Austin Reaves"
+      },
+      "resultChars": 3302
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Oaks West Oakland bar Austin Reaves Golden State comeback"
+      },
+      "resultChars": 344
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "The Room Is Starting to Believe in the Oaks"
+      },
+      "resultChars": 549
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Elias Varek",
+        "thread": true
+      },
+      "resultChars": 2429
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Irene Fay",
+        "thread": true
+      },
+      "resultChars": 51
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Daniel Cloak",
+        "thread": true
+      },
+      "resultChars": 51
+    }
+  ],
+  "workerAnswers": [],
+  "workerAsksUsed": 0,
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00592",
+      "name": "Talia Finch",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Decide what, if anything, you want to write this cycle"
+    },
+    "signal": {
+      "kind": "own-pick",
+      "hood": null,
+      "score": null,
+      "src": "the record of C117"
+    },
+    "exposure": {
+      "basis": [
+        "own-pick"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01022",
+          "name": "Wilson Shepard",
+          "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland — on the feed: C117 team-update",
+          "role": "Head Coach, Oakland Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+            "pop": "POP-01022",
+            "rowName": "Wilson Shepard",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01027",
+          "name": "Austin Reaves",
+          "profile": "Austin Reaves — SG / The Oaks — West Oakland — on the feed: C117 player-feature",
+          "role": "SG / The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+            "pop": "POP-01027",
+            "rowName": "Austin Reaves",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01024",
+          "name": "AJ Dybantsa",
+          "profile": "AJ Dybantsa — SF / The Oaks — KONO — on the feed: C117 game-result",
+          "role": "SF / The Oaks",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+            "pop": "POP-01024",
+            "rowName": "AJ Dybantsa",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01046",
+          "name": "Elliot Abraham",
+          "profile": "Elliot Abraham — General Manager, Oakland Oaks — Jack London — on the feed: C116 season-state",
+          "role": "General Manager, Oakland Oaks",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+            "pop": "POP-01046",
+            "rowName": "Elliot Abraham",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00527",
+          "name": "Mike Paulson",
+          "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland — on the feed: C116 season-state",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+            "pop": "POP-00527",
+            "rowName": "Mike Paulson",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01023",
+          "name": "Adash Stanley",
+          "profile": "Adash Stanley — PG / The Oaks — Piedmont Ave — on the feed: C116 team-update",
+          "role": "PG / The Oaks",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+            "pop": "POP-01023",
+            "rowName": "Adash Stanley",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01079",
+          "name": "Dillon Brooks",
+          "profile": "Dillon Brooks — SF / The Oaks — West Oakland — on the feed: C116 game-result",
+          "role": "SF / The Oaks",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+            "pop": "POP-01079",
+            "rowName": "Dillon Brooks",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01223",
+          "name": "Harry Hayward",
+          "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO — on the feed: C116 game-result",
+          "role": "Oakland Oaks - Power Forward",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+            "pop": "POP-01223",
+            "rowName": "Harry Hayward",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker",
+          "role": "Sourdough Baker",
+          "hood": "Temescal",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "9Egzmf732GbHQsYNhx7e4G",
+            "customId": "cp-POP-00170-c114-PRESS-wed-fgkakh",
+            "cycle": 114,
+            "excerpt": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+          "role": "K-8 Teacher,Former Line cook",
+          "hood": "Fruitvale",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "mgXsax3i7irgmarYJpd9bp",
+            "customId": "cp-POP-00198-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server",
+          "role": "Server",
+          "hood": "Piedmont Ave",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "jQ1x55AXJqEnBWBaUX2JyW",
+            "customId": "cp-POP-00201-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00212",
+          "name": "Jessie Hess",
+          "profile": "Jessie Hess — Barista",
+          "role": "Barista",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "HyhQejEenARxJYxp93ae85",
+            "customId": "cp-POP-00212-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00224",
+          "name": "Dillon Trevor",
+          "profile": "Dillon Trevor — Server",
+          "role": "Server",
+          "hood": "Downtown",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+            "customId": "cp-POP-00224-c107-PRESS",
+            "cycle": 107,
+            "excerpt": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00273",
+          "name": "Trenton Nawan",
+          "profile": "Trenton Nawan — Server",
+          "role": "Server",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "m3ppoFKy9CCohGQMYNgXUC",
+            "customId": "cp-POP-00273-c114-PRESS-thu-mmooah",
+            "cycle": 114,
+            "excerpt": "I'm still feeling pretty good about the Oaks.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00540",
+          "name": "Jade Orion",
+          "profile": "Jade Orion — Musician",
+          "role": "Musician",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "vAkesst5wo8wCX9mn7Rujt",
+            "customId": "cp-POP-00540-c102-PRESS",
+            "cycle": 102,
+            "excerpt": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00642",
+          "name": "Ollie Campbell",
+          "profile": "Ollie Campbell — Bakery Worker",
+          "role": "Bakery Worker",
+          "hood": "Jack London",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "z6pDb5oTFZ317jUrVDT6oD",
+            "customId": "cp-POP-00642-c113-PRESS",
+            "cycle": 113,
+            "excerpt": "To be honest, I still feel the same way about the Oaks.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00722",
+          "name": "Daniel Cloak",
+          "profile": "Daniel Cloak — Bakery Worker",
+          "role": "Bakery Worker",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "uBnTZrbAsy2cgjJY5UAbsb",
+            "customId": "cp-POP-00722-c110-PRESS",
+            "cycle": 110,
+            "excerpt": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00789",
+          "name": "Elias Varek",
+          "profile": "Elias Varek — Founder of Civis Systems",
+          "role": "Founder of Civis Systems",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "saYyBNPi2KgMtYPsSEXGqZ",
+            "customId": "cp-POP-00789-c117-work-tue",
+            "cycle": 117,
+            "excerpt": "I don't have to think about the Oaks.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00794",
+          "name": "Irene Fay",
+          "profile": "Irene Fay — Barista",
+          "role": "Barista",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "toFvMTo3wqpDxkBBseRDVW",
+            "customId": "cp-POP-00794-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00943",
+          "name": "Pilar Ramirez",
+          "profile": "Pilar Ramirez — Paramedic",
+          "role": "Paramedic",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "QYTZTNNQCkG2dSR4Ruz5dS",
+            "customId": "cp-POP-00943-c114-PRESS-sun-gpfibm",
+            "cycle": 114,
+            "excerpt": "I know my husband Vincent and I have argued about the A's and the Oaks, but that's more about our loyalty and curiosity than how it affects the community.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-00961",
+          "name": "Darius Clark",
+          "profile": "Darius Clark — Bakery Worker",
+          "role": "Bakery Worker",
+          "hood": "West Oakland",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "eMYpZ1azxUV7vjTZvhkMiT",
+            "customId": "cp-POP-00961-c106-PRESS",
+            "cycle": 106,
+            "excerpt": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        },
+        {
+          "pop": "POP-01039",
+          "name": "Ximena Mehta",
+          "profile": "Ximena Mehta — Bart Transit PR",
+          "role": "Bart Transit PR",
+          "hood": "Lake Merritt",
+          "mode": "street",
+          "sourceKind": "page-line",
+          "evidence": {
+            "source": "output/citizen_pages/index.jsonl",
+            "docId": "x9VsG69biy6bCUxknxiA3E",
+            "customId": "cp-POP-01039-c115-PRESS-mon-mbnnlh",
+            "cycle": 115,
+            "excerpt": "We had the Oaks game downtown, the Baylight District vote finally going through, and events all over Lake Merritt, Temescal, and KONO.",
+            "highlightKind": "game",
+            "entity": "Oaks",
+            "predicate": "watch"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "Filed this Cycle by Anthony Raines: \"The A's Pay for a Closer They Already Had\"",
+        "src": "output/cron-compare/staged/sports_c117_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+        "id": "F-65592d274c47"
+      },
+      {
+        "t": "FACT",
+        "text": "Filed this Cycle by Elliot Marbury: \"Thirty-Nine Walks in 215 Innings: What Travis Coles's 2041 Command Line Proves\"",
+        "src": "output/cron-compare/staged/sports_c117_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+        "id": "F-fa3792d732e1"
+      },
+      {
+        "t": "FACT",
+        "text": "Filed this Cycle by Selena Grant: \"The Oaks Have Made the Comeback Their First Identity\"",
+        "src": "output/cron-compare/staged/sports_c117_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md",
+        "id": "F-0bd07548fdc8"
+      },
+      {
+        "t": "FACT",
+        "text": "C117 (early-season) · Oaks · team-update · Wilson Shepard (Coach): The Oaks are winning games after halftime, and they have done it since the first game in franchise history. Against Charlotte at home in game one, in front of a sold-out crowd, they trailed 36-32 at the half and 60-49 after three, then scored 36 in the fourth and held the Hornets to 22 to win 85-82. In Detroit they trailed 43-37 at the half and won the second half 54-35 for a 91-78 win. At Golden State they trailed 59-44 at the half, the biggest halftime deficit they have come back from, then won the third 30-19 and the fourth 24-18, outscoring the Warriors 54-37 after the break to win 98-96. In Philadelphia they trailed 82-80 going into the fourth, scored 40 and held the 76ers to 24 for a 120-106 win. In Denver in C116 they were already up 23 after three and still put up 42 in the fourth of a franchise-record 147-114 win. Even the Indiana loss showed it. Down 61-42 at the half and 82-62 after three, the Oaks scored 38 in the fourth, won the quarter 38-22 and came within four, 104-100. Through 13 games the Oaks have won the fourth quarter 10 times, lost it twice and tied it once. One of the two losses was the Orlando game, which was already decided at 101-76 after three. The other was the home loss to San Antonio, tied 90-90 going into the fourth before the Spurs won the quarter by 9. Wilson Shepard's young team finishes. In Indiana a 19-point halftime hole was too much. In Golden State a 15-point hole was not. | Stats: Oaks/game 1 vs CHA/down 60-49 after three/won 4th 36-22/won 85-82, Oaks/at DET/down 43-37 at half/won 2nd half 54-35/won 91-78, Oaks/at GSW/down 59-44 at half/won 2nd half 54-37, Oaks/at PHI/down 82-80 after three/won 4th 40-24, Oaks/at IND/down 82-62 after three/won 4th 38-22/lost 104-100, Oaks/at DEN C116/won 4th 42-32, Oaks/vs SA/tied 90-90 after three/lost 4th by 9, Oaks/4th quarters 10-2-1 in 13 games | Team record: 11-2 | Streak: W2",
+        "src": "Oakland_Sports_Feed row 295 (live, read 2026-11-26)",
+        "id": "F-24b380817d0e"
+      },
+      {
+        "t": "FACT",
+        "text": "C117 (early-season) · Oaks · player-feature · Austin Reaves (SG): Austin Reaves is the highest-paid player on the Oaks at $30 million a year, and this cycle he played like it. He led the Oaks in scoring in both games of C117. Against Denver at home he scored 32 in just 22 minutes on 8 of 14, 6 of 10 from three and 10 of 10 at the line, without a turnover. Then at Golden State he had 23 points, 6 rebounds, 5 assists and 3 steals in 33 minutes as the Oaks came back from 15 down at the half to win 98-96. Through 13 games he has led the Oaks in scoring or shared the lead six times: 23 in New York, tied with AJ Dybantsa; 23 in Washington and 19 in Indiana, tied with Adash Stanley; 20 in Toronto; 32 against Denver; and 23 at Golden State. He does it without needing the ball to himself. In the first game in franchise history, the 85-82 home win over Charlotte, he had 20 points and 9 rebounds on 6 of 12, 4 of 9 from three and 4 of 4 at the line without a turnover. He handed out 10 assists in Detroit, had 9 rebounds and 3 steals with his 23 in New York, and in the 147-114 franchise-record win in Denver he scored 27 on 11 of 14, a perfect 5 of 5 from three, with 12 assists. He also answers his bad nights. After going 4 of 14 in Philadelphia he scored 27 in Denver, and after 13 points and 4 turnovers in the home loss to San Antonio he scored 32 against Denver. Off the court Reaves lives in West Oakland, where he moved after buying first in Downtown. After wins he has stayed late signing for kids by the player lot, and the kids on his block left a hand-lettered sign on his door. | Stats: Austin Reaves/C117/32PTS/8-14FG/6-10 3PT/10-10FT/0TO in 22 minutes vs DEN, Austin Reaves/C117/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes at GSW, Austin Reaves/C116/27PTS/12ASST/2STL/11-14FG/5-5 3PT at DEN, Austin Reaves/game 1 vs CHA/20PTS/9REB/6-12FG/4-9 3PT/4-4FT/0TO, Austin Reaves/at NYK/23PTS/9REB/3STL/8-13FG/5-9 3PT, Austin Reaves/at DET/12PTS/7REB/10ASST, Austin Reaves/led or shared team scoring lead 6 of 13 games, Austin Reaves/$30M/highest-paid Oak | Team record: 11-2 | Streak: W2",
+        "src": "Oakland_Sports_Feed row 294 (live, read 2026-11-26)",
+        "id": "F-7d4c5a4a033f"
+      },
+      {
+        "t": "FACT",
+        "text": "C117 (early-season) · Oaks · game-result · Austin Reaves (SG), Ty Jerome (PG), AJ Dybantsa (SF): The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oakland trailed 25-14 after one and 59-44 at the half, down 15. The Oaks cut it to 78-74 after a 30-19 third quarter and won the fourth 24-18, outscoring Golden State 54-37 in the second half. Austin Reaves led the Oaks again with 23 points, 6 rebounds, 5 assists and 3 steals in 33 minutes on 9 of 17 shooting and 3 of 6 from three. T. Jerome scored 17 in 23 minutes on 7 of 13 and 3 of 8 from three with no turnovers, his fifth straight game in double figures: 19, 28, 23, 14 and 17. AJ Dybantsa added 12, getting to the line for 5 of 7, his fourth straight game in double figures after 18, 19 and 15. As a team the Oaks shot 39 of 88, 44 percent, and 9 of 34 from three, with 23 assists and 23 turnovers, and won it in the second half. The Oaks move to 11-2 and 3-1 in Cup play. | Stats: Austin Reaves/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes, T. Jerome/17PTS/4REB/3ASST/0TO/7-13FG/3-8 3PT in 23 minutes, AJ Dybantsa/12PTS/3REB/3-7FG/5-7FT, Oaks/39-88FG/44%/9-34 3PT/26%/11-16FT/23AST/23TO, Oaks/2nd half 54-37 | Team record: 11-2 | Streak: W2 | Week: A:W",
+        "src": "Oakland_Sports_Feed row 293 (live, read 2026-11-26)",
+        "id": "F-7b962af1d4ab"
+      },
+      {
+        "t": "FACT",
+        "text": "C117 (early-season) · Oaks · game-result · Austin Reaves (SG), TyJerome (PG), Wendell Carter Jr (C), AJ Dybantsa (SF): One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnovers. That makes 27 and 32 in his two games against Denver this season. T. Jerome kept his run going off the bench with a 14-point, 11-assist double-double in 25 minutes on 5 of 8 shooting and 4 of 5 from three. He has scored in double figures four straight games: 19, 28, 23 and 14. Wendell Carter Jr. had 17 points and 6 rebounds on 6 of 9, his third straight game in double figures after 17 and 14, and AJ Dybantsa added 15 on 7 of 11 after 18 and 19 in his last two. As a team the Oaks shot 48 of 92, 52 percent, and 21 of 43 from three, 49 percent, with 31 assists, though they turned it over 22 times. The Oaks move to 10-2 and remain 2-1 in Cup play. | Stats: Austin Reaves/32PTS/4REB/3ASST/1STL/0TO/8-14FG/6-10 3PT/10-10FT in 22 minutes, T. Jerome/14PTS/11ASST/3REB/5-8FG/4-5 3PT off the bench in 25 minutes, Wendell Carter Jr/17PTS/6REB/6-9FG, AJ Dybantsa/15PTS/3REB/7-11FG, Oaks/48-92FG/52%/21-43 3PT/49%/20-22FT/31AST/22TO, Attendance/94% | Team record: 10-2 | Streak: W1 | Week: H:W",
+        "src": "Oakland_Sports_Feed row 292 (live, read 2026-11-26)",
+        "id": "F-551bd6c083ea"
+      },
+      {
+        "t": "FACT",
+        "text": "C116 (early-season) · Oaks · season-state · Elliot Abraham (GM), Wilson Shepard (Coach), Mike Paulson (President of Operations): The Oaks are 8-1 after an 0-9 start through rookie camp and the preseason. Was the 0-9 really about rest and experiments, as Elliot Abraham said in C111, or did the team change something, and will Abraham say so now that it is working? Has the Draymond Green situation settled for him? Is this a defensive team now, or does Wilson Shepard's offense still have another gear? How much of Mike Paulson's attention does the A's offseason take from the Oaks? And with Jerami Grant's failed medical still with the league, what does the roster look like when the hard part of the schedule arrives? | Stats: - | Team record: 8-1 | Streak: W4",
+        "src": "Oakland_Sports_Feed row 286 (live, read 2026-11-26)",
+        "id": "F-369dbd7b7fd3"
+      },
+      {
+        "t": "FACT",
+        "text": "C116 (early-season) · Oaks · team-update · Wilson Shepard (Coach), Adash Stanley (PG), T. Jerome (PG), Elliot Abraham (GM): Ten games into their first season, the Oakland Oaks are the number one team in the NBA.com power rankings, ranked first of all 31 teams, and holding the top spot from the week before. The rankings are built on season record and recent form, and the Oaks had both: 9-1 when they came out, 3-0 over the last week, 6-1 over the last two weeks. They earned it against real opponents. Four of the teams in the top nine are teams the Oaks have already beaten: Detroit, ranked 3rd, beaten 91-78 on the road; Oklahoma City, ranked 4th, beaten 101-95 in the Cup opener at home; New York, ranked 6th, beaten 115-93 on the road; and Philadelphia, ranked 8th, beaten 120-106 on the road after trailing by two going into the fourth. Ranked 2nd was San Antonio. The rankings only update once a week, and these came out a game behind. Since then the Spurs came into Oakland for a Cup game and won 126-117, handing the Oaks their first ever home loss. So number one is now 9-2, number two is 8-2, and the gap at the top is half a game. For an expansion team that went 0-9 through rookie camp and the preseason, with a first-year head coach and a first-time GM, being ranked first in the league at all is the story. | Stats: Oaks/NBA.com Power Ranking/#1 of 31/no change, Oaks/9-1 at ranking/3-0 last week/6-1 last two weeks/9-1 last month, Oaks/now 9-2 after Spurs loss, Oaks wins over ranked teams/DET #3/OKC #4/NYK #6/PHI #8 | Team record: 9-2 | Streak: L1",
+        "src": "Oakland_Sports_Feed row 282 (live, read 2026-11-26)",
+        "id": "F-460f02d5da56"
+      },
+      {
+        "t": "FACT",
+        "text": "C116 (early-season) · Oaks · game-result · T. Jerome (PG), AJ Dybantsa (SF), Adash Stanley (PG), Wendell Carter Jr (C), Austin Reaves (SG), Dillon Brooks (SF), Harry Hayward (PF), Wilson Shepard (Coach): The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scored 27 in the fourth, lost the quarter by 9, and finished 41 of 95 from the field, 43 percent, and 12 of 36 from three. They also left points at the line, 23 of 32, and turned it over 14 times after just 5 in Denver. T. Jerome was the exception again. Off the bench he scored 23 in 21 minutes, all six of his field goals from three on 6 of 8, plus 5 of 7 at the line and 2 steals. That is 19, 28 and 23 in his last three games, and the case for a bigger role is getting hard to ignore. Outside of Jerome the Oaks were 6 of 28 from three. AJ Dybantsa led the starters with 19 on 6 of 14, 3 of 5 from deep, and 4 of 5 at the line. Wendell Carter Jr. had a 14-point, 12-rebound double-double with 4 offensive boards but went 6 of 11 at the line. Adash Stanley had 14, 5 rebounds and 7 assists, and Austin Reaves had 13, 6 rebounds and 6 assists with 4 turnovers. Dillon Brooks scored 13 but needed 19 shots, 5 of 19 and 0 of 6 from three. Harry Hayward came back to earth after his perfect night in Denver, 2 of 9 and 1 of 6 from three, but grabbed 10 rebounds and added 3 assists in 20 minutes. T. Henderson Jr. got back on the floor and went 2 for 2 in 12 minutes. B. Simmons was a DNP for the sixth straight game, with B. James Jr., J. Tate and Coen Carr also sitting. The five-game win streak is over. The Oaks fall to 9-2 and 2-1 in Cup play, and are now scoring 113.9 a game and allowing 95.1. | Stats: T. Jerome/23PTS/2STL/6-8FG/6-8 3PT/5-7FT off the bench in 21 minutes, AJ Dybantsa/19PTS/4REB/6-14FG/3-5 3PT, Wendell Carter Jr/14PTS/12REB/4OREB/6-11FT, Adash Stanley/14PTS/5REB/7ASST, Austin Reaves/13PTS/6REB/6ASST/4TO, Dillon Brooks/13PTS/5-19FG/0-6 3PT, Harry Hayward/5PTS/10REB/3ASST/2-9FG, Oaks/41-95FG/43%/12-36 3PT/23-32FT/14TO/44 BENCH | Team record: 9-2 | Streak: L1 | Week: H:L",
+        "src": "Oakland_Sports_Feed row 281 (live, read 2026-11-26)",
+        "id": "F-209688caac59"
+      },
+      {
+        "t": "FACT",
+        "text": "C116 (early-season) · Oaks · game-result · T. Jerome (PG), Austin Reaves (SG), AJ Dybantsa (SF), Wendell Carter Jr (C), Adash Stanley (PG), Dillon Brooks (SF), Harry Hayward (PF), Wilson Shepard (Coach): One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73 percent. The Oaks handed out 40 assists against just 5 turnovers, scored 72 in the paint and 12 on the break, and their bench outscored most starting fives with 56. Five Oaks did not miss a shot. AJ Dybantsa went 8 for 8 for 18, Wendell Carter Jr. went 8 for 8 for 17 with 9 rebounds, Adash Stanley went 6 for 6 for 15 with 3 of 3 from deep, Harry Hayward went 5 for 5 and 4 for 4 from three for 14, and J. Valanciunas went 3 for 3 for 6 with 6 rebounds in 10 minutes. That is 30 for 30 between them. The leading scorer came off the bench. T. Jerome scored 28 on 12 of 16 with 10 assists in 28 minutes, his second big night as the sixth man after his 19, 7 and 7 in Toronto. Austin Reaves bounced back from his 4 of 14 night in Philadelphia with 27 points on 11 of 14, a perfect 5 of 5 from three, 12 assists and 2 steals in a team-high 41 minutes. Dillon Brooks added 14. Hayward keeps forcing the issue. In 19 minutes he added 4 assists to his perfect shooting, and he is now 9 of 10 from three over his last six games. G. Trent Jr. hit 2 threes in 3 minutes and J. Champagnie handed out 4 assists. B. Simmons was a DNP for the fifth straight game, and T. Henderson Jr., B. James Jr., J. Tate and Coen Carr also sat. The Oaks win their fifth straight, move to 9-1 and 2-0 in Cup play, and are now scoring 113.6 a game while allowing 92.0. | Stats: T. Jerome/28PTS/10ASST/3REB/12-16FG/2-4 3PT off the bench, Austin Reaves/27PTS/12ASST/2STL/11-14FG/5-5 3PT in 41 minutes, AJ Dybantsa/18PTS/4REB/8-8FG/2-2 3PT, Wendell Carter Jr/17PTS/9REB/8-8FG, Adash Stanley/15PTS/3ASST/6-6FG/3-3 3PT, Dillon Brooks/14PTS/7-12FG, Harry Hayward/14PTS/4ASST/5-5FG/4-4 3PT in 19 minutes, J. Valanciunas/6PTS/6REB/3-3FG, Oaks/63-79FG/80%/19-26 3PT/73%/40AST/5TO/72 PAINT/56 BENCH | Team record: 9-1 | Streak: W5 | Week: A:W",
+        "src": "Oakland_Sports_Feed row 280 (live, read 2026-11-26)",
+        "id": "F-09884a9eae4a"
+      },
+      {
+        "t": "FACT",
+        "text": "C116 (early-season) · Oaks · season-state · Wilson Shepard (Coach), Mike Paulson (President of Operations), Elliot Abraham (GM): Ten cycles ago this page was asking Wilson Shepard for answers. The Oaks went 0-4 in rookie camp and 0-5 in the preseason, 0-9 before they had played a game that counted, and in C109 the media wanted to know why the team was losing and why the full roster had never been on the floor together. Shepard, a first-year head coach who spent the previous season as an offensive assistant in Minnesota, kept saying the same thing. In C107 he said the Oaks would \"catch people off guard this year.\" In C109 he said, \"We're still finding our rhythm. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal. We're not getting the results we want, but we're not letting it get us down either.\" In C110, after the loss to Miami, he said the full team had yet to suit up as one, that opening night would show a team nobody had seen, and that he was not worried. The fans were. Nine games into the real deal, the Oaks are 8-1, have won four straight and are 1-0 in the NBA Cup. They beat Charlotte 85-82 in the franchise's first game, coming back from 11 down after three, won in Detroit, New York and Washington, lost by four in Indiana after coming back from 20 down, then routed Toronto 135-75 and beat Oklahoma City, Orlando and Philadelphia. They are scoring 109.9 a game and allowing 89.6, a margin of more than 20 points a night. The surprise is how they are winning. Shepard came in as the offensive specialist, but the early identity is defense: Charlotte scored 82, Detroit 78, Toronto 75 and Washington 62. He has also found rotation pieces nobody expected, like second-round rookie Harry Hayward, and kept the bench fresh, with nobody playing more than 28 minutes in the Toronto rout. After the opener he laughed that his ears were still ringing, then said the next loss could be a game away and the job was to build on the good and eliminate the bad. The other half of this story is the man above him. Mike Paulson is president of operations for an 8-1 expansion team, with Elliot Abraham running the day-to-day as GM, and he is also the GM of the A's in the middle of an offseason that has already seen Vinnie Keane retire, Carmen Mesa traded to the Phillies, Mark Aitken drawing Angels interest in free agency and Benji Dillon undecided. In C110 fans worried that a first-year coach, a first-time GM and a front office chief busy with a World Series run was too much uncertainty. So far the Oaks have answered that. Then there is Elliot Abraham, the first-time GM who has said almost nothing since C111. That cycle, with the team 0-9, he told the media nobody was panicking, that the losing was intentional and that every variation they tried was data for the long term. He also said the Draymond Green trade \"wasn't ideal form\" for a player the community reveres, and that Jerami Grant's status was a matter the league was looking into. In C112 Elias Varek confirmed Grant had failed his medical and credited Paulson and Abraham with building a quality team in one offseason. Abraham has not spoken since. His path here is not a typical basketball one: born in Port-au-Prince, Haiti, adopted young by an American family, MIT, the man who built the first successful professional pickleball league, then senior operations under Varek at Civis Systems and Paulson's day-to-day operator in his one season with the Chicago Bulls before Oakland hired him in C101. The Bulls beat his Oaks in the preseason in C110. He lives in Jack London, has been seen staying late in the clubhouse after wins, and around the waterfront he is still more of a familiar face than a public one. | Stats: Oaks/8-1/W4/109.9 PPG/89.6 OPP PPG/+20.3 margin, Oaks/0-4 rookie camp/0-5 preseason, Oaks/1-0 NBA Cup, Opponents held under 85/CHA 82/DET 78/TOR 75/WAS 62 | Team record: 8-1 | Streak: W4",
+        "src": "Oakland_Sports_Feed row 279 (live, read 2026-11-26)",
+        "id": "F-f6ee7d9a687b"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "pass": "true when nothing here is a piece you want to write this cycle; then give only why",
+        "chase": "string — what you want to write this cycle and how you will go after it, in your own voice. Not JSON.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "the person's popid — from this record, or the popid citizen_lookup gives you",
+            "question": "string",
+            "basis": "string — what in their life ties them to the story you are chasing"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "A target is someone whose life touched the story you are chasing, whoever you want to hear from: a person on this record or anyone in the city (citizen_lookup gives their popid and their life). Up to four are asked. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "hood": "West Oakland",
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland — on the feed: C117 team-update",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+          "pop": "POP-01022",
+          "rowName": "Wilson Shepard",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "hood": "West Oakland",
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland — on the feed: C117 player-feature",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+          "pop": "POP-01027",
+          "rowName": "Austin Reaves",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01024",
+        "name": "AJ Dybantsa",
+        "role": "SF / The Oaks",
+        "hood": "KONO",
+        "profile": "AJ Dybantsa — SF / The Oaks — KONO — on the feed: C117 game-result",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+          "pop": "POP-01024",
+          "rowName": "AJ Dybantsa",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01046",
+        "name": "Elliot Abraham",
+        "role": "General Manager, Oakland Oaks",
+        "hood": "Jack London",
+        "profile": "Elliot Abraham — General Manager, Oakland Oaks — Jack London — on the feed: C116 season-state",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+          "pop": "POP-01046",
+          "rowName": "Elliot Abraham",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00527",
+        "name": "Mike Paulson",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "hood": "West Oakland",
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland — on the feed: C116 season-state",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+          "pop": "POP-00527",
+          "rowName": "Mike Paulson",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "hood": "Piedmont Ave",
+        "profile": "Adash Stanley — PG / The Oaks — Piedmont Ave — on the feed: C116 team-update",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+          "pop": "POP-01023",
+          "rowName": "Adash Stanley",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01079",
+        "name": "Dillon Brooks",
+        "role": "SF / The Oaks",
+        "hood": "West Oakland",
+        "profile": "Dillon Brooks — SF / The Oaks — West Oakland — on the feed: C116 game-result",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+          "pop": "POP-01079",
+          "rowName": "Dillon Brooks",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "hood": "KONO",
+        "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO — on the feed: C116 game-result",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26",
+          "pop": "POP-01223",
+          "rowName": "Harry Hayward",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "hood": "Temescal",
+        "profile": "Melton Neilon — Sourdough Baker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "9Egzmf732GbHQsYNhx7e4G",
+          "customId": "cp-POP-00170-c114-PRESS-wed-fgkakh",
+          "cycle": 114,
+          "excerpt": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "To be honest, the Oaks' loss still has me a bit down, but I'm trying not to overthink it."
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "role": "K-8 Teacher,Former Line cook",
+        "hood": "Fruitvale",
+        "profile": "Rick Walker — K-8 Teacher,Former Line cook",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "mgXsax3i7irgmarYJpd9bp",
+          "customId": "cp-POP-00198-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard some folks talking about Oaks analysis around the neighborhood, seems like people are trying to make sense of what's going on with the team, I'm just trying to keep up with the news like everyone else"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "hood": "Piedmont Ave",
+        "profile": "Elio Perez — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "jQ1x55AXJqEnBWBaUX2JyW",
+          "customId": "cp-POP-00201-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard people talking about Oaks analysis around my neighborhood, it seems like everyone's got an opinion on it, I'm just trying to stay focused on my work and taking care of my family"
+      },
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "hood": "Downtown",
+        "profile": "Jessie Hess — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "HyhQejEenARxJYxp93ae85",
+          "customId": "cp-POP-00212-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence."
+      },
+      {
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "role": "Server",
+        "hood": "Downtown",
+        "profile": "Dillon Trevor — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "4N7gJRG2ySYS7rsQyKK6ay",
+          "customId": "cp-POP-00224-c107-PRESS",
+          "cycle": 107,
+          "excerpt": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do."
+      },
+      {
+        "pop": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "hood": "Jack London",
+        "profile": "Trenton Nawan — Server",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "m3ppoFKy9CCohGQMYNgXUC",
+          "customId": "cp-POP-00273-c114-PRESS-thu-mmooah",
+          "cycle": 114,
+          "excerpt": "I'm still feeling pretty good about the Oaks.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I'm still feeling pretty good about the Oaks."
+      },
+      {
+        "pop": "POP-00540",
+        "name": "Jade Orion",
+        "role": "Musician",
+        "hood": "Lake Merritt",
+        "profile": "Jade Orion — Musician",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "vAkesst5wo8wCX9mn7Rujt",
+          "customId": "cp-POP-00540-c102-PRESS",
+          "cycle": 102,
+          "excerpt": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "Look, I don’t know what kind of \"fame-rise\" you’re talking about—I’m just a person who plays guitar at The Oaks sometimes and fixes my own appliances because rent isn’t cheap."
+      },
+      {
+        "pop": "POP-00642",
+        "name": "Ollie Campbell",
+        "role": "Bakery Worker",
+        "hood": "Jack London",
+        "profile": "Ollie Campbell — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "z6pDb5oTFZ317jUrVDT6oD",
+          "customId": "cp-POP-00642-c113-PRESS",
+          "cycle": 113,
+          "excerpt": "To be honest, I still feel the same way about the Oaks.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "To be honest, I still feel the same way about the Oaks."
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Daniel Cloak — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "uBnTZrbAsy2cgjJY5UAbsb",
+          "customId": "cp-POP-00722-c110-PRESS",
+          "cycle": 110,
+          "excerpt": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I still feel that way about the Oaks, they're trying to reach out and be part of the community, and that's something positive."
+      },
+      {
+        "pop": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "hood": "West Oakland",
+        "profile": "Elias Varek — Founder of Civis Systems",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "saYyBNPi2KgMtYPsSEXGqZ",
+          "customId": "cp-POP-00789-c117-work-tue",
+          "cycle": 117,
+          "excerpt": "I don't have to think about the Oaks.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I don't have to think about the Oaks."
+      },
+      {
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "role": "Barista",
+        "hood": "West Oakland",
+        "profile": "Irene Fay — Barista",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "toFvMTo3wqpDxkBBseRDVW",
+          "customId": "cp-POP-00794-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I feel like community engagement with the Oaks team is something I've heard about, but I don't really know much about it."
+      },
+      {
+        "pop": "POP-00943",
+        "name": "Pilar Ramirez",
+        "role": "Paramedic",
+        "hood": "Lake Merritt",
+        "profile": "Pilar Ramirez — Paramedic",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "QYTZTNNQCkG2dSR4Ruz5dS",
+          "customId": "cp-POP-00943-c114-PRESS-sun-gpfibm",
+          "cycle": 114,
+          "excerpt": "I know my husband Vincent and I have argued about the A's and the Oaks, but that's more about our loyalty and curiosity than how it affects the community.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I know my husband Vincent and I have argued about the A's and the Oaks, but that's more about our loyalty and curiosity than how it affects the community."
+      },
+      {
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "role": "Bakery Worker",
+        "hood": "West Oakland",
+        "profile": "Darius Clark — Bakery Worker",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "eMYpZ1azxUV7vjTZvhkMiT",
+          "customId": "cp-POP-00961-c106-PRESS",
+          "cycle": 106,
+          "excerpt": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "I feel like the community is pretty supportive of the Oaks team, I see people around here talking about them and it seems like they're trying to engage with us more."
+      },
+      {
+        "pop": "POP-01039",
+        "name": "Ximena Mehta",
+        "role": "Bart Transit PR",
+        "hood": "Lake Merritt",
+        "profile": "Ximena Mehta — Bart Transit PR",
+        "mode": "street",
+        "sourceKind": "page-line",
+        "evidence": {
+          "source": "output/citizen_pages/index.jsonl",
+          "docId": "x9VsG69biy6bCUxknxiA3E",
+          "customId": "cp-POP-01039-c115-PRESS-mon-mbnnlh",
+          "cycle": 115,
+          "excerpt": "We had the Oaks game downtown, the Baylight District vote finally going through, and events all over Lake Merritt, Temescal, and KONO.",
+          "highlightKind": "game",
+          "entity": "Oaks",
+          "predicate": "watch"
+        },
+        "matchedPageLine": "We had the Oaks game downtown, the Baylight District vote finally going through, and events all over Lake Merritt, Temescal, and KONO."
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Talia Finch",
+    "popid": "POP-00592"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "The Oaks' comeback identity as it lands in West Oakland: belief, fatigue, indifference, and the distance between winning games and belonging to a neighborhood.",
+      "angle": "The Oaks' comeback identity as it lands in West Oakland: belief, fatigue, indifference, and the distance between winning games and belonging to a neighborhood.",
+      "hood": null,
+      "citizens": [
+        "Elias Varek (POP-00789)",
+        "Irene Fay (POP-00794)",
+        "Daniel Cloak (POP-00722)",
+        "Melton Neilon (POP-00170)"
+      ],
+      "popids": [
+        "POP-00789",
+        "POP-00794",
+        "POP-00722",
+        "POP-00170"
+      ]
+    },
+    "approach": null
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "TALIA-RECORD-1",
+    "kind": "beat-sports-oaks-ground",
+    "seat": {
+      "slug": "talia-finch",
+      "name": "Talia Finch",
+      "popid": "POP-00592",
+      "desk": "sports",
+      "domain": "sports",
+      "builder": "buildTaliaRecord.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-sports-oaks-ground",
+      "score": 100,
+      "label": "the Oaks on the sports feed",
+      "hood": null,
+      "source": "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "the Oaks on the sports feed",
+      "hookLine": "",
+      "anchorFacts": [
+        "Filed this Cycle by Anthony Raines: \"The A's Pay for a Closer They Already Had\"",
+        "Filed this Cycle by Elliot Marbury: \"Thirty-Nine Walks in 215 Innings: What Travis Coles's 2041 Command Line Proves\"",
+        "Filed this Cycle by Selena Grant: \"The Oaks Have Made the Comeback Their First Identity\"",
+        "C117 (early-season) · Oaks · team-update · Wilson Shepard (Coach): The Oaks are winning games after halftime, and they have done it since the first game in franchise history. Against Charlotte at home in game one, in front of a sold-out crowd, they trailed 36-32 at the half and 60-49 after three, then scored 36 in the fourth and held the Hornets to 22 to win 85-82. In Detroit they trailed 43-37 at the half and won the second half 54-35 for a 91-78 win. At Golden State they trailed 59-44 at the half, the biggest halftime deficit they have come back from, then won the third 30-19 and the fourth 24-18, outscoring the Warriors 54-37 after the break to win 98-96. In Philadelphia they trailed 82-80 going into the fourth, scored 40 and held the 76ers to 24 for a 120-106 win. In Denver in C116 they were already up 23 after three and still put up 42 in the fourth of a franchise-record 147-114 win. Even the Indiana loss showed it. Down 61-42 at the half and 82-62 after three, the Oaks scored 38 in the fourth, won the quarter 38-22 and came within four, 104-100. Through 13 games the Oaks have won the fourth quarter 10 times, lost it twice and tied it once. One of the two losses was the Orlando game, which was already decided at 101-76 after three. The other was the home loss to San Antonio, tied 90-90 going into the fourth before the Spurs won the quarter by 9. Wilson Shepard's young team finishes. In Indiana a 19-point halftime hole was too much. In Golden State a 15-point hole was not. | Stats: Oaks/game 1 vs CHA/down 60-49 after three/won 4th 36-22/won 85-82, Oaks/at DET/down 43-37 at half/won 2nd half 54-35/won 91-78, Oaks/at GSW/down 59-44 at half/won 2nd half 54-37, Oaks/at PHI/down 82-80 after three/won 4th 40-24, Oaks/at IND/down 82-62 after three/won 4th 38-22/lost 104-100, Oaks/at DEN C116/won 4th 42-32, Oaks/vs SA/tied 90-90 after three/lost 4th by 9, Oaks/4th quarters 10-2-1 in 13 games | Team record: 11-2 | Streak: W2",
+        "C117 (early-season) · Oaks · player-feature · Austin Reaves (SG): Austin Reaves is the highest-paid player on the Oaks at $30 million a year, and this cycle he played like it. He led the Oaks in scoring in both games of C117. Against Denver at home he scored 32 in just 22 minutes on 8 of 14, 6 of 10 from three and 10 of 10 at the line, without a turnover. Then at Golden State he had 23 points, 6 rebounds, 5 assists and 3 steals in 33 minutes as the Oaks came back from 15 down at the half to win 98-96. Through 13 games he has led the Oaks in scoring or shared the lead six times: 23 in New York, tied with AJ Dybantsa; 23 in Washington and 19 in Indiana, tied with Adash Stanley; 20 in Toronto; 32 against Denver; and 23 at Golden State. He does it without needing the ball to himself. In the first game in franchise history, the 85-82 home win over Charlotte, he had 20 points and 9 rebounds on 6 of 12, 4 of 9 from three and 4 of 4 at the line without a turnover. He handed out 10 assists in Detroit, had 9 rebounds and 3 steals with his 23 in New York, and in the 147-114 franchise-record win in Denver he scored 27 on 11 of 14, a perfect 5 of 5 from three, with 12 assists. He also answers his bad nights. After going 4 of 14 in Philadelphia he scored 27 in Denver, and after 13 points and 4 turnovers in the home loss to San Antonio he scored 32 against Denver. Off the court Reaves lives in West Oakland, where he moved after buying first in Downtown. After wins he has stayed late signing for kids by the player lot, and the kids on his block left a hand-lettered sign on his door. | Stats: Austin Reaves/C117/32PTS/8-14FG/6-10 3PT/10-10FT/0TO in 22 minutes vs DEN, Austin Reaves/C117/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes at GSW, Austin Reaves/C116/27PTS/12ASST/2STL/11-14FG/5-5 3PT at DEN, Austin Reaves/game 1 vs CHA/20PTS/9REB/6-12FG/4-9 3PT/4-4FT/0TO, Austin Reaves/at NYK/23PTS/9REB/3STL/8-13FG/5-9 3PT, Austin Reaves/at DET/12PTS/7REB/10ASST, Austin Reaves/led or shared team scoring lead 6 of 13 games, Austin Reaves/$30M/highest-paid Oak | Team record: 11-2 | Streak: W2",
+        "C117 (early-season) · Oaks · game-result · Austin Reaves (SG), Ty Jerome (PG), AJ Dybantsa (SF): The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oakland trailed 25-14 after one and 59-44 at the half, down 15. The Oaks cut it to 78-74 after a 30-19 third quarter and won the fourth 24-18, outscoring Golden State 54-37 in the second half. Austin Reaves led the Oaks again with 23 points, 6 rebounds, 5 assists and 3 steals in 33 minutes on 9 of 17 shooting and 3 of 6 from three. T. Jerome scored 17 in 23 minutes on 7 of 13 and 3 of 8 from three with no turnovers, his fifth straight game in double figures: 19, 28, 23, 14 and 17. AJ Dybantsa added 12, getting to the line for 5 of 7, his fourth straight game in double figures after 18, 19 and 15. As a team the Oaks shot 39 of 88, 44 percent, and 9 of 34 from three, with 23 assists and 23 turnovers, and won it in the second half. The Oaks move to 11-2 and 3-1 in Cup play. | Stats: Austin Reaves/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes, T. Jerome/17PTS/4REB/3ASST/0TO/7-13FG/3-8 3PT in 23 minutes, AJ Dybantsa/12PTS/3REB/3-7FG/5-7FT, Oaks/39-88FG/44%/9-34 3PT/26%/11-16FT/23AST/23TO, Oaks/2nd half 54-37 | Team record: 11-2 | Streak: W2 | Week: A:W",
+        "C117 (early-season) · Oaks · game-result · Austin Reaves (SG), TyJerome (PG), Wendell Carter Jr (C), AJ Dybantsa (SF): One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnovers. That makes 27 and 32 in his two games against Denver this season. T. Jerome kept his run going off the bench with a 14-point, 11-assist double-double in 25 minutes on 5 of 8 shooting and 4 of 5 from three. He has scored in double figures four straight games: 19, 28, 23 and 14. Wendell Carter Jr. had 17 points and 6 rebounds on 6 of 9, his third straight game in double figures after 17 and 14, and AJ Dybantsa added 15 on 7 of 11 after 18 and 19 in his last two. As a team the Oaks shot 48 of 92, 52 percent, and 21 of 43 from three, 49 percent, with 31 assists, though they turned it over 22 times. The Oaks move to 10-2 and remain 2-1 in Cup play. | Stats: Austin Reaves/32PTS/4REB/3ASST/1STL/0TO/8-14FG/6-10 3PT/10-10FT in 22 minutes, T. Jerome/14PTS/11ASST/3REB/5-8FG/4-5 3PT off the bench in 25 minutes, Wendell Carter Jr/17PTS/6REB/6-9FG, AJ Dybantsa/15PTS/3REB/7-11FG, Oaks/48-92FG/52%/21-43 3PT/49%/20-22FT/31AST/22TO, Attendance/94% | Team record: 10-2 | Streak: W1 | Week: H:W",
+        "C116 (early-season) · Oaks · season-state · Elliot Abraham (GM), Wilson Shepard (Coach), Mike Paulson (President of Operations): The Oaks are 8-1 after an 0-9 start through rookie camp and the preseason. Was the 0-9 really about rest and experiments, as Elliot Abraham said in C111, or did the team change something, and will Abraham say so now that it is working? Has the Draymond Green situation settled for him? Is this a defensive team now, or does Wilson Shepard's offense still have another gear? How much of Mike Paulson's attention does the A's offseason take from the Oaks? And with Jerami Grant's failed medical still with the league, what does the roster look like when the hard part of the schedule arrives? | Stats: - | Team record: 8-1 | Streak: W4",
+        "C116 (early-season) · Oaks · team-update · Wilson Shepard (Coach), Adash Stanley (PG), T. Jerome (PG), Elliot Abraham (GM): Ten games into their first season, the Oakland Oaks are the number one team in the NBA.com power rankings, ranked first of all 31 teams, and holding the top spot from the week before. The rankings are built on season record and recent form, and the Oaks had both: 9-1 when they came out, 3-0 over the last week, 6-1 over the last two weeks. They earned it against real opponents. Four of the teams in the top nine are teams the Oaks have already beaten: Detroit, ranked 3rd, beaten 91-78 on the road; Oklahoma City, ranked 4th, beaten 101-95 in the Cup opener at home; New York, ranked 6th, beaten 115-93 on the road; and Philadelphia, ranked 8th, beaten 120-106 on the road after trailing by two going into the fourth. Ranked 2nd was San Antonio. The rankings only update once a week, and these came out a game behind. Since then the Spurs came into Oakland for a Cup game and won 126-117, handing the Oaks their first ever home loss. So number one is now 9-2, number two is 8-2, and the gap at the top is half a game. For an expansion team that went 0-9 through rookie camp and the preseason, with a first-year head coach and a first-time GM, being ranked first in the league at all is the story. | Stats: Oaks/NBA.com Power Ranking/#1 of 31/no change, Oaks/9-1 at ranking/3-0 last week/6-1 last two weeks/9-1 last month, Oaks/now 9-2 after Spurs loss, Oaks wins over ranked teams/DET #3/OKC #4/NYK #6/PHI #8 | Team record: 9-2 | Streak: L1",
+        "C116 (early-season) · Oaks · game-result · T. Jerome (PG), AJ Dybantsa (SF), Adash Stanley (PG), Wendell Carter Jr (C), Austin Reaves (SG), Dillon Brooks (SF), Harry Hayward (PF), Wilson Shepard (Coach): The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scored 27 in the fourth, lost the quarter by 9, and finished 41 of 95 from the field, 43 percent, and 12 of 36 from three. They also left points at the line, 23 of 32, and turned it over 14 times after just 5 in Denver. T. Jerome was the exception again. Off the bench he scored 23 in 21 minutes, all six of his field goals from three on 6 of 8, plus 5 of 7 at the line and 2 steals. That is 19, 28 and 23 in his last three games, and the case for a bigger role is getting hard to ignore. Outside of Jerome the Oaks were 6 of 28 from three. AJ Dybantsa led the starters with 19 on 6 of 14, 3 of 5 from deep, and 4 of 5 at the line. Wendell Carter Jr. had a 14-point, 12-rebound double-double with 4 offensive boards but went 6 of 11 at the line. Adash Stanley had 14, 5 rebounds and 7 assists, and Austin Reaves had 13, 6 rebounds and 6 assists with 4 turnovers. Dillon Brooks scored 13 but needed 19 shots, 5 of 19 and 0 of 6 from three. Harry Hayward came back to earth after his perfect night in Denver, 2 of 9 and 1 of 6 from three, but grabbed 10 rebounds and added 3 assists in 20 minutes. T. Henderson Jr. got back on the floor and went 2 for 2 in 12 minutes. B. Simmons was a DNP for the sixth straight game, with B. James Jr., J. Tate and Coen Carr also sitting. The five-game win streak is over. The Oaks fall to 9-2 and 2-1 in Cup play, and are now scoring 113.9 a game and allowing 95.1. | Stats: T. Jerome/23PTS/2STL/6-8FG/6-8 3PT/5-7FT off the bench in 21 minutes, AJ Dybantsa/19PTS/4REB/6-14FG/3-5 3PT, Wendell Carter Jr/14PTS/12REB/4OREB/6-11FT, Adash Stanley/14PTS/5REB/7ASST, Austin Reaves/13PTS/6REB/6ASST/4TO, Dillon Brooks/13PTS/5-19FG/0-6 3PT, Harry Hayward/5PTS/10REB/3ASST/2-9FG, Oaks/41-95FG/43%/12-36 3PT/23-32FT/14TO/44 BENCH | Team record: 9-2 | Streak: L1 | Week: H:L",
+        "C116 (early-season) · Oaks · game-result · T. Jerome (PG), Austin Reaves (SG), AJ Dybantsa (SF), Wendell Carter Jr (C), Adash Stanley (PG), Dillon Brooks (SF), Harry Hayward (PF), Wilson Shepard (Coach): One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73 percent. The Oaks handed out 40 assists against just 5 turnovers, scored 72 in the paint and 12 on the break, and their bench outscored most starting fives with 56. Five Oaks did not miss a shot. AJ Dybantsa went 8 for 8 for 18, Wendell Carter Jr. went 8 for 8 for 17 with 9 rebounds, Adash Stanley went 6 for 6 for 15 with 3 of 3 from deep, Harry Hayward went 5 for 5 and 4 for 4 from three for 14, and J. Valanciunas went 3 for 3 for 6 with 6 rebounds in 10 minutes. That is 30 for 30 between them. The leading scorer came off the bench. T. Jerome scored 28 on 12 of 16 with 10 assists in 28 minutes, his second big night as the sixth man after his 19, 7 and 7 in Toronto. Austin Reaves bounced back from his 4 of 14 night in Philadelphia with 27 points on 11 of 14, a perfect 5 of 5 from three, 12 assists and 2 steals in a team-high 41 minutes. Dillon Brooks added 14. Hayward keeps forcing the issue. In 19 minutes he added 4 assists to his perfect shooting, and he is now 9 of 10 from three over his last six games. G. Trent Jr. hit 2 threes in 3 minutes and J. Champagnie handed out 4 assists. B. Simmons was a DNP for the fifth straight game, and T. Henderson Jr., B. James Jr., J. Tate and Coen Carr also sat. The Oaks win their fifth straight, move to 9-1 and 2-0 in Cup play, and are now scoring 113.6 a game while allowing 92.0. | Stats: T. Jerome/28PTS/10ASST/3REB/12-16FG/2-4 3PT off the bench, Austin Reaves/27PTS/12ASST/2STL/11-14FG/5-5 3PT in 41 minutes, AJ Dybantsa/18PTS/4REB/8-8FG/2-2 3PT, Wendell Carter Jr/17PTS/9REB/8-8FG, Adash Stanley/15PTS/3ASST/6-6FG/3-3 3PT, Dillon Brooks/14PTS/7-12FG, Harry Hayward/14PTS/4ASST/5-5FG/4-4 3PT in 19 minutes, J. Valanciunas/6PTS/6REB/3-3FG, Oaks/63-79FG/80%/19-26 3PT/73%/40AST/5TO/72 PAINT/56 BENCH | Team record: 9-1 | Streak: W5 | Week: A:W",
+        "C116 (early-season) · Oaks · season-state · Wilson Shepard (Coach), Mike Paulson (President of Operations), Elliot Abraham (GM): Ten cycles ago this page was asking Wilson Shepard for answers. The Oaks went 0-4 in rookie camp and 0-5 in the preseason, 0-9 before they had played a game that counted, and in C109 the media wanted to know why the team was losing and why the full roster had never been on the floor together. Shepard, a first-year head coach who spent the previous season as an offensive assistant in Minnesota, kept saying the same thing. In C107 he said the Oaks would \"catch people off guard this year.\" In C109 he said, \"We're still finding our rhythm. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal. We're not getting the results we want, but we're not letting it get us down either.\" In C110, after the loss to Miami, he said the full team had yet to suit up as one, that opening night would show a team nobody had seen, and that he was not worried. The fans were. Nine games into the real deal, the Oaks are 8-1, have won four straight and are 1-0 in the NBA Cup. They beat Charlotte 85-82 in the franchise's first game, coming back from 11 down after three, won in Detroit, New York and Washington, lost by four in Indiana after coming back from 20 down, then routed Toronto 135-75 and beat Oklahoma City, Orlando and Philadelphia. They are scoring 109.9 a game and allowing 89.6, a margin of more than 20 points a night. The surprise is how they are winning. Shepard came in as the offensive specialist, but the early identity is defense: Charlotte scored 82, Detroit 78, Toronto 75 and Washington 62. He has also found rotation pieces nobody expected, like second-round rookie Harry Hayward, and kept the bench fresh, with nobody playing more than 28 minutes in the Toronto rout. After the opener he laughed that his ears were still ringing, then said the next loss could be a game away and the job was to build on the good and eliminate the bad. The other half of this story is the man above him. Mike Paulson is president of operations for an 8-1 expansion team, with Elliot Abraham running the day-to-day as GM, and he is also the GM of the A's in the middle of an offseason that has already seen Vinnie Keane retire, Carmen Mesa traded to the Phillies, Mark Aitken drawing Angels interest in free agency and Benji Dillon undecided. In C110 fans worried that a first-year coach, a first-time GM and a front office chief busy with a World Series run was too much uncertainty. So far the Oaks have answered that. Then there is Elliot Abraham, the first-time GM who has said almost nothing since C111. That cycle, with the team 0-9, he told the media nobody was panicking, that the losing was intentional and that every variation they tried was data for the long term. He also said the Draymond Green trade \"wasn't ideal form\" for a player the community reveres, and that Jerami Grant's status was a matter the league was looking into. In C112 Elias Varek confirmed Grant had failed his medical and credited Paulson and Abraham with building a quality team in one offseason. Abraham has not spoken since. His path here is not a typical basketball one: born in Port-au-Prince, Haiti, adopted young by an American family, MIT, the man who built the first successful professional pickleball league, then senior operations under Varek at Civis Systems and Paulson's day-to-day operator in his one season with the Chicago Bulls before Oakland hired him in C101. The Bulls beat his Oaks in the preseason in C110. He lives in Jack London, has been seen staying late in the clubhouse after wins, and around the waterfront he is still more of a familiar face than a public one. | Stats: Oaks/8-1/W4/109.9 PPG/89.6 OPP PPG/+20.3 margin, Oaks/0-4 rookie camp/0-5 preseason, Oaks/1-0 NBA Cup, Opponents held under 85/CHA 82/DET 78/TOR 75/WAS 62 | Team record: 8-1 | Streak: W4"
+      ],
+      "evidence": [
+        {
+          "text": "Filed this Cycle by Anthony Raines: \"The A's Pay for a Closer They Already Had\"",
+          "src": "output/cron-compare/staged/sports_c117_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+        },
+        {
+          "text": "Filed this Cycle by Elliot Marbury: \"Thirty-Nine Walks in 215 Innings: What Travis Coles's 2041 Command Line Proves\"",
+          "src": "output/cron-compare/staged/sports_c117_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+        },
+        {
+          "text": "Filed this Cycle by Selena Grant: \"The Oaks Have Made the Comeback Their First Identity\"",
+          "src": "output/cron-compare/staged/sports_c117_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md"
+        },
+        {
+          "text": "C117 (early-season) · Oaks · team-update · Wilson Shepard (Coach): The Oaks are winning games after halftime, and they have done it since the first game in franchise history. Against Charlotte at home in game one, in front of a sold-out crowd, they trailed 36-32 at the half and 60-49 after three, then scored 36 in the fourth and held the Hornets to 22 to win 85-82. In Detroit they trailed 43-37 at the half and won the second half 54-35 for a 91-78 win. At Golden State they trailed 59-44 at the half, the biggest halftime deficit they have come back from, then won the third 30-19 and the fourth 24-18, outscoring the Warriors 54-37 after the break to win 98-96. In Philadelphia they trailed 82-80 going into the fourth, scored 40 and held the 76ers to 24 for a 120-106 win. In Denver in C116 they were already up 23 after three and still put up 42 in the fourth of a franchise-record 147-114 win. Even the Indiana loss showed it. Down 61-42 at the half and 82-62 after three, the Oaks scored 38 in the fourth, won the quarter 38-22 and came within four, 104-100. Through 13 games the Oaks have won the fourth quarter 10 times, lost it twice and tied it once. One of the two losses was the Orlando game, which was already decided at 101-76 after three. The other was the home loss to San Antonio, tied 90-90 going into the fourth before the Spurs won the quarter by 9. Wilson Shepard's young team finishes. In Indiana a 19-point halftime hole was too much. In Golden State a 15-point hole was not. | Stats: Oaks/game 1 vs CHA/down 60-49 after three/won 4th 36-22/won 85-82, Oaks/at DET/down 43-37 at half/won 2nd half 54-35/won 91-78, Oaks/at GSW/down 59-44 at half/won 2nd half 54-37, Oaks/at PHI/down 82-80 after three/won 4th 40-24, Oaks/at IND/down 82-62 after three/won 4th 38-22/lost 104-100, Oaks/at DEN C116/won 4th 42-32, Oaks/vs SA/tied 90-90 after three/lost 4th by 9, Oaks/4th quarters 10-2-1 in 13 games | Team record: 11-2 | Streak: W2",
+          "src": "Oakland_Sports_Feed row 295 (live, read 2026-11-26)"
+        },
+        {
+          "text": "C117 (early-season) · Oaks · player-feature · Austin Reaves (SG): Austin Reaves is the highest-paid player on the Oaks at $30 million a year, and this cycle he played like it. He led the Oaks in scoring in both games of C117. Against Denver at home he scored 32 in just 22 minutes on 8 of 14, 6 of 10 from three and 10 of 10 at the line, without a turnover. Then at Golden State he had 23 points, 6 rebounds, 5 assists and 3 steals in 33 minutes as the Oaks came back from 15 down at the half to win 98-96. Through 13 games he has led the Oaks in scoring or shared the lead six times: 23 in New York, tied with AJ Dybantsa; 23 in Washington and 19 in Indiana, tied with Adash Stanley; 20 in Toronto; 32 against Denver; and 23 at Golden State. He does it without needing the ball to himself. In the first game in franchise history, the 85-82 home win over Charlotte, he had 20 points and 9 rebounds on 6 of 12, 4 of 9 from three and 4 of 4 at the line without a turnover. He handed out 10 assists in Detroit, had 9 rebounds and 3 steals with his 23 in New York, and in the 147-114 franchise-record win in Denver he scored 27 on 11 of 14, a perfect 5 of 5 from three, with 12 assists. He also answers his bad nights. After going 4 of 14 in Philadelphia he scored 27 in Denver, and after 13 points and 4 turnovers in the home loss to San Antonio he scored 32 against Denver. Off the court Reaves lives in West Oakland, where he moved after buying first in Downtown. After wins he has stayed late signing for kids by the player lot, and the kids on his block left a hand-lettered sign on his door. | Stats: Austin Reaves/C117/32PTS/8-14FG/6-10 3PT/10-10FT/0TO in 22 minutes vs DEN, Austin Reaves/C117/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes at GSW, Austin Reaves/C116/27PTS/12ASST/2STL/11-14FG/5-5 3PT at DEN, Austin Reaves/game 1 vs CHA/20PTS/9REB/6-12FG/4-9 3PT/4-4FT/0TO, Austin Reaves/at NYK/23PTS/9REB/3STL/8-13FG/5-9 3PT, Austin Reaves/at DET/12PTS/7REB/10ASST, Austin Reaves/led or shared team scoring lead 6 of 13 games, Austin Reaves/$30M/highest-paid Oak | Team record: 11-2 | Streak: W2",
+          "src": "Oakland_Sports_Feed row 294 (live, read 2026-11-26)"
+        },
+        {
+          "text": "C117 (early-season) · Oaks · game-result · Austin Reaves (SG), Ty Jerome (PG), AJ Dybantsa (SF): The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oakland trailed 25-14 after one and 59-44 at the half, down 15. The Oaks cut it to 78-74 after a 30-19 third quarter and won the fourth 24-18, outscoring Golden State 54-37 in the second half. Austin Reaves led the Oaks again with 23 points, 6 rebounds, 5 assists and 3 steals in 33 minutes on 9 of 17 shooting and 3 of 6 from three. T. Jerome scored 17 in 23 minutes on 7 of 13 and 3 of 8 from three with no turnovers, his fifth straight game in double figures: 19, 28, 23, 14 and 17. AJ Dybantsa added 12, getting to the line for 5 of 7, his fourth straight game in double figures after 18, 19 and 15. As a team the Oaks shot 39 of 88, 44 percent, and 9 of 34 from three, with 23 assists and 23 turnovers, and won it in the second half. The Oaks move to 11-2 and 3-1 in Cup play. | Stats: Austin Reaves/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes, T. Jerome/17PTS/4REB/3ASST/0TO/7-13FG/3-8 3PT in 23 minutes, AJ Dybantsa/12PTS/3REB/3-7FG/5-7FT, Oaks/39-88FG/44%/9-34 3PT/26%/11-16FT/23AST/23TO, Oaks/2nd half 54-37 | Team record: 11-2 | Streak: W2 | Week: A:W",
+          "src": "Oakland_Sports_Feed row 293 (live, read 2026-11-26)"
+        },
+        {
+          "text": "C117 (early-season) · Oaks · game-result · Austin Reaves (SG), TyJerome (PG), Wendell Carter Jr (C), AJ Dybantsa (SF): One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnovers. That makes 27 and 32 in his two games against Denver this season. T. Jerome kept his run going off the bench with a 14-point, 11-assist double-double in 25 minutes on 5 of 8 shooting and 4 of 5 from three. He has scored in double figures four straight games: 19, 28, 23 and 14. Wendell Carter Jr. had 17 points and 6 rebounds on 6 of 9, his third straight game in double figures after 17 and 14, and AJ Dybantsa added 15 on 7 of 11 after 18 and 19 in his last two. As a team the Oaks shot 48 of 92, 52 percent, and 21 of 43 from three, 49 percent, with 31 assists, though they turned it over 22 times. The Oaks move to 10-2 and remain 2-1 in Cup play. | Stats: Austin Reaves/32PTS/4REB/3ASST/1STL/0TO/8-14FG/6-10 3PT/10-10FT in 22 minutes, T. Jerome/14PTS/11ASST/3REB/5-8FG/4-5 3PT off the bench in 25 minutes, Wendell Carter Jr/17PTS/6REB/6-9FG, AJ Dybantsa/15PTS/3REB/7-11FG, Oaks/48-92FG/52%/21-43 3PT/49%/20-22FT/31AST/22TO, Attendance/94% | Team record: 10-2 | Streak: W1 | Week: H:W",
+          "src": "Oakland_Sports_Feed row 292 (live, read 2026-11-26)"
+        },
+        {
+          "text": "C116 (early-season) · Oaks · season-state · Elliot Abraham (GM), Wilson Shepard (Coach), Mike Paulson (President of Operations): The Oaks are 8-1 after an 0-9 start through rookie camp and the preseason. Was the 0-9 really about rest and experiments, as Elliot Abraham said in C111, or did the team change something, and will Abraham say so now that it is working? Has the Draymond Green situation settled for him? Is this a defensive team now, or does Wilson Shepard's offense still have another gear? How much of Mike Paulson's attention does the A's offseason take from the Oaks? And with Jerami Grant's failed medical still with the league, what does the roster look like when the hard part of the schedule arrives? | Stats: - | Team record: 8-1 | Streak: W4",
+          "src": "Oakland_Sports_Feed row 286 (live, read 2026-11-26)"
+        },
+        {
+          "text": "C116 (early-season) · Oaks · team-update · Wilson Shepard (Coach), Adash Stanley (PG), T. Jerome (PG), Elliot Abraham (GM): Ten games into their first season, the Oakland Oaks are the number one team in the NBA.com power rankings, ranked first of all 31 teams, and holding the top spot from the week before. The rankings are built on season record and recent form, and the Oaks had both: 9-1 when they came out, 3-0 over the last week, 6-1 over the last two weeks. They earned it against real opponents. Four of the teams in the top nine are teams the Oaks have already beaten: Detroit, ranked 3rd, beaten 91-78 on the road; Oklahoma City, ranked 4th, beaten 101-95 in the Cup opener at home; New York, ranked 6th, beaten 115-93 on the road; and Philadelphia, ranked 8th, beaten 120-106 on the road after trailing by two going into the fourth. Ranked 2nd was San Antonio. The rankings only update once a week, and these came out a game behind. Since then the Spurs came into Oakland for a Cup game and won 126-117, handing the Oaks their first ever home loss. So number one is now 9-2, number two is 8-2, and the gap at the top is half a game. For an expansion team that went 0-9 through rookie camp and the preseason, with a first-year head coach and a first-time GM, being ranked first in the league at all is the story. | Stats: Oaks/NBA.com Power Ranking/#1 of 31/no change, Oaks/9-1 at ranking/3-0 last week/6-1 last two weeks/9-1 last month, Oaks/now 9-2 after Spurs loss, Oaks wins over ranked teams/DET #3/OKC #4/NYK #6/PHI #8 | Team record: 9-2 | Streak: L1",
+          "src": "Oakland_Sports_Feed row 282 (live, read 2026-11-26)"
+        },
+        {
+          "text": "C116 (early-season) · Oaks · game-result · T. Jerome (PG), AJ Dybantsa (SF), Adash Stanley (PG), Wendell Carter Jr (C), Austin Reaves (SG), Dillon Brooks (SF), Harry Hayward (PF), Wilson Shepard (Coach): The Spurs handed the Oaks their first ever home loss. San Antonio came into Oakland for a Cup game in front of a 99 percent crowd and left with a 126-117 win, only the Oaks' second loss of the season. It was even for three quarters. The Oaks trailed by 8 after a slow 20-point first, won the second 35-25 to lead 55-53 at the half, and it was tied 90-90 going into the fourth. Then the offense that shot 80 percent in Denver went cold. The Oaks scored 27 in the fourth, lost the quarter by 9, and finished 41 of 95 from the field, 43 percent, and 12 of 36 from three. They also left points at the line, 23 of 32, and turned it over 14 times after just 5 in Denver. T. Jerome was the exception again. Off the bench he scored 23 in 21 minutes, all six of his field goals from three on 6 of 8, plus 5 of 7 at the line and 2 steals. That is 19, 28 and 23 in his last three games, and the case for a bigger role is getting hard to ignore. Outside of Jerome the Oaks were 6 of 28 from three. AJ Dybantsa led the starters with 19 on 6 of 14, 3 of 5 from deep, and 4 of 5 at the line. Wendell Carter Jr. had a 14-point, 12-rebound double-double with 4 offensive boards but went 6 of 11 at the line. Adash Stanley had 14, 5 rebounds and 7 assists, and Austin Reaves had 13, 6 rebounds and 6 assists with 4 turnovers. Dillon Brooks scored 13 but needed 19 shots, 5 of 19 and 0 of 6 from three. Harry Hayward came back to earth after his perfect night in Denver, 2 of 9 and 1 of 6 from three, but grabbed 10 rebounds and added 3 assists in 20 minutes. T. Henderson Jr. got back on the floor and went 2 for 2 in 12 minutes. B. Simmons was a DNP for the sixth straight game, with B. James Jr., J. Tate and Coen Carr also sitting. The five-game win streak is over. The Oaks fall to 9-2 and 2-1 in Cup play, and are now scoring 113.9 a game and allowing 95.1. | Stats: T. Jerome/23PTS/2STL/6-8FG/6-8 3PT/5-7FT off the bench in 21 minutes, AJ Dybantsa/19PTS/4REB/6-14FG/3-5 3PT, Wendell Carter Jr/14PTS/12REB/4OREB/6-11FT, Adash Stanley/14PTS/5REB/7ASST, Austin Reaves/13PTS/6REB/6ASST/4TO, Dillon Brooks/13PTS/5-19FG/0-6 3PT, Harry Hayward/5PTS/10REB/3ASST/2-9FG, Oaks/41-95FG/43%/12-36 3PT/23-32FT/14TO/44 BENCH | Team record: 9-2 | Streak: L1 | Week: H:L",
+          "src": "Oakland_Sports_Feed row 281 (live, read 2026-11-26)"
+        },
+        {
+          "text": "C116 (early-season) · Oaks · game-result · T. Jerome (PG), Austin Reaves (SG), AJ Dybantsa (SF), Wendell Carter Jr (C), Adash Stanley (PG), Dillon Brooks (SF), Harry Hayward (PF), Wilson Shepard (Coach): One cycle after this page asked whether Wilson Shepard's offense still had another gear, the Oaks found it in Denver. They won their second NBA Cup game 147-114, the most points in franchise history, topping the 135 they put up in Toronto. Oakland led by 5 after one, by 18 at the half and by 23 after three, then scored 42 in the fourth. The shooting numbers barely look real: 63 of 79 from the field, 80 percent, and 19 of 26 from three, 73 percent. The Oaks handed out 40 assists against just 5 turnovers, scored 72 in the paint and 12 on the break, and their bench outscored most starting fives with 56. Five Oaks did not miss a shot. AJ Dybantsa went 8 for 8 for 18, Wendell Carter Jr. went 8 for 8 for 17 with 9 rebounds, Adash Stanley went 6 for 6 for 15 with 3 of 3 from deep, Harry Hayward went 5 for 5 and 4 for 4 from three for 14, and J. Valanciunas went 3 for 3 for 6 with 6 rebounds in 10 minutes. That is 30 for 30 between them. The leading scorer came off the bench. T. Jerome scored 28 on 12 of 16 with 10 assists in 28 minutes, his second big night as the sixth man after his 19, 7 and 7 in Toronto. Austin Reaves bounced back from his 4 of 14 night in Philadelphia with 27 points on 11 of 14, a perfect 5 of 5 from three, 12 assists and 2 steals in a team-high 41 minutes. Dillon Brooks added 14. Hayward keeps forcing the issue. In 19 minutes he added 4 assists to his perfect shooting, and he is now 9 of 10 from three over his last six games. G. Trent Jr. hit 2 threes in 3 minutes and J. Champagnie handed out 4 assists. B. Simmons was a DNP for the fifth straight game, and T. Henderson Jr., B. James Jr., J. Tate and Coen Carr also sat. The Oaks win their fifth straight, move to 9-1 and 2-0 in Cup play, and are now scoring 113.6 a game while allowing 92.0. | Stats: T. Jerome/28PTS/10ASST/3REB/12-16FG/2-4 3PT off the bench, Austin Reaves/27PTS/12ASST/2STL/11-14FG/5-5 3PT in 41 minutes, AJ Dybantsa/18PTS/4REB/8-8FG/2-2 3PT, Wendell Carter Jr/17PTS/9REB/8-8FG, Adash Stanley/15PTS/3ASST/6-6FG/3-3 3PT, Dillon Brooks/14PTS/7-12FG, Harry Hayward/14PTS/4ASST/5-5FG/4-4 3PT in 19 minutes, J. Valanciunas/6PTS/6REB/3-3FG, Oaks/63-79FG/80%/19-26 3PT/73%/40AST/5TO/72 PAINT/56 BENCH | Team record: 9-1 | Streak: W5 | Week: A:W",
+          "src": "Oakland_Sports_Feed row 280 (live, read 2026-11-26)"
+        },
+        {
+          "text": "C116 (early-season) · Oaks · season-state · Wilson Shepard (Coach), Mike Paulson (President of Operations), Elliot Abraham (GM): Ten cycles ago this page was asking Wilson Shepard for answers. The Oaks went 0-4 in rookie camp and 0-5 in the preseason, 0-9 before they had played a game that counted, and in C109 the media wanted to know why the team was losing and why the full roster had never been on the floor together. Shepard, a first-year head coach who spent the previous season as an offensive assistant in Minnesota, kept saying the same thing. In C107 he said the Oaks would \"catch people off guard this year.\" In C109 he said, \"We're still finding our rhythm. The guys are putting in the work, and I'm confident we'll tighten up and be ready for the real deal. We're not getting the results we want, but we're not letting it get us down either.\" In C110, after the loss to Miami, he said the full team had yet to suit up as one, that opening night would show a team nobody had seen, and that he was not worried. The fans were. Nine games into the real deal, the Oaks are 8-1, have won four straight and are 1-0 in the NBA Cup. They beat Charlotte 85-82 in the franchise's first game, coming back from 11 down after three, won in Detroit, New York and Washington, lost by four in Indiana after coming back from 20 down, then routed Toronto 135-75 and beat Oklahoma City, Orlando and Philadelphia. They are scoring 109.9 a game and allowing 89.6, a margin of more than 20 points a night. The surprise is how they are winning. Shepard came in as the offensive specialist, but the early identity is defense: Charlotte scored 82, Detroit 78, Toronto 75 and Washington 62. He has also found rotation pieces nobody expected, like second-round rookie Harry Hayward, and kept the bench fresh, with nobody playing more than 28 minutes in the Toronto rout. After the opener he laughed that his ears were still ringing, then said the next loss could be a game away and the job was to build on the good and eliminate the bad. The other half of this story is the man above him. Mike Paulson is president of operations for an 8-1 expansion team, with Elliot Abraham running the day-to-day as GM, and he is also the GM of the A's in the middle of an offseason that has already seen Vinnie Keane retire, Carmen Mesa traded to the Phillies, Mark Aitken drawing Angels interest in free agency and Benji Dillon undecided. In C110 fans worried that a first-year coach, a first-time GM and a front office chief busy with a World Series run was too much uncertainty. So far the Oaks have answered that. Then there is Elliot Abraham, the first-time GM who has said almost nothing since C111. That cycle, with the team 0-9, he told the media nobody was panicking, that the losing was intentional and that every variation they tried was data for the long term. He also said the Draymond Green trade \"wasn't ideal form\" for a player the community reveres, and that Jerami Grant's status was a matter the league was looking into. In C112 Elias Varek confirmed Grant had failed his medical and credited Paulson and Abraham with building a quality team in one offseason. Abraham has not spoken since. His path here is not a typical basketball one: born in Port-au-Prince, Haiti, adopted young by an American family, MIT, the man who built the first successful professional pickleball league, then senior operations under Varek at Civis Systems and Paulson's day-to-day operator in his one season with the Chicago Bulls before Oakland hired him in C101. The Bulls beat his Oaks in the preseason in C110. He lives in Jack London, has been seen staying late in the clubhouse after wins, and around the waterfront he is still more of a familiar face than a public one. | Stats: Oaks/8-1/W4/109.9 PPG/89.6 OPP PPG/+20.3 margin, Oaks/0-4 rookie camp/0-5 preseason, Oaks/1-0 NBA Cup, Opponents held under 85/CHA 82/DET 78/TOR 75/WAS 62 | Team record: 8-1 | Streak: W4",
+          "src": "Oakland_Sports_Feed row 279 (live, read 2026-11-26)"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "factCap": 12,
+      "peopleCap": 25,
+      "factChars": 6000,
+      "roomIsYours": ""
+    },
+    "citizens": [
+      {
+        "popid": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland — on the feed: C117 team-update",
+        "why": "C117 Oaks team-update"
+      },
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland — on the feed: C117 player-feature",
+        "why": "C117 Oaks player-feature"
+      },
+      {
+        "popid": "POP-01024",
+        "name": "AJ Dybantsa",
+        "role": "SF / The Oaks",
+        "neighborhood": "KONO",
+        "business": null,
+        "profile": "AJ Dybantsa — SF / The Oaks — KONO — on the feed: C117 game-result",
+        "why": "C117 Oaks game-result"
+      },
+      {
+        "popid": "POP-01046",
+        "name": "Elliot Abraham",
+        "role": "General Manager, Oakland Oaks",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Elliot Abraham — General Manager, Oakland Oaks — Jack London — on the feed: C116 season-state",
+        "why": "C116 Oaks season-state"
+      },
+      {
+        "popid": "POP-00527",
+        "name": "Mike Paulson",
+        "role": "General Manager, Oakland A's & The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland — on the feed: C116 season-state",
+        "why": "C116 Oaks season-state"
+      },
+      {
+        "popid": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Adash Stanley — PG / The Oaks — Piedmont Ave — on the feed: C116 team-update",
+        "why": "C116 Oaks team-update"
+      },
+      {
+        "popid": "POP-01079",
+        "name": "Dillon Brooks",
+        "role": "SF / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Dillon Brooks — SF / The Oaks — West Oakland — on the feed: C116 game-result",
+        "why": "C116 Oaks game-result"
+      },
+      {
+        "popid": "POP-01223",
+        "name": "Harry Hayward",
+        "role": "Oakland Oaks - Power Forward",
+        "neighborhood": "KONO",
+        "business": null,
+        "profile": "Harry Hayward — Oakland Oaks - Power Forward — KONO — on the feed: C116 game-result",
+        "why": "C116 Oaks game-result"
+      }
+    ],
+    "pointers": [
+      "the Oaks on the sports feed, C116–C117, through row 295, read 2026-11-26"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "text": "I want to go back to the same West Oakland room and sit with what the comeback has changed there—and what it has not. The Oaks are 11-2, have won the fourth quarter 10 times in 13 games, and just came back from 15 down at Golden State, the team that left Oakland. I will watch the replay with the regulars, count who stays with it and who turns away, and ask whether this team has become part of their day or only a good score to talk about. I will keep the quiet answer too: the people who do not have to think about the Oaks at all.",
+    "plan": {
+      "chase": "I want to go back to the same West Oakland room and sit with what the comeback has changed there—and what it has not. The Oaks are 11-2, have won the fourth quarter 10 times in 13 games, and just came back from 15 down at Golden State, the team that left Oakland. I will watch the replay with the regulars, count who stays with it and who turns away, and ask whether this team has become part of their day or only a good score to talk about. I will keep the quiet answer too: the people who do not have to think about the Oaks at all.",
+      "focus": "The Oaks' comeback identity as it lands in West Oakland: belief, fatigue, indifference, and the distance between winning games and belonging to a neighborhood.",
+      "why": "Selena has the pattern in the numbers. Mine is the room after the pattern: a team that keeps winning second halves, an expansion franchise now 11-2, and a city still deciding whether that means anything in ordinary life. The same room gives me continuity instead of a single reaction, and the Golden State win adds a specific Oakland charge without requiring me to claim more than I witness.",
+      "checks": [
+        "The Oaks are 11-2 with a two-game winning streak.",
+        "The Oaks have won the fourth quarter 10 times, lost it twice, and tied it once through 13 games.",
+        "Against Golden State, Oakland trailed 59-44 at halftime and won 98-96 after outscoring the Warriors 54-37 in the second half.",
+        "Austin Reaves led Oakland at Golden State with 23 points, 6 rebounds, 5 assists, and 3 steals.",
+        "I will claim only what I count and hear in the room; I will not describe the room as a measured crowd."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00789",
+          "question": "You said you do not have to think about the Oaks. Is that distance changing after this start, or is winning simply not part of your daily life?",
+          "basis": "Elias Varek lives in West Oakland, has been recorded watching an Oaks replay at a bar counter and catching a recap there, but his current record also gives the clearest skeptical line: he does not have to think about the team."
+        },
+        {
+          "pop": "POP-00794",
+          "question": "You once said you had heard about community engagement with the Oaks but did not know much about it. What, if anything, has reached you since then?",
+          "basis": "Irene Fay is a West Oakland barista whose earlier comment directly touched the gap between the team's community language and what neighborhood people actually encounter."
+        },
+        {
+          "pop": "POP-00722",
+          "question": "You said the Oaks were trying to reach out and be part of the community. Does the way they are winning now make that feel more real, or is that a separate question?",
+          "basis": "Daniel Cloak is a West Oakland bakery worker who has already described community outreach as a positive, giving me a returning neighborhood perspective rather than a first reaction."
+        },
+        {
+          "pop": "POP-00170",
+          "question": "You said the Oaks' loss still had you down. What does a comeback like the Golden State game do to that feeling?",
+          "basis": "Melton Neilon is a Temescal sourdough baker whose recorded response to an Oaks loss shows an emotional investment I can test against the team's repeated comeback wins."
+        }
+      ],
+      "interpretation": "The Oaks may be building a recognizable way of winning before they have built a settled place in Oakland life. My hunch is that the comeback is easier to celebrate than to trust: the room may enjoy the late surge while still withholding the deeper claim that this team belongs to it.",
+      "unverifiedLead": [
+        "The room may be more interested in the team's repeated comebacks than in its community outreach.",
+        "The Golden State win may carry a different emotional weight because the opponent used to play in Oakland.",
+        "Elias Varek's indifference may be a useful counterpoint to the louder belief around the team, but I have not yet heard how he feels about this specific win."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | roster-move | (off-season) | Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | re-signing | (off-season) | Vladimir Gonzalez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Austin Reaves, Wendell Carter Jr, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01028",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Austin Reaves, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01024"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-26T12:16:41.092Z"
+}

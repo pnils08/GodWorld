@@ -1,0 +1,132 @@
+{
+  "empty": false,
+  "cycle": 117,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 84,
+    "label": "The Oaks record is 10-2."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "The Oaks record is 10-2.",
+      "The Oaks have won 1 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ],
+    "hooks": []
+  },
+  "hooks": [],
+  "seeds": [],
+  "civicFacts": [
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): stable — sports feed",
+    "EventTrigger (feed): departed — sports feed",
+    "HomeNeighborhood (feed): Jack London — sports feed",
+    "FranchiseStability (feed): stable — sports feed",
+    "EconomicFootprint (feed): stable — sports feed"
+  ],
+  "story": {
+    "angle": "The Oaks record is 10-2.",
+    "label": "The Oaks record is 10-2.",
+    "hookLine": "The Oaks record is 10-2.",
+    "kind": "long-view-signal",
+    "hood": "KONO",
+    "popids": [
+      "POP-01027"
+    ],
+    "citizens": [
+      "Austin Reaves (POP-01027)"
+    ],
+    "ref": "world_summary_c117.md ## Sports",
+    "cycle": 117
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "Austin Reaves",
+      "popid": "POP-01027",
+      "role": "SG / The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 84,
+      "cycle": 117,
+      "team": "Oaks",
+      "label": "Austin Reaves scores 32 in 22 minutes as the Oaks bounce back at home. Oaks 137 - Nuggets 113"
+    },
+    {
+      "score": 84,
+      "cycle": 117,
+      "team": "Oaks",
+      "label": "Down 15 at the half, the Oaks come back to beat the team that left Oakland. Oaks 98 - Warriors 96"
+    },
+    {
+      "score": 84,
+      "cycle": 117,
+      "team": "Oaks",
+      "label": "The Oaks' highest-paid player is playing like it. Austin Reaves leads the Oaks in scoring two games running"
+    },
+    {
+      "score": 58,
+      "cycle": 117,
+      "team": "A's",
+      "label": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time"
+    },
+    {
+      "score": 58,
+      "cycle": 117,
+      "team": "A's",
+      "label": "Danny Horn said he was the best player in baseball. Then he hit .338 with 56 homeruns and 80 steals"
+    },
+    {
+      "score": 58,
+      "cycle": 117,
+      "team": "A's",
+      "label": "Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer"
+    },
+    {
+      "score": 56,
+      "cycle": 117,
+      "team": "Oaks",
+      "label": "The Oaks finish. Down 15 at the half in Golden State, they won the second half by 17"
+    },
+    {
+      "score": 54,
+      "cycle": 116,
+      "team": "Oaks",
+      "label": "From 0-9 to 8-1: Wilson Shepard's Oaks caught people off guard, just like he said they would"
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c117.md ## Sports",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

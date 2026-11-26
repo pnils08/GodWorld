@@ -1,0 +1,63 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked",
+  "cycle": "117",
+  "provider": "openrouter",
+  "model": "openai/gpt-6-luna",
+  "configuredWriterModel": "openai/gpt-6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "citizen_lookup",
+    "citizen_lookup",
+    "undocked_history",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 6,
+  "wordCount": 408,
+  "targetWords": "350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 408,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "278c04f5f503a745d290fbb524c029c2906c593a6299178d235e08ebd1f9d4bf",
+    "costUsd": 0.0008
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/undocked_c117_nia-rook_packet-v2_openai-gpt-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "config/godworld/.env // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"UNDOCKED: Daniela Kapoor makes the route the story\"\n}"
+  },
+  "ranAt": "2026-11-24T00:23:36.062Z"
+}

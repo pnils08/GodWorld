@@ -1,0 +1,365 @@
+[
+  {
+    "pop": "POP-00503",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00503\",\"name\":\"Rose Delgado\",\"role\":\"City Council District 3\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"Fruitvale shows sentiment decay and rising housing pressure with no active initiative—what office owns the fix? Speak from your life. If the question assumes something that has not happened to you, say so plainly.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Rose Delgado — City Council District 3 — Fruitvale\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null,\"ownLife\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"In their own words — Rose Delgado, City Council District 3, Fruitvale (POP-00503) — 5 pages; latest the midday page, C116: “Honest? The ambition is real, but so is the weight. Every time I walk past that empty lot on International, I feel the clock ticking — not mine, the…”\",\"src\":\"output/citizen_pages/index.jsonl 8jUFMUT5jVWuKQQRiHdMMp\",\"id\":\"F-423bb21371e0\"},{\"t\":\"FACT\",\"text\":\"City Council District 3 — Rose Delgado — approval 61 — active — OPP\",\"src\":\"output/beats/Civic_Office_Ledger.jsonl COUNCIL-D3 @C117\",\"id\":\"F-94e16c997e36\"},{\"t\":\"FACT\",\"text\":\"Rose Delgado — City Council District 3 — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00503\",\"id\":\"F-e65b02699693\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00503",
+        "name": "Rose Delgado",
+        "role": "City Council District 3",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "Fruitvale shows sentiment decay and rising housing pressure with no active initiative—what office owns the fix? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Rose Delgado — City Council District 3 — Fruitvale",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null,
+        "ownLife": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "In their own words — Rose Delgado, City Council District 3, Fruitvale (POP-00503) — 5 pages; latest the midday page, C116: “Honest? The ambition is real, but so is the weight. Every time I walk past that empty lot on International, I feel the clock ticking — not mine, the…”",
+          "src": "output/citizen_pages/index.jsonl 8jUFMUT5jVWuKQQRiHdMMp",
+          "id": "F-423bb21371e0"
+        },
+        {
+          "t": "FACT",
+          "text": "City Council District 3 — Rose Delgado — approval 61 — active — OPP",
+          "src": "output/beats/Civic_Office_Ledger.jsonl COUNCIL-D3 @C117",
+          "id": "F-94e16c997e36"
+        },
+        {
+          "t": "FACT",
+          "text": "Rose Delgado — City Council District 3 — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00503",
+          "id": "F-e65b02699693"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "ownLife": true,
+    "ownWake": {
+      "reporter": "Jax Caldera",
+      "question": "Fruitvale shows sentiment decay and rising housing pressure with no active initiative—what office owns the fix?"
+    },
+    "model": "anthropic/claude-sonnet-5.5",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00034",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00034\",\"name\":\"Avery Santana\",\"role\":\"Mayor of Oakland\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"Why do programs only move when the noise is loud, leaving Fruitvale, Grand Lake and East Oakland to slide? Speak from your life. If the question assumes something that has not happened to you, say so plainly.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Avery Santana — Mayor of Oakland — Rockridge\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null,\"ownLife\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"In their own words — Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”\",\"src\":\"output/citizen_pages/index.jsonl onERfzsE3KnXWe8Abtaaig\",\"id\":\"F-48cc3435f114\"},{\"t\":\"FACT\",\"text\":\"Mayor — Avery Santana — approval 77 — active — OPP\",\"src\":\"output/beats/Civic_Office_Ledger.jsonl MAYOR-01 @C117\",\"id\":\"F-a762d34adc22\"},{\"t\":\"FACT\",\"text\":\"Avery Santana — Mayor of Oakland — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00034\",\"id\":\"F-08fa96a7e0f8\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00034",
+        "name": "Avery Santana",
+        "role": "Mayor of Oakland",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "Why do programs only move when the noise is loud, leaving Fruitvale, Grand Lake and East Oakland to slide? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Avery Santana — Mayor of Oakland — Rockridge",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null,
+        "ownLife": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "In their own words — Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
+          "src": "output/citizen_pages/index.jsonl onERfzsE3KnXWe8Abtaaig",
+          "id": "F-48cc3435f114"
+        },
+        {
+          "t": "FACT",
+          "text": "Mayor — Avery Santana — approval 77 — active — OPP",
+          "src": "output/beats/Civic_Office_Ledger.jsonl MAYOR-01 @C117",
+          "id": "F-a762d34adc22"
+        },
+        {
+          "t": "FACT",
+          "text": "Avery Santana — Mayor of Oakland — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00034",
+          "id": "F-08fa96a7e0f8"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "ownLife": true,
+    "ownWake": {
+      "reporter": "Jax Caldera",
+      "question": "Why do programs only move when the noise is loud, leaving Fruitvale, Grand Lake and East Oakland to slide?"
+    },
+    "model": "anthropic/claude-sonnet-5.5",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00789",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00789\",\"name\":\"Elias Varek\",\"role\":\"Founder of Civis Systems\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jax Caldera\",\"question\":\"You said you would ask the city in public to name one owner for each decaying district—when does that question get asked? Speak from your life. If the question assumes something that has not happened to you, say so plainly.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Elias Varek — Founder of Civis Systems — West Oakland\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null,\"ownLife\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"In their own words — Elias Varek, Founder of Civis Systems, West Oakland (POP-00789) — 34 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still…”\",\"src\":\"output/citizen_pages/index.jsonl XFwW8s6q2NK7YWm2CcZz62\",\"id\":\"F-d8fe3c1fe33d\"},{\"t\":\"FACT\",\"text\":\"Civis Systems (Urban Systems Intelligence Firm, West Oakland), 41 employees, revenue $60,442,315 — POP-00789 Elias Varek (founder)\",\"src\":\"output/beats/Business_Ledger.jsonl BIZ-00052 @C117\",\"id\":\"F-7509efe5ce34\"},{\"t\":\"FACT\",\"text\":\"Oakland Oaks (Sports, Baylight District), 250 employees, revenue $62,819,066 — POP-00789 (Elias Varek, Owner); POP-00527 (Mike Paulson, Basketball Ops)\",\"src\":\"output/beats/Business_Ledger.jsonl BIZ-00074 @C117\",\"id\":\"F-3a2358c11259\"},{\"t\":\"FACT\",\"text\":\"Varek Systems (Tech, West Oakland), 45 employees, revenue $9,094,548 — POP-00789 Elias Varek (founder)\",\"src\":\"output/beats/Business_Ledger.jsonl BIZ-00186 @C117\",\"id\":\"F-041e0ea0ed5f\"},{\"t\":\"FACT\",\"text\":\"Elias Varek, Civis Systems Journal, C116: I put the pipeline's stall on the record last week and promised not to let it quietly become someone else's emergency. A week later nothing has shipped from me and nothing has moved at City Hall. I would rather say that myself than have Jax Caldera say it for me. What bothers me most this week is a hole in my own product. People moved in or out of eighteen districts, and the instrument logged no economic activity behind any of it. Presence rose nearly everywhere: students, adults, seniors, and fewer sick residents. The city is filling back up. But the instrument cannot tell me whether those people are arriving for work, for a lease, for family, or because someone pushed them out. Seeing bodies without seeing paychecks is half a map. Civis built that map, and the gap is ours to close. Next is Piedmont Ave, and KONO beside it. Street trade cooled in both, housing pressure climbed in both, and no city program is aimed at either. Piedmont Ave also has recorded incidents rising. Commercial Stabilization for Grand Lake and the West Oakland Tenant Defense Fund both have votes scheduled, and I give City Hall credit for that. But the money keeps landing where the noise is already deafening. A program costs the least when the signal is still a whisper, and these two districts are whispering now. Then the Oakland Youth Apprenticeship Pipeline in West Oakland. It has spent four weeks in implementation with no step forward. The instrument also shows an earlier West Oakland remedy running past its expected mark, which tells me this city can finish a thing when someone is made to own it. Nobody owns this one. Meanwhile more students are showing up in West Oakland, and every idle week teaches them that showing up buys nothing. Here is what I will do, and you can hold me to it. Before the Oaks' first season is over, Civis will stand up a small team of analysts with one job: tie district movement to hiring, payroll and new business openings. We will publish what they find, and we will publish where they find nothing. I am hiring for those seats now. By the same point in the season, the instrument will carry a standing watch for districts where trade is cooling and housing pressure is climbing with no program aimed at them. Piedmont Ave and KONO go on it first. I will publish that list weekly, and next to each name I will put the office that has not answered. Until the pipeline leaves its current stage, I will publish its count of stalled weeks in this journal every week. I expect someone at City Hall to tell the public, plainly, what they are waiting for.\",\"src\":\"output/civis-journal/civis_journal_c116.md\",\"id\":\"F-6df73ec8c38f\"},{\"t\":\"FACT\",\"text\":\"Elias Varek, Civis Systems Journal, C117: Three districts got worse this week and nobody in this city is aimed at any of them. Mood fell in Fruitvale, Grand Lake and East Oakland. Street trade cooled in Grand Lake and East Oakland. Housing pressure climbed in Fruitvale and Grand Lake. Our instrument saw all of it, and when we looked for a city program pointed at any of those three, we found nothing. A reading with no program behind it is a smoke alarm in an empty building. I built the alarm, so I own the empty building part too. Here is what makes it worse. Downtown Economic Revitalization has sat at vote scheduled for three weeks. The Dimond Revitalization Initiative has sat at announced for four. A vote that never happens is not a plan, it's a press release with a long shelf life. I'm not guessing why. I'm telling you City Hall moves at the speed of its slowest sign-off, and people in Dimond are paying for that speed. Meanwhile Baylight District's final council vote is already in construction, so I know this city can move when it decides to. The question is why it decides so unevenly. The finding that bothers me as a builder is our own. People moved in or out of nineteen districts this week, and the instrument logged no economic activity behind any of it. Nineteen. A city doesn't reshuffle that many neighborhoods for no reason. Either money is moving in ways we can't see, or we're blind to the wiring. A blind spot in the instrument is a blind spot in Oakland, and I don't tolerate those in my own product. So here is what I'm promising, and you can hold me to it. First, before the Oaks finish this first season, Civis will publish a stall clock for every city initiative the instrument tracks. It will show how many weeks each has sat at its stage, in plain view, starting with Downtown and Dimond. If a program stops moving, the public will know the week it stops, not the quarter after. Second, within the same window, we will instrument the economic side of population movement, so the next time a district fills or empties, the instrument can say what work, rent or trade sits behind it. I'm assigning a dedicated team in West Oakland to it, and I'm hiring for it now. Third, I will ask the city, in public, to name one owner for each of the three decaying districts. I'm not asking for a new program. I'm asking who answers when Fruitvale's mood drops again. The instrument will keep measuring. The city has to act. I'd like it to start acting this week.\",\"src\":\"output/civis-journal/civis_journal_c117.md\",\"id\":\"F-874826aeb28c\"},{\"t\":\"FACT\",\"text\":\"Elias Varek — Founder of Civis Systems — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00789\",\"id\":\"F-dc59dc1a98cb\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00789",
+        "name": "Elias Varek",
+        "role": "Founder of Civis Systems",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jax Caldera",
+        "question": "You said you would ask the city in public to name one owner for each decaying district—when does that question get asked? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Elias Varek — Founder of Civis Systems — West Oakland",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null,
+        "ownLife": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "In their own words — Elias Varek, Founder of Civis Systems, West Oakland (POP-00789) — 34 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still…”",
+          "src": "output/citizen_pages/index.jsonl XFwW8s6q2NK7YWm2CcZz62",
+          "id": "F-d8fe3c1fe33d"
+        },
+        {
+          "t": "FACT",
+          "text": "Civis Systems (Urban Systems Intelligence Firm, West Oakland), 41 employees, revenue $60,442,315 — POP-00789 Elias Varek (founder)",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00052 @C117",
+          "id": "F-7509efe5ce34"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Oaks (Sports, Baylight District), 250 employees, revenue $62,819,066 — POP-00789 (Elias Varek, Owner); POP-00527 (Mike Paulson, Basketball Ops)",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00074 @C117",
+          "id": "F-3a2358c11259"
+        },
+        {
+          "t": "FACT",
+          "text": "Varek Systems (Tech, West Oakland), 45 employees, revenue $9,094,548 — POP-00789 Elias Varek (founder)",
+          "src": "output/beats/Business_Ledger.jsonl BIZ-00186 @C117",
+          "id": "F-041e0ea0ed5f"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek, Civis Systems Journal, C116: I put the pipeline's stall on the record last week and promised not to let it quietly become someone else's emergency. A week later nothing has shipped from me and nothing has moved at City Hall. I would rather say that myself than have Jax Caldera say it for me. What bothers me most this week is a hole in my own product. People moved in or out of eighteen districts, and the instrument logged no economic activity behind any of it. Presence rose nearly everywhere: students, adults, seniors, and fewer sick residents. The city is filling back up. But the instrument cannot tell me whether those people are arriving for work, for a lease, for family, or because someone pushed them out. Seeing bodies without seeing paychecks is half a map. Civis built that map, and the gap is ours to close. Next is Piedmont Ave, and KONO beside it. Street trade cooled in both, housing pressure climbed in both, and no city program is aimed at either. Piedmont Ave also has recorded incidents rising. Commercial Stabilization for Grand Lake and the West Oakland Tenant Defense Fund both have votes scheduled, and I give City Hall credit for that. But the money keeps landing where the noise is already deafening. A program costs the least when the signal is still a whisper, and these two districts are whispering now. Then the Oakland Youth Apprenticeship Pipeline in West Oakland. It has spent four weeks in implementation with no step forward. The instrument also shows an earlier West Oakland remedy running past its expected mark, which tells me this city can finish a thing when someone is made to own it. Nobody owns this one. Meanwhile more students are showing up in West Oakland, and every idle week teaches them that showing up buys nothing. Here is what I will do, and you can hold me to it. Before the Oaks' first season is over, Civis will stand up a small team of analysts with one job: tie district movement to hiring, payroll and new business openings. We will publish what they find, and we will publish where they find nothing. I am hiring for those seats now. By the same point in the season, the instrument will carry a standing watch for districts where trade is cooling and housing pressure is climbing with no program aimed at them. Piedmont Ave and KONO go on it first. I will publish that list weekly, and next to each name I will put the office that has not answered. Until the pipeline leaves its current stage, I will publish its count of stalled weeks in this journal every week. I expect someone at City Hall to tell the public, plainly, what they are waiting for.",
+          "src": "output/civis-journal/civis_journal_c116.md",
+          "id": "F-6df73ec8c38f"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek, Civis Systems Journal, C117: Three districts got worse this week and nobody in this city is aimed at any of them. Mood fell in Fruitvale, Grand Lake and East Oakland. Street trade cooled in Grand Lake and East Oakland. Housing pressure climbed in Fruitvale and Grand Lake. Our instrument saw all of it, and when we looked for a city program pointed at any of those three, we found nothing. A reading with no program behind it is a smoke alarm in an empty building. I built the alarm, so I own the empty building part too. Here is what makes it worse. Downtown Economic Revitalization has sat at vote scheduled for three weeks. The Dimond Revitalization Initiative has sat at announced for four. A vote that never happens is not a plan, it's a press release with a long shelf life. I'm not guessing why. I'm telling you City Hall moves at the speed of its slowest sign-off, and people in Dimond are paying for that speed. Meanwhile Baylight District's final council vote is already in construction, so I know this city can move when it decides to. The question is why it decides so unevenly. The finding that bothers me as a builder is our own. People moved in or out of nineteen districts this week, and the instrument logged no economic activity behind any of it. Nineteen. A city doesn't reshuffle that many neighborhoods for no reason. Either money is moving in ways we can't see, or we're blind to the wiring. A blind spot in the instrument is a blind spot in Oakland, and I don't tolerate those in my own product. So here is what I'm promising, and you can hold me to it. First, before the Oaks finish this first season, Civis will publish a stall clock for every city initiative the instrument tracks. It will show how many weeks each has sat at its stage, in plain view, starting with Downtown and Dimond. If a program stops moving, the public will know the week it stops, not the quarter after. Second, within the same window, we will instrument the economic side of population movement, so the next time a district fills or empties, the instrument can say what work, rent or trade sits behind it. I'm assigning a dedicated team in West Oakland to it, and I'm hiring for it now. Third, I will ask the city, in public, to name one owner for each of the three decaying districts. I'm not asking for a new program. I'm asking who answers when Fruitvale's mood drops again. The instrument will keep measuring. The city has to act. I'd like it to start acting this week.",
+          "src": "output/civis-journal/civis_journal_c117.md",
+          "id": "F-874826aeb28c"
+        },
+        {
+          "t": "FACT",
+          "text": "Elias Varek — Founder of Civis Systems — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00789",
+          "id": "F-dc59dc1a98cb"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "ownLife": true,
+    "ownWake": {
+      "reporter": "Jax Caldera",
+      "question": "You said you would ask the city in public to name one owner for each decaying district—when does that question get asked?"
+    },
+    "model": "anthropic/claude-sonnet-5.5",
+    "record": true,
+    "maxTokens": 420
+  }
+]

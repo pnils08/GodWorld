@@ -1,0 +1,19 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-004)",
+  "consolidatedFrom": [
+    "STMT-117-health_center-001 (Chen-Ramirez — Q3 clinical intake audit filing with HCAI and Council Clerk)",
+    "STMT-117-health_center-002 (Chen-Ramirez — Telegraph & 47th merchant-clinic verification walkthrough)",
+    "STMT-117-health_center-003 (Chen-Ramirez — Working-door test and the 2.3-mile gap)",
+    "STMT-117-mayor_gavel-004 (Mayor gavel — Temescal Health Center oversight certification)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "operational",
+    "MilestoneNotes": "C117: Oversight certification is withheld pending verified Q3 HCAI/Clerk filing and a documented Telegraph & 47th merchant walkthrough; operations continue.",
+    "NextScheduledAction": "File the Q3 intake audit with HCAI and the Council Clerk; document the Telegraph & 47th merchant walkthrough",
+    "NextActionCycle": 118
+  }
+}

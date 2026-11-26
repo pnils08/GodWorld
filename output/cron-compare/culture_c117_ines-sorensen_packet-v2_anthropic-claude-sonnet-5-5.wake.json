@@ -1,0 +1,59 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "117",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "ines-sorensen",
+  "byline": {
+    "name": "Ines Sorensen",
+    "popid": "POP-01211",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 22,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "citizen_lookup",
+    "citizen_lookup"
+  ],
+  "toolCalls": 2,
+  "wordCount": 751,
+  "targetWords": null,
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": false,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 751,
+    "short": "The piece is a narrative feature with reporter commentary and interviews rather than verbatim posts from citizens' own pages framed solely by line, name, and city.",
+    "score": 2,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "f39afc01ff08e095b83bd361259d2e82b22abf652e45572f9e08b787b27977f2"
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 2/3 — The piece is a narrative feature with reporter commentary and interviews rather than verbatim posts from citizens' own pages framed solely by line, name, and city."
+  },
+  "article": "output/cron-compare/staged/culture_c117_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "d/.env // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-01211\",\n  \"name\": \"Ines Sorensen\",\n  \"recorded\": true,\n  \"text\": \"Voices: Two People, One Week Before Everything Is Different\"\n}"
+  },
+  "ranAt": "2026-11-26T00:19:38.005Z"
+}

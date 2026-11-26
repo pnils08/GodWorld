@@ -1,0 +1,370 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00014",
+    "name": "Tanya Cruz",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sideline-dispatch",
+      "pulseClass": "record-only-sideline",
+      "bagModes": [
+        "10 Inference Close"
+      ],
+      "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+      "anchorFacts": [
+        "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time.",
+        "The free agency question this page has carried since C112 has its answer, and it is not Oakland and it is not Anaheim. Mark Aitken has signed with the Colorado Rockies, one year for $21 million. The Angels were the team with the reported interest in C116, the A's were the team with the history, and Colorado is the team that closed. The money is almost exactly what he made in 2041, $21. 4M, so this was never about Aitken being priced as a player in decline.",
+        "He is coming off a . 283 season with 153 hits, 33 homeruns, 87 RBI and 3. 2 WAR in 540 at bats, a 93 overall first baseman with 3 Gold Gloves and the 2037 Playoff MVP, and he homered in the World Series that clinched the seventh title. The length is the detail that will be argued over. One year is a short commitment for a player at the top of the market, and it puts Aitken back in free agency after 2042.",
+        "Whether that reads as a door left open or simply the deal that was there, he has not said. What it leaves behind in Oakland is bigger than a lineup spot. Aitken is an Oakland native who grew up swinging a bat in East Oakland. He owns his place in Jack London, where he lives with his wife and three kids. He has been the A's player rep and community liaison, and he runs Aitken Little Leaguers, free baseball for East Oakland kids heading into its sixth year."
+      ],
+      "accessEvidence": {
+        "state": "ALLOTTED",
+        "facts": [
+          "clubhouse/sideline SET is the reporter's room"
+        ]
+      },
+      "quoteEvidence": {
+        "state": "NOT_SUPPLIED",
+        "quotes": []
+      },
+      "observationEvidence": {
+        "state": "ALLOTTED",
+        "facts": []
+      },
+      "missing": [
+        "Packet player quotes",
+        "injury or team-response facts beyond the supplied record",
+        "the rest of the feed notes (8 more sentences not carried)"
+      ],
+      "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+      "sourcePointers": [
+        "output/world_summary_c117.md ## Sports",
+        "docs/media/TANYA_SIDELINE_BAG.md",
+        "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "sideline-signal",
+    "hood": "Jack London",
+    "src": "world_summary_c117.md ## Sports",
+    "plan": {
+      "focus": "The shape of Mark Aitken's departure from Oakland — one year, $21 million, and what the clubhouse and community presence he leaves behind actually looks like."
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "profile": "Mark Aitken — First Baseman, Colorado Rockies",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00003-761da566eb",
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "quote": "One year says I'm not done yet, and it says I didn't want to pretend I knew what next winter looks like. The money being the same as last year — that was never the point. I've got three kids who know this city as home, and a program in East Oakland that's about to start its sixth summer. Colorado gave me a place to play at the level I expect from myself, and I'm going to give them everything I've got for 2042. But I'm not going to stand here and tell you I've closed the book on Oakland. That door doesn't lock from my side. It just doesn't.",
+        "factIds": [
+          "F-e84d26dbbeb3",
+          "F-5eb1ea2b8c47",
+          "F-152032517eae",
+          "F-a0123c97d21f"
+        ],
+        "src": "packet.W2[POP-00003]"
+      },
+      {
+        "id": "Q-POP-00050-b1df055d98",
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "quote": "Yeah, it changes things. Mark was the guy at first — three Gold Gloves, the hometown kid, the whole thing. When someone like that walks, you don't just fill a lineup spot, you fill a presence. I've been working at both corners, and I know the organization's going to look at me differently now. But I've been grinding for this kind of chance. I grew up in West Oakland taking the bus to the Coliseum, and I've watched guys like Mark carry this city. If they need me to step into that spot, I'm ready to work for it.",
+        "factIds": [
+          "F-e84d26dbbeb3",
+          "F-152032517eae",
+          "F-a0123c97d21f"
+        ],
+        "src": "packet.W2[POP-00050]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tanya Cruz",
+        "text": "The clubhouse was quiet and low-lit when the news landed, with no formal statement from the team yet.",
+        "usable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "Aitken's Little Leaguers program continues into its sixth year, but its founder now plays in Colorado.",
+        "usable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "The one-year structure of the deal leaves Aitken back in free agency after 2042, which some in the room may read as a door left open.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C117",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c5606da08cb9"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-e84d26dbbeb3"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time.",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-02ff84fc3f61"
+    },
+    {
+      "t": "FACT",
+      "text": "The free agency question this page has carried since C112 has its answer, and it is not Oakland and it is not Anaheim. Mark Aitken has signed with the Colorado Rockies, one year for $21 million. The Angels were the team with the reported interest in C116, the A's were the team with the history, and Colorado is the team that closed. The money is almost exactly what he made in 2041, $21. 4M, so this was never about Aitken being priced as a player in decline.",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-5eb1ea2b8c47"
+    },
+    {
+      "t": "FACT",
+      "text": "He is coming off a . 283 season with 153 hits, 33 homeruns, 87 RBI and 3. 2 WAR in 540 at bats, a 93 overall first baseman with 3 Gold Gloves and the 2037 Playoff MVP, and he homered in the World Series that clinched the seventh title. The length is the detail that will be argued over. One year is a short commitment for a player at the top of the market, and it puts Aitken back in free agency after 2042.",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-152032517eae"
+    },
+    {
+      "t": "FACT",
+      "text": "Whether that reads as a door left open or simply the deal that was there, he has not said. What it leaves behind in Oakland is bigger than a lineup spot. Aitken is an Oakland native who grew up swinging a bat in East Oakland. He owns his place in Jack London, where he lives with his wife and three kids. He has been the A's player rep and community liaison, and he runs Aitken Little Leaguers, free baseball for East Oakland kids heading into its sixth year.",
+      "src": "world_summary_c117.md ## Sports",
+      "id": "F-a0123c97d21f"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C13, Spring, holiday=none",
+      "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+      "id": "F-f7ed4e9a474c"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "File a short sideline dispatch from the clubhouse SET. Packet owns player quotes and numbers. The room itself is allotted hallucination.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "short first-person sideline interpretation",
+      "targetWords": "evidence-bounded",
+      "opening": "one supplied sports fact"
+    },
+    "authorizedTexture": [
+      "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
+      "room mood and presence as allotted hallucination fitted to the supplied sports line"
+    ],
+    "textureConditions": [
+      "player quotes, statistics, injuries, and results require Packet support",
+      "in-world clubhouse SET and named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "canonBlockers": [
+      "invented player quotes, invented statistics, invented injuries, or real-world Oakland venues",
+      "an invented or altered Packet person, quote, statistic, result, or roster move",
+      "an unresolved feed spelling silently assigned an identity or role"
+    ]
+  },
+  "manifest": {
+    "id": "AM-d8e8ff1ee3c7",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c5606da08cb9",
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-e84d26dbbeb3",
+        "t": "FACT",
+        "text": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-02ff84fc3f61",
+        "t": "FACT",
+        "text": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time.",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-5eb1ea2b8c47",
+        "t": "FACT",
+        "text": "The free agency question this page has carried since C112 has its answer, and it is not Oakland and it is not Anaheim. Mark Aitken has signed with the Colorado Rockies, one year for $21 million. The Angels were the team with the reported interest in C116, the A's were the team with the history, and Colorado is the team that closed. The money is almost exactly what he made in 2041, $21. 4M, so this was never about Aitken being priced as a player in decline.",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-152032517eae",
+        "t": "FACT",
+        "text": "He is coming off a . 283 season with 153 hits, 33 homeruns, 87 RBI and 3. 2 WAR in 540 at bats, a 93 overall first baseman with 3 Gold Gloves and the 2037 Playoff MVP, and he homered in the World Series that clinched the seventh title. The length is the detail that will be argued over. One year is a short commitment for a player at the top of the market, and it puts Aitken back in free agency after 2042.",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-a0123c97d21f",
+        "t": "FACT",
+        "text": "Whether that reads as a door left open or simply the deal that was there, he has not said. What it leaves behind in Oakland is bigger than a lineup spot. Aitken is an Oakland native who grew up swinging a bat in East Oakland. He owns his place in Jack London, where he lives with his wife and three kids. He has been the A's player rep and community liaison, and he runs Aitken Little Leaguers, free baseball for East Oakland kids heading into its sixth year.",
+        "src": "world_summary_c117.md ## Sports"
+      },
+      {
+        "id": "F-f7ed4e9a474c",
+        "t": "FACT",
+        "text": "Calendar: Y3C13, Spring, holiday=none",
+        "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00003-761da566eb",
+        "speakerId": "POP-00003",
+        "speakerName": "Mark Aitken",
+        "text": "One year says I'm not done yet, and it says I didn't want to pretend I knew what next winter looks like. The money being the same as last year — that was never the point. I've got three kids who know this city as home, and a program in East Oakland that's about to start its sixth summer. Colorado gave me a place to play at the level I expect from myself, and I'm going to give them everything I've got for 2042. But I'm not going to stand here and tell you I've closed the book on Oakland. That door doesn't lock from my side. It just doesn't.",
+        "factIds": [
+          "F-e84d26dbbeb3",
+          "F-5eb1ea2b8c47",
+          "F-152032517eae",
+          "F-a0123c97d21f"
+        ],
+        "src": "packet.W2[POP-00003]"
+      },
+      {
+        "id": "Q-POP-00050-b1df055d98",
+        "speakerId": "POP-00050",
+        "speakerName": "Ernesto Quintero",
+        "text": "Yeah, it changes things. Mark was the guy at first — three Gold Gloves, the hometown kid, the whole thing. When someone like that walks, you don't just fill a lineup spot, you fill a presence. I've been working at both corners, and I know the organization's going to look at me differently now. But I've been grinding for this kind of chance. I grew up in West Oakland taking the bus to the Coliseum, and I've watched guys like Mark carry this city. If they need me to step into that spot, I'm ready to work for it.",
+        "factIds": [
+          "F-e84d26dbbeb3",
+          "F-152032517eae",
+          "F-a0123c97d21f"
+        ],
+        "src": "packet.W2[POP-00050]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00003",
+        "name": "Mark Aitken",
+        "profile": "Mark Aitken — First Baseman, Colorado Rockies",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00050",
+        "name": "Ernesto Quintero",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tanya Cruz",
+        "text": "The clubhouse was quiet and low-lit when the news landed, with no formal statement from the team yet.",
+        "publishable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "Aitken's Little Leaguers program continues into its sixth year, but its founder now plays in Colorado.",
+        "publishable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "The one-year structure of the deal leaves Aitken back in free agency after 2042, which some in the room may read as a door left open.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
+      "room mood and presence as allotted hallucination fitted to the supplied sports line"
+    ],
+    "textureConditions": [
+      "player quotes, statistics, injuries, and results require Packet support",
+      "in-world clubhouse SET and named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

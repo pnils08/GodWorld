@@ -1,0 +1,56 @@
+{
+  "office": "council_d5",
+  "cycle": 117,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "I am holding the Alternative Response Initiative expansion until the Fruitvale briefing record is executed and published and East Oakland's audit gets a written next date — same demand I made last cycle, now with the calendar due. On the apprenticeship pipeline I am pressing Director Vance's acceptance test: the placement-gap analysis must be inspectable and separately name West Oakland and Fruitvale, or we record the failure in the open. For East Oakland this cycle, I am carrying the complaint crosswalk demand and the Masjid An-Nur grief gathering as city life that government owes attention, not speculation.",
+  "statements": [
+    {
+      "statementId": "STMT-117-council_d5-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — Fruitvale briefing record and D5 audit hold",
+      "initiative": "INIT-002",
+      "decision": "Hold expansion of the Oakland Alternative Response Initiative: require execution and publication of the D3 Fruitvale briefing record and a written next date for the D5 audit and Baylight feasibility review this cycle before any expansion advances. NO on expansion until the records are public.",
+      "quote": "East Oakland's calls are already inside this program. We do not get expanded into more of a thing we cannot read the record of.",
+      "fullStatement": "East Oakland neighbors are already in the Alternative Response dispatch protocol. That means East Oakland is owed a record it can open — and so is Fruitvale. The Fruitvale briefing was directed cycles ago and is still not executed and published; the D5 audit and the Baylight feasibility review still have no written next date. I vote no on expansion and yes on documentation: publish Fruitvale's briefing record, file East Oakland's audit next date in writing, and hold this program at its current footprint until all three records exist. Expansion before the paper is how a good idea loses its neighborhood's trust.",
+      "disposition": "NO",
+      "actionAsked": "Execute and publish the D3 Fruitvale briefing record and file a written next date for the D5 audit and Baylight feasibility review this cycle; expansion held until all three records are public.",
+      "tone": "righteous-direct",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d5-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — placement-gap analysis publication",
+      "initiative": "INIT-007",
+      "decision": "Require publication this cycle of an inspectable placement-gap analysis and adjustment plan that separately identifies West Oakland and Fruitvale placement reach, documented gaps, specific corrections, responsible owners, and next reporting dates. Withhold any completion or success claim until that record is public.",
+      "quote": "We gave East Oakland's youth the first rung. The rest of the ladder gets written down, named to West Oakland and Fruitvale, or we say out loud that we missed it.",
+      "fullStatement": "Director Vance asked me for an accounting, and she was right to. Cycle 115 I said I was publishing the West Oakland and Fruitvale findings; the honest record is that I asked Planning to publish them and the documents did not land. So here is the standard now, in writing: an inspectable placement-gap analysis this cycle that names West Oakland and Fruitvale separately — their placement reach, the gaps documented, the specific corrections, who owns each one, and the next reporting date. I do not accept a first cohort report as a finish line, and I do not accept a stalled tracker with no document attached. Publish the gaps or record the failure — those are the only two honest outcomes.",
+      "disposition": "YES",
+      "actionAsked": "Publish the placement-gap analysis and adjustment plan this cycle with separate West Oakland and Fruitvale findings, named owners, and next reporting dates; no completion claim without it.",
+      "tone": "passionate-substantive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d5-003",
+      "type": "statement",
+      "topic": "East Oakland constituents — complaint crosswalk and community life",
+      "initiative": null,
+      "decision": "Carry East Oakland's complaint into the Clerk-checked crosswalk with a named office and a next date, and hold the Masjid An-Nur Oakland community grief gathering visible as city life — with attention and honest follow-through, no speculation about causes.",
+      "quote": "One unanswered complaint is one neighbor we told to wait — and the Masjid An-Nur gathering is our neighbors holding each other. Both get a real response from this city.",
+      "fullStatement": "Two things came across my desk from East Oakland this cycle, and neither gets to sit. First, the complaint I put on the crosswalk last cycle still needs a named office and a real next date — the Mayor's Clerk-checked crosswalk is the right instrument, and I will be reading it line by line to make sure East Oakland is not a blank field. Second, the community grief gathering at Masjid An-Nur Oakland: that is our neighbors organizing care for each other, and this city owes it attention, not speculation and not linkage to anything else. East Oakland's mood slipped this cycle and its approval slipped with it. Answers and honest presence are how that turns. Low crime on our streets is a result to protect, not a budget line to absorb — I will not treat East Oakland as where this city saves money.",
+      "disposition": "statement",
+      "actionAsked": "Enter East Oakland's complaint on the Clerk-checked crosswalk with a named office and next date, and treat the Masjid An-Nur gathering as community life owed attention and follow-through.",
+      "tone": "community-centered",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

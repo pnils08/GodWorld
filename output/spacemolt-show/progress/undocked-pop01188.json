@@ -1,9 +1,15 @@
 {
   "session": "undocked-pop01188",
-  "takenAt": "2026-11-19T02:30:32.548Z",
+  "takenAt": "2026-11-22T02:30:29.256Z",
   "account": {
-    "total": 15,
+    "total": 25,
     "earned": [
+      {
+        "id": "voyager_i",
+        "name": "Voyager I",
+        "points": 10,
+        "at": "2026-11-19T02:43:37.276923427Z"
+      },
       {
         "id": "wanderer",
         "name": "Wanderer",
@@ -18,6 +24,11 @@
       }
     ],
     "progress": {
+      "voyager_i": {
+        "name": "Voyager I",
+        "points": 10,
+        "frac": 1
+      },
       "wanderer": {
         "name": "Wanderer",
         "points": 10,
@@ -121,7 +132,7 @@
       "cartographer": {
         "name": "Cartographer",
         "points": 30,
-        "frac": 0.17
+        "frac": 0.32
       },
       "deep_core_master": {
         "name": "Deep Core Master",
@@ -131,7 +142,7 @@
       "far_traveler": {
         "name": "Far Traveler",
         "points": 25,
-        "frac": 0.0004887333333333334
+        "frac": 0.0010641333333333333
       },
       "first_contact": {
         "name": "First Contact",
@@ -151,7 +162,7 @@
       "jump_master": {
         "name": "Jump Master",
         "points": 20,
-        "frac": 0.00064
+        "frac": 0.00136
       },
       "second_star_to_the_right": {
         "name": "Second Star to the Right",
@@ -173,15 +184,10 @@
         "points": 15,
         "frac": 0
       },
-      "voyager_i": {
-        "name": "Voyager I",
-        "points": 10,
-        "frac": 0.68
-      },
       "voyager_ii": {
         "name": "Voyager II",
         "points": 25,
-        "frac": 0.068
+        "frac": 0.128
       },
       "where_no_one_has_gone_before": {
         "name": "Where No One Has Gone Before",

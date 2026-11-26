@@ -1,0 +1,1108 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "117",
+  "persona": "tamsin-pruitt",
+  "freeAngle": "free-rows",
+  "pass": false,
+  "reporterPicks": [],
+  "morningTools": [
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Bea Cartier",
+        "thread": true
+      },
+      "resultChars": 1946
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Geneva Zhou",
+        "thread": true
+      },
+      "resultChars": 1963
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Sahana Joshi",
+        "thread": true
+      },
+      "resultChars": 2067
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Baylight Construction Authority"
+      },
+      "resultChars": 2699
+    }
+  ],
+  "workerAnswers": [],
+  "workerAsksUsed": 0,
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01210",
+      "name": "Tamsin Pruitt",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Decide what, if anything, you want to write this cycle"
+    },
+    "signal": {
+      "kind": "own-pick",
+      "hood": null,
+      "score": null,
+      "src": "the record of C117"
+    },
+    "exposure": {
+      "basis": [
+        "own-pick"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00624",
+          "name": "Aisha Toure",
+          "profile": "Aisha Toure — Immigration Attorney — Downtown",
+          "role": "Immigration Attorney",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+            "pop": "POP-00624",
+            "rowName": "Aisha Toure",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00432",
+          "name": "Duarte Washerman",
+          "profile": "Duarte Washerman — Sound Designer — West Oakland",
+          "role": "Sound Designer",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+            "pop": "POP-00432",
+            "rowName": "Duarte Washerman",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00632",
+          "name": "Rico Valez",
+          "profile": "Rico Valez — Musician — Fruitvale",
+          "role": "Musician",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+            "pop": "POP-00632",
+            "rowName": "Rico Valez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00546",
+          "name": "Tara Ellison",
+          "profile": "Tara Ellison — Journalist — Rockridge",
+          "role": "Journalist",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+            "pop": "POP-00546",
+            "rowName": "Tara Ellison",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00192",
+          "name": "Bea Cartier",
+          "profile": "Bea Cartier — Roofing Contractor — Laurel",
+          "role": "Roofing Contractor",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+            "pop": "POP-00192",
+            "rowName": "Bea Cartier",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00808",
+          "name": "Sahana Joshi",
+          "profile": "Sahana Joshi — Elevator Mechanic — KONO",
+          "role": "Elevator Mechanic",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+            "pop": "POP-00808",
+            "rowName": "Sahana Joshi",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00892",
+          "name": "Geneva Zhou",
+          "profile": "Geneva Zhou — Elevator Mechanic — West Oakland",
+          "role": "Elevator Mechanic",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+            "pop": "POP-00892",
+            "rowName": "Geneva Zhou",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "Aisha Toure — remembered a kindness never returned and decided it was too late to matter, Downtown — one of 4 people the Cycle's city turn reached (Downtown boom sustained — momentum 10/10, the block everyone wants onto) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+        "id": "F-3fbcf319a1aa"
+      },
+      {
+        "t": "FACT",
+        "text": "Aisha Toure — in their life, C116: drove the whole way home without remembering a single turn",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-a30b5eeefc4e"
+      },
+      {
+        "t": "FACT",
+        "text": "Aisha Toure — in their life, C116: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-c6e6918cce64"
+      },
+      {
+        "t": "FACT",
+        "text": "Aisha Toure — in their life, C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-e26336a3c621"
+      },
+      {
+        "t": "FACT",
+        "text": "Aisha Toure — in their life, C117: said the sharp thing to their sister and let it stand",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-b2036a47a727"
+      },
+      {
+        "t": "FACT",
+        "text": "Aisha Toure — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 753f8ac13ffa3029",
+        "id": "F-b08101c9363c"
+      },
+      {
+        "t": "FACT",
+        "text": "Duarte Washerman — split the last of the coffee and the morning's plans with their partner, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland boom sustained — momentum 10/10, the block everyone wants onto) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+        "id": "F-aa8a72523173"
+      },
+      {
+        "t": "FACT",
+        "text": "Duarte Washerman — in their life, C116: someone at the bar called a napkin a ledger and nobody laughed",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-9b958404601f"
+      },
+      {
+        "t": "FACT",
+        "text": "Duarte Washerman — in their life, C117: reorganized a closet and found something thought lost",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-00644dbcf1fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Duarte Washerman — in their life, C117: wrote half a letter to family, then decided to call instead",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-92db53315013"
+      },
+      {
+        "t": "FACT",
+        "text": "Duarte Washerman — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-2290e7d65664"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez — re-read an old journal page and didn't recognize the handwriting mood, Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale boom sustained — momentum 10/10, the block everyone wants onto) (C117)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+        "id": "F-0986bcaebdce"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez — in their life, C116: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-a6492456b88b"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez — in their life, C116: saw someone running for the bus make it, and felt weirdly invested",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-6cbaaa935333"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-e293e25e4ff6"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-a401d16482bd"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez — the Tribune named them in a piece headlined The Names That Stay on the Wall (Culture, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 68d855568af070ff",
+        "id": "F-b012d09bb6a3"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez — the Tribune named them in a piece headlined Where September Comes In Through the Front Door (Arts & Entertainment, C88)",
+        "src": "archive/ARTICLE_INDEX.jsonl a12d96010c0ba12d",
+        "id": "F-d6075f6d2412"
+      },
+      {
+        "t": "FACT",
+        "text": "Rico Valez — the Tribune named them in a piece headlined WHERE KONO GOES WHEN IT'S ALIVE (Arts & Entertainment, C83)",
+        "src": "archive/ARTICLE_INDEX.jsonl 64a3800d3fd97e02",
+        "id": "F-6667951eb5a1"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison — A quiet nod from the owner at Bay Tribune on the way out, the kind that means something., Rockridge (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-cbc8fc45ac1b"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-7ae82e8c4a88"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison — in their life, C116: unpacked a box that had stayed sealed since the last move",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-2b1d8ebcce04"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison — in their life, C117: checked in with a relative",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-b09220b0f847"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-577dca4fe647"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison — the Tribune named them in a piece headlined Rockridge: The Reporter Who Won't Call It Remarkable (Culture, C113)",
+        "src": "archive/ARTICLE_INDEX.jsonl 5af60750e5d2b76f",
+        "id": "F-2adf84190fb7"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison — the Tribune named them in a piece headlined Rockridge Keeps a Name Moving (Culture, C112)",
+        "src": "archive/ARTICLE_INDEX.jsonl a7fbed71068700a1",
+        "id": "F-5793033d2d9d"
+      },
+      {
+        "t": "FACT",
+        "text": "Tara Ellison — the Tribune named them in a piece headlined Tara Ellison Is Rising, and Nobody Around Her Can Say Where (Culture, C111)",
+        "src": "archive/ARTICLE_INDEX.jsonl 016942d31b17d439",
+        "id": "F-67a9de39532d"
+      },
+      {
+        "t": "FACT",
+        "text": "Bea Cartier — Was left off the invite at Baylight Construction Authority for the meeting about their own account., Laurel (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-e66c78e4774b"
+      },
+      {
+        "t": "FACT",
+        "text": "Bea Cartier — in their life, C117: wondered if a decision from years back had been the right one",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-bbd7acee9474"
+      },
+      {
+        "t": "FACT",
+        "text": "Bea Cartier — in their life, C117: let the tickets go unused on the counter and did not offer them to anyone",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-f797ef2a17da"
+      },
+      {
+        "t": "FACT",
+        "text": "Bea Cartier — in their life, C117: passed the Laurel campus lit up for night classes after the day shift",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-fc97c61ca58d"
+      },
+      {
+        "t": "FACT",
+        "text": "Bea Cartier — in their life, C117: watched the third storefront this year paper over its windows",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-1676b7aa6956"
+      },
+      {
+        "t": "FACT",
+        "text": "Sahana Joshi — Finished the week at Baylight Construction Authority with the hardest account on the floor squared away., KONO (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-94b27326542b"
+      },
+      {
+        "t": "FACT",
+        "text": "Sahana Joshi — in their life, C116: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-ddcbdf87e459"
+      },
+      {
+        "t": "FACT",
+        "text": "Geneva Zhou — A coworker at Baylight Construction Authority with less time in got the assignment they had asked about., West Oakland (C117 — what happened in their life, not words they said)",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-d88e535aa25e"
+      },
+      {
+        "t": "FACT",
+        "text": "Geneva Zhou — in their life, C116: caught the recap of last night's game at the counter and stayed for the second retelling",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-2f59473a46bf"
+      },
+      {
+        "t": "FACT",
+        "text": "Geneva Zhou — in their life, C116: heard someone at the cafe complain about the Baylight District noise and bit their tongue near a student cafe",
+        "src": "output/beats/LifeHistory_Log.jsonl @C116",
+        "id": "F-9c3468dd271f"
+      },
+      {
+        "t": "FACT",
+        "text": "Geneva Zhou — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that near a local pop-up",
+        "src": "output/beats/LifeHistory_Log.jsonl @C117",
+        "id": "F-acd17c4c3163"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "pass": "true when nothing here is a piece you want to write this cycle; then give only why",
+        "chase": "string — what you want to write this cycle and how you will go after it, in your own voice. Not JSON.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "the person's popid — from this record, or the popid citizen_lookup gives you",
+            "question": "string",
+            "basis": "string — what in their life ties them to the story you are chasing"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "A target is someone whose life touched the story you are chasing, whoever you want to hear from: a person on this record or anyone in the city (citizen_lookup gives their popid and their life). Up to four are asked. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "street",
+    "candidates": [
+      {
+        "pop": "POP-00624",
+        "name": "Aisha Toure",
+        "role": "Immigration Attorney",
+        "hood": "Downtown",
+        "profile": "Aisha Toure — Immigration Attorney — Downtown",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+          "pop": "POP-00624",
+          "rowName": "Aisha Toure",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00432",
+        "name": "Duarte Washerman",
+        "role": "Sound Designer",
+        "hood": "West Oakland",
+        "profile": "Duarte Washerman — Sound Designer — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+          "pop": "POP-00432",
+          "rowName": "Duarte Washerman",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "hood": "Fruitvale",
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+          "pop": "POP-00632",
+          "rowName": "Rico Valez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "hood": "Rockridge",
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+          "pop": "POP-00546",
+          "rowName": "Tara Ellison",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00192",
+        "name": "Bea Cartier",
+        "role": "Roofing Contractor",
+        "hood": "Laurel",
+        "profile": "Bea Cartier — Roofing Contractor — Laurel",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+          "pop": "POP-00192",
+          "rowName": "Bea Cartier",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00808",
+        "name": "Sahana Joshi",
+        "role": "Elevator Mechanic",
+        "hood": "KONO",
+        "profile": "Sahana Joshi — Elevator Mechanic — KONO",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+          "pop": "POP-00808",
+          "rowName": "Sahana Joshi",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00892",
+        "name": "Geneva Zhou",
+        "role": "Elevator Mechanic",
+        "hood": "West Oakland",
+        "profile": "Geneva Zhou — Elevator Mechanic — West Oakland",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+          "pop": "POP-00892",
+          "rowName": "Geneva Zhou",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "Three people tied to one employer, the Baylight Construction Authority, and one week that went well for one, and went unnoticed or sideways for the other two.",
+      "angle": "Three people tied to one employer, the Baylight Construction Authority, and one week that went well for one, and went unnoticed or sideways for the other two.",
+      "hood": null,
+      "citizens": [
+        "Sahana Joshi (POP-00808)",
+        "Geneva Zhou (POP-00892)",
+        "Bea Cartier (POP-00192)"
+      ],
+      "popids": [
+        "POP-00808",
+        "POP-00892",
+        "POP-00192"
+      ]
+    },
+    "approach": null
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "LIVES-SLICE-3",
+    "kind": "beat-lives",
+    "seat": {
+      "slug": "tamsin-pruitt",
+      "name": "Tamsin Pruitt",
+      "popid": "POP-01210",
+      "desk": "culture",
+      "domain": "lives",
+      "builder": "buildLivesSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-lives",
+      "score": 100,
+      "label": "the lives of C117",
+      "hood": null,
+      "source": "output/beats/Lived_Events.jsonl @C117 batch 9c7f02"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "the lives of C117",
+      "hookLine": "",
+      "anchorFacts": [
+        "Aisha Toure — remembered a kindness never returned and decided it was too late to matter, Downtown — one of 4 people the Cycle's city turn reached (Downtown boom sustained — momentum 10/10, the block everyone wants onto) (C117)",
+        "Aisha Toure — in their life, C116: drove the whole way home without remembering a single turn",
+        "Aisha Toure — in their life, C116: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+        "Aisha Toure — in their life, C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "Aisha Toure — in their life, C117: said the sharp thing to their sister and let it stand",
+        "Aisha Toure — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+        "Duarte Washerman — split the last of the coffee and the morning's plans with their partner, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland boom sustained — momentum 10/10, the block everyone wants onto) (C117)",
+        "Duarte Washerman — in their life, C116: someone at the bar called a napkin a ledger and nobody laughed",
+        "Duarte Washerman — in their life, C117: reorganized a closet and found something thought lost",
+        "Duarte Washerman — in their life, C117: wrote half a letter to family, then decided to call instead",
+        "Duarte Washerman — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+        "Rico Valez — re-read an old journal page and didn't recognize the handwriting mood, Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale boom sustained — momentum 10/10, the block everyone wants onto) (C117)",
+        "Rico Valez — in their life, C116: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet",
+        "Rico Valez — in their life, C116: saw someone running for the bus make it, and felt weirdly invested",
+        "Rico Valez — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "Rico Valez — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "Rico Valez — the Tribune named them in a piece headlined The Names That Stay on the Wall (Culture, C113)",
+        "Rico Valez — the Tribune named them in a piece headlined Where September Comes In Through the Front Door (Arts & Entertainment, C88)",
+        "Rico Valez — the Tribune named them in a piece headlined WHERE KONO GOES WHEN IT'S ALIVE (Arts & Entertainment, C83)",
+        "Tara Ellison — A quiet nod from the owner at Bay Tribune on the way out, the kind that means something., Rockridge (C117 — what happened in their life, not words they said)",
+        "Tara Ellison — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "Tara Ellison — in their life, C116: unpacked a box that had stayed sealed since the last move",
+        "Tara Ellison — in their life, C117: checked in with a relative",
+        "Tara Ellison — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+        "Tara Ellison — the Tribune named them in a piece headlined Rockridge: The Reporter Who Won't Call It Remarkable (Culture, C113)",
+        "Tara Ellison — the Tribune named them in a piece headlined Rockridge Keeps a Name Moving (Culture, C112)",
+        "Tara Ellison — the Tribune named them in a piece headlined Tara Ellison Is Rising, and Nobody Around Her Can Say Where (Culture, C111)",
+        "Bea Cartier — Was left off the invite at Baylight Construction Authority for the meeting about their own account., Laurel (C117 — what happened in their life, not words they said)",
+        "Bea Cartier — in their life, C117: wondered if a decision from years back had been the right one",
+        "Bea Cartier — in their life, C117: let the tickets go unused on the counter and did not offer them to anyone",
+        "Bea Cartier — in their life, C117: passed the Laurel campus lit up for night classes after the day shift",
+        "Bea Cartier — in their life, C117: watched the third storefront this year paper over its windows",
+        "Sahana Joshi — Finished the week at Baylight Construction Authority with the hardest account on the floor squared away., KONO (C117 — what happened in their life, not words they said)",
+        "Sahana Joshi — in their life, C116: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "Geneva Zhou — A coworker at Baylight Construction Authority with less time in got the assignment they had asked about., West Oakland (C117 — what happened in their life, not words they said)",
+        "Geneva Zhou — in their life, C116: caught the recap of last night's game at the counter and stayed for the second retelling",
+        "Geneva Zhou — in their life, C116: heard someone at the cafe complain about the Baylight District noise and bit their tongue near a student cafe",
+        "Geneva Zhou — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that near a local pop-up"
+      ],
+      "evidence": [
+        {
+          "text": "Aisha Toure — remembered a kindness never returned and decided it was too late to matter, Downtown — one of 4 people the Cycle's city turn reached (Downtown boom sustained — momentum 10/10, the block everyone wants onto) (C117)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+          "id": "seed:4d0003ac:117:POP-00624",
+          "kind": "seed",
+          "popid": "POP-00624"
+        },
+        {
+          "text": "Aisha Toure — in their life, C116: drove the whole way home without remembering a single turn",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00624"
+        },
+        {
+          "text": "Aisha Toure — in their life, C116: a group of fans huddle under an awning debating last night's game, their voices rising above the sound of rain hitting the pavement",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00624"
+        },
+        {
+          "text": "Aisha Toure — in their life, C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00624"
+        },
+        {
+          "text": "Aisha Toure — in their life, C117: said the sharp thing to their sister and let it stand",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00624"
+        },
+        {
+          "text": "Aisha Toure — the Tribune named them in a piece headlined The Page of Lives, C113: A Place of Their Own (Culture, C113)",
+          "src": "archive/ARTICLE_INDEX.jsonl 753f8ac13ffa3029",
+          "kind": "thread",
+          "popid": "POP-00624"
+        },
+        {
+          "text": "Duarte Washerman — split the last of the coffee and the morning's plans with their partner, West Oakland — one of 4 people the Cycle's city turn reached (West Oakland boom sustained — momentum 10/10, the block everyone wants onto) (C117)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+          "id": "seed:cd86112a:117:POP-00432",
+          "kind": "seed",
+          "popid": "POP-00432"
+        },
+        {
+          "text": "Duarte Washerman — in their life, C116: someone at the bar called a napkin a ledger and nobody laughed",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00432"
+        },
+        {
+          "text": "Duarte Washerman — in their life, C117: reorganized a closet and found something thought lost",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00432"
+        },
+        {
+          "text": "Duarte Washerman — in their life, C117: wrote half a letter to family, then decided to call instead",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00432"
+        },
+        {
+          "text": "Duarte Washerman — in their life, C117: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00432"
+        },
+        {
+          "text": "Rico Valez — re-read an old journal page and didn't recognize the handwriting mood, Fruitvale — one of 4 people the Cycle's city turn reached (Fruitvale boom sustained — momentum 10/10, the block everyone wants onto) (C117)",
+          "src": "output/beats/Story_Seed_Deck.jsonl @C117",
+          "id": "seed:344b0064:117:POP-00632",
+          "kind": "seed",
+          "popid": "POP-00632"
+        },
+        {
+          "text": "Rico Valez — in their life, C116: slipped into the back pew at Foothill Baptist Tabernacle just to sit somewhere air-conditioned and quiet",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00632"
+        },
+        {
+          "text": "Rico Valez — in their life, C116: saw someone running for the bus make it, and felt weirdly invested",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00632"
+        },
+        {
+          "text": "Rico Valez — in their life, C116: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00632"
+        },
+        {
+          "text": "Rico Valez — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00632"
+        },
+        {
+          "text": "Rico Valez — the Tribune named them in a piece headlined The Names That Stay on the Wall (Culture, C113)",
+          "src": "archive/ARTICLE_INDEX.jsonl 68d855568af070ff",
+          "kind": "thread",
+          "popid": "POP-00632"
+        },
+        {
+          "text": "Rico Valez — the Tribune named them in a piece headlined Where September Comes In Through the Front Door (Arts & Entertainment, C88)",
+          "src": "archive/ARTICLE_INDEX.jsonl a12d96010c0ba12d",
+          "kind": "thread",
+          "popid": "POP-00632"
+        },
+        {
+          "text": "Rico Valez — the Tribune named them in a piece headlined WHERE KONO GOES WHEN IT'S ALIVE (Arts & Entertainment, C83)",
+          "src": "archive/ARTICLE_INDEX.jsonl 64a3800d3fd97e02",
+          "kind": "thread",
+          "popid": "POP-00632"
+        },
+        {
+          "text": "Tara Ellison — A quiet nod from the owner at Bay Tribune on the way out, the kind that means something., Rockridge (C117 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "id": "moment:POP-00546:117:LifeEvent-Promotion-Up-S",
+          "kind": "moment",
+          "popid": "POP-00546"
+        },
+        {
+          "text": "Tara Ellison — in their life, C116: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00546"
+        },
+        {
+          "text": "Tara Ellison — in their life, C116: unpacked a box that had stayed sealed since the last move",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00546"
+        },
+        {
+          "text": "Tara Ellison — in their life, C117: checked in with a relative",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00546"
+        },
+        {
+          "text": "Tara Ellison — in their life, C117: grabbed coffee from the cart outside the hospital before the morning rush hit",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00546"
+        },
+        {
+          "text": "Tara Ellison — the Tribune named them in a piece headlined Rockridge: The Reporter Who Won't Call It Remarkable (Culture, C113)",
+          "src": "archive/ARTICLE_INDEX.jsonl 5af60750e5d2b76f",
+          "kind": "thread",
+          "popid": "POP-00546"
+        },
+        {
+          "text": "Tara Ellison — the Tribune named them in a piece headlined Rockridge Keeps a Name Moving (Culture, C112)",
+          "src": "archive/ARTICLE_INDEX.jsonl a7fbed71068700a1",
+          "kind": "thread",
+          "popid": "POP-00546"
+        },
+        {
+          "text": "Tara Ellison — the Tribune named them in a piece headlined Tara Ellison Is Rising, and Nobody Around Her Can Say Where (Culture, C111)",
+          "src": "archive/ARTICLE_INDEX.jsonl 016942d31b17d439",
+          "kind": "thread",
+          "popid": "POP-00546"
+        },
+        {
+          "text": "Bea Cartier — Was left off the invite at Baylight Construction Authority for the meeting about their own account., Laurel (C117 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "id": "moment:POP-00192:117:LifeEvent-Promotion-Down-S",
+          "kind": "moment",
+          "popid": "POP-00192"
+        },
+        {
+          "text": "Bea Cartier — in their life, C117: wondered if a decision from years back had been the right one",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00192"
+        },
+        {
+          "text": "Bea Cartier — in their life, C117: let the tickets go unused on the counter and did not offer them to anyone",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00192"
+        },
+        {
+          "text": "Bea Cartier — in their life, C117: passed the Laurel campus lit up for night classes after the day shift",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00192"
+        },
+        {
+          "text": "Bea Cartier — in their life, C117: watched the third storefront this year paper over its windows",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00192"
+        },
+        {
+          "text": "Sahana Joshi — Finished the week at Baylight Construction Authority with the hardest account on the floor squared away., KONO (C117 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "id": "moment:POP-00808:117:LifeEvent-Promotion-Up-S",
+          "kind": "moment",
+          "popid": "POP-00808"
+        },
+        {
+          "text": "Sahana Joshi — in their life, C116: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00808"
+        },
+        {
+          "text": "Geneva Zhou — A coworker at Baylight Construction Authority with less time in got the assignment they had asked about., West Oakland (C117 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "id": "moment:POP-00892:117:LifeEvent-Promotion-Down-S",
+          "kind": "moment",
+          "popid": "POP-00892"
+        },
+        {
+          "text": "Geneva Zhou — in their life, C116: caught the recap of last night's game at the counter and stayed for the second retelling",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00892"
+        },
+        {
+          "text": "Geneva Zhou — in their life, C116: heard someone at the cafe complain about the Baylight District noise and bit their tongue near a student cafe",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "kind": "thread",
+          "popid": "POP-00892"
+        },
+        {
+          "text": "Geneva Zhou — in their life, C117: walked past the renderings for the Temescal Community Health Center and decided it would never look like that near a local pop-up",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "kind": "thread",
+          "popid": "POP-00892"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [
+        {
+          "text": "good news landed for one of them and the whole house wore it for days",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Chinatown",
+          "priority": 4
+        },
+        {
+          "text": "A family bought their home in Laurel",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "Laurel",
+          "priority": 3
+        },
+        {
+          "text": "A family bought their home in West Oakland",
+          "angle": "observational analysis",
+          "domain": "COMMUNITY",
+          "hood": "West Oakland",
+          "priority": 3
+        },
+        {
+          "text": "The Dillon household (3) moved from Rockridge to Piedmont Ave — leaving Rockridge for a better fit",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 5
+        },
+        {
+          "text": "The Richards household (2) moved from Fruitvale to Piedmont Ave — moving up from Fruitvale",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Piedmont Ave",
+          "priority": 5
+        },
+        {
+          "text": "Kris Bubic moved from West Oakland to Lake Merritt — moving up from West Oakland",
+          "angle": "desk rotation",
+          "domain": "COMMUNITY",
+          "hood": "Lake Merritt",
+          "priority": 5
+        }
+      ],
+      "note": "none of today's people has written their own page this Cycle — no quotes",
+      "pageVoices": [],
+      "factCap": 120,
+      "peopleCap": 16,
+      "roomIsYours": ""
+    },
+    "citizens": [
+      {
+        "popid": "POP-00624",
+        "name": "Aisha Toure",
+        "role": "Immigration Attorney",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Aisha Toure — Immigration Attorney — Downtown",
+        "why": "reached by the Cycle's city turn: remembered a kindness never returned and decided it was too late to matter"
+      },
+      {
+        "popid": "POP-00432",
+        "name": "Duarte Washerman",
+        "role": "Sound Designer",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Duarte Washerman — Sound Designer — West Oakland",
+        "why": "reached by the Cycle's city turn: split the last of the coffee and the morning's plans with their partner"
+      },
+      {
+        "popid": "POP-00632",
+        "name": "Rico Valez",
+        "role": "Musician",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Rico Valez — Musician — Fruitvale",
+        "why": "reached by the Cycle's city turn: re-read an old journal page and didn't recognize the handwriting mood"
+      },
+      {
+        "popid": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Tara Ellison — Journalist — Rockridge",
+        "why": "lifeevent-promotion-up-s this Cycle: A quiet nod from the owner at Bay Tribune on the way out, the kind that means something."
+      },
+      {
+        "popid": "POP-00192",
+        "name": "Bea Cartier",
+        "role": "Roofing Contractor",
+        "neighborhood": "Laurel",
+        "business": null,
+        "profile": "Bea Cartier — Roofing Contractor — Laurel",
+        "why": "lifeevent-promotion-down-s this Cycle: Was left off the invite at Baylight Construction Authority for the meeting about their own account."
+      },
+      {
+        "popid": "POP-00808",
+        "name": "Sahana Joshi",
+        "role": "Elevator Mechanic",
+        "neighborhood": "KONO",
+        "business": null,
+        "profile": "Sahana Joshi — Elevator Mechanic — KONO",
+        "why": "lifeevent-promotion-up-s this Cycle: Finished the week at Baylight Construction Authority with the hardest account on the floor squared away."
+      },
+      {
+        "popid": "POP-00892",
+        "name": "Geneva Zhou",
+        "role": "Elevator Mechanic",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Geneva Zhou — Elevator Mechanic — West Oakland",
+        "why": "lifeevent-promotion-down-s this Cycle: A coworker at Baylight Construction Authority with less time in got the assignment they had asked about."
+      }
+    ],
+    "pointers": [
+      "output/beats/Lived_Events.jsonl @C117 batch 9c7f02",
+      "output/beats/Story_Hook_Deck.jsonl (hooks for Tamsin Pruitt this cycle)"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210",
+    "text": "I want to write one Lives piece about three people who work, or worked, under the same roof at the Baylight Construction Authority. All three had a week at work this cycle that went differently. Sahana Joshi, an elevator mechanic in KONO, finished the week with the hardest account on the floor squared away. Geneva Zhou, an elevator mechanic in West Oakland, watched a coworker with less time in get the assignment she had asked about. Bea Cartier, a roofing contractor in Laurel, was left off the invite to the meeting about her own account. I would write it as a plain page of what happened, with no verdict on the Authority. For each person I want the one detail their household would pick. For S",
+    "plan": {
+      "chase": "I want to write one Lives piece about three people who work, or worked, under the same roof at the Baylight Construction Authority. All three had a week at work this cycle that went differently. Sahana Joshi, an elevator mechanic in KONO, finished the week with the hardest account on the floor squared away. Geneva Zhou, an elevator mechanic in West Oakland, watched a coworker with less time in get the assignment she had asked about. Bea Cartier, a roofing contractor in Laurel, was left off the invite to the meeting about her own account. I would write it as a plain page of what happened, with no verdict on the Authority. For each person I want the one detail their household would pick. For S",
+      "focus": "Three people tied to one employer, the Baylight Construction Authority, and one week that went well for one, and went unnoticed or sideways for the other two.",
+      "why": "The record has a real event for each of the three. A promotion-type win went to Sahana. Geneva was passed over for an assignment. Bea was left off an invite. They are tied to the same business ID (BIZ-00020) and to the city's biggest build. That gives the Lives page a human, specific look at who gets in the room, without editorializing. The other candidates have only quiet, inner moments this cycle.",
+      "checks": [
+        "Confirm with each person which week the event happened in. The ledger tags Sahana's promotion as C13 and Bea's left-off-the-invite entry as both Y3C9 and Y3C13 in different lists, so the cycle labels may be mixed up.",
+        "Bea Cartier's ledger stage is retired, but the record says she was left off a meeting about her own account. Ask her what her role there is before I describe it.",
+        "Confirm all three are on the Baylight Construction Authority payroll or contract, since the ledger shows only the business ID BIZ-00020.",
+        "Do not name the coworker who got Geneva's assignment unless Geneva or the Authority names them. Winston Clarke is a friend in her record, not that coworker.",
+        "Don't link the three events as cause and effect. They sit side by side on one cycle's record."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00808",
+          "question": "You finished the week with the hardest account on the floor squared away. What was that account, what did it take, and what did you do when it closed?",
+          "basis": "Her ledger entry is a promotion-up life event at the Baylight Construction Authority. The week ended with her toughest account squared away."
+        },
+        {
+          "pop": "POP-00892",
+          "question": "You asked about an assignment and a coworker with less time in got it. What was the assignment, how did you hear, and what did you do next?",
+          "basis": "Her ledger entry is a promotion-down life event at the Authority. The record also shows the savings jar for Oaks season tickets and her walking past the Temescal Community Health Center renderings."
+        },
+        {
+          "pop": "POP-00192",
+          "question": "You weren't on the invite for the meeting about your own account. What is your account, how did you find out about the meeting, and what happened to the tickets on the counter?",
+          "basis": "Her ledger entry shows she was left off the invite at the Authority, and the tickets were left unused on the counter. Her record also shows the third storefront papered over this year."
+        }
+      ],
+      "interpretation": "The three records read like one workplace seen from three seats. Whether that is a pattern or coincidence is not something the ledger can say. The page should report only what each person confirms.",
+      "unverifiedLead": [
+        "Whether the Authority assigns accounts by seniority, and whether that played any part in what happened to Geneva.",
+        "Whether Bea's account and Sahana's hardest account are the same account.",
+        "Whether Bea is still active at the Authority despite her retired career stage."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Adams Point | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Adams Point",
+      "ref": "output/neighborhood_texture_c117.md \"### Adams Point\"; events: world_summary_c117.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Dimond | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Dimond",
+      "ref": "output/neighborhood_texture_c117.md \"### Dimond\"; events: world_summary_c117.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c117.md \"### Downtown\"; events: world_summary_c117.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c117.md \"### East Oakland\"; events: world_summary_c117.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Ivy Hill | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Ivy Hill",
+      "ref": "output/neighborhood_texture_c117.md \"### Ivy Hill\"; events: world_summary_c117.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 22,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-26T12:17:25.312Z"
+}

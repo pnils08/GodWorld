@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-012",
+  "initiativeId": "INIT-012",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-011)",
+  "consolidatedFrom": [
+    "STMT-117-mayor_gavel-011 (Mayor gavel — Dimond legislation deadline and honest stall)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-012",
+    "ImplementationPhase": "stalled",
+    "MilestoneNotes": "C117: Filing deadline missed; no Clerk-verified legislation is in the packet, so INIT-012 is stalled pending completed drafting, outreach and verification.",
+    "NextScheduledAction": "Complete drafting and outreach, then obtain Clerk-verified legislation",
+    "NextActionCycle": 118
+  }
+}

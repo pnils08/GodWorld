@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c117_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Karem Asante",
+        "role": "mentioned",
+        "popid": "POP-00739"
+      },
+      {
+        "name": "Rosalind Achterberg",
+        "role": "mentioned",
+        "popid": "POP-01183"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Man, I sit in those meetings and I hear a lot of talk about numbers, but what I see in my one-on-ones is kids carrying stuff they shouldn't have to. The index slipping? That's just a mirror of what they're bringing in—stress from home, from the block, from not knowing if they'll eat tonight. It's not a stat to me; it's their backpacks getting heavier.",
+        "sourceRef": "citizenVoice PRESS Karem Asante"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-c178a126db77",
+    "draftSha256": "49377c5a134a9e4d52542f2af59eb967556c7e32c64b0c1ba483ad8128706156",
+    "verdict": "output/cron-compare/civic_c117_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-25T00:17:59.483Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 714,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "49377c5a134a9e4d52542f2af59eb967556c7e32c64b0c1ba483ad8128706156",
+      "costUsd": 0.001
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-25T00:18:03.154Z"
+}

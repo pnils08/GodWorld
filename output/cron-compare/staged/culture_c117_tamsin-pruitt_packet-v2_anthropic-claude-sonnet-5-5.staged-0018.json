@@ -1,0 +1,66 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "117",
+  "persona": "tamsin-pruitt",
+  "byline": "Tamsin Pruitt",
+  "bylinePopid": "POP-01210",
+  "article": "output/cron-compare/staged/culture_c117_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0018.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Manjit Singh",
+        "role": "quoted-source",
+        "popid": "POP-00766"
+      },
+      {
+        "name": "Kris Bubic",
+        "role": "quoted-source",
+        "popid": "POP-00128"
+      },
+      {
+        "name": "Maria Keen",
+        "role": "mentioned",
+        "popid": "POP-00013",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "The first thing I did in my new place was unpack my grandmother's old tea set; my friends from the community helped me move. I decided to prioritize getting the water heater fixed over a weekend trip because I wanted to settle in comfortably.",
+        "sourceRef": "citizenVoice PRESS Manjit Singh"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "gate": "off",
+    "model": null,
+    "manifestId": null,
+    "draftSha256": "ce184e043dc7c40b9baaad330531004f26e66644ebd441512f6b031a20db521b",
+    "verdict": null,
+    "ranAt": "2026-11-26T00:18:29.519Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 508,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "scoredWithoutRhea": true,
+      "draftSha256": "ce184e043dc7c40b9baaad330531004f26e66644ebd441512f6b031a20db521b"
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-26T00:18:29.519Z"
+}

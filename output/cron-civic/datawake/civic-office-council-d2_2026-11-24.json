@@ -1,0 +1,61 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-11-24",
+  "cycle": 117,
+  "model": "openai/gpt-6-luna",
+  "statement": "Chinatown’s sentiment remains far below the city figure, even as retail vitality has risen and its crime index has improved from the prior cycle to roughly the city level. Those measures show change, but they do not explain what residents are experiencing. The health and safety brief also flags 133 residents sick, without explaining the cause. I’m choosing to listen before proposing a program: gather Chinatown residents’ concerns, including what they say about local conditions and access to care, then use that information to decide whether further action is warranted.",
+  "moves": [
+    {
+      "type": "canvass",
+      "payload": {
+        "hood": "Chinatown",
+        "note": "Listen to residents about neighborhood conditions, the persistently low sentiment reading, and concerns about health and access to care; report what is heard without treating it as a representative poll."
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-11-24T11:45:31.505Z",
+  "usage": {
+    "prompt_tokens": 6974,
+    "completion_tokens": 762,
+    "total_tokens": 7736,
+    "cost": 0.001252675,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 6971,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.001252675,
+      "upstream_inference_prompt_cost": 0.000871675,
+      "upstream_inference_completions_cost": 0.000381
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 576,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+  "evidenceReads": [],
+  "provider": "OpenAI",
+  "finishReason": "stop",
+  "elapsedMs": 6462,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00502",
+    "id": "L6HNmqZvfVtvKBhz1dRHAP",
+    "customId": "cp-POP-00502-c117-CIVIC-datawake-2026-11-24"
+  }
+}

@@ -1,0 +1,598 @@
+[
+  {
+    "pop": "POP-00617",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00617\",\"name\":\"Eleanor Rivera\",\"role\":\"BART Station Manager\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"What did the platform at 12th St look like on game days this cycle, and how did the crew handle the crowd with on-time performance slipping? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"12th St Oakland City Center's ridership surge against its on-time decline, and what the transit workers on the roster see from the platform.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Eleanor Rivera — BART Station Manager — BART Oakland Division\",\"evidence\":[{\"id\":\"EV-087fdf74c0\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"text\":\"12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C117\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c5606da08cb9\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"id\":\"F-323ac889cb8f\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"id\":\"F-d346dea16375\"},{\"t\":\"FACT\",\"text\":\"Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117 Factors (frame)\",\"id\":\"F-8af392ddc52f\"},{\"t\":\"FACT\",\"text\":\"The week on the line — every cause on the record this cycle, once: breeze; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Lake Merritt, Temescal; events in Lake Merritt; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; game day (Jack London); events in West Oakland\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117 Factors\",\"id\":\"F-67fa760de32c\"},{\"t\":\"FACT\",\"text\":\"Weather this cycle: breeze, 59°F (7 cycles of clear)\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 117\",\"id\":\"F-fcd167a6db53\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at KONO — One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnov\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 117\",\"id\":\"F-39d46e460aab\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at San Antonio — The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oa\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 117\",\"id\":\"F-4eb5c3f0b203\"},{\"t\":\"FACT\",\"text\":\"Eleanor Rivera — BART Station Manager — BART Oakland Division\",\"src\":\"Simulation_Ledger profile for POP-00617\",\"id\":\"F-6412715ef9fb\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00617",
+        "name": "Eleanor Rivera",
+        "role": "BART Station Manager",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "What did the platform at 12th St look like on game days this cycle, and how did the crew handle the crowd with on-time performance slipping? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "12th St Oakland City Center's ridership surge against its on-time decline, and what the transit workers on the roster see from the platform.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+        "evidence": [
+          {
+            "id": "EV-087fdf74c0",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+            "text": "12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C117",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c5606da08cb9"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+          "id": "F-323ac889cb8f"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+          "id": "F-d346dea16375"
+        },
+        {
+          "t": "FACT",
+          "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117 Factors (frame)",
+          "id": "F-8af392ddc52f"
+        },
+        {
+          "t": "FACT",
+          "text": "The week on the line — every cause on the record this cycle, once: breeze; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Lake Merritt, Temescal; events in Lake Merritt; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; game day (Jack London); events in West Oakland",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117 Factors",
+          "id": "F-67fa760de32c"
+        },
+        {
+          "t": "FACT",
+          "text": "Weather this cycle: breeze, 59°F (7 cycles of clear)",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 117",
+          "id": "F-fcd167a6db53"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at KONO — One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnov",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 117",
+          "id": "F-39d46e460aab"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oa",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 117",
+          "id": "F-4eb5c3f0b203"
+        },
+        {
+          "t": "FACT",
+          "text": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+          "src": "Simulation_Ledger profile for POP-00617",
+          "id": "F-6412715ef9fb"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00791",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00791\",\"name\":\"Elena Soria Dominguez\",\"role\":\"Transit Hub Planning Lead\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"With Fruitvale down 1,336 riders and the hub in visioning phase, what does the planning lead see as the connection between the design process and current ridership? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"12th St Oakland City Center's ridership surge against its on-time decline, and what the transit workers on the roster see from the platform.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority\",\"evidence\":[{\"id\":\"EV-fd9cf990c3\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"text\":\"12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C117\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c5606da08cb9\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"id\":\"F-323ac889cb8f\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"id\":\"F-d346dea16375\"},{\"t\":\"FACT\",\"text\":\"Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117 Factors (frame)\",\"id\":\"F-8af392ddc52f\"},{\"t\":\"FACT\",\"text\":\"The week on the line — every cause on the record this cycle, once: breeze; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Lake Merritt, Temescal; events in Lake Merritt; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; game day (Jack London); events in West Oakland\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117 Factors\",\"id\":\"F-67fa760de32c\"},{\"t\":\"FACT\",\"text\":\"Weather this cycle: breeze, 59°F (7 cycles of clear)\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 117\",\"id\":\"F-fcd167a6db53\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at KONO — One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnov\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 117\",\"id\":\"F-39d46e460aab\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at San Antonio — The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oa\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 117\",\"id\":\"F-4eb5c3f0b203\"},{\"t\":\"FACT\",\"text\":\"Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority\",\"src\":\"Simulation_Ledger profile for POP-00791\",\"id\":\"F-79a3d1428db6\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00791",
+        "name": "Elena Soria Dominguez",
+        "role": "Transit Hub Planning Lead",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "With Fruitvale down 1,336 riders and the hub in visioning phase, what does the planning lead see as the connection between the design process and current ridership? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "12th St Oakland City Center's ridership surge against its on-time decline, and what the transit workers on the roster see from the platform.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+        "evidence": [
+          {
+            "id": "EV-fd9cf990c3",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+            "text": "12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C117",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c5606da08cb9"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+          "id": "F-323ac889cb8f"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+          "id": "F-d346dea16375"
+        },
+        {
+          "t": "FACT",
+          "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117 Factors (frame)",
+          "id": "F-8af392ddc52f"
+        },
+        {
+          "t": "FACT",
+          "text": "The week on the line — every cause on the record this cycle, once: breeze; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Lake Merritt, Temescal; events in Lake Merritt; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; game day (Jack London); events in West Oakland",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117 Factors",
+          "id": "F-67fa760de32c"
+        },
+        {
+          "t": "FACT",
+          "text": "Weather this cycle: breeze, 59°F (7 cycles of clear)",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 117",
+          "id": "F-fcd167a6db53"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at KONO — One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnov",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 117",
+          "id": "F-39d46e460aab"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oa",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 117",
+          "id": "F-4eb5c3f0b203"
+        },
+        {
+          "t": "FACT",
+          "text": "Elena Soria Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+          "src": "Simulation_Ledger profile for POP-00791",
+          "id": "F-79a3d1428db6"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01039",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01039\",\"name\":\"Ximena Mehta\",\"role\":\"Bart Transit PR\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"How does BART read the gap between ridership growth and on-time performance at 12th St, and what does the congestion factor mean for the line? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"12th St Oakland City Center's ridership surge against its on-time decline, and what the transit workers on the roster see from the platform.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Ximena Mehta — Bart Transit PR — BART Oakland Division\",\"evidence\":[{\"id\":\"EV-874d7e3378\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"text\":\"12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.\"}],\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C117\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c5606da08cb9\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"id\":\"F-323ac889cb8f\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"id\":\"F-d346dea16375\"},{\"t\":\"FACT\",\"text\":\"Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117 Factors (frame)\",\"id\":\"F-8af392ddc52f\"},{\"t\":\"FACT\",\"text\":\"The week on the line — every cause on the record this cycle, once: breeze; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Lake Merritt, Temescal; events in Lake Merritt; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; game day (Jack London); events in West Oakland\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117 Factors\",\"id\":\"F-67fa760de32c\"},{\"t\":\"FACT\",\"text\":\"Weather this cycle: breeze, 59°F (7 cycles of clear)\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 117\",\"id\":\"F-fcd167a6db53\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at KONO — One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnov\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 117\",\"id\":\"F-39d46e460aab\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at San Antonio — The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oa\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 117\",\"id\":\"F-4eb5c3f0b203\"},{\"t\":\"FACT\",\"text\":\"Ximena Mehta — Bart Transit PR — BART Oakland Division\",\"src\":\"Simulation_Ledger profile for POP-01039\",\"id\":\"F-68d81ed0c396\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01039",
+        "name": "Ximena Mehta",
+        "role": "Bart Transit PR",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "How does BART read the gap between ridership growth and on-time performance at 12th St, and what does the congestion factor mean for the line? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "12th St Oakland City Center's ridership surge against its on-time decline, and what the transit workers on the roster see from the platform.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+        "evidence": [
+          {
+            "id": "EV-874d7e3378",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+            "text": "12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line."
+          }
+        ],
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C117",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c5606da08cb9"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+          "id": "F-323ac889cb8f"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+          "id": "F-d346dea16375"
+        },
+        {
+          "t": "FACT",
+          "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117 Factors (frame)",
+          "id": "F-8af392ddc52f"
+        },
+        {
+          "t": "FACT",
+          "text": "The week on the line — every cause on the record this cycle, once: breeze; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Lake Merritt, Temescal; events in Lake Merritt; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; game day (Jack London); events in West Oakland",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117 Factors",
+          "id": "F-67fa760de32c"
+        },
+        {
+          "t": "FACT",
+          "text": "Weather this cycle: breeze, 59°F (7 cycles of clear)",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 117",
+          "id": "F-fcd167a6db53"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at KONO — One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnov",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 117",
+          "id": "F-39d46e460aab"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oa",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 117",
+          "id": "F-4eb5c3f0b203"
+        },
+        {
+          "t": "FACT",
+          "text": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+          "src": "Simulation_Ledger profile for POP-01039",
+          "id": "F-68d81ed0c396"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00200",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00200\",\"name\":\"Evan Lewis\",\"role\":\"Bus driver\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Trevor Shimizu\",\"question\":\"What have you seen, felt, or understood about \\\"12th St Oakland City Center's ridership surge against its on-time decline, and what the transit workers on the roster see from the platform.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"beat-transit\",\"hood\":null,\"focus\":\"12th St Oakland City Center's ridership surge against its on-time decline, and what the transit workers on the roster see from the platform.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Evan Lewis — Bus driver — AC Transit\",\"evidence\":[{\"id\":\"EV-23a37c5039\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"text\":\"12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.\"}],\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C117\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c5606da08cb9\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"id\":\"F-323ac889cb8f\"},{\"t\":\"FACT\",\"text\":\"12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117\",\"id\":\"F-d346dea16375\"},{\"t\":\"FACT\",\"text\":\"Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117 Factors (frame)\",\"id\":\"F-8af392ddc52f\"},{\"t\":\"FACT\",\"text\":\"The week on the line — every cause on the record this cycle, once: breeze; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Lake Merritt, Temescal; events in Lake Merritt; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; game day (Jack London); events in West Oakland\",\"src\":\"output/beats/Transit_Metrics.jsonl Cycle 117 Factors\",\"id\":\"F-67fa760de32c\"},{\"t\":\"FACT\",\"text\":\"Weather this cycle: breeze, 59°F (7 cycles of clear)\",\"src\":\"output/beats/Cycle_Weather.jsonl CycleID 117\",\"id\":\"F-fcd167a6db53\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at KONO — One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnov\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 117\",\"id\":\"F-39d46e460aab\"},{\"t\":\"FACT\",\"text\":\"Game on the sports feed this cycle: Oaks at San Antonio — The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oa\",\"src\":\"output/beats/Oakland_Sports_Feed.jsonl Cycle 117\",\"id\":\"F-4eb5c3f0b203\"},{\"t\":\"FACT\",\"text\":\"Evan Lewis — Bus driver — AC Transit\",\"src\":\"Simulation_Ledger profile for POP-00200\",\"id\":\"F-43ae64c832ec\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00200",
+        "name": "Evan Lewis",
+        "role": "Bus driver",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Trevor Shimizu",
+        "question": "What have you seen, felt, or understood about \"12th St Oakland City Center's ridership surge against its on-time decline, and what the transit workers on the roster see from the platform.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "beat-transit",
+        "hood": null,
+        "focus": "12th St Oakland City Center's ridership surge against its on-time decline, and what the transit workers on the roster see from the platform.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Evan Lewis — Bus driver — AC Transit",
+        "evidence": [
+          {
+            "id": "EV-23a37c5039",
+            "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+            "text": "12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line."
+          }
+        ],
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C117",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c5606da08cb9"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center ridership up 1,962 vs C116 | 8 stations + 10 corridors on the record",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+          "id": "F-323ac889cb8f"
+        },
+        {
+          "t": "FACT",
+          "text": "12th St Oakland City Center moved up the most this cycle — breeze; base: ledger; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); 16 transit workers on the roster, 8 citizens who lived a transit line, a chaos car on the line.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117",
+          "id": "F-d346dea16375"
+        },
+        {
+          "t": "FACT",
+          "text": "Day type this cycle: ordinary weekday — no citywide cut. A station that moved more than the citywide rule names its own reason on its row.",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117 Factors (frame)",
+          "id": "F-8af392ddc52f"
+        },
+        {
+          "t": "FACT",
+          "text": "The week on the line — every cause on the record this cycle, once: breeze; game day (Downtown, Jack London); events in Lake Merritt, West Oakland; Baylight District — Final Council Vote: construction-active; crowded platforms (city transit congestion 0.14); game day (Downtown); events in Lake Merritt, Temescal; events in Lake Merritt; events in Fruitvale, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; game day (Jack London); events in West Oakland",
+          "src": "output/beats/Transit_Metrics.jsonl Cycle 117 Factors",
+          "id": "F-67fa760de32c"
+        },
+        {
+          "t": "FACT",
+          "text": "Weather this cycle: breeze, 59°F (7 cycles of clear)",
+          "src": "output/beats/Cycle_Weather.jsonl CycleID 117",
+          "id": "F-fcd167a6db53"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at KONO — One game after their first home loss, the Oaks beat Denver 137-113 at home in a non-Cup game in front of a 94 percent crowd. The city is buying in. Oakland led 38-36 after one, 71-59 at the half and 103-79 after three, and played the Nuggets even in the fourth, 34-34. Austin Reaves led the Oaks with 32 points in just 22 minutes, 8 of 14 from the field, 6 of 10 from three and 10 of 10 at the line, with 4 rebounds, 3 assists, a steal and no turnov",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 117",
+          "id": "F-39d46e460aab"
+        },
+        {
+          "t": "FACT",
+          "text": "Game on the sports feed this cycle: Oaks at San Antonio — The Oaks went on the road to face the Golden State Warriors, the team that used to call Oakland home and left, and beat them 98-96 in a Cup game. The last time these teams met it went the other way. In C109 the Warriors came to Oakland for game 2 of the preseason and beat the Oaks, one of the nine straight losses the Oaks took through rookie camp and the preseason. The first meeting that counted went to Oakland, on the Warriors' floor. Oa",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 117",
+          "id": "F-4eb5c3f0b203"
+        },
+        {
+          "t": "FACT",
+          "text": "Evan Lewis — Bus driver — AC Transit",
+          "src": "Simulation_Ledger profile for POP-00200",
+          "id": "F-43ae64c832ec"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": true,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

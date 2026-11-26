@@ -1,0 +1,41 @@
+{
+  "office": "okoro",
+  "agentDir": "civic-office-okoro",
+  "holder": "Brenda Okoro",
+  "popid": "POP-00037",
+  "title": "Deputy Mayor (Community)",
+  "date": "2026-11-25",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Deputy Mayor Brenda Okoro — Weekly Report, Cycle 117**\n\nHere is what my records show, and what I am doing about it.\n\n**The Fund.** Disbursement-active, $20.2 million remaining against the $28 million authorization. That is $400,000 out this cycle under the 23-day standard — the same standard I have held since C110. I want to be exact about where the renewal stands: it is still on the Council calendar, and it stays there until the C114 closeout is verified on the record and Council acts. I am not calling it. Business-and-resident scope intact, 23 days on the clock, closeout on the table first. That has been my position since C115 and it is my position today.\n\n**What moved this cycle.** One fold, and it is the one I care about: initiative work landed in seven neighborhoods — Downtown, Temescal, West Oakland, Fruitvale, Jack London, Ivy Hill, East Oakland. Ivy Hill is on that list. I said last cycle that Ivy Hill and Brooklyn don't care about a charter renewal, they care whether I show up. The work showed up in Ivy Hill. Brooklyn — 0 pressure, 0 momentum, sentiment -0.01 — is still waiting, and I am not going to pretend otherwise.\n\n**The map.** Five neighborhoods at momentum 10/10: Downtown, West Oakland, Fruitvale, Jack London, Uptown. Grand Lake is rising and now boom-sustained at 8/10. Four of those five are pinned at housing pressure 10/10 — Downtown, Fruitvale, Jack London, Uptown. West Oakland's pressure reads 6.5 and its sentiment 0.41 is the highest on the map. I will say the same thing I said last cycle because it remains true: that is what a stabilization fund looks like when it is actually working. But the exodus is no longer a rumor — the migration record this cycle shows five residents in Jack London and five in Uptown planning to leave for a better income fit, Kris Bubic moving up from West Oakland to Lake Merritt, Riley Boon from Jack London to East Oakland, the Dillon and Richards households out of Rockridge and Fruitvale for Piedmont Ave. The boom is the story; the displacement underneath it is the story too.\n\n**Piedmont Avenue.** Still rising, and still the place where two things sit on the same block: households moving up into it, and B'nai Tikvah's pantry feeding neighbors on that same avenue. Rising and hungry, at once. Rabbi Bauer's congregation is doing work the budget cannot buy.\n\n**Faith communities.** New Covenant Pentecostal's food pantry served neighbors this week, and Adams Point United Methodist activated an emergency assistance fund — that is a medium-severity event on the ledger and I am reading it as one. Temple Beth Or held a vigil for community healing in Rockridge. Masjid An-Nur gathered East Oakland in grief. Telegraph Presbyterian hosted a health fair Downtown. That is four traditions doing stabilization work in five neighborhoods in one cycle. I will be in those rooms.\n\n**The blocks that are hurting.** Ivy Hill, San Antonio, Glenview, Dimond, Eastlake, Laurel, Brooklyn — all decay, all negative migration. Dimond logged a high-severity culture spike this cycle and I want eyes on it before it becomes something bigger. Laurel's ice cream truck drew a noise complaint; Uptown's turned into a block party. Two blocks, two outcomes, same vehicle — that tells me the difference is who is standing there organizing, not what is driven down the street.\n\n**What I am doing next.** Verification of the C114 closeout so Council can act on their calendar, not mine. Feet on the ground in Ivy Hill and San Antonio, and Brooklyn next. A real accounting of the pressure in Downtown, Fruitvale, Jack London and Uptown — the exodus is a number now, and numbers get answered with a plan, not a press line. Triage is triage.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-25T11:46:42.960Z",
+  "usage": {
+    "prompt_tokens": 6557,
+    "completion_tokens": 840,
+    "cost": 0.0011
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "community programs housing neighborhoods",
+    "entries": 6,
+    "fromSearch": 6,
+    "newest": 1,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00037",
+    "id": "Sk9cfB927aCHyh3R1uaBpH",
+    "customId": "cp-POP-00037-c117-CIVIC-datawake-2026-11-25"
+  }
+}

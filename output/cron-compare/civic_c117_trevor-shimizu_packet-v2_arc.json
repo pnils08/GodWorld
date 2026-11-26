@@ -1,0 +1,32 @@
+{
+  "status": "arc-seed",
+  "cycle": "117",
+  "desk": "civic",
+  "persona": "trevor-shimizu",
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00617",
+      "name": "Eleanor Rivera",
+      "quote": "Game days at 12th are a different animal — you can feel it before you even see the platform. The crowd comes in waves, not a steady stream, and that's what stretches the dwell time. Trains are there on time, but everyone's squeezing on at once, so the doors hold longer and the schedule slips a little. My crew just adjusts — no big announcements, everyone knows their spot. We read the rhythm of the station, and we move with it. It's not glamorous, but when the platforms fill up like that, you see the team do what they do best: keep it moving, keep it safe, keep it human."
+    },
+    {
+      "pop": "POP-00791",
+      "name": "Elena Soria Dominguez",
+      "quote": "Look, I'll be straight with you — the visioning phase isn't what's moving riders on the platform. People aren't staring at renderings on their way to work. Fruitvale's down this cycle, and I can tell you the design process doesn't put a single butt on a seat. What it does is make sure that when we do break ground, the station actually works for the people who live here — the cart vendors, the kids walking to BART, the folks transferring at rush hour. The ridership numbers right now track with what's happening in East Oakland — events, crowds, the energy of the neighborhood. The hub is about what Fruitvale looks like in five years, not what the counter says this week. I don't pretend otherwise."
+    },
+    {
+      "pop": "POP-01039",
+      "name": "Ximena Mehta",
+      "quote": "Honestly, the ridership jump at 12th doesn't surprise me one bit — between the Baylight construction finally moving and everything happening around the lake and Jack London, that station is the hub everyone funnels through. But yeah, the on-time piece is the part that keeps me up. When you've got that many people on the platforms and the line's running tight, every little delay compounds. The workers on the roster see it from the platform — it's not one big problem, it's the crowd itself slowing the doors, the dwell times stretching. I think the congestion factor is real, and it's the price of the city actually showing up. We just have to figure out how to move that many people without the schedule paying for it."
+    },
+    {
+      "pop": "POP-00200",
+      "name": "Evan Lewis",
+      "quote": "I drive that corridor every day, and you can feel it. The platforms are packed, especially on game days and when something's happening at Lake Merritt or down in Jack London. But the trains aren't always there when they should be. We see it from the platform — the crowd's growing, but the schedule's slipping. It's not one thing; it's the construction, the events, the whole city moving at once. We're doing what we can, but the riders feel it, and so do we."
+    }
+  ],
+  "claim": "Game days at 12th are a different animal — you can feel it before you even see the platform. The crowd comes in waves, not a steady stream, and that's what stretches the dwell time. Trains are there on time, but everyone's squeezing on at once, so the doors hold longer and the schedule slips a little. My crew just adjusts — no big announcements, everyone knows their spot. We read the rhythm of the station, and we move with it. It's not glamorous, but when the platforms fill up like that, you see the team do what they do best: keep it moving, keep it safe, keep it human.",
+  "src": "citizenVoice PRESS c117",
+  "ranAt": "2026-11-23T19:17:42.689Z"
+}

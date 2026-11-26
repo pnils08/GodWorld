@@ -1,0 +1,41 @@
+{
+  "office": "transit_hub",
+  "agentDir": "civic-project-transit-hub",
+  "holder": "Elena Soria Dominguez",
+  "popid": "POP-00791",
+  "title": "Transit Hub Planning Lead",
+  "date": "2026-11-25",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Weekly Report — Cycle 117. Elena Soria Dominguez, Transit Hub Planning Lead.**\n\nHere's what's on the record this week, and here's what actually changed.\n\n**Fruitvale.** Down. 8,007 riders this cycle against 9,343 last — a loss of 1,336, about 14%. On-time is up slightly, 0.83 to 0.85, and it's no longer carrying the \"above-average ridership\" note. I'm not going to dress that up. Last week I told this room the numbers moved because life moved, not because a drawing moved; the same logic cuts both ways, and this week the counter says Fruitvale is quieter. What I will say is that the on-time held and improved while the volume fell — that's a station running clean, not a station failing.\n\n**The rest of the system.** Mixed, and I'll give it straight. 12th Street recovered riders — 12,213 to 14,175 — with on-time down a tick to 0.77, still under game-day crowds and the Baylight District construction. 19th Street flat on riders at 13,856, on-time up 0.78 to 0.81. Lake Merritt up 6,714 to 7,430, on-time up to 0.84. West Oakland 8,773 to 9,100 at 0.86. Rockridge up 4,557 to 5,945 at 0.82. MacArthur 4,172 to 4,368 at 0.85. Coliseum down 8,908 to 8,209 at 0.82 — my other East Oakland station gave back some ground too, so I won't hang Fruitvale's number on the hub alone. Every station is on the sheet with crowded platforms, city transit congestion at 0.14, and that's the real constraint on the platforms.\n\n**Roads.** Worse, and I said last week the direction was right; this week it isn't. I-880 North 89 to 100, I-980 86 to 100, I-880 South 92 to 93, International Blvd 73 back to 84 — heavy again, and that's the corridor my neighbors walk and cross, so I'm not shrugging at it. Broadway 72 to 73 and Grand Ave 64 to 65 held roughly flat. The event ledger puts a gridlock day on top of it — traffic index 83, worst on I-880 North — with Oaks home week crowds through Jack London and Downtown. That's the cause line, and it's on the sheet, not my excuse.\n\n**Infrastructure.** One event this cycle: the Downtown Transit Snarl eased after three cycles back within city range. Low severity, good news, and I'll take it.\n\n**Where the project stands.** No payments out on INIT-003 this cycle — none last cycle either, and I want that heard plainly: $230M budget, $230M unspent. The tracker now records the hold explicitly at Cycle 117: further design advancement is held; preliminary schematics and a documented Fruitvale public comment-and-response record are not evidenced in the packet. That's the honest state of it. The next scheduled action is to deliver the schematics and publish that comment-and-response record — the comments answered in the language they came in — and it's scheduled for Cycle 118. Until that record exists, nothing advances, and I won't pretend a date on a calendar is a deliverable.\n\nThat's my report. It's on the record as given.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-25T11:46:30.444Z",
+  "usage": {
+    "prompt_tokens": 4648,
+    "completion_tokens": 755,
+    "cost": 0.0012
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "transit hub ridership stations",
+    "entries": 4,
+    "fromSearch": 2,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00791",
+    "id": "HDuyUZLd6deANuuJkqcduA",
+    "customId": "cp-POP-00791-c117-CIVIC-datawake-2026-11-25"
+  }
+}

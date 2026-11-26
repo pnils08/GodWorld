@@ -1,0 +1,430 @@
+[
+  {
+    "pop": "POP-00272",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00272\",\"name\":\"Joseph Cramp\",\"role\":\"Janitor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"You said it's still sinking in. When you picture the first shift with the new responsibilities, what's the first fire you think you'll have to put out, and what did the 28 years teach you about it? Speak from your life. If the question assumes something that has not happened to you, say so plainly.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Joseph Cramp — Janitor — Downtown\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null,\"ownLife\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Joseph Cramp, Janitor, Downtown (POP-00272) — 4 pages; latest to a reporter, C117; Lives carried the promotion this Cycle: “I've been a Janitor for 28 years, and I just got promoted. To be honest, it's still sinking in. It means more responsibilities, more fires to put out…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-5cfdbd2d8e5f\"},{\"t\":\"FACT\",\"text\":\"Joseph Cramp — Janitor — Downtown\",\"src\":\"Simulation_Ledger profile for POP-00272\",\"id\":\"F-d03f1ebe86eb\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00272",
+        "name": "Joseph Cramp",
+        "role": "Janitor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "You said it's still sinking in. When you picture the first shift with the new responsibilities, what's the first fire you think you'll have to put out, and what did the 28 years teach you about it? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Joseph Cramp — Janitor — Downtown",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null,
+        "ownLife": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Joseph Cramp, Janitor, Downtown (POP-00272) — 4 pages; latest to a reporter, C117; Lives carried the promotion this Cycle: “I've been a Janitor for 28 years, and I just got promoted. To be honest, it's still sinking in. It means more responsibilities, more fires to put out…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-5cfdbd2d8e5f"
+        },
+        {
+          "t": "FACT",
+          "text": "Joseph Cramp — Janitor — Downtown",
+          "src": "Simulation_Ledger profile for POP-00272",
+          "id": "F-d03f1ebe86eb"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "ownLife": true,
+    "ownWake": {
+      "reporter": "Ines Sorensen",
+      "question": "You said it's still sinking in. When you picture the first shift with the new responsibilities, what's the first fire you think you'll have to put out, and what did the 28 years teach you about it?"
+    },
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00547",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00547\",\"name\":\"Jocelyn Santo\",\"role\":\"Yoga Instructor\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"You said you're still figuring out how this household works. What's one thing in the house that's already different from your life before, and what's one you haven't worked out yet? Speak from your life. If the question assumes something that has not happened to you, say so plainly.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Jocelyn Santo — Yoga Instructor — Lake Merritt\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null,\"ownLife\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Jocelyn Santo, Yoga Instructor, Lake Merritt (POP-00547) — 2 pages; latest to a reporter, a question they carry, C117; Lives carried the new household this Cycle: “Still figuring out how Travis and I make this household work while everything is so new.”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-b112a943f1c1\"},{\"t\":\"FACT\",\"text\":\"Jocelyn Santo — Yoga Instructor — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-00547\",\"id\":\"F-0e8b918f6f5e\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00547",
+        "name": "Jocelyn Santo",
+        "role": "Yoga Instructor",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "You said you're still figuring out how this household works. What's one thing in the house that's already different from your life before, and what's one you haven't worked out yet? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Jocelyn Santo — Yoga Instructor — Lake Merritt",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null,
+        "ownLife": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Jocelyn Santo, Yoga Instructor, Lake Merritt (POP-00547) — 2 pages; latest to a reporter, a question they carry, C117; Lives carried the new household this Cycle: “Still figuring out how Travis and I make this household work while everything is so new.”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-b112a943f1c1"
+        },
+        {
+          "t": "FACT",
+          "text": "Jocelyn Santo — Yoga Instructor — Lake Merritt",
+          "src": "Simulation_Ledger profile for POP-00547",
+          "id": "F-0e8b918f6f5e"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "ownLife": true,
+    "ownWake": {
+      "reporter": "Ines Sorensen",
+      "question": "You said you're still figuring out how this household works. What's one thing in the house that's already different from your life before, and what's one you haven't worked out yet?"
+    },
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00222",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00222\",\"name\":\"Travis Paiz\",\"role\":\"Mover\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"You called setting up the household a whirlwind and said it's been a lot. What was the moment when it hit you that it was real, and what did Jocelyn say or do? Speak from your life. If the question assumes something that has not happened to you, say so plainly.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Travis Paiz — Mover — Lake Merritt\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null,\"ownLife\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Travis Paiz, Mover, Lake Merritt (POP-00222) — 3 pages; latest to a reporter, C117; Lives carried the new household this Cycle: “Setting up the household with Jocelyn was a whirlwind, to be honest. We just got married and were eager to start our life together. It's been a lot…”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-bb47920d0d27\"},{\"t\":\"FACT\",\"text\":\"Travis Paiz — Mover — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-00222\",\"id\":\"F-4a1fbca4fffd\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00222",
+        "name": "Travis Paiz",
+        "role": "Mover",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "You called setting up the household a whirlwind and said it's been a lot. What was the moment when it hit you that it was real, and what did Jocelyn say or do? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Travis Paiz — Mover — Lake Merritt",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null,
+        "ownLife": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Travis Paiz, Mover, Lake Merritt (POP-00222) — 3 pages; latest to a reporter, C117; Lives carried the new household this Cycle: “Setting up the household with Jocelyn was a whirlwind, to be honest. We just got married and were eager to start our life together. It's been a lot…”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-bb47920d0d27"
+        },
+        {
+          "t": "FACT",
+          "text": "Travis Paiz — Mover — Lake Merritt",
+          "src": "Simulation_Ledger profile for POP-00222",
+          "id": "F-4a1fbca4fffd"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "ownLife": true,
+    "ownWake": {
+      "reporter": "Ines Sorensen",
+      "question": "You called setting up the household a whirlwind and said it's been a lot. What was the moment when it hit you that it was real, and what did Jocelyn say or do?"
+    },
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00523",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00523\",\"name\":\"Serg Cerrano\",\"role\":\"Mover\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Ines Sorensen\",\"question\":\"You said the city's pace is pulling you forward since the new child. What is it pulling you away from, and what do you do in the hour when it lets go? Speak from your life. If the question assumes something that has not happened to you, say so plainly.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Serg Cerrano — Mover — Fruitvale\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null,\"ownLife\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Serg Cerrano, Mover, Fruitvale (POP-00523) — 1 page; latest to a reporter, C117; Lives carried the new child this Cycle: “After welcoming my new child, I felt the city's pace pulling me forward. Life's been busy, and I've been close to family a lot lately.”\",\"src\":\"output/citizen_pages/index.jsonl roster\",\"id\":\"F-f36aed6eb994\"},{\"t\":\"FACT\",\"text\":\"Serg Cerrano — Mover — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00523\",\"id\":\"F-409de841f851\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00523",
+        "name": "Serg Cerrano",
+        "role": "Mover",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Ines Sorensen",
+        "question": "You said the city's pace is pulling you forward since the new child. What is it pulling you away from, and what do you do in the hour when it lets go? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Serg Cerrano — Mover — Fruitvale",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null,
+        "ownLife": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Serg Cerrano, Mover, Fruitvale (POP-00523) — 1 page; latest to a reporter, C117; Lives carried the new child this Cycle: “After welcoming my new child, I felt the city's pace pulling me forward. Life's been busy, and I've been close to family a lot lately.”",
+          "src": "output/citizen_pages/index.jsonl roster",
+          "id": "F-f36aed6eb994"
+        },
+        {
+          "t": "FACT",
+          "text": "Serg Cerrano — Mover — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00523",
+          "id": "F-409de841f851"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "ownLife": true,
+    "ownWake": {
+      "reporter": "Ines Sorensen",
+      "question": "You said the city's pace is pulling you forward since the new child. What is it pulling you away from, and what do you do in the hour when it lets go?"
+    },
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

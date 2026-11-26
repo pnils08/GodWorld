@@ -1,0 +1,72 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "117",
+  "persona": "elliot-marbury",
+  "byline": "Elliot Marbury",
+  "bylinePopid": "POP-00166",
+  "article": "output/cron-compare/staged/sports_c117_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Benji Dillon",
+        "role": "mentioned",
+        "popid": "POP-00018",
+        "floor": true
+      },
+      {
+        "name": "Clark Saryan",
+        "role": "mentioned",
+        "popid": "POP-00052",
+        "floor": true
+      },
+      {
+        "name": "Henry Rivas",
+        "role": "mentioned",
+        "popid": "POP-00024",
+        "floor": true
+      },
+      {
+        "name": "Travis Coles",
+        "role": "mentioned",
+        "popid": "POP-00533",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Travis Coles — 3 seasons on the dossier, 2041 the latest — pitcher command memo, multi-year",
+        "sourceRef": "output/player_truesource_mirror.json Travis Coles @C117"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-44829836d1ec",
+    "draftSha256": "6d7419e40a002e111fd1b9caf7e83d4f6f1d8b3eaf0bfb3d841d4d2ecb91ebd8",
+    "verdict": "output/cron-compare/sports_c117_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-26T00:16:40.765Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "code floor 350",
+      "words": 788,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "6d7419e40a002e111fd1b9caf7e83d4f6f1d8b3eaf0bfb3d841d4d2ecb91ebd8",
+      "costUsd": 0.0014
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-26T00:16:47.043Z"
+}

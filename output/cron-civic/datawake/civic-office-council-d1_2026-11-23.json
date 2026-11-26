@@ -1,0 +1,60 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-11-23",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "Brooklyn's sentiment sits just under the city line and its trajectory is still decay — but the retail number moved up and the crime index is flat to city. What I take from that is not a crisis and not a victory; it is a neighborhood that needs its record kept honestly. West Oakland, my other turf, is a different story: sentiment 0.41, crime down, and a housing pressure reading that ticked up a full point. I am not going to invent a problem where the numbers do not show one, and I am not going to pretend the pressure line is nothing. This week I put a work move into the Youth Apprenticeship Pipeline, stalled on my board, because Brooklyn and West Oakland young people signed up and I still owe them a placement path, not a sign-up sheet. And I will say plainly that the one complaint in my window — the Stabilization Fund complaint naming two households out of a program's record — is a thing I will answer with the record, not with a speech. The Tenant Defense Fund I sponsored is operational; I am not relitigating it. No new spending program this week without a need I can name from the pack.",
+  "moves": [
+    {
+      "type": "work",
+      "payload": {
+        "initiativeId": "INIT-007"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-23T11:47:10.268Z",
+  "usage": {
+    "prompt_tokens": 6857,
+    "completion_tokens": 284,
+    "total_tokens": 7141,
+    "cost": 0.00030268,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00030268,
+      "upstream_inference_prompt_cost": 0.00027428,
+      "upstream_inference_completions_cost": 0.0000284
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+  "evidenceReads": [],
+  "provider": "Sail Research",
+  "finishReason": "stop",
+  "elapsedMs": 3516,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00501",
+    "id": "MKsZujjWFb9cNPH2CG1NCV",
+    "customId": "cp-POP-00501-c117-CIVIC-datawake-2026-11-23"
+  }
+}

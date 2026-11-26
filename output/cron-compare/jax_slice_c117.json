@@ -1,0 +1,249 @@
+{
+  "cycle": 117,
+  "builtAt": "2026-11-24T07:24:30.281Z",
+  "empty": false,
+  "kind": "jax-accountability",
+  "journalist": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "persona": "freelance-firebrand"
+  },
+  "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+  "scandalRows": [],
+  "hooks": [],
+  "stink": {
+    "className": "metric-contradiction",
+    "score": 61,
+    "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+    "ref": "Neighborhood_Map row(s) 10; finding C117-5",
+    "kind": "anomaly",
+    "desk": "civic"
+  },
+  "contradiction": {
+    "a": "Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+    "b": "No active initiative (or mitigator) owns this break on the record",
+    "frame": "The map says decay; the program roster does not answer it.",
+    "aSrc": "Neighborhood_Map row(s) 10; finding C117-5",
+    "bSrc": "Neighborhood_Map row(s) 10; finding C117-5"
+  },
+  "story": {
+    "ref": "Neighborhood_Map row(s) 10; finding C117-5",
+    "label": "Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+    "kind": "anomaly",
+    "angle": "The map says decay; the program roster does not answer it.",
+    "hookLine": null,
+    "hood": "Grand Lake",
+    "popids": [
+      "POP-01175",
+      "POP-01207",
+      "POP-01218",
+      "POP-01116",
+      "POP-01125",
+      "POP-01136",
+      "POP-00922"
+    ],
+    "citizens": [
+      "Sunita Raghavan — Pediatrician, Grand Lake",
+      "Maya Inoue — Pharmacy tech, Grand Lake",
+      "Jerri Brown — Dishwasher, Grand Lake",
+      "Darius Hill — Security guard, Ivy Hill",
+      "Ronald Phillips — Barista, Ivy Hill",
+      "Omar Lopez — Construction laborer, Ivy Hill",
+      "Rasha Brown — Disability Rights Advocate, Fruitvale"
+    ],
+    "stinkClass": "metric-contradiction",
+    "stinkScore": 61
+  },
+  "prewrite": {
+    "method": "TWO_SIDED_DATA_AUDIT",
+    "anchorFacts": [
+      "Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+      "No active initiative (or mitigator) owns this break on the record"
+    ],
+    "evidence": [
+      {
+        "side": "A",
+        "text": "Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+        "src": "Neighborhood_Map row(s) 10; finding C117-5"
+      },
+      {
+        "side": "B",
+        "text": "No active initiative (or mitigator) owns this break on the record",
+        "src": "Neighborhood_Map row(s) 10; finding C117-5"
+      }
+    ],
+    "scopeHoods": [
+      "Grand Lake"
+    ],
+    "missing": [
+      "the prior comparison needed to validate the flagged direction",
+      "an office response to the data mismatch"
+    ],
+    "closeQuestion": "The map says decay; the program roster does not answer it."
+  },
+  "citizens": [
+    {
+      "popid": "POP-01175",
+      "name": "Sunita Raghavan",
+      "role": "Pediatrician",
+      "neighborhood": "Grand Lake",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00015",
+      "profile": "Sunita Raghavan (POP-01175) — role: Pediatrician; neighborhood: Grand Lake; born: 2005; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00015; skills: Healthcare; tier: 4",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-01207",
+      "name": "Maya Inoue",
+      "role": "Pharmacy tech",
+      "neighborhood": "Grand Lake",
+      "careerStage": "mid-career",
+      "employerBizId": null,
+      "profile": "Maya Inoue (POP-01207) — role: Pharmacy tech; neighborhood: Grand Lake; born: 1973; careerStage: mid-career; wealth: 5; tier: 4",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-01218",
+      "name": "Jerri Brown",
+      "role": "Dishwasher",
+      "neighborhood": "Grand Lake",
+      "careerStage": "mid-career",
+      "employerBizId": null,
+      "profile": "Jerri Brown (POP-01218) — role: Dishwasher; neighborhood: Grand Lake; born: 2008; careerStage: mid-career; wealth: 4; tier: 4",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-01116",
+      "name": "Darius Hill",
+      "role": "Security guard",
+      "neighborhood": "Ivy Hill",
+      "careerStage": "entry-level",
+      "employerBizId": null,
+      "profile": "Darius Hill (POP-01116) — role: Security guard; neighborhood: Ivy Hill; born: 2017; careerStage: entry-level; wealth: 1; tier: 4",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-01125",
+      "name": "Ronald Phillips",
+      "role": "Barista",
+      "neighborhood": "Ivy Hill",
+      "careerStage": "mid-career",
+      "employerBizId": null,
+      "profile": "Ronald Phillips (POP-01125) — role: Barista; neighborhood: Ivy Hill; born: 2010; careerStage: mid-career; wealth: 4; tier: 4",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-01136",
+      "name": "Omar Lopez",
+      "role": "Construction laborer",
+      "neighborhood": "Ivy Hill",
+      "careerStage": "entry-level",
+      "employerBizId": null,
+      "profile": "Omar Lopez (POP-01136) — role: Construction laborer; neighborhood: Ivy Hill; born: 2016; careerStage: entry-level; wealth: 4; tier: 4",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00922",
+      "name": "Rasha Brown",
+      "role": "Disability Rights Advocate",
+      "neighborhood": "Fruitvale",
+      "careerStage": "entry-level",
+      "employerBizId": "BIZ-00034",
+      "profile": "Rasha Brown (POP-00922) — role: Disability Rights Advocate; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 5; employerBiz: BIZ-00034; skills: The Vulnerable; tier: 4",
+      "why": "bond-hop from interview pool"
+    }
+  ],
+  "priorCoverage": [],
+  "priorCoverageError": null,
+  "bonds": [
+    {
+      "bondId": "u7p0lyps",
+      "a": "POP-01136",
+      "b": "POP-00922",
+      "type": "tension",
+      "intensity": "5.5",
+      "origin": "neighborhood",
+      "neighborhood": null,
+      "aName": "Omar Lopez",
+      "bName": "Rasha Brown",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    }
+  ],
+  "scene": {
+    "weather": "Season: Spring | Weather: 59°F breeze, NW 9 mph, clear (frontState CLEAR), humidity 49, visibility 10",
+    "hood": "Grand Lake",
+    "neighborhoodTexture": "The theater marquee changes over to a new show as sidewalk tables fill up for early dinners. More \"now leasing\" signs appear in windows.",
+    "whoLivedIt": [
+      "POP-01251 Elijah Davis — Emerged into Tier-4 in Grand Lake (Grand Lake)"
+    ],
+    "chaos": [
+      "| ambulance | minor_injury | neighborhood Grand Lake | Sentiment | -0.06 | FALSE |"
+    ],
+    "colorRoom": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers."
+  },
+  "gaps": {
+    "note": "Ledgers/surfaces that would deepen Jax further if wired or fixed",
+    "missingOrThin": [
+      {
+        "source": "EmployerBizId → Business_Ledger name/address",
+        "status": "gap",
+        "why": "RoleType alone; no shop name/street for employer scene color without inventing"
+      },
+      {
+        "source": "Cultural_Ledger venues by neighborhood",
+        "status": "gap-on-disk",
+        "why": "Bar/venue canon list not auto-attached to slice — Jax opens in bars; needs hood venue pointer"
+      },
+      {
+        "source": "Faith_Ledger / Faith_Organizations by hood",
+        "status": "partial",
+        "why": "Texture file sometimes names congregations; not joined to stink hood systematically"
+      },
+      {
+        "source": "LifeHistory_Log raw (beyond Who Lived It digest)",
+        "status": "partial",
+        "why": "Digest is tag-summary; full event prose would deepen street color without inventing people"
+      },
+      {
+        "source": "Relationship_Bonds live refresh",
+        "status": "stale-risk",
+        "why": "bond-ledger-live.tsv may lag; bond-hop quality depends on export freshness"
+      },
+      {
+        "source": "Neighborhood_Map row metrics on slice",
+        "status": "partial",
+        "why": "Stink label carries some decay numbers; full hood board not embedded as color (avoid jargon in prose)"
+      },
+      {
+        "source": "Map hoods with zero Simulation_Ledger residents (e.g. Brooklyn on C102)",
+        "status": "sim-gap",
+        "why": "Audit can flag decay for a hood nobody lives in on the ledger — stink is real, interview pool empty; slice walks to next candidate with residents"
+      },
+      {
+        "source": "Citizen pages / DialState",
+        "status": "via-citizenVoice",
+        "why": "Quote stage loads dials; slice does not pre-print dial prose (correct — voice owns it)"
+      }
+    ],
+    "colorAllowed": [
+      "Weather line from Riley/world_summary",
+      "neighborhood_texture paragraph (perception-only, often nameless)",
+      "Who Lived It lines for this hood",
+      "Chaos_Cars rows touching hood/citizen",
+      "Bond edges among pool (professional/friend/family)"
+    ]
+  },
+  "pointers": [
+    "output/cron-compare/stink_c117.json",
+    "output/desk_signal_c117.json",
+    "output/world_summary_c117.md",
+    "output/neighborhood_texture_c117.md",
+    "Neighborhood_Map row(s) 10; finding C117-5"
+  ],
+  "reportMeta": {
+    "illnessRate": 3.9,
+    "maxScore": 61,
+    "shouldForce": true,
+    "candidateCount": 16
+  }
+}

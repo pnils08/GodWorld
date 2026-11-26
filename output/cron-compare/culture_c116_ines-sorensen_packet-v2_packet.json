@@ -12,10 +12,28 @@
     "story": {
       "kind": "beat-voices",
       "angle": "Voices, C116: you pick whose own words carry the day",
-      "label": "Voices roster, C116: 495 citizens with pages, 13 new since your last piece",
+      "label": "Voices roster, C116: 499 citizens with pages, 2 new since your last piece",
       "hookLine": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
       "hood": null,
       "citizens": [
+        "Juliette Park (POP-00466)",
+        "Jade Orion (POP-00540)",
+        "Avery Santana (POP-00034)",
+        "Priyanka Raman (POP-01096)",
+        "Delvon Pratt (POP-00621)",
+        "Elias Varek (POP-00789)",
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)",
+        "Lena Cross (POP-00539)",
+        "Theo Banks (POP-01056)",
+        "Travis Coles (POP-00533)",
+        "Danny Horn (POP-00022)",
+        "Darrin Davis (POP-00021)",
+        "Trenton Nawan (POP-00273)",
+        "Karim Avery (POP-00980)",
+        "Hector Leech (POP-00252)",
+        "Amara Osei (POP-01110)",
+        "Matilda Diop (POP-00832)",
         "Davey Martinez (POP-00213)",
         "Terrence Mobley (POP-00506)",
         "Nina Chen (POP-00505)",
@@ -26,8 +44,6 @@
         "Rose Delgado (POP-00503)",
         "Leonard Tran (POP-00502)",
         "Denise Carter (POP-00501)",
-        "Avery Santana (POP-00034)",
-        "Elias Varek (POP-00789)",
         "Mark Aitken (POP-00003)",
         "Marguerite Kimball-Ostrow (POP-01188)",
         "Guadalupe Lupe (POP-00643)",
@@ -48,7 +64,6 @@
         "Marisol Quintero (POP-01212)",
         "Amal Nair (POP-00815)",
         "Saniya Williams (POP-00860)",
-        "Vinnie Keane (POP-00001)",
         "Deacon Seymour (POP-00528)",
         "Carmen Mesa (POP-00081)",
         "Kevin Clark (POP-00053)",
@@ -65,7 +80,6 @@
         "Austin Reaves (POP-01027)",
         "AJ Dybantsa (POP-01024)",
         "Adash Stanley (POP-01023)",
-        "Benji Dillon (POP-00018)",
         "Manju Abebe (POP-00918)",
         "Yu Zen (POP-00194)",
         "Drago Helio (POP-00714)",
@@ -107,8 +121,6 @@
         "Rafael Montez (POP-00136)",
         "Caroline Cabrera (POP-00847)",
         "Toto Foto (POP-00302)",
-        "Lena Cross (POP-00539)",
-        "Darrin Davis (POP-00021)",
         "Iris Pham (POP-01203)",
         "Manfred Owens (POP-00028)",
         "Evan Morello (POP-00536)",
@@ -177,8 +189,6 @@
         "Helena Voss-Adeyemi (POP-01095)",
         "Brie Harris (POP-00169)",
         "Marisol Rivera (POP-01062)",
-        "Travis Coles (POP-00533)",
-        "Danny Horn (POP-00022)",
         "Trevor Henderson (POP-01224)",
         "Abraham Wright (POP-00497)",
         "Belle Lopez (POP-00300)",
@@ -186,7 +196,6 @@
         "Hector Navarro (POP-00741)",
         "Tanisha Freeman (POP-00848)",
         "Darius Cike (POP-00658)",
-        "Trenton Nawan (POP-00273)",
         "Declan Toto (POP-00697)",
         "Art Scott (POP-00665)",
         "Ignacio Zavala (POP-01094)",
@@ -268,12 +277,10 @@
         "Dawson Nguyen (POP-00347)",
         "Estrella Mehta (POP-00855)",
         "Valentina Campbell (POP-01017)",
-        "Delvon Pratt (POP-00621)",
         "Marmol Lemon (POP-00336)",
         "Dahlia Cruz (POP-01202)",
         "Eleanor Fong (POP-00981)",
         "Marcus Wright (POP-00288)",
-        "Jade Orion (POP-00540)",
         "Marin Tao (POP-00537)",
         "Drew Lemon (POP-00670)",
         "Andre Turner (POP-00225)",
@@ -313,7 +320,6 @@
         "Ryan Stark (POP-00351)",
         "Nina Reyes (POP-01057)",
         "Alma Vasquez (POP-01063)",
-        "Hector Leech (POP-00252)",
         "Jessie Hess (POP-00212)",
         "Manny Ellen (POP-00046)",
         "Tariq Jello (POP-00174)",
@@ -338,7 +344,6 @@
         "Martin Richards (POP-00031)",
         "Jia Carmichael (POP-00876)",
         "Patrick When (POP-00208)",
-        "Theo Banks (POP-01056)",
         "Colin Phillips (POP-00786)",
         "Victor King (POP-00262)",
         "Jack Phillips (POP-00292)",
@@ -404,7 +409,6 @@
         "Bodhi Davis (POP-00264)",
         "Shawn Neighbor (POP-00746)",
         "Isabel Lopes (POP-00325)",
-        "Priyanka Raman (POP-01096)",
         "Beverly Peterson (POP-00119)",
         "Maria Conteras (POP-01047)",
         "Jesus Jorden (POP-00721)",
@@ -513,6 +517,24 @@
         "Mateo Allen (POP-00199)"
       ],
       "popids": [
+        "POP-00466",
+        "POP-00540",
+        "POP-00034",
+        "POP-01096",
+        "POP-00621",
+        "POP-00789",
+        "POP-00001",
+        "POP-00018",
+        "POP-00539",
+        "POP-01056",
+        "POP-00533",
+        "POP-00022",
+        "POP-00021",
+        "POP-00273",
+        "POP-00980",
+        "POP-00252",
+        "POP-01110",
+        "POP-00832",
         "POP-00213",
         "POP-00506",
         "POP-00505",
@@ -523,8 +545,6 @@
         "POP-00503",
         "POP-00502",
         "POP-00501",
-        "POP-00034",
-        "POP-00789",
         "POP-00003",
         "POP-01188",
         "POP-00643",
@@ -545,7 +565,6 @@
         "POP-01212",
         "POP-00815",
         "POP-00860",
-        "POP-00001",
         "POP-00528",
         "POP-00081",
         "POP-00053",
@@ -562,7 +581,6 @@
         "POP-01027",
         "POP-01024",
         "POP-01023",
-        "POP-00018",
         "POP-00918",
         "POP-00194",
         "POP-00714",
@@ -604,8 +622,6 @@
         "POP-00136",
         "POP-00847",
         "POP-00302",
-        "POP-00539",
-        "POP-00021",
         "POP-01203",
         "POP-00028",
         "POP-00536",
@@ -674,8 +690,6 @@
         "POP-01095",
         "POP-00169",
         "POP-01062",
-        "POP-00533",
-        "POP-00022",
         "POP-01224",
         "POP-00497",
         "POP-00300",
@@ -683,7 +697,6 @@
         "POP-00741",
         "POP-00848",
         "POP-00658",
-        "POP-00273",
         "POP-00697",
         "POP-00665",
         "POP-01094",
@@ -765,12 +778,10 @@
         "POP-00347",
         "POP-00855",
         "POP-01017",
-        "POP-00621",
         "POP-00336",
         "POP-01202",
         "POP-00981",
         "POP-00288",
-        "POP-00540",
         "POP-00537",
         "POP-00670",
         "POP-00225",
@@ -810,7 +821,6 @@
         "POP-00351",
         "POP-01057",
         "POP-01063",
-        "POP-00252",
         "POP-00212",
         "POP-00046",
         "POP-00174",
@@ -835,7 +845,6 @@
         "POP-00031",
         "POP-00876",
         "POP-00208",
-        "POP-01056",
         "POP-00786",
         "POP-00262",
         "POP-00292",
@@ -901,7 +910,6 @@
         "POP-00264",
         "POP-00746",
         "POP-00325",
-        "POP-01096",
         "POP-00119",
         "POP-01047",
         "POP-00721",
@@ -1009,33 +1017,34 @@
         "POP-00245",
         "POP-00199"
       ],
-      "ref": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
+      "ref": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
       "cycle": 116
     }
   },
   "angle": "output/cron-compare/culture_c116_ines-sorensen_packet-v2_angle.json",
-  "quotesRequested": 1,
-  "quotesLanded": 1,
+  "quotesRequested": 3,
+  "quotesLanded": 3,
   "quotes": [
     {
       "pop": "POP-00123",
       "name": "Tre Mingo",
-      "quote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.",
+      "quote": "I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work with, talking about leaving. I've got three kids, and it's hard not to think about how this affects us directly.",
       "disp": "somewhat curious; somewhat ambitious",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.\",\n  \"fact_ids\": [\"F-9c80f9b3dc26\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work with, talking about leaving. I've got three kids, and it's hard not to think about how this affects us directly.\",\n  \"fact_ids\": [\"F-9c80f9b3dc26\", \"F-7a0f63c56c63\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-9c80f9b3dc26"
+          "F-9c80f9b3dc26",
+          "F-7a0f63c56c63"
         ],
         "basis": "lived-context",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00123-8817551e79",
+        "quoteId": "Q-POP-00123-f85c5a2ae4",
         "authoredQuote": true,
-        "publishableQuote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving."
+        "publishableQuote": "I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work with, talking about leaving. I've got three kids, and it's hard not to think about how this affects us directly."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -1049,13 +1058,13 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Ines Sorensen",
-          "question": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching…? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "How do you feel about the recent changes in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "beat-voices",
           "hood": null,
-          "focus": "Tre Mingo's perspective on the neighborhood changes",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c"
+          "focus": "The conversation around rent hikes and neighborhood changes in Uptown",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a"
         },
         "exposure": {
           "basis": [
@@ -1064,8 +1073,8 @@
           "self": "Tre Mingo — Port Worker — Uptown",
           "evidence": [
             {
-              "id": "EV-046fb6c580",
-              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
+              "id": "EV-5857493b83",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
               "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
             }
           ],
@@ -1092,39 +1101,356 @@
           },
           {
             "t": "FACT",
-            "text": "Voices roster, C116: 495 citizens with pages, 13 new since your last piece",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
-            "id": "F-1d72efe534d7"
+            "text": "Voices roster, C116: 499 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-be676d62e885"
           },
           {
             "t": "FACT",
             "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
-            "id": "F-2254c1a07278"
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-848131f7d05f"
           },
           {
             "t": "FACT",
-            "text": "Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; new since your last piece; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
+            "text": "Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116; new since your last piece: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-a1a477d57f54"
+            "id": "F-abedd85821e7"
           },
           {
             "t": "FACT",
-            "text": "Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116; new since your last piece: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
+            "text": "Jade Orion, Musician, Lake Merritt (POP-00540) — 6 pages; latest the night page, a question they carry, C116; new since your last piece: “I don't know if Tank and I are friends or just two people who orbit the same work.”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-42400b2014b8"
+            "id": "F-44c2501627dd"
           },
           {
             "t": "FACT",
-            "text": "Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116; new since your last piece: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
+            "text": "Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-a0b088746077"
+            "id": "F-79c25483defd"
           },
           {
             "t": "FACT",
             "text": "Tre Mingo — Port Worker — Uptown",
             "src": "Simulation_Ledger profile for POP-00123",
             "id": "F-7a0f63c56c63"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01056",
+      "name": "Theo Banks",
+      "quote": "The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave.\",\n  \"fact_ids\": [\"F-092f0b554bf6\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-092f0b554bf6"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01056-458453e0f5",
+        "authoredQuote": true,
+        "publishableQuote": "The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01056",
+          "name": "Theo Banks",
+          "role": "rapper",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "What's your take on the current state of the neighborhood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The conversation around rent hikes and neighborhood changes in Uptown",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Theo Banks — rapper — Uptown",
+          "evidence": [
+            {
+              "id": "EV-9bf6895c6c",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Theo Banks, rapper, Uptown (POP-01056) — 2 pages; latest to a reporter, C116: “I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-585ad44e4026"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C116: 499 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-be676d62e885"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-848131f7d05f"
+          },
+          {
+            "t": "FACT",
+            "text": "Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116; new since your last piece: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-abedd85821e7"
+          },
+          {
+            "t": "FACT",
+            "text": "Jade Orion, Musician, Lake Merritt (POP-00540) — 6 pages; latest the night page, a question they carry, C116; new since your last piece: “I don't know if Tank and I are friends or just two people who orbit the same work.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-44c2501627dd"
+          },
+          {
+            "t": "FACT",
+            "text": "Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-79c25483defd"
+          },
+          {
+            "t": "FACT",
+            "text": "Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 3 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-9ee933e21ef8"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Banks — rapper — Uptown",
+            "src": "Simulation_Ledger profile for POP-01056",
+            "id": "F-092f0b554bf6"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00044",
+      "name": "Elliott Crane",
+      "quote": "The conversation around rent hikes and neighborhood changes in Uptown is real, and it's on my mind. I've heard residents openly discussing plans to leave because of the hikes. As their representative, it creates accountability for me to ensure that we're doing everything we can to support the community. I want to see us focus on maintaining the vitality of our commercial corridors like Piedmont Avenue, ensuring basic city services are effective, and being transparent about our fiscal oversight.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; quick to rattle",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The conversation around rent hikes and neighborhood changes in Uptown is real, and it's on my mind. I've heard residents openly discussing plans to leave because of the hikes. As their representative, it creates accountability for me to ensure that we're doing everything we can to support the community. I want to see us focus on maintaining the vitality of our commercial corridors like Piedmont Avenue, ensuring basic city services are effective, and being transparent about our fiscal oversight.\",\n  \"fact_ids\": [\"F-dfa9a6c5f01d\", \"F-db89f0755ae0\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dfa9a6c5f01d",
+          "F-db89f0755ae0"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00044-d61c2f03cc",
+        "authoredQuote": true,
+        "publishableQuote": "The conversation around rent hikes and neighborhood changes in Uptown is real, and it's on my mind. I've heard residents openly discussing plans to leave because of the hikes. As their representative, it creates accountability for me to ensure that we're doing everything we can to support the community. I want to see us focus on maintaining the vitality of our commercial corridors like Piedmont Avenue, ensuring basic city services are effective, and being transparent about our fiscal oversight."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00044",
+          "name": "Elliott Crane",
+          "role": "City Council District 6",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "Using only the supplied facts, what about \"The conversation around rent hikes and neighborhood changes in Uptown\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The conversation around rent hikes and neighborhood changes in Uptown",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Elliott Crane — City Council District 6 — Uptown",
+          "evidence": [
+            {
+              "id": "EV-35000cddb0",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Elliott Crane, City Council District 6, Uptown (POP-00044) — 2 pages; latest after work, C116: “That’s a fair record, and I’ll own every line of it. The through-line is simple: I’m not going to buy a promise with money we haven’t verified yet.…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-db89f0755ae0"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C116: 499 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-be676d62e885"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-848131f7d05f"
+          },
+          {
+            "t": "FACT",
+            "text": "Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116; new since your last piece: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-abedd85821e7"
+          },
+          {
+            "t": "FACT",
+            "text": "Jade Orion, Musician, Lake Merritt (POP-00540) — 6 pages; latest the night page, a question they carry, C116; new since your last piece: “I don't know if Tank and I are friends or just two people who orbit the same work.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-44c2501627dd"
+          },
+          {
+            "t": "FACT",
+            "text": "Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-79c25483defd"
+          },
+          {
+            "t": "FACT",
+            "text": "Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 3 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-9ee933e21ef8"
+          },
+          {
+            "t": "FACT",
+            "text": "Elliott Crane — City Council District 6 — Uptown",
+            "src": "Simulation_Ledger profile for POP-00044",
+            "id": "F-dfa9a6c5f01d"
           },
           {
             "t": "FACT",
@@ -1182,22 +1508,23 @@
     {
       "pop": "POP-00123",
       "name": "Tre Mingo",
-      "quote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.",
+      "quote": "I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work with, talking about leaving. I've got three kids, and it's hard not to think about how this affects us directly.",
       "disp": "somewhat curious; somewhat ambitious",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.\",\n  \"fact_ids\": [\"F-9c80f9b3dc26\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work with, talking about leaving. I've got three kids, and it's hard not to think about how this affects us directly.\",\n  \"fact_ids\": [\"F-9c80f9b3dc26\", \"F-7a0f63c56c63\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-9c80f9b3dc26"
+          "F-9c80f9b3dc26",
+          "F-7a0f63c56c63"
         ],
         "basis": "lived-context",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00123-8817551e79",
+        "quoteId": "Q-POP-00123-f85c5a2ae4",
         "authoredQuote": true,
-        "publishableQuote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving."
+        "publishableQuote": "I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work with, talking about leaving. I've got three kids, and it's hard not to think about how this affects us directly."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -1211,13 +1538,13 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Ines Sorensen",
-          "question": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching…? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "How do you feel about the recent changes in Uptown? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "beat-voices",
           "hood": null,
-          "focus": "Tre Mingo's perspective on the neighborhood changes",
-          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c"
+          "focus": "The conversation around rent hikes and neighborhood changes in Uptown",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a"
         },
         "exposure": {
           "basis": [
@@ -1226,8 +1553,8 @@
           "self": "Tre Mingo — Port Worker — Uptown",
           "evidence": [
             {
-              "id": "EV-046fb6c580",
-              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
+              "id": "EV-5857493b83",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
               "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
             }
           ],
@@ -1254,33 +1581,33 @@
           },
           {
             "t": "FACT",
-            "text": "Voices roster, C116: 495 citizens with pages, 13 new since your last piece",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
-            "id": "F-1d72efe534d7"
+            "text": "Voices roster, C116: 499 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-be676d62e885"
           },
           {
             "t": "FACT",
             "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
-            "id": "F-2254c1a07278"
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-848131f7d05f"
           },
           {
             "t": "FACT",
-            "text": "Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; new since your last piece; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
+            "text": "Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116; new since your last piece: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-a1a477d57f54"
+            "id": "F-abedd85821e7"
           },
           {
             "t": "FACT",
-            "text": "Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116; new since your last piece: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
+            "text": "Jade Orion, Musician, Lake Merritt (POP-00540) — 6 pages; latest the night page, a question they carry, C116; new since your last piece: “I don't know if Tank and I are friends or just two people who orbit the same work.”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-42400b2014b8"
+            "id": "F-44c2501627dd"
           },
           {
             "t": "FACT",
-            "text": "Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116; new since your last piece: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
+            "text": "Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
             "src": "output/citizen_pages/index.jsonl roster",
-            "id": "F-a0b088746077"
+            "id": "F-79c25483defd"
           },
           {
             "t": "FACT",
@@ -1336,7 +1663,324 @@
           "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
         }
       }
+    },
+    {
+      "pop": "POP-01056",
+      "name": "Theo Banks",
+      "quote": "The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave.\",\n  \"fact_ids\": [\"F-092f0b554bf6\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-092f0b554bf6"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01056-458453e0f5",
+        "authoredQuote": true,
+        "publishableQuote": "The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01056",
+          "name": "Theo Banks",
+          "role": "rapper",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "What's your take on the current state of the neighborhood? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The conversation around rent hikes and neighborhood changes in Uptown",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Theo Banks — rapper — Uptown",
+          "evidence": [
+            {
+              "id": "EV-9bf6895c6c",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Theo Banks, rapper, Uptown (POP-01056) — 2 pages; latest to a reporter, C116: “I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-585ad44e4026"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C116: 499 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-be676d62e885"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-848131f7d05f"
+          },
+          {
+            "t": "FACT",
+            "text": "Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116; new since your last piece: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-abedd85821e7"
+          },
+          {
+            "t": "FACT",
+            "text": "Jade Orion, Musician, Lake Merritt (POP-00540) — 6 pages; latest the night page, a question they carry, C116; new since your last piece: “I don't know if Tank and I are friends or just two people who orbit the same work.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-44c2501627dd"
+          },
+          {
+            "t": "FACT",
+            "text": "Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-79c25483defd"
+          },
+          {
+            "t": "FACT",
+            "text": "Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 3 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-9ee933e21ef8"
+          },
+          {
+            "t": "FACT",
+            "text": "Theo Banks — rapper — Uptown",
+            "src": "Simulation_Ledger profile for POP-01056",
+            "id": "F-092f0b554bf6"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00044",
+      "name": "Elliott Crane",
+      "quote": "The conversation around rent hikes and neighborhood changes in Uptown is real, and it's on my mind. I've heard residents openly discussing plans to leave because of the hikes. As their representative, it creates accountability for me to ensure that we're doing everything we can to support the community. I want to see us focus on maintaining the vitality of our commercial corridors like Piedmont Avenue, ensuring basic city services are effective, and being transparent about our fiscal oversight.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; quick to rattle",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"The conversation around rent hikes and neighborhood changes in Uptown is real, and it's on my mind. I've heard residents openly discussing plans to leave because of the hikes. As their representative, it creates accountability for me to ensure that we're doing everything we can to support the community. I want to see us focus on maintaining the vitality of our commercial corridors like Piedmont Avenue, ensuring basic city services are effective, and being transparent about our fiscal oversight.\",\n  \"fact_ids\": [\"F-dfa9a6c5f01d\", \"F-db89f0755ae0\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dfa9a6c5f01d",
+          "F-db89f0755ae0"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00044-d61c2f03cc",
+        "authoredQuote": true,
+        "publishableQuote": "The conversation around rent hikes and neighborhood changes in Uptown is real, and it's on my mind. I've heard residents openly discussing plans to leave because of the hikes. As their representative, it creates accountability for me to ensure that we're doing everything we can to support the community. I want to see us focus on maintaining the vitality of our commercial corridors like Piedmont Avenue, ensuring basic city services are effective, and being transparent about our fiscal oversight."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00044",
+          "name": "Elliott Crane",
+          "role": "City Council District 6",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Ines Sorensen",
+          "question": "Using only the supplied facts, what about \"The conversation around rent hikes and neighborhood changes in Uptown\" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet."
+        },
+        "signal": {
+          "kind": "beat-voices",
+          "hood": null,
+          "focus": "The conversation around rent hikes and neighborhood changes in Uptown",
+          "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Elliott Crane — City Council District 6 — Uptown",
+          "evidence": [
+            {
+              "id": "EV-35000cddb0",
+              "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+              "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Elliott Crane, City Council District 6, Uptown (POP-00044) — 2 pages; latest after work, C116: “That’s a fair record, and I’ll own every line of it. The through-line is simple: I’m not going to buy a promise with money we haven’t verified yet.…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-db89f0755ae0"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C116",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-871096fd8925"
+          },
+          {
+            "t": "FACT",
+            "text": "Voices roster, C116: 499 citizens with pages, 2 new since your last piece",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-be676d62e885"
+          },
+          {
+            "t": "FACT",
+            "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
+            "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+            "id": "F-848131f7d05f"
+          },
+          {
+            "t": "FACT",
+            "text": "Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116; new since your last piece: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-abedd85821e7"
+          },
+          {
+            "t": "FACT",
+            "text": "Jade Orion, Musician, Lake Merritt (POP-00540) — 6 pages; latest the night page, a question they carry, C116; new since your last piece: “I don't know if Tank and I are friends or just two people who orbit the same work.”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-44c2501627dd"
+          },
+          {
+            "t": "FACT",
+            "text": "Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-79c25483defd"
+          },
+          {
+            "t": "FACT",
+            "text": "Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 3 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in…”",
+            "src": "output/citizen_pages/index.jsonl roster",
+            "id": "F-9ee933e21ef8"
+          },
+          {
+            "t": "FACT",
+            "text": "Elliott Crane — City Council District 6 — Uptown",
+            "src": "Simulation_Ledger profile for POP-00044",
+            "id": "F-dfa9a6c5f01d"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
+            "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
+            "id": "F-647fd9067a33"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
     }
   ],
-  "ranAt": "2026-11-21T15:15:20.731Z"
+  "ranAt": "2026-11-22T15:15:42.549Z"
 }

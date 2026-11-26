@@ -1,0 +1,32 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Oakland Casino Town"
+      },
+      "resultChars": 1101,
+      "resultHead": "[C115 · daily · Mason Ortega] Oakland Casino Town sits in the Baylight District with 99 names on the roster this cycle, three of them listed by role. Manfred Owens keeps the book near the back tables once the evening crowd settles in. \"The book at Oakland Casino Town is mostly the same faces every night, and I'm the one who keeps track of who's in and who's out,\" Owens said. \"Philly runs the floor, Gregory handles the stuff nobody talks about, and I sit near the back with the ledger. The regulars are the ones who've been coming for years — deal\n[C115 · daily · Jordan Velez] Keisha Ramos sits a"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Business_Ledger",
+        "match": "Casino"
+      },
+      "resultChars": 218,
+      "resultHead": "BIZ_ID | Name | Sector | Neighborhood | Employee_Count | Avg_Salary | Annual_Revenue | Growth_Rate | Key_Personnel\nBIZ-00100 | Oakland Casino Town | Nightlife & Entertainment | Baylight District | 94 | 70000 |  | -1.51"
+    },
+    {
+      "tool": "ask_worker",
+      "input": {
+        "office": "STAFF-DM-ECON",
+        "question": "Oakland Casino Town in the Baylight District dropped 3 employees this cycle (94 now, growing -1.5% a year) while DigitalOcean, Bayline 6 and Downtown firms each added one. What does your record show about who those three were and who gains from the casino?"
+      },
+      "resultChars": 2076,
+      "resultHead": "Marcus Osei, Deputy Mayor (Econ Dev), answered:\nHere's what my record actually shows, Jordan — and I'll tell you up front what it doesn't show.\n\n**Who the three were: I can't tell you.** The casino's roster is 94 names on the ledger this cycle, down from 99 two cycles back — that's 99 to 94, not just the three you're counting. But the ledger gives me a headcount and an average salary, $70,000, and nothing else. No names, no roles, no severance record, no exit survey. When a firm sheds people quietly like that, they don't file the paperwork with my office, and I've got no authority to demand it"
+    }
+  ],
+  "ranAt": "2026-11-24T00:17:10.591Z"
+}

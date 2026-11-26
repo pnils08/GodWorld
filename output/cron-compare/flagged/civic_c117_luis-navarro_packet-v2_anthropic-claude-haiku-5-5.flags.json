@@ -1,0 +1,12 @@
+{
+  "draft": "civic_c117_luis-navarro_packet-v2_anthropic-claude-haiku-5-5.md",
+  "flags": [],
+  "checkFlags": [],
+  "contamination": [
+    {
+      "check": "repair-chrome",
+      "issue": "packet-narration"
+    }
+  ],
+  "summary": "deterministic world-contamination blocker failed"
+}

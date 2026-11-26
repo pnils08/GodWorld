@@ -1,0 +1,77 @@
+{
+  "draft": "output/cron-compare/undocked_c117_nia-rook_packet-v2_openai-gpt-6-luna.md",
+  "cycle": "117",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "278c04f5f503a745d290fbb524c029c2906c593a6299178d235e08ebd1f9d4bf",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean verification: Daniela Kapoor quote matches interview record exactly, citizen roles match ledger profiles, and Undocked game context is consistent.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-2",
+    "manifestId": "AM-5cb0ac74da0e",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "49.08",
+          "116"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Daniela Kapoor",
+      "Marguerite Kimball-Ostrow"
+    ],
+    "unverified": [
+      "Alpha Centauri",
+      "Far Traveler",
+      "Jump Master",
+      "Maiden Jump",
+      "Tau Ceti"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.014,
+  "durationMs": 5037,
+  "parseError": false,
+  "ranAt": "2026-11-24T00:23:08.806Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 350",
+    "words": 408,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "278c04f5f503a745d290fbb524c029c2906c593a6299178d235e08ebd1f9d4bf",
+    "costUsd": 0.0008
+  }
+}

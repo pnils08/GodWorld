@@ -1,0 +1,456 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00957-2026-11-25T02-30-29",
+  "popid": "POP-00957",
+  "holder": "David Okonkwo",
+  "session": "undocked-pop00957",
+  "window": {
+    "startedAt": "2026-11-25T02:30:29.767Z",
+    "endedAt": "2026-11-25T02:50:32.532Z"
+  },
+  "runner": {
+    "turns": 52,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 4,
+    "estCostUsd": 0.0267,
+    "tokensIn": 226097,
+    "tokensOut": 8154,
+    "log": "output/spacemolt-show/episodes/undocked-pop00957-2026-11-25T02-30-29.log",
+    "stopReason": "window",
+    "toolCalls": 47
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-25T02:55:33.157Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "wanderer",
+          "name": "Wanderer",
+          "gained": 9
+        },
+        {
+          "id": "first_steps",
+          "name": "First Steps",
+          "gained": 5
+        },
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "gained": 5
+        },
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 3.6
+        },
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 2.7
+        },
+        {
+          "id": "the_truth_is_out_there",
+          "name": "The Truth Is Out There",
+          "gained": 2.5
+        },
+        {
+          "id": "chronicler",
+          "name": "Chronicler",
+          "gained": 1.2
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 0.9
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_i",
+          "name": "Prospector I",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_ii",
+          "name": "Prospector II",
+          "gained": 0
+        }
+      ],
+      "beforeTakenAt": "2026-11-25T02:30:29.497Z",
+      "value": 29.92
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "sol",
+        "alpha_centauri",
+        "tau_ceti",
+        "electra",
+        "mimosa",
+        "ross_154",
+        "arcturus",
+        "timberline",
+        "maplevale",
+        "miaplacidus"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 8
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 0,
+        "mission": 2,
+        "combat": 0,
+        "navigation": 10,
+        "session": 1,
+        "achievement": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 304233594,
+            "created_at": "2026-11-25T02:48:26Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Iron Ore at Frostdust Belt",
+            "data": {
+              "poi_name": "Frostdust Belt",
+              "quantity": 2,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "ross_154",
+              "system_name": "Ross 154",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 304222418,
+            "created_at": "2026-11-25T02:43:21Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 6 Iron Ore at Frostdust Belt",
+            "data": {
+              "poi_name": "Frostdust Belt",
+              "quantity": 6,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "ross_154",
+              "system_name": "Ross 154",
+              "ticks": 3
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [
+          {
+            "id": 304230286,
+            "created_at": "2026-11-25T02:46:59Z",
+            "category": "mission",
+            "event_type": "mission.data_copied",
+            "summary": "Copied a local observation archive",
+            "data": {
+              "poi_id": "abandoned_sensor_mast"
+            }
+          },
+          {
+            "id": 304205510,
+            "created_at": "2026-11-25T02:37:50Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Local Sector Survey",
+            "data": {
+              "mission_id": "bc77a0cf2428f2870cec472b15b72667",
+              "template_id": "local_sector_survey",
+              "title": "Local Sector Survey",
+              "type": "exploration"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 304238957,
+            "created_at": "2026-11-25T02:50:28Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Maplevale to Miaplacidus",
+            "data": {
+              "arrival_poi": "miaplacidus_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "maplevale",
+              "is_pathfinder": false,
+              "to_system": "miaplacidus",
+              "to_system_name": "Miaplacidus"
+            }
+          },
+          {
+            "id": 304236379,
+            "created_at": "2026-11-25T02:49:18Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Ross 154 to Maplevale",
+            "data": {
+              "arrival_poi": "maplevale_vapor_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "ross_154",
+              "is_pathfinder": false,
+              "to_system": "maplevale",
+              "to_system_name": "Maplevale"
+            }
+          },
+          {
+            "id": 304232537,
+            "created_at": "2026-11-25T02:48:08Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Timberline to Ross 154",
+            "data": {
+              "arrival_poi": "frostdust_belt",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "timberline",
+              "is_pathfinder": false,
+              "to_system": "ross_154",
+              "to_system_name": "Ross 154"
+            }
+          },
+          {
+            "id": 304227719,
+            "created_at": "2026-11-25T02:45:48Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Arcturus to Timberline",
+            "data": {
+              "arrival_poi": "timberline_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "arcturus",
+              "is_pathfinder": false,
+              "to_system": "timberline",
+              "to_system_name": "Timberline"
+            }
+          },
+          {
+            "id": 304225195,
+            "created_at": "2026-11-25T02:44:38Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Ross 154 to Arcturus",
+            "data": {
+              "arrival_poi": "arcturus_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "ross_154",
+              "is_pathfinder": false,
+              "to_system": "arcturus",
+              "to_system_name": "Arcturus"
+            }
+          },
+          {
+            "id": 304219223,
+            "created_at": "2026-11-25T02:42:28Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Mimosa to Ross 154",
+            "data": {
+              "arrival_poi": "frostdust_belt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "mimosa",
+              "is_pathfinder": false,
+              "to_system": "ross_154",
+              "to_system_name": "Ross 154"
+            }
+          },
+          {
+            "id": 304214077,
+            "created_at": "2026-11-25T02:41:18Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Electra to Mimosa",
+            "data": {
+              "arrival_poi": "mimosa_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "electra",
+              "is_pathfinder": false,
+              "to_system": "mimosa",
+              "to_system_name": "Mimosa"
+            }
+          },
+          {
+            "id": 304211563,
+            "created_at": "2026-11-25T02:40:08Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Tau Ceti to Electra",
+            "data": {
+              "arrival_poi": "electra_i",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "tau_ceti",
+              "is_pathfinder": false,
+              "to_system": "electra",
+              "to_system_name": "Electra"
+            }
+          },
+          {
+            "id": 304209155,
+            "created_at": "2026-11-25T02:38:58Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpha Centauri to Tau Ceti",
+            "data": {
+              "arrival_poi": "fomalhaut_4675g_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "alpha_centauri",
+              "is_pathfinder": false,
+              "to_system": "tau_ceti",
+              "to_system_name": "Tau Ceti"
+            }
+          },
+          {
+            "id": 304197380,
+            "created_at": "2026-11-25T02:33:58Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "farwatch",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 304188967,
+            "created_at": "2026-11-25T02:30:31Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "DavidOkonkwo logged in",
+            "data": {
+              "last_login_at": "2026-11-25T02:30:29Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": [
+          {
+            "id": 304205175,
+            "created_at": "2026-11-25T02:37:39Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: First Steps",
+            "data": {
+              "achievement_id": "first_steps",
+              "points": 5
+            }
+          },
+          {
+            "id": 304197925,
+            "created_at": "2026-11-25T02:34:10Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Maiden Jump",
+            "data": {
+              "achievement_id": "maiden_jump",
+              "points": 5
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 2,
+    "listed": 2,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-11-25 02:50:32",
+        "text": "[Session Handoff] - **Mid-action state:** Last call was `get_system` at Miaplacidus (miaplacidus_iii). The result was cut off after the POI list header, so the system's full POI list hasn't been reviewed yet.\n- **Immediate next step:** Read the Miaplacidus POI list, then pick a target. Mining is only a small XP gain, so favor charting new systems and POIs.\n- **Location and ship:** Docked or present at miaplacidus_iii, Miaplacidus (Lawless, no police, unclaimed). Ship, credits, and cargo weren't shown in this transcript. Check current status before acting.\n- **Cargo:** Mining Iron Ore earlier"
+      },
+      {
+        "index": 1,
+        "created_at": "2026-11-25 02:35:38",
+        "text": "Night one, Solarian Confederacy. Main Belt at Sol is mined out, so I jumped to Alpha Centauri and charted Farwatch. Next: the Frost Ring, then see what else the board will pay for."
+      }
+    ],
+    "unwindowed": []
+  }
+}

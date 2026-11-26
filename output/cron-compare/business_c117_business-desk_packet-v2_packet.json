@@ -1,0 +1,823 @@
+{
+  "stage": "report",
+  "desk": "business",
+  "cycle": "117",
+  "persona": "business-desk",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+      "angle": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+      "hood": null,
+      "citizens": [
+        "Philly Rodriguez (POP-00027)",
+        "Manfred Owens (POP-00028)",
+        "Gregory Mims (POP-00023)"
+      ],
+      "popids": [
+        "POP-00027",
+        "POP-00028",
+        "POP-00023"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/business_c117_business-desk_packet-v2_angle.json",
+  "quotesRequested": 3,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00027",
+      "name": "Philly Rodriguez",
+      "quote": "Yeah, we lost three. It wasn't layoffs — it was attrition, people moving on. Two of them were dealers who got offers down in San Jose, and one was a security guy who went back to school. I can't give you their names, that's not my place. But I'll tell you this: nobody who stayed got a raise, and nobody got a cut either. Hours are the same, pay's the same. The floor's just a little thinner now, so we're all covering a bit more. The casino's not hurting — it's just not growing. And that's the thing about this town right now: the places around us in Baylight and Jack London are adding a job here and there, and we're the ones giving one up. I don't know what that says about who gains from the casino, but I know what it feels like to walk the floor with three fewer familiar faces.",
+      "disp": "somewhat sociable; casually interested in the teams",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Yeah, we lost three. It wasn't layoffs — it was attrition, people moving on. Two of them were dealers who got offers down in San Jose, and one was a security guy who went back to school. I can't give you their names, that's not my place. But I'll tell you this: nobody who stayed got a raise, and nobody got a cut either. Hours are the same, pay's the same. The floor's just a little thinner now, so we're all covering a bit more. The casino's not hurting — it's just not growing. And that's the thing about this town right now: the places around us in Baylight and Jack London are adding a job here and there, and we're the ones giving one up. I don't know what that says about who gains from the casino, but I know what it feels like to walk the floor with three fewer familiar faces.\",\"fact_ids\":[\"F-98d7f078ab1d\",\"F-835eac28e335\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-98d7f078ab1d",
+          "F-835eac28e335"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00027-24464dc70c",
+        "authoredQuote": true,
+        "publishableQuote": "Yeah, we lost three. It wasn't layoffs — it was attrition, people moving on. Two of them were dealers who got offers down in San Jose, and one was a security guy who went back to school. I can't give you their names, that's not my place. But I'll tell you this: nobody who stayed got a raise, and nobody got a cut either. Hours are the same, pay's the same. The floor's just a little thinner now, so we're all covering a bit more. The casino's not hurting — it's just not growing. And that's the thing about this town right now: the places around us in Baylight and Jack London are adding a job here and there, and we're the ones giving one up. I don't know what that says about who gains from the casino, but I know what it feels like to walk the floor with three fewer familiar faces."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00027",
+          "name": "Philly Rodriguez",
+          "role": "Casino Manager",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "You manage the floor at Oakland Casino Town, and the casino lost 3 people this cycle. Who went, was it layoffs or attrition, and what are the remaining staff's hours and pay like now? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "own-pick",
+          "hood": null,
+          "focus": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+          "evidence": [
+            {
+              "id": "EV-04b6db5e25",
+              "src": "own pick, C117",
+              "text": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C117",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c5606da08cb9"
+          },
+          {
+            "t": "FACT",
+            "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+            "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/",
+            "id": "F-d2036d9993b1"
+          },
+          {
+            "t": "FACT",
+            "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/",
+            "id": "F-efd9ebd3280e"
+          },
+          {
+            "t": "FACT",
+            "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/",
+            "id": "F-453ce66b090f"
+          },
+          {
+            "t": "FACT",
+            "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/",
+            "id": "F-f7a1edd68e81"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/",
+            "id": "F-98d7f078ab1d"
+          },
+          {
+            "t": "FACT",
+            "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/",
+            "id": "F-e2a697fe208c"
+          },
+          {
+            "t": "FACT",
+            "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/",
+            "id": "F-a794c94d37ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+            "src": "Simulation_Ledger profile for POP-00027",
+            "id": "F-835eac28e335"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00028",
+      "name": "Manfred Owens",
+      "quote": "Yeah, I saw the numbers on the board — three people gone from the casino this cycle. I can't tell you exactly who they were, not by name, because I don't have that list in front of me. But I can tell you what it feels like from my seat near the back. The floor's a little thinner at the tables on weeknights, and the shifts have been stretched. Philly's been covering more of the floor himself, and Gregory's been doing double duty on the stuff nobody talks about. I've picked up a couple extra hours myself, just to keep the ledger straight. The firms around us in Baylight and Jack London each added a spot, but that doesn't put food on the table for the folks who got let go here. It's a strange thing — the neighborhood feels like it's moving forward, and we're just holding the line.",
+      "disp": "casually interested in the teams; fairly steady",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Yeah, I saw the numbers on the board — three people gone from the casino this cycle. I can't tell you exactly who they were, not by name, because I don't have that list in front of me. But I can tell you what it feels like from my seat near the back. The floor's a little thinner at the tables on weeknights, and the shifts have been stretched. Philly's been covering more of the floor himself, and Gregory's been doing double duty on the stuff nobody talks about. I've picked up a couple extra hours myself, just to keep the ledger straight. The firms around us in Baylight and Jack London each added a spot, but that doesn't put food on the table for the folks who got let go here. It's a strange thing — the neighborhood feels like it's moving forward, and we're just holding the line.\",\n  \"fact_ids\": [\"F-98d7f078ab1d\", \"F-1bca48dc2528\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-98d7f078ab1d",
+          "F-1bca48dc2528"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00028-c6bf8843af",
+        "authoredQuote": true,
+        "publishableQuote": "Yeah, I saw the numbers on the board — three people gone from the casino this cycle. I can't tell you exactly who they were, not by name, because I don't have that list in front of me. But I can tell you what it feels like from my seat near the back. The floor's a little thinner at the tables on weeknights, and the shifts have been stretched. Philly's been covering more of the floor himself, and Gregory's been doing double duty on the stuff nobody talks about. I've picked up a couple extra hours myself, just to keep the ledger straight. The firms around us in Baylight and Jack London each added a spot, but that doesn't put food on the table for the folks who got let go here. It's a strange thing — the neighborhood feels like it's moving forward, and we're just holding the line."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00028",
+          "name": "Manfred Owens",
+          "role": "Booky",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "You work the book at the casino and live in Jack London. Has your shift or your volume changed, and who is picking up the work of the three who left? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "own-pick",
+          "hood": null,
+          "focus": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+          "evidence": [
+            {
+              "id": "EV-a8c93d3049",
+              "src": "own pick, C117",
+              "text": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C117",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c5606da08cb9"
+          },
+          {
+            "t": "FACT",
+            "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+            "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/",
+            "id": "F-d2036d9993b1"
+          },
+          {
+            "t": "FACT",
+            "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/",
+            "id": "F-efd9ebd3280e"
+          },
+          {
+            "t": "FACT",
+            "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/",
+            "id": "F-453ce66b090f"
+          },
+          {
+            "t": "FACT",
+            "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/",
+            "id": "F-f7a1edd68e81"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/",
+            "id": "F-98d7f078ab1d"
+          },
+          {
+            "t": "FACT",
+            "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/",
+            "id": "F-e2a697fe208c"
+          },
+          {
+            "t": "FACT",
+            "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/",
+            "id": "F-a794c94d37ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+            "src": "Simulation_Ledger profile for POP-00028",
+            "id": "F-1bca48dc2528"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-00027",
+      "name": "Philly Rodriguez",
+      "quote": "Yeah, we lost three. It wasn't layoffs — it was attrition, people moving on. Two of them were dealers who got offers down in San Jose, and one was a security guy who went back to school. I can't give you their names, that's not my place. But I'll tell you this: nobody who stayed got a raise, and nobody got a cut either. Hours are the same, pay's the same. The floor's just a little thinner now, so we're all covering a bit more. The casino's not hurting — it's just not growing. And that's the thing about this town right now: the places around us in Baylight and Jack London are adding a job here and there, and we're the ones giving one up. I don't know what that says about who gains from the casino, but I know what it feels like to walk the floor with three fewer familiar faces.",
+      "disp": "somewhat sociable; casually interested in the teams",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\":\"quote\",\"quote\":\"Yeah, we lost three. It wasn't layoffs — it was attrition, people moving on. Two of them were dealers who got offers down in San Jose, and one was a security guy who went back to school. I can't give you their names, that's not my place. But I'll tell you this: nobody who stayed got a raise, and nobody got a cut either. Hours are the same, pay's the same. The floor's just a little thinner now, so we're all covering a bit more. The casino's not hurting — it's just not growing. And that's the thing about this town right now: the places around us in Baylight and Jack London are adding a job here and there, and we're the ones giving one up. I don't know what that says about who gains from the casino, but I know what it feels like to walk the floor with three fewer familiar faces.\",\"fact_ids\":[\"F-98d7f078ab1d\",\"F-835eac28e335\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-98d7f078ab1d",
+          "F-835eac28e335"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00027-24464dc70c",
+        "authoredQuote": true,
+        "publishableQuote": "Yeah, we lost three. It wasn't layoffs — it was attrition, people moving on. Two of them were dealers who got offers down in San Jose, and one was a security guy who went back to school. I can't give you their names, that's not my place. But I'll tell you this: nobody who stayed got a raise, and nobody got a cut either. Hours are the same, pay's the same. The floor's just a little thinner now, so we're all covering a bit more. The casino's not hurting — it's just not growing. And that's the thing about this town right now: the places around us in Baylight and Jack London are adding a job here and there, and we're the ones giving one up. I don't know what that says about who gains from the casino, but I know what it feels like to walk the floor with three fewer familiar faces."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00027",
+          "name": "Philly Rodriguez",
+          "role": "Casino Manager",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "You manage the floor at Oakland Casino Town, and the casino lost 3 people this cycle. Who went, was it layoffs or attrition, and what are the remaining staff's hours and pay like now? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "own-pick",
+          "hood": null,
+          "focus": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+          "evidence": [
+            {
+              "id": "EV-04b6db5e25",
+              "src": "own pick, C117",
+              "text": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C117",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c5606da08cb9"
+          },
+          {
+            "t": "FACT",
+            "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+            "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/",
+            "id": "F-d2036d9993b1"
+          },
+          {
+            "t": "FACT",
+            "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/",
+            "id": "F-efd9ebd3280e"
+          },
+          {
+            "t": "FACT",
+            "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/",
+            "id": "F-453ce66b090f"
+          },
+          {
+            "t": "FACT",
+            "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/",
+            "id": "F-f7a1edd68e81"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/",
+            "id": "F-98d7f078ab1d"
+          },
+          {
+            "t": "FACT",
+            "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/",
+            "id": "F-e2a697fe208c"
+          },
+          {
+            "t": "FACT",
+            "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/",
+            "id": "F-a794c94d37ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+            "src": "Simulation_Ledger profile for POP-00027",
+            "id": "F-835eac28e335"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00028",
+      "name": "Manfred Owens",
+      "quote": "Yeah, I saw the numbers on the board — three people gone from the casino this cycle. I can't tell you exactly who they were, not by name, because I don't have that list in front of me. But I can tell you what it feels like from my seat near the back. The floor's a little thinner at the tables on weeknights, and the shifts have been stretched. Philly's been covering more of the floor himself, and Gregory's been doing double duty on the stuff nobody talks about. I've picked up a couple extra hours myself, just to keep the ledger straight. The firms around us in Baylight and Jack London each added a spot, but that doesn't put food on the table for the folks who got let go here. It's a strange thing — the neighborhood feels like it's moving forward, and we're just holding the line.",
+      "disp": "casually interested in the teams; fairly steady",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Yeah, I saw the numbers on the board — three people gone from the casino this cycle. I can't tell you exactly who they were, not by name, because I don't have that list in front of me. But I can tell you what it feels like from my seat near the back. The floor's a little thinner at the tables on weeknights, and the shifts have been stretched. Philly's been covering more of the floor himself, and Gregory's been doing double duty on the stuff nobody talks about. I've picked up a couple extra hours myself, just to keep the ledger straight. The firms around us in Baylight and Jack London each added a spot, but that doesn't put food on the table for the folks who got let go here. It's a strange thing — the neighborhood feels like it's moving forward, and we're just holding the line.\",\n  \"fact_ids\": [\"F-98d7f078ab1d\", \"F-1bca48dc2528\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-98d7f078ab1d",
+          "F-1bca48dc2528"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00028-c6bf8843af",
+        "authoredQuote": true,
+        "publishableQuote": "Yeah, I saw the numbers on the board — three people gone from the casino this cycle. I can't tell you exactly who they were, not by name, because I don't have that list in front of me. But I can tell you what it feels like from my seat near the back. The floor's a little thinner at the tables on weeknights, and the shifts have been stretched. Philly's been covering more of the floor himself, and Gregory's been doing double duty on the stuff nobody talks about. I've picked up a couple extra hours myself, just to keep the ledger straight. The firms around us in Baylight and Jack London each added a spot, but that doesn't put food on the table for the folks who got let go here. It's a strange thing — the neighborhood feels like it's moving forward, and we're just holding the line."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00028",
+          "name": "Manfred Owens",
+          "role": "Booky",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "You work the book at the casino and live in Jack London. Has your shift or your volume changed, and who is picking up the work of the three who left? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "own-pick",
+          "hood": null,
+          "focus": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+          "evidence": [
+            {
+              "id": "EV-a8c93d3049",
+              "src": "own pick, C117",
+              "text": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C117",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c5606da08cb9"
+          },
+          {
+            "t": "FACT",
+            "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+            "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/",
+            "id": "F-d2036d9993b1"
+          },
+          {
+            "t": "FACT",
+            "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/",
+            "id": "F-efd9ebd3280e"
+          },
+          {
+            "t": "FACT",
+            "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/",
+            "id": "F-453ce66b090f"
+          },
+          {
+            "t": "FACT",
+            "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/",
+            "id": "F-f7a1edd68e81"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/",
+            "id": "F-98d7f078ab1d"
+          },
+          {
+            "t": "FACT",
+            "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/",
+            "id": "F-e2a697fe208c"
+          },
+          {
+            "t": "FACT",
+            "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/",
+            "id": "F-a794c94d37ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+            "src": "Simulation_Ledger profile for POP-00028",
+            "id": "F-1bca48dc2528"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00023",
+      "name": "Gregory Mims",
+      "quote": null,
+      "disp": "draws people in, deep with them; quick to rattle",
+      "recorded": false,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: answer must be quote|abstain",
+      "raw": "{\"answer\":\"I can't tell you who the three people are — I don't have names, and I'm not gonna pretend I do. What I can tell you is what I see from my corner. The casino's been shrinking for a while now, and that's not news to anybody who's been watching. The folks who worked there, they're not showing up at the food pantry because they're doing great. But here's the thing — I saw an OAR team de-escalate a situation on the corner the other day, quiet, no sirens, no drama. That's the kind of thing that actually helps a neighborhood feel safer, and it's not coming from the casino. The casino's just a building. The people around it, the ones who stay, they're the ones holding this place together. So no, I don't feel the neighborhood benefiting from the casino losing jobs. I feel the neighborhood holding on despite it.\",\"fact_ids\":[\"F-98d7f078ab1d\",\"F-4ce695ee84aa\"],\"basis\":\"lived-context\",\"unverifiedLead\":null,\"abstain_reason\":null}",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00023",
+          "name": "Gregory Mims",
+          "role": "Organized Crime",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "What have you seen change around the casino and West Oakland as staffing shrank, and is the neighborhood feeling any benefit from the casino? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "own-pick",
+          "hood": null,
+          "focus": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+          "src": "own pick, C117"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Gregory Mims — Organized Crime — West Oakland — Organized Crime at Oakland Casino Town (-3 employees this cycle); C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+          "evidence": [
+            {
+              "id": "EV-3c5cecf7db",
+              "src": "own pick, C117",
+              "text": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino."
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C117",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c5606da08cb9"
+          },
+          {
+            "t": "FACT",
+            "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+            "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/",
+            "id": "F-d2036d9993b1"
+          },
+          {
+            "t": "FACT",
+            "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/",
+            "id": "F-efd9ebd3280e"
+          },
+          {
+            "t": "FACT",
+            "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/",
+            "id": "F-453ce66b090f"
+          },
+          {
+            "t": "FACT",
+            "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/",
+            "id": "F-f7a1edd68e81"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/",
+            "id": "F-98d7f078ab1d"
+          },
+          {
+            "t": "FACT",
+            "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/",
+            "id": "F-e2a697fe208c"
+          },
+          {
+            "t": "FACT",
+            "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+            "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/",
+            "id": "F-a794c94d37ad"
+          },
+          {
+            "t": "FACT",
+            "text": "Gregory Mims — Organized Crime — West Oakland — Organized Crime at Oakland Casino Town (-3 employees this cycle); C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+            "src": "Simulation_Ledger profile for POP-00023",
+            "id": "F-4ce695ee84aa"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-23T19:15:41.138Z"
+}

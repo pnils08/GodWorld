@@ -1,0 +1,56 @@
+{
+  "office": "council_d7",
+  "cycle": 117,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "District 7 withheld certification of Temescal Community Health Center operational oversight pending the mandatory filing of the Q3 clinical intake audit with HCAI and the Council Clerk, alongside the Telegraph & 47th merchant walkthrough. In response to the Planning Director's directive on the contained KONO fire, I directed standard structural code inspections and emergency expenditure accounting rather than unmonitored off-budget commercial allocations. Finally, I reaffirmed my recorded YES vote on INIT-009 for Grand Lake commercial stabilization, conditioned strictly on preserving all Chen-Vega milestone and audit requirements.",
+  "statements": [
+    {
+      "statementId": "STMT-117-council_d7-001",
+      "type": "vote_statement",
+      "topic": "Temescal Community Health Center Q3 Clinical Intake Audit and Merchant Verification",
+      "initiative": "Temescal Community Health Center",
+      "decision": "Condition certification of ongoing operational oversight on verified filing of the Q3 clinical intake audit with HCAI and the Council Clerk, and completion of the Telegraph & 47th merchant walkthrough.",
+      "quote": "Clinical dollars require clinical proof; an operating facility does not get an exemption from delivering its quarterly audit data.",
+      "fullStatement": "The Temescal Community Health Center opened ahead of schedule and under budget, but an open door does not confer an exemption from fiscal and clinical accountability. District 7 calendared the Q3 clinical intake audit and the Telegraph & 47th merchant walkthrough for this cycle. We hold $15,923,076.9 in operational allocations to strict standards. I will not certify operational milestones until the completed intake data is filed with both HCAI and the Council Clerk, and our on-the-ground merchant walkthrough is documented. The facility is delivering care, and that care must be matched by public documentation. Sound accounting protects both the patients and the public purse.",
+      "disposition": "statement",
+      "actionAsked": "Transmit Q3 intake audit to HCAI and Council Clerk and submit verified Telegraph & 47th merchant walkthrough report.",
+      "tone": "data-sharp",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d7-002",
+      "type": "vote_statement",
+      "topic": "Municipal Response and Structural Inspection Following KONO Fire",
+      "initiative": null,
+      "decision": "Direct Planning and Building to complete standard structural safety inspections and require Finance to account for emergency deployment costs without off-budget commercial subsidies.",
+      "quote": "Following a contained fire, municipal follow-through must center on disciplined structural code inspections and cost accounting, not unmonitored off-budget allocations.",
+      "fullStatement": "In response to Planning Director Vance's inquiry regarding the contained blaze in KONO, District 7 requires disciplined, routine municipal oversight rather than reactive fiscal measures. Current district reports confirm KONO street trade is busy and neighborhood sentiment remains positive. The necessary follow-through consists of the Bureau of Building completing structural code compliance and safety inspections on affected parcels, while the Fire Department and Finance reconcile standard emergency response costs. No discretionary off-budget relief funds or unmonitored commercial programs are needed or justified. We address physical damage through verified building permits and standard code enforcement, keeping municipal service delivery focused and fiscally contained.",
+      "disposition": "statement",
+      "actionAsked": "Bureau of Building to file structural safety inspection clearances and Finance to report emergency response expenditure reconciliation.",
+      "tone": "process-demanding",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d7-003",
+      "type": "vote_statement",
+      "topic": "Grand Lake Commercial Stabilization Roll Call with Chen-Vega Audit Triggers",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES on INIT-009 roll call strictly contingent upon retaining all Chen-Vega milestone and audit conditions certified by the Clerk.",
+      "quote": "Accountability triggers make the difference between a sound commercial investment and an open checkbook.",
+      "fullStatement": "As the full Council takes up the recorded roll call for INIT-009, my vote remains YES, anchored strictly to the Chen-Vega accountability framework. Grand Lake's commercial corridor merits targeted stabilization, but public investment without binding performance metrics is merely an open checkbook. My support is contingent upon every milestone, expenditure audit, and clawback provision remaining intact and certified by the City Clerk. If stabilization dollars are disbursed, they must be audited against verifiable retail metrics and documented commercial retention before any subsequent tranches are unlocked. Responsible fiscal stewardship requires measuring outcomes, not merely celebrating authorizations.",
+      "disposition": "YES",
+      "actionAsked": "City Clerk to certify the roll call with all Chen-Vega audit benchmarks and milestone conditions preserved.",
+      "tone": "concerned-fiscal",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

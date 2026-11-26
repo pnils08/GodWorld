@@ -1,0 +1,174 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Henry Rivas
+Team: Athletics
+Position: SP
+Jersey: #6
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: A
+Overall: 92
+MLB Service: 8.002
+Age: 30
+Bats: L
+Throws: R
+Height: 6'0"
+Weight: 173 LBS
+Drafted: RND 1 (2029)
+Secondary Position: NONE
+Hitter Tendency: PULL HITTER
+Born: PUERTO RICO
+Canonical POPID: POP-00024
+
+--------------------------------------------------
+
+PITCH REPERTOIRE
+
+2-Seam Fastball — 84 mph
+Sinker — 80 mph
+12-6 Curve — 75 mph
+Circle Change — 76 mph
+Slider — 80 mph
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+STA: 78
+H/9: 77
+K/9: 84
+BB/9: 79
+HR/9: 66
+PCLT: 76
+CTRL: 75
+VEL: 36
+BRK: 57
+FLD: 74
+ARM: 90
+ACC: 59
+REAC: 57
+
+--------------------------------------------------
+
+MLB STATS (BY SEASON)
+
+YEAR TEAM G GS W L SV BS HLD IP H R ER HR BB SO ERA
+2041 ATH 22 22 11 4 0 0 0 136.1 123 42 40 16 24 133 2.64
+2040 ATH 33 33 14 12 0 0 0 184.2 176 77 76 24 59 169 3.70
+2039 ATH 33 33 17 5 0 0 0 187.2 191 85 80 21 38 184 3.84
+2038 ATH 33 33 14 6 0 0 0 183.1 186 75 69 24 39 175 3.39
+2037 PHI 32 32 9 15 0 0 0 170.0 160 63 60 27 52 157 3.18
+2036 PHI 33 33 6 15 0 0 0 154.2 181 94 85 29 50 149 4.95
+2035 PHI 33 33 13 9 0 0 0 181.0 148 71 63 18 54 165 3.13
+2034 PHI 23 23 10 4 0 0 0 130.1 105 35 32 11 39 128 2.21
+
+--------------------------------------------------
+
+ADVANCED (BY SEASON)
+
+YEAR TEAM WHIP WPCT QS CG SHO HB WP TBF WAR K/9 BB/9 HR/9 FIP ERC PFR
+2041 ATH 1.08 .733 15 0 0 3 2 548 3.2 8.78 1.58 1.06 3.17 2.77 1.15
+2040 ATH 1.27 .538 17 0 0 4 2 771 2.9 8.24 2.88 1.17 3.88 3.65 1.23
+2039 ATH 1.22 .773 16 1 1 6 4 778 4.4 8.82 1.82 1.01 3.20 3.43 1.18
+2038 ATH 1.23 .700 16 0 0 3 0 762 3.7 8.59 1.91 1.18 3.48 3.57 1.17
+2037 PHI 1.25 .375 17 0 0 2 0 704 2.1 8.31 2.75 1.43 4.17 3.73 1.23
+2036 PHI 1.49 .286 8 0 0 5 3 692 1.2 8.67 2.91 1.69 4.58 5.20 1.29
+2035 PHI 1.12 .591 16 0 0 3 3 735 3.8 8.20 2.69 0.90 3.41 2.65 1.21
+2034 PHI 1.10 .714 13 0 0 2 1 516 3.2 8.84 2.69 0.76 3.08 2.57 1.28
+
+--------------------------------------------------
+
+CAREER TOTALS
+
+G: 242
+GS: 242
+W: 94
+L: 70
+SV: 0
+BS: 0
+HLD: 0
+IP: 1328.0
+H: 1270
+R: 542
+ER: 505
+HR: 170
+BB: 355
+SO: 1260
+
+ERA: 3.42
+WHIP: 1.22
+WPCT: .573
+QS: 118
+CG: 1
+SHO: 1
+HB: 28
+WP: 15
+TBF: 5506
+WAR: 24.6
+K/9: 8.54
+BB/9: 2.41
+HR/9: 1.15
+FIP: 3.63
+ERC: 3.45
+PFR: 1.22
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2042: $28.2M
+2043: FA
+2044: FA
+2045: FA
+2046: FA
+2047: FA
+2048: FA
+2049: FA
+2050: FA
+2051: FA
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Option: 0/3 USED
+Playoff Eligible: -
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+
+QUIRKS
+
+None (no quirks tab on game screens).
+
+--------------------------------------------------
+
+AWARDS
+
+None (no awards tab on game screens).
+
+--------------------------------------------------
+
+NOTES
+
+- Acquired: 2037, Trade (PHI)
+
+--------------------------------------------------
+METADATA & VERIFICATION FOOTER
+--------------------------------------------------
+TS Code: TS-MLB-ATH-2041-00024
+Verification Tag: Screen-Checked
+Steward of Record: Claude Staged
+POPID: POP-00024
+==================================================

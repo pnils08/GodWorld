@@ -1,0 +1,22 @@
+{
+  "cycle": 117,
+  "moveCycle": 116,
+  "work": {
+    "INIT-014": [
+      "MV-116-civic-office-mayor-2026-11-16"
+    ],
+    "INIT-007": [
+      "MV-116-civic-office-council-d3-2026-11-16",
+      "MV-116-civic-office-council-d1-2026-11-17",
+      "MV-116-civic-office-council-d3-2026-11-19"
+    ],
+    "INIT-002": [
+      "MV-116-civic-office-council-d5-2026-11-17"
+    ],
+    "INIT-015": [
+      "MV-116-civic-office-council-d9-2026-11-19"
+    ]
+  },
+  "candidates": [],
+  "foldedAt": "2026-11-23T00:29:30.321Z"
+}

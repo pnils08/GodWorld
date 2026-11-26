@@ -8,10 +8,20 @@
     {
       "pop": "POP-00123",
       "name": "Tre Mingo",
-      "quote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving."
+      "quote": "I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work with, talking about leaving. I've got three kids, and it's hard not to think about how this affects us directly."
+    },
+    {
+      "pop": "POP-01056",
+      "name": "Theo Banks",
+      "quote": "The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave."
+    },
+    {
+      "pop": "POP-00044",
+      "name": "Elliott Crane",
+      "quote": "The conversation around rent hikes and neighborhood changes in Uptown is real, and it's on my mind. I've heard residents openly discussing plans to leave because of the hikes. As their representative, it creates accountability for me to ensure that we're doing everything we can to support the community. I want to see us focus on maintaining the vitality of our commercial corridors like Piedmont Avenue, ensuring basic city services are effective, and being transparent about our fiscal oversight."
     }
   ],
-  "claim": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.",
+  "claim": "I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work with, talking about leaving. I've got three kids, and it's hard not to think about how this affects us directly.",
   "src": "citizenVoice PRESS c116",
-  "ranAt": "2026-11-21T15:15:20.735Z"
+  "ranAt": "2026-11-22T15:15:42.551Z"
 }

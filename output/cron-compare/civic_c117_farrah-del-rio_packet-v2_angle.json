@@ -1,0 +1,2334 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "farrah-del-rio",
+  "freeAngle": "free-rows",
+  "pass": false,
+  "reporterPicks": [],
+  "morningTools": [],
+  "workerAnswers": [],
+  "workerAsksUsed": 0,
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00161",
+      "name": "Farrah Del Rio",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Decide what, if anything, you want to write this cycle"
+    },
+    "signal": {
+      "kind": "own-pick",
+      "hood": null,
+      "score": null,
+      "src": "the record of C117"
+    },
+    "exposure": {
+      "basis": [
+        "own-pick"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave — C117 in Piedmont Ave: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near a bench on the hospital grounds",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Piedmont Ave — C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00020",
+          "name": "Elena Vásquez",
+          "profile": "Elena Vásquez — Waterfront Urban Planner — Jack London — C117 in Jack London: managed communications for upcoming public announcements",
+          "role": "Waterfront Urban Planner",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00020",
+            "rowName": "Elena Vásquez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00023",
+          "name": "Gregory Mims",
+          "profile": "Gregory Mims — Organized Crime — West Oakland — C117 in West Oakland: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+          "role": "Organized Crime",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00023",
+            "rowName": "Gregory Mims",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00024",
+          "name": "Henry Rivas",
+          "profile": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland — C117 in West Oakland: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00024",
+            "rowName": "Henry Rivas",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00029",
+          "name": "Alisha Peña",
+          "profile": "Alisha Peña — Female Model — Lake Merritt — C117 in Lake Merritt: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+          "role": "Female Model",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00029",
+            "rowName": "Alisha Peña",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00030",
+          "name": "Derek Simmons",
+          "profile": "Derek Simmons — A's Marketing Director — Jack London — C117 in Jack London: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+          "role": "A's Marketing Director",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00030",
+            "rowName": "Derek Simmons",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00031",
+          "name": "Martin Richards",
+          "profile": "Martin Richards — Third Baseman, New York Mets — Piedmont Ave — C117 in Fruitvale: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+          "role": "Third Baseman, New York Mets",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00031",
+            "rowName": "Martin Richards",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00033",
+          "name": "John Ellis",
+          "profile": "John Ellis — Starting Pitcher, Oakland A's — Laurel — C117 in Laurel: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+          "role": "Starting Pitcher, Oakland A's",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00033",
+            "rowName": "John Ellis",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00034",
+          "name": "Avery Santana",
+          "profile": "Avery Santana — Mayor of Oakland — Rockridge — C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+          "role": "Mayor of Oakland",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00034",
+            "rowName": "Avery Santana",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00037",
+          "name": "Brenda Okoro",
+          "profile": "Brenda Okoro — Deputy Mayor (Community Affairs) — Piedmont Ave — C117 in Piedmont Ave: A Piedmont Ave barbershop went quiet when they walked in and stayed quiet.",
+          "role": "Deputy Mayor (Community Affairs)",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00037",
+            "rowName": "Brenda Okoro",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00038",
+          "name": "Theo Park",
+          "profile": "Theo Park — Communications Director — Rockridge — C117 in Rockridge: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+          "role": "Communications Director",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00038",
+            "rowName": "Theo Park",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00039",
+          "name": "Simone Ellis",
+          "profile": "Simone Ellis — Chief Legal Counsel — Lake Merritt — C117 in Lake Merritt: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+          "role": "Chief Legal Counsel",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00039",
+            "rowName": "Simone Ellis",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00040",
+          "name": "Aaron Whitfield",
+          "profile": "Aaron Whitfield — City Manager — Rockridge — C117 in Rockridge: An old acquaintance in Rockridge stopped them to say they are doing right by the neighborhood.",
+          "role": "City Manager",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00040",
+            "rowName": "Aaron Whitfield",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00042",
+          "name": "Ramon Vega",
+          "profile": "Ramon Vega — City Council District 4 — Lake Merritt — C117 in Lake Merritt: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "role": "City Council District 4",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00042",
+            "rowName": "Ramon Vega",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00043",
+          "name": "Janae Rivers",
+          "profile": "Janae Rivers — City Council District 5 — Piedmont Ave — C117 in Piedmont Ave: The owner of a Piedmont Ave gym said memberships filled before the sign went up.",
+          "role": "City Council District 5",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00043",
+            "rowName": "Janae Rivers",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00044",
+          "name": "Elliott Crane",
+          "profile": "Elliott Crane — City Council District 6 — Uptown — C117 in Uptown: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+          "role": "City Council District 6",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00044",
+            "rowName": "Elliott Crane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00046",
+          "name": "Manny Ellen",
+          "profile": "Manny Ellen — Elections Office — Lake Merritt — C117 in Lake Merritt: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a small park",
+          "role": "Elections Office",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00046",
+            "rowName": "Manny Ellen",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00047",
+          "name": "Babe Bono",
+          "profile": "Babe Bono — Redevelopment Board — Lake Merritt — C117 in Lake Merritt: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+          "role": "Redevelopment Board",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00047",
+            "rowName": "Babe Bono",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00049",
+          "name": "Pamela Amelia",
+          "profile": "Pamela Amelia — Audit Commission — Piedmont Ave — C117 in Piedmont Ave: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+          "role": "Audit Commission",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00049",
+            "rowName": "Pamela Amelia",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00050",
+          "name": "Ernesto Quintero",
+          "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District — C117 in Baylight District: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+          "role": "3B/1B , Oakland A's",
+          "hood": "Baylight District",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00050",
+            "rowName": "Ernesto Quintero",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00051",
+          "name": "Desmond Morton",
+          "profile": "Desmond Morton — Left Fielder, Oakland A's — Chinatown — C117 in Chinatown: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "role": "Left Fielder, Oakland A's",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00051",
+            "rowName": "Desmond Morton",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00052",
+          "name": "Clark Saryan",
+          "profile": "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA) — Downtown — C117 in Downtown: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+          "role": "Closing Pitcher, Las Vegas Aviators (AAA)",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00052",
+            "rowName": "Clark Saryan",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00053",
+          "name": "Kevin Clark",
+          "profile": "Kevin Clark — Third Baseman, Oakland A's — Jack London — C117 in Jack London: walked past the renderings for the Temescal Community Health Center and decided it would never look like that near the waterfront",
+          "role": "Third Baseman, Oakland A's",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00053",
+            "rowName": "Kevin Clark",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00077",
+          "name": "Julio Valencia",
+          "profile": "Julio Valencia — Setup/Closing Pitcher, Oakland A's — Uptown — C117 in Uptown: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+          "role": "Setup/Closing Pitcher, Oakland A's",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/cron-compare/staged @C117",
+            "pop": "POP-00077",
+            "rowName": "Julio Valencia",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "In the Tribune this cycle: \"The Fund Paid Out in C117. The Closeout That Gates Its Renewal Is Still Unverified.\" — By Carmen Delaine | Bay Tribune Civic Ledger — opens: Marcus Webb, the OEWD program director who runs the West Oakland Stabilization Fund, put it this way for the record this cycle: \"The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries t",
+        "src": "output/cron-compare/staged/civic_c117_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+        "id": "F-866f3c230bdd"
+      },
+      {
+        "t": "FACT",
+        "text": "In the Tribune this cycle: \"Chinatown's Illness Count Is 133. The Hospital Count Is 6. The Record Can't Explain the Gap.\" — opens: The hospital side of Chinatown's record has not moved. Three residents were admitted this cycle and three left. The neighborhood opened with six in care, closed with six, and has six beds occupied. None of the six is tracked by name. The census lists them as \"other residents.\" Ci",
+        "src": "output/cron-compare/staged/civic_c117_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+        "id": "F-c02067b9868a"
+      },
+      {
+        "t": "FACT",
+        "text": "In the Tribune this cycle: \"12th Street Added 1,962 Riders and Lost 4 Points of On-Time. The Logged Causes Don't Fully Explain It.\" — By Trevor Shimizu — opens: 12th St Oakland City Center carried 14,175 riders in Cycle 117, up 1,962 from 12,213 in Cycle 116. Its on-time performance fell from 81% to 77%. Most of the system went the other way. Lake Merritt, West Oakland and MacArthur each gained seven points. 19th Street gained three, to",
+        "src": "output/cron-compare/staged/civic_c117_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+        "id": "F-a983c2f24303"
+      },
+      {
+        "t": "FACT",
+        "text": "In the Tribune this cycle: \"The Lives Page, Cycle 117\" — opens: Serg Cerrano welcomed a new child into the family this cycle. Cerrano is a mover who lives in Fruitvale. The record gives no name for the baby, no date and no hour, and it does not yet say what came next.",
+        "src": "output/cron-compare/staged/culture_c117_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+        "id": "F-c7c729fee45a"
+      },
+      {
+        "t": "FACT",
+        "text": "In the Tribune this cycle: \"The A's Pay for a Closer They Already Had\" — opens: Mariano Rosales struck out 82 and walked 14 in 63.2 innings in 2041, and on the career line that is the number to hold onto. His TrueSource card works the season out to 11.6 strikeouts per nine, 2.0 walks per nine and 5.86 strikeouts per walk. Every other year on the card sits we",
+        "src": "output/cron-compare/staged/sports_c117_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+        "id": "F-ccf69702d95b"
+      },
+      {
+        "t": "FACT",
+        "text": "In the Tribune this cycle: \"UNDOCKED: Daniela Kapoor makes the route the story\" — opens: Daniela Kapoor’s Sunday-night flight put exploration in the foreground: a route across nine named systems, mining along the way, and a string of achievements whose points give the night its shape. The board’s top line, meanwhile, belongs to Marguerite Kimball-Ostrow, listed at #1",
+        "src": "output/cron-compare/staged/undocked_c117_nia-rook_packet-v2_openai-gpt-6-luna.staged.md",
+        "id": "F-27ed671a3489"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund — status passed, phase disbursement-active, budget $28M, West Oakland; next: Verify C114 closeout, then conduct Council charter-renewal consideration with scope and 23-day standard intact (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-001 @C117",
+        "id": "F-bff71f51c45a"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Alternative Response Initiative — status passed, phase dispatch-live, budget $12.5M, West Oakland, Fruitvale, East Oakland; next: Execute and publish the D3 Fruitvale briefing record; file written next dates for the D5 audit and Baylight feasibility review (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-002 @C117",
+        "id": "F-2694263b7258"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Transit Hub Phase II — Visioning — status passed, phase design-phase, budget $230M, Fruitvale; next: Deliver preliminary schematics and publish the documented Fruitvale public comment-and-response record (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-003 @C117",
+        "id": "F-e163aed1cc4d"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal Community Health Center — status passed, phase operational, budget $45M, Temescal; next: File the Q3 intake audit with HCAI and the Council Clerk; document the Telegraph & 47th merchant walkthrough (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-005 @C117",
+        "id": "F-5d0ad76756c9"
+      },
+      {
+        "t": "FACT",
+        "text": "Baylight District — Final Council Vote — status passed, phase construction-active, budget $2.1B, Jack London, Downtown; next: Conduct and publish the construction milestone review against the assembled evidence file (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-006 @C117",
+        "id": "F-94b2efe59d64"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Youth Apprenticeship Pipeline — status passed, phase stalled, budget $12.5M, West Oakland, East Oakland, Fruitvale; next: Publish the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale review (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-007 @C117",
+        "id": "F-e3aae0c8d712"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown Economic Revitalization — status proposed, phase stalled, budget $15M, Downtown; next: Execute and publish Uptown stabilization planning with timeline, benchmarks and committee record (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-008 @C117",
+        "id": "F-d61b7a1c60a4"
+      },
+      {
+        "t": "FACT",
+        "text": "Commercial Stabilization for Grand Lake — status proposed, phase vote-scheduled, budget $2.5M, Grand Lake; next: Hold and Clerk-certify the full-council roll call with all Chen-Vega conditions (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-009 @C117",
+        "id": "F-96748217a67b"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Tenant Defense Fund — status passed, phase operational, budget $4.2M, West Oakland; next: Publish the legal-support analysis and document the opening of tenant-defense intake (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-010 @C117",
+        "id": "F-e1f6e26615ff"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Hill Revitalization Initiative — status proposed, phase legislation-filed, budget $2.5M, Ivy Hill; next: Complete committee referral and hearing on INIT-011 with separate records for INIT-013 and INIT-014 (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-011 @C117",
+        "id": "F-9d576ecd9ca3"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond Revitalization Initiative — status proposed, phase announced, budget $2.5M, Dimond; next: File legislation (due Cycle 117)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-012 @C117",
+        "id": "F-f9635cee580c"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Hill Community Revitalization — status proposed, phase stalled, budget $2M, Ivy Hill; next: Publish a distinct scope and nonduplication record before any Clerk-verified filing (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-013 @C117",
+        "id": "F-731ff740e9ff"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Hill Community Support Initiative — status proposed, phase vote-scheduled, budget $2.5M, Ivy Hill; next: Council review of the filed INIT-014 legislation (due Cycle 117)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-014 @C117",
+        "id": "F-3b0c74092773"
+      },
+      {
+        "t": "FACT",
+        "text": "Laurel Neighborhood Patch and Clean-Up — status proposed, phase announced, budget $6M, Laurel; next: Complete scope and outreach, then obtain a Clerk-verified filing reference (due Cycle 118)",
+        "src": "output/beats/Initiative_Tracker.jsonl INIT-015 @C117",
+        "id": "F-274bf20773b7"
+      },
+      {
+        "t": "FACT",
+        "text": "Keisha Ramos (Baylight Authority Director) decided on Baylight District — Final Council Vote: Hold the construction milestone determination pending; publish the scope and basis of the C115 completed entry, the evidence-file location, remaining determination work, responsibility, and next repor",
+        "src": "output/civic-voice/baylight_authority_c117.json STMT-117-baylight_authority-001",
+        "id": "F-9add1658eca8"
+      },
+      {
+        "t": "FACT",
+        "text": "Keisha Ramos (Baylight Authority Director) decided on Jack London and Downtown improvement flags — recorded, not converted into construction findings: Note the low-severity improvement flags on the record and continue remediation, hotline, dust-control, and workforce oversight without claiming a milestone.",
+        "src": "output/civic-voice/baylight_authority_c117.json STMT-117-baylight_authority-002",
+        "id": "F-6018d33d628b"
+      },
+      {
+        "t": "FACT",
+        "text": "Denise Carter (City Council District 1) decided on West Oakland Stabilization Fund: Vote YES on Council charter-renewal consideration, contingent on verified C114 closeout, with business-and-resident scope and the 23-day standard preserved.",
+        "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-001",
+        "id": "F-36c0ebd9ac10"
+      },
+      {
+        "t": "FACT",
+        "text": "Denise Carter (City Council District 1) decided on West Oakland Tenant Defense Fund: Support publishing the legal-support analysis and opening tenant-defense intake this cycle, with the C116 record corrected to reflect 6-3 passage at C112 and signature.",
+        "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-002",
+        "id": "F-959d8f9c4ff2"
+      },
+      {
+        "t": "FACT",
+        "text": "Denise Carter (City Council District 1) decided on Oakland Youth Apprenticeship Pipeline: Require publication of the placement-gap analysis and adjustment plan this cycle with explicit West Oakland and Fruitvale review; do not claim completion or success without placement evidence.",
+        "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-003",
+        "id": "F-63a895737c3c"
+      },
+      {
+        "t": "FACT",
+        "text": "Denise Carter (City Council District 1) decided on Oakland Alternative Response Initiative: Support executing and publishing the D3 Fruitvale briefing record and filing written next dates for the D5 audit and Baylight feasibility review; continue holding expansion until all three records exi",
+        "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-004",
+        "id": "F-b0546889634f"
+      },
+      {
+        "t": "FACT",
+        "text": "Denise Carter (City Council District 1) decided on Brooklyn service-audit baseline and D1 OARI evaluation — answer to Director Vance: Report that the Brooklyn service-audit baseline and the District 1 OARI evaluation remain incomplete and not citable; identify the missing records, the responsible offices, the specific assistance req",
+        "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-005",
+        "id": "F-65659ec334fa"
+      },
+      {
+        "t": "FACT",
+        "text": "Denise Carter (City Council District 1) decided on West Oakland and Brooklyn constituents this cycle: Recognize West Oakland's improved mood and hold Brooklyn's remaining questions open with a named next date; request Director Vance's cross-department records request as the concrete deliverable.",
+        "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-006",
+        "id": "F-8804df9f5efa"
+      },
+      {
+        "t": "FACT",
+        "text": "Leonard Tran (City Council District 2) decided on Baylight construction milestone evidence review: Conduct and publish the scheduled review against the assembled evidence file; declare no milestone passed unless the evidence supports it, and continue oversight.",
+        "src": "output/civic-voice/council_d2_c117.json STMT-117-council_d2-001",
+        "id": "F-b431526d2344"
+      },
+      {
+        "t": "FACT",
+        "text": "Leonard Tran (City Council District 2) decided on Uptown stabilization execution and Downtown committee decision: Require a published, executable Uptown stabilization plan with a concrete timeline and Ashford benchmarks, seek a recorded committee decision, and keep the $15 million authorization pending; if delive",
+        "src": "output/civic-voice/council_d2_c117.json STMT-117-council_d2-002",
+        "id": "F-010702722644"
+      },
+      {
+        "t": "FACT",
+        "text": "Leonard Tran (City Council District 2) decided on D2 neighborhood conditions and civic life: Recognize the positive activity in Downtown and Jack London, attend to Chinatown's flat mood and Baylight's slow trade, and seek practical follow-through for neighborhood businesses without declaring",
+        "src": "output/civic-voice/council_d2_c117.json STMT-117-council_d2-003",
+        "id": "F-2acc9fb63888"
+      },
+      {
+        "t": "FACT",
+        "text": "Rose Delgado (City Council District 3) decided on Oakland Alternative Response Initiative: Hold expansion; require execution and publication of the D3 Fruitvale briefing record with the actual date, venue, notice dates, accessibility and participation arrangements, and the district and Frui",
+        "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-001",
+        "id": "F-3aea58d6984d"
+      },
+      {
+        "t": "FACT",
+        "text": "Rose Delgado (City Council District 3) decided on Fruitvale Transit Hub Phase II — Visioning: Hold further design advancement at the C86 authorization; require the contracted design consultant to deliver preliminary schematics and conduct a documented Fruitvale community review this cycle, wit",
+        "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-002",
+        "id": "F-58a386c2e949"
+      },
+      {
+        "t": "FACT",
+        "text": "Rose Delgado (City Council District 3) decided on Oakland Youth Apprenticeship Pipeline: Require the placement-gap analysis and adjustment plan with explicit Fruitvale and West Oakland review to be published this cycle, and record implementation as stalled until that publication exists.",
+        "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-003",
+        "id": "F-bacc38b21f3c"
+      },
+      {
+        "t": "FACT",
+        "text": "Rose Delgado (City Council District 3) decided on San Antonio commercial blocks — next public update and district investment: Hold San Antonio commercial blocks as an active district matter, with the next public update and a named district office point of contact rather than a footnote.",
+        "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-004",
+        "id": "F-b78c4528e741"
+      },
+      {
+        "t": "FACT",
+        "text": "Ramon Vega (City Council District 4) decided on Ivy Hill Revitalization Initiative committee referral and hearing: Support committee referral and a hearing this cycle on the ordinance recorded as filed at C113, with separate records for INIT-011, INIT-013, and INIT-014.",
+        "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-001",
+        "id": "F-54910d3cea8d"
+      },
+      {
+        "t": "FACT",
+        "text": "Ramon Vega (City Council District 4) decided on Dimond Revitalization Initiative filing: Support completing and submitting the announced $2.5 million ordinance this cycle, with filing claimed only after Clerk verification.",
+        "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-002",
+        "id": "F-1f68ce8a5a2c"
+      },
+      {
+        "t": "FACT",
+        "text": "Ramon Vega (City Council District 4) decided on Ivy Hill Community Revitalization filing: Hold INIT-013 and let this filing deadline pass until its distinct scope and nonduplication with INIT-011 and INIT-014 are documented.",
+        "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-003",
+        "id": "F-9665e7263d3c"
+      },
+      {
+        "t": "FACT",
+        "text": "Ramon Vega (City Council District 4) decided on Ivy Hill Community Support Initiative filing verification: Withhold Council review or a vote until the Clerk provides a filing reference or confirms no filing, and the basis for the tracker disposition is documented.",
+        "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-004",
+        "id": "F-9430dea13f60"
+      },
+      {
+        "t": "FACT",
+        "text": "Ramon Vega (City Council District 4) decided on Glenview meeting findings and public-works follow-through: Seek the documented conclusions of the Glenview civic response meeting, work performed, remaining issues, responsible department, and next update date.",
+        "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-005",
+        "id": "F-cb932f00cffd"
+      },
+      {
+        "t": "FACT",
+        "text": "Ramon Vega (City Council District 4) decided on Dimond community response, missed pickup, and civic life: Support a factual public record and next steps for the Dimond briefing; request confirmation of the missed pickup's recovery status and any remaining service step.",
+        "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-006",
+        "id": "F-e49cf69a91d6"
+      },
+      {
+        "t": "FACT",
+        "text": "Ramon Vega (City Council District 4) decided on Ivy Hill conditions and business closure: Keep attention on Ivy Hill's mixed conditions and seek an account of any available city support for the closing business, without promising an outcome or adding a duplicative initiative.",
+        "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-007",
+        "id": "F-c16aaa89db4e"
+      },
+      {
+        "t": "FACT",
+        "text": "Ramon Vega (City Council District 4) decided on Complaint-response crosswalk and corrected C116 claims: Support a Clerk-checked crosswalk that identifies missing complaint coverage and fields rather than supplying unsupported details.",
+        "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-008",
+        "id": "F-ece726f2fd8e"
+      },
+      {
+        "t": "FACT",
+        "text": "Janae Rivers (City Council District 5) decided on Oakland Alternative Response Initiative: Hold expansion of the Oakland Alternative Response Initiative: require execution and publication of the D3 Fruitvale briefing record and a written next date for the D5 audit and Baylight feasibility r",
+        "src": "output/civic-voice/council_d5_c117.json STMT-117-council_d5-001",
+        "id": "F-f23c1628c732"
+      },
+      {
+        "t": "FACT",
+        "text": "Janae Rivers (City Council District 5) decided on Oakland Youth Apprenticeship Pipeline: Require publication this cycle of an inspectable placement-gap analysis and adjustment plan that separately identifies West Oakland and Fruitvale placement reach, documented gaps, specific corrections",
+        "src": "output/civic-voice/council_d5_c117.json STMT-117-council_d5-002",
+        "id": "F-dc81aeb1a472"
+      },
+      {
+        "t": "FACT",
+        "text": "Janae Rivers (City Council District 5) decided on East Oakland constituents — complaint crosswalk and community life: Carry East Oakland's complaint into the Clerk-checked crosswalk with a named office and a next date, and hold the Masjid An-Nur Oakland community grief gathering visible as city life — with attention",
+        "src": "output/civic-voice/council_d5_c117.json STMT-117-council_d5-003",
+        "id": "F-e74498f8afb0"
+      },
+      {
+        "t": "FACT",
+        "text": "Elliott Crane (City Council District 6) decided on Piedmont Avenue Health Response and Baseline Municipal Oversight: Direct the responsible public health authorities to publish an evidence-based update and schedule a public briefing on the Piedmont Avenue health spike without creating new administrative bureaucracy.",
+        "src": "output/civic-voice/council_d6_c117.json STMT-117-council_d6-001",
+        "id": "F-4b104565aeb6"
+      },
+      {
+        "t": "FACT",
+        "text": "Elliott Crane (City Council District 6) decided on Grand Lake Commercial Stabilization Roll Call: Vote YES on Commercial Stabilization for Grand Lake with all Chen-Vega audit milestones and reporting conditions intact.",
+        "src": "output/civic-voice/council_d6_c117.json STMT-117-council_d6-002",
+        "id": "F-545b25349980"
+      },
+      {
+        "t": "FACT",
+        "text": "Elliott Crane (City Council District 6) decided on West Oakland Stabilization Fund Charter Renewal: Require verified C114 closeout accounting and audit documentation before scheduling any Council vote on charter renewal.",
+        "src": "output/civic-voice/council_d6_c117.json STMT-117-council_d6-003",
+        "id": "F-068adf0f5c4f"
+      },
+      {
+        "t": "FACT",
+        "text": "Warren Ashford (City Council District 7) decided on Temescal Community Health Center Q3 Clinical Intake Audit and Merchant Verification: Condition certification of ongoing operational oversight on verified filing of the Q3 clinical intake audit with HCAI and the Council Clerk, and completion of the Telegraph & 47th merchant walkthrough",
+        "src": "output/civic-voice/council_d7_c117.json STMT-117-council_d7-001",
+        "id": "F-c7551d79e7eb"
+      },
+      {
+        "t": "FACT",
+        "text": "Warren Ashford (City Council District 7) decided on Municipal Response and Structural Inspection Following KONO Fire: Direct Planning and Building to complete standard structural safety inspections and require Finance to account for emergency deployment costs without off-budget commercial subsidies.",
+        "src": "output/civic-voice/council_d7_c117.json STMT-117-council_d7-002",
+        "id": "F-be84a24b6dcc"
+      },
+      {
+        "t": "FACT",
+        "text": "Warren Ashford (City Council District 7) decided on Grand Lake Commercial Stabilization Roll Call with Chen-Vega Audit Triggers: Vote YES on INIT-009 roll call strictly contingent upon retaining all Chen-Vega milestone and audit conditions certified by the Clerk.",
+        "src": "output/civic-voice/council_d7_c117.json STMT-117-council_d7-003",
+        "id": "F-6fd5597ef70f"
+      },
+      {
+        "t": "FACT",
+        "text": "Nina Chen (City Council District 8) decided on Commercial Stabilization for Grand Lake Roll Call: Vote YES on the full-council roll call with Chen-Vega milestone and audit conditions intact, withholding any claim of enactment until certification by the City Clerk.",
+        "src": "output/civic-voice/council_d8_c117.json STMT-117-council_d8-001",
+        "id": "F-c3168d2e1228"
+      },
+      {
+        "t": "FACT",
+        "text": "Nina Chen (City Council District 8) decided on Eastlake Service Authorizations and District Complaint Docket Reconciliation: Confirm Eastlake baseline maintenance allocations remain unauthorized pending Public Works docketing, and order an official Clerk-verified complaint reconciliation identifying missing case records acr",
+        "src": "output/civic-voice/council_d8_c117.json STMT-117-council_d8-002",
+        "id": "F-9c6dea0640da"
+      },
+      {
+        "t": "FACT",
+        "text": "Bobby Chen-Ramirez (Health Center Project Director) decided on Temescal Community Health Center: File the Q3 clinical intake audit with HCAI and the Council Clerk this cycle, on the standing quarterly schedule established at C115.",
+        "src": "output/civic-voice/health_center_c117.json STMT-117-health_center-001",
+        "id": "F-4b18e3905655"
+      },
+      {
+        "t": "FACT",
+        "text": "Bobby Chen-Ramirez (Health Center Project Director) decided on Temescal Community Health Center: Complete and document the recurring Telegraph & 47th merchant-clinic verification walkthrough this cycle, with shopkeepers and front-desk staff walking the building together.",
+        "src": "output/civic-voice/health_center_c117.json STMT-117-health_center-002",
+        "id": "F-ba371d9aaa56"
+      },
+      {
+        "t": "FACT",
+        "text": "Bobby Chen-Ramirez (Health Center Project Director) decided on Temescal Community Health Center: Hold the working-door test front and center through Q3: the audit and walkthrough are measured against whether someone can actually get here without two buses.",
+        "src": "output/civic-voice/health_center_c117.json STMT-117-health_center-003",
+        "id": "F-c43099a54bc9"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on West Oakland Stabilization Fund closeout and charter renewal: Carry forward closeout verification and Council consideration; support renewal only after verified C114 closeout, preserving the business-and-resident scope and 23-day standard.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-001",
+        "id": "F-f948f944fbcc"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Alternative Response expansion hold and Fruitvale briefing record: Hold expansion; require a complete published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-002",
+        "id": "F-1524055b6ba7"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Fruitvale Transit Hub schematics and community review: Hold further design advancement until preliminary schematics and a documented Fruitvale public comment-and-response record are delivered and published.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-003",
+        "id": "F-b88a689578b9"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Temescal Health Center oversight certification: Keep the center operational while withholding oversight certification until the Q3 audit filing and merchant walkthrough are verified and documented.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-004",
+        "id": "F-ce462e5513d2"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Baylight construction milestone evidence review: Declare no milestone passed; direct completion and publication of the evidence-file review while all remediation, hotline, dust-control and workforce oversight continues.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-005",
+        "id": "F-f008cea743ee"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Youth Apprenticeship placement-gap accountability: Keep the initiative stalled pending publication of the placement-gap analysis and adjustment plan, including explicit West Oakland and Fruitvale review.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-006",
+        "id": "F-39e6104cdc5c"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Downtown revitalization and Uptown planning stall: Record INIT-008 as stalled because Uptown planning execution is not evidenced; keep the $15 million authorization pending and require a complete public planning record.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-007",
+        "id": "F-6b0733dc02fa"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Grand Lake full-council decision and Clerk certification: Back YES with every Chen-Vega condition, keep the measure vote-scheduled, and request a completed Clerk-certified roll call before claiming any outcome.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-008",
+        "id": "F-1af7393c2269"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on West Oakland tenant-defense implementation and record correction: Move forward on the corrected C112 implementation record, requiring publication of the legal-support analysis and documented intake opening without another committee vote.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-009",
+        "id": "F-b4178655f6a5"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Ivy Hill ordinance referral and committee hearing: Support committee referral and a hearing on the C113-filed ordinance while claiming no completed referral or hearing and keeping all Ivy Hill records separate.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-010",
+        "id": "F-3336fcf85abb"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Dimond legislation deadline and honest stall: Record the missed filing deadline and move INIT-012 to stalled pending completed drafting, documented outreach and Clerk verification.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-011",
+        "id": "F-b43e1b33ea5e"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Duplicative Ivy Hill filing hold: Move INIT-013 to stalled rather than file a duplicative measure; require a distinct scope and nonduplication record before any filing.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-012",
+        "id": "F-a77cf47da2ef"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Complaint-response crosswalk and INIT-014 record correction: Under promises P-d94459ae1189b667 and P-b87ef751a66c370d, direct an eleven-case source-record crosswalk and hold INIT-014 as stalled pending Clerk-backed filing and tracker reconciliation.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-013",
+        "id": "F-f1936c725ee8"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Laurel cleanup scope, outreach and filing hold: Keep INIT-015 announced and carry forward the unfinished scope, outreach and Clerk-verified filing without claiming authorization or implementation.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-014",
+        "id": "F-1b8296655ba4"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Neighborhood conditions, Dimond briefing and civic life: Request the Dimond Emergency Town Briefing record and factual next steps while recognizing faith-community responses and neighborhood conditions without inventing incident details or new programs.",
+        "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-015",
+        "id": "F-18b847dc65d4"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Dimond community response and Oakland civic life: Use the Dimond Emergency Town Briefing to establish a public factual record and next steps, without speculating about causes or linking separate faith-community responses; keep neighborhood gatherings",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-001",
+        "id": "F-9888b580c6d0"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Complaint-response crosswalk and corrected C116 claims: Require a Clerk-checked crosswalk this cycle covering every complaint in the C116 office evidence; because the C117 packet supplies no complaint-level docket list, missing coverage, references, office",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-002",
+        "id": "F-056e1785f267"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on C114 closeout verification and West Oakland charter renewal: Place C114 closeout verification and Council charter-renewal consideration on this cycle's calendar; preserve business-and-resident scope and the 23-day standard, with no renewal claimed before verifi",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-003",
+        "id": "F-634ed847ad06"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Fruitvale briefing, East Oakland audit, and Baylight feasibility record: Direct execution and publication of the D3 Fruitvale briefing record this cycle and written next dates for the D5 audit and Baylight feasibility review; expansion remains held pending all three record",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-004",
+        "id": "F-f8f81969d01b"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Schematics delivery and documented Fruitvale design review: Require the contracted design consultant to deliver preliminary schematics and conduct a documented Fruitvale community review this cycle; hold further design advancement until a public comment-and-re",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-005",
+        "id": "F-5e5ca26ef18f"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Q3 intake audit and Telegraph and 47th merchant oversight: Require the Q3 intake audit filing with HCAI and the Council Clerk and a documented Telegraph & 47th merchant walkthrough this cycle; operational oversight remains uncertified until both are recorded.",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-006",
+        "id": "F-5bfe6caa09bf"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Baylight construction milestone evidence review: Conduct and publish the construction milestone review against the assembled evidence file, declaring no pass unless the remediation, hotline, dust-control, and workforce evidence supports it; oversigh",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-007",
+        "id": "F-74ef4c9d6878"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Placement-gap analysis and apprenticeship adjustment plan: Require publication of the placement-gap analysis and adjustment plan this cycle, with explicit West Oakland and Fruitvale reviews; implementation continues without claims of completion or success uns",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-008",
+        "id": "F-886dfcb8a560"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Uptown stabilization execution and Downtown committee decision: Require a published, executable Uptown stabilization plan with a concrete timeline and Ashford benchmarks, seek a recorded committee decision, keep the $15 million authorization pending, and accept a",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-009",
+        "id": "F-dd8592995338"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Grand Lake full-council roll call with Chen-Vega conditions: Ask the full Council to hold its roll call this cycle with every Chen-Vega milestone and audit condition intact and the Clerk certifying the result; maintain a YES position without claiming an outcome",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-010",
+        "id": "F-7f94f5f1efef"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Tenant-defense implementation and C112 record correction: Publish the legal-support analysis and open tenant-defense intake this cycle, correcting the prior procedural framing to reflect the fund's 6-3 passage at C112 and signature; no committee decision rem",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-011",
+        "id": "F-d86949259980"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Ivy Hill ordinance referral and committee hearing: Seek committee referral and a hearing this cycle on the ordinance recorded as filed at C113, with a record distinguishing INIT-011 from INIT-013 and INIT-014 and no funding or passage claimed in advan",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-012",
+        "id": "F-dff1fcc77d11"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Dimond legislation filing deadline: Direct completion and submission of the $2.5 million ordinance this cycle, document the Dimond Emergency Town Briefing as community input, require Clerk verification before claiming filing, and acknow",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-013",
+        "id": "F-cb7cc4465ff1"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Hold on duplicative Ivy Hill Community Revitalization filing: Hold INIT-013 and let this filing deadline pass rather than submit an overlapping measure; require a distinct scope and nonduplication crosswalk against INIT-011 and INIT-014 before any future Clerk s",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-014",
+        "id": "F-741c4771650d"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on INIT-014 filing verification and tracker-disposition reconciliation: State explicitly that filing remains unverified and withdraw any completed-filing implication; withhold a mayoral request for Council review or a vote until a Clerk reference or no-filing confirmation",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-015",
+        "id": "F-a17ef30aa85f"
+      },
+      {
+        "t": "FACT",
+        "text": "Avery Santana (Mayor) decided on Laurel cleanup scope, outreach, and filing hold: Hold INIT-015 in announced status and let this filing deadline pass because finished scope and outreach records are absent; complete both before any Clerk submission, with no filing or $6 million auth",
+        "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-016",
+        "id": "F-4ea25382ec66"
+      },
+      {
+        "t": "FACT",
+        "text": "Vanessa Tran-Muñoz (OARI Program Director) decided on Oakland Alternative Response Initiative: Hold expansion; publish the executed D3 Fruitvale briefing record in a public, inspectable location with district-level and Fruitvale data references, participation arrangements, and notice dates pres",
+        "src": "output/civic-voice/oari_c117.json STMT-117-oari-001",
+        "id": "F-d13c862fc934"
+      },
+      {
+        "t": "FACT",
+        "text": "Vanessa Tran-Muñoz (OARI Program Director) decided on Oakland Alternative Response Initiative: File written next dates with the Clerk for the D5 audit and the Baylight feasibility review this cycle, replacing open-ended status with dated commitments, while expansion remains held",
+        "src": "output/civic-voice/oari_c117.json STMT-117-oari-002",
+        "id": "F-c2b7c6750b61"
+      },
+      {
+        "t": "FACT",
+        "text": "Vanessa Tran-Muñoz (OARI Program Director) decided on Constituents — West Oakland calm and East Oakland grief, what the crews see on the ground: Carry the D1 and D5 operational presence forward without expansion, keeping evening and weekend bilingual coverage running while the records are assembled",
+        "src": "output/civic-voice/oari_c117.json STMT-117-oari-003",
+        "id": "F-3fed9ebfe86f"
+      },
+      {
+        "t": "FACT",
+        "text": "Brenda Okoro (Deputy Mayor (Community)) decided on West Oakland Stabilization Fund: Hold the C114 closeout verification and Council charter-renewal consideration on this cycle's calendar; no renewal claimed before verification and Council action, with business-and-resident scope and",
+        "src": "output/civic-voice/okoro_c117.json STMT-117-okoro-001",
+        "id": "F-2685fb06e522"
+      },
+      {
+        "t": "FACT",
+        "text": "Brenda Okoro (Deputy Mayor (Community)) decided on Commercial Stabilization for Grand Lake: Hold and certify the full-council roll call with all Chen-Vega milestone and audit conditions intact; maintain a YES position without claiming an outcome.",
+        "src": "output/civic-voice/okoro_c117.json STMT-117-okoro-002",
+        "id": "F-51461881dc8e"
+      },
+      {
+        "t": "FACT",
+        "text": "Brenda Okoro (Deputy Mayor (Community)) decided on Dimond Revitalization Initiative: Support the Dimond Emergency Town Briefing as the public factual record and next steps for the culture spike, without speculating on causes or linking the separate faith-community responses; commit to",
+        "src": "output/civic-voice/okoro_c117.json STMT-117-okoro-003",
+        "id": "F-e6462ab6f61a"
+      },
+      {
+        "t": "FACT",
+        "text": "Brenda Okoro (Deputy Mayor (Community)) decided on Laurel Neighborhood Patch and Clean-Up: Let the Laurel filing deadline pass with INIT-015 held in announced status and let the duplicative Ivy Hill filing (INIT-013) pass rather than submit an overlapping measure; no filing or authorization",
+        "src": "output/civic-voice/okoro_c117.json STMT-117-okoro-004",
+        "id": "F-9ee041252f18"
+      },
+      {
+        "t": "FACT",
+        "text": "Marcus Webb (OEWD Program Director (Stabilization Fund)) decided on West Oakland Stabilization Fund: Hold the queue at the 23-day standard while the Council takes up the verified C114 closeout and charter renewal; no renewal claimed before the roll call.",
+        "src": "output/civic-voice/stabilization_fund_c117.json STMT-117-stabilization_fund-001",
+        "id": "F-e0ae3f1e878d"
+      },
+      {
+        "t": "FACT",
+        "text": "Marcus Webb (OEWD Program Director (Stabilization Fund)) decided on Commercial Stabilization for Grand Lake: Hold and certify the full-council roll call with every Chen-Vega milestone and audit condition attached; maintain a YES position without claiming the outcome.",
+        "src": "output/civic-voice/stabilization_fund_c117.json STMT-117-stabilization_fund-002",
+        "id": "F-ab4fa318c158"
+      },
+      {
+        "t": "FACT",
+        "text": "Marcus Webb (OEWD Program Director (Stabilization Fund)) decided on West Oakland Stabilization Fund: Keep the queue at the 23-day standard and publish the hearing record as the proof; next authorization batch goes to the Deputy Mayor's desk.",
+        "src": "output/civic-voice/stabilization_fund_c117.json STMT-117-stabilization_fund-003",
+        "id": "F-e53ba6a21bbd"
+      },
+      {
+        "t": "FACT",
+        "text": "Elena Soria Dominguez (Transit Hub Planning Lead) decided on INIT-003 complete-entry versus open design review — where the unfinished work lives: Hold further design advancement at the C86 authorization; treat the INIT-003 'complete' tracker entry as closing the visioning and council-authorization history only; keep the comment-and-response rec",
+        "src": "output/civic-voice/transit_hub_c117.json STMT-117-transit_hub-001",
+        "id": "F-b4a47029644a"
+      },
+      {
+        "t": "FACT",
+        "text": "Elena Soria Dominguez (Transit Hub Planning Lead) decided on Fruitvale answer desk and the public comment log: Keep the answer desk and numbered comment log staffed at the Chavez branch this cycle, logging every comment in the language it came in and committing to a written answer with a date before the drawin",
+        "src": "output/civic-voice/transit_hub_c117.json STMT-117-transit_hub-002",
+        "id": "F-79300ed4241c"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "pass": "true when nothing here is a piece you want to write this cycle; then give only why",
+        "chase": "string — what you want to write this cycle and how you will go after it, in your own voice. Not JSON.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "the person's popid — from this record, or the popid citizen_lookup gives you",
+            "question": "string",
+            "basis": "string — what in their life ties them to the story you are chasing"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "A target is someone whose life touched the story you are chasing, whoever you want to hear from: a person on this record or anyone in the city (citizen_lookup gives their popid and their life). Up to four are asked. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "named",
+    "candidates": [
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave — C117 in Piedmont Ave: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near a bench on the hospital grounds",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Piedmont Ave — C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00020",
+        "name": "Elena Vásquez",
+        "role": "Waterfront Urban Planner",
+        "hood": "Jack London",
+        "profile": "Elena Vásquez — Waterfront Urban Planner — Jack London — C117 in Jack London: managed communications for upcoming public announcements",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00020",
+          "rowName": "Elena Vásquez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00023",
+        "name": "Gregory Mims",
+        "role": "Organized Crime",
+        "hood": "West Oakland",
+        "profile": "Gregory Mims — Organized Crime — West Oakland — C117 in West Oakland: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00023",
+          "rowName": "Gregory Mims",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00024",
+        "name": "Henry Rivas",
+        "role": "Starting Pitcher, Oakland A's",
+        "hood": "West Oakland",
+        "profile": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland — C117 in West Oakland: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00024",
+          "rowName": "Henry Rivas",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00029",
+        "name": "Alisha Peña",
+        "role": "Female Model",
+        "hood": "Lake Merritt",
+        "profile": "Alisha Peña — Female Model — Lake Merritt — C117 in Lake Merritt: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00029",
+          "rowName": "Alisha Peña",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00030",
+        "name": "Derek Simmons",
+        "role": "A's Marketing Director",
+        "hood": "Jack London",
+        "profile": "Derek Simmons — A's Marketing Director — Jack London — C117 in Jack London: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00030",
+          "rowName": "Derek Simmons",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00031",
+        "name": "Martin Richards",
+        "role": "Third Baseman, New York Mets",
+        "hood": "Piedmont Ave",
+        "profile": "Martin Richards — Third Baseman, New York Mets — Piedmont Ave — C117 in Fruitvale: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00031",
+          "rowName": "Martin Richards",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00033",
+        "name": "John Ellis",
+        "role": "Starting Pitcher, Oakland A's",
+        "hood": "Laurel",
+        "profile": "John Ellis — Starting Pitcher, Oakland A's — Laurel — C117 in Laurel: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00033",
+          "rowName": "John Ellis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "role": "Mayor of Oakland",
+        "hood": "Rockridge",
+        "profile": "Avery Santana — Mayor of Oakland — Rockridge — C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00034",
+          "rowName": "Avery Santana",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00037",
+        "name": "Brenda Okoro",
+        "role": "Deputy Mayor (Community Affairs)",
+        "hood": "Piedmont Ave",
+        "profile": "Brenda Okoro — Deputy Mayor (Community Affairs) — Piedmont Ave — C117 in Piedmont Ave: A Piedmont Ave barbershop went quiet when they walked in and stayed quiet.",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00037",
+          "rowName": "Brenda Okoro",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00038",
+        "name": "Theo Park",
+        "role": "Communications Director",
+        "hood": "Rockridge",
+        "profile": "Theo Park — Communications Director — Rockridge — C117 in Rockridge: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00038",
+          "rowName": "Theo Park",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00039",
+        "name": "Simone Ellis",
+        "role": "Chief Legal Counsel",
+        "hood": "Lake Merritt",
+        "profile": "Simone Ellis — Chief Legal Counsel — Lake Merritt — C117 in Lake Merritt: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00039",
+          "rowName": "Simone Ellis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00040",
+        "name": "Aaron Whitfield",
+        "role": "City Manager",
+        "hood": "Rockridge",
+        "profile": "Aaron Whitfield — City Manager — Rockridge — C117 in Rockridge: An old acquaintance in Rockridge stopped them to say they are doing right by the neighborhood.",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00040",
+          "rowName": "Aaron Whitfield",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "role": "City Council District 4",
+        "hood": "Lake Merritt",
+        "profile": "Ramon Vega — City Council District 4 — Lake Merritt — C117 in Lake Merritt: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00042",
+          "rowName": "Ramon Vega",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00043",
+        "name": "Janae Rivers",
+        "role": "City Council District 5",
+        "hood": "Piedmont Ave",
+        "profile": "Janae Rivers — City Council District 5 — Piedmont Ave — C117 in Piedmont Ave: The owner of a Piedmont Ave gym said memberships filled before the sign went up.",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00043",
+          "rowName": "Janae Rivers",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00044",
+        "name": "Elliott Crane",
+        "role": "City Council District 6",
+        "hood": "Uptown",
+        "profile": "Elliott Crane — City Council District 6 — Uptown — C117 in Uptown: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00044",
+          "rowName": "Elliott Crane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00046",
+        "name": "Manny Ellen",
+        "role": "Elections Office",
+        "hood": "Lake Merritt",
+        "profile": "Manny Ellen — Elections Office — Lake Merritt — C117 in Lake Merritt: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a small park",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00046",
+          "rowName": "Manny Ellen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00047",
+        "name": "Babe Bono",
+        "role": "Redevelopment Board",
+        "hood": "Lake Merritt",
+        "profile": "Babe Bono — Redevelopment Board — Lake Merritt — C117 in Lake Merritt: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00047",
+          "rowName": "Babe Bono",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00049",
+        "name": "Pamela Amelia",
+        "role": "Audit Commission",
+        "hood": "Piedmont Ave",
+        "profile": "Pamela Amelia — Audit Commission — Piedmont Ave — C117 in Piedmont Ave: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00049",
+          "rowName": "Pamela Amelia",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "hood": "Baylight District",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District — C117 in Baylight District: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00050",
+          "rowName": "Ernesto Quintero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00051",
+        "name": "Desmond Morton",
+        "role": "Left Fielder, Oakland A's",
+        "hood": "Chinatown",
+        "profile": "Desmond Morton — Left Fielder, Oakland A's — Chinatown — C117 in Chinatown: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00051",
+          "rowName": "Desmond Morton",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00052",
+        "name": "Clark Saryan",
+        "role": "Closing Pitcher, Las Vegas Aviators (AAA)",
+        "hood": "Downtown",
+        "profile": "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA) — Downtown — C117 in Downtown: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00052",
+          "rowName": "Clark Saryan",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00053",
+        "name": "Kevin Clark",
+        "role": "Third Baseman, Oakland A's",
+        "hood": "Jack London",
+        "profile": "Kevin Clark — Third Baseman, Oakland A's — Jack London — C117 in Jack London: walked past the renderings for the Temescal Community Health Center and decided it would never look like that near the waterfront",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00053",
+          "rowName": "Kevin Clark",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00077",
+        "name": "Julio Valencia",
+        "role": "Setup/Closing Pitcher, Oakland A's",
+        "hood": "Uptown",
+        "profile": "Julio Valencia — Setup/Closing Pitcher, Oakland A's — Uptown — C117 in Uptown: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/cron-compare/staged @C117",
+          "pop": "POP-00077",
+          "rowName": "Julio Valencia",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Farrah Del Rio",
+    "popid": "POP-00161"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "Cycle 117 is a week of 'holds' with no named verifier or date. The Stabilization Fund paid out while the closeout that gates its renewal remains unverified.",
+      "angle": "Cycle 117 is a week of 'holds' with no named verifier or date. The Stabilization Fund paid out while the closeout that gates its renewal remains unverified.",
+      "hood": null,
+      "citizens": [
+        "Aaron Whitfield (POP-00040)",
+        "Brenda Okoro (POP-00037)",
+        "Elliott Crane (POP-00044)",
+        "Ramon Vega (POP-00042)"
+      ],
+      "popids": [
+        "POP-00040",
+        "POP-00037",
+        "POP-00044",
+        "POP-00042"
+      ]
+    },
+    "approach": null
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OPINION-SLICE-1",
+    "kind": "beat-opinion",
+    "seat": {
+      "slug": "farrah-del-rio",
+      "name": "Farrah Del Rio",
+      "popid": "POP-00161",
+      "desk": "civic",
+      "domain": "opinion",
+      "builder": "buildOpinionSlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-opinion",
+      "score": 100,
+      "label": "the week in Oakland, C117",
+      "hood": null,
+      "source": "output/cron-compare/staged @C117"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "the week in Oakland, C117",
+      "hookLine": "",
+      "anchorFacts": [
+        "In the Tribune this cycle: \"The Fund Paid Out in C117. The Closeout That Gates Its Renewal Is Still Unverified.\" — By Carmen Delaine | Bay Tribune Civic Ledger — opens: Marcus Webb, the OEWD program director who runs the West Oakland Stabilization Fund, put it this way for the record this cycle: \"The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries t",
+        "In the Tribune this cycle: \"Chinatown's Illness Count Is 133. The Hospital Count Is 6. The Record Can't Explain the Gap.\" — opens: The hospital side of Chinatown's record has not moved. Three residents were admitted this cycle and three left. The neighborhood opened with six in care, closed with six, and has six beds occupied. None of the six is tracked by name. The census lists them as \"other residents.\" Ci",
+        "In the Tribune this cycle: \"12th Street Added 1,962 Riders and Lost 4 Points of On-Time. The Logged Causes Don't Fully Explain It.\" — By Trevor Shimizu — opens: 12th St Oakland City Center carried 14,175 riders in Cycle 117, up 1,962 from 12,213 in Cycle 116. Its on-time performance fell from 81% to 77%. Most of the system went the other way. Lake Merritt, West Oakland and MacArthur each gained seven points. 19th Street gained three, to ",
+        "In the Tribune this cycle: \"The Lives Page, Cycle 117\" — opens: Serg Cerrano welcomed a new child into the family this cycle. Cerrano is a mover who lives in Fruitvale. The record gives no name for the baby, no date and no hour, and it does not yet say what came next.",
+        "In the Tribune this cycle: \"The A's Pay for a Closer They Already Had\" — opens: Mariano Rosales struck out 82 and walked 14 in 63.2 innings in 2041, and on the career line that is the number to hold onto. His TrueSource card works the season out to 11.6 strikeouts per nine, 2.0 walks per nine and 5.86 strikeouts per walk. Every other year on the card sits we",
+        "In the Tribune this cycle: \"UNDOCKED: Daniela Kapoor makes the route the story\" — opens: Daniela Kapoor’s Sunday-night flight put exploration in the foreground: a route across nine named systems, mining along the way, and a string of achievements whose points give the night its shape. The board’s top line, meanwhile, belongs to Marguerite Kimball-Ostrow, listed at #1",
+        "West Oakland Stabilization Fund — status passed, phase disbursement-active, budget $28M, West Oakland; next: Verify C114 closeout, then conduct Council charter-renewal consideration with scope and 23-day standard intact (due Cycle 118)",
+        "Oakland Alternative Response Initiative — status passed, phase dispatch-live, budget $12.5M, West Oakland, Fruitvale, East Oakland; next: Execute and publish the D3 Fruitvale briefing record; file written next dates for the D5 audit and Baylight feasibility review (due Cycle 118)",
+        "Fruitvale Transit Hub Phase II — Visioning — status passed, phase design-phase, budget $230M, Fruitvale; next: Deliver preliminary schematics and publish the documented Fruitvale public comment-and-response record (due Cycle 118)",
+        "Temescal Community Health Center — status passed, phase operational, budget $45M, Temescal; next: File the Q3 intake audit with HCAI and the Council Clerk; document the Telegraph & 47th merchant walkthrough (due Cycle 118)",
+        "Baylight District — Final Council Vote — status passed, phase construction-active, budget $2.1B, Jack London, Downtown; next: Conduct and publish the construction milestone review against the assembled evidence file (due Cycle 118)",
+        "Oakland Youth Apprenticeship Pipeline — status passed, phase stalled, budget $12.5M, West Oakland, East Oakland, Fruitvale; next: Publish the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale review (due Cycle 118)",
+        "Downtown Economic Revitalization — status proposed, phase stalled, budget $15M, Downtown; next: Execute and publish Uptown stabilization planning with timeline, benchmarks and committee record (due Cycle 118)",
+        "Commercial Stabilization for Grand Lake — status proposed, phase vote-scheduled, budget $2.5M, Grand Lake; next: Hold and Clerk-certify the full-council roll call with all Chen-Vega conditions (due Cycle 118)",
+        "West Oakland Tenant Defense Fund — status passed, phase operational, budget $4.2M, West Oakland; next: Publish the legal-support analysis and document the opening of tenant-defense intake (due Cycle 118)",
+        "Ivy Hill Revitalization Initiative — status proposed, phase legislation-filed, budget $2.5M, Ivy Hill; next: Complete committee referral and hearing on INIT-011 with separate records for INIT-013 and INIT-014 (due Cycle 118)",
+        "Dimond Revitalization Initiative — status proposed, phase announced, budget $2.5M, Dimond; next: File legislation (due Cycle 117)",
+        "Ivy Hill Community Revitalization — status proposed, phase stalled, budget $2M, Ivy Hill; next: Publish a distinct scope and nonduplication record before any Clerk-verified filing (due Cycle 118)",
+        "Ivy Hill Community Support Initiative — status proposed, phase vote-scheduled, budget $2.5M, Ivy Hill; next: Council review of the filed INIT-014 legislation (due Cycle 117)",
+        "Laurel Neighborhood Patch and Clean-Up — status proposed, phase announced, budget $6M, Laurel; next: Complete scope and outreach, then obtain a Clerk-verified filing reference (due Cycle 118)",
+        "Keisha Ramos (Baylight Authority Director) decided on Baylight District — Final Council Vote: Hold the construction milestone determination pending; publish the scope and basis of the C115 completed entry, the evidence-file location, remaining determination work, responsibility, and next repor",
+        "Keisha Ramos (Baylight Authority Director) decided on Jack London and Downtown improvement flags — recorded, not converted into construction findings: Note the low-severity improvement flags on the record and continue remediation, hotline, dust-control, and workforce oversight without claiming a milestone.",
+        "Denise Carter (City Council District 1) decided on West Oakland Stabilization Fund: Vote YES on Council charter-renewal consideration, contingent on verified C114 closeout, with business-and-resident scope and the 23-day standard preserved.",
+        "Denise Carter (City Council District 1) decided on West Oakland Tenant Defense Fund: Support publishing the legal-support analysis and opening tenant-defense intake this cycle, with the C116 record corrected to reflect 6-3 passage at C112 and signature.",
+        "Denise Carter (City Council District 1) decided on Oakland Youth Apprenticeship Pipeline: Require publication of the placement-gap analysis and adjustment plan this cycle with explicit West Oakland and Fruitvale review; do not claim completion or success without placement evidence.",
+        "Denise Carter (City Council District 1) decided on Oakland Alternative Response Initiative: Support executing and publishing the D3 Fruitvale briefing record and filing written next dates for the D5 audit and Baylight feasibility review; continue holding expansion until all three records exi",
+        "Denise Carter (City Council District 1) decided on Brooklyn service-audit baseline and D1 OARI evaluation — answer to Director Vance: Report that the Brooklyn service-audit baseline and the District 1 OARI evaluation remain incomplete and not citable; identify the missing records, the responsible offices, the specific assistance req",
+        "Denise Carter (City Council District 1) decided on West Oakland and Brooklyn constituents this cycle: Recognize West Oakland's improved mood and hold Brooklyn's remaining questions open with a named next date; request Director Vance's cross-department records request as the concrete deliverable.",
+        "Leonard Tran (City Council District 2) decided on Baylight construction milestone evidence review: Conduct and publish the scheduled review against the assembled evidence file; declare no milestone passed unless the evidence supports it, and continue oversight.",
+        "Leonard Tran (City Council District 2) decided on Uptown stabilization execution and Downtown committee decision: Require a published, executable Uptown stabilization plan with a concrete timeline and Ashford benchmarks, seek a recorded committee decision, and keep the $15 million authorization pending; if delive",
+        "Leonard Tran (City Council District 2) decided on D2 neighborhood conditions and civic life: Recognize the positive activity in Downtown and Jack London, attend to Chinatown's flat mood and Baylight's slow trade, and seek practical follow-through for neighborhood businesses without declaring ",
+        "Rose Delgado (City Council District 3) decided on Oakland Alternative Response Initiative: Hold expansion; require execution and publication of the D3 Fruitvale briefing record with the actual date, venue, notice dates, accessibility and participation arrangements, and the district and Frui",
+        "Rose Delgado (City Council District 3) decided on Fruitvale Transit Hub Phase II — Visioning: Hold further design advancement at the C86 authorization; require the contracted design consultant to deliver preliminary schematics and conduct a documented Fruitvale community review this cycle, wit",
+        "Rose Delgado (City Council District 3) decided on Oakland Youth Apprenticeship Pipeline: Require the placement-gap analysis and adjustment plan with explicit Fruitvale and West Oakland review to be published this cycle, and record implementation as stalled until that publication exists.",
+        "Rose Delgado (City Council District 3) decided on San Antonio commercial blocks — next public update and district investment: Hold San Antonio commercial blocks as an active district matter, with the next public update and a named district office point of contact rather than a footnote.",
+        "Ramon Vega (City Council District 4) decided on Ivy Hill Revitalization Initiative committee referral and hearing: Support committee referral and a hearing this cycle on the ordinance recorded as filed at C113, with separate records for INIT-011, INIT-013, and INIT-014.",
+        "Ramon Vega (City Council District 4) decided on Dimond Revitalization Initiative filing: Support completing and submitting the announced $2.5 million ordinance this cycle, with filing claimed only after Clerk verification.",
+        "Ramon Vega (City Council District 4) decided on Ivy Hill Community Revitalization filing: Hold INIT-013 and let this filing deadline pass until its distinct scope and nonduplication with INIT-011 and INIT-014 are documented.",
+        "Ramon Vega (City Council District 4) decided on Ivy Hill Community Support Initiative filing verification: Withhold Council review or a vote until the Clerk provides a filing reference or confirms no filing, and the basis for the tracker disposition is documented.",
+        "Ramon Vega (City Council District 4) decided on Glenview meeting findings and public-works follow-through: Seek the documented conclusions of the Glenview civic response meeting, work performed, remaining issues, responsible department, and next update date.",
+        "Ramon Vega (City Council District 4) decided on Dimond community response, missed pickup, and civic life: Support a factual public record and next steps for the Dimond briefing; request confirmation of the missed pickup's recovery status and any remaining service step.",
+        "Ramon Vega (City Council District 4) decided on Ivy Hill conditions and business closure: Keep attention on Ivy Hill's mixed conditions and seek an account of any available city support for the closing business, without promising an outcome or adding a duplicative initiative.",
+        "Ramon Vega (City Council District 4) decided on Complaint-response crosswalk and corrected C116 claims: Support a Clerk-checked crosswalk that identifies missing complaint coverage and fields rather than supplying unsupported details.",
+        "Janae Rivers (City Council District 5) decided on Oakland Alternative Response Initiative: Hold expansion of the Oakland Alternative Response Initiative: require execution and publication of the D3 Fruitvale briefing record and a written next date for the D5 audit and Baylight feasibility r",
+        "Janae Rivers (City Council District 5) decided on Oakland Youth Apprenticeship Pipeline: Require publication this cycle of an inspectable placement-gap analysis and adjustment plan that separately identifies West Oakland and Fruitvale placement reach, documented gaps, specific corrections",
+        "Janae Rivers (City Council District 5) decided on East Oakland constituents — complaint crosswalk and community life: Carry East Oakland's complaint into the Clerk-checked crosswalk with a named office and a next date, and hold the Masjid An-Nur Oakland community grief gathering visible as city life — with attention ",
+        "Elliott Crane (City Council District 6) decided on Piedmont Avenue Health Response and Baseline Municipal Oversight: Direct the responsible public health authorities to publish an evidence-based update and schedule a public briefing on the Piedmont Avenue health spike without creating new administrative bureaucracy.",
+        "Elliott Crane (City Council District 6) decided on Grand Lake Commercial Stabilization Roll Call: Vote YES on Commercial Stabilization for Grand Lake with all Chen-Vega audit milestones and reporting conditions intact.",
+        "Elliott Crane (City Council District 6) decided on West Oakland Stabilization Fund Charter Renewal: Require verified C114 closeout accounting and audit documentation before scheduling any Council vote on charter renewal.",
+        "Warren Ashford (City Council District 7) decided on Temescal Community Health Center Q3 Clinical Intake Audit and Merchant Verification: Condition certification of ongoing operational oversight on verified filing of the Q3 clinical intake audit with HCAI and the Council Clerk, and completion of the Telegraph & 47th merchant walkthrough",
+        "Warren Ashford (City Council District 7) decided on Municipal Response and Structural Inspection Following KONO Fire: Direct Planning and Building to complete standard structural safety inspections and require Finance to account for emergency deployment costs without off-budget commercial subsidies.",
+        "Warren Ashford (City Council District 7) decided on Grand Lake Commercial Stabilization Roll Call with Chen-Vega Audit Triggers: Vote YES on INIT-009 roll call strictly contingent upon retaining all Chen-Vega milestone and audit conditions certified by the Clerk.",
+        "Nina Chen (City Council District 8) decided on Commercial Stabilization for Grand Lake Roll Call: Vote YES on the full-council roll call with Chen-Vega milestone and audit conditions intact, withholding any claim of enactment until certification by the City Clerk.",
+        "Nina Chen (City Council District 8) decided on Eastlake Service Authorizations and District Complaint Docket Reconciliation: Confirm Eastlake baseline maintenance allocations remain unauthorized pending Public Works docketing, and order an official Clerk-verified complaint reconciliation identifying missing case records acr",
+        "Bobby Chen-Ramirez (Health Center Project Director) decided on Temescal Community Health Center: File the Q3 clinical intake audit with HCAI and the Council Clerk this cycle, on the standing quarterly schedule established at C115.",
+        "Bobby Chen-Ramirez (Health Center Project Director) decided on Temescal Community Health Center: Complete and document the recurring Telegraph & 47th merchant-clinic verification walkthrough this cycle, with shopkeepers and front-desk staff walking the building together.",
+        "Bobby Chen-Ramirez (Health Center Project Director) decided on Temescal Community Health Center: Hold the working-door test front and center through Q3: the audit and walkthrough are measured against whether someone can actually get here without two buses.",
+        "Avery Santana (Mayor) decided on West Oakland Stabilization Fund closeout and charter renewal: Carry forward closeout verification and Council consideration; support renewal only after verified C114 closeout, preserving the business-and-resident scope and 23-day standard.",
+        "Avery Santana (Mayor) decided on Alternative Response expansion hold and Fruitvale briefing record: Hold expansion; require a complete published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review.",
+        "Avery Santana (Mayor) decided on Fruitvale Transit Hub schematics and community review: Hold further design advancement until preliminary schematics and a documented Fruitvale public comment-and-response record are delivered and published.",
+        "Avery Santana (Mayor) decided on Temescal Health Center oversight certification: Keep the center operational while withholding oversight certification until the Q3 audit filing and merchant walkthrough are verified and documented.",
+        "Avery Santana (Mayor) decided on Baylight construction milestone evidence review: Declare no milestone passed; direct completion and publication of the evidence-file review while all remediation, hotline, dust-control and workforce oversight continues.",
+        "Avery Santana (Mayor) decided on Youth Apprenticeship placement-gap accountability: Keep the initiative stalled pending publication of the placement-gap analysis and adjustment plan, including explicit West Oakland and Fruitvale review.",
+        "Avery Santana (Mayor) decided on Downtown revitalization and Uptown planning stall: Record INIT-008 as stalled because Uptown planning execution is not evidenced; keep the $15 million authorization pending and require a complete public planning record.",
+        "Avery Santana (Mayor) decided on Grand Lake full-council decision and Clerk certification: Back YES with every Chen-Vega condition, keep the measure vote-scheduled, and request a completed Clerk-certified roll call before claiming any outcome.",
+        "Avery Santana (Mayor) decided on West Oakland tenant-defense implementation and record correction: Move forward on the corrected C112 implementation record, requiring publication of the legal-support analysis and documented intake opening without another committee vote.",
+        "Avery Santana (Mayor) decided on Ivy Hill ordinance referral and committee hearing: Support committee referral and a hearing on the C113-filed ordinance while claiming no completed referral or hearing and keeping all Ivy Hill records separate.",
+        "Avery Santana (Mayor) decided on Dimond legislation deadline and honest stall: Record the missed filing deadline and move INIT-012 to stalled pending completed drafting, documented outreach and Clerk verification.",
+        "Avery Santana (Mayor) decided on Duplicative Ivy Hill filing hold: Move INIT-013 to stalled rather than file a duplicative measure; require a distinct scope and nonduplication record before any filing.",
+        "Avery Santana (Mayor) decided on Complaint-response crosswalk and INIT-014 record correction: Under promises P-d94459ae1189b667 and P-b87ef751a66c370d, direct an eleven-case source-record crosswalk and hold INIT-014 as stalled pending Clerk-backed filing and tracker reconciliation.",
+        "Avery Santana (Mayor) decided on Laurel cleanup scope, outreach and filing hold: Keep INIT-015 announced and carry forward the unfinished scope, outreach and Clerk-verified filing without claiming authorization or implementation.",
+        "Avery Santana (Mayor) decided on Neighborhood conditions, Dimond briefing and civic life: Request the Dimond Emergency Town Briefing record and factual next steps while recognizing faith-community responses and neighborhood conditions without inventing incident details or new programs.",
+        "Avery Santana (Mayor) decided on Dimond community response and Oakland civic life: Use the Dimond Emergency Town Briefing to establish a public factual record and next steps, without speculating about causes or linking separate faith-community responses; keep neighborhood gatherings",
+        "Avery Santana (Mayor) decided on Complaint-response crosswalk and corrected C116 claims: Require a Clerk-checked crosswalk this cycle covering every complaint in the C116 office evidence; because the C117 packet supplies no complaint-level docket list, missing coverage, references, office",
+        "Avery Santana (Mayor) decided on C114 closeout verification and West Oakland charter renewal: Place C114 closeout verification and Council charter-renewal consideration on this cycle's calendar; preserve business-and-resident scope and the 23-day standard, with no renewal claimed before verifi",
+        "Avery Santana (Mayor) decided on Fruitvale briefing, East Oakland audit, and Baylight feasibility record: Direct execution and publication of the D3 Fruitvale briefing record this cycle and written next dates for the D5 audit and Baylight feasibility review; expansion remains held pending all three record",
+        "Avery Santana (Mayor) decided on Schematics delivery and documented Fruitvale design review: Require the contracted design consultant to deliver preliminary schematics and conduct a documented Fruitvale community review this cycle; hold further design advancement until a public comment-and-re",
+        "Avery Santana (Mayor) decided on Q3 intake audit and Telegraph and 47th merchant oversight: Require the Q3 intake audit filing with HCAI and the Council Clerk and a documented Telegraph & 47th merchant walkthrough this cycle; operational oversight remains uncertified until both are recorded.",
+        "Avery Santana (Mayor) decided on Baylight construction milestone evidence review: Conduct and publish the construction milestone review against the assembled evidence file, declaring no pass unless the remediation, hotline, dust-control, and workforce evidence supports it; oversigh",
+        "Avery Santana (Mayor) decided on Placement-gap analysis and apprenticeship adjustment plan: Require publication of the placement-gap analysis and adjustment plan this cycle, with explicit West Oakland and Fruitvale reviews; implementation continues without claims of completion or success uns",
+        "Avery Santana (Mayor) decided on Uptown stabilization execution and Downtown committee decision: Require a published, executable Uptown stabilization plan with a concrete timeline and Ashford benchmarks, seek a recorded committee decision, keep the $15 million authorization pending, and accept a ",
+        "Avery Santana (Mayor) decided on Grand Lake full-council roll call with Chen-Vega conditions: Ask the full Council to hold its roll call this cycle with every Chen-Vega milestone and audit condition intact and the Clerk certifying the result; maintain a YES position without claiming an outcome",
+        "Avery Santana (Mayor) decided on Tenant-defense implementation and C112 record correction: Publish the legal-support analysis and open tenant-defense intake this cycle, correcting the prior procedural framing to reflect the fund's 6-3 passage at C112 and signature; no committee decision rem",
+        "Avery Santana (Mayor) decided on Ivy Hill ordinance referral and committee hearing: Seek committee referral and a hearing this cycle on the ordinance recorded as filed at C113, with a record distinguishing INIT-011 from INIT-013 and INIT-014 and no funding or passage claimed in advan",
+        "Avery Santana (Mayor) decided on Dimond legislation filing deadline: Direct completion and submission of the $2.5 million ordinance this cycle, document the Dimond Emergency Town Briefing as community input, require Clerk verification before claiming filing, and acknow",
+        "Avery Santana (Mayor) decided on Hold on duplicative Ivy Hill Community Revitalization filing: Hold INIT-013 and let this filing deadline pass rather than submit an overlapping measure; require a distinct scope and nonduplication crosswalk against INIT-011 and INIT-014 before any future Clerk s",
+        "Avery Santana (Mayor) decided on INIT-014 filing verification and tracker-disposition reconciliation: State explicitly that filing remains unverified and withdraw any completed-filing implication; withhold a mayoral request for Council review or a vote until a Clerk reference or no-filing confirmation",
+        "Avery Santana (Mayor) decided on Laurel cleanup scope, outreach, and filing hold: Hold INIT-015 in announced status and let this filing deadline pass because finished scope and outreach records are absent; complete both before any Clerk submission, with no filing or $6 million auth",
+        "Vanessa Tran-Muñoz (OARI Program Director) decided on Oakland Alternative Response Initiative: Hold expansion; publish the executed D3 Fruitvale briefing record in a public, inspectable location with district-level and Fruitvale data references, participation arrangements, and notice dates pres",
+        "Vanessa Tran-Muñoz (OARI Program Director) decided on Oakland Alternative Response Initiative: File written next dates with the Clerk for the D5 audit and the Baylight feasibility review this cycle, replacing open-ended status with dated commitments, while expansion remains held",
+        "Vanessa Tran-Muñoz (OARI Program Director) decided on Constituents — West Oakland calm and East Oakland grief, what the crews see on the ground: Carry the D1 and D5 operational presence forward without expansion, keeping evening and weekend bilingual coverage running while the records are assembled",
+        "Brenda Okoro (Deputy Mayor (Community)) decided on West Oakland Stabilization Fund: Hold the C114 closeout verification and Council charter-renewal consideration on this cycle's calendar; no renewal claimed before verification and Council action, with business-and-resident scope and ",
+        "Brenda Okoro (Deputy Mayor (Community)) decided on Commercial Stabilization for Grand Lake: Hold and certify the full-council roll call with all Chen-Vega milestone and audit conditions intact; maintain a YES position without claiming an outcome.",
+        "Brenda Okoro (Deputy Mayor (Community)) decided on Dimond Revitalization Initiative: Support the Dimond Emergency Town Briefing as the public factual record and next steps for the culture spike, without speculating on causes or linking the separate faith-community responses; commit to",
+        "Brenda Okoro (Deputy Mayor (Community)) decided on Laurel Neighborhood Patch and Clean-Up: Let the Laurel filing deadline pass with INIT-015 held in announced status and let the duplicative Ivy Hill filing (INIT-013) pass rather than submit an overlapping measure; no filing or authorization",
+        "Marcus Webb (OEWD Program Director (Stabilization Fund)) decided on West Oakland Stabilization Fund: Hold the queue at the 23-day standard while the Council takes up the verified C114 closeout and charter renewal; no renewal claimed before the roll call.",
+        "Marcus Webb (OEWD Program Director (Stabilization Fund)) decided on Commercial Stabilization for Grand Lake: Hold and certify the full-council roll call with every Chen-Vega milestone and audit condition attached; maintain a YES position without claiming the outcome.",
+        "Marcus Webb (OEWD Program Director (Stabilization Fund)) decided on West Oakland Stabilization Fund: Keep the queue at the 23-day standard and publish the hearing record as the proof; next authorization batch goes to the Deputy Mayor's desk.",
+        "Elena Soria Dominguez (Transit Hub Planning Lead) decided on INIT-003 complete-entry versus open design review — where the unfinished work lives: Hold further design advancement at the C86 authorization; treat the INIT-003 'complete' tracker entry as closing the visioning and council-authorization history only; keep the comment-and-response rec",
+        "Elena Soria Dominguez (Transit Hub Planning Lead) decided on Fruitvale answer desk and the public comment log: Keep the answer desk and numbered comment log staffed at the Chavez branch this cycle, logging every comment in the language it came in and committing to a written answer with a date before the drawin"
+      ],
+      "evidence": [
+        {
+          "text": "In the Tribune this cycle: \"The Fund Paid Out in C117. The Closeout That Gates Its Renewal Is Still Unverified.\" — By Carmen Delaine | Bay Tribune Civic Ledger — opens: Marcus Webb, the OEWD program director who runs the West Oakland Stabilization Fund, put it this way for the record this cycle: \"The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries t",
+          "src": "output/cron-compare/staged/civic_c117_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+        },
+        {
+          "text": "In the Tribune this cycle: \"Chinatown's Illness Count Is 133. The Hospital Count Is 6. The Record Can't Explain the Gap.\" — opens: The hospital side of Chinatown's record has not moved. Three residents were admitted this cycle and three left. The neighborhood opened with six in care, closed with six, and has six beds occupied. None of the six is tracked by name. The census lists them as \"other residents.\" Ci",
+          "src": "output/cron-compare/staged/civic_c117_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+        },
+        {
+          "text": "In the Tribune this cycle: \"12th Street Added 1,962 Riders and Lost 4 Points of On-Time. The Logged Causes Don't Fully Explain It.\" — By Trevor Shimizu — opens: 12th St Oakland City Center carried 14,175 riders in Cycle 117, up 1,962 from 12,213 in Cycle 116. Its on-time performance fell from 81% to 77%. Most of the system went the other way. Lake Merritt, West Oakland and MacArthur each gained seven points. 19th Street gained three, to ",
+          "src": "output/cron-compare/staged/civic_c117_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+        },
+        {
+          "text": "In the Tribune this cycle: \"The Lives Page, Cycle 117\" — opens: Serg Cerrano welcomed a new child into the family this cycle. Cerrano is a mover who lives in Fruitvale. The record gives no name for the baby, no date and no hour, and it does not yet say what came next.",
+          "src": "output/cron-compare/staged/culture_c117_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+        },
+        {
+          "text": "In the Tribune this cycle: \"The A's Pay for a Closer They Already Had\" — opens: Mariano Rosales struck out 82 and walked 14 in 63.2 innings in 2041, and on the career line that is the number to hold onto. His TrueSource card works the season out to 11.6 strikeouts per nine, 2.0 walks per nine and 5.86 strikeouts per walk. Every other year on the card sits we",
+          "src": "output/cron-compare/staged/sports_c117_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+        },
+        {
+          "text": "In the Tribune this cycle: \"UNDOCKED: Daniela Kapoor makes the route the story\" — opens: Daniela Kapoor’s Sunday-night flight put exploration in the foreground: a route across nine named systems, mining along the way, and a string of achievements whose points give the night its shape. The board’s top line, meanwhile, belongs to Marguerite Kimball-Ostrow, listed at #1",
+          "src": "output/cron-compare/staged/undocked_c117_nia-rook_packet-v2_openai-gpt-6-luna.staged.md"
+        },
+        {
+          "text": "West Oakland Stabilization Fund — status passed, phase disbursement-active, budget $28M, West Oakland; next: Verify C114 closeout, then conduct Council charter-renewal consideration with scope and 23-day standard intact (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-001 @C117"
+        },
+        {
+          "text": "Oakland Alternative Response Initiative — status passed, phase dispatch-live, budget $12.5M, West Oakland, Fruitvale, East Oakland; next: Execute and publish the D3 Fruitvale briefing record; file written next dates for the D5 audit and Baylight feasibility review (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-002 @C117"
+        },
+        {
+          "text": "Fruitvale Transit Hub Phase II — Visioning — status passed, phase design-phase, budget $230M, Fruitvale; next: Deliver preliminary schematics and publish the documented Fruitvale public comment-and-response record (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-003 @C117"
+        },
+        {
+          "text": "Temescal Community Health Center — status passed, phase operational, budget $45M, Temescal; next: File the Q3 intake audit with HCAI and the Council Clerk; document the Telegraph & 47th merchant walkthrough (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-005 @C117"
+        },
+        {
+          "text": "Baylight District — Final Council Vote — status passed, phase construction-active, budget $2.1B, Jack London, Downtown; next: Conduct and publish the construction milestone review against the assembled evidence file (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-006 @C117"
+        },
+        {
+          "text": "Oakland Youth Apprenticeship Pipeline — status passed, phase stalled, budget $12.5M, West Oakland, East Oakland, Fruitvale; next: Publish the placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale review (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-007 @C117"
+        },
+        {
+          "text": "Downtown Economic Revitalization — status proposed, phase stalled, budget $15M, Downtown; next: Execute and publish Uptown stabilization planning with timeline, benchmarks and committee record (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-008 @C117"
+        },
+        {
+          "text": "Commercial Stabilization for Grand Lake — status proposed, phase vote-scheduled, budget $2.5M, Grand Lake; next: Hold and Clerk-certify the full-council roll call with all Chen-Vega conditions (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-009 @C117"
+        },
+        {
+          "text": "West Oakland Tenant Defense Fund — status passed, phase operational, budget $4.2M, West Oakland; next: Publish the legal-support analysis and document the opening of tenant-defense intake (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-010 @C117"
+        },
+        {
+          "text": "Ivy Hill Revitalization Initiative — status proposed, phase legislation-filed, budget $2.5M, Ivy Hill; next: Complete committee referral and hearing on INIT-011 with separate records for INIT-013 and INIT-014 (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-011 @C117"
+        },
+        {
+          "text": "Dimond Revitalization Initiative — status proposed, phase announced, budget $2.5M, Dimond; next: File legislation (due Cycle 117)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-012 @C117"
+        },
+        {
+          "text": "Ivy Hill Community Revitalization — status proposed, phase stalled, budget $2M, Ivy Hill; next: Publish a distinct scope and nonduplication record before any Clerk-verified filing (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-013 @C117"
+        },
+        {
+          "text": "Ivy Hill Community Support Initiative — status proposed, phase vote-scheduled, budget $2.5M, Ivy Hill; next: Council review of the filed INIT-014 legislation (due Cycle 117)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-014 @C117"
+        },
+        {
+          "text": "Laurel Neighborhood Patch and Clean-Up — status proposed, phase announced, budget $6M, Laurel; next: Complete scope and outreach, then obtain a Clerk-verified filing reference (due Cycle 118)",
+          "src": "output/beats/Initiative_Tracker.jsonl INIT-015 @C117"
+        },
+        {
+          "text": "Keisha Ramos (Baylight Authority Director) decided on Baylight District — Final Council Vote: Hold the construction milestone determination pending; publish the scope and basis of the C115 completed entry, the evidence-file location, remaining determination work, responsibility, and next repor",
+          "src": "output/civic-voice/baylight_authority_c117.json STMT-117-baylight_authority-001"
+        },
+        {
+          "text": "Keisha Ramos (Baylight Authority Director) decided on Jack London and Downtown improvement flags — recorded, not converted into construction findings: Note the low-severity improvement flags on the record and continue remediation, hotline, dust-control, and workforce oversight without claiming a milestone.",
+          "src": "output/civic-voice/baylight_authority_c117.json STMT-117-baylight_authority-002"
+        },
+        {
+          "text": "Denise Carter (City Council District 1) decided on West Oakland Stabilization Fund: Vote YES on Council charter-renewal consideration, contingent on verified C114 closeout, with business-and-resident scope and the 23-day standard preserved.",
+          "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-001"
+        },
+        {
+          "text": "Denise Carter (City Council District 1) decided on West Oakland Tenant Defense Fund: Support publishing the legal-support analysis and opening tenant-defense intake this cycle, with the C116 record corrected to reflect 6-3 passage at C112 and signature.",
+          "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-002"
+        },
+        {
+          "text": "Denise Carter (City Council District 1) decided on Oakland Youth Apprenticeship Pipeline: Require publication of the placement-gap analysis and adjustment plan this cycle with explicit West Oakland and Fruitvale review; do not claim completion or success without placement evidence.",
+          "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-003"
+        },
+        {
+          "text": "Denise Carter (City Council District 1) decided on Oakland Alternative Response Initiative: Support executing and publishing the D3 Fruitvale briefing record and filing written next dates for the D5 audit and Baylight feasibility review; continue holding expansion until all three records exi",
+          "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-004"
+        },
+        {
+          "text": "Denise Carter (City Council District 1) decided on Brooklyn service-audit baseline and D1 OARI evaluation — answer to Director Vance: Report that the Brooklyn service-audit baseline and the District 1 OARI evaluation remain incomplete and not citable; identify the missing records, the responsible offices, the specific assistance req",
+          "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-005"
+        },
+        {
+          "text": "Denise Carter (City Council District 1) decided on West Oakland and Brooklyn constituents this cycle: Recognize West Oakland's improved mood and hold Brooklyn's remaining questions open with a named next date; request Director Vance's cross-department records request as the concrete deliverable.",
+          "src": "output/civic-voice/council_d1_c117.json STMT-117-council_d1-006"
+        },
+        {
+          "text": "Leonard Tran (City Council District 2) decided on Baylight construction milestone evidence review: Conduct and publish the scheduled review against the assembled evidence file; declare no milestone passed unless the evidence supports it, and continue oversight.",
+          "src": "output/civic-voice/council_d2_c117.json STMT-117-council_d2-001"
+        },
+        {
+          "text": "Leonard Tran (City Council District 2) decided on Uptown stabilization execution and Downtown committee decision: Require a published, executable Uptown stabilization plan with a concrete timeline and Ashford benchmarks, seek a recorded committee decision, and keep the $15 million authorization pending; if delive",
+          "src": "output/civic-voice/council_d2_c117.json STMT-117-council_d2-002"
+        },
+        {
+          "text": "Leonard Tran (City Council District 2) decided on D2 neighborhood conditions and civic life: Recognize the positive activity in Downtown and Jack London, attend to Chinatown's flat mood and Baylight's slow trade, and seek practical follow-through for neighborhood businesses without declaring ",
+          "src": "output/civic-voice/council_d2_c117.json STMT-117-council_d2-003"
+        },
+        {
+          "text": "Rose Delgado (City Council District 3) decided on Oakland Alternative Response Initiative: Hold expansion; require execution and publication of the D3 Fruitvale briefing record with the actual date, venue, notice dates, accessibility and participation arrangements, and the district and Frui",
+          "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-001"
+        },
+        {
+          "text": "Rose Delgado (City Council District 3) decided on Fruitvale Transit Hub Phase II — Visioning: Hold further design advancement at the C86 authorization; require the contracted design consultant to deliver preliminary schematics and conduct a documented Fruitvale community review this cycle, wit",
+          "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-002"
+        },
+        {
+          "text": "Rose Delgado (City Council District 3) decided on Oakland Youth Apprenticeship Pipeline: Require the placement-gap analysis and adjustment plan with explicit Fruitvale and West Oakland review to be published this cycle, and record implementation as stalled until that publication exists.",
+          "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-003"
+        },
+        {
+          "text": "Rose Delgado (City Council District 3) decided on San Antonio commercial blocks — next public update and district investment: Hold San Antonio commercial blocks as an active district matter, with the next public update and a named district office point of contact rather than a footnote.",
+          "src": "output/civic-voice/council_d3_c117.json STMT-117-council_d3-004"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4) decided on Ivy Hill Revitalization Initiative committee referral and hearing: Support committee referral and a hearing this cycle on the ordinance recorded as filed at C113, with separate records for INIT-011, INIT-013, and INIT-014.",
+          "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-001"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4) decided on Dimond Revitalization Initiative filing: Support completing and submitting the announced $2.5 million ordinance this cycle, with filing claimed only after Clerk verification.",
+          "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-002"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4) decided on Ivy Hill Community Revitalization filing: Hold INIT-013 and let this filing deadline pass until its distinct scope and nonduplication with INIT-011 and INIT-014 are documented.",
+          "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-003"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4) decided on Ivy Hill Community Support Initiative filing verification: Withhold Council review or a vote until the Clerk provides a filing reference or confirms no filing, and the basis for the tracker disposition is documented.",
+          "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-004"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4) decided on Glenview meeting findings and public-works follow-through: Seek the documented conclusions of the Glenview civic response meeting, work performed, remaining issues, responsible department, and next update date.",
+          "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-005"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4) decided on Dimond community response, missed pickup, and civic life: Support a factual public record and next steps for the Dimond briefing; request confirmation of the missed pickup's recovery status and any remaining service step.",
+          "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-006"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4) decided on Ivy Hill conditions and business closure: Keep attention on Ivy Hill's mixed conditions and seek an account of any available city support for the closing business, without promising an outcome or adding a duplicative initiative.",
+          "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-007"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4) decided on Complaint-response crosswalk and corrected C116 claims: Support a Clerk-checked crosswalk that identifies missing complaint coverage and fields rather than supplying unsupported details.",
+          "src": "output/civic-voice/council_d4_c117.json STMT-117-council_d4-008"
+        },
+        {
+          "text": "Janae Rivers (City Council District 5) decided on Oakland Alternative Response Initiative: Hold expansion of the Oakland Alternative Response Initiative: require execution and publication of the D3 Fruitvale briefing record and a written next date for the D5 audit and Baylight feasibility r",
+          "src": "output/civic-voice/council_d5_c117.json STMT-117-council_d5-001"
+        },
+        {
+          "text": "Janae Rivers (City Council District 5) decided on Oakland Youth Apprenticeship Pipeline: Require publication this cycle of an inspectable placement-gap analysis and adjustment plan that separately identifies West Oakland and Fruitvale placement reach, documented gaps, specific corrections",
+          "src": "output/civic-voice/council_d5_c117.json STMT-117-council_d5-002"
+        },
+        {
+          "text": "Janae Rivers (City Council District 5) decided on East Oakland constituents — complaint crosswalk and community life: Carry East Oakland's complaint into the Clerk-checked crosswalk with a named office and a next date, and hold the Masjid An-Nur Oakland community grief gathering visible as city life — with attention ",
+          "src": "output/civic-voice/council_d5_c117.json STMT-117-council_d5-003"
+        },
+        {
+          "text": "Elliott Crane (City Council District 6) decided on Piedmont Avenue Health Response and Baseline Municipal Oversight: Direct the responsible public health authorities to publish an evidence-based update and schedule a public briefing on the Piedmont Avenue health spike without creating new administrative bureaucracy.",
+          "src": "output/civic-voice/council_d6_c117.json STMT-117-council_d6-001"
+        },
+        {
+          "text": "Elliott Crane (City Council District 6) decided on Grand Lake Commercial Stabilization Roll Call: Vote YES on Commercial Stabilization for Grand Lake with all Chen-Vega audit milestones and reporting conditions intact.",
+          "src": "output/civic-voice/council_d6_c117.json STMT-117-council_d6-002"
+        },
+        {
+          "text": "Elliott Crane (City Council District 6) decided on West Oakland Stabilization Fund Charter Renewal: Require verified C114 closeout accounting and audit documentation before scheduling any Council vote on charter renewal.",
+          "src": "output/civic-voice/council_d6_c117.json STMT-117-council_d6-003"
+        },
+        {
+          "text": "Warren Ashford (City Council District 7) decided on Temescal Community Health Center Q3 Clinical Intake Audit and Merchant Verification: Condition certification of ongoing operational oversight on verified filing of the Q3 clinical intake audit with HCAI and the Council Clerk, and completion of the Telegraph & 47th merchant walkthrough",
+          "src": "output/civic-voice/council_d7_c117.json STMT-117-council_d7-001"
+        },
+        {
+          "text": "Warren Ashford (City Council District 7) decided on Municipal Response and Structural Inspection Following KONO Fire: Direct Planning and Building to complete standard structural safety inspections and require Finance to account for emergency deployment costs without off-budget commercial subsidies.",
+          "src": "output/civic-voice/council_d7_c117.json STMT-117-council_d7-002"
+        },
+        {
+          "text": "Warren Ashford (City Council District 7) decided on Grand Lake Commercial Stabilization Roll Call with Chen-Vega Audit Triggers: Vote YES on INIT-009 roll call strictly contingent upon retaining all Chen-Vega milestone and audit conditions certified by the Clerk.",
+          "src": "output/civic-voice/council_d7_c117.json STMT-117-council_d7-003"
+        },
+        {
+          "text": "Nina Chen (City Council District 8) decided on Commercial Stabilization for Grand Lake Roll Call: Vote YES on the full-council roll call with Chen-Vega milestone and audit conditions intact, withholding any claim of enactment until certification by the City Clerk.",
+          "src": "output/civic-voice/council_d8_c117.json STMT-117-council_d8-001"
+        },
+        {
+          "text": "Nina Chen (City Council District 8) decided on Eastlake Service Authorizations and District Complaint Docket Reconciliation: Confirm Eastlake baseline maintenance allocations remain unauthorized pending Public Works docketing, and order an official Clerk-verified complaint reconciliation identifying missing case records acr",
+          "src": "output/civic-voice/council_d8_c117.json STMT-117-council_d8-002"
+        },
+        {
+          "text": "Bobby Chen-Ramirez (Health Center Project Director) decided on Temescal Community Health Center: File the Q3 clinical intake audit with HCAI and the Council Clerk this cycle, on the standing quarterly schedule established at C115.",
+          "src": "output/civic-voice/health_center_c117.json STMT-117-health_center-001"
+        },
+        {
+          "text": "Bobby Chen-Ramirez (Health Center Project Director) decided on Temescal Community Health Center: Complete and document the recurring Telegraph & 47th merchant-clinic verification walkthrough this cycle, with shopkeepers and front-desk staff walking the building together.",
+          "src": "output/civic-voice/health_center_c117.json STMT-117-health_center-002"
+        },
+        {
+          "text": "Bobby Chen-Ramirez (Health Center Project Director) decided on Temescal Community Health Center: Hold the working-door test front and center through Q3: the audit and walkthrough are measured against whether someone can actually get here without two buses.",
+          "src": "output/civic-voice/health_center_c117.json STMT-117-health_center-003"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on West Oakland Stabilization Fund closeout and charter renewal: Carry forward closeout verification and Council consideration; support renewal only after verified C114 closeout, preserving the business-and-resident scope and 23-day standard.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-001"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Alternative Response expansion hold and Fruitvale briefing record: Hold expansion; require a complete published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-002"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Fruitvale Transit Hub schematics and community review: Hold further design advancement until preliminary schematics and a documented Fruitvale public comment-and-response record are delivered and published.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-003"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Temescal Health Center oversight certification: Keep the center operational while withholding oversight certification until the Q3 audit filing and merchant walkthrough are verified and documented.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-004"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Baylight construction milestone evidence review: Declare no milestone passed; direct completion and publication of the evidence-file review while all remediation, hotline, dust-control and workforce oversight continues.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-005"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Youth Apprenticeship placement-gap accountability: Keep the initiative stalled pending publication of the placement-gap analysis and adjustment plan, including explicit West Oakland and Fruitvale review.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-006"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Downtown revitalization and Uptown planning stall: Record INIT-008 as stalled because Uptown planning execution is not evidenced; keep the $15 million authorization pending and require a complete public planning record.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-007"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Grand Lake full-council decision and Clerk certification: Back YES with every Chen-Vega condition, keep the measure vote-scheduled, and request a completed Clerk-certified roll call before claiming any outcome.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-008"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on West Oakland tenant-defense implementation and record correction: Move forward on the corrected C112 implementation record, requiring publication of the legal-support analysis and documented intake opening without another committee vote.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-009"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Ivy Hill ordinance referral and committee hearing: Support committee referral and a hearing on the C113-filed ordinance while claiming no completed referral or hearing and keeping all Ivy Hill records separate.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-010"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Dimond legislation deadline and honest stall: Record the missed filing deadline and move INIT-012 to stalled pending completed drafting, documented outreach and Clerk verification.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-011"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Duplicative Ivy Hill filing hold: Move INIT-013 to stalled rather than file a duplicative measure; require a distinct scope and nonduplication record before any filing.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-012"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Complaint-response crosswalk and INIT-014 record correction: Under promises P-d94459ae1189b667 and P-b87ef751a66c370d, direct an eleven-case source-record crosswalk and hold INIT-014 as stalled pending Clerk-backed filing and tracker reconciliation.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-013"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Laurel cleanup scope, outreach and filing hold: Keep INIT-015 announced and carry forward the unfinished scope, outreach and Clerk-verified filing without claiming authorization or implementation.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-014"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Neighborhood conditions, Dimond briefing and civic life: Request the Dimond Emergency Town Briefing record and factual next steps while recognizing faith-community responses and neighborhood conditions without inventing incident details or new programs.",
+          "src": "output/civic-voice/mayor_gavel_c117.json STMT-117-mayor_gavel-015"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Dimond community response and Oakland civic life: Use the Dimond Emergency Town Briefing to establish a public factual record and next steps, without speculating about causes or linking separate faith-community responses; keep neighborhood gatherings",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-001"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Complaint-response crosswalk and corrected C116 claims: Require a Clerk-checked crosswalk this cycle covering every complaint in the C116 office evidence; because the C117 packet supplies no complaint-level docket list, missing coverage, references, office",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-002"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on C114 closeout verification and West Oakland charter renewal: Place C114 closeout verification and Council charter-renewal consideration on this cycle's calendar; preserve business-and-resident scope and the 23-day standard, with no renewal claimed before verifi",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-003"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Fruitvale briefing, East Oakland audit, and Baylight feasibility record: Direct execution and publication of the D3 Fruitvale briefing record this cycle and written next dates for the D5 audit and Baylight feasibility review; expansion remains held pending all three record",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-004"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Schematics delivery and documented Fruitvale design review: Require the contracted design consultant to deliver preliminary schematics and conduct a documented Fruitvale community review this cycle; hold further design advancement until a public comment-and-re",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-005"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Q3 intake audit and Telegraph and 47th merchant oversight: Require the Q3 intake audit filing with HCAI and the Council Clerk and a documented Telegraph & 47th merchant walkthrough this cycle; operational oversight remains uncertified until both are recorded.",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-006"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Baylight construction milestone evidence review: Conduct and publish the construction milestone review against the assembled evidence file, declaring no pass unless the remediation, hotline, dust-control, and workforce evidence supports it; oversigh",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-007"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Placement-gap analysis and apprenticeship adjustment plan: Require publication of the placement-gap analysis and adjustment plan this cycle, with explicit West Oakland and Fruitvale reviews; implementation continues without claims of completion or success uns",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-008"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Uptown stabilization execution and Downtown committee decision: Require a published, executable Uptown stabilization plan with a concrete timeline and Ashford benchmarks, seek a recorded committee decision, keep the $15 million authorization pending, and accept a ",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-009"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Grand Lake full-council roll call with Chen-Vega conditions: Ask the full Council to hold its roll call this cycle with every Chen-Vega milestone and audit condition intact and the Clerk certifying the result; maintain a YES position without claiming an outcome",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-010"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Tenant-defense implementation and C112 record correction: Publish the legal-support analysis and open tenant-defense intake this cycle, correcting the prior procedural framing to reflect the fund's 6-3 passage at C112 and signature; no committee decision rem",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-011"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Ivy Hill ordinance referral and committee hearing: Seek committee referral and a hearing this cycle on the ordinance recorded as filed at C113, with a record distinguishing INIT-011 from INIT-013 and INIT-014 and no funding or passage claimed in advan",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-012"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Dimond legislation filing deadline: Direct completion and submission of the $2.5 million ordinance this cycle, document the Dimond Emergency Town Briefing as community input, require Clerk verification before claiming filing, and acknow",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-013"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Hold on duplicative Ivy Hill Community Revitalization filing: Hold INIT-013 and let this filing deadline pass rather than submit an overlapping measure; require a distinct scope and nonduplication crosswalk against INIT-011 and INIT-014 before any future Clerk s",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-014"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on INIT-014 filing verification and tracker-disposition reconciliation: State explicitly that filing remains unverified and withdraw any completed-filing implication; withhold a mayoral request for Council review or a vote until a Clerk reference or no-filing confirmation",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-015"
+        },
+        {
+          "text": "Avery Santana (Mayor) decided on Laurel cleanup scope, outreach, and filing hold: Hold INIT-015 in announced status and let this filing deadline pass because finished scope and outreach records are absent; complete both before any Clerk submission, with no filing or $6 million auth",
+          "src": "output/civic-voice/mayor_open_c117.json STMT-117-mayor_open-016"
+        },
+        {
+          "text": "Vanessa Tran-Muñoz (OARI Program Director) decided on Oakland Alternative Response Initiative: Hold expansion; publish the executed D3 Fruitvale briefing record in a public, inspectable location with district-level and Fruitvale data references, participation arrangements, and notice dates pres",
+          "src": "output/civic-voice/oari_c117.json STMT-117-oari-001"
+        },
+        {
+          "text": "Vanessa Tran-Muñoz (OARI Program Director) decided on Oakland Alternative Response Initiative: File written next dates with the Clerk for the D5 audit and the Baylight feasibility review this cycle, replacing open-ended status with dated commitments, while expansion remains held",
+          "src": "output/civic-voice/oari_c117.json STMT-117-oari-002"
+        },
+        {
+          "text": "Vanessa Tran-Muñoz (OARI Program Director) decided on Constituents — West Oakland calm and East Oakland grief, what the crews see on the ground: Carry the D1 and D5 operational presence forward without expansion, keeping evening and weekend bilingual coverage running while the records are assembled",
+          "src": "output/civic-voice/oari_c117.json STMT-117-oari-003"
+        },
+        {
+          "text": "Brenda Okoro (Deputy Mayor (Community)) decided on West Oakland Stabilization Fund: Hold the C114 closeout verification and Council charter-renewal consideration on this cycle's calendar; no renewal claimed before verification and Council action, with business-and-resident scope and ",
+          "src": "output/civic-voice/okoro_c117.json STMT-117-okoro-001"
+        },
+        {
+          "text": "Brenda Okoro (Deputy Mayor (Community)) decided on Commercial Stabilization for Grand Lake: Hold and certify the full-council roll call with all Chen-Vega milestone and audit conditions intact; maintain a YES position without claiming an outcome.",
+          "src": "output/civic-voice/okoro_c117.json STMT-117-okoro-002"
+        },
+        {
+          "text": "Brenda Okoro (Deputy Mayor (Community)) decided on Dimond Revitalization Initiative: Support the Dimond Emergency Town Briefing as the public factual record and next steps for the culture spike, without speculating on causes or linking the separate faith-community responses; commit to",
+          "src": "output/civic-voice/okoro_c117.json STMT-117-okoro-003"
+        },
+        {
+          "text": "Brenda Okoro (Deputy Mayor (Community)) decided on Laurel Neighborhood Patch and Clean-Up: Let the Laurel filing deadline pass with INIT-015 held in announced status and let the duplicative Ivy Hill filing (INIT-013) pass rather than submit an overlapping measure; no filing or authorization",
+          "src": "output/civic-voice/okoro_c117.json STMT-117-okoro-004"
+        },
+        {
+          "text": "Marcus Webb (OEWD Program Director (Stabilization Fund)) decided on West Oakland Stabilization Fund: Hold the queue at the 23-day standard while the Council takes up the verified C114 closeout and charter renewal; no renewal claimed before the roll call.",
+          "src": "output/civic-voice/stabilization_fund_c117.json STMT-117-stabilization_fund-001"
+        },
+        {
+          "text": "Marcus Webb (OEWD Program Director (Stabilization Fund)) decided on Commercial Stabilization for Grand Lake: Hold and certify the full-council roll call with every Chen-Vega milestone and audit condition attached; maintain a YES position without claiming the outcome.",
+          "src": "output/civic-voice/stabilization_fund_c117.json STMT-117-stabilization_fund-002"
+        },
+        {
+          "text": "Marcus Webb (OEWD Program Director (Stabilization Fund)) decided on West Oakland Stabilization Fund: Keep the queue at the 23-day standard and publish the hearing record as the proof; next authorization batch goes to the Deputy Mayor's desk.",
+          "src": "output/civic-voice/stabilization_fund_c117.json STMT-117-stabilization_fund-003"
+        },
+        {
+          "text": "Elena Soria Dominguez (Transit Hub Planning Lead) decided on INIT-003 complete-entry versus open design review — where the unfinished work lives: Hold further design advancement at the C86 authorization; treat the INIT-003 'complete' tracker entry as closing the visioning and council-authorization history only; keep the comment-and-response rec",
+          "src": "output/civic-voice/transit_hub_c117.json STMT-117-transit_hub-001"
+        },
+        {
+          "text": "Elena Soria Dominguez (Transit Hub Planning Lead) decided on Fruitvale answer desk and the public comment log: Keep the answer desk and numbered comment log staffed at the Chavez branch this cycle, logging every comment in the language it came in and committing to a written answer with a date before the drawin",
+          "src": "output/civic-voice/transit_hub_c117.json STMT-117-transit_hub-002"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "factCap": 100,
+      "peopleCap": 25,
+      "roomIsYours": ""
+    },
+    "citizens": [
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave — C117 in Piedmont Ave: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near a bench on the hospital grounds",
+        "why": "C117 in Piedmont Ave: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near a bench on the hospital grounds"
+      },
+      {
+        "popid": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Piedmont Ave — C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner",
+        "why": "C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner"
+      },
+      {
+        "popid": "POP-00020",
+        "name": "Elena Vásquez",
+        "role": "Waterfront Urban Planner",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Elena Vásquez — Waterfront Urban Planner — Jack London — C117 in Jack London: managed communications for upcoming public announcements",
+        "why": "C117 in Jack London: managed communications for upcoming public announcements"
+      },
+      {
+        "popid": "POP-00023",
+        "name": "Gregory Mims",
+        "role": "Organized Crime",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Gregory Mims — Organized Crime — West Oakland — C117 in West Oakland: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "why": "C117 in West Oakland: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner"
+      },
+      {
+        "popid": "POP-00024",
+        "name": "Henry Rivas",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Henry Rivas — Starting Pitcher, Oakland A's — West Oakland — C117 in West Oakland: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+        "why": "C117 in West Oakland: walked past the renderings for the Temescal Community Health Center and decided it would never look like that"
+      },
+      {
+        "popid": "POP-00029",
+        "name": "Alisha Peña",
+        "role": "Female Model",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Alisha Peña — Female Model — Lake Merritt — C117 in Lake Merritt: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "why": "C117 in Lake Merritt: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline"
+      },
+      {
+        "popid": "POP-00030",
+        "name": "Derek Simmons",
+        "role": "A's Marketing Director",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Derek Simmons — A's Marketing Director — Jack London — C117 in Jack London: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "why": "C117 in Jack London: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for"
+      },
+      {
+        "popid": "POP-00031",
+        "name": "Martin Richards",
+        "role": "Third Baseman, New York Mets",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Martin Richards — Third Baseman, New York Mets — Piedmont Ave — C117 in Fruitvale: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "why": "C117 in Fruitvale: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for"
+      },
+      {
+        "popid": "POP-00033",
+        "name": "John Ellis",
+        "role": "Starting Pitcher, Oakland A's",
+        "neighborhood": "Laurel",
+        "business": null,
+        "profile": "John Ellis — Starting Pitcher, Oakland A's — Laurel — C117 in Laurel: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "why": "C117 in Laurel: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard"
+      },
+      {
+        "popid": "POP-00034",
+        "name": "Avery Santana",
+        "role": "Mayor of Oakland",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Avery Santana — Mayor of Oakland — Rockridge — C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for",
+        "why": "C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for"
+      },
+      {
+        "popid": "POP-00037",
+        "name": "Brenda Okoro",
+        "role": "Deputy Mayor (Community Affairs)",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Brenda Okoro — Deputy Mayor (Community Affairs) — Piedmont Ave — C117 in Piedmont Ave: A Piedmont Ave barbershop went quiet when they walked in and stayed quiet.",
+        "why": "C117 in Piedmont Ave: A Piedmont Ave barbershop went quiet when they walked in and stayed quiet."
+      },
+      {
+        "popid": "POP-00038",
+        "name": "Theo Park",
+        "role": "Communications Director",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Theo Park — Communications Director — Rockridge — C117 in Rockridge: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "why": "C117 in Rockridge: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever."
+      },
+      {
+        "popid": "POP-00039",
+        "name": "Simone Ellis",
+        "role": "Chief Legal Counsel",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Simone Ellis — Chief Legal Counsel — Lake Merritt — C117 in Lake Merritt: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "why": "C117 in Lake Merritt: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever."
+      },
+      {
+        "popid": "POP-00040",
+        "name": "Aaron Whitfield",
+        "role": "City Manager",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Aaron Whitfield — City Manager — Rockridge — C117 in Rockridge: An old acquaintance in Rockridge stopped them to say they are doing right by the neighborhood.",
+        "why": "C117 in Rockridge: An old acquaintance in Rockridge stopped them to say they are doing right by the neighborhood."
+      },
+      {
+        "popid": "POP-00042",
+        "name": "Ramon Vega",
+        "role": "City Council District 4",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Ramon Vega — City Council District 4 — Lake Merritt — C117 in Lake Merritt: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "why": "C117 in Lake Merritt: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots"
+      },
+      {
+        "popid": "POP-00043",
+        "name": "Janae Rivers",
+        "role": "City Council District 5",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Janae Rivers — City Council District 5 — Piedmont Ave — C117 in Piedmont Ave: The owner of a Piedmont Ave gym said memberships filled before the sign went up.",
+        "why": "C117 in Piedmont Ave: The owner of a Piedmont Ave gym said memberships filled before the sign went up."
+      },
+      {
+        "popid": "POP-00044",
+        "name": "Elliott Crane",
+        "role": "City Council District 6",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Elliott Crane — City Council District 6 — Uptown — C117 in Uptown: painted over graffiti on the recreation center wall alongside five neighbors they barely knew",
+        "why": "C117 in Uptown: painted over graffiti on the recreation center wall alongside five neighbors they barely knew"
+      },
+      {
+        "popid": "POP-00046",
+        "name": "Manny Ellen",
+        "role": "Elections Office",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Manny Ellen — Elections Office — Lake Merritt — C117 in Lake Merritt: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a small park",
+        "why": "C117 in Lake Merritt: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a small park"
+      },
+      {
+        "popid": "POP-00047",
+        "name": "Babe Bono",
+        "role": "Redevelopment Board",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Babe Bono — Redevelopment Board — Lake Merritt — C117 in Lake Merritt: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "why": "C117 in Lake Merritt: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard"
+      },
+      {
+        "popid": "POP-00049",
+        "name": "Pamela Amelia",
+        "role": "Audit Commission",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Pamela Amelia — Audit Commission — Piedmont Ave — C117 in Piedmont Ave: walked past the renderings for the Temescal Community Health Center and decided it would never look like that",
+        "why": "C117 in Piedmont Ave: walked past the renderings for the Temescal Community Health Center and decided it would never look like that"
+      },
+      {
+        "popid": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "neighborhood": "Baylight District",
+        "business": null,
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District — C117 in Baylight District: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "why": "C117 in Baylight District: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever."
+      },
+      {
+        "popid": "POP-00051",
+        "name": "Desmond Morton",
+        "role": "Left Fielder, Oakland A's",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Desmond Morton — Left Fielder, Oakland A's — Chinatown — C117 in Chinatown: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "why": "C117 in Chinatown: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots"
+      },
+      {
+        "popid": "POP-00052",
+        "name": "Clark Saryan",
+        "role": "Closing Pitcher, Las Vegas Aviators (AAA)",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Clark Saryan — Closing Pitcher, Las Vegas Aviators (AAA) — Downtown — C117 in Downtown: saw the sign-up sheet for the recreation center clean-up and walked past it a second time",
+        "why": "C117 in Downtown: saw the sign-up sheet for the recreation center clean-up and walked past it a second time"
+      },
+      {
+        "popid": "POP-00053",
+        "name": "Kevin Clark",
+        "role": "Third Baseman, Oakland A's",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Kevin Clark — Third Baseman, Oakland A's — Jack London — C117 in Jack London: walked past the renderings for the Temescal Community Health Center and decided it would never look like that near the waterfront",
+        "why": "C117 in Jack London: walked past the renderings for the Temescal Community Health Center and decided it would never look like that near the waterfront"
+      },
+      {
+        "popid": "POP-00077",
+        "name": "Julio Valencia",
+        "role": "Setup/Closing Pitcher, Oakland A's",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Julio Valencia — Setup/Closing Pitcher, Oakland A's — Uptown — C117 in Uptown: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "why": "C117 in Uptown: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline"
+      }
+    ],
+    "pointers": [
+      "output/cron-compare/staged @C117"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Farrah Del Rio",
+    "popid": "POP-00161",
+    "text": "I want to write about a pattern I can lay out in three parts. The mayor, the Deputy Mayor, the council and the program directors all issued C117 decisions, and the same word runs through nearly all of them: hold. Hold OARI expansion. Hold Fruitvale Transit Hub design. Hold the Baylight milestone. Hold the Uptown plan. Hold the Ivy Hill and Laurel filings. Dimond missed its deadline outright. Everyone says \"no claim before verification,\" and I agree with that. But nobody names who verifies, or by when. The tracker says the West Oakland Stabilization Fund's C114 closeout is still unverified, and it is the gate on renewal. The fund paid out in C117 anyway. The column's argument is that a hold w",
+    "plan": {
+      "chase": "I want to write about a pattern I can lay out in three parts. The mayor, the Deputy Mayor, the council and the program directors all issued C117 decisions, and the same word runs through nearly all of them: hold. Hold OARI expansion. Hold Fruitvale Transit Hub design. Hold the Baylight milestone. Hold the Uptown plan. Hold the Ivy Hill and Laurel filings. Dimond missed its deadline outright. Everyone says \"no claim before verification,\" and I agree with that. But nobody names who verifies, or by when. The tracker says the West Oakland Stabilization Fund's C114 closeout is still unverified, and it is the gate on renewal. The fund paid out in C117 anyway. The column's argument is that a hold w",
+      "focus": "Cycle 117 is a week of 'holds' with no named verifier or date. The Stabilization Fund paid out while the closeout that gates its renewal remains unverified.",
+      "why": "The same verification gaps recur across several initiatives, and the money has already moved on at least one of them. That makes it a civic accountability story, and a columnist can argue it.",
+      "checks": [
+        "Confirm with the Initiative_Tracker that INIT-001's closeout is still listed as unverified and due C118.",
+        "Ask Marcus Webb whether any C117 payments were made before the closeout was verified, and how the 23-day standard applies.",
+        "Ask the City Manager and the OARI director whether the D3 Fruitvale briefing record, the D5 audit date and the Baylight feasibility date have been filed with the Clerk.",
+        "Check how many initiatives are marked stalled or held, and which of them have a named responsible office and a date."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00040",
+          "question": "Which office verifies the C114 closeout and the other held items, and by what date will each of those records be public?",
+          "basis": "He is the City Manager and answers for every initiative's progress and operations."
+        },
+        {
+          "pop": "POP-00037",
+          "question": "Payments went out in C117 while the closeout that gates renewal is unverified. What is the verification date, and who signs off?",
+          "basis": "The Deputy Mayor for Community holds the Stabilization Fund closeout and charter-renewal item on her calendar."
+        },
+        {
+          "pop": "POP-00044",
+          "question": "You asked for verified closeout documentation before any renewal vote is scheduled. What would you accept as verification, and when do you expect it?",
+          "basis": "He is the council member who set verified C114 closeout accounting as a condition for scheduling a vote."
+        },
+        {
+          "pop": "POP-00042",
+          "question": "You asked for a Clerk-checked crosswalk and Clerk verification of filings. Has the Clerk confirmed anything yet on INIT-011 through INIT-014?",
+          "basis": "He is the District 4 council member pressing Clerk verification on the Ivy Hill and Dimond filings."
+        }
+      ],
+      "interpretation": "Across offices, 'hold pending verification' has become the default stance. It reads as caution, but without a named verifier and a date it works as a delay. The Stabilization Fund shows the cost: money moved before the gate opened.",
+      "unverifiedLead": [
+        "Whether any C117 Stabilization Fund payments went to households before the closeout was verified, which is not confirmed yet.",
+        "Whether the Clerk has any reference on INIT-014.",
+        "Whether the Fruitvale briefing was actually held."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Carry forward closeout verification and Council consideration; support renewal only after verified C114 closeout, preserving the business-and-resident scope and 23-day standard. — \"West Oakla",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold expansion; require a complete published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review. — \"Alternative response expands on public ev",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold further design advancement until preliminary schematics and a documented Fruitvale public comment-and-response record are delivered and published. — \"Fruitvale will get a transit hub des",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep the center operational while withholding oversight certification until the Q3 audit filing and merchant walkthrough are verified and documented. — \"Temescal's health center keeps serving",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Declare no milestone passed; direct completion and publication of the evidence-file review while all remediation, hotline, dust-control and workforce oversight continues. — \"Baylight earns it",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 135,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-26T12:16:54.812Z"
+}

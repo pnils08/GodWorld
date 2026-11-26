@@ -1,0 +1,95 @@
+{
+  "office": "worker_med_exam",
+  "agentDir": "worker-med-exam",
+  "holder": "Jonas Patel",
+  "popid": "POP-00142",
+  "title": "Medical Examiner",
+  "date": "2026-11-23",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Cycle 117 — Weekly Report to the Mayor and Council, on the record. From the Office of the Medical Examiner.**\n\n**Deaths:** No new names came off the ledger this week. The archive of deceased residents stands at nine, the most recent Florencia Shah of KONO in Cycle 114, cause on file recorded as died surrounded by family. I want to flag a standing defect in that register: Isabelle Louis, POP-00331, Uptown, left the ledger in Cycle 106 and still has no cause on file. A name without a cause is a hole in the record, and I will not certify that column clean until it's filled.\n\n**Residents in hospital care:** Three tracked admissions, all with outcomes recorded as recovered at discharge — Yu Zen (Rockridge) and Deacon Seymour (Lake Merritt), both from workplace accidents, and Maurice Franklin (Rockridge), severe seasonal flu. Ambulances ran twice this Cycle, both minor injury: one in Piedmont Ave and one in Grand Lake, neither generating a hospital admission on my books. No health events were logged on the city's ledger for Cycle 117; I'd ask the public to remember an empty event line is not the same as an empty night.\n\n**Waiting on a cause:** Three names. Marcus Osei (Chinatown) and Elliott Crane (Uptown), recovering, their assigned causes car accident and broken leg respectively. And Ariana Lee, Piedmont Ave, serious condition. I've said this before and I'll say it on the record: Ariana Lee has no next of kin listed. She is forty-two years old and living with stage-four disease, and her chart is the one file on my desk that no amount of paperwork will resolve. Of note, the city logged a medium-severity health spike in Piedmont Ave in Cycle 116 — that is her neighborhood, and I intend to ask the hospital whether the two are connected.\n\n**One matter I am putting formally in front of this body:** I have twice now found the lacerations in the Yu Zen file inconsistent with the fall described in the official account. I requested the camera footage. The camera was blind. A resident recovered, and the record says workplace accident, but my office does not close a file simply because the file is inconvenient. I am asking, on the record, for the footage request to be renewed and for anyone with knowledge of that job floor to come to my office.\n\nThe ledger's quiet this week. Quiet is not the same as answered. My office stands ready on all of the above.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-23T11:47:46.195Z",
+  "usage": {
+    "prompt_tokens": 9426,
+    "completion_tokens": 857,
+    "cost": 0.0015
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Residents on the archive as deceased",
+        "from_cycle": 100
+      },
+      "resultChars": 1364
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Tracked residents in the hospital ledger"
+      },
+      "resultChars": 668
+    },
+    {
+      "tool": "memory_recall",
+      "input": {
+        "query": "Yu Zen"
+      },
+      "resultChars": 2255
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Ambulance events, every Cycle on the sheet",
+        "from_cycle": 112
+      },
+      "resultChars": 725
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Health events on the city's event ledger",
+        "from_cycle": 110
+      },
+      "resultChars": 246
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Ariana Lee",
+        "thread": true
+      },
+      "resultChars": 1998
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Yu Zen workplace accident Rockridge"
+      },
+      "resultChars": 51
+    }
+  ],
+  "memory": {
+    "searchedOn": "deaths cause of death",
+    "entries": 2,
+    "fromSearch": 0,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00142",
+    "id": "dE54HZXfP6CrnMKqNgoWVh",
+    "customId": "cp-POP-00142-c117-CIVIC-datawake-2026-11-23"
+  }
+}

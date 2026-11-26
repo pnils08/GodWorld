@@ -1,0 +1,28 @@
+{
+  "office": "council_d8",
+  "cycle": 117,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "District 8 casts a recorded YES vote on the Commercial Stabilization for Grand Lake roll call conditioned on strict Chen-Vega milestone and audit protocols, maintaining that individual floor votes do not constitute enactment until certified by the Clerk. In response to planning directives and district conditions, we formally identify that Eastlake maintenance allocations remain proposed pending Public Works authorization, while demanding an official Clerk crosswalk to reconcile unsupplied docket numbers across Lake Merritt, Eastlake, and Adams Point.",
+  "statements": [
+    {
+      "statementId": "STMT-117-council_d8-001",
+      "type": "vote_statement",
+      "topic": "Commercial Stabilization for Grand Lake Roll Call",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES on the full-council roll call with Chen-Vega milestone and audit conditions intact, withholding any claim of enactment until certification by the City Clerk.",
+      "quote": "A floor vote is an individual position, not an enacted law; District 8 votes yes strictly under Chen-Vega oversight, but only a certified roll call makes it real.",
+      "fullStatement": "District 8 votes YES on Commercial Stabilization for Grand Lake to secure the $2.5 million authorization, but we do so strictly under the Chen-Vega mandatory milestone reporting and audit controls established in committee. Procedural integrity requires absolute clarity on the record: an individual affirmative vote is not an enacted ordinance. As Grand Lake experiences slipping sentiment, quieter storefronts, and rising housing pressures, our commercial corridors require documented relief, not unverified administrative assumptions. We join the Mayor in calling for the scheduled full-council roll call to be held this cycle without diluting oversight criteria, and we reserve final disposition until the City Clerk officially certifies the roll call tally.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d8-002",
+      "type": "policy_statement",
+      "topic": "Eastlake Service Authorizations and District Complaint Docket Reconciliation",
+      "initiative": null,
+      "decision": "Confirm Eastlake baseline maintenance allocations remain unauthorized pending Public Works docketing, and order an official Clerk-verified complaint reconciliation identifying missing case records across Lake Merritt, Eastlake, and Adams Point.",
+      "quote": "Administrative accountability requires documenting gaps rather than fabricating dockets; we will not conflate Lake Merritt complaints with Eastlake maintenance while our records lack certified case numbers.",
+      "fullStatement": "Addressing the Planning Director's directive and Promise P-6903e362468303b6, District 8 clarifies the administrative status of Eastlake baseline maintenance allocations: they remain proposed and pending formal Public Works authorization, with no certified municipal schedule yet published. Regarding complaint reconciliation, the Cycle 115 record identified three maintenance complaints originating in Lake Merritt between Cycles 113 and 115, whereas Cycle 116 office evidence referenced four districtwide complaints. Because the Cycle 117 packet provides no docket numbers, responsible departments, or scheduled response dates, District 8 will not invent case files. We direct the Clerk and Public Works to publish a formal crosswalk distinguishing Lake Merritt's prior files from Eastlake municipal service requests and Adams Point, where Adams Point United Methodist has activated its emergency assistance fund amid souring neighborhood mood.",
+      "trackerUpdates": {}
+    }
+  ]
+}

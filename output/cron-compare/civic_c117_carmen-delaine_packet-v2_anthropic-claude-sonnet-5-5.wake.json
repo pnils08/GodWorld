@@ -1,0 +1,63 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "117",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "carmen-delaine",
+  "byline": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 135,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_recall",
+    "canon_search",
+    "citizen_lookup",
+    "sheet_read",
+    "canon_search"
+  ],
+  "toolCalls": 6,
+  "wordCount": 913,
+  "targetWords": "500-900",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 500",
+    "words": 913,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "f5965da7db8eba01d3b31b655fe53c3efd1340e0241936a01b423c8ac9e9f324",
+    "costUsd": 0.0012
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c117_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00011\",\n  \"name\": \"Carmen Delaine\",\n  \"recorded\": true,\n  \"text\": \"The Fund Paid Out in C117. The Closeout That Gates Its Renewal Is Still Unverified.\"\n}"
+  },
+  "ranAt": "2026-11-24T00:16:25.628Z"
+}

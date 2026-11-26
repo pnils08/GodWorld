@@ -1,0 +1,118 @@
+{
+  "version": "TALIA-RECORD-1",
+  "empty": false,
+  "cycle": 90,
+  "kind": "beat-sports-oaks-ground",
+  "seat": {
+    "slug": "talia-finch",
+    "name": "Talia Finch",
+    "popid": "POP-00592",
+    "desk": "sports",
+    "domain": "sports",
+    "builder": "buildTaliaRecord.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-sports-oaks-ground",
+    "score": 100,
+    "label": "the Oaks on the sports feed",
+    "hood": null,
+    "source": "the Oaks on the sports feed, C89–C91, through row 129, read 2026-11-25"
+  },
+  "story": {
+    "kind": "beat-sports-oaks-ground",
+    "angle": "the Oaks on the sports feed",
+    "label": "the Oaks on the sports feed",
+    "hookLine": "",
+    "hood": null,
+    "citizens": [
+      "Elias Varek (POP-00789)",
+      "Mike Paulson (POP-00527)"
+    ],
+    "popids": [
+      "POP-00789",
+      "POP-00527"
+    ],
+    "ref": "the Oaks on the sports feed, C89–C91, through row 129, read 2026-11-25",
+    "cycle": 90
+  },
+  "approach": " Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00789",
+      "name": "Elias Varek",
+      "role": "Founder of Civis Systems",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Elias Varek — Founder of Civis Systems — West Oakland — on the feed: C91 editorial-note",
+      "why": "C91 Oaks editorial-note"
+    },
+    {
+      "popid": "POP-00527",
+      "name": "Mike Paulson",
+      "role": "General Manager, Oakland A's & The Oaks",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Mike Paulson — General Manager, Oakland A's & The Oaks — West Oakland — on the feed: C91 player-feature",
+      "why": "C91 Oaks player-feature"
+    }
+  ],
+  "facts": [
+    {
+      "text": "C91 (off-season) · Oaks · editorial-note · Elias Varek: Elias Varek, 31 year old, from West Oakland, Owner/Founder of Civic Systems backs heads group thatll bring NBA back to Oakland | Stats: - | Team record: - | Streak: -",
+      "src": "Oakland_Sports_Feed row 129 (live, read 2026-11-25)"
+    },
+    {
+      "text": "C91 (early-season) · Oaks · player-feature · Mike Paulson: In recent interview Mike Paulson acknowledges being on NBA list | Stats: - | Team record: - | Streak: -",
+      "src": "Oakland_Sports_Feed row 128 (live, read 2026-11-25)"
+    },
+    {
+      "text": "C89 (early-season) · Oaks · front-office · Mike Paulson: Mike Paulson goes on record to deny any interest in Warriors GM position | Stats: - | Team record: -",
+      "src": "Oakland_Sports_Feed row 123 (live, read 2026-11-25)"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "the Oaks on the sports feed",
+    "hookLine": "",
+    "anchorFacts": [
+      "C91 (off-season) · Oaks · editorial-note · Elias Varek: Elias Varek, 31 year old, from West Oakland, Owner/Founder of Civic Systems backs heads group thatll bring NBA back to Oakland | Stats: - | Team record: - | Streak: -",
+      "C91 (early-season) · Oaks · player-feature · Mike Paulson: In recent interview Mike Paulson acknowledges being on NBA list | Stats: - | Team record: - | Streak: -",
+      "C89 (early-season) · Oaks · front-office · Mike Paulson: Mike Paulson goes on record to deny any interest in Warriors GM position | Stats: - | Team record: -"
+    ],
+    "evidence": [
+      {
+        "text": "C91 (off-season) · Oaks · editorial-note · Elias Varek: Elias Varek, 31 year old, from West Oakland, Owner/Founder of Civic Systems backs heads group thatll bring NBA back to Oakland | Stats: - | Team record: - | Streak: -",
+        "src": "Oakland_Sports_Feed row 129 (live, read 2026-11-25)"
+      },
+      {
+        "text": "C91 (early-season) · Oaks · player-feature · Mike Paulson: In recent interview Mike Paulson acknowledges being on NBA list | Stats: - | Team record: - | Streak: -",
+        "src": "Oakland_Sports_Feed row 128 (live, read 2026-11-25)"
+      },
+      {
+        "text": "C89 (early-season) · Oaks · front-office · Mike Paulson: Mike Paulson goes on record to deny any interest in Warriors GM position | Stats: - | Team record: -",
+        "src": "Oakland_Sports_Feed row 123 (live, read 2026-11-25)"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "factCap": 3,
+    "peopleCap": 25,
+    "factChars": 6000,
+    "roomIsYours": ""
+  },
+  "rows": 3,
+  "readAt": "2026-11-25T08:24:19.891Z",
+  "pointers": [
+    "the Oaks on the sports feed, C89–C91, through row 129, read 2026-11-25"
+  ]
+}

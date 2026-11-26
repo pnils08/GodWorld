@@ -1,0 +1,56 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "117",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "rachel-torres",
+  "byline": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057",
+    "beatDomain": "SAFETY"
+  },
+  "laneEntries": 135,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [],
+  "toolCalls": 0,
+  "wordCount": 1052,
+  "targetWords": null,
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1052,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "80dd52e6d7f09864fd524d6672c0dd48d0432d0f2ce0d43b5fd70a17f776bd23",
+    "costUsd": 0.0012
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c117_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": ".env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }\n{\n  \"popId\": \"POP-00057\",\n  \"name\": \"Rachel Torres\",\n  \"recorded\": true,\n  \"text\": \"Temescal's Eight: Why an Arrest Is Not a Clearance\"\n}"
+  },
+  "ranAt": "2026-11-25T00:17:10.105Z"
+}

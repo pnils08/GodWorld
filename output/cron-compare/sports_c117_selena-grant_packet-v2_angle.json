@@ -1,0 +1,502 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "117",
+  "persona": "selena-grant",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00591",
+      "name": "Selena Grant",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks — team-update C117 · 11-2 · W2 — the second club's board read",
+      "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+      "creativeBrief": {
+        "kind": "beat-slice",
+        "domain": "oaks",
+        "hood": "KONO",
+        "facts": [
+          "Oaks — team-update (early-season), C117: The Oaks finish. Down 15 at the half in Golden State, they won the second half by 17",
+          "Record 11-2 · streak W2",
+          "Stats (feed): Oaks/game 1 vs CHA/down 60-49 after three/won 4th 36-22/won 85-82, Oaks/at DET/down 43-37 at half/won 2nd half 54-35/won 91-78, Oaks/at GSW/down 59-44 at half/won 2nd half 54-37, Oaks/at PHI/down 82-80 after three/won 4th 40-24, Oaks/at IND/down 82-62 after three/won 4th 38-22/lost 104-100, Oaks/at DEN C116/won 4th 42-32, Oaks/vs SA/tied 90-90 after three/lost 4th by 9, Oaks/4th quarters 10-2-1 in 13 games",
+          "Trigger: comeback",
+          "Franchise stability: growing",
+          "Oaks — player-feature (early-season), C117: The Oaks' highest-paid player is playing like it. Austin Reaves leads the Oaks in scoring two games running",
+          "Stats (feed): Austin Reaves/C117/32PTS/8-14FG/6-10 3PT/10-10FT/0TO in 22 minutes vs DEN, Austin Reaves/C117/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes at GSW, Austin Reaves/C116/27PTS/12ASST/2STL/11-14FG/5-5 3PT at DEN, Austin Reaves/game 1 vs CHA/20PTS/9REB/6-12FG/4-9 3PT/4-4FT/0TO, Austin Reaves/at NYK/23PTS/9REB/3STL/8-13FG/5-9 3PT, Austin Reaves/at DET/12PTS/7REB/10ASST, Austin Reaves/led or shared team scoring lead 6 of 13 games, Austin Reaves/$30M/highest-paid Oak",
+          "Trigger: milestone",
+          "Oaks — game-result (early-season), C117: Down 15 at the half, the Oaks come back to beat the team that left Oakland. Oaks 98 - Warriors 96",
+          "Stats (feed): Austin Reaves/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes, T. Jerome/17PTS/4REB/3ASST/0TO/7-13FG/3-8 3PT in 23 minutes, AJ Dybantsa/12PTS/3REB/3-7FG/5-7FT, Oaks/39-88FG/44%/9-34 3PT/26%/11-16FT/23AST/23TO, Oaks/2nd half 54-37",
+          "Trigger: rivalry",
+          "Oaks — game-result (early-season), C117: Austin Reaves scores 32 in 22 minutes as the Oaks bounce back at home. Oaks 137 - Nuggets 113"
+        ],
+        "priorCycle": null,
+        "note": null,
+        "engineHooks": [],
+        "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak",
+        "pageVoices": [],
+        "forbidden": [
+          "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+          "Do not contradict a role, employer or neighborhood listed here",
+          "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "beat-oaks-beat",
+      "hood": "KONO",
+      "score": null,
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C117",
+      "nearby": [
+        {
+          "text": "A's | roster-move | (off-season) | Mark Aitken",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | re-signing | (off-season) | Vladimir Gonzalez",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Austin Reaves, Wendell Carter Jr, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Austin Reaves, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — team-update C117 · 11-2 · W2",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C117",
+        "id": "F-675d9fd84eca"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks finish. Down 15 at the half in Golden State, they won the second half by 17",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C117",
+        "id": "F-e73b14dd2ce4"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — team-update (early-season), C117: The Oaks finish. Down 15 at the half in Golden State, they won the second half by 17",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-504027157798"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 11-2 · streak W2",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-f81958f96a24"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Oaks/game 1 vs CHA/down 60-49 after three/won 4th 36-22/won 85-82, Oaks/at DET/down 43-37 at half/won 2nd half 54-35/won 91-78, Oaks/at GSW/down 59-44 at half/won 2nd half 54-37, Oaks/at PHI/down 82-80 after three/won 4th 40-24, Oaks/at IND/down 82-62 after three/won 4th 38-22/lost 104-100, Oaks/at DEN C116/won 4th 42-32, Oaks/vs SA/tied 90-90 after three/lost 4th by 9, Oaks/4th quarters 10-2-1 in 13 games",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-d48f1efb2fbf"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: comeback",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-b15ba53a19e2"
+      },
+      {
+        "t": "FACT",
+        "text": "Franchise stability: growing",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-a097976a1668"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — player-feature (early-season), C117: The Oaks' highest-paid player is playing like it. Austin Reaves leads the Oaks in scoring two games running",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-516607717b26"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Austin Reaves/C117/32PTS/8-14FG/6-10 3PT/10-10FT/0TO in 22 minutes vs DEN, Austin Reaves/C117/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes at GSW, Austin Reaves/C116/27PTS/12ASST/2STL/11-14FG/5-5 3PT at DEN, Austin Reaves/game 1 vs CHA/20PTS/9REB/6-12FG/4-9 3PT/4-4FT/0TO, Austin Reaves/at NYK/23PTS/9REB/3STL/8-13FG/5-9 3PT, Austin Reaves/at DET/12PTS/7REB/10ASST, Austin Reaves/led or shared team scoring lead 6 of 13 games, Austin Reaves/$30M/highest-paid Oak",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-027b893dc35e"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: milestone",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-69e9899494f0"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C117: Down 15 at the half, the Oaks come back to beat the team that left Oakland. Oaks 98 - Warriors 96",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-848bc143ee67"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Austin Reaves/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes, T. Jerome/17PTS/4REB/3ASST/0TO/7-13FG/3-8 3PT in 23 minutes, AJ Dybantsa/12PTS/3REB/3-7FG/5-7FT, Oaks/39-88FG/44%/9-34 3PT/26%/11-16FT/23AST/23TO, Oaks/2nd half 54-37",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-e3b81757f87a"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: rivalry",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-7e52e56de7e2"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks — game-result (early-season), C117: Austin Reaves scores 32 in 22 minutes as the Oaks bounce back at home. Oaks 137 - Nuggets 113",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-c081e40ee96d"
+      },
+      {
+        "t": "FACT",
+        "text": "Record 10-2 · streak W1",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-2420a7e2780a"
+      },
+      {
+        "t": "FACT",
+        "text": "Stats (feed): Austin Reaves/32PTS/4REB/3ASST/1STL/0TO/8-14FG/6-10 3PT/10-10FT in 22 minutes, T. Jerome/14PTS/11ASST/3REB/5-8FG/4-5 3PT off the bench in 25 minutes, Wendell Carter Jr/17PTS/6REB/6-9FG, AJ Dybantsa/15PTS/3REB/7-11FG, Oaks/48-92FG/52%/21-43 3PT/49%/20-22FT/31AST/22TO, Attendance/94%",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-fb4f825eb5b3"
+      },
+      {
+        "t": "FACT",
+        "text": "Trigger: big-win",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl C117",
+        "id": "F-dca8aa91605b"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Selena Grant",
+    "popid": "POP-00591"
+  },
+  "assignment": {
+    "story": {
+      "kind": "beat-oaks-beat",
+      "angle": "Oaks — team-update C117 · 11-2 · W2 — the second club's board read",
+      "label": "Oaks — team-update C117 · 11-2 · W2",
+      "hookLine": "The Oaks finish. Down 15 at the half in Golden State, they won the second half by 17",
+      "hood": "KONO",
+      "citizens": [
+        "Wilson Shepard (POP-01022)",
+        "Austin Reaves (POP-01027)"
+      ],
+      "popids": [
+        "POP-01022",
+        "POP-01027"
+      ],
+      "ref": "output/beats/Oakland_Sports_Feed.jsonl @C117",
+      "cycle": 117
+    },
+    "approach": "Oaks beat-analyst approach: this slice is the Oaks feed raw — the record, the streak, the stats lines, the trigger behind each event. Third-person board read on the second club, not fan heat. Numbers come from the feed only — never invent a stat. The named players are real; the press row, the cage, the bus are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "OAKS-BEAT-1",
+    "kind": "beat-oaks-beat",
+    "seat": {
+      "slug": "selena-grant",
+      "name": "Selena Grant",
+      "popid": "POP-00591",
+      "desk": "sports",
+      "domain": "oaks",
+      "builder": "buildOaksBeatSlice.js"
+    },
+    "hood": "KONO",
+    "pulse": {
+      "className": "beat-oaks-beat",
+      "score": 100,
+      "label": "Oaks — team-update C117 · 11-2 · W2",
+      "hood": "KONO",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl @C117"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "Oaks — team-update C117 · 11-2 · W2 — the second club's board read",
+      "hookLine": "The Oaks finish. Down 15 at the half in Golden State, they won the second half by 17",
+      "anchorFacts": [
+        "Oaks — team-update (early-season), C117: The Oaks finish. Down 15 at the half in Golden State, they won the second half by 17",
+        "Record 11-2 · streak W2",
+        "Stats (feed): Oaks/game 1 vs CHA/down 60-49 after three/won 4th 36-22/won 85-82, Oaks/at DET/down 43-37 at half/won 2nd half 54-35/won 91-78, Oaks/at GSW/down 59-44 at half/won 2nd half 54-37, Oaks/at PHI/down 82-80 after three/won 4th 40-24, Oaks/at IND/down 82-62 after three/won 4th 38-22/lost 104-100, Oaks/at DEN C116/won 4th 42-32, Oaks/vs SA/tied 90-90 after three/lost 4th by 9, Oaks/4th quarters 10-2-1 in 13 games",
+        "Trigger: comeback",
+        "Franchise stability: growing",
+        "Oaks — player-feature (early-season), C117: The Oaks' highest-paid player is playing like it. Austin Reaves leads the Oaks in scoring two games running",
+        "Record 11-2 · streak W2",
+        "Stats (feed): Austin Reaves/C117/32PTS/8-14FG/6-10 3PT/10-10FT/0TO in 22 minutes vs DEN, Austin Reaves/C117/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes at GSW, Austin Reaves/C116/27PTS/12ASST/2STL/11-14FG/5-5 3PT at DEN, Austin Reaves/game 1 vs CHA/20PTS/9REB/6-12FG/4-9 3PT/4-4FT/0TO, Austin Reaves/at NYK/23PTS/9REB/3STL/8-13FG/5-9 3PT, Austin Reaves/at DET/12PTS/7REB/10ASST, Austin Reaves/led or shared team scoring lead 6 of 13 games, Austin Reaves/$30M/highest-paid Oak",
+        "Trigger: milestone",
+        "Franchise stability: growing",
+        "Oaks — game-result (early-season), C117: Down 15 at the half, the Oaks come back to beat the team that left Oakland. Oaks 98 - Warriors 96",
+        "Record 11-2 · streak W2",
+        "Stats (feed): Austin Reaves/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes, T. Jerome/17PTS/4REB/3ASST/0TO/7-13FG/3-8 3PT in 23 minutes, AJ Dybantsa/12PTS/3REB/3-7FG/5-7FT, Oaks/39-88FG/44%/9-34 3PT/26%/11-16FT/23AST/23TO, Oaks/2nd half 54-37",
+        "Trigger: rivalry",
+        "Franchise stability: growing",
+        "Oaks — game-result (early-season), C117: Austin Reaves scores 32 in 22 minutes as the Oaks bounce back at home. Oaks 137 - Nuggets 113",
+        "Record 10-2 · streak W1",
+        "Stats (feed): Austin Reaves/32PTS/4REB/3ASST/1STL/0TO/8-14FG/6-10 3PT/10-10FT in 22 minutes, T. Jerome/14PTS/11ASST/3REB/5-8FG/4-5 3PT off the bench in 25 minutes, Wendell Carter Jr/17PTS/6REB/6-9FG, AJ Dybantsa/15PTS/3REB/7-11FG, Oaks/48-92FG/52%/21-43 3PT/49%/20-22FT/31AST/22TO, Attendance/94%",
+        "Trigger: big-win",
+        "Franchise stability: growing"
+      ],
+      "evidence": [
+        {
+          "text": "Oaks — team-update (early-season), C117: The Oaks finish. Down 15 at the half in Golden State, they won the second half by 17",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Record 11-2 · streak W2",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Stats (feed): Oaks/game 1 vs CHA/down 60-49 after three/won 4th 36-22/won 85-82, Oaks/at DET/down 43-37 at half/won 2nd half 54-35/won 91-78, Oaks/at GSW/down 59-44 at half/won 2nd half 54-37, Oaks/at PHI/down 82-80 after three/won 4th 40-24, Oaks/at IND/down 82-62 after three/won 4th 38-22/lost 104-100, Oaks/at DEN C116/won 4th 42-32, Oaks/vs SA/tied 90-90 after three/lost 4th by 9, Oaks/4th quarters 10-2-1 in 13 games",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Trigger: comeback",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Oaks — player-feature (early-season), C117: The Oaks' highest-paid player is playing like it. Austin Reaves leads the Oaks in scoring two games running",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Record 11-2 · streak W2",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Stats (feed): Austin Reaves/C117/32PTS/8-14FG/6-10 3PT/10-10FT/0TO in 22 minutes vs DEN, Austin Reaves/C117/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes at GSW, Austin Reaves/C116/27PTS/12ASST/2STL/11-14FG/5-5 3PT at DEN, Austin Reaves/game 1 vs CHA/20PTS/9REB/6-12FG/4-9 3PT/4-4FT/0TO, Austin Reaves/at NYK/23PTS/9REB/3STL/8-13FG/5-9 3PT, Austin Reaves/at DET/12PTS/7REB/10ASST, Austin Reaves/led or shared team scoring lead 6 of 13 games, Austin Reaves/$30M/highest-paid Oak",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Trigger: milestone",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C117: Down 15 at the half, the Oaks come back to beat the team that left Oakland. Oaks 98 - Warriors 96",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Record 11-2 · streak W2",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Stats (feed): Austin Reaves/23PTS/6REB/5ASST/3STL/9-17FG/3-6 3PT in 33 minutes, T. Jerome/17PTS/4REB/3ASST/0TO/7-13FG/3-8 3PT in 23 minutes, AJ Dybantsa/12PTS/3REB/3-7FG/5-7FT, Oaks/39-88FG/44%/9-34 3PT/26%/11-16FT/23AST/23TO, Oaks/2nd half 54-37",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Trigger: rivalry",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Oaks — game-result (early-season), C117: Austin Reaves scores 32 in 22 minutes as the Oaks bounce back at home. Oaks 137 - Nuggets 113",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Record 10-2 · streak W1",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Stats (feed): Austin Reaves/32PTS/4REB/3ASST/1STL/0TO/8-14FG/6-10 3PT/10-10FT in 22 minutes, T. Jerome/14PTS/11ASST/3REB/5-8FG/4-5 3PT off the bench in 25 minutes, Wendell Carter Jr/17PTS/6REB/6-9FG, AJ Dybantsa/15PTS/3REB/7-11FG, Oaks/48-92FG/52%/21-43 3PT/49%/20-22FT/31AST/22TO, Attendance/94%",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Trigger: big-win",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        },
+        {
+          "text": "Franchise stability: growing",
+          "src": "output/beats/Oakland_Sports_Feed.jsonl C117"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": null,
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": "the near-empty press row, the bullpen chatter, what the manager says when the record is ugly, the drumbeat of a losing streak"
+    },
+    "citizens": [
+      {
+        "popid": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Wilson Shepard — Head Coach, Oakland Oaks — West Oakland",
+        "why": "named on the Oaks feed C117 (Oakland_Sports_Feed)"
+      },
+      {
+        "popid": "POP-01027",
+        "name": "Austin Reaves",
+        "role": "SG / The Oaks",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Austin Reaves — SG / The Oaks — West Oakland",
+        "why": "named on the Oaks feed C117 (Oakland_Sports_Feed)"
+      }
+    ],
+    "pointers": [
+      "output/beats/Oakland_Sports_Feed.jsonl @C117"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "text": "The Oaks' comeback win against the Warriors was a statement game, and I'm going to dig into what made it tick. I'll be talking to the coaching staff and players to understand their strategy going into the game and how they managed to overcome a 15-point deficit at halftime. Austin Reaves' performance was particularly impressive, and I'll be looking into his preparation and mindset. The rivalry between the Oaks and Warriors adds an extra layer of interest to this game, and I'll explore how the team is using this momentum to fuel their next games.",
+    "plan": {
+      "chase": "The Oaks' comeback win against the Warriors was a statement game, and I'm going to dig into what made it tick. I'll be talking to the coaching staff and players to understand their strategy going into the game and how they managed to overcome a 15-point deficit at halftime. Austin Reaves' performance was particularly impressive, and I'll be looking into his preparation and mindset. The rivalry between the Oaks and Warriors adds an extra layer of interest to this game, and I'll explore how the team is using this momentum to fuel their next games.",
+      "focus": "Oaks' comeback strategy and player performance",
+      "why": "The Oaks' ability to come back from a significant deficit against a rival team is worth examining, especially given their strong start to the season.",
+      "checks": [
+        "Coaching staff's halftime adjustments",
+        "Player interviews to understand their mindset and preparation"
+      ],
+      "targets": [],
+      "interpretation": "The Oaks' win is a sign of their growing stability and resilience as a team.",
+      "unverifiedLead": [
+        "Potential for a deeper dive into the Oaks' fourth-quarter performance, which has been a bright spot in their early-season games"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | roster-move | (off-season) | Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | re-signing | (off-season) | Vladimir Gonzalez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Austin Reaves, Wendell Carter Jr, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01028",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Austin Reaves, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01024"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-24T12:17:00.980Z"
+}

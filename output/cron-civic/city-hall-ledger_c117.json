@@ -1,0 +1,226 @@
+{
+  "cycle": 117,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "COUNCIL-D3",
+      "popid": "POP-00503",
+      "holder": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Fruitvale gets the briefing and the written record before expansion, not the other way around.",
+      "actionAsked": "Hold expansion; require execution and publication of the D3 Fruitvale briefing record with the actual date, venue, notice dates, accessibility and participation arrangements, and the district and Fruitvale data references, and file written next dates for the D5 audit and Baylight feasibility review.",
+      "voiceFile": "output/civic-voice/council_d3_c117.json"
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "West Oakland gets a verified closeout and a faithful charter renewal — not a shortcut around the businesses and residents this fund serves.",
+      "actionAsked": "Hold the C114 closeout verification and Council charter-renewal consideration on this cycle's calendar; no renewal claimed before verification and Council action, with business-and-resident scope and the 23-day standard preserved.",
+      "voiceFile": "output/civic-voice/okoro_c117.json"
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "A floor vote is an individual position, not an enacted law; District 8 votes yes strictly under Chen-Vega oversight, but only a certified roll call makes it real.",
+      "actionAsked": "Vote YES on the full-council roll call with Chen-Vega milestone and audit conditions intact, withholding any claim of enactment until certification by the City Clerk.",
+      "voiceFile": "output/civic-voice/council_d8_c117.json"
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "East Oakland's calls are already inside this program. We do not get expanded into more of a thing we cannot read the record of.",
+      "actionAsked": "Execute and publish the D3 Fruitvale briefing record and file a written next date for the D5 audit and Baylight feasibility review this cycle; expansion held until all three records are public.",
+      "voiceFile": "output/civic-voice/council_d5_c117.json"
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "A review is not a pass; the evidence has to earn that conclusion.",
+      "actionAsked": "Conduct and publish the evidence-file review; declare no milestone pass without supporting evidence and continue oversight.",
+      "voiceFile": "output/civic-voice/council_d2_c117.json"
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "An isolated health spike demands disciplined departmental follow-through and prompt facts for our residents, not administrative panic or unneeded bureaucracy.",
+      "actionAsked": "Direct the responsible public health authorities to publish an evidence-based update and schedule a public briefing on the Piedmont Avenue health spike without creating new administrative bureaucracy.",
+      "voiceFile": "output/civic-voice/council_d6_c117.json"
+    },
+    {
+      "officeId": "COUNCIL-D1",
+      "popid": "POP-00501",
+      "holder": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "The Fund was never hood-wide relief, and it was never housing — it is West Oakland businesses and neighbors, with the 23-day clock kept honest. I verified nothing by wishing it.",
+      "actionAsked": "Vote YES on Council charter-renewal consideration, contingent on verified C114 closeout, with business-and-resident scope and the 23-day standard preserved.",
+      "voiceFile": "output/civic-voice/council_d1_c117.json"
+    },
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Clinical dollars require clinical proof; an operating facility does not get an exemption from delivering its quarterly audit data.",
+      "actionAsked": "Transmit Q3 intake audit to HCAI and Council Clerk and submit verified Telegraph & 47th merchant walkthrough report.",
+      "voiceFile": "output/civic-voice/council_d7_c117.json"
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "A filed ordinance deserves a hearing on its own record, not confusion with two different proposals.",
+      "actionAsked": "Refer the filed INIT-011 ordinance to committee and hold the hearing, preserving distinct records for the three Ivy Hill initiatives.",
+      "voiceFile": "output/civic-voice/council_d4_c117.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": "disbursement-active",
+        "note": "C117: Renewal support is contingent on verified C114 closeout and Council action; business-and-resident scope and the 23-day standard remain intact."
+      },
+      {
+        "initiativeId": "INIT-002",
+        "mayoralAction": "none",
+        "implementationPhase": "dispatch-live",
+        "note": "C117: Expansion remains held pending a published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review."
+      },
+      {
+        "initiativeId": "INIT-003",
+        "mayoralAction": "none",
+        "implementationPhase": "design-phase",
+        "note": "C117: Further design advancement is held; preliminary schematics and a documented Fruitvale public comment-and-response record are not evidenced in the packet."
+      },
+      {
+        "initiativeId": "INIT-005",
+        "mayoralAction": "none",
+        "implementationPhase": "operational",
+        "note": "C117: Oversight certification is withheld pending verified Q3 HCAI/Clerk filing and a documented Telegraph & 47th merchant walkthrough; operations continue."
+      },
+      {
+        "initiativeId": "INIT-006",
+        "mayoralAction": "none",
+        "implementationPhase": "construction-active",
+        "note": "C117: No construction milestone pass is declared; the evidence-file review must be published while remediation, hotline, dust and workforce oversight continue."
+      },
+      {
+        "initiativeId": "INIT-007",
+        "mayoralAction": "none",
+        "implementationPhase": "stalled",
+        "note": "C117: Stalled pending publication of the placement-gap analysis and adjustment plan, with explicit West Oakland and Fruitvale review and a next reporting checkpoint."
+      },
+      {
+        "initiativeId": "INIT-008",
+        "mayoralAction": "none",
+        "implementationPhase": "stalled",
+        "note": "C117: Uptown planning execution is not evidenced; INIT-008 is stalled, with the $15M authorization still pending Council and no implementation claimed."
+      },
+      {
+        "initiativeId": "INIT-009",
+        "mayoralAction": "none",
+        "implementationPhase": "vote-scheduled",
+        "note": "C117: Mayor backs YES with all Chen-Vega conditions; no Clerk-certified roll call or outcome is in the packet, and no enactment is claimed."
+      },
+      {
+        "initiativeId": "INIT-010",
+        "mayoralAction": "none",
+        "implementationPhase": "implementation-active",
+        "note": "C117: C112 6-3 passage and signing control; no committee revote is pending, and legal-analysis publication and intake opening remain unverified."
+      },
+      {
+        "initiativeId": "INIT-011",
+        "mayoralAction": "none",
+        "implementationPhase": "legislation-filed",
+        "note": "C117: Mayor backs committee referral and hearing on the C113-filed ordinance; no completed referral or hearing is evidenced, and records stay separate."
+      },
+      {
+        "initiativeId": "INIT-012",
+        "mayoralAction": "none",
+        "implementationPhase": "stalled",
+        "note": "C117: Filing deadline missed; no Clerk-verified legislation is in the packet, so INIT-012 is stalled pending completed drafting, outreach and verification."
+      },
+      {
+        "initiativeId": "INIT-013",
+        "mayoralAction": "none",
+        "implementationPhase": "stalled",
+        "note": "C117: No verified filing or nonduplication record is supplied; INIT-013 is stalled pending a distinct scope and separation from INIT-011 and INIT-014."
+      },
+      {
+        "initiativeId": "INIT-014",
+        "mayoralAction": "none",
+        "implementationPhase": "stalled",
+        "note": "C117: Clerk docket remains unverified; C115/C116 records conflict with failed/vote-scheduled entries, so review is stalled pending Clerk reconciliation."
+      },
+      {
+        "initiativeId": "INIT-015",
+        "mayoralAction": "none",
+        "implementationPhase": "announced",
+        "note": "C117: Scope, outreach and Clerk-verified filing are not evidenced; INIT-015 stays announced, with no authorization or implementation claimed."
+      }
+    ],
+    "quote": "West Oakland's fund keeps its scope and its 23-day standard, but renewal starts with verified closeout and ends with Council action.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c117.json"
+  }
+}

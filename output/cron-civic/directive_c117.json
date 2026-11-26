@@ -1,0 +1,189 @@
+{
+  "stage": "directive",
+  "cycle": 117,
+  "model": "openai/gpt-6.1-sol",
+  "mayorModel": "moonshotai/kimi-k3.1-pro",
+  "roster": [
+    "civic-office-mayor",
+    "civic-office-council-d1",
+    "civic-office-council-d2",
+    "civic-office-council-d3",
+    "civic-office-council-d4",
+    "civic-office-council-d5",
+    "civic-office-council-d6",
+    "civic-office-council-d7",
+    "civic-office-council-d8",
+    "civic-office-council-d9",
+    "civic-project-stabilization-fund",
+    "civic-project-oari",
+    "civic-project-health-center",
+    "civic-project-transit-hub",
+    "civic-office-baylight-authority"
+  ],
+  "blocks": [
+    {
+      "head": "Avery Santana — Mayor",
+      "agentDir": "civic-office-mayor",
+      "promises": [
+        "P-d94459ae1189b667",
+        "P-b87ef751a66c370d"
+      ]
+    },
+    {
+      "head": "Rose Delgado — City Council District 3",
+      "agentDir": "civic-office-council-d3",
+      "promises": [
+        "P-71776abe706ff093"
+      ]
+    },
+    {
+      "head": "Ramon Vega — City Council District 4",
+      "agentDir": "civic-office-council-d4",
+      "promises": []
+    },
+    {
+      "head": "Janae Rivers — City Council District 5",
+      "agentDir": "civic-office-council-d5",
+      "promises": [
+        "P-36f7939757489205"
+      ]
+    },
+    {
+      "head": "Nina Chen — City Council District 8",
+      "agentDir": "civic-office-council-d8",
+      "promises": [
+        "P-6903e362468303b6"
+      ]
+    },
+    {
+      "head": "Terrence Mobley — City Council District 9",
+      "agentDir": "civic-office-council-d9",
+      "promises": [
+        "P-b6cac45e0bdc5443"
+      ]
+    },
+    {
+      "head": "Marcus Webb — OEWD Program Director (Stabilization Fund)",
+      "agentDir": "civic-project-stabilization-fund",
+      "promises": []
+    },
+    {
+      "head": "Vanessa Tran-Muñoz — OARI Program Director",
+      "agentDir": "civic-project-oari",
+      "promises": []
+    },
+    {
+      "head": "Bobby Chen-Ramirez — Health Center Project Director",
+      "agentDir": "civic-project-health-center",
+      "promises": []
+    },
+    {
+      "head": "Elena Soria Dominguez — Transit Hub Planning Lead",
+      "agentDir": "civic-project-transit-hub",
+      "promises": []
+    },
+    {
+      "head": "Keisha Ramos — Baylight Authority Director",
+      "agentDir": "civic-office-baylight-authority",
+      "promises": [
+        "P-bfd37c6da17c47d4"
+      ]
+    }
+  ],
+  "notDirecting": true,
+  "notDirectingProblem": null,
+  "rejectedBlocks": [],
+  "truncated": 0,
+  "promises": {
+    "staged": 1,
+    "statuses": 0,
+    "rejected": []
+  },
+  "memoryReads": [
+    {
+      "query": "",
+      "status": "ok",
+      "hits": 8,
+      "why": null
+    }
+  ],
+  "notes": 0,
+  "toolCalls": [
+    {
+      "tool": "sheet_read",
+      "resultChars": 6025
+    },
+    {
+      "tool": "memory_recall",
+      "resultChars": 18038
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 2850
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 2601
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 2498
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 2495
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 1568
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 51
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 51
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 51
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 51
+    }
+  ],
+  "usage": {
+    "in": 276809,
+    "out": 6897,
+    "billedUsd": 0.4463,
+    "rateUsd": 0.6226,
+    "finishReason": "stop"
+  },
+  "attempts": [
+    {
+      "model": "openai/gpt-6.1-sol",
+      "tools": true,
+      "blocks": 11,
+      "notDirecting": true,
+      "usage": {
+        "in": 276809,
+        "out": 6897,
+        "billedUsd": 0.4463,
+        "rateUsd": 0.6226,
+        "finishReason": "stop"
+      }
+    }
+  ],
+  "note": null,
+  "commit": "complete",
+  "directive": "output/mara-directives/mara_directive_c117_AUTO.txt",
+  "staged": "output/mara-directives/staged_c117.json",
+  "ranAt": "2026-11-23T00:32:20.156Z",
+  "commitReceipt": "output/mara-directives/commit_c117.json"
+}

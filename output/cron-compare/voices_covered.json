@@ -62,237 +62,6 @@
     "day": "2026-11-15",
     "ranCycle": 115
   },
-  "bAfko77vD8qnDESpCC66QZ": {
-    "popid": "POP-00528",
-    "slot": "evening",
-    "cycle": 101,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "ZnmjXvPRwweA6a2rzWpH5f": {
-    "popid": "POP-00528",
-    "slot": "evening-tension",
-    "cycle": 101,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "aSQydLkpovoNzanh1GG3qF": {
-    "popid": "POP-00528",
-    "slot": "midday",
-    "cycle": 103,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "sy7NLo4hgKBd6dKAAU9k53": {
-    "popid": "POP-00528",
-    "slot": "midday-tension-resolved",
-    "cycle": 103,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "2Jf2YFm8ARo2b7SqZYrPun": {
-    "popid": "POP-00528",
-    "slot": "night",
-    "cycle": 103,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "1FRk6wAKuLQbH3XPED3sxx": {
-    "popid": "POP-00528",
-    "slot": "CONVO",
-    "cycle": 103,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "17AjojYmZ913okB6pUrGk1": {
-    "popid": "POP-01039",
-    "slot": "CONVO",
-    "cycle": 103,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "f3RSEnTHmzvShnRUfwPiYM": {
-    "popid": "POP-00528",
-    "slot": "night",
-    "cycle": 106,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "5KN3CjLJg3GzxRirnS3Zh6": {
-    "popid": "POP-00528",
-    "slot": "night-tension",
-    "cycle": 106,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "PdNFj1Z3JuRy6Y2EwxT57j": {
-    "popid": "POP-00528",
-    "slot": "morning",
-    "cycle": 107,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "uB1FepB1R48ZhHHLXqEFMc": {
-    "popid": "POP-00528",
-    "slot": "morning-tension",
-    "cycle": 107,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "4bQaMGujBJzQZdSEreFQk6": {
-    "popid": "POP-01039",
-    "slot": "PRESS",
-    "cycle": 108,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "E6LCGuaQtMQvQ2gdYgQcny": {
-    "popid": "POP-00528",
-    "slot": "PRESS",
-    "cycle": 108,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "ZxY3e3iHk1TyBuwA63Sm7U": {
-    "popid": "POP-00528",
-    "slot": "midday",
-    "cycle": 108,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "dnvE78XEsRwYyJiUm9E6jM": {
-    "popid": "POP-00528",
-    "slot": "midday-tension",
-    "cycle": 108,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "i44MnmFZqNQGshBMQW7bLD": {
-    "popid": "POP-00528",
-    "slot": "CONVO",
-    "cycle": 108,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "evtG77mJxpVfLhMR2jgLd1": {
-    "popid": "POP-01039",
-    "slot": "CONVO",
-    "cycle": 108,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "JxgBd5hxNmf8jGMiVd21sD": {
-    "popid": "POP-00528",
-    "slot": "midday",
-    "cycle": 109,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "ebTTLmPkJ216ahnsSTgEaL": {
-    "popid": "POP-00528",
-    "slot": "midday-tension",
-    "cycle": 109,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "k27kbaVr7NNpRZeZVbrbLG": {
-    "popid": "POP-00528",
-    "slot": "CONVO",
-    "cycle": 109,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "xiUSxNpn2ZB5bbD66y6NHe": {
-    "popid": "POP-00528",
-    "slot": "morning",
-    "cycle": 111,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "CudM38tYdkGfnzKyACZK3x": {
-    "popid": "POP-00528",
-    "slot": "morning-tension",
-    "cycle": 111,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "9W2JxHUipS4cFEJQJ2SQMA": {
-    "popid": "POP-00528",
-    "slot": "PRESS",
-    "cycle": 112,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "dvvywu72E2CYjxMyjEK7VX": {
-    "popid": "POP-00528",
-    "slot": "PRESS-tension",
-    "cycle": 112,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "JQeZMYuwAixwDhKKcF1h5C": {
-    "popid": "POP-00528",
-    "slot": "PRESS",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "26TL9qbt7heycM1erDgK5G": {
-    "popid": "POP-00528",
-    "slot": "PRESS-tension",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "7QKu1fH2uosnAGaFTLCfo7": {
-    "popid": "POP-01039",
-    "slot": "PRESS",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "pCUY7rUVBcmLZAywuWQVhC": {
-    "popid": "POP-01039",
-    "slot": "midday",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "vg2iVLF2NcZB9p4VPGaKdK": {
-    "popid": "POP-01039",
-    "slot": "midday-tension",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "eeGY2FPTovk8Uoj1ELFskz": {
-    "popid": "POP-01039",
-    "slot": "CONVO",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "z1VaE8yzEJWz2SAKkJetxG": {
-    "popid": "POP-01039",
-    "slot": "CONVO-tension",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "JYE29Gxdz9gKamgZNNBeTo": {
-    "popid": "POP-00528",
-    "slot": "CONVO",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "AqJCcJFQzDim7DD7f6EzdG": {
-    "popid": "POP-00528",
-    "slot": "CONVO-tension",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
   "ZpAWdC6R9rfYxgXTGCHzbz": {
     "popid": "POP-00141",
     "slot": "PRESS",
@@ -377,13 +146,6 @@
     "day": "2026-11-15",
     "ranCycle": 115
   },
-  "F68ghUdKmvKMvTb8aiJszx": {
-    "popid": "POP-01039",
-    "slot": "PRESS",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
   "6iMNAzKuahLBSQ52RnCi29": {
     "popid": "POP-00141",
     "slot": "PRESS",
@@ -447,13 +209,6 @@
     "day": "2026-11-15",
     "ranCycle": 115
   },
-  "63yCd9kEo1kQAJPE4LaBXr": {
-    "popid": "POP-01039",
-    "slot": "PRESS",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
   "6wMRczMBik3KvyjLmWkeqh": {
     "popid": "POP-00346",
     "slot": "PRESS",
@@ -510,96 +265,12 @@
     "day": "2026-11-15",
     "ranCycle": 115
   },
-  "wHkay8iz11WxP8hUoS5Sig": {
-    "popid": "POP-00528",
-    "slot": "PRESS",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "RQzgY2ddtwBq7kxLxkmoBz": {
-    "popid": "POP-00528",
-    "slot": "PRESS-tension",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "PZX4yMmBok1UoZSiE8mDdr": {
-    "popid": "POP-00528",
-    "slot": "PRESS",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "GufNhQ2UJnt2itxGcrp8Vf": {
-    "popid": "POP-00528",
-    "slot": "PRESS-tension",
-    "cycle": 113,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
-  "BEXS9TsKQdemLxifNNEUPj": {
-    "popid": "POP-01039",
-    "slot": "PRESS",
-    "cycle": 114,
-    "day": "2026-11-07",
-    "ranCycle": 114
-  },
   "48xbDTnHAfj52p8wfE2DaC": {
     "popid": "POP-00263",
     "slot": "PRESS",
     "cycle": 114,
     "day": "2026-11-15",
     "ranCycle": 115
-  },
-  "KSgkLDtSetejSvasUaTZPF": {
-    "popid": "POP-00366",
-    "slot": "PRESS",
-    "cycle": 113,
-    "day": "2026-11-08",
-    "ranCycle": 114
-  },
-  "SWXHcEjRBXzQ4qYFm5RYu5": {
-    "popid": "POP-00943",
-    "slot": "CONVO",
-    "cycle": 114,
-    "day": "2026-11-08",
-    "ranCycle": 114
-  },
-  "feD6UrDMxYpVdukrfkczdb": {
-    "popid": "POP-00943",
-    "slot": "CONVO-tension",
-    "cycle": 114,
-    "day": "2026-11-08",
-    "ranCycle": 114
-  },
-  "5QdbAYixRrtcG3GS4QJajk": {
-    "popid": "POP-00998",
-    "slot": "night",
-    "cycle": 114,
-    "day": "2026-11-08",
-    "ranCycle": 114
-  },
-  "siBJ2mBqMp5bnNw9hichEu": {
-    "popid": "POP-00998",
-    "slot": "night-tension",
-    "cycle": 114,
-    "day": "2026-11-08",
-    "ranCycle": 114
-  },
-  "sVA3SDJ64aPRidAHe2Y1Bu": {
-    "popid": "POP-00366",
-    "slot": "morning",
-    "cycle": 114,
-    "day": "2026-11-08",
-    "ranCycle": 114
-  },
-  "hFYRPkvfCTwLe4muBzNb7k": {
-    "popid": "POP-00366",
-    "slot": "morning-tension",
-    "cycle": 114,
-    "day": "2026-11-08",
-    "ranCycle": 114
   },
   "XhJzmr9CJDR27EaLAemWEj": {
     "popid": "POP-00346",
@@ -1097,5 +768,89 @@
     "cycle": 116,
     "day": "2026-11-21",
     "ranCycle": 116
+  },
+  "8mz3uuPYrg3FHpccrVMSSD": {
+    "popid": "POP-00272",
+    "slot": "morning",
+    "cycle": 97,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "pn15qNFmTsB4Vx2UGqPpjB": {
+    "popid": "POP-00222",
+    "slot": "morning",
+    "cycle": 102,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "wJnTNrgaqDg91vySQC8hHi": {
+    "popid": "POP-00222",
+    "slot": "midday",
+    "cycle": 107,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "aSLf2jh5Hjfusikehedvwb": {
+    "popid": "POP-00222",
+    "slot": "midday-tension",
+    "cycle": 107,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "v3hKf6zGX6CMmTGJ1vPyD7": {
+    "popid": "POP-00272",
+    "slot": "midday",
+    "cycle": 111,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "PahEAvWTYzaCXwaFzZ18N5": {
+    "popid": "POP-00272",
+    "slot": "PRESS",
+    "cycle": 112,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "cM1dX9nA3XYjk4oQfSXS9A": {
+    "popid": "POP-00523",
+    "slot": "PRESS",
+    "cycle": 117,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "Xn4ehBNyCLPxjmofqMmjsY": {
+    "popid": "POP-00272",
+    "slot": "PRESS",
+    "cycle": 117,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "aWVGBPt6D1AK2TT8xm6jNf": {
+    "popid": "POP-00272",
+    "slot": "PRESS-tension",
+    "cycle": 117,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "jvoF12xpRy3Rnp4rfmKiVk": {
+    "popid": "POP-00222",
+    "slot": "PRESS",
+    "cycle": 117,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "dmyFoL5NeuFhqT6aKB8Z1v": {
+    "popid": "POP-00547",
+    "slot": "PRESS",
+    "cycle": 117,
+    "day": "2026-11-25",
+    "ranCycle": 117
+  },
+  "RVGWtEYX6fLddGcQXxHJGg": {
+    "popid": "POP-00547",
+    "slot": "PRESS-tension",
+    "cycle": 117,
+    "day": "2026-11-25",
+    "ranCycle": 117
   }
 }

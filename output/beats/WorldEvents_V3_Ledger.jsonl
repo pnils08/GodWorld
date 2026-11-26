@@ -479,3 +479,13 @@
 {"Timestamp":"Y3C12","Cycle":"116","EventDescription":"Temple Beth Or: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Rockridge"}
 {"Timestamp":"Y3C12","Cycle":"116","EventDescription":"B'nai Tikvah Synagogue: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Piedmont Ave"}
 {"Timestamp":"Y3C12","Cycle":"116","EventDescription":"Or Hashalom Renewal Community: job training workshop begins new session","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Grand Lake"}
+{"Timestamp":"Y3C13","Cycle":"117","EventDescription":"High-severity culture spike in Dimond","EventType":"cultural-sighting","Domain":"CULTURE","Severity":"high","Neighborhood":"Dimond"}
+{"Timestamp":"Y3C13","Cycle":"117","EventDescription":"The Downtown Transit Snarl — Downtown crisis eased after 3 cycles back within city range","EventType":"infra-incident","Domain":"INFRASTRUCTURE","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C13","Cycle":"117","EventDescription":"online call-to-gather","EventType":"civic-activity","Domain":"CIVIC","Severity":"low","Neighborhood":"Fruitvale"}
+{"Timestamp":"Y3C13","Cycle":"117","EventDescription":"lost dog returned","EventType":"misc-event","Domain":"GENERAL","Severity":"low","Neighborhood":"Lake Merritt"}
+{"Timestamp":"Y3C13","Cycle":"117","EventDescription":"Adams Point United Methodist: emergency assistance fund activated","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Adams Point"}
+{"Timestamp":"Y3C13","Cycle":"117","EventDescription":"Temple Beth Or: vigil held for community healing","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"Rockridge"}
+{"Timestamp":"Y3C13","Cycle":"117","EventDescription":"Masjid An-Nur Oakland: community grief gathering organized","EventType":"misc-event","Domain":"FAITH","Severity":"medium","Neighborhood":"East Oakland"}
+{"Timestamp":"Y3C13","Cycle":"117","EventDescription":"Telegraph Presbyterian Fellowship: community health fair hosted","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"Downtown"}
+{"Timestamp":"Y3C13","Cycle":"117","EventDescription":"New Covenant Pentecostal Assembly: food pantry serves neighbors in need","EventType":"misc-event","Domain":"FAITH","Severity":"low","Neighborhood":"West Oakland"}
+{"Timestamp":"Y3C13","Cycle":"117","EventDescription":"Ivy Hill Family Dental is closing in Ivy Hill — 8 weeks of decline and revenue under the line; 0 jobs go with it","EventType":"business-incident","Domain":"BUSINESS","Severity":"medium","Neighborhood":"Ivy Hill"}

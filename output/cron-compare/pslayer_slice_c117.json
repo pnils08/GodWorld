@@ -1,0 +1,296 @@
+{
+  "cycle": 117,
+  "builtAt": "2026-11-24T12:15:10.632Z",
+  "empty": false,
+  "journalist": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "persona": "p-slayer"
+  },
+  "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+  "pulse": {
+    "className": "roster-move",
+    "classes": [
+      "roster-move"
+    ],
+    "score": 72,
+    "label": "Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+    "team": "A's",
+    "eventKind": "re-signing",
+    "seasonType": "off-season",
+    "feedCycle": 117,
+    "record": "-",
+    "streak": "-",
+    "mood": "confident",
+    "fanSentiment": "excited",
+    "neighborhood": "Fruitvale",
+    "notes": "The same cycle Mark Aitken left for Colorado, the A's locked up a player they intend to keep. Vladimir Gonzalez, the A's right fielder, has agreed to a five-year, $119 million contract, $23.8 million a year, avoiding arbitration. It is the biggest raise on the roster this off-season. Gonzalez made $2.7M in 2041, so the new deal adds $21.1M a year, almost exactly the $21.4M that came off the books when Aitken signed with the Rockies. Mike Paulson let a 33-year-old walk on a one-year deal and put the same money into a 27-year-old for five. He earned it. Gonzalez, born in the Dominican Republic, is a 92 overall right fielder coming off the best line of his career: .306 with 161 hits, 28 homeruns, 76 RBI, 17 steals and 4.7 WAR in 527 at bats, with only 60 strikeouts. That 4.7 WAR is more than Aitken's 3.2 and more than any A's hitter this page has written up this off-season. The deal also settles a question Gonzalez raised himself. In C113, with the outfield crowded behind him, he said he was not sure how his clutch performance would affect his chances, that \"it's up to Paulson to decide,\" and named Desmond Morton and Frank Reyna as the players pushing him. He told the young guys, \"you can't control what Paulson decides. You just control how you show up,\" and added, \"I earned my spot, sure, but I remember what it was like trying to crack a crowded room.\" Five years answers who plays right field. It also means Reyna, Morton, JR Rosado and Kevin Clark, whose secondary positions include right field, are competing for left field and the bench.",
+    "stats": "Vladimir Gonzalez/5yr/$119M/$23.8M AAV/avoided arbitration, Vladimir Gonzalez/2041/527AB/.306AVG/161H/28HR/76RBI/17SB/60SO/4.7WAR, Vladimir Gonzalez/92OVR/age 27/$2.7M 2041"
+  },
+  "charge": {
+    "bagModes": [
+      {
+        "id": 1,
+        "name": "Hate the Move"
+      },
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      }
+    ],
+    "fanCharge": "fury",
+    "foilNumber": "4.7WAR",
+    "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+    "palette": [
+      "fury",
+      "euphoria",
+      "dread",
+      "defiance",
+      "confession",
+      "grief",
+      "dare"
+    ]
+  },
+  "prewrite": {
+    "reporter": "P.Slayer",
+    "bagModes": [
+      {
+        "id": 1,
+        "name": "Hate the Move"
+      },
+      {
+        "id": 3,
+        "name": "Friction Pivot"
+      }
+    ],
+    "fanCharge": "fury",
+    "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+    "anchorFacts": [
+      "StoryAngle (feed): Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+      "Stats (feed): Vladimir Gonzalez/5yr/$119M/$23.8M AAV/avoided arbitration, Vladimir Gonzalez/2041/527AB/.306AVG/161H/28HR/76RBI/17SB/60SO/4.7WAR, Vladimir Gonzalez/92OVR/age 27/$2.7M 2041",
+      "Event: A's — re-signing (off-season)",
+      "NamesUsed: Vladimir Gonzalez (RF)"
+    ],
+    "foilNumber": "4.7WAR",
+    "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+    "hooks": [
+      {
+        "text": "A's lose a player to another club. What leaves with them, who fills the hole, fan reaction.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      },
+      {
+        "text": "A's keep a player. Loyalty story, what the deal says about next season, clubhouse reaction.",
+        "angle": "conflict/tension coverage",
+        "hood": null
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "text": "A's lose a player to another club. What leaves with them, who fills the hole, fan reaction.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    },
+    {
+      "text": "A's keep a player. Loyalty story, what the deal says about next season, clubhouse reaction.",
+      "angle": "conflict/tension coverage",
+      "hood": null
+    }
+  ],
+  "seeds": [],
+  "friction": {
+    "a": "Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+    "b": "FO language (transition / flexibility / prepared) or the tidy \"genius in hindsight\" read",
+    "frame": "The stands feel sold out or sold short — write into that gap, not the press release."
+  },
+  "priorTakes": [],
+  "story": {
+    "ref": "Oakland_Sports_Feed cycle 117; world_summary_c117.md \"## Sports\" · Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+    "label": "Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+    "kind": "roster-move",
+    "angle": "Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+    "hookLine": "The stands feel sold out or sold short — write into that gap, not the press release.",
+    "hood": "Fruitvale",
+    "team": "A's",
+    "eventKind": "re-signing",
+    "popids": [
+      "POP-00598",
+      "POP-00003",
+      "POP-00527",
+      "POP-00051",
+      "POP-00079",
+      "POP-00053"
+    ],
+    "citizens": [
+      "Vladimir Gonzalez (POP-00598)",
+      "Mark Aitken (POP-00003)",
+      "Mike Paulson (POP-00527)",
+      "Dominican Republic",
+      "Desmond Morton (POP-00051)",
+      "Frank Reyna (POP-00079)",
+      "Kevin Clark (POP-00053)"
+    ],
+    "pulseClass": "roster-move",
+    "pulseScore": 72,
+    "fanCharge": "fury",
+    "bagModeIds": [
+      1,
+      3
+    ]
+  },
+  "players": [
+    {
+      "name": "Vladimir Gonzalez",
+      "popid": "POP-00598",
+      "role": "Right Fielder, Oakland A's",
+      "neighborhood": "Fruitvale",
+      "why": "feed-names"
+    },
+    {
+      "name": "Mark Aitken",
+      "popid": "POP-00003",
+      "role": "First Baseman, Colorado Rockies",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    },
+    {
+      "name": "Mike Paulson",
+      "popid": "POP-00527",
+      "role": "General Manager, Oakland A's & The Oaks",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Dominican Republic",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Desmond Morton",
+      "popid": "POP-00051",
+      "role": "Left Fielder, Oakland A's",
+      "neighborhood": "Chinatown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Frank Reyna",
+      "popid": "POP-00079",
+      "role": "Right Fielder, Oakland A's",
+      "neighborhood": "Lake Merritt",
+      "why": "feed-names"
+    },
+    {
+      "name": "Kevin Clark",
+      "popid": "POP-00053",
+      "role": "Third Baseman, Oakland A's",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Fruitvale",
+    "record": "-",
+    "streak": "-",
+    "mood": "confident",
+    "fanSentiment": "excited",
+    "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+  },
+  "candidates": [
+    {
+      "score": 72,
+      "cycle": 117,
+      "team": "A's",
+      "primary": "roster-move",
+      "angle": "Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+      "priorHits": 0
+    },
+    {
+      "score": 72,
+      "cycle": 117,
+      "team": "A's",
+      "primary": "roster-move",
+      "angle": "Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+      "priorHits": 0
+    },
+    {
+      "score": 55,
+      "cycle": 116,
+      "team": "A's",
+      "primary": "roster-move",
+      "angle": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+      "priorHits": 0
+    },
+    {
+      "score": 55,
+      "cycle": 116,
+      "team": "A's",
+      "primary": "roster-move",
+      "angle": "What does the Mesa trade mean for Hernandez, Kevin Clark and Mark Aitken?",
+      "priorHits": 0
+    },
+    {
+      "score": 53,
+      "cycle": 116,
+      "team": "Oaks",
+      "primary": "loss",
+      "angle": "The Spurs hand the Oaks their first home loss. Spurs 126 - Oaks 117",
+      "priorHits": 0
+    },
+    {
+      "score": 49,
+      "cycle": 115,
+      "team": "Oaks",
+      "primary": "insult-pulse",
+      "angle": "The Oaks bury Orlando early for a third straight win. Oaks 125 - Magic 109",
+      "priorHits": 0
+    },
+    {
+      "score": 46,
+      "cycle": 117,
+      "team": "A's",
+      "primary": "award-board",
+      "angle": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+      "priorHits": 0
+    },
+    {
+      "score": 44,
+      "cycle": 117,
+      "team": "A's",
+      "primary": "award-board",
+      "angle": "Danny Horn said he was the best player in baseball. Then he hit .338 with 56 homeruns and 80 steals",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c117.md ## Sports",
+    "output/desk_signal_c117.json lanes.sports",
+    "docs/media/P_SLAYER_CHARGE_BAG.md",
+    "docs/media/voices/p_slayer.md",
+    "docs/media/P_SLAYER_JOURNEY_INDEX.md",
+    "Oakland_Sports_Feed cycle 117; world_summary_c117.md \"## Sports\" · Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+    "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+  ],
+  "gaps": {
+    "note": "What would deepen fan-heat further",
+    "missingOrThin": [
+      {
+        "source": "cp-POP-00008 live wall at build time",
+        "status": "wake-time",
+        "why": "reporterWall injects at cron angle; slice uses on-disk prior columns so build stays offline"
+      },
+      {
+        "source": "As_Roster live line for foil",
+        "status": "feed-stats-proxy",
+        "why": "FoilNumber parsed from feed Stats/Notes; live roster sheet would refine without inventing"
+      },
+      {
+        "source": "TrueSource / truesource injury windows",
+        "status": "partial",
+        "why": "Injury-load class relies on feed wording; card detail would strengthen Superman mode"
+      }
+    ]
+  }
+}

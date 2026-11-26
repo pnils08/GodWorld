@@ -1,0 +1,23 @@
+{
+  "initiative": "INIT-014",
+  "initiativeId": "INIT-014",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-013)",
+  "consolidatedFrom": [
+    "STMT-117-mayor_gavel-013 (Mayor gavel — Complaint-response crosswalk and INIT-014 record correction)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-014",
+    "ImplementationPhase": "stalled",
+    "MilestoneNotes": "C117: Clerk docket remains unverified; C115/C116 records conflict with failed/vote-scheduled entries, so review is stalled pending Clerk reconciliation.",
+    "NextScheduledAction": "Publish the eleven-case complaint crosswalk and obtain Clerk-backed INIT-014 filing and tracker reconciliation",
+    "NextActionCycle": 118,
+    "LastWorkCycle": 117,
+    "LastWorkSeat": "civic-office-mayor"
+  },
+  "_moveFold": {
+    "moveIds": [
+      "MV-116-civic-office-mayor-2026-11-16"
+    ]
+  }
+}

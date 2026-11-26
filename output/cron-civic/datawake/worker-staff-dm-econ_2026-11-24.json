@@ -1,0 +1,41 @@
+{
+  "office": "worker_staff_dm_econ",
+  "agentDir": "worker-staff-dm-econ",
+  "holder": "Marcus Osei",
+  "popid": "POP-00036",
+  "title": "Deputy Mayor (Econ Dev)",
+  "date": "2026-11-24",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "# Deputy Mayor's Weekly Report — Cycle 117\n\nLet me start with the one that's on the books, because it's the first closure I've had to report in a while and I'm not going to bury it.\n\n**Ivy Hill Family Dental is closing.** Healthcare, Ivy Hill, zero jobs on the payroll at the end — but it's been eight weeks of decline and revenue under the line, and the event ledger carries it as a -25 shock to the neighborhood on top of everything else Ivy Hill is already carrying. Ivy Hill now sits at **5 businesses, 0 staff, median pay $43,000**, retail vitality 5.05, boom index -0.4. And they've got two carryover shocks still working through — one at cycle 3 of 4, one at cycle 2 of 4. Ivy Hill is getting hit three ways at once and I want that said plainly: **this is the neighborhood our plans are missing.**\n\n**The citywide picture.** 282 businesses now, 31,391 staff, median pay $52,000. One fewer business than last Cycle, 8 fewer jobs. That's the closure showing up in the totals.\n\n**Where the jobs sit — and where they don't.** Downtown: 23 businesses, 6,826 staff, median pay $78,000. Baylight District: 12 businesses, 2,802 staff, median pay $136,839. Piedmont Ave, 2,729. Jack London, 2,034. Good numbers, and I'll take them. Now read down. **Chinatown: 11 businesses, 118 staff, median pay $46,000, retail vitality 11.32, boom index flat at zero.** Family retail, income tier 3. A hundred and eighteen jobs across the whole district — same as last Cycle, which means nothing got better and nothing got worse, and \"nothing got worse\" is not a plan. Temescal: 198 staff, 13 businesses, clinic employer, boom index still negative at -0.7.\n\n**Out of work.** Temescal, 165 out of 2,146 adults — still the worst count in the city. San Antonio, 104. Dimond, 97. Glenview, 96. Eastlake, 92. Ivy Hill, 89. **Chinatown, 82 out of 1,506.** East Oakland, 87. These are the quiet numbers, and they don't make headlines.\n\n**What else is moving.** Baylight District took a fresh -8 this Cycle — **Oakland Casino Town lost 3 employees, sector impact services/retail, four Cycles to run.** Baylight's boom index is at 1.0 and it's still shedding service jobs; that's the pattern I don't like. Adams Point's church carryover is at cycle 1 of 4, -8. The mail truck brought one business an overdue payment — growth up half a point, someone got paid late and it helped them anyway — and handed another an insurance premium hike, growth down half a point for no reason they earned. Building inspector passed one, growth flat. Floor, not ceiling.\n\n**What I want.** Ivy Hill is closing businesses and bleeding shocks. Chinatown's 118 jobs have been flat for two Cycles. Temescal's 165 unemployed don't show up in anybody's headline. Our economic development plans have to reach the people on the ground — not the neighborhoods with the loudest voices and the biggest payrolls. If 13 people in one neighborhood make headlines, that's 13 too many. If 165 in another never make them, that's a failure of our reporting and our plans.\n\nThat's my report. On the record.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-24T11:46:03.646Z",
+  "usage": {
+    "prompt_tokens": 3730,
+    "completion_tokens": 779,
+    "cost": 0.0007
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "business jobs employment retail",
+    "entries": 2,
+    "fromSearch": 1,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00036",
+    "id": "KRUiCCQ1DSZXCeYyuaZgtA",
+    "customId": "cp-POP-00036-c117-CIVIC-datawake-2026-11-24"
+  }
+}

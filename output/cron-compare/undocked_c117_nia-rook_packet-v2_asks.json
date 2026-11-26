@@ -1,0 +1,122 @@
+[
+  {
+    "pop": "POP-00957",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00957\",\"name\":\"David Okonkwo\",\"role\":\"UNDOCKED pilot\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Nia Rook\",\"question\":\"What were you trying to accomplish on this run, and how did you decide to take the Local Sector Survey contract? How do you think about achievement points compared with credits? Speak from your life. If the question assumes something that has not happened to you, say so plainly.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"David Okonkwo — UNDOCKED pilot\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null,\"ownLife\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"UNDOCKED episode: David Okonkwo, Tuesday night. Standings: Marguerite Kimball-Ostrow leads the board — rank #1, 49.08 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: David Okonkwo — Retired Insurance Adjuster.\",\"src\":\"undocked:undocked-pop00957-Y3C13\",\"id\":\"F-c580a4921931\"},{\"t\":\"FACT\",\"text\":\"David Okonkwo's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; took the Local Sector Survey contract; mined 8 iron ore; earned Wanderer (9 points), First Steps (5 points), Maiden Jump (5 points), Voyager I (3.6 points), Cartographer (2.7 points), The Truth Is Out There (2.5 points), Chronicler (1.2 points), Voyager II (0.9 points), Far Traveler (0.01 points), Jump Master (0.01 points) and Prospector I (0.01 points); came out even on credits; flew until the show's time ran out.\",\"src\":\"undocked:undocked-pop00957-Y3C13\",\"id\":\"F-08d72c8fa967\"},{\"t\":\"FACT\",\"text\":\"David Okonkwo — Retired Insurance Adjuster (ledger)\",\"src\":\"undocked:undocked-pop00957-Y3C13\",\"id\":\"F-913c516759d5\"},{\"t\":\"FACT\",\"text\":\"David Okonkwo — UNDOCKED pilot\",\"src\":\"Simulation_Ledger profile for POP-00957\",\"id\":\"F-c839a73fa5d1\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00957",
+        "name": "David Okonkwo",
+        "role": "UNDOCKED pilot",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Nia Rook",
+        "question": "What were you trying to accomplish on this run, and how did you decide to take the Local Sector Survey contract? How do you think about achievement points compared with credits? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "David Okonkwo — UNDOCKED pilot",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null,
+        "ownLife": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "UNDOCKED episode: David Okonkwo, Tuesday night. Standings: Marguerite Kimball-Ostrow leads the board — rank #1, 49.08 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: David Okonkwo — Retired Insurance Adjuster.",
+          "src": "undocked:undocked-pop00957-Y3C13",
+          "id": "F-c580a4921931"
+        },
+        {
+          "t": "FACT",
+          "text": "David Okonkwo's Tuesday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline, Maplevale and Miaplacidus; took the Local Sector Survey contract; mined 8 iron ore; earned Wanderer (9 points), First Steps (5 points), Maiden Jump (5 points), Voyager I (3.6 points), Cartographer (2.7 points), The Truth Is Out There (2.5 points), Chronicler (1.2 points), Voyager II (0.9 points), Far Traveler (0.01 points), Jump Master (0.01 points) and Prospector I (0.01 points); came out even on credits; flew until the show's time ran out.",
+          "src": "undocked:undocked-pop00957-Y3C13",
+          "id": "F-08d72c8fa967"
+        },
+        {
+          "t": "FACT",
+          "text": "David Okonkwo — Retired Insurance Adjuster (ledger)",
+          "src": "undocked:undocked-pop00957-Y3C13",
+          "id": "F-913c516759d5"
+        },
+        {
+          "t": "FACT",
+          "text": "David Okonkwo — UNDOCKED pilot",
+          "src": "Simulation_Ledger profile for POP-00957",
+          "id": "F-c839a73fa5d1"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "ownLife": true,
+    "ownWake": {
+      "reporter": "Nia Rook",
+      "question": "What were you trying to accomplish on this run, and how did you decide to take the Local Sector Survey contract? How do you think about achievement points compared with credits?"
+    },
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

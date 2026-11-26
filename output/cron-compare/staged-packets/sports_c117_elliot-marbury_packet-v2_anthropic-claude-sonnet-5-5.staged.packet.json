@@ -1,0 +1,382 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00166",
+    "name": "Elliot Marbury",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Travis Coles — 3 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year — what the line proves, on what sample, and what would disprove it",
+    "approach": "Data-desk approach: this slice is one player's season-by-season line off the dossier, the rates worked out from it, and two peers at the same job. Third person, dry, source-forward. One hard claim the numbers carry, with its sample size stated; a thin season is variance, not identity. Say which number next season would kill the claim. No quotes, no scene, no clubhouse — the memo is the proof. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "beat-slice",
+      "domain": "data-desk",
+      "hood": null,
+      "facts": [
+        "Travis Coles — SP, Athletics; 3 seasons on the dossier",
+        "Travis Coles 2041 ATH: 32 G, 32 GS, 22-4, 0 SV, 215 IP, 166 H, 65 ER, 25 HR, 39 BB, 254 SO, ERA 2.72",
+        "Travis Coles 2040 WSH: 33 G, 33 GS, 13-8, 0 SV, 219.1 IP, 177 H, 50 ER, 17 HR, 61 BB, 207 SO, ERA 2.05",
+        "Travis Coles 2039 WSH: 33 G, 33 GS, 9-15, 0 SV, 197.2 IP, 179 H, 87 ER, 26 HR, 51 BB, 198 SO, ERA 3.96",
+        "Travis Coles 2041 rates (215 IP): 10.6 K per 9, 1.6 BB per 9, 6.51 K per BB (worked from the season line)",
+        "Travis Coles 2040 rates (219.1 IP): 8.5 K per 9, 2.5 BB per 9, 3.39 K per BB (worked from the season line)",
+        "Travis Coles 2039 rates (197.2 IP): 9.0 K per 9, 2.3 BB per 9, 3.88 K per BB (worked from the season line)",
+        "Peer — Benji Dillon (SP, Athletics) 2041 ATH: 35 G, 28 GS, 10-8, 1 SV, 150.1 IP, 155 H, 74 ER, 16 HR, 65 BB, 132 SO, ERA 4.43",
+        "Peer — Benji Dillon 2041 rates (150.1 IP): 7.9 K per 9, 3.9 BB per 9, 2.03 K per BB (worked from the season line)",
+        "Peer — Henry Rivas (SP, Athletics) 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64",
+        "Peer — Henry Rivas 2041 rates (136.1 IP): 8.8 K per 9, 1.6 BB per 9, 5.54 K per BB (worked from the season line)",
+        "This cycle (feed notes, off-season): The one mark on the year came in World Series game 2, when he and Clark Saryan each gave up 2 runs in relief of Travis Coles."
+      ],
+      "priorCycle": "DOSSIER",
+      "note": "subject is on this cycle's feed",
+      "engineHooks": [],
+      "roomIsYours": "the order the columns are read in, which season is the hinge, what the peer band makes ordinary or strange",
+      "pageVoices": [],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "beat-data-desk",
+    "hood": null,
+    "src": "output/player_truesource_mirror.json Travis Coles @C117",
+    "plan": {
+      "focus": "Travis Coles's 2041 walk rate against his own two prior seasons and the 2041 peer band on the Athletics staff."
+    },
+    "runningStories": []
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Elliot Marbury",
+        "text": "Whether Coles changed his pitch mix or mechanics between 2040 and 2041 is not in the dossier and would require a separate source.",
+        "usable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "Whether the World Series game 2 relief appearance — where he and Clark Saryan each gave up 2 runs — affected his postseason line is not in the dossier.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C117",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c5606da08cb9"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles — 3 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+      "src": "output/player_truesource_mirror.json Travis Coles @C117",
+      "id": "F-85692f225047"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles's 2041 line against 2 earlier seasons and 2 peers.",
+      "src": "output/player_truesource_mirror.json Travis Coles @C117",
+      "id": "F-480554020509"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles — SP, Athletics; 3 seasons on the dossier",
+      "src": "output/player_truesource_mirror.json Travis Coles",
+      "id": "F-98523943218c"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2041 ATH: 32 G, 32 GS, 22-4, 0 SV, 215 IP, 166 H, 65 ER, 25 HR, 39 BB, 254 SO, ERA 2.72",
+      "src": "output/player_truesource_mirror.json Travis Coles",
+      "id": "F-e886192b26cf"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2040 WSH: 33 G, 33 GS, 13-8, 0 SV, 219.1 IP, 177 H, 50 ER, 17 HR, 61 BB, 207 SO, ERA 2.05",
+      "src": "output/player_truesource_mirror.json Travis Coles",
+      "id": "F-d215fe318911"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2039 WSH: 33 G, 33 GS, 9-15, 0 SV, 197.2 IP, 179 H, 87 ER, 26 HR, 51 BB, 198 SO, ERA 3.96",
+      "src": "output/player_truesource_mirror.json Travis Coles",
+      "id": "F-a6ac44702062"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2041 rates (215 IP): 10.6 K per 9, 1.6 BB per 9, 6.51 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Travis Coles",
+      "id": "F-26a02a50b92c"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2040 rates (219.1 IP): 8.5 K per 9, 2.5 BB per 9, 3.39 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Travis Coles",
+      "id": "F-a89097d47e91"
+    },
+    {
+      "t": "FACT",
+      "text": "Travis Coles 2039 rates (197.2 IP): 9.0 K per 9, 2.3 BB per 9, 3.88 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Travis Coles",
+      "id": "F-780c3e454f03"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Benji Dillon (SP, Athletics) 2041 ATH: 35 G, 28 GS, 10-8, 1 SV, 150.1 IP, 155 H, 74 ER, 16 HR, 65 BB, 132 SO, ERA 4.43",
+      "src": "output/player_truesource_mirror.json Benji Dillon",
+      "id": "F-0ca9a1a03748"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Benji Dillon 2041 rates (150.1 IP): 7.9 K per 9, 3.9 BB per 9, 2.03 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Benji Dillon",
+      "id": "F-abeac4aace05"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Henry Rivas (SP, Athletics) 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-8ff347d1068a"
+    },
+    {
+      "t": "FACT",
+      "text": "Peer — Henry Rivas 2041 rates (136.1 IP): 8.8 K per 9, 1.6 BB per 9, 5.54 K per BB (worked from the season line)",
+      "src": "output/player_truesource_mirror.json Henry Rivas",
+      "id": "F-30d206f5b045"
+    },
+    {
+      "t": "FACT",
+      "text": "This cycle (feed notes, off-season): The one mark on the year came in World Series game 2, when he and Clark Saryan each gave up 2 runs in relief of Travis Coles.",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl @C117",
+      "id": "F-f754d3f99f62"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C13, Spring, holiday=none",
+      "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+      "id": "F-f7ed4e9a474c"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line. No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen's mouth. Unnamed voices are yours. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "marbury-data-desk-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Put one audit-grade claim in the paper: a single player's Packet-backed season lines, the rates the Packet has already worked from them, and the peer band, with the sample stated. The memo is the proof. One falsifiable claim the numbers carry is success; a quote, a scene, fan heat, elegy, or a number the Packet does not hold is not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person data-desk memo, source-forward",
+      "targetWords": "evidence-bounded; 350-600",
+      "opening": "the one Packet-backed season line or rate that carries the claim"
+    },
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "canonBlockers": [
+      "a statistic or rate attributed to the wrong player or the wrong season, or two players' lines merged into one subject",
+      "a rate, split, projection, or advanced metric the Packet does not supply",
+      "an invented award, contract, salary, injury, roster move, result, quote, interview, or front-office act",
+      "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+      "a one-season or thin-sample line presented as settled identity"
+    ]
+  },
+  "manifest": {
+    "id": "AM-44829836d1ec",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c5606da08cb9",
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-85692f225047",
+        "t": "FACT",
+        "text": "Travis Coles — 3 seasons on the dossier, 2041 the latest | pitcher command memo, multi-year",
+        "src": "output/player_truesource_mirror.json Travis Coles @C117"
+      },
+      {
+        "id": "F-480554020509",
+        "t": "FACT",
+        "text": "Travis Coles's 2041 line against 2 earlier seasons and 2 peers.",
+        "src": "output/player_truesource_mirror.json Travis Coles @C117"
+      },
+      {
+        "id": "F-98523943218c",
+        "t": "FACT",
+        "text": "Travis Coles — SP, Athletics; 3 seasons on the dossier",
+        "src": "output/player_truesource_mirror.json Travis Coles"
+      },
+      {
+        "id": "F-e886192b26cf",
+        "t": "FACT",
+        "text": "Travis Coles 2041 ATH: 32 G, 32 GS, 22-4, 0 SV, 215 IP, 166 H, 65 ER, 25 HR, 39 BB, 254 SO, ERA 2.72",
+        "src": "output/player_truesource_mirror.json Travis Coles"
+      },
+      {
+        "id": "F-d215fe318911",
+        "t": "FACT",
+        "text": "Travis Coles 2040 WSH: 33 G, 33 GS, 13-8, 0 SV, 219.1 IP, 177 H, 50 ER, 17 HR, 61 BB, 207 SO, ERA 2.05",
+        "src": "output/player_truesource_mirror.json Travis Coles"
+      },
+      {
+        "id": "F-a6ac44702062",
+        "t": "FACT",
+        "text": "Travis Coles 2039 WSH: 33 G, 33 GS, 9-15, 0 SV, 197.2 IP, 179 H, 87 ER, 26 HR, 51 BB, 198 SO, ERA 3.96",
+        "src": "output/player_truesource_mirror.json Travis Coles"
+      },
+      {
+        "id": "F-26a02a50b92c",
+        "t": "FACT",
+        "text": "Travis Coles 2041 rates (215 IP): 10.6 K per 9, 1.6 BB per 9, 6.51 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Travis Coles"
+      },
+      {
+        "id": "F-a89097d47e91",
+        "t": "FACT",
+        "text": "Travis Coles 2040 rates (219.1 IP): 8.5 K per 9, 2.5 BB per 9, 3.39 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Travis Coles"
+      },
+      {
+        "id": "F-780c3e454f03",
+        "t": "FACT",
+        "text": "Travis Coles 2039 rates (197.2 IP): 9.0 K per 9, 2.3 BB per 9, 3.88 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Travis Coles"
+      },
+      {
+        "id": "F-0ca9a1a03748",
+        "t": "FACT",
+        "text": "Peer — Benji Dillon (SP, Athletics) 2041 ATH: 35 G, 28 GS, 10-8, 1 SV, 150.1 IP, 155 H, 74 ER, 16 HR, 65 BB, 132 SO, ERA 4.43",
+        "src": "output/player_truesource_mirror.json Benji Dillon"
+      },
+      {
+        "id": "F-abeac4aace05",
+        "t": "FACT",
+        "text": "Peer — Benji Dillon 2041 rates (150.1 IP): 7.9 K per 9, 3.9 BB per 9, 2.03 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Benji Dillon"
+      },
+      {
+        "id": "F-8ff347d1068a",
+        "t": "FACT",
+        "text": "Peer — Henry Rivas (SP, Athletics) 2041 ATH: 22 G, 22 GS, 11-4, 0 SV, 136.1 IP, 123 H, 40 ER, 16 HR, 24 BB, 133 SO, ERA 2.64",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-30d206f5b045",
+        "t": "FACT",
+        "text": "Peer — Henry Rivas 2041 rates (136.1 IP): 8.8 K per 9, 1.6 BB per 9, 5.54 K per BB (worked from the season line)",
+        "src": "output/player_truesource_mirror.json Henry Rivas"
+      },
+      {
+        "id": "F-f754d3f99f62",
+        "t": "FACT",
+        "text": "This cycle (feed notes, off-season): The one mark on the year came in World Series game 2, when he and Clark Saryan each gave up 2 runs in relief of Travis Coles.",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl @C117"
+      },
+      {
+        "id": "F-f7ed4e9a474c",
+        "t": "FACT",
+        "text": "Calendar: Y3C13, Spring, holiday=none",
+        "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Elliot Marbury",
+        "text": "Whether Coles changed his pitch mix or mechanics between 2040 and 2041 is not in the dossier and would require a separate source.",
+        "publishable": false
+      },
+      {
+        "from": "Elliot Marbury",
+        "text": "Whether the World Series game 2 relief appearance — where he and Clark Saryan each gave up 2 runs — affected his postseason line is not in the dossier.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+      "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+      "a blank or thin sample named as blank or thin rather than filled in"
+    ],
+    "textureConditions": [
+      "every named player, team, position, season, and source must come from the Packet",
+      "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+      "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+      "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+    ],
+    "forbiddenClaimClasses": []
+  }
+}

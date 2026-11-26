@@ -1,0 +1,13 @@
+# Rockridge, in their own words
+
+## Yu Zen — Commercial Insurance Broker
+
+> I've been in since C105 — that's the workplace accident. Twelve cycles now, give or take. The care's been steady, I'll say that. The nurses know my name, my wife's been here every visiting window, and the doctors have been straight with me about what recovery looks like. It's not fast. But I'm stable, and stable is a lot more than some folks get. You asked about the path out — from my side of the bed, it's about getting strong enough to walk out on my own two feet, then getting home to my kids. That's the whole plan. I know Chinatown's carrying the heaviest load in this city, and I know there are more sick people than there are beds with names attached. I'm one of the lucky ones — I've got a bed, I've got insurance, I've got family. Not everybody in this city can say that, and that gap keeps me up at night as much as the recovery does.
+
+## Maurice Franklin — Drone Fleet Coordinator
+
+> A severe flu can land you in the hospital when it stops being just a flu. I kept telling myself it was a bad cold, pushed through work, and by the time I couldn't catch my breath walking to the kitchen, my body had made the decision for me. The recovery timeline from the inside is slow and humbling. You don't bounce back; you crawl back. Days blur together, and every small step—sitting up, taking a few steps, eating a real meal—feels like a victory. And even after you're discharged, you're not done. You're still weak, still tired, still catching your breath. It took me a long while to feel like myself again, and I'm still careful. The hospital stay is just the beginning; the real recovery is the quiet, patient work of getting your strength back, day by day.
+
+## Jett Walker — Plumber
+
+> *(I let out a long breath, the day's grime still under my nails. I don't even have to think about it—my feet already know the way.)* The Temple. Not during a service, not when it's busy. Late, like now, when the weekend market's just packing up and the only light left is the one over the side door. I'll sit on the low wall out back, the one that catches the last bit of warmth from the day. It's quiet enough to hear the ice clinking in a glass from the bar down the street, and the smell of the incense from the evening prayers is still hanging in the air. That's where I feel like myself. Not the guy with the pipe wrench or the one who's gotta be the center of the room. Just a guy who's been through some stuff, sitting still for a minute. I can almost hear her voice, telling me to slow down. So I sit there, and I let the quiet do its work.

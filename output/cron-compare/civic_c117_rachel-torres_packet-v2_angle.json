@@ -1,0 +1,1462 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "rachel-torres",
+  "freeAngle": "free-rows",
+  "pass": false,
+  "morningTools": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Crime_Metrics",
+        "match": "Temescal"
+      },
+      "resultChars": 279
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "OARI West Oakland de-escalation"
+      },
+      "resultChars": 3238
+    },
+    {
+      "tool": "ask_worker",
+      "input": {
+        "office": "CHIEF-POLICE",
+        "question": "Temescal is the one hotspot this cycle at 8 incidents, 2 arrests and 3 in custody at the close. How many of those 8 incidents were closed with no report filed or reclassified, and why is clearance citywide sitting at 19 to 26 percent?"
+      },
+      "resultChars": 3137
+    }
+  ],
+  "workerAnswers": [
+    {
+      "question": "Temescal is the one hotspot this cycle at 8 incidents, 2 arrests and 3 in custody at the close. How many of those 8 incidents were closed with no report filed or reclassified, and why is clearance citywide sitting at 19 to 26 percent?",
+      "officeId": "CHIEF-POLICE",
+      "popid": "POP-00136",
+      "name": "Rafael Montez",
+      "title": "Police Chief",
+      "text": "I'm not going to give you a number I don't have.\n\nYou're asking me how many of Temescal's 8 incidents were closed with no report filed or reclassified. That's a records question and the honest answer is: I'd have to pull the case files to tell you, and I'm not going to improvise a figure for the Tribune on something that specific. If the number is zero, I'll say zero. If it isn't, I'll say that too — and say why, case by case. What I can tell you right now is that Temescal is the one hotspot on the sheet at 8 incidents, and 2 arrests with 3 in custody at close is not a clearance rate of 2 in 8 — an arrest is an intake, not a closure, and clearance is worked after the fact, not on the same clock. I'm not going to let those two get conflated in print.\n\nOn the citywide clearance rate — 19 to 26 percent, with Fruitvale the low at 19 and three neighborhoods at 26 — I'll give it to you straight instead of dressing it up. That range is not good enough, and I've said so internally, not just to you. Three things drive it:\n\n**Cases that don't close in one cycle stay open, and they compete for the same investigators.** Arrests and clearance are on different clocks. We took 28 intakes against 133 incidents this cycle, released 24, and ended with 52 in custody. The cases that get an arrest are the easy ones — the caught-in-the-act, the named suspect, the domestic where the parties know each other. The rest — property crime, no witness, no camera, a description that won't survive a lineup — those don't close in one cycle, and when follow-through thins, they don't close at all.\n\n**Our investigators are being asked to do more with the same bench.** That's a resourcing and a prioritization question, and I own it. When you've got 133 incidents and roughly two dozen arrests' worth of leads to work, something has to give, and what gives is the case with no victim pushing and no detective's gut telling them it'll break.\n\n**And the trust piece, which I'll say on the record.** Clearance in the neighborhoods that need it most — like Fruitvale at 19 — lags partly because people don't talk to us in those neighborhoods. If you want a case closed, you need someone who saw something to tell you. That's not an excuse, it's a diagnosis, and it's exactly what I've been pushing on with the command staff: why our follow-through is lagging where it matters most.\n\nWhat I'm doing about it, concretely: the command staff review is where I'm pressing case backlog and follow-through by district, not just new intakes. And the patrol strategy stays balanced this cycle — the indices are flat to slightly down with no single district deteriorating sharply enough to justify pulling resources off even coverage. Balanced posture keeps the response times steady and keeps the OARI co-response coordination intact, and that's what protects the clearance work in the long run.\n\nSend me a written request for the Temescal case dispositions and I'll give you the actual number with the case numbers behind it. I'd rather you print \"we're checking, here's the file\" than a figure I made up in a hallway.",
+      "finish": "stop"
+    }
+  ],
+  "workerAsksUsed": 1,
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00057",
+      "name": "Sgt. Rachel Torres",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Decide what, if anything, you want to write this cycle"
+    },
+    "signal": {
+      "kind": "own-pick",
+      "hood": null,
+      "score": null,
+      "src": "the record of C117"
+    },
+    "exposure": {
+      "basis": [
+        "own-pick"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00136",
+          "name": "Rafael Montez",
+          "profile": "Rafael Montez — Police Chief — Oakland Police Department — age 45",
+          "role": "Police Chief",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-00136",
+            "rowName": "Rafael Montez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00137",
+          "name": "Kimberly Cho",
+          "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department — age 56",
+          "role": "DEPUTY CHIEF OF OPERATIONS",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-00137",
+            "rowName": "Kimberly Cho",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00138",
+          "name": "Leonard Briggs",
+          "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department — age 52",
+          "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-00138",
+            "rowName": "Leonard Briggs",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00139",
+          "name": "Samantha Viteri",
+          "profile": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50",
+          "role": "INTERNAL AFFAIRS DIVISION LEAD",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-00139",
+            "rowName": "Samantha Viteri",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00140",
+          "name": "Marcus Hollowell",
+          "profile": "Marcus Hollowell — FIRE CHIEF — Oakland Fire Department — age 53",
+          "role": "FIRE CHIEF",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-00140",
+            "rowName": "Marcus Hollowell",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00141",
+          "name": "Priya Narang",
+          "profile": "Priya Narang — EMS DIRECTOR — Oakland Fire Department — age 47",
+          "role": "EMS DIRECTOR",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-00141",
+            "rowName": "Priya Narang",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01021",
+          "name": "Vanessa Tran-Muñoz",
+          "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40",
+          "role": "OARI Program Director",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-01021",
+            "rowName": "Vanessa Tran-Muñoz",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01141",
+          "name": "Dolores Nwachukwu",
+          "profile": "Dolores Nwachukwu — Police Captain — Oakland Police Department — age 48",
+          "role": "Police Captain",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-01141",
+            "rowName": "Dolores Nwachukwu",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01142",
+          "name": "Tomas Reinholt",
+          "profile": "Tomas Reinholt — Police Lieutenant — Oakland Police Department — age 44",
+          "role": "Police Lieutenant",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-01142",
+            "rowName": "Tomas Reinholt",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01151",
+          "name": "Luis Ferreira-Nash",
+          "profile": "Luis Ferreira-Nash — Deputy Fire Chief — Oakland Fire Department — age 50",
+          "role": "Deputy Fire Chief",
+          "hood": null,
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-01151",
+            "rowName": "Luis Ferreira-Nash",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave — C117 in Piedmont Ave: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near a bench on the hospital grounds — age 39",
+          "role": "Former Designated Hitter, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-00001",
+            "rowName": "Vinnie Keane",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Piedmont Ave — C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner — age 38",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "output/beats/Crime_Metrics.jsonl @C117",
+            "pop": "POP-00018",
+            "rowName": "Benji Dillon",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "133 incidents across 22 neighborhoods this cycle",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-8eceb6a5d222"
+      },
+      {
+        "t": "FACT",
+        "text": "Adams Point: 5 incidents (+0 vs C116), response 9.5 min, clearance 21%, property index 42, violent index 26",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-5ba44ef9fedc"
+      },
+      {
+        "t": "FACT",
+        "text": "Baylight District: 5 incidents (-1 vs C116), response 9.4 min, clearance 25%, property index 32, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-28f5bc318456"
+      },
+      {
+        "t": "FACT",
+        "text": "Brooklyn: 6 incidents (+1 vs C116), response 10.3 min, clearance 24%, property index 38, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-9e3b3419b368"
+      },
+      {
+        "t": "FACT",
+        "text": "Chinatown: 4 incidents (+0 vs C116), response 10.6 min, clearance 24%, property index 38, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-43906ca6cd40"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond: 7 incidents (+2 vs C116), response 10.6 min, clearance 21%, property index 41, violent index 28",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-7f52c1e25296"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: 7 incidents (-1 vs C116), response 9.5 min, clearance 22%, property index 39, violent index 21",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-c77716459a4d"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland: 8 incidents (+3 vs C116), response 9.8 min, clearance 21%, property index 41, violent index 34",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-4d4d7ecabe17"
+      },
+      {
+        "t": "FACT",
+        "text": "Eastlake: 6 incidents (+0 vs C116), response 9.4 min, clearance 20%, property index 42, violent index 26",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-1b79207bc77a"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale: 8 incidents (+2 vs C116), response 10 min, clearance 19%, property index 37, violent index 32",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-cec3cd2b5152"
+      },
+      {
+        "t": "FACT",
+        "text": "Glenview: 6 incidents (+1 vs C116), response 9.8 min, clearance 22%, property index 42, violent index 30",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-d9eb6d903e20"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake: 6 incidents (-1 vs C116), response 10.8 min, clearance 26%, property index 40, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-a5df4f237f12"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Hill: 4 incidents (-2 vs C116), response 9.5 min, clearance 22%, property index 40, violent index 29",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-3d5d383a4901"
+      },
+      {
+        "t": "FACT",
+        "text": "Jack London: 7 incidents (+2 vs C116), response 10.6 min, clearance 20%, property index 40, violent index 22",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-e5d50029724f"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO: 5 incidents (+0 vs C116), response 10.8 min, clearance 25%, property index 39, violent index 23",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-7d7bfc754d60"
+      },
+      {
+        "t": "FACT",
+        "text": "Lake Merritt: 6 incidents (-1 vs C116), response 9.7 min, clearance 21%, property index 38, violent index 24",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-a1656a5cc951"
+      },
+      {
+        "t": "FACT",
+        "text": "Laurel: 6 incidents (+0 vs C116), response 10.6 min, clearance 21%, property index 38, violent index 28",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-848d62135358"
+      },
+      {
+        "t": "FACT",
+        "text": "Piedmont Ave: 6 incidents (+0 vs C116), response 9.6 min, clearance 23%, property index 37, violent index 25",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-1a3970822092"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: 5 incidents (-1 vs C116), response 10.3 min, clearance 24%, property index 36, violent index 25",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-35a5deed891c"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio: 5 incidents (+0 vs C116), response 10 min, clearance 26%, property index 42, violent index 29",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-08c47cb09d91"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal: 8 incidents (+2 vs C116), response 10 min, clearance 22%, property index 50, violent index 25",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-638bd4fdc353"
+      },
+      {
+        "t": "FACT",
+        "text": "Uptown: 6 incidents (+0 vs C116), response 10.8 min, clearance 21%, property index 37, violent index 24",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-bd1e250451c0"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland: 7 incidents (+2 vs C116), response 10.7 min, clearance 26%, property index 38, violent index 27",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-d06ca02fb62a"
+      },
+      {
+        "t": "FACT",
+        "text": "Hotspots this cycle (over the city's own bar): Temescal (1.15× the city median)",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-3a7e0066e0d6"
+      },
+      {
+        "t": "FACT",
+        "text": "Moved this cycle — rising: none; easing: Fruitvale",
+        "src": "output/beats/Crime_Metrics.jsonl @C117",
+        "id": "F-26a06fb951cf"
+      },
+      {
+        "t": "FACT",
+        "text": "Citywide custody this cycle: 28 arrests (0 tracked, 28 other residents); 52 in custody at the close; 24 left",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 city",
+        "id": "F-f8e980230281"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Downtown",
+        "id": "F-af32aefd3d50"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Grand Lake",
+        "id": "F-bdcc04292f5c"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 East Oakland",
+        "id": "F-f3ca9db455d2"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Fruitvale",
+        "id": "F-89b334b9c81d"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Temescal",
+        "id": "F-ebe5f0050664"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 West Oakland",
+        "id": "F-4b8d3b306110"
+      },
+      {
+        "t": "FACT",
+        "text": "Adams Point: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Adams Point",
+        "id": "F-8a2a31608342"
+      },
+      {
+        "t": "FACT",
+        "text": "Baylight District: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Baylight District",
+        "id": "F-a0277bf5d616"
+      },
+      {
+        "t": "FACT",
+        "text": "Brooklyn: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Brooklyn",
+        "id": "F-9e4f987fc568"
+      },
+      {
+        "t": "FACT",
+        "text": "Chinatown: 4 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Chinatown",
+        "id": "F-941d30807d20"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond: 7 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Dimond",
+        "id": "F-b1c05e18d074"
+      },
+      {
+        "t": "FACT",
+        "text": "Eastlake: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Eastlake",
+        "id": "F-f7cfddf87586"
+      },
+      {
+        "t": "FACT",
+        "text": "Glenview: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Glenview",
+        "id": "F-5ad1859e3c46"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Hill: 4 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Ivy Hill",
+        "id": "F-52f647bee2ac"
+      },
+      {
+        "t": "FACT",
+        "text": "Jack London: 7 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Jack London",
+        "id": "F-838cf868c7da"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 KONO",
+        "id": "F-0cf3276383b4"
+      },
+      {
+        "t": "FACT",
+        "text": "Lake Merritt: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Lake Merritt",
+        "id": "F-0f6be8f0a990"
+      },
+      {
+        "t": "FACT",
+        "text": "Laurel: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Laurel",
+        "id": "F-92fdfb9c9bd4"
+      },
+      {
+        "t": "FACT",
+        "text": "Piedmont Ave: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Piedmont Ave",
+        "id": "F-4b0bbdf7f90a"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Rockridge",
+        "id": "F-984678da0296"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 San Antonio",
+        "id": "F-4350d2c32db6"
+      },
+      {
+        "t": "FACT",
+        "text": "Uptown: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Uptown",
+        "id": "F-fa91262a2537"
+      },
+      {
+        "t": "FACT",
+        "text": "oari_van → West Oakland: OARI talks it down — a crisis ended without cuffs, and the data point everyone cites.",
+        "src": "output/world_summary_c117.md ## Chaos Events",
+        "id": "F-b1a9a5b725bd"
+      },
+      {
+        "t": "FACT",
+        "text": "deescalated | OARI talks it down — a crisis ended without cuffs, and the data point everyone cites. | West Oakland | mag 0.05",
+        "src": "output/world_summary_c117.md ## What Moved › chaos-event (Ripple_Ledger)",
+        "id": "F-5da67e9b2d64"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "pass": "true when nothing here is a piece you want to write this cycle; then give only why",
+        "chase": "string — what you want to write this cycle and how you will go after it, in your own voice. Not JSON.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "A target is someone you want to hear from; each must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "offices",
+    "candidates": [
+      {
+        "pop": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "hood": null,
+        "profile": "Rafael Montez — Police Chief — Oakland Police Department — age 45",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00136",
+          "rowName": "Rafael Montez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00137",
+        "name": "Kimberly Cho",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "hood": null,
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department — age 56",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00137",
+          "rowName": "Kimberly Cho",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00138",
+        "name": "Leonard Briggs",
+        "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+        "hood": null,
+        "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department — age 52",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00138",
+          "rowName": "Leonard Briggs",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00139",
+        "name": "Samantha Viteri",
+        "role": "INTERNAL AFFAIRS DIVISION LEAD",
+        "hood": null,
+        "profile": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00139",
+          "rowName": "Samantha Viteri",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00140",
+        "name": "Marcus Hollowell",
+        "role": "FIRE CHIEF",
+        "hood": null,
+        "profile": "Marcus Hollowell — FIRE CHIEF — Oakland Fire Department — age 53",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00140",
+          "rowName": "Marcus Hollowell",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00141",
+        "name": "Priya Narang",
+        "role": "EMS DIRECTOR",
+        "hood": null,
+        "profile": "Priya Narang — EMS DIRECTOR — Oakland Fire Department — age 47",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00141",
+          "rowName": "Priya Narang",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "hood": null,
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-01021",
+          "rowName": "Vanessa Tran-Muñoz",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "role": "Police Captain",
+        "hood": null,
+        "profile": "Dolores Nwachukwu — Police Captain — Oakland Police Department — age 48",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-01141",
+          "rowName": "Dolores Nwachukwu",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01142",
+        "name": "Tomas Reinholt",
+        "role": "Police Lieutenant",
+        "hood": null,
+        "profile": "Tomas Reinholt — Police Lieutenant — Oakland Police Department — age 44",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-01142",
+          "rowName": "Tomas Reinholt",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01151",
+        "name": "Luis Ferreira-Nash",
+        "role": "Deputy Fire Chief",
+        "hood": null,
+        "profile": "Luis Ferreira-Nash — Deputy Fire Chief — Oakland Fire Department — age 50",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-01151",
+          "rowName": "Luis Ferreira-Nash",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave — C117 in Piedmont Ave: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near a bench on the hospital grounds — age 39",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00001",
+          "rowName": "Vinnie Keane",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "hood": "Piedmont Ave",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Piedmont Ave — C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner — age 38",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00018",
+          "rowName": "Benji Dillon",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00023",
+        "name": "Gregory Mims",
+        "role": "Organized Crime",
+        "hood": "West Oakland",
+        "profile": "Gregory Mims — Organized Crime — West Oakland — C117 in West Oakland: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner — age 52",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00023",
+          "rowName": "Gregory Mims",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00030",
+        "name": "Derek Simmons",
+        "role": "A's Marketing Director",
+        "hood": "Jack London",
+        "profile": "Derek Simmons — A's Marketing Director — Jack London — C117 in Jack London: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for — age 39",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00030",
+          "rowName": "Derek Simmons",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00031",
+        "name": "Martin Richards",
+        "role": "Third Baseman, New York Mets",
+        "hood": "Piedmont Ave",
+        "profile": "Martin Richards — Third Baseman, New York Mets — Piedmont Ave — C117 in Fruitvale: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for — age 30",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00031",
+          "rowName": "Martin Richards",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00034",
+        "name": "Avery Santana",
+        "role": "Mayor of Oakland",
+        "hood": "Rockridge",
+        "profile": "Avery Santana — Mayor of Oakland — Rockridge — C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for — age 56",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00034",
+          "rowName": "Avery Santana",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00038",
+        "name": "Theo Park",
+        "role": "Communications Director",
+        "hood": "Rockridge",
+        "profile": "Theo Park — Communications Director — Rockridge — C117 in Rockridge: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. — age 53",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00038",
+          "rowName": "Theo Park",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00039",
+        "name": "Simone Ellis",
+        "role": "Chief Legal Counsel",
+        "hood": "Lake Merritt",
+        "profile": "Simone Ellis — Chief Legal Counsel — Lake Merritt — C117 in Lake Merritt: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. — age 57",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00039",
+          "rowName": "Simone Ellis",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00046",
+        "name": "Manny Ellen",
+        "role": "Elections Office",
+        "hood": "Lake Merritt",
+        "profile": "Manny Ellen — Elections Office — Lake Merritt — C117 in Lake Merritt: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a small park — age 43",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00046",
+          "rowName": "Manny Ellen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "hood": "Baylight District",
+        "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District — C117 in Baylight District: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. — age 25",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00050",
+          "rowName": "Ernesto Quintero",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00080",
+        "name": "Richie Haynes",
+        "role": "Starting Pitcher, Midland RockHounds (AA)",
+        "hood": "Piedmont Ave",
+        "profile": "Richie Haynes — Starting Pitcher, Midland RockHounds (AA) — Piedmont Ave — C117 in Piedmont Ave: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. — age 20",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "output/beats/Crime_Metrics.jsonl @C117",
+          "pop": "POP-00080",
+          "rowName": "Richie Haynes",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "The gap between arrests and clearance in C117, with Temescal as the test case: how an incident gets counted, how an arrest gets counted, and how a clearance gets counted.",
+      "angle": "The gap between arrests and clearance in C117, with Temescal as the test case: how an incident gets counted, how an arrest gets counted, and how a clearance gets counted.",
+      "hood": null,
+      "citizens": [
+        "Kimberly Cho (POP-00137)",
+        "Dolores Nwachukwu (POP-01141)",
+        "Vanessa Tran-Muñoz (POP-01021)",
+        "Samantha Viteri (POP-00139)"
+      ],
+      "popids": [
+        "POP-00137",
+        "POP-01141",
+        "POP-01021",
+        "POP-00139"
+      ]
+    },
+    "approach": null
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "SAFETY-SLICE-5",
+    "kind": "beat-safety",
+    "seat": {
+      "slug": "rachel-torres",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "desk": "civic",
+      "domain": "public-safety",
+      "builder": "buildSafetySlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-safety",
+      "score": 100,
+      "label": "the public safety record of C117",
+      "hood": null,
+      "source": "output/beats/Crime_Metrics.jsonl @C117"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "the public safety record of C117",
+      "hookLine": "",
+      "anchorFacts": [
+        "133 incidents across 22 neighborhoods this cycle",
+        "Adams Point: 5 incidents (+0 vs C116), response 9.5 min, clearance 21%, property index 42, violent index 26",
+        "Baylight District: 5 incidents (-1 vs C116), response 9.4 min, clearance 25%, property index 32, violent index 27",
+        "Brooklyn: 6 incidents (+1 vs C116), response 10.3 min, clearance 24%, property index 38, violent index 27",
+        "Chinatown: 4 incidents (+0 vs C116), response 10.6 min, clearance 24%, property index 38, violent index 27",
+        "Dimond: 7 incidents (+2 vs C116), response 10.6 min, clearance 21%, property index 41, violent index 28",
+        "Downtown: 7 incidents (-1 vs C116), response 9.5 min, clearance 22%, property index 39, violent index 21",
+        "East Oakland: 8 incidents (+3 vs C116), response 9.8 min, clearance 21%, property index 41, violent index 34",
+        "Eastlake: 6 incidents (+0 vs C116), response 9.4 min, clearance 20%, property index 42, violent index 26",
+        "Fruitvale: 8 incidents (+2 vs C116), response 10 min, clearance 19%, property index 37, violent index 32",
+        "Glenview: 6 incidents (+1 vs C116), response 9.8 min, clearance 22%, property index 42, violent index 30",
+        "Grand Lake: 6 incidents (-1 vs C116), response 10.8 min, clearance 26%, property index 40, violent index 27",
+        "Ivy Hill: 4 incidents (-2 vs C116), response 9.5 min, clearance 22%, property index 40, violent index 29",
+        "Jack London: 7 incidents (+2 vs C116), response 10.6 min, clearance 20%, property index 40, violent index 22",
+        "KONO: 5 incidents (+0 vs C116), response 10.8 min, clearance 25%, property index 39, violent index 23",
+        "Lake Merritt: 6 incidents (-1 vs C116), response 9.7 min, clearance 21%, property index 38, violent index 24",
+        "Laurel: 6 incidents (+0 vs C116), response 10.6 min, clearance 21%, property index 38, violent index 28",
+        "Piedmont Ave: 6 incidents (+0 vs C116), response 9.6 min, clearance 23%, property index 37, violent index 25",
+        "Rockridge: 5 incidents (-1 vs C116), response 10.3 min, clearance 24%, property index 36, violent index 25",
+        "San Antonio: 5 incidents (+0 vs C116), response 10 min, clearance 26%, property index 42, violent index 29",
+        "Temescal: 8 incidents (+2 vs C116), response 10 min, clearance 22%, property index 50, violent index 25",
+        "Uptown: 6 incidents (+0 vs C116), response 10.8 min, clearance 21%, property index 37, violent index 24",
+        "West Oakland: 7 incidents (+2 vs C116), response 10.7 min, clearance 26%, property index 38, violent index 27",
+        "Hotspots this cycle (over the city's own bar): Temescal (1.15× the city median)",
+        "Moved this cycle — rising: none; easing: Fruitvale",
+        "Citywide custody this cycle: 28 arrests (0 tracked, 28 other residents); 52 in custody at the close; 24 left",
+        "Downtown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "Grand Lake: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+        "East Oakland: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Fruitvale: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "West Oakland: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+        "Adams Point: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Baylight District: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Brooklyn: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Chinatown: 4 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Dimond: 7 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Eastlake: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Glenview: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Ivy Hill: 4 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Jack London: 7 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "KONO: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Lake Merritt: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Laurel: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Piedmont Ave: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Rockridge: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "San Antonio: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "Uptown: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+        "oari_van → West Oakland: OARI talks it down — a crisis ended without cuffs, and the data point everyone cites.",
+        "deescalated | OARI talks it down — a crisis ended without cuffs, and the data point everyone cites. | West Oakland | mag 0.05"
+      ],
+      "evidence": [
+        {
+          "text": "133 incidents across 22 neighborhoods this cycle",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Adams Point: 5 incidents (+0 vs C116), response 9.5 min, clearance 21%, property index 42, violent index 26",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Baylight District: 5 incidents (-1 vs C116), response 9.4 min, clearance 25%, property index 32, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Brooklyn: 6 incidents (+1 vs C116), response 10.3 min, clearance 24%, property index 38, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Chinatown: 4 incidents (+0 vs C116), response 10.6 min, clearance 24%, property index 38, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Dimond: 7 incidents (+2 vs C116), response 10.6 min, clearance 21%, property index 41, violent index 28",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Downtown: 7 incidents (-1 vs C116), response 9.5 min, clearance 22%, property index 39, violent index 21",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "East Oakland: 8 incidents (+3 vs C116), response 9.8 min, clearance 21%, property index 41, violent index 34",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Eastlake: 6 incidents (+0 vs C116), response 9.4 min, clearance 20%, property index 42, violent index 26",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Fruitvale: 8 incidents (+2 vs C116), response 10 min, clearance 19%, property index 37, violent index 32",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Glenview: 6 incidents (+1 vs C116), response 9.8 min, clearance 22%, property index 42, violent index 30",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Grand Lake: 6 incidents (-1 vs C116), response 10.8 min, clearance 26%, property index 40, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Ivy Hill: 4 incidents (-2 vs C116), response 9.5 min, clearance 22%, property index 40, violent index 29",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Jack London: 7 incidents (+2 vs C116), response 10.6 min, clearance 20%, property index 40, violent index 22",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "KONO: 5 incidents (+0 vs C116), response 10.8 min, clearance 25%, property index 39, violent index 23",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Lake Merritt: 6 incidents (-1 vs C116), response 9.7 min, clearance 21%, property index 38, violent index 24",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Laurel: 6 incidents (+0 vs C116), response 10.6 min, clearance 21%, property index 38, violent index 28",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Piedmont Ave: 6 incidents (+0 vs C116), response 9.6 min, clearance 23%, property index 37, violent index 25",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Rockridge: 5 incidents (-1 vs C116), response 10.3 min, clearance 24%, property index 36, violent index 25",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "San Antonio: 5 incidents (+0 vs C116), response 10 min, clearance 26%, property index 42, violent index 29",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Temescal: 8 incidents (+2 vs C116), response 10 min, clearance 22%, property index 50, violent index 25",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Uptown: 6 incidents (+0 vs C116), response 10.8 min, clearance 21%, property index 37, violent index 24",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "West Oakland: 7 incidents (+2 vs C116), response 10.7 min, clearance 26%, property index 38, violent index 27",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Hotspots this cycle (over the city's own bar): Temescal (1.15× the city median)",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Moved this cycle — rising: none; easing: Fruitvale",
+          "src": "output/beats/Crime_Metrics.jsonl @C117"
+        },
+        {
+          "text": "Citywide custody this cycle: 28 arrests (0 tracked, 28 other residents); 52 in custody at the close; 24 left",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 city"
+        },
+        {
+          "text": "Downtown: 7 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Downtown"
+        },
+        {
+          "text": "Grand Lake: 6 charges → 2 arrests → 4 in custody at the close (0 tracked, 4 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Grand Lake"
+        },
+        {
+          "text": "East Oakland: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 East Oakland"
+        },
+        {
+          "text": "Fruitvale: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Fruitvale"
+        },
+        {
+          "text": "Temescal: 8 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Temescal"
+        },
+        {
+          "text": "West Oakland: 7 charges → 2 arrests → 3 in custody at the close (0 tracked, 3 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 West Oakland"
+        },
+        {
+          "text": "Adams Point: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Adams Point"
+        },
+        {
+          "text": "Baylight District: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Baylight District"
+        },
+        {
+          "text": "Brooklyn: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Brooklyn"
+        },
+        {
+          "text": "Chinatown: 4 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Chinatown"
+        },
+        {
+          "text": "Dimond: 7 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Dimond"
+        },
+        {
+          "text": "Eastlake: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Eastlake"
+        },
+        {
+          "text": "Glenview: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Glenview"
+        },
+        {
+          "text": "Ivy Hill: 4 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Ivy Hill"
+        },
+        {
+          "text": "Jack London: 7 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Jack London"
+        },
+        {
+          "text": "KONO: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 KONO"
+        },
+        {
+          "text": "Lake Merritt: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Lake Merritt"
+        },
+        {
+          "text": "Laurel: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Laurel"
+        },
+        {
+          "text": "Piedmont Ave: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Piedmont Ave"
+        },
+        {
+          "text": "Rockridge: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Rockridge"
+        },
+        {
+          "text": "San Antonio: 5 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 San Antonio"
+        },
+        {
+          "text": "Uptown: 6 charges → 1 arrest → 2 in custody at the close (0 tracked, 2 other residents); tracked: none tracked",
+          "src": "output/beats/Care_Justice_Census.jsonl judicial @C117 Uptown"
+        },
+        {
+          "text": "oari_van → West Oakland: OARI talks it down — a crisis ended without cuffs, and the data point everyone cites.",
+          "src": "output/world_summary_c117.md ## Chaos Events"
+        },
+        {
+          "text": "deescalated | OARI talks it down — a crisis ended without cuffs, and the data point everyone cites. | West Oakland | mag 0.05",
+          "src": "output/world_summary_c117.md ## What Moved › chaos-event (Ripple_Ledger)"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 116
+      },
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "roomIsYours": ""
+    },
+    "citizens": [
+      {
+        "popid": "POP-00136",
+        "name": "Rafael Montez",
+        "role": "Police Chief",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Rafael Montez — Police Chief — Oakland Police Department — age 45",
+        "why": "works at Oakland Police Department (Employment_Roster)",
+        "age": 45
+      },
+      {
+        "popid": "POP-00137",
+        "name": "Kimberly Cho",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department — age 56",
+        "why": "works at Oakland Police Department (Employment_Roster)",
+        "age": 56
+      },
+      {
+        "popid": "POP-00138",
+        "name": "Leonard Briggs",
+        "role": "DEPUTY CHIEF OF COMMUNITY ENGAGEMENT",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Leonard Briggs — DEPUTY CHIEF OF COMMUNITY ENGAGEMENT — Oakland Police Department — age 52",
+        "why": "works at Oakland Police Department (Employment_Roster)",
+        "age": 52
+      },
+      {
+        "popid": "POP-00139",
+        "name": "Samantha Viteri",
+        "role": "INTERNAL AFFAIRS DIVISION LEAD",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50",
+        "why": "works at Oakland Police Department (Employment_Roster)",
+        "age": 50
+      },
+      {
+        "popid": "POP-00140",
+        "name": "Marcus Hollowell",
+        "role": "FIRE CHIEF",
+        "neighborhood": null,
+        "business": "Oakland Fire Department",
+        "profile": "Marcus Hollowell — FIRE CHIEF — Oakland Fire Department — age 53",
+        "why": "works at Oakland Fire Department (Employment_Roster)",
+        "age": 53
+      },
+      {
+        "popid": "POP-00141",
+        "name": "Priya Narang",
+        "role": "EMS DIRECTOR",
+        "neighborhood": null,
+        "business": "Oakland Fire Department",
+        "profile": "Priya Narang — EMS DIRECTOR — Oakland Fire Department — age 47",
+        "why": "works at Oakland Fire Department (Employment_Roster)",
+        "age": 47
+      },
+      {
+        "popid": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "neighborhood": null,
+        "business": "Oakland Alternative Response Initiative",
+        "profile": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40",
+        "why": "works at Oakland Alternative Response Initiative (Employment_Roster)",
+        "age": 40
+      },
+      {
+        "popid": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "role": "Police Captain",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Dolores Nwachukwu — Police Captain — Oakland Police Department — age 48",
+        "why": "works at Oakland Police Department (Employment_Roster)",
+        "age": 48
+      },
+      {
+        "popid": "POP-01142",
+        "name": "Tomas Reinholt",
+        "role": "Police Lieutenant",
+        "neighborhood": null,
+        "business": "Oakland Police Department",
+        "profile": "Tomas Reinholt — Police Lieutenant — Oakland Police Department — age 44",
+        "why": "works at Oakland Police Department (Employment_Roster)",
+        "age": 44
+      },
+      {
+        "popid": "POP-01151",
+        "name": "Luis Ferreira-Nash",
+        "role": "Deputy Fire Chief",
+        "neighborhood": null,
+        "business": "Oakland Fire Department",
+        "profile": "Luis Ferreira-Nash — Deputy Fire Chief — Oakland Fire Department — age 50",
+        "why": "works at Oakland Fire Department (Employment_Roster)",
+        "age": 50
+      },
+      {
+        "popid": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Former Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Vinnie Keane — Former Designated Hitter, Oakland A's Legend — Piedmont Ave — C117 in Piedmont Ave: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near a bench on the hospital grounds — age 39",
+        "why": "C117 in Piedmont Ave: the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever. near a bench on the hospital grounds",
+        "age": 39
+      },
+      {
+        "popid": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Piedmont Ave — C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner — age 38",
+        "why": "C117 in Rockridge: recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a bookstore corner",
+        "age": 38
+      }
+    ],
+    "pointers": [
+      "output/beats/Crime_Metrics.jsonl @C117"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057",
+    "text": "I'm writing a procedural explainer on the distance between an incident, an arrest and a clearance, with Temescal as the worked example. Temescal is the only hotspot on the sheet this cycle: 8 incidents, up 2 from C116, property index 50, 22% clearance. It produced 2 arrests and 3 people in custody at the close. Those figures are not the same measure, and Chief Montez told me so on the record. He said an arrest is an intake and clearance is worked after the fact. He also said the 19 to 26 percent citywide range is 'not good enough.' He named three causes: cases competing for the same investigators, follow-through thinning on cases with no witness or camera, and thin trust in places like Fruit",
+    "plan": {
+      "chase": "I'm writing a procedural explainer on the distance between an incident, an arrest and a clearance, with Temescal as the worked example. Temescal is the only hotspot on the sheet this cycle: 8 incidents, up 2 from C116, property index 50, 22% clearance. It produced 2 arrests and 3 people in custody at the close. Those figures are not the same measure, and Chief Montez told me so on the record. He said an arrest is an intake and clearance is worked after the fact. He also said the 19 to 26 percent citywide range is 'not good enough.' He named three causes: cases competing for the same investigators, follow-through thinning on cases with no witness or camera, and thin trust in places like Fruit",
+      "focus": "The gap between arrests and clearance in C117, with Temescal as the test case: how an incident gets counted, how an arrest gets counted, and how a clearance gets counted.",
+      "why": "This cycle's numbers invite a misreading. Temescal is the only hotspot, at 1.15× the city median. It has 8 incidents, 2 arrests and 3 in custody at the close, and a 22% clearance rate. Citywide there are 133 incidents, 28 arrests, 52 in custody and 24 released, and clearance runs 19 to 26% by neighborhood. A reader will set those figures side by side and treat them as one measure. Chief Montez says they run on different clocks: an arrest is an intake, and clearance is worked afterward. I want to",
+      "checks": [
+        "Confirm the Temescal figures against the Crime_Metrics row: 8 incidents, +2 vs C116, property index 50, violent index 25, clearance 22%, pressure ratio 1.15.",
+        "Confirm the custody figures: 28 arrests, 52 in custody at the close, 24 released, and 2 arrests with 3 in custody for Temescal.",
+        "Get the Temescal case dispositions in writing from OPD before printing any figure on how many incidents were cleared or closed with no report.",
+        "Ask how OARI calls are classified and whether a de-escalation such as the West Oakland call counts as an incident in Crime_Metrics.",
+        "Do not call Temescal a trend. This is one cycle, and the sheet lists no neighborhood as rising.",
+        "Confirm the C117 chaos-event wording (deescalated, West Oakland, mag 0.05) before characterizing the OARI call.",
+        "Check the Fruitvale 'easing' tag against its +2 incident change and 19% clearance, since the two readings pull in different directions."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00137",
+          "question": "When a neighborhood logs about eight incidents in a cycle and the department makes about two arrests there, how are detectives assigned? What decides which Temescal property cases get follow-up and which stay open with no one working them?",
+          "basis": "Deputy Chief of Operations. She answers for how investigative staffing and patrol resources are allocated. The Chief said the bench is thin and that prioritization is the issue."
+        },
+        {
+          "pop": "POP-01141",
+          "question": "Walk me through a Temescal property case from the first call to the last entry in the file. At what point does it get a report, get reclassified, or get closed with no report filed?",
+          "basis": "Police Captain. She can speak to how incidents are classified and documented at the district level. The question is the gap between what happened and how it is categorized."
+        },
+        {
+          "pop": "POP-01021",
+          "question": "The West Oakland call this cycle ended without cuffs. How is a call like that classified, does it appear in the incident count, and what does OARI record as its outcome?",
+          "basis": "OARI Program Director. She answers for the program's call records. The C117 chaos event calls the de-escalation 'the data point everyone cites,' and I want to know what that point is counting."
+        },
+        {
+          "pop": "POP-00139",
+          "question": "Do any complaints or reviews tied to Temescal or Fruitvale incidents this cycle bear on how those incidents were classified or closed? If you can't discuss specific cases, can you say how classification disputes reach your division?",
+          "basis": "Internal Affairs Division Lead. She is the check on classification and closure practices. I expect little on specific cases and will ask only about process."
+        }
+      ],
+      "interpretation": "The incident count, the arrest count and the clearance rate are three separate ledgers, and this cycle's flat numbers hide that. Temescal looks like a spike in incidents but not in arrests. That is consistent with Montez's account that most incidents never get an arrest, and that clearance depends on investigator time and on witnesses willing to talk. It does not show that Temescal is being neglected. I read his candor about the range as a real admission, but one conversation does not establish ",
+      "unverifiedLead": [
+        "Some of Temescal's 8 incidents may have been closed with no report filed or reclassified. The Chief would not say without the files.",
+        "The West Oakland OARI de-escalation may be counted only in OARI's own ledger and not in the incident figures. I haven't checked.",
+        "Fruitvale is tagged 'easing' while its incidents rose by 2 and its clearance, at 19%, is the lowest in the city. The tag may measure something other than what a reader assumes.",
+        "Thin trust in neighborhoods such as Fruitvale may be depressing clearance there, as the Chief argued. I have no independent check on that."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Avery Santana (mayor gavel): Carry forward closeout verification and Council consideration; support renewal only after verified C114 closeout, preserving the business-and-resident scope and 23-day standard. — \"West Oakla",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold expansion; require a complete published D3 Fruitvale briefing record and written next dates for the D5 audit and Baylight feasibility review. — \"Alternative response expands on public ev",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Hold further design advancement until preliminary schematics and a documented Fruitvale public comment-and-response record are delivered and published. — \"Fruitvale will get a transit hub des",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Keep the center operational while withholding oversight certification until the Q3 audit filing and merchant walkthrough are verified and documented. — \"Temescal's health center keeps serving",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor gavel): Declare no milestone passed; direct completion and publication of the evidence-file review while all remediation, hotline, dust-control and workforce oversight continues. — \"Baylight earns it",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_gavel_c117.json",
+      "popids": []
+    }
+  ],
+  "laneEntries": 135,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-24T12:16:25.544Z"
+}

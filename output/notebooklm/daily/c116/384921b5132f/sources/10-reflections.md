@@ -1,0 +1,5 @@
+# Temescal, in their own words
+
+## Jun Leu — student
+
+> There's this one thing that keeps bugging me — my stupid shoelace. It's this one lace on my left shoe that keeps coming untied no matter how tight I tie it. This morning I'm walking to school, double-knotted it before I left, and by the time I crossed Telegraph it was dragging on the ground again. I had to stop and crouch down right there on the sidewalk, and I'm trying to re-tie it while this guy with a coffee waits to get past me. I don't know why it's so annoying. It's just a string. But it's like the shoe knows. It's the one lace, every time, like it's got a mind of its own. I almost just left it untied and let it flap around, but then I'd step on it and trip, and the kids at school would see me eat pavement. But sitting there on the sidewalk, tying it for the third time this week, I got this dumb little laugh out of it. Like, of course it's this lace. Of course it's today, when I'm already running late. It's almost funny how predictable it is. I tied it again, stood up, and the guy with the coffee just nodded at me, no

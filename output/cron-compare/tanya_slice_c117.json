@@ -1,0 +1,185 @@
+{
+  "empty": false,
+  "cycle": 117,
+  "kind": "tanya-sideline",
+  "desk": "sports",
+  "journalist": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "persona": "tanya-cruz"
+  },
+  "pulse": {
+    "className": "record-only-sideline",
+    "score": 70,
+    "label": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time"
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 10,
+        "name": "Inference Close"
+      }
+    ],
+    "anchorFacts": [
+      "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time.",
+      "The free agency question this page has carried since C112 has its answer, and it is not Oakland and it is not Anaheim. Mark Aitken has signed with the Colorado Rockies, one year for $21 million. The Angels were the team with the reported interest in C116, the A's were the team with the history, and Colorado is the team that closed. The money is almost exactly what he made in 2041, $21. 4M, so this was never about Aitken being priced as a player in decline.",
+      "He is coming off a . 283 season with 153 hits, 33 homeruns, 87 RBI and 3. 2 WAR in 540 at bats, a 93 overall first baseman with 3 Gold Gloves and the 2037 Playoff MVP, and he homered in the World Series that clinched the seventh title. The length is the detail that will be argued over. One year is a short commitment for a player at the top of the market, and it puts Aitken back in free agency after 2042.",
+      "Whether that reads as a door left open or simply the deal that was there, he has not said. What it leaves behind in Oakland is bigger than a lineup spot. Aitken is an Oakland native who grew up swinging a bat in East Oakland. He owns his place in Jack London, where he lives with his wife and three kids. He has been the A's player rep and community liaison, and he runs Aitken Little Leaguers, free baseball for East Oakland kids heading into its sixth year."
+    ],
+    "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+    "accessEvidence": {
+      "state": "ALLOTTED",
+      "facts": [
+        "clubhouse/sideline SET is the reporter's room"
+      ]
+    },
+    "quoteEvidence": {
+      "state": "NOT_SUPPLIED",
+      "quotes": []
+    },
+    "observationEvidence": {
+      "state": "ALLOTTED",
+      "facts": []
+    },
+    "missing": [
+      "Packet player quotes",
+      "injury or team-response facts beyond the supplied record",
+      "the rest of the feed notes (8 more sentences not carried)"
+    ],
+    "hooks": [
+      {
+        "text": "Oaks come back to win. The turn, the hero, the crowd in Jack London.",
+        "angle": "desk rotation",
+        "hood": "Jack London"
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "text": "Oaks come back to win. The turn, the hero, the crowd in Jack London.",
+      "angle": "desk rotation",
+      "hood": "Jack London"
+    }
+  ],
+  "seeds": [],
+  "story": {
+    "angle": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+    "label": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+    "hookLine": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+    "kind": "sideline-signal",
+    "hood": "Jack London",
+    "popids": [
+      "POP-00003",
+      "POP-00018",
+      "POP-00053",
+      "POP-00050",
+      "POP-01239",
+      "POP-00001"
+    ],
+    "citizens": [
+      "Mark Aitken (POP-00003)",
+      "Benji Dillon (POP-00018)",
+      "Kevin Clark (POP-00053)",
+      "Ernesto Quintero (POP-00050)",
+      "Giancarlo Hernandez (POP-01239)",
+      "Vinnie Keane (POP-00001)"
+    ],
+    "ref": "world_summary_c117.md ## Sports",
+    "cycle": 117
+  },
+  "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview. The feed notes report what people said in paraphrase; none of it is a quote — never put it in quotation marks or attribute it as speech.",
+  "players": [
+    {
+      "name": "Mark Aitken",
+      "popid": "POP-00003",
+      "role": "First Baseman, Colorado Rockies",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    },
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "why": "feed-names"
+    },
+    {
+      "name": "Kevin Clark",
+      "popid": "POP-00053",
+      "role": "Third Baseman, Oakland A's",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    },
+    {
+      "name": "Ernesto Quintero",
+      "popid": "POP-00050",
+      "role": "3B/1B , Oakland A's",
+      "neighborhood": "Baylight District",
+      "why": "feed-names"
+    },
+    {
+      "name": "Giancarlo Hernandez",
+      "popid": "POP-01239",
+      "role": "Third Baseman, Oakland A's",
+      "neighborhood": "West Oakland",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Former Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Piedmont Ave",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "label": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+      "cycle": 117
+    },
+    {
+      "score": 50,
+      "label": "Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+      "cycle": 117
+    },
+    {
+      "score": 50,
+      "label": "Danny Horn said he was the best player in baseball. Then he hit .338 with 56 homeruns and 80 steals",
+      "cycle": 117
+    },
+    {
+      "score": 50,
+      "label": "Austin Reaves scores 32 in 22 minutes as the Oaks bounce back at home. Oaks 137 - Nuggets 113",
+      "cycle": 117
+    },
+    {
+      "score": 50,
+      "label": "Down 15 at the half, the Oaks come back to beat the team that left Oakland. Oaks 98 - Warriors 96",
+      "cycle": 117
+    },
+    {
+      "score": 50,
+      "label": "The Oaks' highest-paid player is playing like it. Austin Reaves leads the Oaks in scoring two games running",
+      "cycle": 117
+    },
+    {
+      "score": 50,
+      "label": "The Oaks finish. Down 15 at the half in Golden State, they won the second half by 17",
+      "cycle": 117
+    },
+    {
+      "score": 50,
+      "label": "Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+      "cycle": 117
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c117.md ## Sports",
+    "docs/media/TANYA_SIDELINE_BAG.md",
+    "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+  ]
+}

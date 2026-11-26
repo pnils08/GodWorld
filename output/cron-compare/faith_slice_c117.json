@@ -1,0 +1,744 @@
+{
+  "version": "FAITH-SLICE-4",
+  "empty": false,
+  "cycle": 117,
+  "kind": "beat-faith",
+  "seat": {
+    "slug": "elliot-graye",
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "desk": "culture",
+    "domain": "faith",
+    "builder": "buildFaithSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-faith",
+    "score": 100,
+    "label": "the faith record of C117",
+    "hood": null,
+    "source": "the faith record of C117"
+  },
+  "story": {
+    "kind": "beat-faith",
+    "angle": "the faith record of C117",
+    "label": "the faith record of C117",
+    "hookLine": "",
+    "hood": null,
+    "citizens": [
+      "Eunice Marston (POP-00753)",
+      "Ophelia Brenner (POP-00754)",
+      "Antoine Vermeer (POP-00755)",
+      "Ramon Solano (POP-00756)",
+      "Daniel Han (POP-00757)",
+      "Robert Jaston (POP-00758)",
+      "Naomi Sterling (POP-00759)",
+      "Yael Bauer (POP-00760)",
+      "Idris Karim (POP-00761)",
+      "Aziz Rahimi (POP-00762)",
+      "Kenji Tanaka (POP-00763)",
+      "Tao Lee (POP-00764)",
+      "Anand Krishnamurthy (POP-00765)",
+      "Manjit Singh (POP-00766)",
+      "Miriam Goldstein (POP-00767)",
+      "Eleanor Bishop (POP-00768)",
+      "Clarissa Dane (POP-00143)",
+      "Marlon Hingsley (POP-00172)",
+      "Joel Wren (POP-00218)",
+      "Dillon Trevor (POP-00224)",
+      "Drew Lemon (POP-00670)"
+    ],
+    "popids": [
+      "POP-00753",
+      "POP-00754",
+      "POP-00755",
+      "POP-00756",
+      "POP-00757",
+      "POP-00758",
+      "POP-00759",
+      "POP-00760",
+      "POP-00761",
+      "POP-00762",
+      "POP-00763",
+      "POP-00764",
+      "POP-00765",
+      "POP-00766",
+      "POP-00767",
+      "POP-00768",
+      "POP-00143",
+      "POP-00172",
+      "POP-00218",
+      "POP-00224",
+      "POP-00670"
+    ],
+    "ref": "the faith record of C117",
+    "cycle": 117
+  },
+  "approach": " Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00753",
+      "name": "Eunice Marston",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown — leads Telegraph Presbyterian Fellowship — community program, C117: community health fair hosted",
+      "why": "leads Telegraph Presbyterian Fellowship — community program, C117: community health fair hosted"
+    },
+    {
+      "popid": "POP-00754",
+      "name": "Ophelia Brenner",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Ophelia Brenner — Senior Pastor / Faith Leader — Fruitvale — leads Foothill Baptist Tabernacle",
+      "why": "leads Foothill Baptist Tabernacle"
+    },
+    {
+      "popid": "POP-00755",
+      "name": "Antoine Vermeer",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Antoine Vermeer — Senior Pastor / Faith Leader — Lake Merritt — leads Cathedral of the Living Word — community program, C115: after-school tutoring program expands",
+      "why": "leads Cathedral of the Living Word — community program, C115: after-school tutoring program expands"
+    },
+    {
+      "popid": "POP-00756",
+      "name": "Ramon Solano",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Ramon Solano — Senior Pastor / Faith Leader — Fruitvale — leads St. Esperanza Parish — community program, C116: job training workshop begins new session",
+      "why": "leads St. Esperanza Parish — community program, C116: job training workshop begins new session"
+    },
+    {
+      "popid": "POP-00757",
+      "name": "Daniel Han",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Daniel Han — Senior Pastor / Faith Leader — Lake Merritt — leads Adams Point United Methodist — crisis response, C117: emergency assistance fund activated",
+      "why": "leads Adams Point United Methodist — crisis response, C117: emergency assistance fund activated"
+    },
+    {
+      "popid": "POP-00758",
+      "name": "Robert Jaston",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Robert Jaston — Senior Pastor / Faith Leader — West Oakland — leads New Covenant Pentecostal Assembly — community program, C117: food pantry serves neighbors in need",
+      "why": "leads New Covenant Pentecostal Assembly — community program, C117: food pantry serves neighbors in need"
+    },
+    {
+      "popid": "POP-00759",
+      "name": "Naomi Sterling",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Naomi Sterling — Senior Pastor / Faith Leader — Rockridge — leads Temple Beth Or — crisis response, C117: vigil held for community healing",
+      "why": "leads Temple Beth Or — crisis response, C117: vigil held for community healing"
+    },
+    {
+      "popid": "POP-00760",
+      "name": "Yael Bauer",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Yael Bauer — Senior Pastor / Faith Leader — Piedmont Ave — leads B'nai Tikvah Synagogue — community program, C116: food pantry serves neighbors in need",
+      "why": "leads B'nai Tikvah Synagogue — community program, C116: food pantry serves neighbors in need"
+    },
+    {
+      "popid": "POP-00761",
+      "name": "Idris Karim",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Idris Karim — Senior Pastor / Faith Leader — Temescal — leads Temescal Islamic Center",
+      "why": "leads Temescal Islamic Center"
+    },
+    {
+      "popid": "POP-00762",
+      "name": "Aziz Rahimi",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Aziz Rahimi — Senior Pastor / Faith Leader — Fruitvale — leads Masjid An-Nur Oakland — crisis response, C117: community grief gathering organized",
+      "why": "leads Masjid An-Nur Oakland — crisis response, C117: community grief gathering organized"
+    },
+    {
+      "popid": "POP-00763",
+      "name": "Kenji Tanaka",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown — leads Bay Pure Land Buddhist Temple — community program, C115: job training workshop begins new session",
+      "why": "leads Bay Pure Land Buddhist Temple — community program, C115: job training workshop begins new session"
+    },
+    {
+      "popid": "POP-00764",
+      "name": "Tao Lee",
+      "role": "Community Organizer",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Tao Lee — Community Organizer — Downtown — leads Lake Merritt Mindfulness Sangha",
+      "why": "leads Lake Merritt Mindfulness Sangha"
+    },
+    {
+      "popid": "POP-00765",
+      "name": "Anand Krishnamurthy",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Anand Krishnamurthy — Senior Pastor / Faith Leader — Rockridge — leads Bharat Mandir of the East Bay — community program, C114: food pantry serves neighbors in need",
+      "why": "leads Bharat Mandir of the East Bay — community program, C114: food pantry serves neighbors in need"
+    },
+    {
+      "popid": "POP-00766",
+      "name": "Manjit Singh",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Manjit Singh — Senior Pastor / Faith Leader — Fruitvale — leads Gurdwara Singh Sabha Fruitvale",
+      "why": "leads Gurdwara Singh Sabha Fruitvale"
+    },
+    {
+      "popid": "POP-00767",
+      "name": "Miriam Goldstein",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Miriam Goldstein — Senior Pastor / Faith Leader — Lake Merritt — leads Or Hashalom Renewal Community — community program, C116: job training workshop begins new session",
+      "why": "leads Or Hashalom Renewal Community — community program, C116: job training workshop begins new session"
+    },
+    {
+      "popid": "POP-00768",
+      "name": "Eleanor Bishop",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Eleanor Bishop — Senior Pastor / Faith Leader — Lake Merritt — leads Lakeshore Unitarian Universalist Fellowship",
+      "why": "leads Lakeshore Unitarian Universalist Fellowship"
+    },
+    {
+      "popid": "POP-00143",
+      "name": "Clarissa Dane",
+      "role": "DISTRICT ATTORNEY",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Clarissa Dane — DISTRICT ATTORNEY — West Oakland — C117: stopped by a community program run out of New Covenant Pentecostal Assembly",
+      "why": "C117: stopped by a community program run out of New Covenant Pentecostal Assembly"
+    },
+    {
+      "popid": "POP-00172",
+      "name": "Marlon Hingsley",
+      "role": "Housing Authority Inspector",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Marlon Hingsley — Housing Authority Inspector — Downtown — C117: stopped by a community program run out of Telegraph Presbyterian Fellowship",
+      "why": "C117: stopped by a community program run out of Telegraph Presbyterian Fellowship"
+    },
+    {
+      "popid": "POP-00218",
+      "name": "Joel Wren",
+      "role": "Mechanic",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Joel Wren — Mechanic — West Oakland — C117: stopped by a community program run out of New Covenant Pentecostal Assembly",
+      "why": "C117: stopped by a community program run out of New Covenant Pentecostal Assembly"
+    },
+    {
+      "popid": "POP-00224",
+      "name": "Dillon Trevor",
+      "role": "Server",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Dillon Trevor — Server — Downtown — C117: stopped by a community program run out of Telegraph Presbyterian Fellowship",
+      "why": "C117: stopped by a community program run out of Telegraph Presbyterian Fellowship"
+    },
+    {
+      "popid": "POP-00670",
+      "name": "Drew Lemon",
+      "role": "Housing Authority Inspector",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Drew Lemon — Housing Authority Inspector — Downtown — C117: stopped by a community program run out of Telegraph Presbyterian Fellowship",
+      "why": "C117: stopped by a community program run out of Telegraph Presbyterian Fellowship"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Adams Point United Methodist (Adams Point), C117 — crisis response: emergency assistance fund activated (attendance 50)",
+      "src": "output/beats/Faith_Ledger.jsonl C117 \"Adams Point United Methodist\""
+    },
+    {
+      "text": "Temple Beth Or (Rockridge), C117 — crisis response: vigil held for community healing (attendance 91)",
+      "src": "output/beats/Faith_Ledger.jsonl C117 \"Temple Beth Or\""
+    },
+    {
+      "text": "Masjid An-Nur Oakland (East Oakland), C117 — crisis response: community grief gathering organized (attendance 56)",
+      "src": "output/beats/Faith_Ledger.jsonl C117 \"Masjid An-Nur Oakland\""
+    },
+    {
+      "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+      "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\""
+    },
+    {
+      "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+      "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\""
+    },
+    {
+      "text": "Telegraph Presbyterian Fellowship (Downtown), C117 — community program: community health fair hosted (attendance 50)",
+      "src": "output/beats/Faith_Ledger.jsonl C117 \"Telegraph Presbyterian Fellowship\""
+    },
+    {
+      "text": "New Covenant Pentecostal Assembly (West Oakland), C117 — community program: food pantry serves neighbors in need (attendance 129)",
+      "src": "output/beats/Faith_Ledger.jsonl C117 \"New Covenant Pentecostal Assembly\""
+    },
+    {
+      "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+      "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\""
+    },
+    {
+      "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+      "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\""
+    },
+    {
+      "text": "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+      "src": "output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\""
+    },
+    {
+      "text": "B'nai Tikvah Synagogue (Piedmont Ave), C116 — community program: food pantry serves neighbors in need (attendance 32)",
+      "src": "output/beats/Faith_Ledger.jsonl C116 \"B'nai Tikvah Synagogue\""
+    },
+    {
+      "text": "Or Hashalom Renewal Community (Grand Lake), C116 — community program: job training workshop begins new session (attendance 58)",
+      "src": "output/beats/Faith_Ledger.jsonl C116 \"Or Hashalom Renewal Community\""
+    },
+    {
+      "text": "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+      "src": "output/beats/Faith_Ledger.jsonl C115 \"Cathedral of the Living Word\""
+    },
+    {
+      "text": "Masjid An-Nur Oakland (East Oakland), C115 — community program: seniors lunch program marks milestone (attendance 50)",
+      "src": "output/beats/Faith_Ledger.jsonl C115 \"Masjid An-Nur Oakland\""
+    },
+    {
+      "text": "Bay Pure Land Buddhist Temple (Chinatown), C115 — community program: job training workshop begins new session (attendance 40)",
+      "src": "output/beats/Faith_Ledger.jsonl C115 \"Bay Pure Land Buddhist Temple\""
+    },
+    {
+      "text": "Cathedral of the Living Word (Lake Merritt), C114 — community program: job training workshop begins new session (attendance 204)",
+      "src": "output/beats/Faith_Ledger.jsonl C114 \"Cathedral of the Living Word\""
+    },
+    {
+      "text": "B'nai Tikvah Synagogue (Piedmont Ave), C114 — community program: seniors lunch program marks milestone (attendance 25)",
+      "src": "output/beats/Faith_Ledger.jsonl C114 \"B'nai Tikvah Synagogue\""
+    },
+    {
+      "text": "Masjid An-Nur Oakland (East Oakland), C114 — community program: after-school tutoring program expands (attendance 43)",
+      "src": "output/beats/Faith_Ledger.jsonl C114 \"Masjid An-Nur Oakland\""
+    },
+    {
+      "text": "Bharat Mandir of the East Bay (Montclair), C114 — community program: food pantry serves neighbors in need (attendance 41)",
+      "src": "output/beats/Faith_Ledger.jsonl C114 \"Bharat Mandir of the East Bay\""
+    },
+    {
+      "text": "St. Esperanza Parish (Fruitvale), C113 — community program: after-school tutoring program expands (attendance 110)",
+      "src": "output/beats/Faith_Ledger.jsonl C113 \"St. Esperanza Parish\""
+    },
+    {
+      "text": "Telegraph Presbyterian Fellowship — Protestant, Downtown, congregation 450, founded 189 years ago, led today by Rev. Eunice Marston, 2 members on the ledger — historic mainline, social justice focus",
+      "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+    },
+    {
+      "text": "Foothill Baptist Tabernacle — Baptist, East Oakland, congregation 5,000, founded 123 years ago, led today by Dr. Ophelia Brenner — anchor institution, community programs",
+      "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+    },
+    {
+      "text": "Cathedral of the Living Word — Catholic, Lake Merritt, congregation 2,000, founded 34 years ago, led today by Bishop Antoine Vermeer, 4 members on the ledger — architectural landmark, diverse congregation",
+      "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+    },
+    {
+      "text": "St. Esperanza Parish — Catholic, Fruitvale, congregation 800, founded 119 years ago, led today by Fr. Ramon Solano — Latino community center, family focus",
+      "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+    },
+    {
+      "text": "Adams Point United Methodist — Methodist, Adams Point, congregation 300, founded 150 years ago, led today by Rev. Daniel Han — progressive, LGBTQ affirming",
+      "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+    },
+    {
+      "text": "New Covenant Pentecostal Assembly — Pentecostal, West Oakland, congregation 1,200, founded 70 years ago, led today by Bishop Robert Jaston, 2 members on the ledger — charismatic worship, youth outreach",
+      "src": "output/beats/Faith_Organizations.jsonl \"New Covenant Pentecostal Assembly\""
+    },
+    {
+      "text": "Temple Beth Or — Reform Jewish, Rockridge, congregation 700, founded 167 years ago, led today by Rabbi Naomi Sterling, 2 members on the ledger — oldest Jewish congregation, interfaith active",
+      "src": "output/beats/Faith_Organizations.jsonl \"Temple Beth Or\""
+    },
+    {
+      "text": "B'nai Tikvah Synagogue — Orthodox Jewish, Piedmont Ave, congregation 250, founded 118 years ago, led today by Rabbi Yael Bauer — traditional observance, community eruv",
+      "src": "output/beats/Faith_Organizations.jsonl \"B'nai Tikvah Synagogue\""
+    },
+    {
+      "text": "Temescal Islamic Center — Muslim, Temescal, congregation 600, founded 57 years ago, led today by Imam Idris Karim — diverse Muslim community, education focus",
+      "src": "output/beats/Faith_Organizations.jsonl \"Temescal Islamic Center\""
+    },
+    {
+      "text": "Masjid An-Nur Oakland — Muslim, East Oakland, congregation 400, founded 64 years ago, led today by Imam Aziz Rahimi — African American Muslim heritage",
+      "src": "output/beats/Faith_Organizations.jsonl \"Masjid An-Nur Oakland\""
+    },
+    {
+      "text": "Bay Pure Land Buddhist Temple — Buddhist, Chinatown, congregation 300, founded 116 years ago, led today by Rev. Kenji Tanaka, 1 members on the ledger — Jodo Shinshu, Japanese-American heritage",
+      "src": "output/beats/Faith_Organizations.jsonl \"Bay Pure Land Buddhist Temple\""
+    },
+    {
+      "text": "Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 35 years ago, led today by Tao Lee, 2 members on the ledger — diverse sangha, social justice dharma",
+      "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\""
+    },
+    {
+      "text": "Bharat Mandir of the East Bay — Hindu, Montclair, congregation 400, founded 52 years ago, led today by Pandit Anand Krishnamurthy — South Indian traditions, cultural programs",
+      "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+    },
+    {
+      "text": "Gurdwara Singh Sabha Fruitvale — Sikh, Fruitvale, congregation 350, founded 60 years ago, led today by Bhai Manjit Singh — langar kitchen, community service",
+      "src": "output/beats/Faith_Organizations.jsonl \"Gurdwara Singh Sabha Fruitvale\""
+    },
+    {
+      "text": "Or Hashalom Renewal Community — Jewish Renewal, Grand Lake, congregation 400, founded 58 years ago, led today by Rabbi Miriam Goldstein — progressive, social justice",
+      "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\""
+    },
+    {
+      "text": "Lakeshore Unitarian Universalist Fellowship — Unitarian, Lake Merritt, congregation 350, founded 153 years ago, led today by Rev. Eleanor Bishop, 4 members on the ledger — interfaith dialogue, humanist welcome",
+      "src": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\""
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "the faith record of C117",
+    "hookLine": "",
+    "anchorFacts": [
+      "Adams Point United Methodist (Adams Point), C117 — crisis response: emergency assistance fund activated (attendance 50)",
+      "Temple Beth Or (Rockridge), C117 — crisis response: vigil held for community healing (attendance 91)",
+      "Masjid An-Nur Oakland (East Oakland), C117 — crisis response: community grief gathering organized (attendance 56)",
+      "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+      "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+      "Telegraph Presbyterian Fellowship (Downtown), C117 — community program: community health fair hosted (attendance 50)",
+      "New Covenant Pentecostal Assembly (West Oakland), C117 — community program: food pantry serves neighbors in need (attendance 129)",
+      "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+      "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+      "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+      "B'nai Tikvah Synagogue (Piedmont Ave), C116 — community program: food pantry serves neighbors in need (attendance 32)",
+      "Or Hashalom Renewal Community (Grand Lake), C116 — community program: job training workshop begins new session (attendance 58)",
+      "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+      "Masjid An-Nur Oakland (East Oakland), C115 — community program: seniors lunch program marks milestone (attendance 50)",
+      "Bay Pure Land Buddhist Temple (Chinatown), C115 — community program: job training workshop begins new session (attendance 40)",
+      "Cathedral of the Living Word (Lake Merritt), C114 — community program: job training workshop begins new session (attendance 204)",
+      "B'nai Tikvah Synagogue (Piedmont Ave), C114 — community program: seniors lunch program marks milestone (attendance 25)",
+      "Masjid An-Nur Oakland (East Oakland), C114 — community program: after-school tutoring program expands (attendance 43)",
+      "Bharat Mandir of the East Bay (Montclair), C114 — community program: food pantry serves neighbors in need (attendance 41)",
+      "St. Esperanza Parish (Fruitvale), C113 — community program: after-school tutoring program expands (attendance 110)",
+      "Telegraph Presbyterian Fellowship — Protestant, Downtown, congregation 450, founded 189 years ago, led today by Rev. Eunice Marston, 2 members on the ledger — historic mainline, social justice focus",
+      "Foothill Baptist Tabernacle — Baptist, East Oakland, congregation 5,000, founded 123 years ago, led today by Dr. Ophelia Brenner — anchor institution, community programs",
+      "Cathedral of the Living Word — Catholic, Lake Merritt, congregation 2,000, founded 34 years ago, led today by Bishop Antoine Vermeer, 4 members on the ledger — architectural landmark, diverse congregation",
+      "St. Esperanza Parish — Catholic, Fruitvale, congregation 800, founded 119 years ago, led today by Fr. Ramon Solano — Latino community center, family focus",
+      "Adams Point United Methodist — Methodist, Adams Point, congregation 300, founded 150 years ago, led today by Rev. Daniel Han — progressive, LGBTQ affirming",
+      "New Covenant Pentecostal Assembly — Pentecostal, West Oakland, congregation 1,200, founded 70 years ago, led today by Bishop Robert Jaston, 2 members on the ledger — charismatic worship, youth outreach",
+      "Temple Beth Or — Reform Jewish, Rockridge, congregation 700, founded 167 years ago, led today by Rabbi Naomi Sterling, 2 members on the ledger — oldest Jewish congregation, interfaith active",
+      "B'nai Tikvah Synagogue — Orthodox Jewish, Piedmont Ave, congregation 250, founded 118 years ago, led today by Rabbi Yael Bauer — traditional observance, community eruv",
+      "Temescal Islamic Center — Muslim, Temescal, congregation 600, founded 57 years ago, led today by Imam Idris Karim — diverse Muslim community, education focus",
+      "Masjid An-Nur Oakland — Muslim, East Oakland, congregation 400, founded 64 years ago, led today by Imam Aziz Rahimi — African American Muslim heritage",
+      "Bay Pure Land Buddhist Temple — Buddhist, Chinatown, congregation 300, founded 116 years ago, led today by Rev. Kenji Tanaka, 1 members on the ledger — Jodo Shinshu, Japanese-American heritage",
+      "Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 35 years ago, led today by Tao Lee, 2 members on the ledger — diverse sangha, social justice dharma",
+      "Bharat Mandir of the East Bay — Hindu, Montclair, congregation 400, founded 52 years ago, led today by Pandit Anand Krishnamurthy — South Indian traditions, cultural programs",
+      "Gurdwara Singh Sabha Fruitvale — Sikh, Fruitvale, congregation 350, founded 60 years ago, led today by Bhai Manjit Singh — langar kitchen, community service",
+      "Or Hashalom Renewal Community — Jewish Renewal, Grand Lake, congregation 400, founded 58 years ago, led today by Rabbi Miriam Goldstein — progressive, social justice",
+      "Lakeshore Unitarian Universalist Fellowship — Unitarian, Lake Merritt, congregation 350, founded 153 years ago, led today by Rev. Eleanor Bishop, 4 members on the ledger — interfaith dialogue, humanist welcome"
+    ],
+    "evidence": [
+      {
+        "text": "Adams Point United Methodist (Adams Point), C117 — crisis response: emergency assistance fund activated (attendance 50)",
+        "src": "output/beats/Faith_Ledger.jsonl C117 \"Adams Point United Methodist\""
+      },
+      {
+        "text": "Temple Beth Or (Rockridge), C117 — crisis response: vigil held for community healing (attendance 91)",
+        "src": "output/beats/Faith_Ledger.jsonl C117 \"Temple Beth Or\""
+      },
+      {
+        "text": "Masjid An-Nur Oakland (East Oakland), C117 — crisis response: community grief gathering organized (attendance 56)",
+        "src": "output/beats/Faith_Ledger.jsonl C117 \"Masjid An-Nur Oakland\""
+      },
+      {
+        "text": "Interfaith Council (Adams Point), C115 — interfaith dialogue: interfaith prayer breakfast brings leaders together (attendance 123)",
+        "src": "output/beats/Faith_Ledger.jsonl C115 \"Interfaith Council\""
+      },
+      {
+        "text": "Interfaith Council (Chinatown), C114 — interfaith dialogue: dialogue series addresses shared concerns (attendance 53)",
+        "src": "output/beats/Faith_Ledger.jsonl C114 \"Interfaith Council\""
+      },
+      {
+        "text": "Telegraph Presbyterian Fellowship (Downtown), C117 — community program: community health fair hosted (attendance 50)",
+        "src": "output/beats/Faith_Ledger.jsonl C117 \"Telegraph Presbyterian Fellowship\""
+      },
+      {
+        "text": "New Covenant Pentecostal Assembly (West Oakland), C117 — community program: food pantry serves neighbors in need (attendance 129)",
+        "src": "output/beats/Faith_Ledger.jsonl C117 \"New Covenant Pentecostal Assembly\""
+      },
+      {
+        "text": "St. Esperanza Parish (Fruitvale), C116 — community program: job training workshop begins new session (attendance 86)",
+        "src": "output/beats/Faith_Ledger.jsonl C116 \"St. Esperanza Parish\""
+      },
+      {
+        "text": "New Covenant Pentecostal Assembly (West Oakland), C116 — community program: seniors lunch program marks milestone (attendance 153)",
+        "src": "output/beats/Faith_Ledger.jsonl C116 \"New Covenant Pentecostal Assembly\""
+      },
+      {
+        "text": "Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89)",
+        "src": "output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\""
+      },
+      {
+        "text": "B'nai Tikvah Synagogue (Piedmont Ave), C116 — community program: food pantry serves neighbors in need (attendance 32)",
+        "src": "output/beats/Faith_Ledger.jsonl C116 \"B'nai Tikvah Synagogue\""
+      },
+      {
+        "text": "Or Hashalom Renewal Community (Grand Lake), C116 — community program: job training workshop begins new session (attendance 58)",
+        "src": "output/beats/Faith_Ledger.jsonl C116 \"Or Hashalom Renewal Community\""
+      },
+      {
+        "text": "Cathedral of the Living Word (Lake Merritt), C115 — community program: after-school tutoring program expands (attendance 250)",
+        "src": "output/beats/Faith_Ledger.jsonl C115 \"Cathedral of the Living Word\""
+      },
+      {
+        "text": "Masjid An-Nur Oakland (East Oakland), C115 — community program: seniors lunch program marks milestone (attendance 50)",
+        "src": "output/beats/Faith_Ledger.jsonl C115 \"Masjid An-Nur Oakland\""
+      },
+      {
+        "text": "Bay Pure Land Buddhist Temple (Chinatown), C115 — community program: job training workshop begins new session (attendance 40)",
+        "src": "output/beats/Faith_Ledger.jsonl C115 \"Bay Pure Land Buddhist Temple\""
+      },
+      {
+        "text": "Cathedral of the Living Word (Lake Merritt), C114 — community program: job training workshop begins new session (attendance 204)",
+        "src": "output/beats/Faith_Ledger.jsonl C114 \"Cathedral of the Living Word\""
+      },
+      {
+        "text": "B'nai Tikvah Synagogue (Piedmont Ave), C114 — community program: seniors lunch program marks milestone (attendance 25)",
+        "src": "output/beats/Faith_Ledger.jsonl C114 \"B'nai Tikvah Synagogue\""
+      },
+      {
+        "text": "Masjid An-Nur Oakland (East Oakland), C114 — community program: after-school tutoring program expands (attendance 43)",
+        "src": "output/beats/Faith_Ledger.jsonl C114 \"Masjid An-Nur Oakland\""
+      },
+      {
+        "text": "Bharat Mandir of the East Bay (Montclair), C114 — community program: food pantry serves neighbors in need (attendance 41)",
+        "src": "output/beats/Faith_Ledger.jsonl C114 \"Bharat Mandir of the East Bay\""
+      },
+      {
+        "text": "St. Esperanza Parish (Fruitvale), C113 — community program: after-school tutoring program expands (attendance 110)",
+        "src": "output/beats/Faith_Ledger.jsonl C113 \"St. Esperanza Parish\""
+      },
+      {
+        "text": "Telegraph Presbyterian Fellowship — Protestant, Downtown, congregation 450, founded 189 years ago, led today by Rev. Eunice Marston, 2 members on the ledger — historic mainline, social justice focus",
+        "src": "output/beats/Faith_Organizations.jsonl \"Telegraph Presbyterian Fellowship\""
+      },
+      {
+        "text": "Foothill Baptist Tabernacle — Baptist, East Oakland, congregation 5,000, founded 123 years ago, led today by Dr. Ophelia Brenner — anchor institution, community programs",
+        "src": "output/beats/Faith_Organizations.jsonl \"Foothill Baptist Tabernacle\""
+      },
+      {
+        "text": "Cathedral of the Living Word — Catholic, Lake Merritt, congregation 2,000, founded 34 years ago, led today by Bishop Antoine Vermeer, 4 members on the ledger — architectural landmark, diverse congregation",
+        "src": "output/beats/Faith_Organizations.jsonl \"Cathedral of the Living Word\""
+      },
+      {
+        "text": "St. Esperanza Parish — Catholic, Fruitvale, congregation 800, founded 119 years ago, led today by Fr. Ramon Solano — Latino community center, family focus",
+        "src": "output/beats/Faith_Organizations.jsonl \"St. Esperanza Parish\""
+      },
+      {
+        "text": "Adams Point United Methodist — Methodist, Adams Point, congregation 300, founded 150 years ago, led today by Rev. Daniel Han — progressive, LGBTQ affirming",
+        "src": "output/beats/Faith_Organizations.jsonl \"Adams Point United Methodist\""
+      },
+      {
+        "text": "New Covenant Pentecostal Assembly — Pentecostal, West Oakland, congregation 1,200, founded 70 years ago, led today by Bishop Robert Jaston, 2 members on the ledger — charismatic worship, youth outreach",
+        "src": "output/beats/Faith_Organizations.jsonl \"New Covenant Pentecostal Assembly\""
+      },
+      {
+        "text": "Temple Beth Or — Reform Jewish, Rockridge, congregation 700, founded 167 years ago, led today by Rabbi Naomi Sterling, 2 members on the ledger — oldest Jewish congregation, interfaith active",
+        "src": "output/beats/Faith_Organizations.jsonl \"Temple Beth Or\""
+      },
+      {
+        "text": "B'nai Tikvah Synagogue — Orthodox Jewish, Piedmont Ave, congregation 250, founded 118 years ago, led today by Rabbi Yael Bauer — traditional observance, community eruv",
+        "src": "output/beats/Faith_Organizations.jsonl \"B'nai Tikvah Synagogue\""
+      },
+      {
+        "text": "Temescal Islamic Center — Muslim, Temescal, congregation 600, founded 57 years ago, led today by Imam Idris Karim — diverse Muslim community, education focus",
+        "src": "output/beats/Faith_Organizations.jsonl \"Temescal Islamic Center\""
+      },
+      {
+        "text": "Masjid An-Nur Oakland — Muslim, East Oakland, congregation 400, founded 64 years ago, led today by Imam Aziz Rahimi — African American Muslim heritage",
+        "src": "output/beats/Faith_Organizations.jsonl \"Masjid An-Nur Oakland\""
+      },
+      {
+        "text": "Bay Pure Land Buddhist Temple — Buddhist, Chinatown, congregation 300, founded 116 years ago, led today by Rev. Kenji Tanaka, 1 members on the ledger — Jodo Shinshu, Japanese-American heritage",
+        "src": "output/beats/Faith_Organizations.jsonl \"Bay Pure Land Buddhist Temple\""
+      },
+      {
+        "text": "Lake Merritt Mindfulness Sangha — Buddhist, Downtown, congregation 500, founded 35 years ago, led today by Tao Lee, 2 members on the ledger — diverse sangha, social justice dharma",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lake Merritt Mindfulness Sangha\""
+      },
+      {
+        "text": "Bharat Mandir of the East Bay — Hindu, Montclair, congregation 400, founded 52 years ago, led today by Pandit Anand Krishnamurthy — South Indian traditions, cultural programs",
+        "src": "output/beats/Faith_Organizations.jsonl \"Bharat Mandir of the East Bay\""
+      },
+      {
+        "text": "Gurdwara Singh Sabha Fruitvale — Sikh, Fruitvale, congregation 350, founded 60 years ago, led today by Bhai Manjit Singh — langar kitchen, community service",
+        "src": "output/beats/Faith_Organizations.jsonl \"Gurdwara Singh Sabha Fruitvale\""
+      },
+      {
+        "text": "Or Hashalom Renewal Community — Jewish Renewal, Grand Lake, congregation 400, founded 58 years ago, led today by Rabbi Miriam Goldstein — progressive, social justice",
+        "src": "output/beats/Faith_Organizations.jsonl \"Or Hashalom Renewal Community\""
+      },
+      {
+        "text": "Lakeshore Unitarian Universalist Fellowship — Unitarian, Lake Merritt, congregation 350, founded 153 years ago, led today by Rev. Eleanor Bishop, 4 members on the ledger — interfaith dialogue, humanist welcome",
+        "src": "output/beats/Faith_Organizations.jsonl \"Lakeshore Unitarian Universalist Fellowship\""
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "factCap": 36,
+    "peopleCap": 30,
+    "roomIsYours": ""
+  },
+  "organizations": 16,
+  "weekEvents": [
+    {
+      "cycle": 117,
+      "organization": "Adams Point United Methodist",
+      "type": "crisis_response",
+      "hood": "Adams Point"
+    },
+    {
+      "cycle": 117,
+      "organization": "Temple Beth Or",
+      "type": "crisis_response",
+      "hood": "Rockridge"
+    },
+    {
+      "cycle": 117,
+      "organization": "Masjid An-Nur Oakland",
+      "type": "crisis_response",
+      "hood": "East Oakland"
+    },
+    {
+      "cycle": 115,
+      "organization": "Interfaith Council",
+      "type": "interfaith_dialogue",
+      "hood": "Adams Point"
+    },
+    {
+      "cycle": 114,
+      "organization": "Interfaith Council",
+      "type": "interfaith_dialogue",
+      "hood": "Chinatown"
+    },
+    {
+      "cycle": 117,
+      "organization": "Telegraph Presbyterian Fellowship",
+      "type": "community_program",
+      "hood": "Downtown"
+    },
+    {
+      "cycle": 117,
+      "organization": "New Covenant Pentecostal Assembly",
+      "type": "community_program",
+      "hood": "West Oakland"
+    },
+    {
+      "cycle": 116,
+      "organization": "St. Esperanza Parish",
+      "type": "community_program",
+      "hood": "Fruitvale"
+    },
+    {
+      "cycle": 116,
+      "organization": "New Covenant Pentecostal Assembly",
+      "type": "community_program",
+      "hood": "West Oakland"
+    },
+    {
+      "cycle": 116,
+      "organization": "Temple Beth Or",
+      "type": "community_program",
+      "hood": "Rockridge"
+    },
+    {
+      "cycle": 116,
+      "organization": "B'nai Tikvah Synagogue",
+      "type": "community_program",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "cycle": 116,
+      "organization": "Or Hashalom Renewal Community",
+      "type": "community_program",
+      "hood": "Grand Lake"
+    },
+    {
+      "cycle": 115,
+      "organization": "Cathedral of the Living Word",
+      "type": "community_program",
+      "hood": "Lake Merritt"
+    },
+    {
+      "cycle": 115,
+      "organization": "Masjid An-Nur Oakland",
+      "type": "community_program",
+      "hood": "East Oakland"
+    },
+    {
+      "cycle": 115,
+      "organization": "Bay Pure Land Buddhist Temple",
+      "type": "community_program",
+      "hood": "Chinatown"
+    },
+    {
+      "cycle": 114,
+      "organization": "Cathedral of the Living Word",
+      "type": "community_program",
+      "hood": "Lake Merritt"
+    },
+    {
+      "cycle": 114,
+      "organization": "B'nai Tikvah Synagogue",
+      "type": "community_program",
+      "hood": "Piedmont Ave"
+    },
+    {
+      "cycle": 114,
+      "organization": "Masjid An-Nur Oakland",
+      "type": "community_program",
+      "hood": "East Oakland"
+    },
+    {
+      "cycle": 114,
+      "organization": "Bharat Mandir of the East Bay",
+      "type": "community_program",
+      "hood": "Montclair"
+    },
+    {
+      "cycle": 113,
+      "organization": "St. Esperanza Parish",
+      "type": "community_program",
+      "hood": "Fruitvale"
+    }
+  ],
+  "pointers": [
+    "the faith record of C117"
+  ]
+}

@@ -1,0 +1,386 @@
+[
+  {
+    "pop": "POP-00137",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00137\",\"name\":\"Kimberly Cho\",\"role\":\"DEPUTY CHIEF OF OPERATIONS\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"When a neighborhood logs about eight incidents in a cycle and the department makes about two arrests there, how are detectives assigned? What decides which Temescal property cases get follow-up and which stay open with no one working them? Speak from your life.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department — age 56\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null},\"known\":[{\"t\":\"FACT\",\"text\":\"Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department — age 56\",\"src\":\"Simulation_Ledger profile for POP-00137\",\"id\":\"F-a26db6a6b9c1\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00137",
+        "name": "Kimberly Cho",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "When a neighborhood logs about eight incidents in a cycle and the department makes about two arrests there, how are detectives assigned? What decides which Temescal property cases get follow-up and which stay open with no one working them? Speak from your life."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department — age 56",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Kimberly Cho — DEPUTY CHIEF OF OPERATIONS — Oakland Police Department — age 56",
+          "src": "Simulation_Ledger profile for POP-00137",
+          "id": "F-a26db6a6b9c1"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01141",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01141\",\"name\":\"Dolores Nwachukwu\",\"role\":\"Police Captain\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"Walk me through a Temescal property case from the first call to the last entry in the file. At what point does it get a report, get reclassified, or get closed with no report filed? Speak from your life.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Dolores Nwachukwu — Police Captain — Oakland Police Department — age 48\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null},\"known\":[{\"t\":\"FACT\",\"text\":\"Dolores Nwachukwu — Police Captain — Oakland Police Department — age 48\",\"src\":\"Simulation_Ledger profile for POP-01141\",\"id\":\"F-0aa8846e6805\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01141",
+        "name": "Dolores Nwachukwu",
+        "role": "Police Captain",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "Walk me through a Temescal property case from the first call to the last entry in the file. At what point does it get a report, get reclassified, or get closed with no report filed? Speak from your life."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Dolores Nwachukwu — Police Captain — Oakland Police Department — age 48",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Dolores Nwachukwu — Police Captain — Oakland Police Department — age 48",
+          "src": "Simulation_Ledger profile for POP-01141",
+          "id": "F-0aa8846e6805"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01021",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01021\",\"name\":\"Vanessa Tran-Muñoz\",\"role\":\"OARI Program Director\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"The West Oakland call this cycle ended without cuffs. How is a call like that classified, does it appear in the incident count, and what does OARI record as its outcome? Speak from your life.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null},\"known\":[{\"t\":\"FACT\",\"text\":\"Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40\",\"src\":\"Simulation_Ledger profile for POP-01021\",\"id\":\"F-5c2d76122ad3\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01021",
+        "name": "Vanessa Tran-Muñoz",
+        "role": "OARI Program Director",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "The West Oakland call this cycle ended without cuffs. How is a call like that classified, does it appear in the incident count, and what does OARI record as its outcome? Speak from your life."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Vanessa Tran-Muñoz — OARI Program Director — Oakland Alternative Response Initiative — age 40",
+          "src": "Simulation_Ledger profile for POP-01021",
+          "id": "F-5c2d76122ad3"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00139",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00139\",\"name\":\"Samantha Viteri\",\"role\":\"INTERNAL AFFAIRS DIVISION LEAD\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Sgt. Rachel Torres\",\"question\":\"Do any complaints or reviews tied to Temescal or Fruitvale incidents this cycle bear on how those incidents were classified or closed? If you can't discuss specific cases, can you say how classification disputes reach your division? Speak from your life.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null},\"known\":[{\"t\":\"FACT\",\"text\":\"Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50\",\"src\":\"Simulation_Ledger profile for POP-00139\",\"id\":\"F-d47f720fe01a\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"lived-context|direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00139",
+        "name": "Samantha Viteri",
+        "role": "INTERNAL AFFAIRS DIVISION LEAD",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Sgt. Rachel Torres",
+        "question": "Do any complaints or reviews tied to Temescal or Fruitvale incidents this cycle bear on how those incidents were classified or closed? If you can't discuss specific cases, can you say how classification disputes reach your division? Speak from your life."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Samantha Viteri — INTERNAL AFFAIRS DIVISION LEAD — Oakland Police Department — age 50",
+          "src": "Simulation_Ledger profile for POP-00139",
+          "id": "F-d47f720fe01a"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "lived-context|direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-v4-flash-0731",
+    "record": true,
+    "maxTokens": 420
+  }
+]

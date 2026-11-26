@@ -1,0 +1,63 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "117",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.6-luna",
+  "configuredWriterModel": "openai/gpt-5.6-luna",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "selena-grant",
+  "byline": {
+    "name": "Selena Grant",
+    "popid": "POP-00591",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 6,
+  "wordCount": 510,
+  "targetWords": "400-650",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "code floor 400",
+    "words": 510,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "b9d8d7e6c87bcc7a0b601d818c1dcc05d389f2a8398b7517a288979292cf3771",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c117_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }\n{\n  \"popId\": \"POP-00591\",\n  \"name\": \"Selena Grant\",\n  \"recorded\": true,\n  \"text\": \"The Oaks Have Made the Comeback Their First Identity\"\n}"
+  },
+  "ranAt": "2026-11-25T00:19:14.307Z"
+}

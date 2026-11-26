@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-24",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Selena Grant",
+      "desk": "sports",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Tamsin Pruitt",
+      "desk": "culture",
+      "ok": true,
+      "checks": null
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": false,
+      "error": "spent angle artifact at output/cron-compare/undocked_c117_nia-rook_packet-v2_angle.json (written 2026-11-23T12:17:21.676Z) — already filed as staged/undocked_c117_nia-rook_packet-v2_openai-gpt-6-luna.staged.json at 2026-11-24T00:23:11.513Z; today's --stage=angle did not land, not filing twice on one plan",
+      "checks": null
+    }
+  ],
+  "checkTotals": null,
+  "ranAt": "2026-11-24T19:17:12.647Z"
+}

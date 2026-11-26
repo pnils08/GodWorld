@@ -1,0 +1,5 @@
+# Temescal, in their own words
+
+## Danny Horn — Center Fielder, Oakland A's - Best player in the MLB
+
+> Man, reading that back still doesn't feel real. A year ago I said I was the best player in baseball, and people laughed. This year? I didn't have to say it. The numbers did the talking. But here's the thing — that 13.3 WAR, the 56 homers, the 80 bags, all of it? That's not me trying to prove anybody wrong. That's me showing up every single day because I owe it to this city, this team, and the game itself. I play center field like it's the last time I'll ever step on that grass. I run out every ground ball like it's Game 7 of the World Series. The mood in the room is dominant? I don't know about the room. I know about the dugout. I know about the guys in Oakland who bleed green and gold. That's who I play for. Keane and Dillon stepping away — those are big shoes. But Isley and Darrin, they've got the heart for it. And I'll be out there in center, chasing down everything that comes my way. That's my promise.

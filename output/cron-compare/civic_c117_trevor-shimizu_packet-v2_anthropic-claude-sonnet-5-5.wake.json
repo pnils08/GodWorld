@@ -1,0 +1,60 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "117",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "trevor-shimizu",
+  "byline": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "beatDomain": "INFRASTRUCTURE"
+  },
+  "laneEntries": 135,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "sheet_read",
+    "canon_recall",
+    "ask_worker"
+  ],
+  "toolCalls": 3,
+  "wordCount": 887,
+  "targetWords": null,
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 887,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d557eecf8abf1ef282e9c2b5939c55947ccda1dfc4d1b306172e84f41ea1dce2",
+    "costUsd": 0.0011
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c117_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "iet: true }\n{\n  \"popId\": \"POP-00155\",\n  \"name\": \"Trevor Shimizu\",\n  \"recorded\": true,\n  \"text\": \"12th Street Added 1,962 Riders and Lost 4 Points of On-Time. The Logged Causes Don't Fully Explain I\"\n}"
+  },
+  "ranAt": "2026-11-24T00:20:28.408Z"
+}

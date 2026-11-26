@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "rachel-torres",
+  "byline": "Sgt. Rachel Torres",
+  "bylinePopid": "POP-00057",
+  "article": "output/cron-compare/staged/civic_c117_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Samantha Viteri",
+        "role": "mentioned",
+        "popid": "POP-00139"
+      },
+      {
+        "name": "Vanessa Tran-Muñoz",
+        "role": "mentioned",
+        "popid": "POP-01021"
+      },
+      {
+        "name": "Rafael Montez",
+        "role": "mentioned",
+        "popid": "POP-00136"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "That call gets classified as a wellness response, and it counts in our incident total just like any other — but the outcome we record isn't 'no arrest,' it's 'resolved without enforcement,' which means the crew stayed, the person got connected to what they needed, and the situation didn't escalate. That's the outcome that matters to me.",
+        "sourceRef": "citizenVoice PRESS Vanessa Tran-Muñoz"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-264eb7c8ebe1",
+    "draftSha256": "80dd52e6d7f09864fd524d6672c0dd48d0432d0f2ce0d43b5fd70a17f776bd23",
+    "verdict": "output/cron-compare/civic_c117_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-25T00:16:44.380Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 1052,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "80dd52e6d7f09864fd524d6672c0dd48d0432d0f2ce0d43b5fd70a17f776bd23",
+      "costUsd": 0.0012
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-25T00:16:49.517Z"
+}

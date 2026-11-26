@@ -1,0 +1,240 @@
+[
+  {
+    "pop": "POP-00595",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00595\",\"name\":\"Sarah Corliss\",\"role\":\"Capacity Analyst, DigitalOcean\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"You were handed the keys to open DigitalOcean on your own for the first time. What was that morning like, who handed them over, and what did you do first once you were inside? Speak from your life. If the question assumes something that has not happened to you, say so plainly.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Sarah Corliss — Capacity Analyst, DigitalOcean — Jack London\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null,\"ownLife\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Sarah Corliss — Was handed the keys at DigitalOcean to open on their own for the first time., Jack London (C117 — what happened in their life, not words they said)\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C117\",\"id\":\"F-4dc3cb2d3193\"},{\"t\":\"FACT\",\"text\":\"Sarah Corliss — in their life, C116: heard someone at the cafe complain about the Baylight District noise and bit their tongue\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C116\",\"id\":\"F-538e81bdfbc7\"},{\"t\":\"FACT\",\"text\":\"Sarah Corliss — in their life, C117: told the story of their first A's game again, and nobody minded\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C117\",\"id\":\"F-01c80a2ee9da\"},{\"t\":\"FACT\",\"text\":\"Sarah Corliss — in their life, C117: griped about Jack London over dinner\",\"src\":\"output/beats/LifeHistory_Log.jsonl @C117\",\"id\":\"F-f401ebe91818\"},{\"t\":\"FACT\",\"text\":\"Sarah Corliss — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)\",\"src\":\"archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5\",\"id\":\"F-b6a1f56ca024\"},{\"t\":\"FACT\",\"text\":\"Sarah Corliss — Capacity Analyst, DigitalOcean — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00595\",\"id\":\"F-00550ad93b13\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00595",
+        "name": "Sarah Corliss",
+        "role": "Capacity Analyst, DigitalOcean",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tamsin Pruitt",
+        "question": "You were handed the keys to open DigitalOcean on your own for the first time. What was that morning like, who handed them over, and what did you do first once you were inside? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Sarah Corliss — Capacity Analyst, DigitalOcean — Jack London",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null,
+        "ownLife": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Sarah Corliss — Was handed the keys at DigitalOcean to open on their own for the first time., Jack London (C117 — what happened in their life, not words they said)",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "id": "F-4dc3cb2d3193"
+        },
+        {
+          "t": "FACT",
+          "text": "Sarah Corliss — in their life, C116: heard someone at the cafe complain about the Baylight District noise and bit their tongue",
+          "src": "output/beats/LifeHistory_Log.jsonl @C116",
+          "id": "F-538e81bdfbc7"
+        },
+        {
+          "t": "FACT",
+          "text": "Sarah Corliss — in their life, C117: told the story of their first A's game again, and nobody minded",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "id": "F-01c80a2ee9da"
+        },
+        {
+          "t": "FACT",
+          "text": "Sarah Corliss — in their life, C117: griped about Jack London over dinner",
+          "src": "output/beats/LifeHistory_Log.jsonl @C117",
+          "id": "F-f401ebe91818"
+        },
+        {
+          "t": "FACT",
+          "text": "Sarah Corliss — the Tribune named them in a piece headlined Uptown's Two Speeds: The Block Moves Faster Than the Store (Business, C112)",
+          "src": "archive/ARTICLE_INDEX.jsonl 6bc955294e6e05a5",
+          "id": "F-b6a1f56ca024"
+        },
+        {
+          "t": "FACT",
+          "text": "Sarah Corliss — Capacity Analyst, DigitalOcean — Jack London",
+          "src": "Simulation_Ledger profile for POP-00595",
+          "id": "F-00550ad93b13"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "ownLife": true,
+    "ownWake": {
+      "reporter": "Tamsin Pruitt",
+      "question": "You were handed the keys to open DigitalOcean on your own for the first time. What was that morning like, who handed them over, and what did you do first once you were inside?"
+    },
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00788",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00788\",\"name\":\"Terrence Wussin\",\"role\":\"Security Guard\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tamsin Pruitt\",\"question\":\"You've moved into a place of your own in Jack London. What was the first thing you put in it, and does the neighborhood look different from your own front door? Speak from your life. If the question assumes something that has not happened to you, say so plainly.\"},\"signal\":{\"kind\":\"interview\",\"hood\":null,\"focus\":\"\",\"src\":\"own pick, C117\"},\"exposure\":{\"basis\":[\"assignment\"],\"self\":\"Terrence Wussin — Security Guard — Jack London\",\"evidence\":[],\"editorialTarget\":true,\"planTarget\":null,\"ownLife\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Terrence Wussin moved into a place of their own in Jack London, renting (C117)\",\"src\":\"output/beats/Household_Ledger.jsonl @C117\",\"id\":\"F-f47ae42f73b5\"},{\"t\":\"FACT\",\"text\":\"Terrence Wussin — Security Guard — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00788\",\"id\":\"F-ceea7fe66617\"},{\"t\":\"FACT\",\"text\":\"Calendar: Y3C13, Spring, holiday=none\",\"src\":\"output/world_summary_c117.md Calendar context (Simulation_Calendar)\",\"id\":\"F-f7ed4e9a474c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00788",
+        "name": "Terrence Wussin",
+        "role": "Security Guard",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tamsin Pruitt",
+        "question": "You've moved into a place of your own in Jack London. What was the first thing you put in it, and does the neighborhood look different from your own front door? Speak from your life. If the question assumes something that has not happened to you, say so plainly."
+      },
+      "signal": {
+        "kind": "interview",
+        "hood": null,
+        "focus": "",
+        "src": "own pick, C117"
+      },
+      "exposure": {
+        "basis": [
+          "assignment"
+        ],
+        "self": "Terrence Wussin — Security Guard — Jack London",
+        "evidence": [],
+        "editorialTarget": true,
+        "planTarget": null,
+        "ownLife": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Terrence Wussin moved into a place of their own in Jack London, renting (C117)",
+          "src": "output/beats/Household_Ledger.jsonl @C117",
+          "id": "F-f47ae42f73b5"
+        },
+        {
+          "t": "FACT",
+          "text": "Terrence Wussin — Security Guard — Jack London",
+          "src": "Simulation_Ledger profile for POP-00788",
+          "id": "F-ceea7fe66617"
+        },
+        {
+          "t": "FACT",
+          "text": "Calendar: Y3C13, Spring, holiday=none",
+          "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+          "id": "F-f7ed4e9a474c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself — your job, your block, the people you know, your own week. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "ownLife": true,
+    "ownWake": {
+      "reporter": "Tamsin Pruitt",
+      "question": "You've moved into a place of your own in Jack London. What was the first thing you put in it, and does the neighborhood look different from your own front door?"
+    },
+    "model": "meta-llama/llama-4-maverick",
+    "record": true,
+    "maxTokens": 420
+  }
+]

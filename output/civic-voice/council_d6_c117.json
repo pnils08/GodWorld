@@ -1,0 +1,38 @@
+{
+  "office": "council_d6",
+  "cycle": 117,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "I directed city and county public health authorities to issue a verified factual update on the Piedmont Avenue health spike while maintaining routine municipal services on our bustling corridor. On citywide business, I confirmed my support for Grand Lake commercial stabilization anchored by strict Chen-Vega audit milestones, and maintained that Council action on the West Oakland Stabilization Fund charter renewal must await verified C114 closeout ledgers.",
+  "statements": [
+    {
+      "statementId": "STMT-117-council_d6-001",
+      "type": "district_statement",
+      "topic": "Piedmont Avenue Health Response and Baseline Municipal Oversight",
+      "initiative": null,
+      "decision": "Direct the responsible public health authorities to publish an evidence-based update and schedule a public briefing on the Piedmont Avenue health spike without creating new administrative bureaucracy.",
+      "quote": "An isolated health spike demands disciplined departmental follow-through and prompt facts for our residents, not administrative panic or unneeded bureaucracy.",
+      "fullStatement": "Piedmont Avenue remains vibrant, with bustling street trade and low crime, but City Hall owes our community clear facts regarding the Cycle 116 health event. The official record documents a medium-severity spike with an impact score of 25 affecting 93 residents; however, underlying clinical diagnoses and specific environmental vectors remain unverified. While municipal sanitation and initial intake reviews have been mobilized, we must distinguish documented incident data from premature conclusions. I expect the responsible public health agency to complete its factual intake, coordinate necessary testing, and provide residents with a documented public update date by next cycle. Commercial corridors thrive on basic municipal competence, not sensationalism or redundant task forces.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d6-002",
+      "type": "vote_statement",
+      "topic": "Grand Lake Commercial Stabilization Roll Call",
+      "initiative": "Commercial Stabilization for Grand Lake",
+      "decision": "Vote YES on Commercial Stabilization for Grand Lake with all Chen-Vega audit milestones and reporting conditions intact.",
+      "quote": "Public capital earns my vote when enforceable audits and transparent operational milestones protect the public purse from day one.",
+      "fullStatement": "I support moving Commercial Stabilization for Grand Lake to a recorded roll call this cycle. My affirmative position has always been conditioned on fiscal rigor, and the Chen-Vega framework provides the exact audit milestones, reporting thresholds, and oversight safeguards necessary to protect municipal funds. Target commercial investments can stabilize critical merchant corridors, but only if financial performance is independently audited rather than taken on faith. With these enforceable oversight provisions firmly embedded in the measure, I vote yes on advancing this stabilization effort.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d6-003",
+      "type": "oversight_statement",
+      "topic": "West Oakland Stabilization Fund Charter Renewal",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Require verified C114 closeout accounting and audit documentation before scheduling any Council vote on charter renewal.",
+      "quote": "A charter renewal cannot outpace the ledger; West Oakland deserves verified closeout documentation before we commit further municipal resources.",
+      "fullStatement": "The Mayor's agenda appropriately places C114 closeout verification ahead of Council action on renewing the West Oakland Stabilization Fund charter. Having cast the crossover vote to establish this fund at Cycle 78, I have consistently held that long-term municipal programs must be governed by rigorous accounting. We cannot deliberate on charter extensions, disbursement standards, or operational scope until the Clerk and Auditor verify the complete reconciliation of prior expenditures. Once that ledger is authenticated and placed on the record, Council can conduct a responsible vote based on certified facts.",
+      "trackerUpdates": {}
+    }
+  ]
+}

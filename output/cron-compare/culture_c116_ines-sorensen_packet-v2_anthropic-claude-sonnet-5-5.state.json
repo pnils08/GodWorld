@@ -33,14 +33,28 @@
   "signal": {
     "kind": "beat-voices",
     "hood": null,
-    "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
+    "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
     "plan": {
-      "focus": "Tre Mingo's perspective on the neighborhood changes"
+      "focus": "The conversation around rent hikes and neighborhood changes in Uptown"
     },
     "runningStories": []
   },
   "exposure": {
     "subjects": [
+      {
+        "pop": "POP-01056",
+        "name": "Theo Banks",
+        "profile": "Theo Banks — rapper — Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00044",
+        "name": "Elliott Crane",
+        "profile": "Elliott Crane — City Council District 6 — Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
       {
         "pop": "POP-00123",
         "name": "Tre Mingo",
@@ -51,20 +65,47 @@
     ],
     "sources": [
       {
-        "id": "Q-POP-00123-8817551e79",
+        "id": "Q-POP-00123-f85c5a2ae4",
         "pop": "POP-00123",
         "name": "Tre Mingo",
-        "quote": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.",
+        "quote": "I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work with, talking about leaving. I've got three kids, and it's hard not to think about how this affects us directly.",
         "factIds": [
-          "F-9c80f9b3dc26"
+          "F-9c80f9b3dc26",
+          "F-7a0f63c56c63"
         ],
         "src": "packet.W2[POP-00123]"
+      },
+      {
+        "id": "Q-POP-01056-458453e0f5",
+        "pop": "POP-01056",
+        "name": "Theo Banks",
+        "quote": "The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave.",
+        "factIds": [
+          "F-092f0b554bf6"
+        ],
+        "src": "packet.W2[POP-01056]"
+      },
+      {
+        "id": "Q-POP-00044-d61c2f03cc",
+        "pop": "POP-00044",
+        "name": "Elliott Crane",
+        "quote": "The conversation around rent hikes and neighborhood changes in Uptown is real, and it's on my mind. I've heard residents openly discussing plans to leave because of the hikes. As their representative, it creates accountability for me to ensure that we're doing everything we can to support the community. I want to see us focus on maintaining the vitality of our commercial corridors like Piedmont Avenue, ensuring basic city services are effective, and being transparent about our fiscal oversight.",
+        "factIds": [
+          "F-dfa9a6c5f01d",
+          "F-db89f0755ae0"
+        ],
+        "src": "packet.W2[POP-00044]"
       }
     ],
     "excludedLeads": [
       {
         "from": "Ines Sorensen",
-        "text": "Potential story on the human impact of gentrification in Uptown",
+        "text": "Potential for increased gentrification in Uptown",
+        "usable": false
+      },
+      {
+        "from": "Ines Sorensen",
+        "text": "Community response to the A's season ending",
         "usable": false
       }
     ]
@@ -78,93 +119,189 @@
     },
     {
       "t": "FACT",
-      "text": "Voices roster, C116: 495 citizens with pages, 13 new since your last piece",
-      "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
-      "id": "F-1d72efe534d7"
+      "text": "Voices roster, C116: 499 citizens with pages, 2 new since your last piece",
+      "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+      "id": "F-be676d62e885"
     },
     {
       "t": "FACT",
       "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-      "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c",
-      "id": "F-2254c1a07278"
+      "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a",
+      "id": "F-848131f7d05f"
     },
     {
       "t": "FACT",
-      "text": "Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; new since your last piece; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
+      "text": "Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116; new since your last piece: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-a1a477d57f54"
+      "id": "F-abedd85821e7"
     },
     {
       "t": "FACT",
-      "text": "Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116; new since your last piece: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
+      "text": "Jade Orion, Musician, Lake Merritt (POP-00540) — 6 pages; latest the night page, a question they carry, C116; new since your last piece: “I don't know if Tank and I are friends or just two people who orbit the same work.”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-42400b2014b8"
+      "id": "F-44c2501627dd"
     },
     {
       "t": "FACT",
-      "text": "Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116; new since your last piece: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
+      "text": "Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-a0b088746077"
+      "id": "F-79c25483defd"
     },
     {
       "t": "FACT",
-      "text": "Warren Ashford, City Council District 7, Rockridge (POP-00504) — 9 pages; latest after work, C116; new since your last piece: “Council District 7 — Warren Ashford here. Let me address that record directly, because I stand by every line of it. **On the clinical dollars…”",
+      "text": "Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 3 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-c8604b37930f"
+      "id": "F-9ee933e21ef8"
     },
     {
       "t": "FACT",
-      "text": "Elliott Crane, City Council District 6, Uptown (POP-00044) — 2 pages; latest after work, C116; new since your last piece: “That’s a fair record, and I’ll own every line of it. The through-line is simple: I’m not going to buy a promise with money we haven’t verified yet.…”",
+      "text": "Delvon Pratt, Warehouse Supervisor, West Oakland (POP-00621) — 3 pages; latest to a reporter, C116: “I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-4ef6f08d9124"
+      "id": "F-767c85506691"
     },
     {
       "t": "FACT",
-      "text": "Janae Rivers, City Council District 5, Piedmont Ave (POP-00043) — 9 pages; latest after work, C116; new since your last piece: “**Janae Rivers** *(standing at the front of the Community Meeting Room, Piedmont Ave Library — sleeves rolled up, a stack of printed call logs on the…”",
+      "text": "Elias Varek, Founder of Civis Systems, West Oakland (POP-00789) — 34 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-8634334131f0"
+      "id": "F-9b34695c95bf"
     },
     {
       "t": "FACT",
-      "text": "Ramon Vega, City Council District 4, Lake Merritt (POP-00042) — 19 pages; latest after work, C116; new since your last piece: “Let's get right to it. You've laid out the record cleanly. Here's where I land, and I'll be direct with you because that's how I operate. **On the…”",
+      "text": "Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Piedmont Ave (POP-00001) — 55 pages; latest to a reporter, C116; Lives carried the retirement this Cycle: “I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-f504757deff2"
+      "id": "F-c97e2def3b67"
     },
     {
       "t": "FACT",
-      "text": "Rose Delgado, City Council District 3, Fruitvale (POP-00503) — 4 pages; latest after work, C116; new since your last piece: “Councilmember Delgado, I hear you. Let’s not bury the lead: **your own words this cycle put the $230M design on notice** — no schematics, no…”",
+      "text": "Benji Dillon, Pitcher, Oakland A's Legend, Rockridge (POP-00018) — 41 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-77893658d103"
+      "id": "F-9d401287c422"
     },
     {
       "t": "FACT",
-      "text": "Leonard Tran, City Council District 2, Downtown (POP-00502) — 3 pages; latest after work, C116; new since your last piece: “The record is the record, and I don’t blur lines. A stated YES is a position, not a vote. A proposed allocation is a number on a page, not money…”",
+      "text": "Lena Cross, Actor, Piedmont Ave (POP-00539) — 12 pages; latest to a reporter, C116: “Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-c4eeda165531"
+      "id": "F-68015c252cea"
     },
     {
       "t": "FACT",
-      "text": "Denise Carter, City Council District 1, West Oakland (POP-00501) — 2 pages; latest after work, C116; new since your last piece: “Denise leans forward, her elbows on the table, voice low and steady. She doesn't wave off the numbers, but she refuses to let them be the whole…”",
+      "text": "Theo Banks, rapper, Uptown (POP-01056) — 2 pages; latest to a reporter, C116: “I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-0298b824db17"
+      "id": "F-585ad44e4026"
     },
     {
       "t": "FACT",
-      "text": "Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 11 pages; latest after work, C116; new since your last piece; Lives carried what the Cycle's turn reached them with this Cycle: “*(I keep my eyes on the room, not the clock. The stack of papers in front of me is a tool, not a shield. I flip to the third page, where the numbers…”",
+      "text": "Travis Coles, Starting Pitcher, Oakland A's, Downtown (POP-00533) — 12 pages; latest to a reporter, C116: “I've seen Benji Dillon around Rockridge a few times, and it's clear he's getting more attention. As a player, you're used to being recognized, but…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-184501cd232f"
+      "id": "F-490efc8d7527"
     },
     {
       "t": "FACT",
-      "text": "Elias Varek, Founder of Civis Systems, West Oakland (POP-00789) — 33 pages; latest after work, C116; new since your last piece; Lives carried a moment the record kept this Cycle: “Numbers don't lie, but they do withhold. Civis moved a tenth of a percent. That's not growth, that's a heartbeat. Flatlining. And the Oakland Oaks —…”",
+      "text": "Danny Horn, Center Fielder, Oakland A's - Best player in the MLB, Temescal (POP-00022) — 8 pages; latest to a reporter, C116: “To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-660cac67b1fd"
+      "id": "F-1bd0d84c19de"
     },
     {
       "t": "FACT",
-      "text": "Mark Aitken, First Baseman, Colorado Rockies, Jack London (POP-00003) — 17 pages; latest after work, C116; new since your last piece: “Yeah. I saw the feed. Hard not to, with the phone blowing up the way it is. Here's what I'll say about the Angels thing — it's real, in the sense…”",
+      "text": "Darrin Davis, Left Fielder, Oakland A's Legend, Piedmont Ave (POP-00021) — 8 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “To be honest, I'm not super close to Benji Dillon, but I've seen his name popping up more often around the A's, and it's clear he's gaining traction.…”",
       "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-7b73225ebb62"
+      "id": "F-f1eb27f7ff5d"
+    },
+    {
+      "t": "FACT",
+      "text": "Trenton Nawan, Server, Jack London (POP-00273) — 15 pages; latest to a reporter, C116: “You want to know what the work actually looks like? Stand at the dish pit at Green & Gold on a Saturday night. That's where you learn the real rhythm…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-d9ac95c09dc5"
+    },
+    {
+      "t": "FACT",
+      "text": "Karim Avery, Security Guard, Fruitvale (POP-00980) — 2 pages; latest to a reporter, a question they carry, C116: “How do I serve people when I can see the weight they carry and can't lighten it?”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-0d941545612d"
+    },
+    {
+      "t": "FACT",
+      "text": "Hector Leech, Dishwasher, Jack London (POP-00252) — 4 pages; latest to a reporter, C116: “A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-f2799ba3b020"
+    },
+    {
+      "t": "FACT",
+      "text": "Amara Osei, Founder, Portside Bio, West Oakland (POP-01110) — 1 page; latest the midday page, C116: “The corner store on Mandela, the one with the squeaky screen door and the old man who’s been running it since before I moved here. I don’t need…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-3abf922393bd"
+    },
+    {
+      "t": "FACT",
+      "text": "Matilda Diop, Paramedic, Lake Merritt (POP-00832) — 2 pages; latest the morning page, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “Did I make the right call years back, and who was I really arguing with on that bench?”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-9c30b5867128"
+    },
+    {
+      "t": "FACT",
+      "text": "Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-bdcac30cc946"
+    },
+    {
+      "t": "FACT",
+      "text": "Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-a0aad8611de4"
+    },
+    {
+      "t": "FACT",
+      "text": "Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-ea78f66d74b5"
+    },
+    {
+      "t": "FACT",
+      "text": "Warren Ashford, City Council District 7, Rockridge (POP-00504) — 9 pages; latest after work, C116: “Council District 7 — Warren Ashford here. Let me address that record directly, because I stand by every line of it. **On the clinical dollars…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-e961eb71637c"
+    },
+    {
+      "t": "FACT",
+      "text": "Elliott Crane, City Council District 6, Uptown (POP-00044) — 2 pages; latest after work, C116: “That’s a fair record, and I’ll own every line of it. The through-line is simple: I’m not going to buy a promise with money we haven’t verified yet.…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-db89f0755ae0"
+    },
+    {
+      "t": "FACT",
+      "text": "Janae Rivers, City Council District 5, Piedmont Ave (POP-00043) — 9 pages; latest after work, C116: “**Janae Rivers** *(standing at the front of the Community Meeting Room, Piedmont Ave Library — sleeves rolled up, a stack of printed call logs on the…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-122561fe410a"
+    },
+    {
+      "t": "FACT",
+      "text": "Ramon Vega, City Council District 4, Lake Merritt (POP-00042) — 19 pages; latest after work, C116: “Let's get right to it. You've laid out the record cleanly. Here's where I land, and I'll be direct with you because that's how I operate. **On the…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-80ab3a09d404"
+    },
+    {
+      "t": "FACT",
+      "text": "Rose Delgado, City Council District 3, Fruitvale (POP-00503) — 4 pages; latest after work, C116: “Councilmember Delgado, I hear you. Let’s not bury the lead: **your own words this cycle put the $230M design on notice** — no schematics, no…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-b0eca4e6ba44"
+    },
+    {
+      "t": "FACT",
+      "text": "Leonard Tran, City Council District 2, Downtown (POP-00502) — 3 pages; latest after work, C116: “The record is the record, and I don’t blur lines. A stated YES is a position, not a vote. A proposed allocation is a number on a page, not money…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-dd6da6397bd3"
+    },
+    {
+      "t": "FACT",
+      "text": "Denise Carter, City Council District 1, West Oakland (POP-00501) — 2 pages; latest after work, C116: “Denise leans forward, her elbows on the table, voice low and steady. She doesn't wave off the numbers, but she refuses to let them be the whole…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-7f8bed6d68bb"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken, First Baseman, Colorado Rockies, Jack London (POP-00003) — 17 pages; latest after work, C116: “Yeah. I saw the feed. Hard not to, with the phone blowing up the way it is. Here's what I'll say about the Angels thing — it's real, in the sense…”",
+      "src": "output/citizen_pages/index.jsonl roster",
+      "id": "F-36d8448b6167"
     },
     {
       "t": "FACT",
@@ -282,12 +419,6 @@
     },
     {
       "t": "FACT",
-      "text": "Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Piedmont Ave (POP-00001) — 53 pages; latest to a reporter, a question they carry, C116; Lives carried the retirement this Cycle: “TENSION[c116]: Will Benji listen to what he actually wants, or will the calendar decide for him?”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-b4c74cc0f406"
-    },
-    {
-      "t": "FACT",
       "text": "Deacon Seymour, Manager, Oakland A's, Lake Merritt (POP-00528) — 36 pages; latest to a reporter, a question they carry, C116; you ran them C114: “TENSION[c116]: Will Benji decide he has one more run in him, or do we have to plan like he's gone for good?”",
       "src": "output/citizen_pages/index.jsonl roster",
       "id": "F-ba8558920acf"
@@ -381,12 +512,6 @@
       "text": "Adash Stanley, PG / The Oaks, Piedmont Ave (POP-01023) — 14 pages; latest after work, C116; Lives carried a moment the record kept this Cycle: “*leans back in the chair, letting the screen glow fade for a second* Yeah. That Denver game. That's the one we've been building toward. 147 points,…”",
       "src": "output/citizen_pages/index.jsonl roster",
       "id": "F-4e216507b41f"
-    },
-    {
-      "t": "FACT",
-      "text": "Benji Dillon, Pitcher, Oakland A's Legend, Rockridge (POP-00018) — 39 pages; latest after work, C116; Lives carried a moment the record kept this Cycle: “The door's been open for a while now. That's not me being coy—it's me being honest with myself. Vinnie made his call. It was the right one for him.…”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-8b89b8bff841"
     },
     {
       "t": "FACT",
@@ -633,18 +758,6 @@
       "text": "Toto Foto, Theater Director, Uptown (POP-00302) — 3 pages; latest to a reporter, C115: “I love walking through Uptown on a busy Saturday like that. The market was buzzing, and it felt like everyone was out enjoying the day. I saw some…”",
       "src": "output/citizen_pages/index.jsonl roster",
       "id": "F-1c7a357939a0"
-    },
-    {
-      "t": "FACT",
-      "text": "Lena Cross, Actor, Piedmont Ave (POP-00539) — 11 pages; latest to a reporter, a question they carry, C115: “TENSION[c115]: Will Wendell Carter Jr. actually tell me anything about Anthony Raines?”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-a98940176108"
-    },
-    {
-      "t": "FACT",
-      "text": "Darrin Davis, Left Fielder, Oakland A's Legend, Piedmont Ave (POP-00021) — 7 pages; latest to a reporter, C115; Lives carried what the Cycle's turn reached them with this Cycle: “I've seen Benji Dillon's name popping up more often around the A's, and it's clear he's gaining traction. To be honest, I'm not super close to him,…”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-1d0e0475512d"
     },
     {
       "t": "FACT",
@@ -1056,18 +1169,6 @@
     },
     {
       "t": "FACT",
-      "text": "Travis Coles, Starting Pitcher, Oakland A's, Downtown (POP-00533) — 11 pages; latest to a reporter, C114: “To be honest, I haven't really thought much about Benji Dillon's rising fame. I'm focused on my own game and the A's season. I know he's a teammate,…”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-8eb43ef2c51b"
-    },
-    {
-      "t": "FACT",
-      "text": "Danny Horn, Center Fielder, Oakland A's - Best player in the MLB, Temescal (POP-00022) — 7 pages; latest to a reporter, C114: “To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've…”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-da2159bfa063"
-    },
-    {
-      "t": "FACT",
       "text": "Trevor Henderson, Oakland Oaks - Center, Lake Merritt (POP-01224) — 3 pages; latest the midday page, a question they carry, C114: “TENSION[c114]: Will Paulson move one of those big contracts before Saryan's rookie deal, or keep paying for past production?”",
       "src": "output/citizen_pages/index.jsonl roster",
       "id": "F-f772c512355f"
@@ -1107,12 +1208,6 @@
       "text": "Darius Cike, Quantum Computing Researcher, West Oakland (POP-00658) — 3 pages; latest to a reporter, C114: “To be honest, my work in Quantum Computing doesn't directly relate to my decision to move to West Oakland. I've been drawn to the area's industrial…”",
       "src": "output/citizen_pages/index.jsonl roster",
       "id": "F-553aa38d0b44"
-    },
-    {
-      "t": "FACT",
-      "text": "Trenton Nawan, Server, Jack London (POP-00273) — 14 pages; latest to a reporter, C114: “I'm still feeling pretty good about the Oaks. That 4-0 start has really got me hopeful. I checked the scores twice a day all week and was happy every…”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-2b7dca2a9228"
     },
     {
       "t": "FACT",
@@ -1602,12 +1697,6 @@
     },
     {
       "t": "FACT",
-      "text": "Delvon Pratt, Warehouse Supervisor, West Oakland (POP-00621) — 2 pages; latest the night page, a question they carry, C112: “TENSION[c112]: Why am I pretending it's fine when I'm just tired of squeezing into this space?”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-2c553b8cc41c"
-    },
-    {
-      "t": "FACT",
       "text": "Marmol Lemon, Graffiti Restoration Artist, Uptown (POP-00336) — 2 pages; latest in conversation, a question they carry, C112: “TENSION[c112]: I'm not sure how I feel about them painting over the old murals by the bar patio.”",
       "src": "output/citizen_pages/index.jsonl roster",
       "id": "F-485091fe8749"
@@ -1629,12 +1718,6 @@
       "text": "Marcus Wright, Server, West Oakland (POP-00288) — 7 pages; latest to a reporter, a question they carry, C112: “TENSION[c112]: Who is actually going to look out for the folks around here who are barely holding on?”",
       "src": "output/citizen_pages/index.jsonl roster",
       "id": "F-c6e987153f24"
-    },
-    {
-      "t": "FACT",
-      "text": "Jade Orion, Musician, Lake Merritt (POP-00540) — 4 pages; latest to a reporter, C112: “I'm not sure what you mean by 'rising fame.' I've been doing my music here in Lake Merritt for a while now, and it's nice to see people appreciating…”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-a48b4da01ff9"
     },
     {
       "t": "FACT",
@@ -1872,12 +1955,6 @@
     },
     {
       "t": "FACT",
-      "text": "Hector Leech, Dishwasher, Jack London (POP-00252) — 3 pages; latest to a reporter, C111: “A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a…”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-aacb3ed7933d"
-    },
-    {
-      "t": "FACT",
       "text": "Jessie Hess, Barista, Downtown (POP-00212) — 14 pages; latest to a reporter, C111: “Look, I'm a fan—I'm always gonna want to believe. But that loss to Miami? It stung. I was all in on that starting five, really hyped, but you can't…”",
       "src": "output/citizen_pages/index.jsonl roster",
       "id": "F-4a1cded10e18"
@@ -2019,12 +2096,6 @@
       "text": "Patrick When, Janitor, Downtown (POP-00208) — 4 pages; latest in conversation, a question they carry, C110: “TENSION[c110]: Nobody's answering at the church or union hall, so who's gonna help Mrs. Chen before she's out?”",
       "src": "output/citizen_pages/index.jsonl roster",
       "id": "F-73dcca5eca50"
-    },
-    {
-      "t": "FACT",
-      "text": "Theo Banks, rapper, Uptown (POP-01056) — 1 page; latest to a reporter, C110: “Honestly, I don't really know much about Tara Ellison or how her rising fame is affecting the Baylight District's arts and culture scene. I'm over in…”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-1cbe47e5c8ca"
     },
     {
       "t": "FACT",
@@ -2415,12 +2486,6 @@
       "text": "Isabel Lopes, ESL Teacher, Fruitvale (POP-00325) — 6 pages; latest in conversation, C108: “\"Shawn! Hey, it’s good to see you. I was just thinking about how much Fruitvale feels like it’s buzzing lately—have you noticed? It’s like everyone’s…”",
       "src": "output/citizen_pages/index.jsonl roster",
       "id": "F-d553ccae7f8a"
-    },
-    {
-      "t": "FACT",
-      "text": "Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 2 pages; latest the midday page, a question they carry, C107; Lives carried what the Cycle's turn reached them with this Cycle: “TENSION[c107]: Maybe that’s the thing—I’m always moving, but not always toward anything.”",
-      "src": "output/citizen_pages/index.jsonl roster",
-      "id": "F-73b5118f9e1d"
     },
     {
       "t": "FACT",
@@ -3060,6 +3125,18 @@
     },
     {
       "t": "FACT",
+      "text": "“Honestly, I don't really know much about Tara Ellison or how her rising fame is affecting the Baylight District's arts and culture scene. I'm over in Uptown, so I don't really get out that way too often. I've been focused on my own music and the scene around here.” — Theo Banks, rapper, Uptown (own page, to a reporter, C110)",
+      "src": "output/citizen_pages/index.jsonl cp-POP-01056-c110-PRESS",
+      "id": "F-b65ce4d62a01"
+    },
+    {
+      "t": "FACT",
+      "text": "“The closeout language held, and that’s what matters. I keep circling the same truth: we can’t spend on promise when the ledger is still open, and I won’t pretend otherwise just to move a charter faster. Piedmont Avenue doesn’t need me to invent problems—it needs the trash picked up and the permits moving, and that’s the work I’m actually paid to protect. I’m restless tonight because the quiet feels like a trap; someone’s going to float a shiny project tomorrow and I’ll have to say no again. Fine. Discipline isn’t flashy, but it’s the only thing that keeps the corridor from becoming a photo op.” — Elliott Crane, City Council District 6, Uptown (own page, after work, C115)",
+      "src": "output/citizen_pages/index.jsonl cp-POP-00044-c115-work-thu",
+      "id": "F-f35f312cc657"
+    },
+    {
+      "t": "FACT",
       "text": "“I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence.” — Tre Mingo, Port Worker, Uptown (own page, to a reporter, C116)",
       "src": "output/citizen_pages/index.jsonl cp-POP-00123-c116-PRESS-mon-laejhi",
       "id": "F-00c5d7ea8b7e"
@@ -3078,9 +3155,51 @@
     },
     {
       "t": "FACT",
+      "text": "“That’s a fair record, and I’ll own every line of it. The through-line is simple: I’m not going to buy a promise with money we haven’t verified yet. My constituents on Piedmont Avenue don’t need slogans—they need the sidewalk power-washed and the permit counter moving. And the health spike affecting 93 residents? That’s not a talking point, that’s a number I can’t shake. I want the public health folks to give us a straight answer and a clear timeline, not a new layer of city process that takes six months to tell us what we already know. So if you’re asking whether I’m open to a charter extension or a new investment package—yes, but only if the closeout audits are clean and the milestones are enforceable. I’ll cross lines when the numbers hold up. That’s not stubbornness, that’s just how I sleep at night.” — Elliott Crane, City Council District 6, Uptown (own page, after work, C116)",
+      "src": "output/citizen_pages/index.jsonl cp-POP-00044-c116-work-thu",
+      "id": "F-12de85b4d735"
+    },
+    {
+      "t": "FACT",
+      "text": "“I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the player, it's about what they mean to the community. I don't know him personally, but you can feel the impact. People around here talk about it, how it's another change for the team.” — Theo Banks, rapper, Uptown (own page, to a reporter, C116)",
+      "src": "output/citizen_pages/index.jsonl cp-POP-01056-c116-PRESS-fri-kebnhl",
+      "id": "F-6a3dee9e4622"
+    },
+    {
+      "t": "FACT",
+      "text": "“I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.” — Tre Mingo, Port Worker, Uptown (own page, to a reporter, C116)",
+      "src": "output/citizen_pages/index.jsonl cp-POP-00123-c116-PRESS-sat-ibnjhf",
+      "id": "F-931e436f85f0"
+    },
+    {
+      "t": "FACT",
+      "text": "“Will my three kids be able to afford to grow up in this neighborhood at all?” — Tre Mingo, Port Worker, Uptown (own page, to a reporter, a question they carry, C116)",
+      "src": "output/citizen_pages/index.jsonl cp-POP-00123-c116-PRESS-sat-ibnjhf-tension",
+      "id": "F-038acaf6ecc0"
+    },
+    {
+      "t": "FACT",
       "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
       "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)",
       "id": "F-647fd9067a33"
+    },
+    {
+      "t": "FACT",
+      "text": "Tre Mingo — Port Worker — Uptown",
+      "src": "Simulation_Ledger profile for POP-00123",
+      "id": "F-7a0f63c56c63"
+    },
+    {
+      "t": "FACT",
+      "text": "Theo Banks — rapper — Uptown",
+      "src": "Simulation_Ledger profile for POP-01056",
+      "id": "F-092f0b554bf6"
+    },
+    {
+      "t": "FACT",
+      "text": "Elliott Crane — City Council District 6 — Uptown",
+      "src": "Simulation_Ledger profile for POP-00044",
+      "id": "F-dfa9a6c5f01d"
     }
   ],
   "limits": {
@@ -3160,7 +3279,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-8479426c4e87",
+    "id": "AM-207e4ebaf0b7",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -3170,93 +3289,189 @@
         "src": "cron-desk-run explicit cycle argument"
       },
       {
-        "id": "F-1d72efe534d7",
+        "id": "F-be676d62e885",
         "t": "FACT",
-        "text": "Voices roster, C116: 495 citizens with pages, 13 new since your last piece",
-        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c"
+        "text": "Voices roster, C116: 499 citizens with pages, 2 new since your last piece",
+        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a"
       },
       {
-        "id": "F-2254c1a07278",
+        "id": "F-848131f7d05f",
         "t": "FACT",
         "text": "Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.",
-        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch 3e839c"
+        "src": "output/citizen_pages/index.jsonl (pages, whole store) batch ed9b7a"
       },
       {
-        "id": "F-a1a477d57f54",
+        "id": "F-abedd85821e7",
         "t": "FACT",
-        "text": "Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; new since your last piece; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
+        "text": "Juliette Park, Venture Partner (Ridgeline Ventures), West Oakland (POP-00466) — 1 page; latest the morning page, C116; new since your last piece: “The little metal click of the blinds this morning — that cheap, tinny sound they make, like a toy latch. I’ve heard it a thousand times, but today it…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-42400b2014b8",
+        "id": "F-44c2501627dd",
         "t": "FACT",
-        "text": "Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116; new since your last piece: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
+        "text": "Jade Orion, Musician, Lake Merritt (POP-00540) — 6 pages; latest the night page, a question they carry, C116; new since your last piece: “I don't know if Tank and I are friends or just two people who orbit the same work.”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-a0b088746077",
+        "id": "F-79c25483defd",
         "t": "FACT",
-        "text": "Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116; new since your last piece: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
+        "text": "Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 13 pages; latest to a reporter, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “How can we keep supporting people like Paloma, and what other stories can we learn from?”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-c8604b37930f",
+        "id": "F-9ee933e21ef8",
         "t": "FACT",
-        "text": "Warren Ashford, City Council District 7, Rockridge (POP-00504) — 9 pages; latest after work, C116; new since your last piece: “Council District 7 — Warren Ashford here. Let me address that record directly, because I stand by every line of it. **On the clinical dollars…”",
+        "text": "Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 3 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “One thing that's stood out to me in West Oakland recently is how the community turn seems to be paying off. I noticed the new streetlights went in…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-4ef6f08d9124",
+        "id": "F-767c85506691",
         "t": "FACT",
-        "text": "Elliott Crane, City Council District 6, Uptown (POP-00044) — 2 pages; latest after work, C116; new since your last piece: “That’s a fair record, and I’ll own every line of it. The through-line is simple: I’m not going to buy a promise with money we haven’t verified yet.…”",
+        "text": "Delvon Pratt, Warehouse Supervisor, West Oakland (POP-00621) — 3 pages; latest to a reporter, C116: “I've been living in West Oakland for a while now, and it's hard not to notice the industrial vibe around here. You've got warehouses, factories, and…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-8634334131f0",
+        "id": "F-9b34695c95bf",
         "t": "FACT",
-        "text": "Janae Rivers, City Council District 5, Piedmont Ave (POP-00043) — 9 pages; latest after work, C116; new since your last piece: “**Janae Rivers** *(standing at the front of the Community Meeting Room, Piedmont Ave Library — sleeves rolled up, a stack of printed call logs on the…”",
+        "text": "Elias Varek, Founder of Civis Systems, West Oakland (POP-00789) — 34 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “I've been thinking a lot about Vinnie Keane's retirement and what it means for the programs we both founded in West Oakland. To be honest, it's still…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-f504757deff2",
+        "id": "F-c97e2def3b67",
         "t": "FACT",
-        "text": "Ramon Vega, City Council District 4, Lake Merritt (POP-00042) — 19 pages; latest after work, C116; new since your last piece: “Let's get right to it. You've laid out the record cleanly. Here's where I land, and I'll be direct with you because that's how I operate. **On the…”",
+        "text": "Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Piedmont Ave (POP-00001) — 55 pages; latest to a reporter, C116; Lives carried the retirement this Cycle: “I've founded a couple of programs in West Oakland, like the Firehouse 29 Baseball Academy and the Keane Auxiliary Flag Football League. I plan to…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-77893658d103",
+        "id": "F-9d401287c422",
         "t": "FACT",
-        "text": "Rose Delgado, City Council District 3, Fruitvale (POP-00503) — 4 pages; latest after work, C116; new since your last piece: “Councilmember Delgado, I hear you. Let’s not bury the lead: **your own words this cycle put the $230M design on notice** — no schematics, no…”",
+        "text": "Benji Dillon, Pitcher, Oakland A's Legend, Rockridge (POP-00018) — 41 pages; latest to a reporter, C116; Lives carried a moment the record kept this Cycle: “Vinnie Keane made his call, and it was the right one for him. I've noticed that when one of us steps away, it's not just about the player, it's about…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-c4eeda165531",
+        "id": "F-68015c252cea",
         "t": "FACT",
-        "text": "Leonard Tran, City Council District 2, Downtown (POP-00502) — 3 pages; latest after work, C116; new since your last piece: “The record is the record, and I don’t blur lines. A stated YES is a position, not a vote. A proposed allocation is a number on a page, not money…”",
+        "text": "Lena Cross, Actor, Piedmont Ave (POP-00539) — 12 pages; latest to a reporter, C116: “Vinnie Keane is a neighborhood treasure. I've seen him around Piedmont Ave, and we chat about the A's. His retirement was a big deal, and it's been…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-0298b824db17",
+        "id": "F-585ad44e4026",
         "t": "FACT",
-        "text": "Denise Carter, City Council District 1, West Oakland (POP-00501) — 2 pages; latest after work, C116; new since your last piece: “Denise leans forward, her elbows on the table, voice low and steady. She doesn't wave off the numbers, but she refuses to let them be the whole…”",
+        "text": "Theo Banks, rapper, Uptown (POP-01056) — 2 pages; latest to a reporter, C116: “I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-184501cd232f",
+        "id": "F-490efc8d7527",
         "t": "FACT",
-        "text": "Avery Santana, Mayor of Oakland, Rockridge (POP-00034) — 11 pages; latest after work, C116; new since your last piece; Lives carried what the Cycle's turn reached them with this Cycle: “*(I keep my eyes on the room, not the clock. The stack of papers in front of me is a tool, not a shield. I flip to the third page, where the numbers…”",
+        "text": "Travis Coles, Starting Pitcher, Oakland A's, Downtown (POP-00533) — 12 pages; latest to a reporter, C116: “I've seen Benji Dillon around Rockridge a few times, and it's clear he's getting more attention. As a player, you're used to being recognized, but…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-660cac67b1fd",
+        "id": "F-1bd0d84c19de",
         "t": "FACT",
-        "text": "Elias Varek, Founder of Civis Systems, West Oakland (POP-00789) — 33 pages; latest after work, C116; new since your last piece; Lives carried a moment the record kept this Cycle: “Numbers don't lie, but they do withhold. Civis moved a tenth of a percent. That's not growth, that's a heartbeat. Flatlining. And the Oakland Oaks —…”",
+        "text": "Danny Horn, Center Fielder, Oakland A's - Best player in the MLB, Temescal (POP-00022) — 8 pages; latest to a reporter, C116: “To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-7b73225ebb62",
+        "id": "F-f1eb27f7ff5d",
         "t": "FACT",
-        "text": "Mark Aitken, First Baseman, Colorado Rockies, Jack London (POP-00003) — 17 pages; latest after work, C116; new since your last piece: “Yeah. I saw the feed. Hard not to, with the phone blowing up the way it is. Here's what I'll say about the Angels thing — it's real, in the sense…”",
+        "text": "Darrin Davis, Left Fielder, Oakland A's Legend, Piedmont Ave (POP-00021) — 8 pages; latest to a reporter, C116; Lives carried what the Cycle's turn reached them with this Cycle: “To be honest, I'm not super close to Benji Dillon, but I've seen his name popping up more often around the A's, and it's clear he's gaining traction.…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-d9ac95c09dc5",
+        "t": "FACT",
+        "text": "Trenton Nawan, Server, Jack London (POP-00273) — 15 pages; latest to a reporter, C116: “You want to know what the work actually looks like? Stand at the dish pit at Green & Gold on a Saturday night. That's where you learn the real rhythm…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-0d941545612d",
+        "t": "FACT",
+        "text": "Karim Avery, Security Guard, Fruitvale (POP-00980) — 2 pages; latest to a reporter, a question they carry, C116: “How do I serve people when I can see the weight they carry and can't lighten it?”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-f2799ba3b020",
+        "t": "FACT",
+        "text": "Hector Leech, Dishwasher, Jack London (POP-00252) — 4 pages; latest to a reporter, C116: “A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-3abf922393bd",
+        "t": "FACT",
+        "text": "Amara Osei, Founder, Portside Bio, West Oakland (POP-01110) — 1 page; latest the midday page, C116: “The corner store on Mandela, the one with the squeaky screen door and the old man who’s been running it since before I moved here. I don’t need…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-9c30b5867128",
+        "t": "FACT",
+        "text": "Matilda Diop, Paramedic, Lake Merritt (POP-00832) — 2 pages; latest the morning page, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “Did I make the right call years back, and who was I really arguing with on that bench?”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-bdcac30cc946",
+        "t": "FACT",
+        "text": "Davey Martinez, Maintenance tech, Temescal (POP-00213) — 3 pages; latest the night page, a question they carry, C116; Lives carried what the Cycle's turn reached them with this Cycle: “Does a city's loss of someone who made it feel like ours matter, when my own life is fine? Things keep slipping away.”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-a0aad8611de4",
+        "t": "FACT",
+        "text": "Terrence Mobley, City Council District 9, Uptown (POP-00506) — 2 pages; latest after work, C116: “That's the record, and I'll stand by every line of it. The cleanup isn't a press release—it's a scope, a resident list, and a Clerk entry that holds…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-ea78f66d74b5",
+        "t": "FACT",
+        "text": "Nina Chen, City Council District 8, Lake Merritt (POP-00505) — 2 pages; latest after work, C116: “Council Member Chen's office acknowledges the record as stated. District 8 remains committed to the principles outlined: procedural integrity,…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-e961eb71637c",
+        "t": "FACT",
+        "text": "Warren Ashford, City Council District 7, Rockridge (POP-00504) — 9 pages; latest after work, C116: “Council District 7 — Warren Ashford here. Let me address that record directly, because I stand by every line of it. **On the clinical dollars…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-db89f0755ae0",
+        "t": "FACT",
+        "text": "Elliott Crane, City Council District 6, Uptown (POP-00044) — 2 pages; latest after work, C116: “That’s a fair record, and I’ll own every line of it. The through-line is simple: I’m not going to buy a promise with money we haven’t verified yet.…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-122561fe410a",
+        "t": "FACT",
+        "text": "Janae Rivers, City Council District 5, Piedmont Ave (POP-00043) — 9 pages; latest after work, C116: “**Janae Rivers** *(standing at the front of the Community Meeting Room, Piedmont Ave Library — sleeves rolled up, a stack of printed call logs on the…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-80ab3a09d404",
+        "t": "FACT",
+        "text": "Ramon Vega, City Council District 4, Lake Merritt (POP-00042) — 19 pages; latest after work, C116: “Let's get right to it. You've laid out the record cleanly. Here's where I land, and I'll be direct with you because that's how I operate. **On the…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-b0eca4e6ba44",
+        "t": "FACT",
+        "text": "Rose Delgado, City Council District 3, Fruitvale (POP-00503) — 4 pages; latest after work, C116: “Councilmember Delgado, I hear you. Let’s not bury the lead: **your own words this cycle put the $230M design on notice** — no schematics, no…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-dd6da6397bd3",
+        "t": "FACT",
+        "text": "Leonard Tran, City Council District 2, Downtown (POP-00502) — 3 pages; latest after work, C116: “The record is the record, and I don’t blur lines. A stated YES is a position, not a vote. A proposed allocation is a number on a page, not money…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-7f8bed6d68bb",
+        "t": "FACT",
+        "text": "Denise Carter, City Council District 1, West Oakland (POP-00501) — 2 pages; latest after work, C116: “Denise leans forward, her elbows on the table, voice low and steady. She doesn't wave off the numbers, but she refuses to let them be the whole…”",
+        "src": "output/citizen_pages/index.jsonl roster"
+      },
+      {
+        "id": "F-36d8448b6167",
+        "t": "FACT",
+        "text": "Mark Aitken, First Baseman, Colorado Rockies, Jack London (POP-00003) — 17 pages; latest after work, C116: “Yeah. I saw the feed. Hard not to, with the phone blowing up the way it is. Here's what I'll say about the Angels thing — it's real, in the sense…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
@@ -3374,12 +3589,6 @@
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-b4c74cc0f406",
-        "t": "FACT",
-        "text": "Vinnie Keane, Former Designated Hitter, Oakland A's Legend, Piedmont Ave (POP-00001) — 53 pages; latest to a reporter, a question they carry, C116; Lives carried the retirement this Cycle: “TENSION[c116]: Will Benji listen to what he actually wants, or will the calendar decide for him?”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
         "id": "F-ba8558920acf",
         "t": "FACT",
         "text": "Deacon Seymour, Manager, Oakland A's, Lake Merritt (POP-00528) — 36 pages; latest to a reporter, a question they carry, C116; you ran them C114: “TENSION[c116]: Will Benji decide he has one more run in him, or do we have to plan like he's gone for good?”",
@@ -3473,12 +3682,6 @@
         "id": "F-4e216507b41f",
         "t": "FACT",
         "text": "Adash Stanley, PG / The Oaks, Piedmont Ave (POP-01023) — 14 pages; latest after work, C116; Lives carried a moment the record kept this Cycle: “*leans back in the chair, letting the screen glow fade for a second* Yeah. That Denver game. That's the one we've been building toward. 147 points,…”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
-        "id": "F-8b89b8bff841",
-        "t": "FACT",
-        "text": "Benji Dillon, Pitcher, Oakland A's Legend, Rockridge (POP-00018) — 39 pages; latest after work, C116; Lives carried a moment the record kept this Cycle: “The door's been open for a while now. That's not me being coy—it's me being honest with myself. Vinnie made his call. It was the right one for him.…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
@@ -3725,18 +3928,6 @@
         "id": "F-1c7a357939a0",
         "t": "FACT",
         "text": "Toto Foto, Theater Director, Uptown (POP-00302) — 3 pages; latest to a reporter, C115: “I love walking through Uptown on a busy Saturday like that. The market was buzzing, and it felt like everyone was out enjoying the day. I saw some…”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
-        "id": "F-a98940176108",
-        "t": "FACT",
-        "text": "Lena Cross, Actor, Piedmont Ave (POP-00539) — 11 pages; latest to a reporter, a question they carry, C115: “TENSION[c115]: Will Wendell Carter Jr. actually tell me anything about Anthony Raines?”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
-        "id": "F-1d0e0475512d",
-        "t": "FACT",
-        "text": "Darrin Davis, Left Fielder, Oakland A's Legend, Piedmont Ave (POP-00021) — 7 pages; latest to a reporter, C115; Lives carried what the Cycle's turn reached them with this Cycle: “I've seen Benji Dillon's name popping up more often around the A's, and it's clear he's gaining traction. To be honest, I'm not super close to him,…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
@@ -4148,18 +4339,6 @@
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-8eb43ef2c51b",
-        "t": "FACT",
-        "text": "Travis Coles, Starting Pitcher, Oakland A's, Downtown (POP-00533) — 11 pages; latest to a reporter, C114: “To be honest, I haven't really thought much about Benji Dillon's rising fame. I'm focused on my own game and the A's season. I know he's a teammate,…”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
-        "id": "F-da2159bfa063",
-        "t": "FACT",
-        "text": "Danny Horn, Center Fielder, Oakland A's - Best player in the MLB, Temescal (POP-00022) — 7 pages; latest to a reporter, C114: “To be honest, I've not really thought much about Benji Dillon's rising fame. I'm focused on my own game and helping the A's make a deep run. I've…”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
         "id": "F-f772c512355f",
         "t": "FACT",
         "text": "Trevor Henderson, Oakland Oaks - Center, Lake Merritt (POP-01224) — 3 pages; latest the midday page, a question they carry, C114: “TENSION[c114]: Will Paulson move one of those big contracts before Saryan's rookie deal, or keep paying for past production?”",
@@ -4199,12 +4378,6 @@
         "id": "F-553aa38d0b44",
         "t": "FACT",
         "text": "Darius Cike, Quantum Computing Researcher, West Oakland (POP-00658) — 3 pages; latest to a reporter, C114: “To be honest, my work in Quantum Computing doesn't directly relate to my decision to move to West Oakland. I've been drawn to the area's industrial…”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
-        "id": "F-2b7dca2a9228",
-        "t": "FACT",
-        "text": "Trenton Nawan, Server, Jack London (POP-00273) — 14 pages; latest to a reporter, C114: “I'm still feeling pretty good about the Oaks. That 4-0 start has really got me hopeful. I checked the scores twice a day all week and was happy every…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
@@ -4694,12 +4867,6 @@
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-2c553b8cc41c",
-        "t": "FACT",
-        "text": "Delvon Pratt, Warehouse Supervisor, West Oakland (POP-00621) — 2 pages; latest the night page, a question they carry, C112: “TENSION[c112]: Why am I pretending it's fine when I'm just tired of squeezing into this space?”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
         "id": "F-485091fe8749",
         "t": "FACT",
         "text": "Marmol Lemon, Graffiti Restoration Artist, Uptown (POP-00336) — 2 pages; latest in conversation, a question they carry, C112: “TENSION[c112]: I'm not sure how I feel about them painting over the old murals by the bar patio.”",
@@ -4721,12 +4888,6 @@
         "id": "F-c6e987153f24",
         "t": "FACT",
         "text": "Marcus Wright, Server, West Oakland (POP-00288) — 7 pages; latest to a reporter, a question they carry, C112: “TENSION[c112]: Who is actually going to look out for the folks around here who are barely holding on?”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
-        "id": "F-a48b4da01ff9",
-        "t": "FACT",
-        "text": "Jade Orion, Musician, Lake Merritt (POP-00540) — 4 pages; latest to a reporter, C112: “I'm not sure what you mean by 'rising fame.' I've been doing my music here in Lake Merritt for a while now, and it's nice to see people appreciating…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
@@ -4964,12 +5125,6 @@
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
-        "id": "F-aacb3ed7933d",
-        "t": "FACT",
-        "text": "Hector Leech, Dishwasher, Jack London (POP-00252) — 3 pages; latest to a reporter, C111: “A full shift in the pit is a marathon, not a sprint. You're in the steam before the first ticket even prints, and the heat just sits on you like a…”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
         "id": "F-4a1cded10e18",
         "t": "FACT",
         "text": "Jessie Hess, Barista, Downtown (POP-00212) — 14 pages; latest to a reporter, C111: “Look, I'm a fan—I'm always gonna want to believe. But that loss to Miami? It stung. I was all in on that starting five, really hyped, but you can't…”",
@@ -5111,12 +5266,6 @@
         "id": "F-73dcca5eca50",
         "t": "FACT",
         "text": "Patrick When, Janitor, Downtown (POP-00208) — 4 pages; latest in conversation, a question they carry, C110: “TENSION[c110]: Nobody's answering at the church or union hall, so who's gonna help Mrs. Chen before she's out?”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
-        "id": "F-1cbe47e5c8ca",
-        "t": "FACT",
-        "text": "Theo Banks, rapper, Uptown (POP-01056) — 1 page; latest to a reporter, C110: “Honestly, I don't really know much about Tara Ellison or how her rising fame is affecting the Baylight District's arts and culture scene. I'm over in…”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
@@ -5507,12 +5656,6 @@
         "id": "F-d553ccae7f8a",
         "t": "FACT",
         "text": "Isabel Lopes, ESL Teacher, Fruitvale (POP-00325) — 6 pages; latest in conversation, C108: “\"Shawn! Hey, it’s good to see you. I was just thinking about how much Fruitvale feels like it’s buzzing lately—have you noticed? It’s like everyone’s…”",
-        "src": "output/citizen_pages/index.jsonl roster"
-      },
-      {
-        "id": "F-73b5118f9e1d",
-        "t": "FACT",
-        "text": "Priyanka Raman, Principal, Oakland Tech Collective, West Oakland (POP-01096) — 2 pages; latest the midday page, a question they carry, C107; Lives carried what the Cycle's turn reached them with this Cycle: “TENSION[c107]: Maybe that’s the thing—I’m always moving, but not always toward anything.”",
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
@@ -6152,6 +6295,18 @@
         "src": "output/citizen_pages/index.jsonl roster"
       },
       {
+        "id": "F-b65ce4d62a01",
+        "t": "FACT",
+        "text": "“Honestly, I don't really know much about Tara Ellison or how her rising fame is affecting the Baylight District's arts and culture scene. I'm over in Uptown, so I don't really get out that way too often. I've been focused on my own music and the scene around here.” — Theo Banks, rapper, Uptown (own page, to a reporter, C110)",
+        "src": "output/citizen_pages/index.jsonl cp-POP-01056-c110-PRESS"
+      },
+      {
+        "id": "F-f35f312cc657",
+        "t": "FACT",
+        "text": "“The closeout language held, and that’s what matters. I keep circling the same truth: we can’t spend on promise when the ledger is still open, and I won’t pretend otherwise just to move a charter faster. Piedmont Avenue doesn’t need me to invent problems—it needs the trash picked up and the permits moving, and that’s the work I’m actually paid to protect. I’m restless tonight because the quiet feels like a trap; someone’s going to float a shiny project tomorrow and I’ll have to say no again. Fine. Discipline isn’t flashy, but it’s the only thing that keeps the corridor from becoming a photo op.” — Elliott Crane, City Council District 6, Uptown (own page, after work, C115)",
+        "src": "output/citizen_pages/index.jsonl cp-POP-00044-c115-work-thu"
+      },
+      {
         "id": "F-00c5d7ea8b7e",
         "t": "FACT",
         "text": "“I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving. The businesses are growing, the numbers look good, but the folks on the ledger aren't the ones who get to stay. I don't feel like I'm part of it. I feel like I'm watching it from the other side of the fence.” — Tre Mingo, Port Worker, Uptown (own page, to a reporter, C116)",
@@ -6170,25 +6325,103 @@
         "src": "output/citizen_pages/index.jsonl cp-POP-00123-c116-PRESS-wed-lekdim"
       },
       {
+        "id": "F-12de85b4d735",
+        "t": "FACT",
+        "text": "“That’s a fair record, and I’ll own every line of it. The through-line is simple: I’m not going to buy a promise with money we haven’t verified yet. My constituents on Piedmont Avenue don’t need slogans—they need the sidewalk power-washed and the permit counter moving. And the health spike affecting 93 residents? That’s not a talking point, that’s a number I can’t shake. I want the public health folks to give us a straight answer and a clear timeline, not a new layer of city process that takes six months to tell us what we already know. So if you’re asking whether I’m open to a charter extension or a new investment package—yes, but only if the closeout audits are clean and the milestones are enforceable. I’ll cross lines when the numbers hold up. That’s not stubbornness, that’s just how I sleep at night.” — Elliott Crane, City Council District 6, Uptown (own page, after work, C116)",
+        "src": "output/citizen_pages/index.jsonl cp-POP-00044-c116-work-thu"
+      },
+      {
+        "id": "F-6a3dee9e4622",
+        "t": "FACT",
+        "text": "“I've seen Vinnie Keane's name around, heard he's retired. That's a big deal for the A's, you know? Losing a face like that, it's not just about the player, it's about what they mean to the community. I don't know him personally, but you can feel the impact. People around here talk about it, how it's another change for the team.” — Theo Banks, rapper, Uptown (own page, to a reporter, C116)",
+        "src": "output/citizen_pages/index.jsonl cp-POP-01056-c116-PRESS-fri-kebnhl"
+      },
+      {
+        "id": "F-931e436f85f0",
+        "t": "FACT",
+        "text": "“I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.” — Tre Mingo, Port Worker, Uptown (own page, to a reporter, C116)",
+        "src": "output/citizen_pages/index.jsonl cp-POP-00123-c116-PRESS-sat-ibnjhf"
+      },
+      {
+        "id": "F-038acaf6ecc0",
+        "t": "FACT",
+        "text": "“Will my three kids be able to afford to grow up in this neighborhood at all?” — Tre Mingo, Port Worker, Uptown (own page, to a reporter, a question they carry, C116)",
+        "src": "output/citizen_pages/index.jsonl cp-POP-00123-c116-PRESS-sat-ibnjhf-tension"
+      },
+      {
         "id": "F-647fd9067a33",
         "t": "FACT",
         "text": "Calendar: Y3C12, Spring, holiday=Spring Equinox",
         "src": "output/world_summary_c116.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-7a0f63c56c63",
+        "t": "FACT",
+        "text": "Tre Mingo — Port Worker — Uptown",
+        "src": "Simulation_Ledger profile for POP-00123"
+      },
+      {
+        "id": "F-092f0b554bf6",
+        "t": "FACT",
+        "text": "Theo Banks — rapper — Uptown",
+        "src": "Simulation_Ledger profile for POP-01056"
+      },
+      {
+        "id": "F-dfa9a6c5f01d",
+        "t": "FACT",
+        "text": "Elliott Crane — City Council District 6 — Uptown",
+        "src": "Simulation_Ledger profile for POP-00044"
       }
     ],
     "approvedQuotes": [
       {
-        "id": "Q-POP-00123-8817551e79",
+        "id": "Q-POP-00123-f85c5a2ae4",
         "speakerId": "POP-00123",
         "speakerName": "Tre Mingo",
-        "text": "I walk past that fence every day. The development's not for me — it's happening around me. I work at the port, I've got three kids, and I'm watching rents climb while the people I work with talk about leaving.",
+        "text": "I'm worried about the changes in Uptown, to be honest. Rents are climbing, and it's not just numbers on a page; it's people I know, people I work with, talking about leaving. I've got three kids, and it's hard not to think about how this affects us directly.",
         "factIds": [
-          "F-9c80f9b3dc26"
+          "F-9c80f9b3dc26",
+          "F-7a0f63c56c63"
         ],
         "src": "packet.W2[POP-00123]"
+      },
+      {
+        "id": "Q-POP-01056-458453e0f5",
+        "speakerId": "POP-01056",
+        "speakerName": "Theo Banks",
+        "text": "The streets are alive with energy, but rent hikes dominate conversations, with some residents openly discussing plans to leave.",
+        "factIds": [
+          "F-092f0b554bf6"
+        ],
+        "src": "packet.W2[POP-01056]"
+      },
+      {
+        "id": "Q-POP-00044-d61c2f03cc",
+        "speakerId": "POP-00044",
+        "speakerName": "Elliott Crane",
+        "text": "The conversation around rent hikes and neighborhood changes in Uptown is real, and it's on my mind. I've heard residents openly discussing plans to leave because of the hikes. As their representative, it creates accountability for me to ensure that we're doing everything we can to support the community. I want to see us focus on maintaining the vitality of our commercial corridors like Piedmont Avenue, ensuring basic city services are effective, and being transparent about our fiscal oversight.",
+        "factIds": [
+          "F-dfa9a6c5f01d",
+          "F-db89f0755ae0"
+        ],
+        "src": "packet.W2[POP-00044]"
       }
     ],
     "approvedSubjects": [
+      {
+        "id": "POP-01056",
+        "name": "Theo Banks",
+        "profile": "Theo Banks — rapper — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00044",
+        "name": "Elliott Crane",
+        "profile": "Elliott Crane — City Council District 6 — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
       {
         "id": "POP-00123",
         "name": "Tre Mingo",
@@ -6210,7 +6443,12 @@
     "unverifiedLeads": [
       {
         "from": "Ines Sorensen",
-        "text": "Potential story on the human impact of gentrification in Uptown",
+        "text": "Potential for increased gentrification in Uptown",
+        "publishable": false
+      },
+      {
+        "from": "Ines Sorensen",
+        "text": "Community response to the A's season ending",
         "publishable": false
       }
     ],

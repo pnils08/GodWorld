@@ -1,0 +1,486 @@
+{
+  "version": "ENVIRONMENT-SLICE-3",
+  "empty": false,
+  "cycle": 117,
+  "kind": "beat-weather",
+  "seat": {
+    "slug": "noah-tan",
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "desk": "civic",
+    "domain": "environment",
+    "builder": "buildEnvironmentSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-weather",
+    "score": 100,
+    "label": "the weather and environment record of C117",
+    "hood": null,
+    "source": "the weather and environment record of C117"
+  },
+  "story": {
+    "kind": "beat-weather",
+    "angle": "the weather and environment record of C117",
+    "label": "the weather and environment record of C117",
+    "hookLine": "",
+    "hood": null,
+    "citizens": [
+      "Austin Reaves (POP-01027)",
+      "Mark Aitken (POP-00003)",
+      "Philly Rodriguez (POP-00027)",
+      "Laila Cortez (POP-00035)",
+      "Ernesto Quintero (POP-00050)",
+      "Marky Beal (POP-00202)",
+      "Jaren Lanning (POP-00245)",
+      "Brian Adams (POP-00258)",
+      "Joesph Allen (POP-00289)",
+      "Imie Calero (POP-00335)",
+      "Kaila Jordache (POP-00352)",
+      "Lingo Kim (POP-00360)",
+      "Rayon Dart (POP-00363)",
+      "Juniper Walken (POP-00430)",
+      "Anna Baker (POP-00471)",
+      "Terrance Robinson (POP-00480)",
+      "Jace Robinson (POP-00483)",
+      "Jillian Tort (POP-00485)",
+      "Abraham Wright (POP-00497)",
+      "Marisol Achebe (POP-00526)",
+      "Michael Creighton (POP-00589)",
+      "Emma Washington (POP-00627)",
+      "Ala Lewis (POP-00660)",
+      "Siu Niu (POP-00671)",
+      "Nadine Beckett (POP-00715)"
+    ],
+    "popids": [
+      "POP-01027",
+      "POP-00003",
+      "POP-00027",
+      "POP-00035",
+      "POP-00050",
+      "POP-00202",
+      "POP-00245",
+      "POP-00258",
+      "POP-00289",
+      "POP-00335",
+      "POP-00352",
+      "POP-00360",
+      "POP-00363",
+      "POP-00430",
+      "POP-00471",
+      "POP-00480",
+      "POP-00483",
+      "POP-00485",
+      "POP-00497",
+      "POP-00526",
+      "POP-00589",
+      "POP-00627",
+      "POP-00660",
+      "POP-00671",
+      "POP-00715"
+    ],
+    "ref": "the weather and environment record of C117",
+    "cycle": 117
+  },
+  "approach": " Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01027",
+      "name": "Austin Reaves",
+      "role": "SG / The Oaks",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Austin Reaves — SG / The Oaks — West Oakland — C117 in West Oakland: came home to find the neighbors had left a case of something cold on the porch — walking in the door like the block was theirs",
+      "why": "C117 in West Oakland: came home to find the neighbors had left a case of something cold on the porch — walking in the door like the block was theirs"
+    },
+    {
+      "popid": "POP-00003",
+      "name": "Mark Aitken",
+      "role": "First Baseman, Colorado Rockies",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Mark Aitken — First Baseman, Colorado Rockies — Jack London — C117 in Jack London: watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+      "why": "C117 in Jack London: watched the ferry cut across the bay at sunset and felt lucky to live this close to the water"
+    },
+    {
+      "popid": "POP-00027",
+      "name": "Philly Rodriguez",
+      "role": "Casino Manager",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Philly Rodriguez — Casino Manager — West Oakland — C117 in West Oakland: felt energy from seasonal change near a campus quad",
+      "why": "C117 in West Oakland: felt energy from seasonal change near a campus quad"
+    },
+    {
+      "popid": "POP-00035",
+      "name": "Laila Cortez",
+      "role": "Chief of Staff",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Laila Cortez — Chief of Staff — West Oakland — C117 in West Oakland: watched the fog roll over the port cranes from their front window",
+      "why": "C117 in West Oakland: watched the fog roll over the port cranes from their front window"
+    },
+    {
+      "popid": "POP-00050",
+      "name": "Ernesto Quintero",
+      "role": "3B/1B , Oakland A's",
+      "neighborhood": "Baylight District",
+      "business": null,
+      "profile": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District — C117 in Baylight District: decided on a clear day that the walk around the lake could wait for better weather",
+      "why": "C117 in Baylight District: decided on a clear day that the walk around the lake could wait for better weather"
+    },
+    {
+      "popid": "POP-00202",
+      "name": "Marky Beal",
+      "role": "Retail worker",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Marky Beal — Retail worker — West Oakland — C117 in West Oakland: felt unexpectedly nostalgic at the smell of rain on warm pavement",
+      "why": "C117 in West Oakland: felt unexpectedly nostalgic at the smell of rain on warm pavement"
+    },
+    {
+      "popid": "POP-00245",
+      "name": "Jaren Lanning",
+      "role": "Mechanic",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Jaren Lanning — Mechanic — Uptown — C117 in Uptown: felt energy from seasonal change",
+      "why": "C117 in Uptown: felt energy from seasonal change"
+    },
+    {
+      "popid": "POP-00258",
+      "name": "Brian Adams",
+      "role": "Janitor",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Brian Adams — Janitor — Jack London — C117 in Jack London: watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+      "why": "C117 in Jack London: watched the ferry cut across the bay at sunset and felt lucky to live this close to the water"
+    },
+    {
+      "popid": "POP-00289",
+      "name": "Joesph Allen",
+      "role": "Taxi driver",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Joesph Allen — Taxi driver — West Oakland — C117 in West Oakland: found a quiet minute at a porch-lit block and a sense of anticipation hangs in the air",
+      "why": "C117 in West Oakland: found a quiet minute at a porch-lit block and a sense of anticipation hangs in the air"
+    },
+    {
+      "popid": "POP-00335",
+      "name": "Imie Calero",
+      "role": "Civil Rights Attorney",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Imie Calero — Civil Rights Attorney — Downtown — C117 in Downtown: wandered through the late-night market stalls, clutching a paper cup of hot tea near a civic plaza",
+      "why": "C117 in Downtown: wandered through the late-night market stalls, clutching a paper cup of hot tea near a civic plaza"
+    },
+    {
+      "popid": "POP-00352",
+      "name": "Kaila Jordache",
+      "role": "GED Program Instructor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Kaila Jordache — GED Program Instructor — Piedmont Ave — C117 in Piedmont Ave: bought a new A's jersey and a sense of anticipation hangs in the air",
+      "why": "C117 in Piedmont Ave: bought a new A's jersey and a sense of anticipation hangs in the air"
+    },
+    {
+      "popid": "POP-00360",
+      "name": "Lingo Kim",
+      "role": "Hair Stylist",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Lingo Kim — Hair Stylist — Temescal — C117 in Temescal: felt unexpectedly nostalgic at the smell of rain on warm pavement",
+      "why": "C117 in Temescal: felt unexpectedly nostalgic at the smell of rain on warm pavement"
+    },
+    {
+      "popid": "POP-00363",
+      "name": "Rayon Dart",
+      "role": "Climate Modeling Scientist",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Rayon Dart — Climate Modeling Scientist — Lake Merritt — C117 in Lake Merritt: bought a new A's jersey and a sense of anticipation hangs in the air",
+      "why": "C117 in Lake Merritt: bought a new A's jersey and a sense of anticipation hangs in the air"
+    },
+    {
+      "popid": "POP-00430",
+      "name": "Juniper Walken",
+      "role": "Flower Shop Owner",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Juniper Walken — Flower Shop Owner — Temescal — C117 in Temescal: Baylight treated the UNDOCKED board like weather — you checked it whether you meant to or not",
+      "why": "C117 in Temescal: Baylight treated the UNDOCKED board like weather — you checked it whether you meant to or not"
+    },
+    {
+      "popid": "POP-00471",
+      "name": "Anna Baker",
+      "role": "Trade Union Representative",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Anna Baker — Trade Union Representative — Jack London — C117 in Jack London: felt unexpectedly nostalgic at the smell of rain on warm pavement",
+      "why": "C117 in Jack London: felt unexpectedly nostalgic at the smell of rain on warm pavement"
+    },
+    {
+      "popid": "POP-00480",
+      "name": "Terrance Robinson",
+      "role": "Printmaker",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Terrance Robinson — Printmaker — Uptown — C117 in Uptown: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn",
+      "why": "C117 in Uptown: knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn"
+    },
+    {
+      "popid": "POP-00483",
+      "name": "Jace Robinson",
+      "role": "Machine Learning Engineer (Oakmesh Systems)",
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Jace Robinson — Machine Learning Engineer (Oakmesh Systems) — West Oakland — C117 in West Oakland: watched the fog roll over the port cranes from their front window",
+      "why": "C117 in West Oakland: watched the fog roll over the port cranes from their front window"
+    },
+    {
+      "popid": "POP-00485",
+      "name": "Jillian Tort",
+      "role": "City Permit Coordinator",
+      "neighborhood": "Downtown",
+      "business": null,
+      "profile": "Jillian Tort — City Permit Coordinator — Downtown — C117 in Downtown: wandered through the late-night market stalls, clutching a paper cup of hot tea",
+      "why": "C117 in Downtown: wandered through the late-night market stalls, clutching a paper cup of hot tea"
+    },
+    {
+      "popid": "POP-00497",
+      "name": "Abraham Wright",
+      "role": "Tea House Owner",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Abraham Wright — Tea House Owner — Chinatown — C117 in Chinatown: felt energy from seasonal change",
+      "why": "C117 in Chinatown: felt energy from seasonal change"
+    },
+    {
+      "popid": "POP-00526",
+      "name": "Marisol Achebe",
+      "role": "Mutual Aid Network Organizer",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Marisol Achebe — Mutual Aid Network Organizer — Fruitvale — C117 in Fruitvale: found a quiet minute at Fruitvale BART area and a sense of anticipation hangs in the air",
+      "why": "C117 in Fruitvale: found a quiet minute at Fruitvale BART area and a sense of anticipation hangs in the air"
+    },
+    {
+      "popid": "POP-00589",
+      "name": "Michael Creighton",
+      "role": "Writer",
+      "neighborhood": "Temescal",
+      "business": null,
+      "profile": "Michael Creighton — Writer — Temescal — C117 in Temescal: couldn't sleep for the wind rattling the window frame",
+      "why": "C117 in Temescal: couldn't sleep for the wind rattling the window frame"
+    },
+    {
+      "popid": "POP-00627",
+      "name": "Emma Washington",
+      "role": "Barber",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Emma Washington — Barber — Fruitvale — C117 in Fruitvale: couldn't sleep for the wind rattling the window frame",
+      "why": "C117 in Fruitvale: couldn't sleep for the wind rattling the window frame"
+    },
+    {
+      "popid": "POP-00660",
+      "name": "Ala Lewis",
+      "role": "Tailor",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Ala Lewis — Tailor — Piedmont Ave — C117 in Piedmont Ave: found a quiet minute at the hospital cafeteria and a sense of anticipation hangs in the air",
+      "why": "C117 in Piedmont Ave: found a quiet minute at the hospital cafeteria and a sense of anticipation hangs in the air"
+    },
+    {
+      "popid": "POP-00671",
+      "name": "Siu Niu",
+      "role": "Orthodontist",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Siu Niu — Orthodontist — Piedmont Ave — C117 in Piedmont Ave: found a quiet minute at a tree-lined cafe and a sense of anticipation hangs in the air",
+      "why": "C117 in Piedmont Ave: found a quiet minute at a tree-lined cafe and a sense of anticipation hangs in the air"
+    },
+    {
+      "popid": "POP-00715",
+      "name": "Nadine Beckett",
+      "role": "Nurse Practitioner",
+      "neighborhood": "Piedmont Ave",
+      "business": null,
+      "profile": "Nadine Beckett — Nurse Practitioner — Piedmont Ave — C117 in Piedmont Ave: felt energy from seasonal change near the hospital cafeteria",
+      "why": "C117 in Piedmont Ave: felt energy from seasonal change near the hospital cafeteria"
+    }
+  ],
+  "facts": [
+    {
+      "text": "This cycle: breeze, 59°F, impact 1.02, comfort 0.7, mood energized, 7 cycles of clear",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 117"
+    },
+    {
+      "text": "Last 7 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F, C113 clear 58°F, C114 mild 55°F, C115 mild 55°F, C116 mild 54°F",
+      "src": "output/beats/Cycle_Weather.jsonl"
+    },
+    {
+      "text": "deescalated | OARI talks it down — a crisis ended without cuffs, and the data point everyone cites. | West Oakland | mag 0.05",
+      "src": "output/world_summary_c117.md ## What Moved › chaos-event (Ripple_Ledger)"
+    },
+    {
+      "text": "OakTown Social in Temescal is quiet; movement restricted on this weather.",
+      "src": "output/world_summary_c117.md ## Evening Texture"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "the weather and environment record of C117",
+    "hookLine": "",
+    "anchorFacts": [
+      "This cycle: breeze, 59°F, impact 1.02, comfort 0.7, mood energized, 7 cycles of clear",
+      "Last 7 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F, C113 clear 58°F, C114 mild 55°F, C115 mild 55°F, C116 mild 54°F",
+      "deescalated | OARI talks it down — a crisis ended without cuffs, and the data point everyone cites. | West Oakland | mag 0.05",
+      "OakTown Social in Temescal is quiet; movement restricted on this weather."
+    ],
+    "evidence": [
+      {
+        "text": "This cycle: breeze, 59°F, impact 1.02, comfort 0.7, mood energized, 7 cycles of clear",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 117"
+      },
+      {
+        "text": "Last 7 cycles: C110 fog 52°F, C111 mild 57°F, C112 clear 48°F, C113 clear 58°F, C114 mild 55°F, C115 mild 55°F, C116 mild 54°F",
+        "src": "output/beats/Cycle_Weather.jsonl"
+      },
+      {
+        "text": "deescalated | OARI talks it down — a crisis ended without cuffs, and the data point everyone cites. | West Oakland | mag 0.05",
+        "src": "output/world_summary_c117.md ## What Moved › chaos-event (Ripple_Ledger)"
+      },
+      {
+        "text": "OakTown Social in Temescal is quiet; movement restricted on this weather.",
+        "src": "output/world_summary_c117.md ## Evening Texture"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_IN_TABLE",
+      "vs": 116
+    },
+    "hooks": [],
+    "note": null,
+    "pageVoices": [],
+    "factCap": 12,
+    "peopleCap": 25,
+    "roomIsYours": ""
+  },
+  "weather": {
+    "CycleID": "117",
+    "Type": "breeze",
+    "Temp": "59",
+    "Impact": "1.02",
+    "Advisory": "",
+    "Comfort": "0.7",
+    "Mood": "energized",
+    "Alerts": "",
+    "Streak": "7",
+    "StreakType": "clear",
+    "Timestamp": "Y3C13"
+  },
+  "recent": [
+    {
+      "CycleID": "110",
+      "Type": "fog",
+      "Temp": "52",
+      "Impact": "1.3",
+      "Advisory": "",
+      "Comfort": "0.4",
+      "Mood": "introspective",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "fog",
+      "Timestamp": "Y3C6"
+    },
+    {
+      "CycleID": "111",
+      "Type": "mild",
+      "Temp": "57",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.75",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "clear",
+      "Timestamp": "Y3C7"
+    },
+    {
+      "CycleID": "112",
+      "Type": "clear",
+      "Temp": "48",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.65",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "2",
+      "StreakType": "clear",
+      "Timestamp": "Y3C8"
+    },
+    {
+      "CycleID": "113",
+      "Type": "clear",
+      "Temp": "58",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.75",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "3",
+      "StreakType": "clear",
+      "Timestamp": "Y3C9"
+    },
+    {
+      "CycleID": "114",
+      "Type": "mild",
+      "Temp": "55",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.75",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "4",
+      "StreakType": "clear",
+      "Timestamp": "Y3C10"
+    },
+    {
+      "CycleID": "115",
+      "Type": "mild",
+      "Temp": "55",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.65",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "5",
+      "StreakType": "clear",
+      "Timestamp": "Y3C11"
+    },
+    {
+      "CycleID": "116",
+      "Type": "mild",
+      "Temp": "54",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.65",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "6",
+      "StreakType": "clear",
+      "Timestamp": "Y3C12"
+    }
+  ],
+  "pointers": [
+    "the weather and environment record of C117"
+  ]
+}

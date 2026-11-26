@@ -1,0 +1,13 @@
+{
+  "draft": "civic_c117_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "flags": [
+    {
+      "claim": "Elias Varek, who founded Civis, put it in his own journal this week: \"A reading with no program behind it is a smoke alarm in an empty building.\"",
+      "issue": "Fabricated speech attributed to named ledger citizen Elias Varek (POP-00789); quote is not present in the interview record or ground truth.",
+      "severity": "high"
+    }
+  ],
+  "checkFlags": [],
+  "contamination": [],
+  "summary": "Failed verification due to high-severity fabricated speech attributed to verified citizen Elias Varek."
+}

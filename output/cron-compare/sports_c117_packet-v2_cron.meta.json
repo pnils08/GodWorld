@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "117",
+  "model": "x-ai/grok-4.3",
+  "turns": 3,
+  "maxTurns": 15,
+  "usageInputTokens": 17821,
+  "usageOutputTokens": 1236,
+  "savedFiles": [
+    "output/cron-compare/sports_c117_tanya-cruz_packet-v2_x-ai-grok-4-3.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c117.md",
+  "durationMs": 31444,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-11-26T00:17:38.649Z"
+}

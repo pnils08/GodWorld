@@ -1,0 +1,407 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "117",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00007",
+      "name": "Hal Richmond",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "What the supplied C117 line card establishes, and what history remains unsupplied.",
+      "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "sports-history",
+        "pulseClass": "era-door",
+        "bagModes": [
+          "6 What He Became",
+          "8 The Archive Entry"
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Event (feed): A's — roster-move (off-season)",
+          "Cycle: C117"
+        ],
+        "dossierFacts": [
+          "Mark Aitken TrueSource: 2041 REGULAR SEASON G: 138 PA: 572 AB: 540 R: 84 H: 153 2B: 23 3B: 0 HR: 33 RBI: 87 BB: 25 SO: 65 HBP: 3 SF: 3 SAC: 1 GIDP: 7 AVG: 0.283 OBP: 0.317 SL | WAR: 3.2 | AWARDS (Career Reference) - Rookie of the Year (2032) - Gold Glove (2032, 2038, 2039) - Si"
+        ],
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ],
+        "closingNote": "the line that holds",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+        "sourcePointers": [
+          "output/world_summary_c117.md ## Sports",
+          "docs/media/HAL_ARCHIVE_BAG.md",
+          "output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Jack London",
+      "score": null,
+      "src": "world_summary_c117.md ## Sports",
+      "team": "A's",
+      "nearby": [
+        {
+          "text": "A's | roster-move | (off-season) | Mark Aitken",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | re-signing | (off-season) | Vladimir Gonzalez",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (off-season) | Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Austin Reaves, Wendell Carter Jr, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | game-result | (early-season) | Austin Reaves, AJ Dybantsa",
+          "src": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "A's — roster-move — supplied C117 line card",
+        "src": "world_summary_c117.md ## Sports",
+        "id": "F-c79eeed4162c"
+      },
+      {
+        "t": "FACT",
+        "text": "Event (feed): A's — roster-move (off-season)",
+        "src": "world_summary_c117.md ## Sports",
+        "id": "F-caee733c8759"
+      },
+      {
+        "t": "FACT",
+        "text": "Cycle: C117",
+        "src": "world_summary_c117.md ## Sports",
+        "id": "F-de9a349cfeb3"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "records",
+    "candidates": [],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C117 line card establishes, and what history remains unsupplied.",
+      "label": "A's — roster-move — supplied C117 line card",
+      "hookLine": "A's — roster-move — supplied C117 line card",
+      "hood": "Jack London",
+      "pulseClass": "era-door",
+      "team": "A's",
+      "eventKind": "roster-move",
+      "closingNote": "the line that holds",
+      "citizens": [
+        "Mark Aitken (POP-00003)"
+      ],
+      "popids": [
+        "POP-00003"
+      ],
+      "ref": "world_summary_c117.md ## Sports",
+      "cycle": 117
+    },
+    "approach": "Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. End on the closing note in this slice (the line that holds, or the quiet note the class carries). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": {
+    "pulse": {
+      "className": "era-door",
+      "score": 84,
+      "label": "A's — roster-move — supplied C117 line card",
+      "team": "A's",
+      "eventKind": "roster-move",
+      "seasonType": "off-season",
+      "storyAngle": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+      "hasStats": true,
+      "record": "-",
+      "streak": "-",
+      "foilNumber": "3.2WAR",
+      "closingNote": "the line that holds",
+      "feedCycle": 117
+    },
+    "bag": {
+      "modes": [
+        {
+          "id": 6,
+          "name": "What He Became"
+        },
+        {
+          "id": 8,
+          "name": "The Archive Entry"
+        }
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "closingNote": "the line that holds",
+      "claim": "Present fact: 3.2WAR on the feed. Archive claim: the man behind the line — Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time Close toward the line that holds."
+    },
+    "prewrite": {
+      "reporter": "Hal Richmond",
+      "bagModes": [
+        {
+          "id": 6,
+          "name": "What He Became"
+        },
+        {
+          "id": 8,
+          "name": "The Archive Entry"
+        }
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "presentFacts": [
+        "Event (feed): A's — roster-move (off-season)",
+        "Cycle: C117"
+      ],
+      "dossierFacts": [
+        "Mark Aitken TrueSource: 2041 REGULAR SEASON G: 138 PA: 572 AB: 540 R: 84 H: 153 2B: 23 3B: 0 HR: 33 RBI: 87 BB: 25 SO: 65 HBP: 3 SF: 3 SAC: 1 GIDP: 7 AVG: 0.283 OBP: 0.317 SL | WAR: 3.2 | AWARDS (Career Reference) - Rookie of the Year (2032) - Gold Glove (2032, 2038, 2039) - Si"
+      ],
+      "closingNote": "the line that holds",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "claim": "Present fact: 3.2WAR on the feed. Archive claim: the man behind the line — Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time Close toward the line that holds.",
+      "foilNumber": "3.2WAR",
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ],
+      "hooks": [
+        {
+          "text": "Oaks big win. The game that mattered, who delivered, fan energy in Jack London.",
+          "angle": "conflict/tension coverage",
+          "hood": "Jack London"
+        }
+      ]
+    },
+    "friction": {
+      "a": "Present feed fact: Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+      "b": "Wire copy / FO strategy / bleacher heat that skips time",
+      "frame": "Present first, then echo — end on the line that holds."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Mark Aitken",
+        "popid": "POP-00003",
+        "role": "First Baseman, Colorado Rockies",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Jack London",
+      "record": "-",
+      "streak": "-",
+      "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+    },
+    "candidates": [
+      {
+        "score": 84,
+        "cycle": 117,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Mark Aitken signs with Colorado, one year and $21 million. The city didn't hold on to its own this time",
+        "priorHits": 0
+      },
+      {
+        "score": 78,
+        "cycle": 117,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Danny Horn said he was the best player in baseball. Then he hit .338 with 56 homeruns and 80 steals",
+        "priorHits": 0
+      },
+      {
+        "score": 78,
+        "cycle": 117,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "priorHits": 0
+      },
+      {
+        "score": 74,
+        "cycle": 117,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Vladimir Gonzalez gets five years and $119 million. The A's put Aitken's money into their right fielder",
+        "priorHits": 0
+      },
+      {
+        "score": 74,
+        "cycle": 116,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Paulson cashes in the Carmen Mesa chip with the team the A's just beat. Giancarlo Hernandez makes three A-potential third basemen",
+        "priorHits": 0
+      },
+      {
+        "score": 73,
+        "cycle": 116,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Benji Dillon hasn't retired yet. The 5-time Cy Young winner leaves the door open after Keane walks through his",
+        "priorHits": 0
+      }
+    ]
+  },
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "text": "The A's are making a roster move in the off-season, and the C117 line card establishes Mark Aitken as a point of reference. I'll chase the story of what this move means for the team, and how it relates to their history. The A's have been linked to top free agents before, and the way they handle roster moves can be telling. I'll look into Aitken's background and see if there's a connection to the current move.",
+    "plan": {
+      "chase": "The A's are making a roster move in the off-season, and the C117 line card establishes Mark Aitken as a point of reference. I'll chase the story of what this move means for the team, and how it relates to their history. The A's have been linked to top free agents before, and the way they handle roster moves can be telling. I'll look into Aitken's background and see if there's a connection to the current move.",
+      "focus": "A's roster move",
+      "why": "The C117 line card provides a factual basis for understanding the move, and I want to explore its historical context.",
+      "checks": [
+        "Verify the details of the roster move",
+        "Research Mark Aitken's career and background"
+      ],
+      "targets": [],
+      "interpretation": "The A's roster move may be part of a larger strategy, and understanding Mark Aitken's role can provide insight.",
+      "unverifiedLead": [
+        "The move could be related to the team's performance last season",
+        "There may be a historical parallel to the current roster move"
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "A's | roster-move | (off-season) | Mark Aitken",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00003"
+      ]
+    },
+    {
+      "label": "A's | re-signing | (off-season) | Vladimir Gonzalez",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00598"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (off-season) | Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Austin Reaves, Wendell Carter Jr, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01028",
+        "POP-01024"
+      ]
+    },
+    {
+      "label": "Oaks | game-result | (early-season) | Austin Reaves, AJ Dybantsa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 117; rendered: world_summary_c117.md \"## Sports\" C117 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01027",
+        "POP-01024"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-26T12:16:17.216Z"
+}

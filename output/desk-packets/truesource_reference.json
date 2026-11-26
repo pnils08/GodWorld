@@ -1,5 +1,5 @@
 {
-  "cycle": 116,
+  "cycle": 117,
   "mayor": "Avery Santana",
   "executiveBranch": {
     "mayor": "Avery Santana",
@@ -8,7 +8,7 @@
       "title": "Mayor",
       "popId": "POP-00034",
       "status": "active",
-      "approvalRating": "79"
+      "approvalRating": "77"
     },
     "deputyMayor": "Brenda Okoro",
     "deputyMayorDetail": {
@@ -213,13 +213,6 @@
       "position": "Starting Pitcher, Midland RockHounds (AA)",
       "popId": "POP-00080",
       "tier": "4",
-      "status": "Active"
-    },
-    {
-      "name": "Carmen Mesa",
-      "position": "Starting Pitcher, Philadelphia Phillies",
-      "popId": "POP-00081",
-      "tier": "3",
       "status": "Active"
     },
     {
@@ -503,8 +496,8 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
       "implementationPhase": "disbursement-active",
-      "nextScheduledAction": "Council consideration of the charter renewal ordinance",
-      "nextActionCycle": 116
+      "nextScheduledAction": "Verify C114 closeout and conduct Council charter-renewal consideration",
+      "nextActionCycle": 117
     },
     {
       "name": "Oakland Alternative Response Initiative",
@@ -512,17 +505,17 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes.",
       "implementationPhase": "dispatch-live",
-      "nextScheduledAction": "Execute and publish the D3 briefing record with district-level and Fruitvale data",
-      "nextActionCycle": 116
+      "nextScheduledAction": "Execute and publish D3 Fruitvale briefing record; file D5 and Baylight next dates",
+      "nextActionCycle": 117
     },
     {
       "name": "Fruitvale Transit Hub Phase II — Visioning",
       "id": "INIT-003",
       "status": "PASSED",
       "voteBreakdown": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
-      "implementationPhase": "complete",
-      "nextScheduledAction": null,
-      "nextActionCycle": null
+      "implementationPhase": "design-phase",
+      "nextScheduledAction": "Deliver schematics and conduct documented Fruitvale community review",
+      "nextActionCycle": 117
     },
     {
       "name": "Temescal Community Health Center",
@@ -530,89 +523,35 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
       "implementationPhase": "operational",
-      "nextScheduledAction": "Q3 intake audit filing + recurring merchant verification walkthrough",
-      "nextActionCycle": 116
+      "nextScheduledAction": "File Q3 audit with HCAI and Clerk; complete merchant walkthrough",
+      "nextActionCycle": 117
     },
     {
       "name": "Baylight District — Final Council Vote",
       "id": "INIT-006",
       "status": "PASSED",
       "voteBreakdown": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
-      "implementationPhase": "complete",
-      "nextScheduledAction": null,
-      "nextActionCycle": null
+      "implementationPhase": "construction-active",
+      "nextScheduledAction": "Construction milestone review against the assembled evidence file",
+      "nextActionCycle": 117
     },
     {
       "name": "Oakland Youth Apprenticeship Pipeline",
       "id": "INIT-007",
       "status": "PASSED",
       "voteBreakdown": "[ENGINE-CLOCK n=3 from=C109] Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (Oakland City Schools MOU C76, Oakland Community College District MOU C78, budget allocation C80, A's commitment C83) unverified.",
-      "implementationPhase": "implementation-active",
-      "nextScheduledAction": "Publish the placement-gap analysis and program adjustment plan",
-      "nextActionCycle": 116
-    },
-    {
-      "name": "Downtown Economic Revitalization",
-      "id": "INIT-008",
-      "status": "FAILED",
-      "voteBreakdown": "economic imbalance\nCycle 113: Rejected.",
-      "implementationPhase": "vote-scheduled",
-      "nextScheduledAction": null,
-      "nextActionCycle": null
-    },
-    {
-      "name": "Commercial Stabilization for Grand Lake",
-      "id": "INIT-009",
-      "status": "FAILED",
-      "voteBreakdown": "Proposed by Leonard Tran in C109 — neighborhood math-imbalance flag on Grand Lake retail.\nCycle 113: Rejected.",
-      "implementationPhase": "vote-scheduled",
-      "nextScheduledAction": "Recorded full-council vote on INIT-009",
-      "nextActionCycle": 116
+      "implementationPhase": "stalled",
+      "nextScheduledAction": "Publish placement-gap analysis and program adjustment plan",
+      "nextActionCycle": 117
     },
     {
       "name": "West Oakland Tenant Defense Fund",
       "id": "INIT-010",
-      "status": "FAILED",
-      "voteBreakdown": "Proposed by Denise Carter in C109 — eviction filings outpacing Stabilization Fund relief.\nCycle 112: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted yes.\nCycle 113: Rejected.",
-      "implementationPhase": "vote-scheduled",
-      "nextScheduledAction": "Publish the analysis and record the committee decision",
-      "nextActionCycle": 116
-    },
-    {
-      "name": "Ivy Hill Revitalization Initiative",
-      "id": "INIT-011",
-      "status": "FAILED",
-      "voteBreakdown": "Commercial contraction and public safety concerns in Ivy Hill\nCycle 113: Rejected.",
-      "implementationPhase": "announced",
-      "nextScheduledAction": null,
-      "nextActionCycle": null
-    },
-    {
-      "name": "Dimond Revitalization Initiative",
-      "id": "INIT-012",
-      "status": "FAILED",
-      "voteBreakdown": "Commercial contraction and public safety concerns in Dimond\nCycle 113: Rejected.",
-      "implementationPhase": "announced",
-      "nextScheduledAction": null,
-      "nextActionCycle": null
-    },
-    {
-      "name": "Ivy Hill Community Revitalization",
-      "id": "INIT-013",
-      "status": "FAILED",
-      "voteBreakdown": "addressing decay momentum and crime index\nCycle 113: Rejected.",
-      "implementationPhase": "announced",
-      "nextScheduledAction": null,
-      "nextActionCycle": null
-    },
-    {
-      "name": "Ivy Hill Community Support Initiative",
-      "id": "INIT-014",
-      "status": "FAILED",
-      "voteBreakdown": "Ivy Hill is showing signs of decay momentum and increased crime index, requiring immediate community support and targeted investment.\nCycle 116: Failed 3-4. Leonard Tran voted yes. Ramon Vega voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted no.",
-      "implementationPhase": "vote-scheduled",
-      "nextScheduledAction": "Council review of the filed INIT-014 legislation",
-      "nextActionCycle": 116
+      "status": "PASSED",
+      "voteBreakdown": "Proposed by Denise Carter in C109 — eviction filings outpacing Stabilization Fund relief.\nCycle 112: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted yes.",
+      "implementationPhase": "operational",
+      "nextScheduledAction": "Publish the legal-support analysis and open tenant-defense intake",
+      "nextActionCycle": 117
     }
   ]
 }

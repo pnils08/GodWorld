@@ -1,0 +1,95 @@
+{
+  "draft": "output/cron-compare/civic_c117_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "117",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "88c2f7af41c558be31160bc7049bc0150d624939c27406674e0e3e7ac28f1ac9",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Elias Varek, who founded Civis, put it in his own journal this week: \"A reading with no program behind it is a smoke alarm in an empty building.\"",
+      "issue": "Fabricated speech attributed to named ledger citizen Elias Varek (POP-00789); quote is not present in the interview record or ground truth.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 1,
+  "summary": "Failed verification due to high-severity fabricated speech attributed to verified citizen Elias Varek.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "revise",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v2",
+    "packageVersion": "JAX-LEP2-4",
+    "manifestId": "AM-94e86d1353aa",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "0.17",
+          "0.5",
+          "20th",
+          "1.23",
+          "17th",
+          "0.14",
+          "1.15",
+          "14th"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "the Mayor's rewiring,"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Avery Santana",
+      "Elias Varek",
+      "Rose Delgado"
+    ],
+    "unverified": [
+      "Civis Systems",
+      "Commercial Stabilization",
+      "For East Oakland",
+      "Youth Apprenticeship Pipeline"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0171,
+  "durationMs": 10378,
+  "parseError": false,
+  "ranAt": "2026-11-26T00:15:41.979Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 693,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "88c2f7af41c558be31160bc7049bc0150d624939c27406674e0e3e7ac28f1ac9",
+    "costUsd": 0.0009
+  }
+}

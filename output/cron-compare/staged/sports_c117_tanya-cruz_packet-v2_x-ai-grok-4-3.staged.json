@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "117",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c117_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Mark Aitken",
+        "role": "quoted-source",
+        "popid": "POP-00003"
+      },
+      {
+        "name": "Ernesto Quintero",
+        "role": "quoted-source",
+        "popid": "POP-00050"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "One year says I'm not done yet, and it says I didn't want to pretend I knew what next winter looks like. The money being the same as last year — that was never the point. I've got three kids who know this city as home, and a program in East Oakland that's about to start its sixth summer. Colorado gave me a place to play at the level I expect from myself, and I'm going to give them everything I've …",
+        "sourceRef": "citizenVoice PRESS Mark Aitken"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d8e8ff1ee3c7",
+    "draftSha256": "d5bb70fec6f7b974a2ce79ff6061979bbb5063ee4c9897c5581483d3cb90f12d",
+    "verdict": "output/cron-compare/sports_c117_tanya-cruz_packet-v2_x-ai-grok-4-3.rhea.json",
+    "ranAt": "2026-11-26T00:17:44.156Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 283,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d5bb70fec6f7b974a2ce79ff6061979bbb5063ee4c9897c5581483d3cb90f12d",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-26T00:17:48.991Z"
+}

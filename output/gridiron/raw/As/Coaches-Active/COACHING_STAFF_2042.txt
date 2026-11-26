@@ -1,0 +1,82 @@
+TRUESOURCE_COACHING_STAFF_RECORD
+Season: 2042
+Team: Athletics
+Source: Image Verified (coaching staff screens)
+
+MANAGER:
+Name: Deacon Seymour
+Years Left: 2
+Salary: $7,600,000
+Attribute Grade: A
+Boosts:
+Contact: +2
+Drag Bunting: +2
+Stamina: -2
+Speed: +3
+
+HITTING COACH:
+Name: Dan Perez
+Years Left: 1
+Salary: $2,466,666
+Attribute Grade: A
+Boosts:
+Clutch: +1
+Plate Vision: +1
+Power: +3
+Drag Bunting: -1
+
+PITCHING COACH:
+Name: Fernando Lima
+Years Left: 1
+Salary: $1,400,000
+Attribute Grade: A
+Boosts:
+BB/9: +1
+Stamina: +1
+Control: +1
+HR/9: +2
+
+1ST BASE COACH:
+Name: Babe Bradford
+Years Left: 1
+Salary: $1,283,333
+Attribute Grade: A
+Boosts:
+Fielding: +2
+Speed: +2
+Durability: -2
+Arm Accuracy: +3
+
+3RD BASE COACH:
+Name: Stephan Kollars
+Years Left: 1
+Salary: $1,775,000
+Attribute Grade: A
+Boosts:
+Speed: +2
+Reaction: +1
+Fielding: +1
+Blocking: +1
+
+FARM DIRECTOR:
+Name: Robert Mooney
+Years Left: 1
+Salary: $1,666,666
+Attribute Grade: A
+Boosts:
+H/9: +1
+K/9: +3
+Plate Discipline: +1
+Stealing: -1
+
+STAFF SALARY TOTAL: $16.48M (includes scouts Peterson, Hollis, Redd: $290,600)
+PROJECTED SURPLUS: $124.46M
+AVAILABLE BUDGET: $129.46M
+
+CHANGES FROM 2041 RECORD:
+- Years left down one for every coach (Seymour 3 -> 2; Perez, Lima, Bradford, Kollars 2 -> 1; Mooney 2 -> 1).
+- Salaries unchanged.
+- Boosts added for Perez, Lima, Bradford, Kollars, Mooney (2041 record listed Seymour's only).
+- Projected surplus $7.15M -> $124.46M; available budget $12.15M -> $129.46M.
+
+END TRUESOURCE_COACHING_STAFF_RECORD

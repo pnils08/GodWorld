@@ -1,0 +1,43 @@
+{
+  "office": "district_attorney",
+  "agentDir": "civic-office-district-attorney",
+  "holder": "Clarissa Dane",
+  "popid": "POP-00143",
+  "title": "District Attorney",
+  "date": "2026-11-24",
+  "cycle": 117,
+  "model": "moonshotai/kimi-k3.1-pro",
+  "statement": "**Cycle 117 — Weekly Report of District Attorney Clarissa Dane**\n\nFor the record:\n\n**Arrests and custody.** Oakland began Cycle 117 with **48 people in custody**, matching Cycle 116’s ending population. The city recorded **28 arrest intakes**, **24 exits**, and no transfers in or out, ending with **52 people in custody**. The population reconciles exactly: **48 + 28 − 24 = 52**.\n\nThis is a net increase of **four people**, or approximately **8.3%**, reversing Cycle 116’s net decrease of 19. Intakes rose by four, from 24 to 28, while exits fell by 19, from 43 to 24. These changes describe custody flow; they do not, without disposition-level records, establish case resolutions, releases, or changes in public safety. The bed-capacity field remains blank, so I still cannot report occupancy or capacity compliance.\n\nThe neighborhood table accounts for all **28 intakes** and all **52 people in custody at cycle end**. **Downtown, Temescal, West Oakland, Fruitvale, Grand Lake, and East Oakland recorded two intakes each**; the other 16 listed neighborhoods recorded one each. Downtown and Grand Lake ended with four people in custody each. Temescal, West Oakland, Fruitvale, and East Oakland ended with three each, and the remaining 16 neighborhoods with two each. **West Oakland’s intakes increased from one to two, and its ending custody count increased from two to three.**\n\n**Cases and court fines.** The case ledger again contains **no entries**. That is not a finding that no cases are pending. It means this record still provides no basis for reporting pending cases, filings, declinations, dismissals, convictions, acquittals, or the dispositions associated with custody exits.\n\nThe court recorded **$125,905 in fine revenue paid to the city**, attributed to **28 cleared charges fined at the neighborhood rate**. Revenue increased by **$17,021**, approximately **15.6%**, from Cycle 116’s $108,884; the number of cleared charges identified in the fine note increased from 24 to 28. The matching 28 intakes and 28 fined charges must not be treated as the same events without case-level identifiers. Charges, people, arrests, cases, and custody exits remain different units.\n\nThe reported post-entry balance is **$136,879,736**, compared with **$131,753,831** after Cycle 116’s fine entry. That is an increase of **$5,125,905**, which exceeds this cycle’s fine revenue by **$5,000,000**. The supplied fine entries alone do not explain that additional amount, and I will not attribute the entire balance change to court collections without the intervening treasury records.\n\n**Incidents and clearance.** The neighborhood table lists **133 incidents across 22 neighborhoods**, up **eight incidents**, or **6.4%**, from Cycle 116’s 125.\n\nThe highest incident count is now **eight**, shared by **Temescal, Fruitvale, and East Oakland**. Temescal reports 22% clearance and a steady trend; Fruitvale reports 19% clearance and a falling trend; East Oakland reports 21% clearance and a steady trend. Downtown declined from eight incidents and 20% clearance to **seven incidents and 22% clearance**.\n\nWest Oakland increased from five incidents and 24% clearance to **seven incidents and 26% clearance**. East Oakland increased from five incidents and 24% clearance to **eight incidents and 21% clearance**, while retaining the highest recorded violent level, **33.28**. Fruitvale increased from six incidents and 21% clearance to **eight incidents and 19% clearance**; its violent level remains **30.32**, and its trend changed from steady to falling.\n\nGrand Lake declined from seven incidents to **six**, with clearance increasing from 25% to **26%**; its trend is now **steady rather than rising**. Lake Merritt also declined from seven incidents to six, with clearance remaining at 21%. Temescal again has the highest property level, now **47.32**, compared with 47.22 last cycle.\n\nCurrent clearance rates range from **19% in Fruitvale** to **26% in West Oakland, Grand Lake, and San Antonio**. Fruitvale is the only neighborhood marked falling; every other listed neighborhood is steady. These figures direct administrative review. They do not establish causation, predict individual case outcomes, or alter the evidence required for charges.\n\n**Patrol and safety entries.** The patrol ledger records two **helped_by_police** events: one in **San Antonio**, with a recorded CrimeIndex movement of **−0.05**, and one in **Adams Point**, with a movement of **−0.08**. Neither entry is an arrest or prosecution, and the index movements alone do not establish a neighborhood-wide causal effect. The safety-event ledger again records **no events**.\n\n**Action.** I am continuing the charge-by-charge reconciliation of intakes, court cases, dispositions, custody exits, and fine entries; seeking the missing bed-capacity and exit-reason information; and requesting the treasury entries necessary to explain the additional $5,000,000 balance change. I am also directing case-file review attention to the three eight-incident neighborhoods, the violent-level readings in East Oakland and Fruitvale, and West Oakland’s increased incident volume. My office will report what the records establish and will not fill the remaining gaps with assumptions.",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-24T11:47:36.631Z",
+  "usage": {
+    "prompt_tokens": 4341,
+    "completion_tokens": 4806,
+    "cost": 0.0567
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "charges custody arrests court",
+    "entries": 6,
+    "fromSearch": 4,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [
+    "5000000"
+  ],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00143",
+    "id": "qGdhoeVHTpWDRZL5aWJyZ9",
+    "customId": "cp-POP-00143-c117-CIVIC-datawake-2026-11-24"
+  }
+}

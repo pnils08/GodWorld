@@ -1,0 +1,191 @@
+FULL STAT TRUE SOURCE — PITCHER  
+  
+Name: Mariano Rosales  
+Team: Athletics  
+Position: CP  
+Jersey: \#13  
+  
+\--------------------------------------------------  
+  
+PROFILE  
+  
+Potential: A  
+Overall: 95 (trending up)  
+MLB Service: 6.000  
+Age: 27  
+Bats: S  
+Throws: R  
+Height: 5'10"  
+Weight: 186 LBS  
+Drafted: RND 2 (2035)  
+Secondary Position: NONE  
+Hitter Tendency: EXTREME OPPOSITE  
+Born: UTAH  
+Canonical POPID: POP-00555  
+  
+\--------------------------------------------------  
+  
+PITCH REPERTOIRE  
+  
+4-Seam Fastball — 96 mph  
+2-Seam Fastball — 94 mph  
+Changeup — 84 mph  
+  
+\--------------------------------------------------  
+  
+ATTRIBUTES  
+  
+STA: 25  
+H/9: 98  
+K/9: 88  
+BB/9: 83  
+HR/9: 85  
+PCLT: 85  
+CTRL: 52  
+VEL: 99  
+BRK: 75  
+FLD: 60  
+ARM: 73  
+ACC: 75  
+REAC: 52  
+  
+\--------------------------------------------------  
+  
+ATTRIBUTE HISTORY  
+  
+ATTR   2041 CARD  WAS   NOW   CHANGE  
+STA    26         26    25    -1  
+H/9    90         90    98    +8  
+K/9    79         79    88    +9  
+BB/9   82         82    83    +1  
+HR/9   80         80    85    +5  
+PCLT   84         84    85    +1  
+CTRL   51         51    52    +1  
+VEL    99         99    99    -  
+BRK    75         75    75    -  
+FLD    59         59    60    +1  
+ARM    73         73    73    -  
+ACC    74         74    75    +1  
+REAC   -          51    52    +1  
+  
+(WAS = NOW value minus the game's change marker. REAC was not on the 2041 card.)  
+  
+\--------------------------------------------------  
+  
+MLB STATS (BY SEASON)  
+  
+YEAR TEAM G GS W L SV BS HLD IP H R ER HR BB SO ERA  
+2041 ATH 60 0 8 3 42 3 2 63.2 35 14 13 6 14 82 1.84  
+2040 BAL 58 0 1 5 38 5 2 56.0 56 29 26 8 13 56 4.18  
+2039 BAL 67 0 10 6 2 9 27 77.2 52 24 18 4 26 77 2.09  
+2038 BAL 83 0 7 9 1 5 36 89.2 93 47 41 7 24 61 4.12  
+2037 BAL 72 0 7 8 0 6 25 77.2 75 33 30 12 29 71 3.48  
+2036 BAL 74 0 6 7 18 2 18 83.1 57 27 20 5 26 67 2.16  
+  
+\--------------------------------------------------  
+  
+ADVANCED (BY SEASON)  
+  
+YEAR TEAM WHIP WPCT QS CG SHO HB WP TBF WAR K/9 BB/9 HR/9 FIP ERC PFR  
+2041 ATH 0.77 .727 0 0 0 1 0 236 1.7 11.59 1.98 0.85 2.36 1.21 1.51  
+2040 BAL 1.23 .167 0 0 0 4 3 230 0.6 9.00 2.09 1.29 3.77 3.70 1.23  
+2039 BAL 1.00 .625 0 0 0 3 1 311 1.6 8.92 3.01 0.46 2.81 1.77 1.33  
+2038 BAL 1.30 .437 0 0 0 3 2 384 1.1 6.12 2.41 0.70 3.56 3.49 0.95  
+2037 BAL 1.34 .467 0 0 0 6 1 333 0.1 8.23 3.36 1.39 4.53 4.03 1.29  
+2036 BAL 1.00 .462 0 0 0 2 0 324 1.4 7.24 2.81 0.54 3.18 1.88 1.12  
+  
+\--------------------------------------------------  
+  
+CAREER TOTALS  
+  
+G: 414  
+GS: 0  
+W: 39  
+L: 38  
+SV: 101  
+BS: 30  
+HLD: 110  
+IP: 448.0  
+H: 368  
+R: 174  
+ER: 148  
+HR: 42  
+BB: 132  
+SO: 414  
+  
+ERA: 2.97  
+WHIP: 1.12  
+WPCT: .506  
+QS: 0  
+CG: 0  
+SHO: 0  
+HB: 19  
+WP: 7  
+TBF: 1818  
+WAR: 6.6  
+K/9: 8.32  
+BB/9: 2.65  
+HR/9: 0.84  
+FIP: 3.38  
+ERC: 2.62  
+PFR: 1.22  
+  
+(Season WAR values sum to 6.5; the game's career line shows 6.6, rounding. Career line kept as shown.)  
+  
+\--------------------------------------------------  
+  
+CONTRACT STATUS  
+  
+2042: $17.6M  
+2043: $17.6M  
+2044: $17.6M  
+2045: $17.6M  
+2046: $17.6M  
+2047: FA  
+2048: FA  
+2049: FA  
+2050: FA  
+2051: FA  
+  
+\--------------------------------------------------  
+  
+ROSTER STATUS  
+  
+On Active Roster: YES  
+On 40-Man Roster: YES  
+Minor League Option: 0/3 USED  
+Playoff Eligible: -  
+On Waivers: NO  
+Designated for Assignment: NO  
+Cleared Optional Waivers: NO  
+Cleared Outright Waivers: NO  
+Cleared Trade Waivers: NO  
+Eligible for Rule 5 Draft: NO  
+Contract Option: NONE  
+  
+\--------------------------------------------------  
+  
+AWARDS  
+  
+\- All-Star (2041)  
+  
+\--------------------------------------------------  
+  
+CAREER MILESTONES  
+  
+\- AL Saves Leader (42 SV, 2041) (from the 2041 card, not on game awards screen)  
+  
+\--------------------------------------------------
+
+NOTES
+
+- Acquired: 2041, Trade (BAL)
+
+\--------------------------------------------------  
+METADATA & VERIFICATION FOOTER  
+\--------------------------------------------------  
+TS Code: TS-MLB-ATH-2041-00555  
+Verification Tag: TrueSource Verified  
+Steward of Record: Builder Approved / Antigravity Staged  
+POPID: POP-00555  
+\==================================================  

@@ -1,0 +1,203 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Hitoki Ka
+Team: Athletics
+Position: RP
+Jersey: #45
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: B
+Overall: 88 (trending up)
+MLB Service: 7.110
+Age: 30
+Bats: R
+Throws: R
+Height: 6'2"
+Weight: 208 lbs
+Drafted: Round 3 (2029)
+Secondary Position: NONE
+Hitter Tendency: WHOLE FIELD
+Born: CALIFORNIA
+Canonical POPID: POP-01081
+
+--------------------------------------------------
+
+ATTRIBUTES (game screen)
+
+STA: 23
+H/9: 99
+K/9: 81
+BB/9: 72
+HR/9: 93
+PCLT: 79
+CTRL: 79
+VEL: 83
+BRK: 69
+FLD: 35
+ARM: 88
+ACC: 98
+REAC: 44
+
+--------------------------------------------------
+
+ATTRIBUTE HISTORY
+
+ATTR   2041 CARD  WAS      NOW   CHANGE
+STA    45         23        23    -
+H/9    85         97        99    +2
+K/9    82         81        81    -
+BB/9   78         67        72    +5
+HR/9   84         91        93    +2
+PCLT   82         79        79    -
+CTRL   68         78        79    +1
+VEL    88         83        83    -
+BRK    76         69        69    -
+FLD    58         35        35    -
+ARM    65         88        88    -
+ACC    62         98        98    -
+REAC   58         44        44    -
+
+(WAS = NOW value minus the game's change marker. The 2041 card values do not match WAS and were wrong.)
+
+--------------------------------------------------
+
+PITCH REPERTOIRE
+
+4-Seam Fastball — 95 MPH
+Slider — 87 MPH
+Changeup — 84 MPH
+Curveball — 81 MPH
+
+--------------------------------------------------
+
+MLB STATS (BY SEASON)
+
+YEAR TEAM G GS W L SV BS HLD IP H R ER HR BB SO ERA
+2041 ATH 57 0 10 1 1 2 13 70.0 40 7 7 4 13 71 0.90
+2040 ATH 72 0 5 1 1 1 15 87.1 61 23 23 5 27 82 2.37
+2039 ATH 79 0 7 4 0 3 31 83.1 71 42 34 9 45 81 3.67
+2038 ATH 74 0 6 1 3 3 10 85.0 60 23 20 4 33 84 2.12
+2037 ATH 69 0 5 3 1 2 10 81.2 75 23 23 6 34 77 2.53
+2036 ATH 27 0 1 1 0 1 5 30.2 26 12 11 4 16 28 3.23
+2035 TOT 72 0 6 4 1 3 28 78.2 73 44 41 11 24 81 4.69
+2034 AZ 77 0 6 4 8 11 25 81.1 76 37 31 12 38 77 3.43
+2033 AZ 19 0 1 0 0 0 3 21.1 23 13 12 5 11 12 5.06
+
+--------------------------------------------------
+
+ADVANCED (BY SEASON)
+
+YEAR TEAM WHIP WPCT QS CG SHO HB WP TBF WAR K/9 BB/9 HR/9 FIP ERC PFR
+2041 ATH 0.76 .909 0 0 0 3 1 258 1.8 9.13 1.67 0.51 2.40 1.04 1.20
+2040 ATH 1.01 .833 0 0 0 2 0 340 1.8 8.45 2.78 0.52 2.86 1.93 1.25
+2039 ATH 1.39 .636 0 0 0 1 2 356 0.5 8.75 4.86 0.97 4.12 3.76 1.51
+2038 ATH 1.09 .857 0 0 0 3 2 346 1.7 8.89 3.49 0.42 2.91 2.07 1.38
+2037 ATH 1.33 .625 0 0 0 2 2 339 1.2 8.49 3.75 0.66 3.39 3.50 1.36
+2036 ATH 1.37 .500 0 0 0 1 0 132 0.1 8.22 4.70 1.17 4.53 3.77 1.43
+2035 TOT 1.23 .600 0 0 0 5 1 328 0.7 9.27 2.75 1.26 3.86 3.49 1.33
+2034 AZ 1.40 .600 0 0 0 5 4 357 0.1 8.52 4.20 1.33 4.61 4.11 1.41
+2033 AZ 1.59 1.000 0 0 0 0 3 98 -0.4 5.06 4.64 2.11 6.47 5.88 1.08
+
+(Season TBF values as read sum to 2554; the game's career line shows 2552. Career line kept as shown. WAR seasons sum to 7.5 vs career 7.4, rounding.)
+
+--------------------------------------------------
+
+CAREER TOTALS
+
+G: 546
+GS: 0
+W: 47
+L: 19
+SV: 15
+BS: 26
+HLD: 140
+IP: 619.1
+H: 505
+R: 224
+ER: 202
+HR: 60
+BB: 241
+SO: 593
+ERA: 2.94
+WHIP: 1.20
+WPCT: .712
+QS: 0
+CG: 0
+SHO: 0
+HB: 22
+WP: 15
+TBF: 2552
+WAR: 7.4
+K/9: 8.62
+BB/9: 3.50
+HR/9: 0.87
+FIP: 3.62
+ERC: 2.95
+PFR: 1.35
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2042: $7.0M
+2043: FA
+2044: FA
+2045: FA
+2046: FA
+2047: FA
+2048: FA
+2049: FA
+2050: FA
+2051: FA
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Options Used: 2/3
+Playoff Eligible: -
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+
+QUIRKS
+
+None (no quirks tab on game screens).
+
+--------------------------------------------------
+
+AWARDS
+
+None on game screens.
+
+--------------------------------------------------
+
+CAREER MILESTONES (kept per user)
+
+- AL Relief ERA Leader, 2041 (0.90 ERA in 70.0 IP; from the 2041 card, not on game awards screens)
+
+--------------------------------------------------
+
+NOTES
+
+- Acquired: 2035, Trade (CIN)
+
+--------------------------------------------------
+METADATA & VERIFICATION FOOTER
+--------------------------------------------------
+TS Code: TS-MLB-ATH-2041-01081
+Verification Tag: Screen-Checked
+Steward of Record: Claude Staged
+POPID: POP-01081
+==================================================

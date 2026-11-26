@@ -1,0 +1,179 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Sidney Tumolo
+Team: Athletics
+Position: 2B
+Jersey: #20
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: B
+Overall: 81 (trending up)
+MLB Service: 0.073
+Age: 26
+Bats: R
+Throws: R
+Height: 5'10"
+Weight: 207 lbs
+Drafted: Round 1 (2035)
+Secondary Position: SS
+Hitter Tendency: WHOLE FIELD
+Born: GERMANY
+Canonical POPID: POP-00058
+
+--------------------------------------------------
+
+ATTRIBUTES (game screen)
+
+CON R: 76
+CON L: 95
+POW R: 52
+POW L: 51
+VIS: 70
+DISC: 67
+CLT: 70
+BUNT: 31
+DBUNT: 15
+DUR: 49
+FLD: 91
+ARM: 70
+ACC: 62
+REAC: 69
+SPD: 55
+STEAL: 63
+BR AGG: 52
+
+--------------------------------------------------
+
+ATTRIBUTE HISTORY
+
+ATTR    2041 CARD  WAS      NOW   CHANGE
+CON R   73         73        76    +3
+CON L   96         96        95    -1
+POW R   52         52        52    0
+POW L   51         51        51    0
+VIS     67         67        70    +3
+DISC    64         64        67    +3
+CLT     68         68        70    +2
+BUNT    29         29        31    +2
+DBUNT   13         13        15    +2
+DUR     47         47        49    +2
+FLD     89         89        91    +2
+ARM     68         68        70    +2
+ACC     60         60        62    +2
+REAC    67         67        69    +2
+SPD     54         54        55    +1
+STEAL   62         62        63    +1
+BR AGG  49         49        52    +3
+
+NOW = the latest attributes screen.
+WAS = NOW value minus the change marker shown on that screen;
+it matches the 2041 card on file for every attribute.
+2041 CARD = the card on file in Drive; cycle not recorded.
+
+--------------------------------------------------
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   AB  R   H   2B  3B  HR  RBI  BB  SO  SB  CS  AVG   OBP   SLG
+2041  ATH   23  88  11  28  8   0   3   12   2   6   2   2   .318  .344  .511
+
+Read from the MLB Stats screens. One MLB season.
+
+--------------------------------------------------
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS   PA  SF  SAC  GIDP  HBP  IBB  TB  SB%   A   PO  E  FLD%  INN    WAR
+2041  ATH   .855  93  1   0    1     2    0    45  .500  52  20  2  .973  187.2  0.4
+
+--------------------------------------------------
+
+RATES (BY SEASON)
+
+YEAR  TEAM  BB%   K%    BB/K  ISO   AB/HR  PSN  SECA  RUNS  SBR   RC    RF
+2041  ATH   2.2%  6.5%  0.33  .193  29.3   2.4  .216  4.8   -0.6  15.0  3.45
+
+--------------------------------------------------
+
+CAREER TOTALS (game career line)
+
+G: 23
+AB: 88
+R: 11
+H: 28
+2B: 8
+3B: 0
+HR: 3
+RBI: 12
+BB: 2
+SO: 6
+SB: 2
+CS: 2
+AVG: .318
+OBP: .344
+SLG: .511
+OPS: .855
+PA: 93
+TB: 45
+SB%: .500
+A: 52
+PO: 20
+E: 2
+FLD%: .973
+INN: 187.2
+WAR: 0.4
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2042: $780K
+2043–2044: Renewal (RNW)
+2045–2047: Arbitration (ARB)
+2048–2051: Free Agent (FA)
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Option: 2/3 Used
+Playoff Eligible: -
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+
+QUIRKS
+
+- None (the game shows no Quirks tab for him)
+
+--------------------------------------------------
+
+AWARDS
+
+- None (the game shows no Awards tab for him)
+
+--------------------------------------------------
+
+NOTES
+
+- Acquired: 2035, First Year Player Draft (Round 1)
+
+--------------------------------------------------
+METADATA & VERIFICATION FOOTER
+--------------------------------------------------
+TS Code: TS-MLB-ATH-2041-00058
+Verification Tag: Screen-Checked
+Steward of Record: Claude Staged
+POPID: POP-00058
+==================================================

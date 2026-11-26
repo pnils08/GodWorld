@@ -1,0 +1,193 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Danny Horn
+Team: Athletics
+Position: CF
+Jersey: #44
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: A
+Overall: 99
+MLB Service: 8.135
+Age: 31
+Bats: S
+Throws: L
+Height: 6'0"
+Weight: 209 lbs
+Drafted: Round 4 (2029)
+Secondary Position: LF, RF
+Hitter Tendency: WHOLE FIELD
+Born: NEW JERSEY
+Canonical POPID: POP-00022
+
+--------------------------------------------------
+
+ATTRIBUTES (game screen)
+
+CON R: 95
+CON L: 80
+POW R: 85
+POW L: 67
+VIS: 87
+DISC: 66
+CLT: 77
+BUNT: 51
+DBUNT: 58
+DUR: 98
+FLD: 98
+ARM: 75
+ACC: 70
+REAC: 97
+SPD: 92
+STEAL: 83
+BR AGG: 73
+
+--------------------------------------------------
+
+ATTRIBUTE HISTORY
+
+ATTR    2041 CARD  WAS      NOW   CHANGE
+CON R   83         85        95    +10
+CON L   75         77        80    +3
+POW R   78         78        85    +7
+POW L   61         64        67    +3
+VIS     79         78        87    +9
+DISC    79         78        66    -12
+CLT     79         77        77    0
+BUNT    35         51        51    0
+DBUNT   25         58        58    0
+DUR     99         98        98    0
+FLD     98         98        98    0
+ARM     74         74        75    +1
+ACC     70         70        70    0
+REAC    99         98        97    -1
+SPD     93         92        92    0
+STEAL   83         83        83    0
+BR AGG  73         73        73    0
+
+NOW = the latest attributes screen.
+WAS = NOW value minus the change marker shown on that screen;
+the cycle of that earlier reading is not shown in the game.
+2041 CARD = the card on file in Drive; cycle not recorded.
+
+--------------------------------------------------
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G    AB   R    H    2B  3B  HR  RBI  BB   SO   SB  CS  AVG   OBP   SLG
+2041  ATH   148  621  152  210  48  9   56  113  35   65   80  9   .338  .382  .715
+2040  ATH   147  607  94   170  36  8   32  98   67   121  35  5   .280  .355  .524
+2039  ATH   154  614  120  198  44  13  33  103  66   104  28  6   .322  .391  .598
+2038  ATH   159  611  83   158  32  8   29  92   64   110  29  6   .259  .335  .480
+2037  ATH   159  561  83   138  36  10  13  62   69   103  26  3   .246  .333  .415
+2036  ATH   96   323  33   64   10  3   10  24   16   79   9   6   .198  .237  .341
+2035  ATH   122  426  55   91   19  3   19  50   48   105  19  1   .214  .300  .406
+2034  MIN   67   239  20   46   12  2   5   24   27   61   11  4   .192  .272  .322
+2033  MIN   58   199  11   33   8   0   2   17   21   60   5   0   .166  .252  .236
+
+All seasons read from the MLB Stats screens.
+
+--------------------------------------------------
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS    PA   SF  SAC  GIDP  HBP  IBB  TB   SB%    PO    A    E    FLD%   INN      WAR
+2041  ATH   1.097  671  4   0    3     11   3    444  .899   290   7    1    .997   1279.0   13.3
+2040  ATH   .879   686  3   4    4     5    2    318  .875   328   11   0    1.000  1301.0   8.0
+2039  ATH   .989   689  3   1    9     5    1    367  .824   275   13   1    .997   1373.2   10.0
+2038  ATH   .815   686  2   2    4     7    1    293  .829   277   17   0    1.000  1408.1   6.4
+2037  ATH   .748   640  3   1    5     6    1    233  .897   241   18   0    1.000  1406.0   5.2
+2036  ATH   .578   344  2   2    2     1    0    110  .600   156   5    0    1.000  793.2    0.5
+2035  ATH   .706   482  1   2    4     5    0    173  .950   210   9    2    .991   1045.2   3.0
+2034  MIN   .594   269  2   1    2     0    0    77   .733   127   7    2    .985   591.0    0.4
+2033  MIN   .488   222  0   0    3     2    0    47   1.000  115   6    2    .984   478.2    -0.4
+
+--------------------------------------------------
+
+CAREER TOTALS (game career line)
+
+G: 1110
+AB: 4201
+R: 651
+H: 1108
+2B: 245
+3B: 56
+HR: 199
+RBI: 583
+BB: 413
+SO: 808
+SB: 242
+CS: 40
+AVG: .264
+OBP: .334
+SLG: .491
+OPS: .825
+PA: 4689
+TB: 2062
+SB%: .858
+PO: 2019
+A: 93
+E: 8
+FLD%: .996
+INN: 9677.0
+WAR: 46.3
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2042: $37.8M
+2043: $37.8M
+2044: $37.8M
+2045–2051: Free Agent
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Option: 3/3 Used
+Playoff Eligible: -
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+
+QUIRKS
+
+- Day Player (Performs better when playing day games)
+
+--------------------------------------------------
+
+AWARDS
+
+- Most Valuable Player: 2041
+- Hank Aaron Award: 2041
+- 4x All-Star: 2038, 2039, 2040, 2041
+- 2x Silver Slugger: 2039, 2041
+- Batting Title: 2041
+- Home Run Champion: 2041
+
+--------------------------------------------------
+
+NOTES
+
+- Acquired: 2034, Trade (MIN)
+
+--------------------------------------------------
+METADATA & VERIFICATION FOOTER
+--------------------------------------------------
+TS Code: TS-MLB-ATH-2041-00022
+Verification Tag: Screen-Checked
+Steward of Record: Claude Staged
+POPID: POP-00022
+===================================================

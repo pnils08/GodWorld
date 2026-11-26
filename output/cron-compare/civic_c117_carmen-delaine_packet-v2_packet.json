@@ -1,0 +1,153 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c117_carmen-delaine_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00501",
+      "name": "Denise Carter",
+      "quote": "The Fund was never hood-wide relief, and it was never housing — it is West Oakland businesses and neighbors, with the 23-day clock kept honest. I verified nothing by wishing it.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 117,
+        "officeSlug": "council_d1",
+        "statementId": "STMT-117-council_d1-001",
+        "quote": "The Fund was never hood-wide relief, and it was never housing — it is West Oakland businesses and neighbors, with the 23-day clock kept honest. I verified nothing by wishing it.",
+        "topic": "West Oakland Stabilization Fund — charter renewal",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/council_d1_c117.json",
+        "holderPopid": "POP-00501",
+        "speakerName": "Denise Carter"
+      }
+    },
+    {
+      "pop": "POP-00037",
+      "name": "Brenda Okoro",
+      "quote": "West Oakland gets a verified closeout and a faithful charter renewal — not a shortcut around the businesses and residents this fund serves.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 117,
+        "officeSlug": "okoro",
+        "statementId": "STMT-117-okoro-001",
+        "quote": "West Oakland gets a verified closeout and a faithful charter renewal — not a shortcut around the businesses and residents this fund serves.",
+        "topic": "West Oakland Stabilization Fund — verified closeout before Council renewal",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/okoro_c117.json",
+        "holderPopid": "POP-00037",
+        "speakerName": "Brenda Okoro"
+      }
+    },
+    {
+      "pop": "POP-00790",
+      "name": "Marcus Webb",
+      "quote": "The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries the proof, and the roll call belongs to the Council.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 117,
+        "officeSlug": "stabilization_fund",
+        "statementId": "STMT-117-stabilization_fund-001",
+        "quote": "The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries the proof, and the roll call belongs to the Council.",
+        "topic": "C114 closeout verification and Council charter-renewal consideration",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/stabilization_fund_c117.json",
+        "holderPopid": "POP-00790",
+        "speakerName": "Marcus Webb"
+      }
+    },
+    {
+      "pop": "POP-00790",
+      "name": "Marcus Webb",
+      "quote": "The rent does not wait for the ordinance and the vote doesn't come before the analysis — West Oakland gets the legal-support record first, and the 23-day clock keeps running while it does.",
+      "sourceKind": "office-record",
+      "officeRecord": {
+        "sourceKind": "office-record",
+        "cycle": 117,
+        "officeSlug": "stabilization_fund",
+        "statementId": "STMT-117-stabilization_fund-003",
+        "quote": "The rent does not wait for the ordinance and the vote doesn't come before the analysis — West Oakland gets the legal-support record first, and the 23-day clock keeps running while it does.",
+        "topic": "West Oakland queue and 23-day standard",
+        "initiativeId": "INIT-001",
+        "filePath": "output/civic-voice/stabilization_fund_c117.json",
+        "holderPopid": "POP-00790",
+        "speakerName": "Marcus Webb"
+      }
+    }
+  ],
+  "officeRecords": [
+    {
+      "sourceKind": "office-record",
+      "cycle": 117,
+      "officeSlug": "council_d1",
+      "statementId": "STMT-117-council_d1-001",
+      "quote": "The Fund was never hood-wide relief, and it was never housing — it is West Oakland businesses and neighbors, with the 23-day clock kept honest. I verified nothing by wishing it.",
+      "topic": "West Oakland Stabilization Fund — charter renewal",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/council_d1_c117.json",
+      "holderPopid": "POP-00501",
+      "speakerName": "Denise Carter"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 117,
+      "officeSlug": "okoro",
+      "statementId": "STMT-117-okoro-001",
+      "quote": "West Oakland gets a verified closeout and a faithful charter renewal — not a shortcut around the businesses and residents this fund serves.",
+      "topic": "West Oakland Stabilization Fund — verified closeout before Council renewal",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/okoro_c117.json",
+      "holderPopid": "POP-00037",
+      "speakerName": "Brenda Okoro"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 117,
+      "officeSlug": "stabilization_fund",
+      "statementId": "STMT-117-stabilization_fund-001",
+      "quote": "The closeout is published, the ordinance is on the calendar with the scope that works and the 23-day clock still running — the hearing record carries the proof, and the roll call belongs to the Council.",
+      "topic": "C114 closeout verification and Council charter-renewal consideration",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/stabilization_fund_c117.json",
+      "holderPopid": "POP-00790",
+      "speakerName": "Marcus Webb"
+    },
+    {
+      "sourceKind": "office-record",
+      "cycle": 117,
+      "officeSlug": "stabilization_fund",
+      "statementId": "STMT-117-stabilization_fund-003",
+      "quote": "The rent does not wait for the ordinance and the vote doesn't come before the analysis — West Oakland gets the legal-support record first, and the 23-day clock keeps running while it does.",
+      "topic": "West Oakland queue and 23-day standard",
+      "initiativeId": "INIT-001",
+      "filePath": "output/civic-voice/stabilization_fund_c117.json",
+      "holderPopid": "POP-00790",
+      "speakerName": "Marcus Webb"
+    }
+  ],
+  "officeSilence": null,
+  "interviews": [],
+  "ranAt": "2026-11-23T19:15:01.557Z"
+}

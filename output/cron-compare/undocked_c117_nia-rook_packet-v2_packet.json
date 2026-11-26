@@ -1,0 +1,310 @@
+{
+  "stage": "report",
+  "desk": "undocked",
+  "cycle": "117",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop01209-Y3C13",
+      "label": "UNDOCKED: Daniela Kapoor, Sunday night",
+      "kind": "undocked",
+      "angle": "UNDOCKED episode: Daniela Kapoor, Sunday night. Standings: Marguerite Kimball-Ostrow leads the board — rank #1, 49.08 achievement points, 0 credits, 2 cycle(s) led, current streak 2. In the chair: Daniela Kapoor — Teacher.",
+      "facts": [
+        "Daniela Kapoor's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline and Maplevale; mined 8 copper ore, 15 iron ore and 1 antimatter containment cell; earned Wanderer (8 points), Maiden Jump (5 points), Voyager I (3.2 points), The Truth Is Out There (2.5 points), Cartographer (2.4 points), Chronicler (1.2 points), Voyager II (0.8 points), Prospector I (0.02 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came out even on credits; flew until the show's time ran out.",
+        "Daniela Kapoor — Teacher (ledger)"
+      ],
+      "citizens": [
+        "Daniela Kapoor — Teacher, UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-01209"
+      ],
+      "hood": "Glenview"
+    }
+  },
+  "angle": "output/cron-compare/undocked_c117_nia-rook_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-01209",
+      "name": "Daniela Kapoor",
+      "quote": "Sunday night was a great flight on UNDOCKED. I was happy with how it went, I mined some good resources and jumped around to different systems. I went through Sol, Alpha Centauri, and a few others, and managed to earn a bunch of achievements. It was a lot of fun.",
+      "disp": "somewhat sociable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Sunday night was a great flight on UNDOCKED. I was happy with how it went, I mined some good resources and jumped around to different systems. I went through Sol, Alpha Centauri, and a few others, and managed to earn a bunch of achievements. It was a lot of fun.\",\n  \"fact_ids\": [\"F-d1413323c0dd\", \"F-b31cd1e2c3d8\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d1413323c0dd",
+          "F-b31cd1e2c3d8"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01209-4105cbc42c",
+        "authoredQuote": true,
+        "publishableQuote": "Sunday night was a great flight on UNDOCKED. I was happy with how it went, I mined some good resources and jumped around to different systems. I went through Sol, Alpha Centauri, and a few others, and managed to earn a bunch of achievements. It was a lot of fun."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01209",
+          "name": "Daniela Kapoor",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What was notable about Daniela Kapoor's journey on Sunday night? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Glenview",
+          "focus": "Daniela Kapoor's performance on UNDOCKED",
+          "src": "undocked:undocked-pop01209-Y3C13"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Daniela Kapoor — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-ea6bab8137",
+              "src": "undocked:undocked-pop01209-Y3C13",
+              "text": "UNDOCKED: Daniela Kapoor, Sunday night"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Daniela Kapoor, Sunday night",
+            "src": "undocked:undocked-pop01209-Y3C13",
+            "id": "F-702b3dfc18b0"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniela Kapoor's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline and Maplevale; mined 8 copper ore, 15 iron ore and 1 antimatter containment cell; earned Wanderer (8 points), Maiden Jump (5 points), Voyager I (3.2 points), The Truth Is Out There (2.5 points), Cartographer (2.4 points), Chronicler (1.2 points), Voyager II (0.8 points), Prospector I (0.02 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came ou",
+            "src": "undocked:undocked-pop01209-Y3C13",
+            "id": "F-d1413323c0dd"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniela Kapoor — Teacher (ledger)",
+            "src": "undocked:undocked-pop01209-Y3C13",
+            "id": "F-9ff4f0f9e962"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C117",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c5606da08cb9"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniela Kapoor — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-01209",
+            "id": "F-b31cd1e2c3d8"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "officeRecords": [],
+  "officeSilence": null,
+  "interviews": [
+    {
+      "pop": "POP-01209",
+      "name": "Daniela Kapoor",
+      "quote": "Sunday night was a great flight on UNDOCKED. I was happy with how it went, I mined some good resources and jumped around to different systems. I went through Sol, Alpha Centauri, and a few others, and managed to earn a bunch of achievements. It was a lot of fun.",
+      "disp": "somewhat sociable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Sunday night was a great flight on UNDOCKED. I was happy with how it went, I mined some good resources and jumped around to different systems. I went through Sol, Alpha Centauri, and a few others, and managed to earn a bunch of achievements. It was a lot of fun.\",\n  \"fact_ids\": [\"F-d1413323c0dd\", \"F-b31cd1e2c3d8\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d1413323c0dd",
+          "F-b31cd1e2c3d8"
+        ],
+        "basis": "lived-context",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01209-4105cbc42c",
+        "authoredQuote": true,
+        "publishableQuote": "Sunday night was a great flight on UNDOCKED. I was happy with how it went, I mined some good resources and jumped around to different systems. I went through Sol, Alpha Centauri, and a few others, and managed to earn a bunch of achievements. It was a lot of fun."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01209",
+          "name": "Daniela Kapoor",
+          "role": "UNDOCKED pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "What was notable about Daniela Kapoor's journey on Sunday night? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Glenview",
+          "focus": "Daniela Kapoor's performance on UNDOCKED",
+          "src": "undocked:undocked-pop01209-Y3C13"
+        },
+        "exposure": {
+          "basis": [
+            "assignment"
+          ],
+          "self": "Daniela Kapoor — UNDOCKED pilot",
+          "evidence": [
+            {
+              "id": "EV-ea6bab8137",
+              "src": "undocked:undocked-pop01209-Y3C13",
+              "text": "UNDOCKED: Daniela Kapoor, Sunday night"
+            }
+          ],
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Daniela Kapoor, Sunday night",
+            "src": "undocked:undocked-pop01209-Y3C13",
+            "id": "F-702b3dfc18b0"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniela Kapoor's Sunday night on UNDOCKED: went through Sol, Alpha Centauri, Tau Ceti, Electra, Mimosa, Ross 154, Arcturus, Timberline and Maplevale; mined 8 copper ore, 15 iron ore and 1 antimatter containment cell; earned Wanderer (8 points), Maiden Jump (5 points), Voyager I (3.2 points), The Truth Is Out There (2.5 points), Cartographer (2.4 points), Chronicler (1.2 points), Voyager II (0.8 points), Prospector I (0.02 points), Far Traveler (0.01 points) and Jump Master (0.01 points); came ou",
+            "src": "undocked:undocked-pop01209-Y3C13",
+            "id": "F-d1413323c0dd"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniela Kapoor — Teacher (ledger)",
+            "src": "undocked:undocked-pop01209-Y3C13",
+            "id": "F-9ff4f0f9e962"
+          },
+          {
+            "t": "FACT",
+            "text": "Current cycle: C117",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c5606da08cb9"
+          },
+          {
+            "t": "FACT",
+            "text": "Daniela Kapoor — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-01209",
+            "id": "F-b31cd1e2c3d8"
+          },
+          {
+            "t": "FACT",
+            "text": "Calendar: Y3C13, Spring, holiday=none",
+            "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+            "id": "F-f7ed4e9a474c"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "lived-context|direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-11-23T19:18:47.516Z"
+}

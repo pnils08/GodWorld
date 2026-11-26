@@ -1,0 +1,66 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "117",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 135,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "sheet_read",
+    "ask_worker",
+    "ask_worker"
+  ],
+  "toolCalls": 4,
+  "wordCount": 905,
+  "targetWords": null,
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [
+    {
+      "text": "Coen Cartier prioritized their health after a scare (Chinatown).",
+      "run": "coen cartier health scare chinatown"
+    }
+  ],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 905,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "6aeee82df3a43d7e0a9103101e00fdc9e8bfcf7627140a18a0701f9b90cee09c",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/civic_c117_lila-mezran_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "nts [www.vestauth.com]\n{\n  \"popId\": \"POP-00154\",\n  \"name\": \"Lila Mezran\",\n  \"recorded\": true,\n  \"text\": \"Chinatown's Illness Count Is 133. The Hospital Count Is 6. The Record Can't Explain the Gap.\"\n}"
+  },
+  "ranAt": "2026-11-24T00:19:04.067Z"
+}

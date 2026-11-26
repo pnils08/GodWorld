@@ -1,0 +1,56 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-11-26T02:55:50.209Z",
+  "POPID": "POP-01209",
+  "Cycle": 117,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop01209-2026-11-26T02-30-34",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop01209-2026-11-26T02-30-34.json",
+  "Holder": "Daniela Kapoor",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Daniela Kapoor credits=0 systems=hatysa,ridgecrest,cervantes,miaplacidus,mimosa,electra,tau_ceti,alpha_centauri,sol,sirius,nova_terra,furud,acrux,botein,diadem",
+  "DecidedAt": "2026-11-26T02:55:50.216Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 117,
+    "EventType": "undocked-episode",
+    "POPID": "POP-01209",
+    "Holder": "Daniela Kapoor",
+    "EpisodeId": "undocked-pop01209-Y3C13-e2",
+    "CreditsDelta": 0,
+    "PointsDelta": 10.73,
+    "Systems": [
+      "hatysa",
+      "ridgecrest",
+      "cervantes",
+      "miaplacidus",
+      "mimosa",
+      "electra",
+      "tau_ceti",
+      "alpha_centauri",
+      "sol",
+      "sirius",
+      "nova_terra",
+      "furud",
+      "acrux",
+      "botein",
+      "diadem"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop01209-2026-11-26T02-30-34.json"
+  }
+}

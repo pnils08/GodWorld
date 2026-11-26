@@ -1,0 +1,781 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00156",
+    "name": "Angela Reyes",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "Steady schools week: a small index dip in six neighborhoods against flat funding and teacher quality and slightly rising enrollment. I'll check whether the dip reflects anything teachers see in classrooms.",
+    "approach": null,
+    "voice": null,
+    "runningStoriesNote": "signal.runningStories are events the city is already living through and where each one stands. Background only — write nothing about tracking them."
+  },
+  "signal": {
+    "kind": "own-pick",
+    "hood": null,
+    "src": "own pick, C117",
+    "plan": {
+      "focus": "Steady schools week: a small index dip in six neighborhoods against flat funding and teacher quality and slightly rising enrollment. I'll check whether the dip reflects anything teachers see in classrooms."
+    },
+    "runningStories": [
+      "The Downtown Transit Snarl [Downtown] — ENDED this week after 4 week(s)",
+      "West Oakland Stabilization Fund — disbursement-active [West Oakland] — under way",
+      "Oakland Alternative Response Initiative — dispatch-live [West Oakland, Fruitvale, East Oakland] — under way",
+      "Fruitvale Transit Hub Phase II — Visioning — design-phase [Fruitvale] — under way",
+      "Temescal Community Health Center — operational [Temescal] — under way",
+      "Baylight District — Final Council Vote — construction-active [Jack London, Downtown] — under way",
+      "Oakland Youth Apprenticeship Pipeline — stalled [West Oakland, East Oakland, Fruitvale] — under way",
+      "Downtown Economic Revitalization — vote-scheduled [Downtown] — under way",
+      "Commercial Stabilization for Grand Lake — vote-scheduled [Grand Lake] — under way",
+      "West Oakland Tenant Defense Fund — operational [West Oakland] — under way",
+      "Ivy Hill Revitalization Initiative — legislation-filed [Ivy Hill] — under way",
+      "Dimond Revitalization Initiative — announced [Dimond] — under way",
+      "Ivy Hill Community Revitalization — announced [Ivy Hill] — under way",
+      "Ivy Hill Community Support Initiative — vote-scheduled [Ivy Hill] — under way",
+      "Laurel Neighborhood Patch and Clean-Up — announced [Laurel] — under way",
+      "Oakland Youth Apprenticeship Pipeline — implementation-active [West Oakland, East Oakland, Fruitvale] — ENDED this week; now stalled",
+      "West Oakland Tenant Defense Fund — vote-scheduled [West Oakland] — ENDED this week; now operational",
+      "Ivy Hill Revitalization Initiative — announced [Ivy Hill] — ENDED this week; now legislation-filed",
+      "Baylight District — Final Council Vote — complete [Jack London, Downtown] — ENDED this week; now construction-active",
+      "Fruitvale Transit Hub Phase II — Visioning — complete [Fruitvale] — ENDED this week; now design-phase"
+    ]
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00739",
+        "name": "Karem Asante",
+        "profile": "Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01183",
+        "name": "Rosalind Achterberg",
+        "profile": "Rosalind Achterberg — Superintendent of Schools",
+        "quotationEligible": true,
+        "src": "tool:ask_worker:SUPT-SCHOOLS — asked: The school quality index slipped this cycle, with the biggest drops (0.08 to 0.10) in Fruitvale, Grand Lake, Jack London, Uptown, Downtown and West Oakland, while funding and teacher quality held flat"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00739-3aa5a4dab4",
+        "pop": "POP-00739",
+        "name": "Karem Asante",
+        "quote": "Man, I sit in those meetings and I hear a lot of talk about numbers, but what I see in my one-on-ones is kids carrying stuff they shouldn't have to. The index slipping? That's just a mirror of what they're bringing in—stress from home, from the block, from not knowing if they'll eat tonight. It's not a stat to me; it's their backpacks getting heavier.",
+        "factIds": [
+          "F-155f7988991e"
+        ],
+        "src": "packet.W2[POP-00739]"
+      },
+      {
+        "id": "Q-WORKER-07bdf5a08645",
+        "pop": "POP-01183",
+        "name": "Rosalind Achterberg",
+        "quote": "Angela, before I explain anything, I have to correct a premise — and I'd rather do it now than have it in print. **The record I have in front of me doesn't match the numbers in your question.** You cite drops of 0.08 to 0.10 in Fruitvale, Grand Lake, Jack London, Uptown, Downtown and West Oakland. My current sheet shows: - **Fruitvale 7.2**, **Downtown 7.2**, **Jack London 7.3**, **Grand Lake 7.09**, **Uptown 7.03**, **West Oakland 7.92** — with teacher quality flat and funding flat exactly as you describe. But I can't see the prior cycle's rows. My Schools-by-neighborhood record holds this cycle only; it doesn't carry a before-and-after, so I can't independently confirm a 0.08–0.10 slide, and neither can I show you the places where the number held or rose. If your reporter's methodology is comparing against a prior published sheet, I'm not going to dispute your arithmetic — but I'm not going to narrate a dip I can't see the baseline for, either. That's how a superintendent ends up on the record blaming staff for a rounding artifact. Here's what I can say on the record, plainly: **On the numbers.** Teacher quality and funding are held flat across every one of those six neighborhoods — the dollars and the staffing did not move. So whatever moved the index moved *inside* the classroom, not in the budget. And these six are not one story: Fruitvale at 88.2 graduation and West Oakland at 90.5 are performing well above the city's lower tier, while Uptown has 63 students and Grand Lake 319. A tenth of a point on an index with 63 students in the denominator is a handful of students, not a school coming apart. I want your readers to understand the scale of what's being described before they panic about it. **On what my staff are seeing.** I'm not going to invent classroom observations I don't have. What I *do* have from Cycle 117 is residents' own school lines, and they are, candidly, the opposite of a crisis: a Dimond student who asked a question nobody in the room could answer and liked that; a Chinatown student reading ahead in a chapter book; a San Antonio student building a volcano that erupted twice; Jack London and Rockridge students cramming for finals at the library until closing. One Fruitvale student, Karim Avery, was recognized at the Fruitvale Transit Corridor Mutual Aid. That's engaged learning, in the neighborhoods you're asking about. It is also, of course, self-reported and partial — it's not a quality index and I won't dress it up as one. **What I'm actually worried about.** The honest answer is the persistent gap, not the drift. San Antonio at 6.6 and East Oakland at 6.57, both at $11,000 per student, both with the lowest teacher quality in the district at 6.68 — that's a structural problem that a tenth of a point of noise shouldn't distract us from. And I'll flag one thing I own: the Oakland Youth Apprenticeship Pipeline, my $12.5M workforce initiative, has been **stalled since Cycle 116** pending a placement-gap analysis with explicit West Oakland and Fruitvale review, due at Cycle 118. Those are two of the six neighborhoods in your question. When a college-and-career pathway is held up in a neighborhood, that eventually shows up somewhere. I'd rather answer for that than for a tenth of a point. So: put me down as saying the district will publish the prior-cycle comparison alongside this cycle's sheet so the public can see the movement itself rather than my characterization of it, and that I don't yet have a classroom-level explanation that meets the standard of the record. If your sources have something specific in those buildings, I want to hear it — my office line is open.",
+        "factIds": [],
+        "src": "tool:ask_worker:SUPT-SCHOOLS — asked: The school quality index slipped this cycle, with the biggest drops (0.08 to 0.10) in Fruitvale, Grand Lake, Jack London, Uptown, Downtown and West Oakland, while funding and teacher quality held flat",
+        "sourceKind": "worker-answer"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "The dip might come from how the index is calculated rather than anything in classrooms.",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "Teachers describing sameness (Isabel Lopes) might mean calm, or they might mean stuck. I can't tell which without asking.",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "The Oakland Alternative Response Initiative may be affecting how safe Jack London families feel, going by Lo Thoop's note, but that is only a hunch.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C117",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c5606da08cb9"
+    },
+    {
+      "t": "FACT",
+      "text": "Enrollment moved: Piedmont Ave +3 students, East Oakland +2 students, Temescal +2 students, West Oakland +1 students, Laurel +1 students, Adams Point +1 students, Jack London +1 students, Fruitvale +1 students, Downtown +1 students, Grand Lake +1 students, Eastlake +1 students, Dimond +1 students, Glenview +1 students, Chinatown +1 students, Ivy Hill +1 students, San Antonio +1 students vs C116",
+      "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C117",
+      "id": "F-8f298785e744"
+    },
+    {
+      "t": "FACT",
+      "text": "Adams Point: school quality index 7.91 (was 7.92 at C116), graduation 89.48%, college-ready 62.53%, teacher quality 7.9, funding 13,000, 278 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-3d99edee8e88"
+    },
+    {
+      "t": "FACT",
+      "text": "Baylight District: school quality index 8.33 (was 8.3 at C116), graduation 91.06%, college-ready 66.38%, teacher quality 8.2, funding 14,500, 65 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-74e32f746215"
+    },
+    {
+      "t": "FACT",
+      "text": "Brooklyn: school quality index 8.22 (was 8.2 at C116), graduation 90.82%, college-ready 65.84%, teacher quality 8.2, funding 14,500, 351 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-08f1741f46ad"
+    },
+    {
+      "t": "FACT",
+      "text": "Chinatown: school quality index 6.81 (was 6.82 at C116), graduation 85.32%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 315 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-1a3923635bc2"
+    },
+    {
+      "t": "FACT",
+      "text": "Dimond: school quality index 6.83 (was 6.84 at C116), graduation 85.32%, college-ready 52.49%, teacher quality 6.9, funding 12,000, 355 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-38ee2cc149ff"
+    },
+    {
+      "t": "FACT",
+      "text": "Downtown: school quality index 7.2 (was 7.28 at C116), graduation 88.77%, college-ready 61.65%, teacher quality 8.2, funding 14,500, 245 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-ee109c07faa7"
+    },
+    {
+      "t": "FACT",
+      "text": "East Oakland: school quality index 6.57 (was 6.61 at C116), graduation 84.09%, college-ready 49.79%, teacher quality 6.68, funding 11,000, 486 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-6275c5cbd66d"
+    },
+    {
+      "t": "FACT",
+      "text": "Eastlake: school quality index 6.9 (was 6.91 at C116), graduation 85.48%, college-ready 52.87%, teacher quality 6.9, funding 12,000, 315 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-693ce4ae7dd4"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale: school quality index 7.2 (was 7.3 at C116), graduation 88.2%, college-ready 59.5%, teacher quality 7.9, funding 13,000, 427 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-6d63697f3443"
+    },
+    {
+      "t": "FACT",
+      "text": "Glenview: school quality index 6.81 (was 6.83 at C116), graduation 85.31%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 388 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-a713cdf7107a"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Lake: school quality index 7.09 (was 7.18 at C116), graduation 87.84%, college-ready 58.8%, teacher quality 7.9, funding 13,000, 319 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-5150e1cb6c7e"
+    },
+    {
+      "t": "FACT",
+      "text": "Ivy Hill: school quality index 6.66 (was 6.69 at C116), graduation 84.26%, college-ready 50.21%, teacher quality 6.68, funding 11,000, 329 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-e1c98943c04d"
+    },
+    {
+      "t": "FACT",
+      "text": "Jack London: school quality index 7.3 (was 7.39 at C116), graduation 89.09%, college-ready 62.1%, teacher quality 8.2, funding 14,500, 203 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-b95726fa93bc"
+    },
+    {
+      "t": "FACT",
+      "text": "KONO: school quality index 6.85 (was 6.89 at C116), graduation 85.44%, college-ready 52.77%, teacher quality 6.9, funding 12,000, 60 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-998aff65bcd0"
+    },
+    {
+      "t": "FACT",
+      "text": "Lake Merritt: school quality index 8.04 (was 8 at C116), graduation 90.2%, college-ready 64.32%, teacher quality 8.2, funding 14,500, 59 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-1b269834dbce"
+    },
+    {
+      "t": "FACT",
+      "text": "Laurel: school quality index 7.91 (was 7.92 at C116), graduation 89.46%, college-ready 62.51%, teacher quality 7.9, funding 13,000, 339 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-82c308264f76"
+    },
+    {
+      "t": "FACT",
+      "text": "Piedmont Ave: school quality index 8.3 (was 8.28 at C116), graduation 91.69%, college-ready 68.53%, teacher quality 8.2, funding 14,500, 256 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-b3e4889f8764"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge: school quality index 8.36 (was 8.4 at C116), graduation 93.61%, college-ready 73.53%, teacher quality 9.13, funding 15,000, 250 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-d244ff2117b3"
+    },
+    {
+      "t": "FACT",
+      "text": "San Antonio: school quality index 6.6 (was 6.64 at C116), graduation 84.18%, college-ready 50.02%, teacher quality 6.68, funding 11,000, 392 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-b6ceb918f6fa"
+    },
+    {
+      "t": "FACT",
+      "text": "Temescal: school quality index 6.21 (was 6.25 at C116), graduation 83.53%, college-ready 53%, teacher quality 6.8, funding 11,500, 316 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-29ec39dc691f"
+    },
+    {
+      "t": "FACT",
+      "text": "Uptown: school quality index 7.03 (was 7.12 at C116), graduation 87.63%, college-ready 58.39%, teacher quality 7.9, funding 13,000, 63 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-b4dfe152b4cd"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland: school quality index 7.92 (was 8 at C116), graduation 90.5%, college-ready 65.07%, teacher quality 8.2, funding 14,500, 327 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C117",
+      "id": "F-3180bed6e475"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland City Schools (Education), City-wide — 5,201 employees, growing 7.2% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C117",
+      "id": "F-cbba9716c14d"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Community College District (Education), City-wide — 1,800 employees, growing 7.0% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00035 @C117",
+      "id": "F-6777b5db3b99"
+    },
+    {
+      "t": "FACT",
+      "text": "Firehouse 29 West Oakland Baseball Academy (Sports), West Oakland — 20 employees, growing 5.0% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00103 @C117",
+      "id": "F-e0d51554dfb5"
+    },
+    {
+      "t": "FACT",
+      "text": "Harrison Street Chinese School (Education), Chinatown — 15 employees, growing 2.0% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00207 @C117",
+      "id": "F-822a124a026c"
+    },
+    {
+      "t": "FACT",
+      "text": "Hillside Preparatory (Private School), Rockridge — 15 employees, growing 3.3% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00226 @C117",
+      "id": "F-ad25f201cf64"
+    },
+    {
+      "t": "FACT",
+      "text": "Early Shift Childcare (Preschool & Early Education), San Antonio — 15 employees, growing 0.6% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00261 @C117",
+      "id": "F-c9b54a4ef520"
+    },
+    {
+      "t": "FACT",
+      "text": "MacArthur Tutoring Center (Tutoring), Laurel — 15 employees, growing 1.1% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00279 @C117",
+      "id": "F-202a6f6063e9"
+    },
+    {
+      "t": "FACT",
+      "text": "Laurel Music School (Music School), Laurel — 9 employees, growing 2.4% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00281 @C117",
+      "id": "F-b252526e93bf"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland City College — Laurel Campus (Education), Laurel — 15 employees, growing 0.9% a year",
+      "src": "output/beats/Business_Ledger.jsonl BIZ-00284 @C117",
+      "id": "F-8523cce1a779"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-002 @C117",
+      "id": "F-d8386c125a83"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-003 @C117",
+      "id": "F-5b7c0e4b71d6"
+    },
+    {
+      "t": "FACT",
+      "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-004 @C117",
+      "id": "F-ab145363d7b4"
+    },
+    {
+      "t": "FACT",
+      "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-005 @C117",
+      "id": "F-15dd3d475266"
+    },
+    {
+      "t": "FACT",
+      "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-006 @C117",
+      "id": "F-73dfa42c0293"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-007 @C117",
+      "id": "F-5ca0e8720ccc"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Youth Apprenticeship Pipeline (economic), Baylight District, since C86",
+      "src": "output/beats/Community_Programs.jsonl PRG-008 @C117",
+      "id": "F-09d9ee8e7bdf"
+    },
+    {
+      "t": "FACT",
+      "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+      "src": "output/beats/Community_Programs.jsonl PRG-017 @C117",
+      "id": "F-4aff83ff48b4"
+    },
+    {
+      "t": "FACT",
+      "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+      "src": "output/beats/Community_Programs.jsonl PRG-019 @C117",
+      "id": "F-ff9b22910a2c"
+    },
+    {
+      "t": "FACT",
+      "text": "Foothill Baptist Tabernacle Academy (tech-education), East Oakland, since C88",
+      "src": "output/beats/Community_Programs.jsonl PRG-030 @C117",
+      "id": "F-4d4aa3997e40"
+    },
+    {
+      "t": "FACT",
+      "text": "Darrin Davis Youth Community Events (), City-wide — founded by Darrin Davis",
+      "src": "output/beats/Community_Programs.jsonl PRG-033 @C117",
+      "id": "F-7658af683162"
+    },
+    {
+      "t": "FACT",
+      "text": "Calendar: Y3C13, Spring, holiday=none",
+      "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)",
+      "id": "F-f7ed4e9a474c"
+    },
+    {
+      "t": "FACT",
+      "text": "Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+      "src": "Simulation_Ledger profile for POP-00739",
+      "id": "F-155f7988991e"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts are canon — never contradict them"
+    ],
+    "attribute": [
+      "a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "angela-schools-v2",
+    "canonPolicy": "load-bearing",
+    "canonBlockers": [
+      "an invented or altered location: school, program, business or neighborhood",
+      "an invented or altered citizen (name, role, age, home, relationship, school), or words a named citizen did not say",
+      "an invented or altered data point: a score, rate, enrollment, funding, number, date or engine record"
+    ]
+  },
+  "manifest": {
+    "id": "AM-c178a126db77",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c5606da08cb9",
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-8f298785e744",
+        "t": "FACT",
+        "text": "Enrollment moved: Piedmont Ave +3 students, East Oakland +2 students, Temescal +2 students, West Oakland +1 students, Laurel +1 students, Adams Point +1 students, Jack London +1 students, Fruitvale +1 students, Downtown +1 students, Grand Lake +1 students, Eastlake +1 students, Dimond +1 students, Glenview +1 students, Chinatown +1 students, Ivy Hill +1 students, San Antonio +1 students vs C116",
+        "src": "output/beats/prev/Neighborhood_Demographics.jsonl vs current @C117"
+      },
+      {
+        "id": "F-3d99edee8e88",
+        "t": "FACT",
+        "text": "Adams Point: school quality index 7.91 (was 7.92 at C116), graduation 89.48%, college-ready 62.53%, teacher quality 7.9, funding 13,000, 278 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-74e32f746215",
+        "t": "FACT",
+        "text": "Baylight District: school quality index 8.33 (was 8.3 at C116), graduation 91.06%, college-ready 66.38%, teacher quality 8.2, funding 14,500, 65 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-08f1741f46ad",
+        "t": "FACT",
+        "text": "Brooklyn: school quality index 8.22 (was 8.2 at C116), graduation 90.82%, college-ready 65.84%, teacher quality 8.2, funding 14,500, 351 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-1a3923635bc2",
+        "t": "FACT",
+        "text": "Chinatown: school quality index 6.81 (was 6.82 at C116), graduation 85.32%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 315 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-38ee2cc149ff",
+        "t": "FACT",
+        "text": "Dimond: school quality index 6.83 (was 6.84 at C116), graduation 85.32%, college-ready 52.49%, teacher quality 6.9, funding 12,000, 355 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-ee109c07faa7",
+        "t": "FACT",
+        "text": "Downtown: school quality index 7.2 (was 7.28 at C116), graduation 88.77%, college-ready 61.65%, teacher quality 8.2, funding 14,500, 245 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-6275c5cbd66d",
+        "t": "FACT",
+        "text": "East Oakland: school quality index 6.57 (was 6.61 at C116), graduation 84.09%, college-ready 49.79%, teacher quality 6.68, funding 11,000, 486 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-693ce4ae7dd4",
+        "t": "FACT",
+        "text": "Eastlake: school quality index 6.9 (was 6.91 at C116), graduation 85.48%, college-ready 52.87%, teacher quality 6.9, funding 12,000, 315 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-6d63697f3443",
+        "t": "FACT",
+        "text": "Fruitvale: school quality index 7.2 (was 7.3 at C116), graduation 88.2%, college-ready 59.5%, teacher quality 7.9, funding 13,000, 427 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-a713cdf7107a",
+        "t": "FACT",
+        "text": "Glenview: school quality index 6.81 (was 6.83 at C116), graduation 85.31%, college-ready 52.47%, teacher quality 6.9, funding 12,000, 388 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-5150e1cb6c7e",
+        "t": "FACT",
+        "text": "Grand Lake: school quality index 7.09 (was 7.18 at C116), graduation 87.84%, college-ready 58.8%, teacher quality 7.9, funding 13,000, 319 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-e1c98943c04d",
+        "t": "FACT",
+        "text": "Ivy Hill: school quality index 6.66 (was 6.69 at C116), graduation 84.26%, college-ready 50.21%, teacher quality 6.68, funding 11,000, 329 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-b95726fa93bc",
+        "t": "FACT",
+        "text": "Jack London: school quality index 7.3 (was 7.39 at C116), graduation 89.09%, college-ready 62.1%, teacher quality 8.2, funding 14,500, 203 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-998aff65bcd0",
+        "t": "FACT",
+        "text": "KONO: school quality index 6.85 (was 6.89 at C116), graduation 85.44%, college-ready 52.77%, teacher quality 6.9, funding 12,000, 60 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-1b269834dbce",
+        "t": "FACT",
+        "text": "Lake Merritt: school quality index 8.04 (was 8 at C116), graduation 90.2%, college-ready 64.32%, teacher quality 8.2, funding 14,500, 59 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-82c308264f76",
+        "t": "FACT",
+        "text": "Laurel: school quality index 7.91 (was 7.92 at C116), graduation 89.46%, college-ready 62.51%, teacher quality 7.9, funding 13,000, 339 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-b3e4889f8764",
+        "t": "FACT",
+        "text": "Piedmont Ave: school quality index 8.3 (was 8.28 at C116), graduation 91.69%, college-ready 68.53%, teacher quality 8.2, funding 14,500, 256 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-d244ff2117b3",
+        "t": "FACT",
+        "text": "Rockridge: school quality index 8.36 (was 8.4 at C116), graduation 93.61%, college-ready 73.53%, teacher quality 9.13, funding 15,000, 250 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-b6ceb918f6fa",
+        "t": "FACT",
+        "text": "San Antonio: school quality index 6.6 (was 6.64 at C116), graduation 84.18%, college-ready 50.02%, teacher quality 6.68, funding 11,000, 392 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-29ec39dc691f",
+        "t": "FACT",
+        "text": "Temescal: school quality index 6.21 (was 6.25 at C116), graduation 83.53%, college-ready 53%, teacher quality 6.8, funding 11,500, 316 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-b4dfe152b4cd",
+        "t": "FACT",
+        "text": "Uptown: school quality index 7.03 (was 7.12 at C116), graduation 87.63%, college-ready 58.39%, teacher quality 7.9, funding 13,000, 63 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-3180bed6e475",
+        "t": "FACT",
+        "text": "West Oakland: school quality index 7.92 (was 8 at C116), graduation 90.5%, college-ready 65.07%, teacher quality 8.2, funding 14,500, 327 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C117"
+      },
+      {
+        "id": "F-cbba9716c14d",
+        "t": "FACT",
+        "text": "Oakland City Schools (Education), City-wide — 5,201 employees, growing 7.2% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00016 @C117"
+      },
+      {
+        "id": "F-6777b5db3b99",
+        "t": "FACT",
+        "text": "Oakland Community College District (Education), City-wide — 1,800 employees, growing 7.0% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00035 @C117"
+      },
+      {
+        "id": "F-e0d51554dfb5",
+        "t": "FACT",
+        "text": "Firehouse 29 West Oakland Baseball Academy (Sports), West Oakland — 20 employees, growing 5.0% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00103 @C117"
+      },
+      {
+        "id": "F-822a124a026c",
+        "t": "FACT",
+        "text": "Harrison Street Chinese School (Education), Chinatown — 15 employees, growing 2.0% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00207 @C117"
+      },
+      {
+        "id": "F-ad25f201cf64",
+        "t": "FACT",
+        "text": "Hillside Preparatory (Private School), Rockridge — 15 employees, growing 3.3% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00226 @C117"
+      },
+      {
+        "id": "F-c9b54a4ef520",
+        "t": "FACT",
+        "text": "Early Shift Childcare (Preschool & Early Education), San Antonio — 15 employees, growing 0.6% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00261 @C117"
+      },
+      {
+        "id": "F-202a6f6063e9",
+        "t": "FACT",
+        "text": "MacArthur Tutoring Center (Tutoring), Laurel — 15 employees, growing 1.1% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00279 @C117"
+      },
+      {
+        "id": "F-b252526e93bf",
+        "t": "FACT",
+        "text": "Laurel Music School (Music School), Laurel — 9 employees, growing 2.4% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00281 @C117"
+      },
+      {
+        "id": "F-8523cce1a779",
+        "t": "FACT",
+        "text": "Oakland City College — Laurel Campus (Education), Laurel — 15 employees, growing 0.9% a year",
+        "src": "output/beats/Business_Ledger.jsonl BIZ-00284 @C117"
+      },
+      {
+        "id": "F-d8386c125a83",
+        "t": "FACT",
+        "text": "Vinnie Keane Firehouse 29 West Oakland Baseball Academy (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-002 @C117"
+      },
+      {
+        "id": "F-5b7c0e4b71d6",
+        "t": "FACT",
+        "text": "Mark Aitken Youth Baseball League (youth-sports), East Oakland — founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-003 @C117"
+      },
+      {
+        "id": "F-ab145363d7b4",
+        "t": "FACT",
+        "text": "Fruitvale Summer Speed Series (youth-sports), Fruitvale, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-004 @C117"
+      },
+      {
+        "id": "F-15dd3d475266",
+        "t": "FACT",
+        "text": "Eastside Hoopers Coalition (youth-sports), East Oakland — founded by Marcus Whitfield, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-005 @C117"
+      },
+      {
+        "id": "F-73dfa42c0293",
+        "t": "FACT",
+        "text": "Keane Auxiliary Flag Football League (youth-sports), West Oakland — founded by Vinnie Keane, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-006 @C117"
+      },
+      {
+        "id": "F-5ca0e8720ccc",
+        "t": "FACT",
+        "text": "Oakland A's Alumni Youth Clinics (youth-sports), Dimond — founded by Mark Aitken, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-007 @C117"
+      },
+      {
+        "id": "F-09d9ee8e7bdf",
+        "t": "FACT",
+        "text": "Oakland Youth Apprenticeship Pipeline (economic), Baylight District, since C86",
+        "src": "output/beats/Community_Programs.jsonl PRG-008 @C117"
+      },
+      {
+        "id": "F-4aff83ff48b4",
+        "t": "FACT",
+        "text": "NeuroCity Youth Lab (tech-education), Downtown — founded by Priya Nair, since C101",
+        "src": "output/beats/Community_Programs.jsonl PRG-017 @C117"
+      },
+      {
+        "id": "F-ff9b22910a2c",
+        "t": "FACT",
+        "text": "Civis Systems Civic Fellows Program (tech-education), West Oakland — founded by Elias Varek, since C96",
+        "src": "output/beats/Community_Programs.jsonl PRG-019 @C117"
+      },
+      {
+        "id": "F-4d4aa3997e40",
+        "t": "FACT",
+        "text": "Foothill Baptist Tabernacle Academy (tech-education), East Oakland, since C88",
+        "src": "output/beats/Community_Programs.jsonl PRG-030 @C117"
+      },
+      {
+        "id": "F-7658af683162",
+        "t": "FACT",
+        "text": "Darrin Davis Youth Community Events (), City-wide — founded by Darrin Davis",
+        "src": "output/beats/Community_Programs.jsonl PRG-033 @C117"
+      },
+      {
+        "id": "F-f7ed4e9a474c",
+        "t": "FACT",
+        "text": "Calendar: Y3C13, Spring, holiday=none",
+        "src": "output/world_summary_c117.md Calendar context (Simulation_Calendar)"
+      },
+      {
+        "id": "F-155f7988991e",
+        "t": "FACT",
+        "text": "Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+        "src": "Simulation_Ledger profile for POP-00739"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00739-3aa5a4dab4",
+        "speakerId": "POP-00739",
+        "speakerName": "Karem Asante",
+        "text": "Man, I sit in those meetings and I hear a lot of talk about numbers, but what I see in my one-on-ones is kids carrying stuff they shouldn't have to. The index slipping? That's just a mirror of what they're bringing in—stress from home, from the block, from not knowing if they'll eat tonight. It's not a stat to me; it's their backpacks getting heavier.",
+        "factIds": [
+          "F-155f7988991e"
+        ],
+        "src": "packet.W2[POP-00739]"
+      },
+      {
+        "id": "Q-WORKER-07bdf5a08645",
+        "speakerId": "POP-01183",
+        "speakerName": "Rosalind Achterberg",
+        "text": "Angela, before I explain anything, I have to correct a premise — and I'd rather do it now than have it in print. **The record I have in front of me doesn't match the numbers in your question.** You cite drops of 0.08 to 0.10 in Fruitvale, Grand Lake, Jack London, Uptown, Downtown and West Oakland. My current sheet shows: - **Fruitvale 7.2**, **Downtown 7.2**, **Jack London 7.3**, **Grand Lake 7.09**, **Uptown 7.03**, **West Oakland 7.92** — with teacher quality flat and funding flat exactly as you describe. But I can't see the prior cycle's rows. My Schools-by-neighborhood record holds this cycle only; it doesn't carry a before-and-after, so I can't independently confirm a 0.08–0.10 slide, and neither can I show you the places where the number held or rose. If your reporter's methodology is comparing against a prior published sheet, I'm not going to dispute your arithmetic — but I'm not going to narrate a dip I can't see the baseline for, either. That's how a superintendent ends up on the record blaming staff for a rounding artifact. Here's what I can say on the record, plainly: **On the numbers.** Teacher quality and funding are held flat across every one of those six neighborhoods — the dollars and the staffing did not move. So whatever moved the index moved *inside* the classroom, not in the budget. And these six are not one story: Fruitvale at 88.2 graduation and West Oakland at 90.5 are performing well above the city's lower tier, while Uptown has 63 students and Grand Lake 319. A tenth of a point on an index with 63 students in the denominator is a handful of students, not a school coming apart. I want your readers to understand the scale of what's being described before they panic about it. **On what my staff are seeing.** I'm not going to invent classroom observations I don't have. What I *do* have from Cycle 117 is residents' own school lines, and they are, candidly, the opposite of a crisis: a Dimond student who asked a question nobody in the room could answer and liked that; a Chinatown student reading ahead in a chapter book; a San Antonio student building a volcano that erupted twice; Jack London and Rockridge students cramming for finals at the library until closing. One Fruitvale student, Karim Avery, was recognized at the Fruitvale Transit Corridor Mutual Aid. That's engaged learning, in the neighborhoods you're asking about. It is also, of course, self-reported and partial — it's not a quality index and I won't dress it up as one. **What I'm actually worried about.** The honest answer is the persistent gap, not the drift. San Antonio at 6.6 and East Oakland at 6.57, both at $11,000 per student, both with the lowest teacher quality in the district at 6.68 — that's a structural problem that a tenth of a point of noise shouldn't distract us from. And I'll flag one thing I own: the Oakland Youth Apprenticeship Pipeline, my $12.5M workforce initiative, has been **stalled since Cycle 116** pending a placement-gap analysis with explicit West Oakland and Fruitvale review, due at Cycle 118. Those are two of the six neighborhoods in your question. When a college-and-career pathway is held up in a neighborhood, that eventually shows up somewhere. I'd rather answer for that than for a tenth of a point. So: put me down as saying the district will publish the prior-cycle comparison alongside this cycle's sheet so the public can see the movement itself rather than my characterization of it, and that I don't yet have a classroom-level explanation that meets the standard of the record. If your sources have something specific in those buildings, I want to hear it — my office line is open.",
+        "factIds": [],
+        "sourceKind": "worker-answer",
+        "src": "tool:ask_worker:SUPT-SCHOOLS — asked: The school quality index slipped this cycle, with the biggest drops (0.08 to 0.10) in Fruitvale, Grand Lake, Jack London, Uptown, Downtown and West Oakland, while funding and teacher quality held flat"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00739",
+        "name": "Karem Asante",
+        "profile": "Karem Asante — Youth Counselor — West Oakland — age 34 — Youth Counselor at Oakland City Schools; C117: Sat through a meeting at Oakland City Schools where every idea was theirs and none had their name on it.",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01183",
+        "name": "Rosalind Achterberg",
+        "profile": "Rosalind Achterberg — Superintendent of Schools",
+        "src": "tool:ask_worker:SUPT-SCHOOLS — asked: The school quality index slipped this cycle, with the biggest drops (0.08 to 0.10) in Fruitvale, Grand Lake, Jack London, Uptown, Downtown and West Oakland, while funding and teacher quality held flat",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "The dip might come from how the index is calculated rather than anything in classrooms.",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "Teachers describing sameness (Isabel Lopes) might mean calm, or they might mean stuck. I can't tell which without asking.",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "The Oakland Alternative Response Initiative may be affecting how safe Jack London families feel, going by Lo Thoop's note, but that is only a hunch.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [],
+    "textureConditions": [],
+    "forbiddenClaimClasses": []
+  }
+}

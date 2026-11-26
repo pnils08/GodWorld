@@ -1,0 +1,63 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "117",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5.5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5.5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "tamsin-pruitt",
+  "byline": {
+    "name": "Tamsin Pruitt",
+    "popid": "POP-01210",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 22,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "citizen_lookup",
+    "citizen_lookup",
+    "canon_recall",
+    "canon_recall",
+    "sheet_read",
+    "sheet_read"
+  ],
+  "toolCalls": 6,
+  "wordCount": 508,
+  "targetWords": null,
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 508,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "ce184e043dc7c40b9baaad330531004f26e66644ebd441512f6b031a20db521b"
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/culture_c117_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0018.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "v // tip: ◈ secrets for agents [www.dotenvx.com]\n{\n  \"popId\": \"POP-01210\",\n  \"name\": \"Tamsin Pruitt\",\n  \"recorded\": true,\n  \"text\": \"A Place of His Own on Fruitvale, and the Water Heater Came First\"\n}"
+  },
+  "ranAt": "2026-11-26T00:18:48.523Z"
+}

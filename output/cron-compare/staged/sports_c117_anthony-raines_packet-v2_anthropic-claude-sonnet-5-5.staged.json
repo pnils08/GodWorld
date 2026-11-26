@@ -1,0 +1,90 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "117",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c117_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Clark Saryan",
+        "role": "mentioned",
+        "popid": "POP-00052",
+        "floor": true
+      },
+      {
+        "name": "Hitoki Ka",
+        "role": "mentioned",
+        "popid": "POP-01081",
+        "floor": true
+      },
+      {
+        "name": "Ian Devine",
+        "role": "mentioned",
+        "popid": "POP-01082",
+        "floor": true
+      },
+      {
+        "name": "Julio Valencia",
+        "role": "mentioned",
+        "popid": "POP-00077",
+        "floor": true
+      },
+      {
+        "name": "Louis Cross",
+        "role": "mentioned",
+        "popid": "POP-01080",
+        "floor": true
+      },
+      {
+        "name": "Mariano Rosales",
+        "role": "mentioned",
+        "popid": "POP-00555",
+        "floor": true
+      },
+      {
+        "name": "Travis Coles",
+        "role": "mentioned",
+        "popid": "POP-00533",
+        "floor": true
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "A's · re-signing — Mariano Rosales gets five years and $88 million. The ninth inning stays with the A's closer",
+        "sourceRef": "world_summary_c117.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-08fb1893bf65",
+    "draftSha256": "3130bae67f3bc7b6f5f2a27e95a6581b4a81400e002badf133ab6d318ff3e16a",
+    "verdict": "output/cron-compare/sports_c117_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-24T00:21:08.329Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 855,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "3130bae67f3bc7b6f5f2a27e95a6581b4a81400e002badf133ab6d318ff3e16a",
+      "costUsd": 0.0015
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-24T00:21:15.087Z"
+}

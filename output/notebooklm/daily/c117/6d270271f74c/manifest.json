@@ -1,0 +1,566 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "2.0",
+  "canonStatus": "NOT_CANON",
+  "cycle": 117,
+  "generatedAt": "2026-11-25T14:00:07.730Z",
+  "lastAttemptAt": "2026-11-25T14:00:07.730Z",
+  "hours": 36,
+  "packHash": "6d270271f74c7459edf854482a2b0c2a30291149bb15b64d123d6394b0918a86",
+  "worldSummary": "output/world_summary_c117.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/civic_c117_luis-navarro_packet-v2_anthropic-claude-haiku-5-5.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c117_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c117_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c117_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0019.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c117_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md"
+    }
+  ],
+  "flaggedReports": [
+    "output/cron-compare/flagged/civic_c117_luis-navarro_packet-v2_anthropic-claude-haiku-5-5.flags.json"
+  ],
+  "editionDay": false,
+  "firstMorning": false,
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 1,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED",
+      "FLAGGED_DISPOSITION",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_3",
+      "REPORTED_THRESHOLD_MET_1"
+    ],
+    "dispositionCounts": {
+      "passed": 3,
+      "rheaFlagged": 0,
+      "neverGated": 1
+    },
+    "fingerprint": "6ea860b0411be6cbf4b307c95d681146132feb9d0fbf562cb6a07c56050da366"
+  },
+  "newsroomPulse": {
+    "fingerprint": "1baf0a3dbdd6e54bcb6e597a0cbc7fab636fabf7a6975d707e8160d3ea58cee8",
+    "counts": {
+      "angles": 12,
+      "asks": 4,
+      "fanoutAssignments": 8,
+      "w2Ready": 4,
+      "quotes": 6,
+      "passed": 3,
+      "rheaFlagged": 0,
+      "neverGated": 1,
+      "flagged": 1,
+      "pending": 7
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "73cd50b5-4b8f-4329-bb42-0783c8d93763",
+  "dryRun": false,
+  "sources": [
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C117 — Angela Reyes: Six Neighborhoods Slipped Eight to Ten Hundredths, and the Superintendent Won't Say Why",
+      "hash": "2ad932ac00e3c37b8f3642e6c1872d77c79912a0352cd53f471dc17052bd986d",
+      "words": 697,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/01-article.md",
+      "path": "output/cron-compare/staged/civic_c117_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "b4ac5a80-f961-4be8-8592-d090e504b1c1",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C117 — Sgt. Rachel Torres: Temescal's Eight: Why an Arrest Is Not a Clearance",
+      "hash": "38ac587ef495aa642f94b2c721e01a79ea7df9c8b4a4e0e341407209d6aca6f1",
+      "words": 1074,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/02-article.md",
+      "path": "output/cron-compare/staged/civic_c117_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "b55c6cdc-e544-4198-81d0-892145a3320d",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C117 — Tamsin Pruitt: A Place of His Own on Fruitvale, and the Water Heater Came First",
+      "hash": "14d6a9c21f18fd0e457eceb8eac4540fbb7f4b6a1d86dd42e20c48050f534511",
+      "words": 518,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/03-article.md",
+      "path": "output/cron-compare/staged/culture_c117_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0019.md",
+      "id": "270439ca-9c08-4454-8382-8fa76ddf1468",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C117 — Selena Grant: The Oaks Have Made the Comeback Their First Identity",
+      "hash": "b4bd73afe9e57aef6c2084bf91692a85578601cd040ad9e29ed5df78aa24a37f",
+      "words": 518,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/04-article.md",
+      "path": "output/cron-compare/staged/sports_c117_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md",
+      "id": "1fda805f-06e9-4c19-a400-c9acc00b074e",
+      "reused": false
+    },
+    {
+      "kind": "exchange",
+      "title": "The Bay Tribune Daily C117 — Overheard — Deon Whitfield and Jasper Whitfield",
+      "hash": "4a0d35d5ba6cd9e3f1d0994b5a5706306819bcfe41846302c1282c5041541b1e",
+      "words": 195,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/05-exchange.md",
+      "path": "output/exchanges/exchange_c117_2026-11-24_conversation.md",
+      "id": "e43e5de1-1e9e-4690-905d-6864f7adf046",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Fruitvale",
+      "hash": "3c850f5fc6e3c8dff4d7b8e73c4969f5ea957c4dadf56c2efd1e297040fd15e5",
+      "words": 558,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/06-reflections.md",
+      "path": null,
+      "id": "7df7b72a-cdfd-4c23-b56e-104a72694ec5",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Jack London",
+      "hash": "aa529d1e38b0bfd972d82853e5b7a354b4ab977b9ad069b42a937ec45fde00fa",
+      "words": 399,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/07-reflections.md",
+      "path": null,
+      "id": "30b4f8b3-4ac1-4a58-aad7-aa6dfb0af523",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — KONO",
+      "hash": "703d857e4cdece93e3a86199a720fc7419328b4cdd8e181643fd36f35fea82f9",
+      "words": 213,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/08-reflections.md",
+      "path": null,
+      "id": "c697a11e-96df-4143-8c31-3d873b636bd7",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Lake Merritt",
+      "hash": "690fc6b72ef86bc96f07317901413d086b099a3f89b9fc308792ca0b9c87b1fc",
+      "words": 271,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/09-reflections.md",
+      "path": null,
+      "id": "401591f3-b9fb-4e53-b1a2-d3e682f318ff",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Piedmont Ave",
+      "hash": "9f05fd95fbcd1ad3885e92b2fdf4ad7830fff987fb9cb93522680c9e786b444a",
+      "words": 368,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/10-reflections.md",
+      "path": null,
+      "id": "e798069a-c33c-4296-9f7a-8e4818ccf830",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Rockridge",
+      "hash": "45c2578087088219df9cee3489f90b3c31508de64e57dd82f5fc638f51370b95",
+      "words": 71,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/11-reflections.md",
+      "path": null,
+      "id": "47e4f96b-b3c0-4bb6-bebc-419f471fd485",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Temescal",
+      "hash": "82eb603943d2b03a6c87d85ab7ee287f448ede48d4354ce9b6352d2f74b4666e",
+      "words": 203,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/12-reflections.md",
+      "path": null,
+      "id": "d85dc2cf-c199-40ff-aad6-9120cb0f02cd",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Uptown",
+      "hash": "1729e8b1fd147964487df7117c1a90a41e359571360bb0683fc4a4ef93a06509",
+      "words": 74,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/13-reflections.md",
+      "path": null,
+      "id": "02cd1708-0bf5-4dfa-83f3-6042e0322947",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — West Oakland",
+      "hash": "83bd461086b9a553ef07d7ff56a4f3b9398018803d822b8f20ac2773514c092a",
+      "words": 1204,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/14-reflections.md",
+      "path": null,
+      "id": "ce4871f3-fa5a-455f-b7bb-30dc7d65d24f",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — City State",
+      "hash": "398efbccfa40437c8d51007cf38009b9f9025457ddd55942a23ff03487810346",
+      "words": 373,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/15-world.md",
+      "path": null,
+      "id": "a45258f3-5026-42ca-87a2-3769f45162ee",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — What Moved",
+      "hash": "e49bf47cbb108795d585f48830f33e557cc3ff57de1db7bfc90b8ddd52bf4d64",
+      "words": 1150,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/16-world.md",
+      "path": null,
+      "id": "e587be47-cd1b-44d3-a810-be133de7833c",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — Who Lived It",
+      "hash": "c8b2bbc2f6600d1e71ee02d7c3a10ae3f3dcf8be3f281a53583941c5322e40dd",
+      "words": 389,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/17-world.md",
+      "path": null,
+      "id": "f887aba6-67dd-4764-a032-03c6563ee757",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — Sports",
+      "hash": "38dbaa9b8284fa9fc9767b5230392fd7761d73e65a0138cf860013b101409b02",
+      "words": 2948,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/18-world.md",
+      "path": null,
+      "id": "8fa74712-e282-41c3-823f-26ff118a04ce",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — Evening Texture",
+      "hash": "37a1aa72c7e7ea37c43f194a4036c50fc6bbb907cb585237b060d666080a1aab",
+      "words": 111,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/19-world.md",
+      "path": null,
+      "id": "d7490c52-c8e8-48a5-847b-ef16f55cb3df",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — World Events",
+      "hash": "1862911dae31c671a0405805bf07488ed93a84014dd958ad94e4192b7c7449f7",
+      "words": 170,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/20-world.md",
+      "path": null,
+      "id": "fe875ef1-b402-4bc4-8a93-dcd7346d8bbb",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — Chaos Events",
+      "hash": "7912de065c0ba4ca88b2f916a7f524c7c6b10e6f5a1c9fc302ca04c9c25771c7",
+      "words": 262,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/21-world.md",
+      "path": null,
+      "id": "948654ed-72ec-45a3-b645-2e164abb46c3",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — Three-Cycle Trends",
+      "hash": "fb44e5fe22eff7f84cae5314b483344a93f5193b996ca9bd8c9123c35bf8a11a",
+      "words": 95,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/22-world.md",
+      "path": null,
+      "id": "6d92a26c-23b7-4137-9ad4-ae50a97c4f4f",
+      "reused": false
+    }
+  ],
+  "sourceIds": [
+    "b4ac5a80-f961-4be8-8592-d090e504b1c1",
+    "b55c6cdc-e544-4198-81d0-892145a3320d",
+    "270439ca-9c08-4454-8382-8fa76ddf1468",
+    "1fda805f-06e9-4c19-a400-c9acc00b074e",
+    "e43e5de1-1e9e-4690-905d-6864f7adf046",
+    "7df7b72a-cdfd-4c23-b56e-104a72694ec5",
+    "30b4f8b3-4ac1-4a58-aad7-aa6dfb0af523",
+    "c697a11e-96df-4143-8c31-3d873b636bd7",
+    "401591f3-b9fb-4e53-b1a2-d3e682f318ff",
+    "e798069a-c33c-4296-9f7a-8e4818ccf830",
+    "47e4f96b-b3c0-4bb6-bebc-419f471fd485",
+    "d85dc2cf-c199-40ff-aad6-9120cb0f02cd",
+    "02cd1708-0bf5-4dfa-83f3-6042e0322947",
+    "ce4871f3-fa5a-455f-b7bb-30dc7d65d24f",
+    "a45258f3-5026-42ca-87a2-3769f45162ee",
+    "e587be47-cd1b-44d3-a810-be133de7833c",
+    "f887aba6-67dd-4764-a032-03c6563ee757",
+    "8fa74712-e282-41c3-823f-26ff118a04ce",
+    "d7490c52-c8e8-48a5-847b-ef16f55cb3df",
+    "fe875ef1-b402-4bc4-8a93-dcd7346d8bbb",
+    "948654ed-72ec-45a3-b645-2e164abb46c3",
+    "6d92a26c-23b7-4137-9ad4-ae50a97c4f4f"
+  ],
+  "audioPresentation": {
+    "format": "deep_dive",
+    "length": "default",
+    "source": "router",
+    "profile": "REPORTED_DAY"
+  },
+  "audioArtifactId": "3aa5c72b-7af1-49d7-8117-ed17d274873b",
+  "audioSources": [
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C117 — Angela Reyes: Six Neighborhoods Slipped Eight to Ten Hundredths, and the Superintendent Won't Say Why",
+      "hash": "2ad932ac00e3c37b8f3642e6c1872d77c79912a0352cd53f471dc17052bd986d",
+      "words": 697,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/01-article.md",
+      "path": "output/cron-compare/staged/civic_c117_angela-reyes_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "b4ac5a80-f961-4be8-8592-d090e504b1c1",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C117 — Sgt. Rachel Torres: Temescal's Eight: Why an Arrest Is Not a Clearance",
+      "hash": "38ac587ef495aa642f94b2c721e01a79ea7df9c8b4a4e0e341407209d6aca6f1",
+      "words": 1074,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/02-article.md",
+      "path": "output/cron-compare/staged/civic_c117_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+      "id": "b55c6cdc-e544-4198-81d0-892145a3320d",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C117 — Tamsin Pruitt: A Place of His Own on Fruitvale, and the Water Heater Came First",
+      "hash": "14d6a9c21f18fd0e457eceb8eac4540fbb7f4b6a1d86dd42e20c48050f534511",
+      "words": 518,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/03-article.md",
+      "path": "output/cron-compare/staged/culture_c117_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5.staged-0019.md",
+      "id": "270439ca-9c08-4454-8382-8fa76ddf1468",
+      "reused": false
+    },
+    {
+      "kind": "article",
+      "title": "The Bay Tribune Daily C117 — Selena Grant: The Oaks Have Made the Comeback Their First Identity",
+      "hash": "b4bd73afe9e57aef6c2084bf91692a85578601cd040ad9e29ed5df78aa24a37f",
+      "words": 518,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/04-article.md",
+      "path": "output/cron-compare/staged/sports_c117_selena-grant_packet-v2_openai-gpt-5-6-luna.staged.md",
+      "id": "1fda805f-06e9-4c19-a400-c9acc00b074e",
+      "reused": false
+    },
+    {
+      "kind": "exchange",
+      "title": "The Bay Tribune Daily C117 — Overheard — Deon Whitfield and Jasper Whitfield",
+      "hash": "4a0d35d5ba6cd9e3f1d0994b5a5706306819bcfe41846302c1282c5041541b1e",
+      "words": 195,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/05-exchange.md",
+      "path": "output/exchanges/exchange_c117_2026-11-24_conversation.md",
+      "id": "e43e5de1-1e9e-4690-905d-6864f7adf046",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Fruitvale",
+      "hash": "3c850f5fc6e3c8dff4d7b8e73c4969f5ea957c4dadf56c2efd1e297040fd15e5",
+      "words": 558,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/06-reflections.md",
+      "path": null,
+      "id": "7df7b72a-cdfd-4c23-b56e-104a72694ec5",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Jack London",
+      "hash": "aa529d1e38b0bfd972d82853e5b7a354b4ab977b9ad069b42a937ec45fde00fa",
+      "words": 399,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/07-reflections.md",
+      "path": null,
+      "id": "30b4f8b3-4ac1-4a58-aad7-aa6dfb0af523",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — KONO",
+      "hash": "703d857e4cdece93e3a86199a720fc7419328b4cdd8e181643fd36f35fea82f9",
+      "words": 213,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/08-reflections.md",
+      "path": null,
+      "id": "c697a11e-96df-4143-8c31-3d873b636bd7",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Lake Merritt",
+      "hash": "690fc6b72ef86bc96f07317901413d086b099a3f89b9fc308792ca0b9c87b1fc",
+      "words": 271,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/09-reflections.md",
+      "path": null,
+      "id": "401591f3-b9fb-4e53-b1a2-d3e682f318ff",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Piedmont Ave",
+      "hash": "9f05fd95fbcd1ad3885e92b2fdf4ad7830fff987fb9cb93522680c9e786b444a",
+      "words": 368,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/10-reflections.md",
+      "path": null,
+      "id": "e798069a-c33c-4296-9f7a-8e4818ccf830",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Rockridge",
+      "hash": "45c2578087088219df9cee3489f90b3c31508de64e57dd82f5fc638f51370b95",
+      "words": 71,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/11-reflections.md",
+      "path": null,
+      "id": "47e4f96b-b3c0-4bb6-bebc-419f471fd485",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Temescal",
+      "hash": "82eb603943d2b03a6c87d85ab7ee287f448ede48d4354ce9b6352d2f74b4666e",
+      "words": 203,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/12-reflections.md",
+      "path": null,
+      "id": "d85dc2cf-c199-40ff-aad6-9120cb0f02cd",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — Uptown",
+      "hash": "1729e8b1fd147964487df7117c1a90a41e359571360bb0683fc4a4ef93a06509",
+      "words": 74,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/13-reflections.md",
+      "path": null,
+      "id": "02cd1708-0bf5-4dfa-83f3-6042e0322947",
+      "reused": false
+    },
+    {
+      "kind": "reflections",
+      "title": "The Bay Tribune Daily C117 — Citizens in their own words — West Oakland",
+      "hash": "83bd461086b9a553ef07d7ff56a4f3b9398018803d822b8f20ac2773514c092a",
+      "words": 1204,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/14-reflections.md",
+      "path": null,
+      "id": "ce4871f3-fa5a-455f-b7bb-30dc7d65d24f",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — City State",
+      "hash": "398efbccfa40437c8d51007cf38009b9f9025457ddd55942a23ff03487810346",
+      "words": 373,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/15-world.md",
+      "path": null,
+      "id": "a45258f3-5026-42ca-87a2-3769f45162ee",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — What Moved",
+      "hash": "e49bf47cbb108795d585f48830f33e557cc3ff57de1db7bfc90b8ddd52bf4d64",
+      "words": 1150,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/16-world.md",
+      "path": null,
+      "id": "e587be47-cd1b-44d3-a810-be133de7833c",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — Who Lived It",
+      "hash": "c8b2bbc2f6600d1e71ee02d7c3a10ae3f3dcf8be3f281a53583941c5322e40dd",
+      "words": 389,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/17-world.md",
+      "path": null,
+      "id": "f887aba6-67dd-4764-a032-03c6563ee757",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — Sports",
+      "hash": "38dbaa9b8284fa9fc9767b5230392fd7761d73e65a0138cf860013b101409b02",
+      "words": 2948,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/18-world.md",
+      "path": null,
+      "id": "8fa74712-e282-41c3-823f-26ff118a04ce",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — Evening Texture",
+      "hash": "37a1aa72c7e7ea37c43f194a4036c50fc6bbb907cb585237b060d666080a1aab",
+      "words": 111,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/19-world.md",
+      "path": null,
+      "id": "d7490c52-c8e8-48a5-847b-ef16f55cb3df",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — World Events",
+      "hash": "1862911dae31c671a0405805bf07488ed93a84014dd958ad94e4192b7c7449f7",
+      "words": 170,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/20-world.md",
+      "path": null,
+      "id": "fe875ef1-b402-4bc4-8a93-dcd7346d8bbb",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — Chaos Events",
+      "hash": "7912de065c0ba4ca88b2f916a7f524c7c6b10e6f5a1c9fc302ca04c9c25771c7",
+      "words": 262,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/21-world.md",
+      "path": null,
+      "id": "948654ed-72ec-45a3-b645-2e164abb46c3",
+      "reused": false
+    },
+    {
+      "kind": "world",
+      "title": "The Bay Tribune Daily C117 — Cycle 117 opens — Three-Cycle Trends",
+      "hash": "fb44e5fe22eff7f84cae5314b483344a93f5193b996ca9bd8c9123c35bf8a11a",
+      "words": 95,
+      "file": "output/notebooklm/daily/c117/6d270271f74c/sources/22-world.md",
+      "path": null,
+      "id": "6d92a26c-23b7-4137-9ad4-ae50a97c4f4f",
+      "reused": false
+    }
+  ],
+  "audioPath": "output/notebooklm/daily/c117/6d270271f74c/godworld_daily_c117.m4a",
+  "driveLink": "https://drive.google.com/file/d/1xBfnhJ63V2F6PtY-GZ0pFyZSjluNoH94/view?usp=drivesdk",
+  "opsReportArtifactId": "cd2d13c7-ff2a-43d3-821a-6b13f45f2c52",
+  "opsReportPath": "output/notebooklm/daily/c117/6d270271f74c/ops-report-c117.md",
+  "opsReportDelivered": true
+}

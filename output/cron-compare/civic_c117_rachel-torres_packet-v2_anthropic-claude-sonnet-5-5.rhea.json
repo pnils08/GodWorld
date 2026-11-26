@@ -1,0 +1,75 @@
+{
+  "draft": "output/cron-compare/civic_c117_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "117",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "80dd52e6d7f09864fd524d6672c0dd48d0432d0f2ce0d43b5fd70a17f776bd23",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, quotes, and public safety data verify cleanly against ground truth and interview records.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "rachel-safety-v2",
+    "packageVersion": "RACHEL-LEP2-3",
+    "manifestId": "AM-264eb7c8ebe1",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "48"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Rachel Torres",
+      "Rafael Montez",
+      "Samantha Viteri",
+      "Vanessa Tran-Muñoz"
+    ],
+    "unverified": [
+      "Internal Affairs",
+      "Public Safety"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0156,
+  "durationMs": 7983,
+  "parseError": false,
+  "ranAt": "2026-11-25T00:16:44.380Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 1052,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "80dd52e6d7f09864fd524d6672c0dd48d0432d0f2ce0d43b5fd70a17f776bd23",
+    "costUsd": 0.0012
+  }
+}

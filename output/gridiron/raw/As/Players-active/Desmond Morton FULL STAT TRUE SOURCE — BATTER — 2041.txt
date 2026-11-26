@@ -1,0 +1,131 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Desmond Morton
+Team: Athletics
+Position: LF
+Jersey: #0
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: A
+Overall: 85
+MLB Service: 0.122
+Age: 25
+Bats: L
+Throws: R
+Height: 5'10"
+Weight: 163 LBS
+Drafted: RND 5 (2034)
+Secondary Position: CF, RF
+Hitter Tendency: PULL HITTER
+Born: NETHERLANDS
+Canonical POPID: POP-00051
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+CON R: 82
+CON L: 72
+POW R: 61
+POW L: 59
+VIS: 61
+DISC: 61
+CLT: 64
+BUNT: 48
+DBUNT: 25
+DUR: 99
+FLD: 66
+ARM: 87
+ACC: 88
+REAC: 61
+SPD: 77
+STEAL: 79
+BR AGG: 80
+
+--------------------------------------------------
+
+MLB STATS (BY SEASON)
+
+YEAR TEAM G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2042 ATH 0 0 0 0 0 0 0 0 0 0 0 0 .000 .000 .000
+2041 ATH 80 285 47 83 22 8 7 44 23 49 28 8 .291 .348 .498
+CAREER   80 285 47 83 22 8 7 44 23 49 28 8 .291 .348 .498
+
+--------------------------------------------------
+
+ADVANCED (BY SEASON)
+
+YEAR TEAM OPS PA SF SAC GIDP HBP IBB TB SB% A PO E FLD% INN WAR
+2042 ATH .000 0 0 0 0 0 0 0 .000 0 0 0 .000 0.0 0.0
+2041 ATH .846 313 2 0 6 3 1 142 .778 4 169 2 .989 684.2 2.5
+CAREER   .846 313 2 0 6 3 1 142 .778 4 169 2 .989 684.2 2.5
+
+--------------------------------------------------
+
+RATES (BY SEASON)
+
+YEAR TEAM BB% K% BB/K ISO AB/HR PSN SECA BAT RUNS SBR RC RF
+2042 ATH 0.0% 0.0% 0.00 .000 0.0 0.0 .000 0.0 0.0 0.0 0.00
+2041 ATH 7.3% 15.7% 0.47 .207 40.7 11.2 .358 15.4 3.6 48.9 2.27
+CAREER   7.3% 15.7% 0.47 .207 40.7 11.2 .358 15.4 3.6 48.9 2.27
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2042: $780K
+2043: RNW
+2044: RNW
+2045: ARB
+2046: ARB
+2047: ARB
+2048: FA
+2049: FA
+2050: FA
+2051: FA
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Option: 2/3 USED
+Playoff Eligible: -
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+
+QUIRKS
+
+- Breaking Ball Hitter (Excels at hitting breaking balls.)
+
+--------------------------------------------------
+
+AWARDS
+
+None (no awards tab on game screens).
+
+--------------------------------------------------
+
+NOTES
+
+- Acquired: 2037, Trade (CWS)
+
+--------------------------------------------------
+METADATA & VERIFICATION FOOTER
+--------------------------------------------------
+TS Code: TS-MLB-ATH-2041-00051
+Verification Tag: Screen-Checked
+Steward of Record: Claude Staged
+POPID: POP-00051
+==================================================

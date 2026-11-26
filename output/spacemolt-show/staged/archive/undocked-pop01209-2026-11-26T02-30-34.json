@@ -1,0 +1,508 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop01209-2026-11-26T02-30-34",
+  "popid": "POP-01209",
+  "holder": "Daniela Kapoor",
+  "session": "undocked-pop01209",
+  "window": {
+    "startedAt": "2026-11-26T02:30:34.194Z",
+    "endedAt": "2026-11-26T02:50:49.275Z"
+  },
+  "runner": {
+    "turns": 49,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 3,
+    "estCostUsd": 0.016,
+    "tokensIn": 129539,
+    "tokensOut": 6039,
+    "log": "output/spacemolt-show/episodes/undocked-pop01209-2026-11-26T02-30-34.log",
+    "stopReason": "window",
+    "toolCalls": 58
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session",
+      "achievement"
+    ],
+    "fetchedAt": "2026-11-26T02:55:50.153Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "basis": "progress",
+      "items": [
+        {
+          "id": "voyager_i",
+          "name": "Voyager I",
+          "gained": 4
+        },
+        {
+          "id": "cartographer",
+          "name": "Cartographer",
+          "gained": 3
+        },
+        {
+          "id": "chronicler",
+          "name": "Chronicler",
+          "gained": 1.2
+        },
+        {
+          "id": "wanderer",
+          "name": "Wanderer",
+          "gained": 1
+        },
+        {
+          "id": "voyager_ii",
+          "name": "Voyager II",
+          "gained": 1
+        },
+        {
+          "id": "master_explorer",
+          "name": "Master Explorer",
+          "gained": 0.5
+        },
+        {
+          "id": "far_traveler",
+          "name": "Far Traveler",
+          "gained": 0.01
+        },
+        {
+          "id": "jump_master",
+          "name": "Jump Master",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_i",
+          "name": "Prospector I",
+          "gained": 0.01
+        },
+        {
+          "id": "prospector_ii",
+          "name": "Prospector II",
+          "gained": 0
+        }
+      ],
+      "beforeTakenAt": "2026-11-26T02:30:33.957Z",
+      "value": 10.73
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "hatysa",
+        "ridgecrest",
+        "cervantes",
+        "miaplacidus",
+        "mimosa",
+        "electra",
+        "tau_ceti",
+        "alpha_centauri",
+        "sol",
+        "sirius",
+        "nova_terra",
+        "furud",
+        "acrux",
+        "botein",
+        "diadem"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 5,
+          "copper_ore": 3
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 3,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 14,
+        "session": 1,
+        "achievement": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 308168588,
+            "created_at": "2026-11-26T02:49:54Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 3 Iron Ore at Acrux Belt",
+            "data": {
+              "poi_name": "Acrux Belt",
+              "quantity": 3,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "acrux",
+              "system_name": "Acrux",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 308143869,
+            "created_at": "2026-11-26T02:39:54Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Iron Ore at Cervantes Fading Signal",
+            "data": {
+              "poi_name": "Cervantes Fading Signal",
+              "quantity": 2,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "cervantes",
+              "system_name": "Cervantes",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 308143268,
+            "created_at": "2026-11-26T02:39:54Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 3 Copper Ore at Cervantes Fading Signal",
+            "data": {
+              "poi_name": "Cervantes Fading Signal",
+              "quantity": 3,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "cervantes",
+              "system_name": "Cervantes",
+              "ticks": 3
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 308169279,
+            "created_at": "2026-11-26T02:50:08Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Botein to Diadem",
+            "data": {
+              "arrival_poi": "diadem_v",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "botein",
+              "is_pathfinder": false,
+              "to_system": "diadem",
+              "to_system_name": "Diadem"
+            }
+          },
+          {
+            "id": 308165384,
+            "created_at": "2026-11-26T02:48:58Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Acrux to Botein",
+            "data": {
+              "arrival_poi": "botein_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "acrux",
+              "is_pathfinder": false,
+              "to_system": "botein",
+              "to_system_name": "Botein"
+            }
+          },
+          {
+            "id": 308161707,
+            "created_at": "2026-11-26T02:47:18Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Furud to Acrux",
+            "data": {
+              "arrival_poi": "acrux_iv",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "furud",
+              "is_pathfinder": false,
+              "to_system": "acrux",
+              "to_system_name": "Acrux"
+            }
+          },
+          {
+            "id": 308159077,
+            "created_at": "2026-11-26T02:46:08Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Nova Terra to Furud",
+            "data": {
+              "arrival_poi": "furud_vapor_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "nova_terra",
+              "is_pathfinder": false,
+              "to_system": "furud",
+              "to_system_name": "Furud"
+            }
+          },
+          {
+            "id": 308156057,
+            "created_at": "2026-11-26T02:44:58Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Nova Terra",
+            "data": {
+              "arrival_poi": "nova_terra_gas_plume",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "nova_terra",
+              "to_system_name": "Nova Terra"
+            }
+          },
+          {
+            "id": 308152686,
+            "created_at": "2026-11-26T02:43:48Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Sirius",
+            "data": {
+              "arrival_poi": "sirius_gas_pocket",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          },
+          {
+            "id": 308150344,
+            "created_at": "2026-11-26T02:42:38Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpha Centauri to Sol",
+            "data": {
+              "arrival_poi": "neptune",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "alpha_centauri",
+              "is_pathfinder": false,
+              "to_system": "sol",
+              "to_system_name": "Sol"
+            }
+          },
+          {
+            "id": 308147758,
+            "created_at": "2026-11-26T02:41:28Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Tau Ceti to Alpha Centauri",
+            "data": {
+              "arrival_poi": "alpha_centauri_frost_ring",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "tau_ceti",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          },
+          {
+            "id": 308145032,
+            "created_at": "2026-11-26T02:40:18Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Electra to Tau Ceti",
+            "data": {
+              "arrival_poi": "fomalhaut_4675g_star",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "electra",
+              "is_pathfinder": false,
+              "to_system": "tau_ceti",
+              "to_system_name": "Tau Ceti"
+            }
+          },
+          {
+            "id": 308140979,
+            "created_at": "2026-11-26T02:39:08Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Mimosa to Electra",
+            "data": {
+              "arrival_poi": "main_belt_echo",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "mimosa",
+              "is_pathfinder": false,
+              "to_system": "electra",
+              "to_system_name": "Electra"
+            }
+          },
+          {
+            "id": 308138527,
+            "created_at": "2026-11-26T02:37:58Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Miaplacidus to Mimosa",
+            "data": {
+              "arrival_poi": "volatile_pocket",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "miaplacidus",
+              "is_pathfinder": false,
+              "to_system": "mimosa",
+              "to_system_name": "Mimosa"
+            }
+          },
+          {
+            "id": 308136069,
+            "created_at": "2026-11-26T02:36:48Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Cervantes to Miaplacidus",
+            "data": {
+              "arrival_poi": "miaplacidus_frost_ring",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "cervantes",
+              "is_pathfinder": false,
+              "to_system": "miaplacidus",
+              "to_system_name": "Miaplacidus"
+            }
+          },
+          {
+            "id": 308128015,
+            "created_at": "2026-11-26T02:34:47Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Ridgecrest to Cervantes",
+            "data": {
+              "arrival_poi": "cervantes_fading_signal",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "ridgecrest",
+              "is_pathfinder": false,
+              "to_system": "cervantes",
+              "to_system_name": "Cervantes"
+            }
+          },
+          {
+            "id": 308125651,
+            "created_at": "2026-11-26T02:33:37Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Hatysa to Ridgecrest",
+            "data": {
+              "arrival_poi": "ridgecrest_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "hatysa",
+              "is_pathfinder": false,
+              "to_system": "ridgecrest",
+              "to_system_name": "Ridgecrest"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 308119402,
+            "created_at": "2026-11-26T02:30:35Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "DanielaKapoor logged in",
+            "data": {
+              "last_login_at": "2026-11-26T02:30:33Z",
+              "source": "password"
+            }
+          }
+        ],
+        "achievement": [
+          {
+            "id": 308126207,
+            "created_at": "2026-11-26T02:33:49Z",
+            "category": "achievement",
+            "event_type": "achievement.unlocked",
+            "summary": "Unlocked achievement: Wanderer",
+            "data": {
+              "achievement_id": "wanderer",
+              "points": 10
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 2,
+    "listed": 4,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-11-26 02:47:53",
+        "text": "Charting the frontier road: Hatysa, Ridgecrest, Cervantes, Miaplacidus, Mimosa, Electra, Tau Ceti, Alpha Centauri, Sol, Sirius, Nova Terra, Furud, now Acrux. Mining where the rocks allow. Exploration is the score tonight."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-11-26 02:32:17",
+        "text": "Undocked from DF Alpha at Hatysa. Plan: mine the Ice Shelf, chart new systems for the explorer board, keep the Theoria flying."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 2,
+        "created_at": "2026-11-23 02:50:34",
+        "text": "[Session Handoff] - **Mid-action state:** At Maplevale Vapor Fields (maplevale_vapor_fields), Maplevale system (Lawless). Three `mine` attempts failed with `no_equipment`: gas collection needs a gas harvester module. Nothing has been mined here.\n- **Immediate next step:** Either acquire or fit a gas harvester module before mining gas again, or leave the vapor fields and resume charting. The agent had not yet decided which.\n- **Status:** Pilot DanielaKapoor (solarian), ship Theoria. Credits 500. Hull 100/100, shield 56/55, armor 5. Fuel 87/100. Cargo 26/72. Crew 1/1, no marines.\n- **Location and"
+      },
+      {
+        "index": 3,
+        "created_at": "2026-11-23 02:31:25",
+        "text": "Undocked from Sol Central tonight. Plan: mine the Main Belt, then chart nearby systems (Alpha Centauri, Sirius) for exploration and jump achievements. Keep it clean, keep it useful."
+      }
+    ]
+  }
+}

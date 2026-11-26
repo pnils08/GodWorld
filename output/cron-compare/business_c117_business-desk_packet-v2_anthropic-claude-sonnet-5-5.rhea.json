@@ -1,0 +1,96 @@
+{
+  "draft": "output/cron-compare/business_c117_business-desk_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "117",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "833c81d75355815be98a687fa255ea8e3cc800e8d4af8ab337e6e9757e213b0b",
+  "pass": false,
+  "flags": [
+    {
+      "severity": "high",
+      "check": "invented-voice",
+      "issue": "Marcus Osei (POP-00036) cannot be quoted: INSTITUTIONAL"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact interview records, and economic claims align with ground truth.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economy-v2",
+    "packageVersion": "JORDAN-LEP2-3",
+    "manifestId": "AM-714b7d3bf806",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "97",
+          "3.1%",
+          "0.1%",
+          "0.7%",
+          "115",
+          "210"
+        ]
+      },
+      {
+        "code": "UNAPPROVED_QUOTE",
+        "values": [
+          "churn, not growth.",
+          "not hurting — just not growing."
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jax Caldera",
+      "Jordan Velez",
+      "Manfred Owens",
+      "Marcus Osei",
+      "Maria Keen",
+      "Philly Rodriguez"
+    ],
+    "unverified": [
+      "Atlas Bay Architects",
+      "Bay Tribune Downtown",
+      "San Jose"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0154,
+  "durationMs": 9360,
+  "parseError": false,
+  "ranAt": "2026-11-24T00:17:20.727Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 720,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "833c81d75355815be98a687fa255ea8e3cc800e8d4af8ab337e6e9757e213b0b",
+    "costUsd": 0.0011
+  }
+}

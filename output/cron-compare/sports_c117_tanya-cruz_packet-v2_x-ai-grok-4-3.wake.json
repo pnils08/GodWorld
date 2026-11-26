@@ -1,0 +1,59 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "117",
+  "provider": "openrouter",
+  "model": "x-ai/grok-4.3",
+  "configuredWriterModel": "x-ai/grok-4.3",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "tanya-cruz",
+  "byline": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": null,
+  "toolUse": [
+    "canon_recall",
+    "canon_recall"
+  ],
+  "toolCalls": 2,
+  "wordCount": 283,
+  "targetWords": "evidence-bounded",
+  "capHit": 0,
+  "checkFlags": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 283,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d5bb70fec6f7b974a2ce79ff6061979bbb5063ee4c9897c5581483d3cb90f12d",
+    "costUsd": 0.0011
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/3 — nothing fell short"
+  },
+  "article": "output/cron-compare/staged/sports_c117_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "{ debug: true }\n{\n  \"popId\": \"POP-00014\",\n  \"name\": \"Tanya Cruz\",\n  \"recorded\": true,\n  \"text\": \"Ernesto Quintero lingered at his locker after the last round of swings, glove still on, when word of\"\n}"
+  },
+  "ranAt": "2026-11-26T00:18:12.604Z"
+}

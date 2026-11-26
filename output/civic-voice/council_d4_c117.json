@@ -1,0 +1,136 @@
+{
+  "office": "council_d4",
+  "cycle": 117,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I will advance the filed Ivy Hill ordinance to committee, support a Clerk-verifiable Dimond filing, and hold the overlapping Ivy Hill proposal and INIT-014 review where the record does not support them. For residents, I am seeking documented follow-through on Glenview and Dimond, while treating the Ivy Hill business closure and Dimond civic activity seriously without manufacturing an emergency or claiming facts we do not have.",
+  "statements": [
+    {
+      "statementId": "STMT-117-council_d4-001",
+      "type": "vote_statement",
+      "topic": "Ivy Hill Revitalization Initiative committee referral and hearing",
+      "initiative": "Ivy Hill Revitalization Initiative",
+      "decision": "Support committee referral and a hearing this cycle on the ordinance recorded as filed at C113, with separate records for INIT-011, INIT-013, and INIT-014.",
+      "quote": "A filed ordinance deserves a hearing on its own record, not confusion with two different proposals.",
+      "fullStatement": "The packet records the Ivy Hill Revitalization Initiative ordinance as filed at C113, and the committee referral and hearing are due this cycle. I support taking that step. The committee record should make clear that this is INIT-011, distinct from the announced INIT-013 and the separately disputed filing status of INIT-014. A hearing is an opportunity to examine the proposal on its merits; it is not a claim that funding has been approved or that the ordinance has passed.",
+      "disposition": "statement",
+      "actionAsked": "Refer the filed INIT-011 ordinance to committee and hold the hearing, preserving distinct records for the three Ivy Hill initiatives.",
+      "tone": "deliberate-analytical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d4-002",
+      "type": "vote_statement",
+      "topic": "Dimond Revitalization Initiative filing",
+      "initiative": "Dimond Revitalization Initiative",
+      "decision": "Support completing and submitting the announced $2.5 million ordinance this cycle, with filing claimed only after Clerk verification.",
+      "quote": "Four cycles announced is enough; Dimond needs a verifiable filing or an honest missed-deadline record.",
+      "fullStatement": "The Dimond Revitalization Initiative has remained announced for four cycles, and filing is due now. I support completing and submitting the $2.5 million ordinance this cycle. The Dimond Emergency Town Briefing should inform the work as community input, but it is not itself a filing or proof that the legislation is complete. I will not describe the ordinance as filed unless the Clerk can verify the submission; if that record is not produced, the missed deadline should be stated plainly.",
+      "disposition": "statement",
+      "actionAsked": "Complete and submit the ordinance this cycle, obtain Clerk verification, and record a missed deadline if no verified filing is produced.",
+      "tone": "blunt-practical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d4-003",
+      "type": "vote_statement",
+      "topic": "Ivy Hill Community Revitalization filing",
+      "initiative": "Ivy Hill Community Revitalization",
+      "decision": "Hold INIT-013 and let this filing deadline pass until its distinct scope and nonduplication with INIT-011 and INIT-014 are documented.",
+      "quote": "I will not file another Ivy Hill measure simply to make a calendar look complete.",
+      "fullStatement": "I support holding INIT-013 rather than filing it this cycle. The packet identifies two other Ivy Hill measures with separate records, but does not provide a distinct scope or a nonduplication crosswalk for this proposal. Filing on a deadline alone would not answer whether it adds something different for residents. Before any future submission, staff should document how INIT-013 differs from INIT-011 and INIT-014. If that record is not ready, the deadline should pass openly rather than be treated as a reason to rush.",
+      "disposition": "no-action",
+      "actionAsked": "Do not submit INIT-013 this cycle; prepare a distinct-scope and nonduplication crosswalk before any future filing.",
+      "tone": "deliberate-analytical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d4-004",
+      "type": "vote_statement",
+      "topic": "Ivy Hill Community Support Initiative filing verification",
+      "initiative": "Ivy Hill Community Support Initiative",
+      "decision": "Withhold Council review or a vote until the Clerk provides a filing reference or confirms no filing, and the basis for the tracker disposition is documented.",
+      "quote": "A contested tracker entry is not a Clerk-verified filing and cannot stand in for one.",
+      "fullStatement": "I am not proceeding to a Council review or vote on INIT-014 this cycle. My prior position remains: the filing needs a reference the Clerk can verify, or a clear confirmation that no filing exists, along with the documented basis for the tracker disposition. The current packet does not supply that evidence. This is not a judgment on whether Ivy Hill deserves attention; it is a requirement that the Council know what legislation is actually before it before taking a procedural step.",
+      "disposition": "tabled",
+      "actionAsked": "Obtain the Clerk's filing reference or no-filing confirmation and document the basis for the tracker disposition before requesting Council review.",
+      "tone": "procedural-authoritative",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d4-005",
+      "type": "constituent_statement",
+      "topic": "Glenview meeting findings and public-works follow-through",
+      "initiative": null,
+      "decision": "Seek the documented conclusions of the Glenview civic response meeting, work performed, remaining issues, responsible department, and next update date.",
+      "quote": "A meeting is not a work record; Glenview deserves to know what happened next.",
+      "fullStatement": "The packet still does not tell residents what the Glenview civic response meeting established or what public-works follow-through occurred. It also records a medium-severity public-works spike, but that fact does not fill in the missing work record. I am asking staff to document the meeting's conclusions, work performed, any remaining issues, the responsible department, and a date for the next update. Until those facts are supplied, I will not claim that the issue is resolved or infer work that the record does not show.",
+      "disposition": "statement",
+      "actionAsked": "Provide the Glenview meeting findings, work performed, remaining issues, responsible department, and next update date.",
+      "tone": "procedural-authoritative",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d4-006",
+      "type": "constituent_statement",
+      "topic": "Dimond community response, missed pickup, and civic life",
+      "initiative": null,
+      "decision": "Support a factual public record and next steps for the Dimond briefing; request confirmation of the missed pickup's recovery status and any remaining service step.",
+      "quote": "Dimond deserves an honest account of the service issue and room for civic life without speculation.",
+      "fullStatement": "Dimond's high-severity culture spike and the Mayor's call for a community briefing merit a public factual record and clear next steps. I support keeping neighborhood gatherings visible as part of civic life, without speculating about causes or linking separate faith-community responses. Separately, the packet records a missed garbage pickup but does not say whether service recovered. I am asking staff to confirm that status and identify any remaining service step. I will not turn an unanswered recovery question into a broader emergency claim.",
+      "disposition": "statement",
+      "actionAsked": "Document the Dimond briefing's factual conclusions and next steps; confirm whether the missed pickup was recovered and identify any remaining service action.",
+      "tone": "deliberate-analytical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d4-007",
+      "type": "constituent_statement",
+      "topic": "Ivy Hill conditions and business closure",
+      "initiative": null,
+      "decision": "Keep attention on Ivy Hill's mixed conditions and seek an account of any available city support for the closing business, without promising an outcome or adding a duplicative initiative.",
+      "quote": "A business closure deserves a careful account, not a promise the record cannot support.",
+      "fullStatement": "Ivy Hill's mood has lifted this cycle, while the packet also reports that Ivy Hill Family Dental is closing after eight weeks of decline, with zero jobs going with it. I take both facts seriously; neither erases the other. I will ask staff to identify whether there is any relevant city support or action to report, without suggesting that the closure can be reversed. On legislation, I support the distinct filed ordinance's hearing and will not add another Ivy Hill measure without a clear, nonduplicative scope.",
+      "disposition": "statement",
+      "actionAsked": "Identify whether any relevant city support or action is available to report regarding the closure, without promising an outcome.",
+      "tone": "bridge-building",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-117-council_d4-008",
+      "type": "constituent_statement",
+      "topic": "Complaint-response crosswalk and corrected C116 claims",
+      "initiative": null,
+      "decision": "Support a Clerk-checked crosswalk that identifies missing complaint coverage and fields rather than supplying unsupported details.",
+      "quote": "A blank field should be marked blank, not filled with a guess.",
+      "fullStatement": "I support a Clerk-checked accounting of the complaints covered by the C116 office evidence. The C117 packet does not provide a complaint-level docket list, so I will not invent complaint references, responsible offices, remedies, or dates. The crosswalk should identify what is missing and distinguish a documented response from a promised one. That is the practical way to correct unsupported claims and give residents an auditable account, rather than presenting an incomplete record as complete.",
+      "disposition": "statement",
+      "actionAsked": "Prepare the Clerk-checked crosswalk and explicitly mark complaint references, offices, remedies, dates, or coverage that cannot be verified from the record.",
+      "tone": "procedural-authoritative",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

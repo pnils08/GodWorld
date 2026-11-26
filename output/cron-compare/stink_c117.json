@@ -1,0 +1,693 @@
+{
+  "cycle": 117,
+  "scannedAt": "2026-11-24T07:24:30.288Z",
+  "signalPath": "/root/GodWorld/output/desk_signal_c117.json",
+  "signalMissing": false,
+  "illnessRate": 3.9,
+  "forceThreshold": 35,
+  "shouldForce": true,
+  "maxScore": 61,
+  "top": {
+    "className": "metric-contradiction",
+    "score": 61,
+    "desk": "civic",
+    "kind": "anomaly",
+    "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+    "ref": "output/engine_audit_c117.json patterns[5]; evidence: Neighborhood_Map row(s) 10",
+    "hood": "Grand Lake",
+    "popids": [
+      "POP-01175",
+      "POP-01207",
+      "POP-01218"
+    ],
+    "handle": {
+      "angle": "civic gap in Grand Lake — who is accountable, what council has or hasn't done",
+      "hookLine": "No civic initiative addresses the Grand Lake signal surfaced this cycle.",
+      "citizens": [
+        "Sunita Raghavan (POP-01175)",
+        "Maya Inoue (POP-01207)",
+        "Jerri Brown (POP-01218)"
+      ]
+    },
+    "story": {
+      "ref": "output/engine_audit_c117.json patterns[5]; evidence: Neighborhood_Map row(s) 10",
+      "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+      "kind": "anomaly",
+      "angle": "civic gap in Grand Lake — who is accountable, what council has or hasn't done",
+      "hookLine": "No civic initiative addresses the Grand Lake signal surfaced this cycle.",
+      "citizens": [
+        "Sunita Raghavan (POP-01175)",
+        "Maya Inoue (POP-01207)",
+        "Jerri Brown (POP-01218)"
+      ],
+      "popids": [
+        "POP-01175",
+        "POP-01207",
+        "POP-01218"
+      ],
+      "hood": "Grand Lake",
+      "stinkClass": "metric-contradiction"
+    }
+  },
+  "candidates": [
+    {
+      "className": "metric-contradiction",
+      "score": 61,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c117.json patterns[5]; evidence: Neighborhood_Map row(s) 10",
+      "hood": "Grand Lake",
+      "popids": [
+        "POP-01175",
+        "POP-01207",
+        "POP-01218"
+      ],
+      "handle": {
+        "angle": "civic gap in Grand Lake — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Grand Lake signal surfaced this cycle.",
+        "citizens": [
+          "Sunita Raghavan (POP-01175)",
+          "Maya Inoue (POP-01207)",
+          "Jerri Brown (POP-01218)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[5]; evidence: Neighborhood_Map row(s) 10",
+        "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.060, RetailVitality -1.23, HousingPressure +1.000] — Sentiment now 0.09 (11 of 22, city median 0.09); RetailVitality now 13.65 (8 of 22, city median 9.93); HousingPressure now 6 (17 of 22, city median 0) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in Grand Lake — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the Grand Lake signal surfaced this cycle.",
+        "citizens": [
+          "Sunita Raghavan (POP-01175)",
+          "Maya Inoue (POP-01207)",
+          "Jerri Brown (POP-01218)"
+        ],
+        "popids": [
+          "POP-01175",
+          "POP-01207",
+          "POP-01218"
+        ],
+        "hood": "Grand Lake",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | East Oakland: decay [Sentiment -0.140, RetailVitality -1.15] — Sentiment now 0.07 (14 of 22, city median 0.09); RetailVitality now 8.78 (14 of 22, city median 9.93) — with no matching active initiative",
+      "ref": "output/engine_audit_c117.json patterns[6]; evidence: Neighborhood_Map row(s) 23",
+      "hood": "East Oakland",
+      "popids": [
+        "POP-00857",
+        "POP-00891",
+        "POP-01113"
+      ],
+      "handle": {
+        "angle": "civic gap in East Oakland — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the East Oakland signal surfaced this cycle.",
+        "citizens": [
+          "Juliet Choi (POP-00857)",
+          "Renée Cabrera (POP-00891)",
+          "Quinn Adeyemi (POP-01113)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[6]; evidence: Neighborhood_Map row(s) 23",
+        "label": "math-imbalance (medium) | East Oakland: decay [Sentiment -0.140, RetailVitality -1.15] — Sentiment now 0.07 (14 of 22, city median 0.09); RetailVitality now 8.78 (14 of 22, city median 9.93) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "civic gap in East Oakland — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the East Oakland signal surfaced this cycle.",
+        "citizens": [
+          "Juliet Choi (POP-00857)",
+          "Renée Cabrera (POP-00891)",
+          "Quinn Adeyemi (POP-01113)"
+        ],
+        "popids": [
+          "POP-00857",
+          "POP-00891",
+          "POP-01113"
+        ],
+        "hood": "East Oakland",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "metric-contradiction",
+      "score": 51,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "math-imbalance (medium) | Fruitvale: decay [Sentiment -0.170, HousingPressure +0.500] — Sentiment now 0.19 (7 of 22, city median 0.09); HousingPressure now 10 (20 of 22, city median 0) — with no matching active initiative",
+      "ref": "output/engine_audit_c117.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00598",
+        "POP-00744",
+        "POP-00953"
+      ],
+      "handle": {
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in several cycles.",
+        "citizens": [
+          "Vladimir Gonzalez (POP-00598)",
+          "Carmen Solis (POP-00953)",
+          "Tomas Renteria (POP-00744)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+        "label": "math-imbalance (medium) | Fruitvale: decay [Sentiment -0.170, HousingPressure +0.500] — Sentiment now 0.19 (7 of 22, city median 0.09); HousingPressure now 10 (20 of 22, city median 0) — with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in several cycles.",
+        "citizens": [
+          "Vladimir Gonzalez (POP-00598)",
+          "Carmen Solis (POP-00953)",
+          "Tomas Renteria (POP-00744)"
+        ],
+        "popids": [
+          "POP-00598",
+          "POP-00744",
+          "POP-00953"
+        ],
+        "hood": "Fruitvale",
+        "stinkClass": "metric-contradiction"
+      }
+    },
+    {
+      "className": "implementation-gap",
+      "score": 40,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "stuck-initiative (medium) | Initiative \"Dimond Revitalization Initiative\" in phase \"announced\" for 4 cycles",
+      "ref": "output/engine_audit_c117.json patterns[1]; evidence: Initiative_Tracker row(s) 12; storyline INIT-012:announced",
+      "hood": "Dimond",
+      "popids": [
+        "POP-01146",
+        "POP-01199",
+        "POP-01205"
+      ],
+      "handle": {
+        "angle": "Dimond Revitalization Initiative stalled in announced — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Dimond has not advanced in 4 cycles.",
+        "citizens": [
+          "Devin Castellanos (POP-01146)",
+          "Patrick Clark (POP-01199)",
+          "Xavier Green (POP-01205)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[1]; evidence: Initiative_Tracker row(s) 12; storyline INIT-012:announced",
+        "label": "stuck-initiative (medium) | Initiative \"Dimond Revitalization Initiative\" in phase \"announced\" for 4 cycles",
+        "kind": "anomaly",
+        "angle": "Dimond Revitalization Initiative stalled in announced — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Dimond has not advanced in 4 cycles.",
+        "citizens": [
+          "Devin Castellanos (POP-01146)",
+          "Patrick Clark (POP-01199)",
+          "Xavier Green (POP-01205)"
+        ],
+        "popids": [
+          "POP-01146",
+          "POP-01199",
+          "POP-01205"
+        ],
+        "hood": "Dimond",
+        "stinkClass": "implementation-gap"
+      }
+    },
+    {
+      "className": "crisis-unattended",
+      "score": 38,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "repeating-event (medium) | Issue \"none\" recurred 3 cycles",
+      "ref": "output/engine_audit_c117.json patterns[3]; evidence: Riley_Digest row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[3]; evidence: Riley_Digest row(s) ",
+        "label": "repeating-event (medium) | Issue \"none\" recurred 3 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "crisis-unattended"
+      }
+    },
+    {
+      "className": "implementation-gap",
+      "score": 30,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.71 (expected 0.02) — from prior \"stuck-initiative\"",
+      "ref": "output/engine_audit_c117.json patterns[14]; evidence: Neighborhood_Map row(s) ; storyline INIT-007:stalled",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [
+        "POP-00857",
+        "POP-00891",
+        "POP-01113"
+      ],
+      "handle": {
+        "angle": "INIT-007 posted a positive, named-cause result — what the milestone delivers and who carried it",
+        "hookLine": "INIT-007 posted a positive, named-cause result; a milestone worth covering, not burying.",
+        "citizens": [
+          "Juliet Choi (POP-00857)",
+          "Renée Cabrera (POP-00891)",
+          "Quinn Adeyemi (POP-01113)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[14]; evidence: Neighborhood_Map row(s) ; storyline INIT-007:stalled",
+        "label": "improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.71 (expected 0.02) — from prior \"stuck-initiative\"",
+        "kind": "anomaly",
+        "angle": "INIT-007 posted a positive, named-cause result — what the milestone delivers and who carried it",
+        "hookLine": "INIT-007 posted a positive, named-cause result; a milestone worth covering, not burying.",
+        "citizens": [
+          "Juliet Choi (POP-00857)",
+          "Renée Cabrera (POP-00891)",
+          "Quinn Adeyemi (POP-01113)"
+        ],
+        "popids": [
+          "POP-00857",
+          "POP-00891",
+          "POP-01113"
+        ],
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "stinkClass": "implementation-gap"
+      }
+    },
+    {
+      "className": "implementation-gap",
+      "score": 30,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "stuck-initiative (low) | Initiative \"Downtown Economic Revitalization\" in phase \"vote-scheduled\" for 3 cycles",
+      "ref": "output/engine_audit_c117.json patterns[0]; evidence: Initiative_Tracker row(s) 8; storyline INIT-008:vote-scheduled",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00688",
+        "POP-00753",
+        "POP-00764"
+      ],
+      "handle": {
+        "angle": "Downtown Economic Revitalization stalled in vote-scheduled — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 3 cycles.",
+        "citizens": [
+          "Merkin Jumper (POP-00688)",
+          "Eunice Marston (POP-00753)",
+          "Tao Lee (POP-00764)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[0]; evidence: Initiative_Tracker row(s) 8; storyline INIT-008:vote-scheduled",
+        "label": "stuck-initiative (low) | Initiative \"Downtown Economic Revitalization\" in phase \"vote-scheduled\" for 3 cycles",
+        "kind": "anomaly",
+        "angle": "Downtown Economic Revitalization stalled in vote-scheduled — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 3 cycles.",
+        "citizens": [
+          "Merkin Jumper (POP-00688)",
+          "Eunice Marston (POP-00753)",
+          "Tao Lee (POP-00764)"
+        ],
+        "popids": [
+          "POP-00688",
+          "POP-00753",
+          "POP-00764"
+        ],
+        "hood": "Downtown",
+        "stinkClass": "implementation-gap"
+      }
+    },
+    {
+      "className": "implementation-gap",
+      "score": 30,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "stuck-initiative (low) | Initiative \"Ivy Hill Community Revitalization\" in phase \"announced\" for 3 cycles",
+      "ref": "output/engine_audit_c117.json patterns[2]; evidence: Initiative_Tracker row(s) 13; storyline INIT-013:announced",
+      "hood": "Ivy Hill",
+      "popids": [
+        "POP-01220",
+        "POP-01227",
+        "POP-01243"
+      ],
+      "handle": {
+        "angle": "Ivy Hill Community Revitalization stalled in announced — remedy path + responsible office",
+        "hookLine": "The safety initiative carrying Ivy Hill has not advanced in 3 cycles.",
+        "citizens": [
+          "Clara Dubois (POP-01220)",
+          "Victor Baker (POP-01227)",
+          "Omar Clark (POP-01243)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[2]; evidence: Initiative_Tracker row(s) 13; storyline INIT-013:announced",
+        "label": "stuck-initiative (low) | Initiative \"Ivy Hill Community Revitalization\" in phase \"announced\" for 3 cycles",
+        "kind": "anomaly",
+        "angle": "Ivy Hill Community Revitalization stalled in announced — remedy path + responsible office",
+        "hookLine": "The safety initiative carrying Ivy Hill has not advanced in 3 cycles.",
+        "citizens": [
+          "Clara Dubois (POP-01220)",
+          "Victor Baker (POP-01227)",
+          "Omar Clark (POP-01243)"
+        ],
+        "popids": [
+          "POP-01220",
+          "POP-01227",
+          "POP-01243"
+        ],
+        "hood": "Ivy Hill",
+        "stinkClass": "implementation-gap"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 28,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "ref": "output/engine_audit_c117.json patterns[7]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[7]; evidence: WorldEvents_V3_Ledger row(s) ",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": null,
+        "popids": [],
+        "hood": null,
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 28,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "production-imbalance (medium) | 19 neighborhoods report migration flow with zero economic events this cycle",
+      "ref": "output/engine_audit_c117.json patterns[8]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Uptown, Baylight District, East Oakland",
+      "popids": [
+        "POP-01116",
+        "POP-01125",
+        "POP-01136"
+      ],
+      "handle": {
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 6 cycles.",
+        "citizens": [
+          "Darius Hill (POP-01116)",
+          "Ronald Phillips (POP-01125)",
+          "Omar Lopez (POP-01136)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[8]; evidence: Neighborhood_Map row(s) ",
+        "label": "production-imbalance (medium) | 19 neighborhoods report migration flow with zero economic events this cycle",
+        "kind": "anomaly",
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 6 cycles.",
+        "citizens": [
+          "Darius Hill (POP-01116)",
+          "Ronald Phillips (POP-01125)",
+          "Omar Lopez (POP-01136)"
+        ],
+        "popids": [
+          "POP-01116",
+          "POP-01125",
+          "POP-01136"
+        ],
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Uptown, Baylight District, East Oakland",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "implementation-gap",
+      "score": 24,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → stalled",
+      "ref": "output/engine_audit_c117.json patterns[11]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:stalled",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [
+        "POP-00198",
+        "POP-00636",
+        "POP-01210"
+      ],
+      "handle": {
+        "angle": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to stalled — what the milestone delivers and who carried it",
+        "hookLine": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to stalled; a milestone worth covering, not burying.",
+        "citizens": [
+          "Rick Walker (POP-00198)",
+          "Tamsin Pruitt (POP-01210)",
+          "Luis Navarro (POP-00636)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[11]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:stalled",
+        "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → stalled",
+        "kind": "anomaly",
+        "angle": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to stalled — what the milestone delivers and who carried it",
+        "hookLine": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to stalled; a milestone worth covering, not burying.",
+        "citizens": [
+          "Rick Walker (POP-00198)",
+          "Tamsin Pruitt (POP-01210)",
+          "Luis Navarro (POP-00636)"
+        ],
+        "popids": [
+          "POP-00198",
+          "POP-00636",
+          "POP-01210"
+        ],
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "stinkClass": "implementation-gap"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: complete → construction-active",
+      "ref": "output/engine_audit_c117.json patterns[10]; evidence: Initiative_Tracker row(s) 6; storyline INIT-006:construction-active",
+      "hood": "Jack London, Downtown",
+      "popids": [
+        "POP-00015",
+        "POP-00030",
+        "POP-00649"
+      ],
+      "handle": {
+        "angle": "Baylight District — Final Council Vote advanced from complete to construction-active — what the milestone delivers and who carried it",
+        "hookLine": "Baylight District — Final Council Vote advanced from complete to construction-active; a milestone worth covering, not burying.",
+        "citizens": [
+          "Jire Hilt (POP-00649)",
+          "DeShawn Hartley (POP-00015)",
+          "Derek Simmons (POP-00030)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[10]; evidence: Initiative_Tracker row(s) 6; storyline INIT-006:construction-active",
+        "label": "improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: complete → construction-active",
+        "kind": "anomaly",
+        "angle": "Baylight District — Final Council Vote advanced from complete to construction-active — what the milestone delivers and who carried it",
+        "hookLine": "Baylight District — Final Council Vote advanced from complete to construction-active; a milestone worth covering, not burying.",
+        "citizens": [
+          "Jire Hilt (POP-00649)",
+          "DeShawn Hartley (POP-00015)",
+          "Derek Simmons (POP-00030)"
+        ],
+        "popids": [
+          "POP-00015",
+          "POP-00030",
+          "POP-00649"
+        ],
+        "hood": "Jack London, Downtown",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: complete → design-phase",
+      "ref": "output/engine_audit_c117.json patterns[9]; evidence: Initiative_Tracker row(s) 4; storyline INIT-003:design-phase",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00231",
+        "POP-00754",
+        "POP-01057"
+      ],
+      "handle": {
+        "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from complete to design-phase — what the milestone delivers and who carried it",
+        "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from complete to design-phase; a milestone worth covering, not burying.",
+        "citizens": [
+          "Nina Reyes (POP-01057)",
+          "Calvin Turner (POP-00231)",
+          "Ophelia Brenner (POP-00754)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[9]; evidence: Initiative_Tracker row(s) 4; storyline INIT-003:design-phase",
+        "label": "improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: complete → design-phase",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from complete to design-phase — what the milestone delivers and who carried it",
+        "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from complete to design-phase; a milestone worth covering, not burying.",
+        "citizens": [
+          "Nina Reyes (POP-01057)",
+          "Calvin Turner (POP-00231)",
+          "Ophelia Brenner (POP-00754)"
+        ],
+        "popids": [
+          "POP-00231",
+          "POP-00754",
+          "POP-01057"
+        ],
+        "hood": "Fruitvale",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Ivy Hill Revitalization Initiative\" advanced: announced → legislation-filed",
+      "ref": "output/engine_audit_c117.json patterns[13]; evidence: Initiative_Tracker row(s) 11; storyline INIT-011:legislation-filed",
+      "hood": "Ivy Hill",
+      "popids": [
+        "POP-01161",
+        "POP-01191",
+        "POP-01198"
+      ],
+      "handle": {
+        "angle": "Ivy Hill Revitalization Initiative advanced from announced to legislation-filed — what the milestone delivers and who carried it",
+        "hookLine": "Ivy Hill Revitalization Initiative advanced from announced to legislation-filed; a milestone worth covering, not burying.",
+        "citizens": [
+          "Samuel Adeyemi (POP-01161)",
+          "Rafael Santillan (POP-01191)",
+          "Victor Baker (POP-01198)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[13]; evidence: Initiative_Tracker row(s) 11; storyline INIT-011:legislation-filed",
+        "label": "improvement (low) | Initiative \"Ivy Hill Revitalization Initiative\" advanced: announced → legislation-filed",
+        "kind": "anomaly",
+        "angle": "Ivy Hill Revitalization Initiative advanced from announced to legislation-filed — what the milestone delivers and who carried it",
+        "hookLine": "Ivy Hill Revitalization Initiative advanced from announced to legislation-filed; a milestone worth covering, not burying.",
+        "citizens": [
+          "Samuel Adeyemi (POP-01161)",
+          "Rafael Santillan (POP-01191)",
+          "Victor Baker (POP-01198)"
+        ],
+        "popids": [
+          "POP-01161",
+          "POP-01191",
+          "POP-01198"
+        ],
+        "hood": "Ivy Hill",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"West Oakland Tenant Defense Fund\" advanced: vote-scheduled → operational",
+      "ref": "output/engine_audit_c117.json patterns[12]; evidence: Initiative_Tracker row(s) 10; storyline INIT-010:operational",
+      "hood": "West Oakland",
+      "popids": [
+        "POP-00007",
+        "POP-00722",
+        "POP-00789"
+      ],
+      "handle": {
+        "angle": "West Oakland Tenant Defense Fund advanced from vote-scheduled to operational — what the milestone delivers and who carried it",
+        "hookLine": "West Oakland Tenant Defense Fund advanced from vote-scheduled to operational; a milestone worth covering, not burying.",
+        "citizens": [
+          "Hal Richmond (POP-00007)",
+          "Daniel Cloak (POP-00722)",
+          "Elias Varek (POP-00789)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[12]; evidence: Initiative_Tracker row(s) 10; storyline INIT-010:operational",
+        "label": "improvement (low) | Initiative \"West Oakland Tenant Defense Fund\" advanced: vote-scheduled → operational",
+        "kind": "anomaly",
+        "angle": "West Oakland Tenant Defense Fund advanced from vote-scheduled to operational — what the milestone delivers and who carried it",
+        "hookLine": "West Oakland Tenant Defense Fund advanced from vote-scheduled to operational; a milestone worth covering, not burying.",
+        "citizens": [
+          "Hal Richmond (POP-00007)",
+          "Daniel Cloak (POP-00722)",
+          "Elias Varek (POP-00789)"
+        ],
+        "popids": [
+          "POP-00007",
+          "POP-00722",
+          "POP-00789"
+        ],
+        "hood": "West Oakland",
+        "stinkClass": "anomaly"
+      }
+    },
+    {
+      "className": "anomaly",
+      "score": 18,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.71 (expected 0.02) — from prior \"production-imbalance\"",
+      "ref": "output/engine_audit_c117.json patterns[15]; evidence: Neighborhood_Map row(s) ",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Brooklyn, Glenview, Ivy Hill, San Antonio, KONO, Uptown, Baylight District, East Oakland",
+      "popids": [
+        "POP-00153",
+        "POP-00160",
+        "POP-01211"
+      ],
+      "handle": {
+        "angle": "economic gain in Downtown — the positive outcome and its driver",
+        "hookLine": "A economic metric improved in Downtown this cycle.",
+        "citizens": [
+          "Jordan Velez (POP-00153)",
+          "Mason Ortega (POP-00160)",
+          "Ines Sorensen (POP-01211)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c117.json patterns[15]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 0.71 (expected 0.02) — from prior \"production-imbalance\"",
+        "kind": "anomaly",
+        "angle": "economic gain in Downtown — the positive outcome and its driver",
+        "hookLine": "A economic metric improved in Downtown this cycle.",
+        "citizens": [
+          "Jordan Velez (POP-00153)",
+          "Mason Ortega (POP-00160)",
+          "Ines Sorensen (POP-01211)"
+        ],
+        "popids": [
+          "POP-00153",
+          "POP-00160",
+          "POP-01211"
+        ],
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Brooklyn, Glenview, Ivy Hill, San Antonio, KONO, Uptown, Baylight District, East Oakland",
+        "stinkClass": "anomaly"
+      }
+    }
+  ],
+  "candidateCount": 16
+}

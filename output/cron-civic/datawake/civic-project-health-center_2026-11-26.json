@@ -1,0 +1,41 @@
+{
+  "office": "health_center",
+  "agentDir": "civic-project-health-center",
+  "holder": "Bobby Chen-Ramirez",
+  "popid": "POP-00792",
+  "title": "Health Center Project Director",
+  "date": "2026-11-26",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Weekly report — Cycle 118, Temescal Community Health Center (INIT-005)**\n\n**The Q3 filing still has not happened.** I said last cycle I'd come back with a receipt number and walkthrough notes, not intentions. What I have to report instead is that the tracker still shows my next action as filing the Q3 intake audit and documenting the Telegraph & 47th walkthrough, and oversight certification remains withheld. Two cycles of me saying \"next cycle\" is not a scheduling problem, it's a failure of mine, and I'm not going to pretty it up. I said the schedule I set is the schedule I own. That stands, and it cuts against me this week.\n\n**Budget.** $15,230,769.20 remaining on $45M — unchanged from last cycle. No city payments posted on INIT-005 this cycle, and no other movement. I won't read a flat line as good news. A center that's open, staffed, and still carrying a third of its budget without deployment is a question I owe a verified answer to, and the audit is how I answer it.\n\n**What the numbers show.** Citywide this cycle: 34 intakes, 68 in care at the start, 68 at the end, 68 beds, no transfers either way, 34 exits. That is the same flat 34/68/68 I've reported twice now. The slide I flagged — 36, 35, 35, 34, 34, 34 — has stopped sliding, but it hasn't turned. Fewer people in care every cycle, holding steady at a lower level, is not the same as people getting well. I don't have the verified read on why, and I'm not going to manufacture one.\n\nTemescal this cycle: 2 intakes, 4 in care, 4 beds. The building does its job. Whether it reaches the people who need it most is still the open question, and it stays open until the walkthrough is documented.\n\n**The need.** Temescal sits at 77 residents sick. Chinatown is the heaviest on the board at 133, then East Oakland 113, Ivy Hill 109, Fruitvale 108, San Antonio 104, Laurel 101. Rockridge and Grand Lake both at 96. Our center is in one neighborhood, and the heaviest-load neighborhoods are three or four buses from it for a lot of the people who live there. That gap is the thing the audit and the walkthrough are supposed to speak to, and neither is on the record yet.\n\n**Programs and events.** Five health programs active — East Bay Harm Reduction Alliance and Foothill Baptist Tabernacle's seniors lunch in East Oakland, the Postpartum Oakland Network in Temescal, Elders in Place in Chinatown, New Covenant Pentecostal's seniors lunch in West Oakland. No health events logged on the ledger this cycle, and none last cycle; the last entry remains the medium-severity spike in Piedmont Ave in cycle 116. East Oakland carries the second-heaviest need on the map with one program inside it; Chinatown, the heaviest, has one. I keep that in view.\n\n**What I'm doing.** This cycle it's the filing and the walkthrough — the Q3 intake audit to HCAI and the Council Clerk, and the Telegraph & 47th walkthrough with notes: who's referring, who's turned away, whether the corridor connects people to the center or just to the front desk. I'll bring the date, the confirmation, and the notes, or I'll bring an honest account of why I don't have them. What I won't do is withhold my verdict and then not do the work that earns one. The hours have to match the need, and I'm the one who has to say whether they do.\n\n— Bobby Chen-Ramirez, Health Center Project Director, Temescal",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-26T11:46:05.330Z",
+  "usage": {
+    "prompt_tokens": 5047,
+    "completion_tokens": 816,
+    "cost": 0.0012
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "health center clinic patients",
+    "entries": 6,
+    "fromSearch": 4,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00792",
+    "id": "UGmWDYfYdHZCE6aZ7bA3bY",
+    "customId": "cp-POP-00792-c117-CIVIC-datawake-2026-11-26"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "117",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c117_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Evan Lewis",
+        "role": "mentioned",
+        "popid": "POP-00200"
+      },
+      {
+        "name": "Eleanor Rivera",
+        "role": "mentioned",
+        "popid": "POP-00617"
+      },
+      {
+        "name": "Elena Soria Dominguez",
+        "role": "mentioned",
+        "popid": "POP-00791"
+      },
+      {
+        "name": "Ximena Mehta",
+        "role": "mentioned",
+        "popid": "POP-01039"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Game days at 12th are a different animal — you can feel it before you even see the platform. The crowd comes in waves, not a steady stream, and that's what stretches the dwell time. Trains are there on time, but everyone's squeezing on at once, so the doors hold longer and the schedule slips a little. My crew just adjusts — no big announcements, everyone knows their spot. We read the rhythm of the station, and we move with it. It's not glamorous, but when the platforms fill up like that, you see the team do what they do best: keep it moving, keep it safe, keep it human.",
+        "sourceRef": "citizenVoice PRESS Eleanor Rivera"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-93a73cf33a02",
+    "draftSha256": "d557eecf8abf1ef282e9c2b5939c55947ccda1dfc4d1b306172e84f41ea1dce2",
+    "verdict": "output/cron-compare/civic_c117_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.rhea.json",
+    "ranAt": "2026-11-24T00:19:58.120Z",
+    "contractScore": {
+      "opened": true,
+      "purposeMet": true,
+      "inTarget": true,
+      "inTargetBy": "judge",
+      "words": 887,
+      "short": "",
+      "score": 3,
+      "max": 3,
+      "model": "google/gemini-3.7-flash",
+      "draftSha256": "d557eecf8abf1ef282e9c2b5939c55947ccda1dfc4d1b306172e84f41ea1dce2",
+      "costUsd": 0.0011
+    }
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-11-24T00:20:01.771Z"
+}

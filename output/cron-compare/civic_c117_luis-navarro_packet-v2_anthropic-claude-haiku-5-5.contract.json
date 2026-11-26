@@ -1,0 +1,17 @@
+{
+  "draft": "output/cron-compare/civic_c117_luis-navarro_packet-v2_anthropic-claude-haiku-5-5.md",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 708,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "scoredWithoutRhea": true,
+    "draftSha256": "e51078fde6a7c2d56fa4520b78e971db199546645062e235359919853ebb9b4c"
+  },
+  "ranAt": "2026-11-25T00:15:52.249Z"
+}

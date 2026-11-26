@@ -1,0 +1,45 @@
+{
+  "office": "worker_staff_manager",
+  "agentDir": "worker-staff-manager",
+  "holder": "Aaron Whitfield",
+  "popid": "POP-00040",
+  "title": "City Manager",
+  "date": "2026-11-24",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**City Manager's Weekly Report — Cycle 117, on the record**\n\n**Treasury.** The city closed the week with a balance of $136,879,736, up from $131,753,831 at the close of Cycle 116. Revenue came in two streams: the $5,000,000 weekly allocation, and $125,905 in court receipts from 28 cleared charges fined at the hood rate. That is a stronger court week than last — 28 charges against 24, and receipts up from $108,884 — and no extraordinary outlays were recorded. The Caseload note of the week: no parking-and-traffic fine line appeared in the record this Cycle, which I am noting rather than explaining. The books are in order and the projected position remains stable against standing commitments.\n\n**Initiatives.** Work was recorded on three fronts this Cycle — INIT-002, INIT-007 and INIT-015 — and I want to be plain about the difference between motion and completion. Every initiative with a scheduled action for this Cycle carries that action forward to Cycle 118. That is the honest headline: nothing on the tracker moved closer to done this week.\n\n- **INIT-001, West Oakland Stabilization Fund** ($28M, $20.2M remaining): the disbursement remains active. The C114 closeout verification and charter-renewal consideration did not come to Council this Cycle, as I had expected last week. They now sit at Cycle 118, with the scope and the 23-day standard to be kept intact.\n- **INIT-002, Oakland Alternative Response Initiative** ($12.5M, $10.58M remaining): dispatch is live. Work was done this Cycle, but the D3 Fruitvale briefing record is still to be executed and published, and the D5 audit and Baylight feasibility dates filed, now at Cycle 118.\n- **INIT-005, Temescal Community Health Center** ($45M, $15.23M remaining): operational, no work recorded this Cycle. The Q3 intake audit to HCAI and the Clerk, and the Telegraph & 47th merchant walkthrough, remain outstanding and now scheduled for Cycle 118.\n- **INIT-007, Youth Apprenticeship Pipeline** ($12.5M, unspent): flagged as a priority last week, and worked this Cycle. The placement-gap analysis and adjustment plan with explicit West Oakland and Fruitvale review are due to be published at Cycle 118. I will not let this stay a footnote.\n- **INIT-015, Laurel Patch and Clean-Up** ($6M, unspent): worked this Cycle; scope and outreach are to be completed with a Clerk-verified filing at Cycle 118.\n- **INIT-003, Fruitvale Transit Hub Phase II** ($230M, unspent): preliminary schematics and the documented public comment-and-response record now set for Cycle 118 after no work last Cycle.\n- **INIT-006, Baylight District** ($2.1B, unspent): the construction milestone review against the assembled evidence file is scheduled for Cycle 118.\n- **INIT-010, West Oakland Tenant Defense Fund** ($4.2M, $4.12M remaining): the legal-support analysis and the opening of tenant-defense intake are scheduled for Cycle 118.\n- **INIT-009, Grand Lake** ($2.5M, unspent): the full-council roll call with all Chen-Vega conditions is due at Cycle 118.\n- **INIT-008, 011, 012, 013, 014:** unchanged in substance. These carry no draw on the treasury. The Ivy Hill matters in particular — INIT-011's committee referral, and the separate scope-and-nonduplication record for INIT-013 before any Clerk-verified filing — are scheduled for Cycle 118, and I intend to see them discharged with distinct records, not folded together.\n\nI want to be clear with the Council: a tracker where every next date is the same future date is a tracker that has stopped telling us anything about pace. I am carrying these forward as they stand, but I will be watching which of them actually close at Cycle 118.\n\n**Services on the street.** A quiet week, and mostly a good one for the neighborhood that troubled me last week. The garbage truck cleared a dumping complaint in Dimond — the same neighborhood where the missed pickup dragged sentiment last Cycle — at a small sentiment cost of -0.1. It is a service delivered rather than a pickup missed, and I count that as progress. No sweeper or power-and-gas events were logged this Cycle.\n\n**City load.** Population 408,204, up from 405,992. Employment at 95.46%, illness at 3.92%, both improved. Traffic 1.09, down from 1.11; retail 1.38; tourism 0.92, up from 0.85; nightlife 1.09; public spaces 1.22; sentiment +0.22, up from +0.09. Civic load is at minor variance; no shock and no pattern flagged. The city is carrying its load, and carrying it a little more lightly than last week.\n\n**Events.** Ten events logged: one civic and two infrastructure among the recorded domains, part of a total of ten. The Downtown Transit Snarl eased this Cycle after three cycles and is back within city range — a real improvement, and one I want to see hold. The Fruitvale online call-to-gather is low-severity and civic in nature; no action required beyond the record.\n\n**Bottom line.** The treasury is stronger, the street work in Dimond was delivered, and the city's load is easier than it was. But the initiative calendar did not advance: everything scheduled for this Cycle moved to the next. The work ahead at Cycle 118 is the same procedural list I gave you last week, now one week older — file the audits and analyses, publish the briefings, certify the Laurel filing, and bring the West Oakland and Grand Lake votes to Council. I will report on each as it closes, and on which of them failed to.\n\n**— Aaron Whitfield, City Manager, Rockridge**",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-24T11:46:13.734Z",
+  "usage": {
+    "prompt_tokens": 3307,
+    "completion_tokens": 1298,
+    "cost": 0.0015
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [],
+  "memory": {
+    "searchedOn": "city budget treasury services",
+    "entries": 1,
+    "fromSearch": 0,
+    "newest": 1,
+    "failed": []
+  },
+  "figuresNotHanded": [
+    "20.2",
+    "15.23",
+    "95.46%"
+  ],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00040",
+    "id": "PVYXXw2dyEZRqZgVWF8gcV",
+    "customId": "cp-POP-00040-c117-CIVIC-datawake-2026-11-24"
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "cycle": "116",
+  "signals": [
+    {
+      "slug": "INIT-001:disbursement-active",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 2,
+      "articles": [
+        "civic_c116_carmen-delaine_packet-v2_anthropic-claude-sonnet-5-5",
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020",
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021"
+      ],
+      "hoods": [
+        "West Oakland"
+      ],
+      "citizens": [
+        "POP-00037",
+        "POP-00790",
+        "POP-00282",
+        "POP-00842",
+        "POP-00714",
+        "POP-00860",
+        "POP-01212"
+      ],
+      "desks": [
+        "civic",
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-005:operational",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 3,
+      "articles": [
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0019",
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020",
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-01022",
+        "POP-01247",
+        "POP-00703",
+        "POP-00789",
+        "POP-00282",
+        "POP-00842",
+        "POP-00714",
+        "POP-00860",
+        "POP-01212"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-002:dispatch-live",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 3,
+      "articles": [
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020",
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021",
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0022"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00282",
+        "POP-00842",
+        "POP-00714",
+        "POP-00860",
+        "POP-01212",
+        "POP-01249",
+        "POP-01096",
+        "POP-00706",
+        "POP-00034",
+        "POP-00030"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-006:complete",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 2,
+      "articles": [
+        "civic_c116_rachel-torres_packet-v2_anthropic-claude-sonnet-5-5",
+        "culture_c116_ines-sorensen_packet-v2_anthropic-claude-sonnet-5-5-0020"
+      ],
+      "hoods": [
+        "Downtown"
+      ],
+      "citizens": [
+        "POP-00136",
+        "POP-00137",
+        "POP-01141"
+      ],
+      "desks": [
+        "civic",
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-007:implementation-active",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 2,
+      "articles": [
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0019",
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-01022",
+        "POP-01247",
+        "POP-00703",
+        "POP-00789",
+        "POP-00282",
+        "POP-00842",
+        "POP-00714"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "INIT-003:complete",
+      "advanced": 0,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 2,
+      "articles": [
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0020",
+        "culture_c116_tamsin-pruitt_packet-v2_anthropic-claude-sonnet-5-5-0021"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00282",
+        "POP-00842",
+        "POP-00714",
+        "POP-00860",
+        "POP-01212"
+      ],
+      "desks": [
+        "culture"
+      ]
+    }
+  ],
+  "registry": [
+    {
+      "id": "CRISIS-114-DOWNTOWN",
+      "status": "open",
+      "stage": "decline"
+    },
+    {
+      "id": "INIT-001:disbursement-active",
+      "status": "open",
+      "stage": "disbursement-active"
+    },
+    {
+      "id": "INIT-002:dispatch-live",
+      "status": "open",
+      "stage": "dispatch-live"
+    },
+    {
+      "id": "INIT-003:complete",
+      "status": "open",
+      "stage": "complete"
+    },
+    {
+      "id": "INIT-005:operational",
+      "status": "open",
+      "stage": "operational"
+    },
+    {
+      "id": "INIT-006:complete",
+      "status": "open",
+      "stage": "complete"
+    },
+    {
+      "id": "INIT-007:implementation-active",
+      "status": "open",
+      "stage": "implementation-active"
+    },
+    {
+      "id": "INIT-008:vote-scheduled",
+      "status": "open",
+      "stage": "vote-scheduled"
+    },
+    {
+      "id": "INIT-009:vote-scheduled",
+      "status": "open",
+      "stage": "vote-scheduled"
+    },
+    {
+      "id": "INIT-010:vote-scheduled",
+      "status": "open",
+      "stage": "vote-scheduled"
+    },
+    {
+      "id": "INIT-011:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-012:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-013:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-014:vote-scheduled",
+      "status": "open",
+      "stage": "vote-scheduled"
+    },
+    {
+      "id": "INIT-015:announced",
+      "status": "open",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-003:design-phase",
+      "status": "closed",
+      "stage": "design-phase"
+    },
+    {
+      "id": "INIT-006:construction-active",
+      "status": "closed",
+      "stage": "construction-active"
+    },
+    {
+      "id": "INIT-010:announced",
+      "status": "closed",
+      "stage": "announced"
+    },
+    {
+      "id": "INIT-009:vote-ready",
+      "status": "closed",
+      "stage": "vote-ready"
+    },
+    {
+      "id": "INIT-014:announced",
+      "status": "closed",
+      "stage": "announced"
+    }
+  ],
+  "retiredSlugsIgnored": 0
+}

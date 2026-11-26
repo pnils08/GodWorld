@@ -1,0 +1,5 @@
+# KONO, in their own words
+
+## AJ Dybantsa — SF / The Oaks
+
+> Man. Yeah. That Denver game, that was the one. That's the kind of night you dream about as a kid — 137 points, 40 assists, the whole building buzzing. I was feeding off it, 7-of-11, felt like everything I touched was going down. That's the rhythm I've been chasing. And then the Warriors game... that one meant something different. That's the team that left Oakland. To go into their building and take it in a Cup game after they beat us in the preseason — that's the kind of statement that makes people in this city feel something. We were down 15 at the half and just flipped the switch. 54-37 in the second half. That's heart. I didn't have my best shooting night there, 3-of-7, but I got to the line, played within the offense, did what the game needed. That's what this group does right now. Austin's been on another planet. T's been steady. Wendell's finding his spots. It's not about any one guy — it's about all of us clicking. 11-2, four in a row, and the city's showing out. The mood in the room is exactly what you'd expect. We know what we're building.

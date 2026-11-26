@@ -1,0 +1,2002 @@
+{
+  "stage": "angle",
+  "desk": "business",
+  "cycle": "117",
+  "persona": "business-desk",
+  "freeAngle": "free-rows",
+  "pass": false,
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00153",
+      "name": "Jordan Velez",
+      "role": "desk reporter",
+      "desk": "business"
+    },
+    "task": {
+      "goal": "Decide what, if anything, you want to write this cycle"
+    },
+    "signal": {
+      "kind": "own-pick",
+      "hood": null,
+      "score": null,
+      "src": "the record of C117"
+    },
+    "exposure": {
+      "basis": [
+        "own-pick"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00042",
+          "name": "Ramon Vega",
+          "profile": "Ramon Vega — City Council District 4 — Lake Merritt — C117: staked $392 on sports (win), open",
+          "role": "City Council District 4",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00042",
+            "rowName": "Ramon Vega",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00131",
+          "name": "Lorenzo Jordan",
+          "profile": "Lorenzo Jordan — Public Defender — Downtown — C117: staked $189 on undocked (pos), open",
+          "role": "Public Defender",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00131",
+            "rowName": "Lorenzo Jordan",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00142",
+          "name": "Jonas Patel",
+          "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown — C117: staked $552 on sports (loss), open",
+          "role": "MEDICAL EXAMINER",
+          "hood": "Chinatown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00142",
+            "rowName": "Jonas Patel",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00023",
+          "name": "Gregory Mims",
+          "profile": "Gregory Mims — Organized Crime — West Oakland — Organized Crime at Oakland Casino Town (-3 employees this cycle); C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+          "role": "Organized Crime",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00023",
+            "rowName": "Gregory Mims",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00027",
+          "name": "Philly Rodriguez",
+          "profile": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+          "role": "Casino Manager",
+          "hood": "West Oakland",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00027",
+            "rowName": "Philly Rodriguez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00028",
+          "name": "Manfred Owens",
+          "profile": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+          "role": "Booky",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00028",
+            "rowName": "Manfred Owens",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00132",
+          "name": "Tobias Jurko",
+          "profile": "Tobias Jurko — Landscape Architect — Piedmont Ave — Landscape Architect at Atlas Bay Architects (+1 employees this cycle); C117: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "role": "Landscape Architect",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00132",
+            "rowName": "Tobias Jurko",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00135",
+          "name": "Mina Linas",
+          "profile": "Mina Linas — Sea Level Monitoring Technician — Lake Merritt — Sea Level Monitoring Technician at DigitalOcean (+1 employees this cycle); C117: said no to something and felt the shape of who they are in it",
+          "role": "Sea Level Monitoring Technician",
+          "hood": "Lake Merritt",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00135",
+            "rowName": "Mina Linas",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00299",
+          "name": "Joel Henry",
+          "profile": "Joel Henry — Plumber — Uptown — Plumber at Bay Tribune (+1 employees this cycle); C117: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+          "role": "Plumber",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00299",
+            "rowName": "Joel Henry",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00546",
+          "name": "Tara Ellison",
+          "profile": "Tara Ellison — Journalist — Rockridge — Journalist at Bay Tribune (+1 employees this cycle); C117: checked in with a relative",
+          "role": "Journalist",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00546",
+            "rowName": "Tara Ellison",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00595",
+          "name": "Sarah Corliss",
+          "profile": "Sarah Corliss — Capacity Analyst, DigitalOcean — Jack London — Capacity Analyst, DigitalOcean at DigitalOcean (+1 employees this cycle); C117: told the story of their first A's game again, and nobody minded",
+          "role": "Capacity Analyst, DigitalOcean",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00595",
+            "rowName": "Sarah Corliss",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00596",
+          "name": "Michael Corliss",
+          "profile": "Michael Corliss — Photographer — KONO — Photographer at Bay Tribune (+1 employees this cycle); C117: hung the new Oaks banner in the window facing the street",
+          "role": "Photographer",
+          "hood": "KONO",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00596",
+            "rowName": "Michael Corliss",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01049",
+          "name": "Sarah Huang",
+          "profile": "Sarah Huang — Healthcare Director, Atlas Bay Architects — Grand Lake — Healthcare Director, Atlas Bay Architects at Atlas Bay Architects (+1 employees this cycle); C117: kept score by hand at the kitchen table the way their father taught them near a busy shopping block",
+          "role": "Healthcare Director, Atlas Bay Architects",
+          "hood": "Grand Lake",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-01049",
+            "rowName": "Sarah Huang",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01057",
+          "name": "Nina Reyes",
+          "profile": "Nina Reyes — actress — Fruitvale — actress at Bay Tribune (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+          "role": "actress",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-01057",
+            "rowName": "Nina Reyes",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01064",
+          "name": "Pixel Pete",
+          "profile": "Pixel Pete — streamer — Rockridge — streamer at Bay Tribune (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+          "role": "streamer",
+          "hood": "Rockridge",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-01064",
+            "rowName": "Pixel Pete",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01068",
+          "name": "Kai Tanaka",
+          "profile": "Kai Tanaka — artist — Fruitvale — artist at Bayline 6 (+1 employees this cycle); C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+          "role": "artist",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-01068",
+            "rowName": "Kai Tanaka",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01070",
+          "name": "Rosa Martinez",
+          "profile": "Rosa Martinez — Studio Assistant — Downtown — Studio Assistant at Bayline 6 (+1 employees this cycle); C117: heard a song they did not know and changed the station before the chorus",
+          "role": "Studio Assistant",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-01070",
+            "rowName": "Rosa Martinez",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01071",
+          "name": "Claire Ashford",
+          "profile": "Claire Ashford — author — Piedmont Ave — author at Atlas Bay Architects (+1 employees this cycle); C117: caught themselves arguing with a new idea before they had heard the end of it",
+          "role": "author",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-01071",
+            "rowName": "Claire Ashford",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01073",
+          "name": "Li Wei",
+          "profile": "Li Wei — Studio Assistant — Fruitvale — Studio Assistant at Ridgeline Studio (+1 employees this cycle); C117: felt the city's pace pulling them forward",
+          "role": "Studio Assistant",
+          "hood": "Fruitvale",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-01073",
+            "rowName": "Li Wei",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01075",
+          "name": "Marcus Duval",
+          "profile": "Marcus Duval — actor — Laurel — actor at Bayline 6 (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+          "role": "actor",
+          "hood": "Laurel",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-01075",
+            "rowName": "Marcus Duval",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-01098",
+          "name": "Naomi Castellanos",
+          "profile": "Naomi Castellanos — Principal, Ridgeline Studio — Piedmont Ave — Principal, Ridgeline Studio at Ridgeline Studio (+1 employees this cycle); C117: ran into neighbors at The Keane Family Block Party",
+          "role": "Principal, Ridgeline Studio",
+          "hood": "Piedmont Ave",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-01098",
+            "rowName": "Naomi Castellanos",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00180",
+          "name": "Cameron Wallen",
+          "profile": "Cameron Wallen — Corporate Accountant — Downtown — C117: paid a bill early just because the option existed near a busy plaza",
+          "role": "Corporate Accountant",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00180",
+            "rowName": "Cameron Wallen",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00208",
+          "name": "Patrick When",
+          "profile": "Patrick When — Janitor — Downtown — C117: did rent math on the back of an envelope and sat back hard",
+          "role": "Janitor",
+          "hood": "Downtown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00208",
+            "rowName": "Patrick When",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00237",
+          "name": "Jerry Nelson",
+          "profile": "Jerry Nelson — Janitor — Uptown — C117: mopped the gym floor into drying stripes and waited by the door",
+          "role": "Janitor",
+          "hood": "Uptown",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00237",
+            "rowName": "Jerry Nelson",
+            "kind": "slice-row"
+          }
+        },
+        {
+          "pop": "POP-00243",
+          "name": "Xanny Allen",
+          "profile": "Xanny Allen — Warehouse worker — Jack London — C117: set up automatic transfers to the savings account and felt briefly like an adult near a venue doorway",
+          "role": "Warehouse worker",
+          "hood": "Jack London",
+          "mode": "named",
+          "sourceKind": "slice-row",
+          "evidence": {
+            "source": "the economy record of C117",
+            "pop": "POP-00243",
+            "rowName": "Xanny Allen",
+            "kind": "slice-row"
+          }
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C117",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c5606da08cb9"
+      },
+      {
+        "t": "FACT",
+        "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 job",
+        "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/",
+        "id": "F-d2036d9993b1"
+      },
+      {
+        "t": "FACT",
+        "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/",
+        "id": "F-efd9ebd3280e"
+      },
+      {
+        "t": "FACT",
+        "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/",
+        "id": "F-453ce66b090f"
+      },
+      {
+        "t": "FACT",
+        "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/",
+        "id": "F-f7a1edd68e81"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/",
+        "id": "F-98d7f078ab1d"
+      },
+      {
+        "t": "FACT",
+        "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/",
+        "id": "F-e2a697fe208c"
+      },
+      {
+        "t": "FACT",
+        "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/",
+        "id": "F-a794c94d37ad"
+      },
+      {
+        "t": "FACT",
+        "text": "Hillside Family Dental (Healthcare), Glenview — 0 employees, revenue $936k, growing -0.7% a year — since C116: yearly growth rate +0.5 pts, revenue -$131, -3 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00141 vs prev/",
+        "id": "F-d015091d50f1"
+      },
+      {
+        "t": "FACT",
+        "text": "Bay Tribune (Media & Journalism), Downtown — 63 employees, revenue $19.9M, growing 14.3% a year — since C116: yearly growth rate -0.4 pts, revenue +$54k, +1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00018 vs prev/",
+        "id": "F-ba23caa2822f"
+      },
+      {
+        "t": "FACT",
+        "text": "Ridgeline Studio (Architecture), Uptown — 62 employees, revenue $33.1M, growing 16.1% a year — since C116: yearly growth rate -0.2 pts, revenue +$102k, +1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00053 vs prev/",
+        "id": "F-4024ac7d072c"
+      },
+      {
+        "t": "FACT",
+        "text": "Atlas Bay Architects (Architecture), Downtown — 87 employees, revenue $43.0M, growing 13.2% a year — since C116: yearly growth rate +0.2 pts, revenue +$109k, +1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00089 vs prev/",
+        "id": "F-9596733c2270"
+      },
+      {
+        "t": "FACT",
+        "text": "Bayline 6 (Media & Journalism), Jack London — 143 employees, revenue $46.7M, growing 12.9% a year — since C116: yearly growth rate +0.1 pts, revenue +$116k, +1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00183 vs prev/",
+        "id": "F-16a404c84940"
+      },
+      {
+        "t": "FACT",
+        "text": "DigitalOcean (Cloud Infrastructure), Baylight District — 801 employees, revenue $522.4M, growing 5.2% a year — since C116: yearly growth rate -0.1 pts, revenue +$520k, +1 employees",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00002 vs prev/",
+        "id": "F-ed7e6635838b"
+      },
+      {
+        "t": "FACT",
+        "text": "Marine Systems (Science), Baylight District — 0 employees, growing -1.8% a year — since C116: yearly growth rate +1.0 pts",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00105 vs prev/",
+        "id": "F-7384c3d1d0aa"
+      },
+      {
+        "t": "FACT",
+        "text": "Slopeview Hardware (Retail), Glenview — 7 employees, revenue $630k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00143 vs prev/",
+        "id": "F-6bc5c58bd3e9"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Hill Market (Retail), Ivy Hill — 0 employees, revenue $513k, growing -4.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$463",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00150 vs prev/",
+        "id": "F-7aee6efb01e2"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Hill Cafe (Cafe / dining), Ivy Hill — 0 employees, revenue $311k, growing -2.4% a year — since C116: yearly growth rate +1.0 pts, revenue -$146",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00151 vs prev/",
+        "id": "F-b5db85d072e3"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Cleaners (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.9% a year — since C116: yearly growth rate +1.0 pts, revenue -$93",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00152 vs prev/",
+        "id": "F-50fcdbb84c40"
+      },
+      {
+        "t": "FACT",
+        "text": "Fold Laundry (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.8% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00155 vs prev/",
+        "id": "F-d3f134ef5c8a"
+      },
+      {
+        "t": "FACT",
+        "text": "Shift Change Kitchen (Restaurant & Dining), San Antonio — 12 employees, revenue $866k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$108",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00172 vs prev/",
+        "id": "F-f08f46f99b6e"
+      },
+      {
+        "t": "FACT",
+        "text": "Lakeshore Cigar Club (Cigar Lounge), Lake Merritt — 11 employees, revenue $722k, growing 4.5% a year — since C116: yearly growth rate +1.0 pts, revenue +$629",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00241 vs prev/",
+        "id": "F-0c5338742992"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Avenue Wine Bar (Wine Bar), Lake Merritt — 11 employees, revenue $722k, growing 4.8% a year — since C116: yearly growth rate +1.0 pts, revenue +$664",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00242 vs prev/",
+        "id": "F-967534093dd9"
+      },
+      {
+        "t": "FACT",
+        "text": "Baylight Construction Authority (Construction), Baylight District — 451 employees, revenue $31.4M, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$16k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00020 vs prev/",
+        "id": "F-80ebceba87bd"
+      },
+      {
+        "t": "FACT",
+        "text": "Lucky Harbor Herbalist & Tea (Herbalist & Tea Shop), Chinatown — 4 employees, revenue $381k, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$199",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00206 vs prev/",
+        "id": "F-b362fa1817d5"
+      },
+      {
+        "t": "FACT",
+        "text": "Seoul Corner Market (Korean Grocery), KONO — 4 employees, revenue $381k, growing 2.4% a year — since C116: yearly growth rate +1.0 pts, revenue +$178",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00215 vs prev/",
+        "id": "F-1b4e535dd6c2"
+      },
+      {
+        "t": "FACT",
+        "text": "Ridgeline Ventures (Venture Capital), Lake Merritt — 12 employees, revenue $4.6M, growing 16.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00007 vs prev/",
+        "id": "F-74c52c0baf9e"
+      },
+      {
+        "t": "FACT",
+        "text": "Gridiron Analytics (Sports Analytics), Temescal — 20 employees, revenue $3.0M, growing 25.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00008 vs prev/",
+        "id": "F-e2e073a1fa97"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Community Clinic (Healthcare), Fruitvale — 38 employees, revenue $8.2M, growing 13.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$21k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00026 vs prev/",
+        "id": "F-18bd49ed4549"
+      },
+      {
+        "t": "FACT",
+        "text": "Coliseum District Development (Real Estate), East Oakland — 31 employees, revenue $19.7M, growing 9.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$34k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00029 vs prev/",
+        "id": "F-e52e963491fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Diner (Restaurant & Dining), Fruitvale — 2 employees, revenue $208k, growing 11.9% a year — since C116: yearly growth rate -1.0 pts, revenue +$475",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00045 vs prev/",
+        "id": "F-561d6d28623b"
+      },
+      {
+        "t": "FACT",
+        "text": "Midnight Bistro (Restaurant & Dining), Downtown — 2 employees, revenue $253k, growing 12.5% a year — since C116: yearly growth rate -1.0 pts, revenue +$607",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00049 vs prev/",
+        "id": "F-d9009a6a4e76"
+      },
+      {
+        "t": "FACT",
+        "text": "Estuary Architects (Architecture), Lake Merritt — 45 employees, growing 10.0% a year — since C116: yearly growth rate -1.0 pts",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00055 vs prev/",
+        "id": "F-6c5c14ecab61"
+      },
+      {
+        "t": "FACT",
+        "text": "Romano's (Food & Beverage), Dimond — 16 employees, revenue $1.4M, growing 4.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$1k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00075 vs prev/",
+        "id": "F-e28f37424662"
+      },
+      {
+        "t": "FACT",
+        "text": "Port Grind (Food & Beverage), Grand Lake — 9 employees, revenue $1.0M, growing 12.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$2k",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00076 vs prev/",
+        "id": "F-8f10d6c71dfa"
+      },
+      {
+        "t": "FACT",
+        "text": "B'nai Tikvah Synagogue (Synagogue), Piedmont Ave — 6 employees, revenue $382k, growing 2.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$204",
+        "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00092 vs prev/",
+        "id": "F-121ef129ac5b"
+      },
+      {
+        "t": "FACT",
+        "text": "business-closure | closure: Ivy Hill Family Dental (Healthcare) — 0 jobs | Ivy Hill | mag -25 | targets BIZ-00153",
+        "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)",
+        "id": "F-7cb5b899e65d"
+      },
+      {
+        "t": "FACT",
+        "text": "carryover | carryover: cycle 1 of 4 | Adams Point | mag -8 | targets BIZ-00061",
+        "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)",
+        "id": "F-4f164d873764"
+      },
+      {
+        "t": "FACT",
+        "text": "carryover | carryover: cycle 2 of 4 | Baylight District | mag -8 | targets BIZ-00105",
+        "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)",
+        "id": "F-f41c7a7a047c"
+      },
+      {
+        "t": "FACT",
+        "text": "carryover | carryover: cycle 3 of 4 | Ivy Hill | mag -8 | targets BIZ-00150",
+        "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)",
+        "id": "F-9bb210f973af"
+      },
+      {
+        "t": "FACT",
+        "text": "sector-impact:services/retail | Oakland Casino Town lost 3 employees | Baylight District | mag -8 | targets BIZ-00100",
+        "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)",
+        "id": "F-53456f83abcb"
+      },
+      {
+        "t": "FACT",
+        "text": "Casino C117: 17 undocked wagers placed, 14 sports wagers placed; 2 settled, 15 voided",
+        "src": "output/beats/Casino_Ledger.jsonl @C117",
+        "id": "F-18ed6879e2b0"
+      },
+      {
+        "t": "FACT",
+        "text": "Casino house float: $246k",
+        "src": "output/beats/Casino_Ledger.jsonl HOUSE",
+        "id": "F-3a122530bc4a"
+      },
+      {
+        "t": "FACT",
+        "text": "Maria Keen won on undocked (no) — staked $385, paid $705",
+        "src": "output/beats/Casino_Ledger.jsonl 0f679cb015012003",
+        "id": "F-f62962da62fa"
+      },
+      {
+        "t": "FACT",
+        "text": "Jax Caldera lost on undocked (neg) — staked $428, the house kept it",
+        "src": "output/beats/Casino_Ledger.jsonl 91a9400c9b3e9a11",
+        "id": "F-a268465132ba"
+      },
+      {
+        "t": "FACT",
+        "text": "Downtown: median income $123k, median rent $3k, housing pressure 10, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-8983fa0e088d"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal: median income $68k, median rent $2k, housing pressure 0.5, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-a3a8c8753d3e"
+      },
+      {
+        "t": "FACT",
+        "text": "Laurel: median income $86k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-b1ffd484b740"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland: median income $147k, median rent $4k, housing pressure 6.5, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-82b26378561d"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale: median income $100k, median rent $3k, housing pressure 10, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-9d615082c789"
+      },
+      {
+        "t": "FACT",
+        "text": "Jack London: median income $121k, median rent $3k, housing pressure 10, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-d92707a932b0"
+      },
+      {
+        "t": "FACT",
+        "text": "Rockridge: median income $162k, median rent $4k, housing pressure 3.5, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-82cb52cee9fd"
+      },
+      {
+        "t": "FACT",
+        "text": "Adams Point: median income $94k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-ec0ef9f7bb2f"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake: median income $107k, median rent $3k, housing pressure 6, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-dc923d9baa45"
+      },
+      {
+        "t": "FACT",
+        "text": "Piedmont Ave: median income $151k, median rent $4k, housing pressure 1.5, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-5797845f7177"
+      },
+      {
+        "t": "FACT",
+        "text": "Chinatown: median income $85k, median rent $2k, housing pressure 0, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-8150c112aed7"
+      },
+      {
+        "t": "FACT",
+        "text": "Brooklyn: median income $129k, median rent $3k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-e2216b203201"
+      },
+      {
+        "t": "FACT",
+        "text": "Eastlake: median income $83k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-b3985854d605"
+      },
+      {
+        "t": "FACT",
+        "text": "Glenview: median income $81k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-903a6b40eca7"
+      },
+      {
+        "t": "FACT",
+        "text": "Dimond: median income $79k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-7ced5a2bed77"
+      },
+      {
+        "t": "FACT",
+        "text": "Ivy Hill: median income $77k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-4b779efc677e"
+      },
+      {
+        "t": "FACT",
+        "text": "San Antonio: median income $69k, median rent $2k, housing pressure 0, trajectory decay",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-6afc95a4dcd1"
+      },
+      {
+        "t": "FACT",
+        "text": "KONO: median income $83k, median rent $2k, housing pressure 1, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-6382bfadeebd"
+      },
+      {
+        "t": "FACT",
+        "text": "Lake Merritt: median income $186k, median rent $5k, housing pressure 0, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-6c25538383df"
+      },
+      {
+        "t": "FACT",
+        "text": "Uptown: median income $99k, median rent $2k, housing pressure 10, trajectory growth",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-3024ea0e5d66"
+      },
+      {
+        "t": "FACT",
+        "text": "Baylight District: median income $139k, median rent $3k, housing pressure 0, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-b1397559e25f"
+      },
+      {
+        "t": "FACT",
+        "text": "East Oakland: median income $72k, median rent $2k, housing pressure 0, trajectory steady",
+        "src": "output/beats/Neighborhood_Map.jsonl @C117",
+        "id": "F-acc821af4ff3"
+      },
+      {
+        "t": "FACT",
+        "text": "City treasury C117: revenue $5.0M (weekly budget allocation), balance after $136.8M",
+        "src": "output/beats/City_Treasury.jsonl @C117",
+        "id": "F-8ff02ff7d571"
+      },
+      {
+        "t": "FACT",
+        "text": "City treasury C117: revenue $126k (28 cleared charges, fined at the hood rate), balance after $136.9M",
+        "src": "output/beats/City_Treasury.jsonl @C117",
+        "id": "F-1439b13b7917"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "pass": "true when nothing here is a piece you want to write this cycle; then give only why",
+        "chase": "string — what you want to write this cycle and how you will go after it, in your own voice. Not JSON.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ]
+      },
+      "rule": "A target is someone you want to hear from; each must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "sourcingPool": {
+    "mode": "workplace",
+    "candidates": [
+      {
+        "pop": "POP-00042",
+        "name": "Ramon Vega",
+        "role": "City Council District 4",
+        "hood": "Lake Merritt",
+        "profile": "Ramon Vega — City Council District 4 — Lake Merritt — C117: staked $392 on sports (win), open",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00042",
+          "rowName": "Ramon Vega",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00131",
+        "name": "Lorenzo Jordan",
+        "role": "Public Defender",
+        "hood": "Downtown",
+        "profile": "Lorenzo Jordan — Public Defender — Downtown — C117: staked $189 on undocked (pos), open",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00131",
+          "rowName": "Lorenzo Jordan",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00142",
+        "name": "Jonas Patel",
+        "role": "MEDICAL EXAMINER",
+        "hood": "Chinatown",
+        "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown — C117: staked $552 on sports (loss), open",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00142",
+          "rowName": "Jonas Patel",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00023",
+        "name": "Gregory Mims",
+        "role": "Organized Crime",
+        "hood": "West Oakland",
+        "profile": "Gregory Mims — Organized Crime — West Oakland — Organized Crime at Oakland Casino Town (-3 employees this cycle); C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00023",
+          "rowName": "Gregory Mims",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00027",
+        "name": "Philly Rodriguez",
+        "role": "Casino Manager",
+        "hood": "West Oakland",
+        "profile": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00027",
+          "rowName": "Philly Rodriguez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00028",
+        "name": "Manfred Owens",
+        "role": "Booky",
+        "hood": "Jack London",
+        "profile": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00028",
+          "rowName": "Manfred Owens",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00132",
+        "name": "Tobias Jurko",
+        "role": "Landscape Architect",
+        "hood": "Piedmont Ave",
+        "profile": "Tobias Jurko — Landscape Architect — Piedmont Ave — Landscape Architect at Atlas Bay Architects (+1 employees this cycle); C117: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00132",
+          "rowName": "Tobias Jurko",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00135",
+        "name": "Mina Linas",
+        "role": "Sea Level Monitoring Technician",
+        "hood": "Lake Merritt",
+        "profile": "Mina Linas — Sea Level Monitoring Technician — Lake Merritt — Sea Level Monitoring Technician at DigitalOcean (+1 employees this cycle); C117: said no to something and felt the shape of who they are in it",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00135",
+          "rowName": "Mina Linas",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00299",
+        "name": "Joel Henry",
+        "role": "Plumber",
+        "hood": "Uptown",
+        "profile": "Joel Henry — Plumber — Uptown — Plumber at Bay Tribune (+1 employees this cycle); C117: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00299",
+          "rowName": "Joel Henry",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "hood": "Rockridge",
+        "profile": "Tara Ellison — Journalist — Rockridge — Journalist at Bay Tribune (+1 employees this cycle); C117: checked in with a relative",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00546",
+          "rowName": "Tara Ellison",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00595",
+        "name": "Sarah Corliss",
+        "role": "Capacity Analyst, DigitalOcean",
+        "hood": "Jack London",
+        "profile": "Sarah Corliss — Capacity Analyst, DigitalOcean — Jack London — Capacity Analyst, DigitalOcean at DigitalOcean (+1 employees this cycle); C117: told the story of their first A's game again, and nobody minded",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00595",
+          "rowName": "Sarah Corliss",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00596",
+        "name": "Michael Corliss",
+        "role": "Photographer",
+        "hood": "KONO",
+        "profile": "Michael Corliss — Photographer — KONO — Photographer at Bay Tribune (+1 employees this cycle); C117: hung the new Oaks banner in the window facing the street",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00596",
+          "rowName": "Michael Corliss",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01049",
+        "name": "Sarah Huang",
+        "role": "Healthcare Director, Atlas Bay Architects",
+        "hood": "Grand Lake",
+        "profile": "Sarah Huang — Healthcare Director, Atlas Bay Architects — Grand Lake — Healthcare Director, Atlas Bay Architects at Atlas Bay Architects (+1 employees this cycle); C117: kept score by hand at the kitchen table the way their father taught them near a busy shopping block",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-01049",
+          "rowName": "Sarah Huang",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01057",
+        "name": "Nina Reyes",
+        "role": "actress",
+        "hood": "Fruitvale",
+        "profile": "Nina Reyes — actress — Fruitvale — actress at Bay Tribune (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-01057",
+          "rowName": "Nina Reyes",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01064",
+        "name": "Pixel Pete",
+        "role": "streamer",
+        "hood": "Rockridge",
+        "profile": "Pixel Pete — streamer — Rockridge — streamer at Bay Tribune (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-01064",
+          "rowName": "Pixel Pete",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01068",
+        "name": "Kai Tanaka",
+        "role": "artist",
+        "hood": "Fruitvale",
+        "profile": "Kai Tanaka — artist — Fruitvale — artist at Bayline 6 (+1 employees this cycle); C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-01068",
+          "rowName": "Kai Tanaka",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01070",
+        "name": "Rosa Martinez",
+        "role": "Studio Assistant",
+        "hood": "Downtown",
+        "profile": "Rosa Martinez — Studio Assistant — Downtown — Studio Assistant at Bayline 6 (+1 employees this cycle); C117: heard a song they did not know and changed the station before the chorus",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-01070",
+          "rowName": "Rosa Martinez",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01071",
+        "name": "Claire Ashford",
+        "role": "author",
+        "hood": "Piedmont Ave",
+        "profile": "Claire Ashford — author — Piedmont Ave — author at Atlas Bay Architects (+1 employees this cycle); C117: caught themselves arguing with a new idea before they had heard the end of it",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-01071",
+          "rowName": "Claire Ashford",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01073",
+        "name": "Li Wei",
+        "role": "Studio Assistant",
+        "hood": "Fruitvale",
+        "profile": "Li Wei — Studio Assistant — Fruitvale — Studio Assistant at Ridgeline Studio (+1 employees this cycle); C117: felt the city's pace pulling them forward",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-01073",
+          "rowName": "Li Wei",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01075",
+        "name": "Marcus Duval",
+        "role": "actor",
+        "hood": "Laurel",
+        "profile": "Marcus Duval — actor — Laurel — actor at Bayline 6 (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-01075",
+          "rowName": "Marcus Duval",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-01098",
+        "name": "Naomi Castellanos",
+        "role": "Principal, Ridgeline Studio",
+        "hood": "Piedmont Ave",
+        "profile": "Naomi Castellanos — Principal, Ridgeline Studio — Piedmont Ave — Principal, Ridgeline Studio at Ridgeline Studio (+1 employees this cycle); C117: ran into neighbors at The Keane Family Block Party",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-01098",
+          "rowName": "Naomi Castellanos",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00180",
+        "name": "Cameron Wallen",
+        "role": "Corporate Accountant",
+        "hood": "Downtown",
+        "profile": "Cameron Wallen — Corporate Accountant — Downtown — C117: paid a bill early just because the option existed near a busy plaza",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00180",
+          "rowName": "Cameron Wallen",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00208",
+        "name": "Patrick When",
+        "role": "Janitor",
+        "hood": "Downtown",
+        "profile": "Patrick When — Janitor — Downtown — C117: did rent math on the back of an envelope and sat back hard",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00208",
+          "rowName": "Patrick When",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00237",
+        "name": "Jerry Nelson",
+        "role": "Janitor",
+        "hood": "Uptown",
+        "profile": "Jerry Nelson — Janitor — Uptown — C117: mopped the gym floor into drying stripes and waited by the door",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00237",
+          "rowName": "Jerry Nelson",
+          "kind": "slice-row"
+        }
+      },
+      {
+        "pop": "POP-00243",
+        "name": "Xanny Allen",
+        "role": "Warehouse worker",
+        "hood": "Jack London",
+        "profile": "Xanny Allen — Warehouse worker — Jack London — C117: set up automatic transfers to the savings account and felt briefly like an adult near a venue doorway",
+        "mode": "named",
+        "sourceKind": "slice-row",
+        "evidence": {
+          "source": "the economy record of C117",
+          "pop": "POP-00243",
+          "rowName": "Xanny Allen",
+          "kind": "slice-row"
+        }
+      }
+    ],
+    "officeRecords": []
+  },
+  "reporter": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153"
+  },
+  "assignment": {
+    "story": {
+      "kind": "own-pick",
+      "ref": "own pick, C117",
+      "label": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+      "angle": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+      "hood": null,
+      "citizens": [
+        "Philly Rodriguez (POP-00027)",
+        "Manfred Owens (POP-00028)",
+        "Gregory Mims (POP-00023)"
+      ],
+      "popids": [
+        "POP-00027",
+        "POP-00028",
+        "POP-00023"
+      ]
+    },
+    "approach": null
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "beatSlice": {
+    "version": "ECONOMY-SLICE-3",
+    "kind": "beat-economy",
+    "seat": {
+      "slug": "business-desk",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "desk": "business",
+      "domain": "economy",
+      "builder": "buildEconomySlice.js"
+    },
+    "hood": null,
+    "pulse": {
+      "className": "beat-economy",
+      "score": 100,
+      "label": "the economy record of C117",
+      "hood": null,
+      "source": "the economy record of C117"
+    },
+    "prewrite": {
+      "schema": "BEAT-SLICE-1",
+      "method": "BEAT_TAB_FACTS",
+      "missing": [],
+      "angle": "the economy record of C117",
+      "hookLine": "",
+      "anchorFacts": [
+        "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 jobs, 1 up, 0 down); Community Platform 1 (350 jobs, 1 up, 0 down); Housing & Social Services 1 (320 jobs, 1 up, 0 down); Architecture 4 (292 jobs, 2 up, 2 down); Nightlife & Entertainment 9 (280 jobs, 6 up, 3 down); Sports 2 (270 jobs, 2 up, 0 down); Media & Journalism 4 (269 jobs, 3 up, 1 down); Restaurant & Dining 27 (264 jobs, 19 up, 8 down); Retail 31 (241 jobs, 16 up, 15 down); Legal & Judicial 1 (222 jobs, 1 up, 0 down); As Stadium 1 (110 jobs, 1 up, 0 down); Faith Organization 9 (103 jobs, 9 up, 0 down); Services 19 (101 jobs, 14 up, 5 down); Agent Communication 1 (100 jobs, 1 up, 0 down); Community Services 1 (94 jobs, 0 up, 1 down); Cafe / dining 10 (91 jobs, 5 up, 4 down); AI Research 1 (86 jobs, 1 up, 0 down); Food & Beverage 5 (62 jobs, 3 up, 2 down); Coworking / Tech Hub 1 (62 jobs, 1 up, 0 down); Civic Tech 2 (51 jobs, 0 up, 2 down); Public Safety / Crisis Response 1 (47 jobs, 1 up, 0 down); Tech 1 (45 jobs, 1 up, 0 down); Tech / Applied Robotics 1 (45 jobs, 1 up, 0 down); Tech / Data Infrastructure 1 (45 jobs, 1 up, 0 down); Tech / Software 1 (45 jobs, 1 up, 0 down); Urban Systems Intelligence Firm 1 (41 jobs, 0 up, 0 down); Veterinary Clinic 1 (38 jobs, 1 up, 0 down); Optometry Clinic 1 (38 jobs, 0 up, 1 down); Urgent Care Clinic 1 (38 jobs, 0 up, 1 down); Pediatric Clinic 1 (38 jobs, 1 up, 0 down); Medical Specialists 1 (38 jobs, 0 up, 1 down); Home Health Agency 1 (38 jobs, 1 up, 0 down); Real Estate 2 (37 jobs, 1 up, 1 down); Fast Food & Quick Service 1 (31 jobs, 0 up, 1 down); Construction Supply 1 (30 jobs, 1 up, 0 down); Cafe / gallery 1 (30 jobs, 1 up, 0 down); Bar / lounge 1 (30 jobs, 1 up, 0 down); Retail & Food 1 (30 jobs, 1 up, 0 down); Sports Bar & Dining 1 (30 jobs, 1 up, 0 down); Finance & Banking 1 (26 jobs, 1 up, 0 down); Law Firm 1 (26 jobs, 1 up, 0 down); Real Estate Finance 1 (26 jobs, 1 up, 0 down); Staffing Agency / Professional Services 1 (26 jobs, 1 up, 0 down); Estate Law 1 (26 jobs, 1 up, 0 down); Wealth Management / Finance 1 (26 jobs, 0 up, 1 down); Management Consulting 1 (26 jobs, 1 up, 0 down); Credit Union / Finance 1 (26 jobs, 1 up, 0 down); Biotech 1 (25 jobs, 1 up, 0 down); Community Development 2 (25 jobs, 2 up, 0 down); Development 1 (25 jobs, 1 up, 0 down); Cafe 2 (22 jobs, 2 up, 0 down); Sports Analytics 1 (20 jobs, 0 up, 1 down); Theater / Historic Landmark 2 (18 jobs, 2 up, 0 down); Transit & Infrastructure 1 (18 jobs, 1 up, 0 down); Tutoring 1 (15 jobs, 1 up, 0 down); Preschool & Early Education 1 (15 jobs, 1 up, 0 down); Private School 1 (15 jobs, 1 up, 0 down); Hospitality 1 (14 jobs, 1 up, 0 down); Venture Capital 1 (12 jobs, 0 up, 1 down); Hair Salon / Services 2 (12 jobs, 1 up, 1 down); Cigar Lounge 1 (11 jobs, 1 up, 0 down); Wine Bar 1 (11 jobs, 1 up, 0 down); Bar / Saloon / Historic Landmark 1 (11 jobs, 1 up, 0 down); Comedy Club 1 (11 jobs, 1 up, 0 down); Brewery 1 (11 jobs, 1 up, 0 down); Dance Club / Nightlife & Entertainment 1 (11 jobs, 1 up, 0 down); Late-Night Restaurant & Dining 1 (11 jobs, 1 up, 0 down); Bar / Lounge 1 (11 jobs, 1 up, 0 down); Korean Restaurant 1 (11 jobs, 1 up, 0 down); Coffee Roaster 1 (11 jobs, 1 up, 0 down); Bakery 1 (11 jobs, 1 up, 0 down); Fusion Restaurant 1 (11 jobs, 1 up, 0 down); Brunch Restaurant 1 (11 jobs, 1 up, 0 down); Karaoke Bar 1 (11 jobs, 1 up, 0 down); Bar 1 (11 jobs, 1 up, 0 down); Ramen Bar 1 (11 jobs, 1 up, 0 down); Small Plates & Natural Wine Bar 1 (11 jobs, 1 up, 0 down); Private Club 1 (11 jobs, 1 up, 0 down); Workforce Development 1 (11 jobs, 1 up, 0 down); Ice Cream / Dessert Cafe 1 (11 jobs, 0 up, 1 down); Taquería / Restaurant 1 (11 jobs, 1 up, 0 down); Vietnamese Restaurant 1 (11 jobs, 1 up, 0 down); Gentlemen's Club / Adult Entertainment 1 (11 jobs, 0 up, 1 down); Pool Hall & Bar 1 (11 jobs, 0 up, 1 down); Farmers Market 1 (11 jobs, 0 up, 1 down); Social Club 1 (11 jobs, 0 up, 1 down); Sports Bar & Grill 1 (11 jobs, 1 up, 0 down); Bakery / Patisserie 1 (11 jobs, 0 up, 1 down); Pizzeria / Restaurant & Dining 1 (11 jobs, 0 up, 1 down); Talent Management 1 (10 jobs, 1 up, 0 down); Bar / nightlife 1 (10 jobs, 1 up, 0 down); Music Venue 1 (9 jobs, 1 up, 0 down); Design Studio 1 (9 jobs, 1 up, 0 down); Theater Company / Performance Space 1 (9 jobs, 1 up, 0 down); Art Gallery 1 (9 jobs, 1 up, 0 down); Music School 1 (9 jobs, 1 up, 0 down); Artist Studios 1 (9 jobs, 1 up, 0 down); Movie Theater 1 (9 jobs, 0 up, 1 down); Synagogue 1 (6 jobs, 0 up, 1 down); Industrial Supply / Services 1 (6 jobs, 1 up, 0 down); Climbing Gym / Services 1 (6 jobs, 1 up, 0 down); Youth Recreation / Community 1 (6 jobs, 1 up, 0 down); Auto Repair / Services 1 (6 jobs, 1 up, 0 down); Community Kitchen 1 (6 jobs, 1 up, 0 down); Outdoor Rental / Services 1 (6 jobs, 1 up, 0 down); Property Management / Real Estate 1 (6 jobs, 1 up, 0 down); Cultural Center / Community / Historic Landmark 1 (6 jobs, 1 up, 0 down); Stadium / Historic Landmark 1 (6 jobs, 1 up, 0 down); Church 1 (5 jobs, 1 up, 0 down); Herbalist & Tea Shop 1 (4 jobs, 1 up, 0 down); Korean Grocery 1 (4 jobs, 1 up, 0 down); Wholesale Grocery 1 (4 jobs, 1 up, 0 down); Pharmacy / Retail 1 (4 jobs, 1 up, 0 down); Wine Shop 1 (4 jobs, 1 up, 0 down); Garden Center / Retail 1 (4 jobs, 0 up, 1 down); Wine & Spirits Shop 1 (4 jobs, 1 up, 0 down); Hardware Store 1 (4 jobs, 1 up, 0 down); Butcher Shop 1 (4 jobs, 0 up, 1 down); Grocery 1 (4 jobs, 1 up, 0 down); Quinceañera & Formalwear Boutique 1 (4 jobs, 1 up, 0 down); Mexican Grocery 1 (4 jobs, 1 up, 0 down); Pawn & Jewelry Shop 1 (4 jobs, 0 up, 1 down); Antiques Shop 1 (4 jobs, 1 up, 0 down); Women's Boutique 1 (4 jobs, 0 up, 1 down); Bike Shop 1 (4 jobs, 1 up, 0 down); Toy Store 1 (4 jobs, 0 up, 1 down); Jewelry Store 1 (4 jobs, 0 up, 1 down); Children's Boutique 1 (4 jobs, 0 up, 1 down); Men's Clothing Store 1 (4 jobs, 1 up, 0 down); Florist Shop 1 (4 jobs, 1 up, 0 down); Corporate 1 (3 jobs, 1 up, 0 down); Faith / Methodist 1 (1 jobs, 1 up, 0 down); Science 1 (0 jobs, 1 up, 0 down) — the rest of the ledger is on Business_Ledger",
+        "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+        "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+        "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+        "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+        "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+        "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+        "Hillside Family Dental (Healthcare), Glenview — 0 employees, revenue $936k, growing -0.7% a year — since C116: yearly growth rate +0.5 pts, revenue -$131, -3 employees",
+        "Bay Tribune (Media & Journalism), Downtown — 63 employees, revenue $19.9M, growing 14.3% a year — since C116: yearly growth rate -0.4 pts, revenue +$54k, +1 employees",
+        "Ridgeline Studio (Architecture), Uptown — 62 employees, revenue $33.1M, growing 16.1% a year — since C116: yearly growth rate -0.2 pts, revenue +$102k, +1 employees",
+        "Atlas Bay Architects (Architecture), Downtown — 87 employees, revenue $43.0M, growing 13.2% a year — since C116: yearly growth rate +0.2 pts, revenue +$109k, +1 employees",
+        "Bayline 6 (Media & Journalism), Jack London — 143 employees, revenue $46.7M, growing 12.9% a year — since C116: yearly growth rate +0.1 pts, revenue +$116k, +1 employees",
+        "DigitalOcean (Cloud Infrastructure), Baylight District — 801 employees, revenue $522.4M, growing 5.2% a year — since C116: yearly growth rate -0.1 pts, revenue +$520k, +1 employees",
+        "Marine Systems (Science), Baylight District — 0 employees, growing -1.8% a year — since C116: yearly growth rate +1.0 pts",
+        "Slopeview Hardware (Retail), Glenview — 7 employees, revenue $630k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+        "Ivy Hill Market (Retail), Ivy Hill — 0 employees, revenue $513k, growing -4.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$463",
+        "Ivy Hill Cafe (Cafe / dining), Ivy Hill — 0 employees, revenue $311k, growing -2.4% a year — since C116: yearly growth rate +1.0 pts, revenue -$146",
+        "Ivy Cleaners (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.9% a year — since C116: yearly growth rate +1.0 pts, revenue -$93",
+        "Fold Laundry (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.8% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+        "Shift Change Kitchen (Restaurant & Dining), San Antonio — 12 employees, revenue $866k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$108",
+        "Lakeshore Cigar Club (Cigar Lounge), Lake Merritt — 11 employees, revenue $722k, growing 4.5% a year — since C116: yearly growth rate +1.0 pts, revenue +$629",
+        "Grand Avenue Wine Bar (Wine Bar), Lake Merritt — 11 employees, revenue $722k, growing 4.8% a year — since C116: yearly growth rate +1.0 pts, revenue +$664",
+        "Baylight Construction Authority (Construction), Baylight District — 451 employees, revenue $31.4M, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$16k",
+        "Lucky Harbor Herbalist & Tea (Herbalist & Tea Shop), Chinatown — 4 employees, revenue $381k, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$199",
+        "Seoul Corner Market (Korean Grocery), KONO — 4 employees, revenue $381k, growing 2.4% a year — since C116: yearly growth rate +1.0 pts, revenue +$178",
+        "Ridgeline Ventures (Venture Capital), Lake Merritt — 12 employees, revenue $4.6M, growing 16.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+        "Gridiron Analytics (Sports Analytics), Temescal — 20 employees, revenue $3.0M, growing 25.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+        "Fruitvale Community Clinic (Healthcare), Fruitvale — 38 employees, revenue $8.2M, growing 13.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$21k",
+        "Coliseum District Development (Real Estate), East Oakland — 31 employees, revenue $19.7M, growing 9.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$34k",
+        "Fruitvale Diner (Restaurant & Dining), Fruitvale — 2 employees, revenue $208k, growing 11.9% a year — since C116: yearly growth rate -1.0 pts, revenue +$475",
+        "Midnight Bistro (Restaurant & Dining), Downtown — 2 employees, revenue $253k, growing 12.5% a year — since C116: yearly growth rate -1.0 pts, revenue +$607",
+        "Estuary Architects (Architecture), Lake Merritt — 45 employees, growing 10.0% a year — since C116: yearly growth rate -1.0 pts",
+        "Romano's (Food & Beverage), Dimond — 16 employees, revenue $1.4M, growing 4.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$1k",
+        "Port Grind (Food & Beverage), Grand Lake — 9 employees, revenue $1.0M, growing 12.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$2k",
+        "B'nai Tikvah Synagogue (Synagogue), Piedmont Ave — 6 employees, revenue $382k, growing 2.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$204",
+        "business-closure | closure: Ivy Hill Family Dental (Healthcare) — 0 jobs | Ivy Hill | mag -25 | targets BIZ-00153",
+        "carryover | carryover: cycle 1 of 4 | Adams Point | mag -8 | targets BIZ-00061",
+        "carryover | carryover: cycle 2 of 4 | Baylight District | mag -8 | targets BIZ-00105",
+        "carryover | carryover: cycle 3 of 4 | Ivy Hill | mag -8 | targets BIZ-00150",
+        "sector-impact:services/retail | Oakland Casino Town lost 3 employees | Baylight District | mag -8 | targets BIZ-00100",
+        "Casino C117: 17 undocked wagers placed, 14 sports wagers placed; 2 settled, 15 voided",
+        "Casino house float: $246k",
+        "Maria Keen won on undocked (no) — staked $385, paid $705",
+        "Jax Caldera lost on undocked (neg) — staked $428, the house kept it",
+        "Downtown: median income $123k, median rent $3k, housing pressure 10, trajectory growth",
+        "Temescal: median income $68k, median rent $2k, housing pressure 0.5, trajectory steady",
+        "Laurel: median income $86k, median rent $2k, housing pressure 0, trajectory decay",
+        "West Oakland: median income $147k, median rent $4k, housing pressure 6.5, trajectory growth",
+        "Fruitvale: median income $100k, median rent $3k, housing pressure 10, trajectory growth",
+        "Jack London: median income $121k, median rent $3k, housing pressure 10, trajectory growth",
+        "Rockridge: median income $162k, median rent $4k, housing pressure 3.5, trajectory steady",
+        "Adams Point: median income $94k, median rent $2k, housing pressure 0, trajectory decay",
+        "Grand Lake: median income $107k, median rent $3k, housing pressure 6, trajectory growth",
+        "Piedmont Ave: median income $151k, median rent $4k, housing pressure 1.5, trajectory growth",
+        "Chinatown: median income $85k, median rent $2k, housing pressure 0, trajectory steady",
+        "Brooklyn: median income $129k, median rent $3k, housing pressure 0, trajectory decay",
+        "Eastlake: median income $83k, median rent $2k, housing pressure 0, trajectory decay",
+        "Glenview: median income $81k, median rent $2k, housing pressure 0, trajectory decay",
+        "Dimond: median income $79k, median rent $2k, housing pressure 0, trajectory decay",
+        "Ivy Hill: median income $77k, median rent $2k, housing pressure 0, trajectory decay",
+        "San Antonio: median income $69k, median rent $2k, housing pressure 0, trajectory decay",
+        "KONO: median income $83k, median rent $2k, housing pressure 1, trajectory steady",
+        "Lake Merritt: median income $186k, median rent $5k, housing pressure 0, trajectory steady",
+        "Uptown: median income $99k, median rent $2k, housing pressure 10, trajectory growth",
+        "Baylight District: median income $139k, median rent $3k, housing pressure 0, trajectory steady",
+        "East Oakland: median income $72k, median rent $2k, housing pressure 0, trajectory steady",
+        "City treasury C117: revenue $5.0M (weekly budget allocation), balance after $136.8M",
+        "City treasury C117: revenue $126k (28 cleared charges, fined at the hood rate), balance after $136.9M"
+      ],
+      "evidence": [
+        {
+          "text": "All 282 businesses by sector, C117: Education 4 (7031 jobs, 1 up, 3 down); Healthcare 9 (5113 jobs, 4 up, 5 down); Utilities 2 (3301 jobs, 2 up, 0 down); Public Transit 2 (3001 jobs, 1 up, 1 down); Port & Logistics 1 (1501 jobs, 1 up, 0 down); Public Services 3 (1401 jobs, 3 up, 0 down); Construction 8 (1287 jobs, 6 up, 2 down); Municipal Government 1 (1201 jobs, 1 up, 0 down); Public Safety 2 (1153 jobs, 2 up, 0 down); Cloud Infrastructure 1 (801 jobs, 0 up, 1 down); Sports Franchise 1 (520 jobs, 1 up, 0 down); Community Platform 1 (350 jobs, 1 up, 0 down); Housing & Social Services 1 (320 jobs, 1 up, 0 down); Architecture 4 (292 jobs, 2 up, 2 down); Nightlife & Entertainment 9 (280 jobs, 6 up, 3 down); Sports 2 (270 jobs, 2 up, 0 down); Media & Journalism 4 (269 jobs, 3 up, 1 down); Restaurant & Dining 27 (264 jobs, 19 up, 8 down); Retail 31 (241 jobs, 16 up, 15 down); Legal & Judicial 1 (222 jobs, 1 up, 0 down); As Stadium 1 (110 jobs, 1 up, 0 down); Faith Organization 9 (103 jobs, 9 up, 0 down); Services 19 (101 jobs, 14 up, 5 down); Agent Communication 1 (100 jobs, 1 up, 0 down); Community Services 1 (94 jobs, 0 up, 1 down); Cafe / dining 10 (91 jobs, 5 up, 4 down); AI Research 1 (86 jobs, 1 up, 0 down); Food & Beverage 5 (62 jobs, 3 up, 2 down); Coworking / Tech Hub 1 (62 jobs, 1 up, 0 down); Civic Tech 2 (51 jobs, 0 up, 2 down); Public Safety / Crisis Response 1 (47 jobs, 1 up, 0 down); Tech 1 (45 jobs, 1 up, 0 down); Tech / Applied Robotics 1 (45 jobs, 1 up, 0 down); Tech / Data Infrastructure 1 (45 jobs, 1 up, 0 down); Tech / Software 1 (45 jobs, 1 up, 0 down); Urban Systems Intelligence Firm 1 (41 jobs, 0 up, 0 down); Veterinary Clinic 1 (38 jobs, 1 up, 0 down); Optometry Clinic 1 (38 jobs, 0 up, 1 down); Urgent Care Clinic 1 (38 jobs, 0 up, 1 down); Pediatric Clinic 1 (38 jobs, 1 up, 0 down); Medical Specialists 1 (38 jobs, 0 up, 1 down); Home Health Agency 1 (38 jobs, 1 up, 0 down); Real Estate 2 (37 jobs, 1 up, 1 down); Fast Food & Quick Service 1 (31 jobs, 0 up, 1 down); Construction Supply 1 (30 jobs, 1 up, 0 down); Cafe / gallery 1 (30 jobs, 1 up, 0 down); Bar / lounge 1 (30 jobs, 1 up, 0 down); Retail & Food 1 (30 jobs, 1 up, 0 down); Sports Bar & Dining 1 (30 jobs, 1 up, 0 down); Finance & Banking 1 (26 jobs, 1 up, 0 down); Law Firm 1 (26 jobs, 1 up, 0 down); Real Estate Finance 1 (26 jobs, 1 up, 0 down); Staffing Agency / Professional Services 1 (26 jobs, 1 up, 0 down); Estate Law 1 (26 jobs, 1 up, 0 down); Wealth Management / Finance 1 (26 jobs, 0 up, 1 down); Management Consulting 1 (26 jobs, 1 up, 0 down); Credit Union / Finance 1 (26 jobs, 1 up, 0 down); Biotech 1 (25 jobs, 1 up, 0 down); Community Development 2 (25 jobs, 2 up, 0 down); Development 1 (25 jobs, 1 up, 0 down); Cafe 2 (22 jobs, 2 up, 0 down); Sports Analytics 1 (20 jobs, 0 up, 1 down); Theater / Historic Landmark 2 (18 jobs, 2 up, 0 down); Transit & Infrastructure 1 (18 jobs, 1 up, 0 down); Tutoring 1 (15 jobs, 1 up, 0 down); Preschool & Early Education 1 (15 jobs, 1 up, 0 down); Private School 1 (15 jobs, 1 up, 0 down); Hospitality 1 (14 jobs, 1 up, 0 down); Venture Capital 1 (12 jobs, 0 up, 1 down); Hair Salon / Services 2 (12 jobs, 1 up, 1 down); Cigar Lounge 1 (11 jobs, 1 up, 0 down); Wine Bar 1 (11 jobs, 1 up, 0 down); Bar / Saloon / Historic Landmark 1 (11 jobs, 1 up, 0 down); Comedy Club 1 (11 jobs, 1 up, 0 down); Brewery 1 (11 jobs, 1 up, 0 down); Dance Club / Nightlife & Entertainment 1 (11 jobs, 1 up, 0 down); Late-Night Restaurant & Dining 1 (11 jobs, 1 up, 0 down); Bar / Lounge 1 (11 jobs, 1 up, 0 down); Korean Restaurant 1 (11 jobs, 1 up, 0 down); Coffee Roaster 1 (11 jobs, 1 up, 0 down); Bakery 1 (11 jobs, 1 up, 0 down); Fusion Restaurant 1 (11 jobs, 1 up, 0 down); Brunch Restaurant 1 (11 jobs, 1 up, 0 down); Karaoke Bar 1 (11 jobs, 1 up, 0 down); Bar 1 (11 jobs, 1 up, 0 down); Ramen Bar 1 (11 jobs, 1 up, 0 down); Small Plates & Natural Wine Bar 1 (11 jobs, 1 up, 0 down); Private Club 1 (11 jobs, 1 up, 0 down); Workforce Development 1 (11 jobs, 1 up, 0 down); Ice Cream / Dessert Cafe 1 (11 jobs, 0 up, 1 down); Taquería / Restaurant 1 (11 jobs, 1 up, 0 down); Vietnamese Restaurant 1 (11 jobs, 1 up, 0 down); Gentlemen's Club / Adult Entertainment 1 (11 jobs, 0 up, 1 down); Pool Hall & Bar 1 (11 jobs, 0 up, 1 down); Farmers Market 1 (11 jobs, 0 up, 1 down); Social Club 1 (11 jobs, 0 up, 1 down); Sports Bar & Grill 1 (11 jobs, 1 up, 0 down); Bakery / Patisserie 1 (11 jobs, 0 up, 1 down); Pizzeria / Restaurant & Dining 1 (11 jobs, 0 up, 1 down); Talent Management 1 (10 jobs, 1 up, 0 down); Bar / nightlife 1 (10 jobs, 1 up, 0 down); Music Venue 1 (9 jobs, 1 up, 0 down); Design Studio 1 (9 jobs, 1 up, 0 down); Theater Company / Performance Space 1 (9 jobs, 1 up, 0 down); Art Gallery 1 (9 jobs, 1 up, 0 down); Music School 1 (9 jobs, 1 up, 0 down); Artist Studios 1 (9 jobs, 1 up, 0 down); Movie Theater 1 (9 jobs, 0 up, 1 down); Synagogue 1 (6 jobs, 0 up, 1 down); Industrial Supply / Services 1 (6 jobs, 1 up, 0 down); Climbing Gym / Services 1 (6 jobs, 1 up, 0 down); Youth Recreation / Community 1 (6 jobs, 1 up, 0 down); Auto Repair / Services 1 (6 jobs, 1 up, 0 down); Community Kitchen 1 (6 jobs, 1 up, 0 down); Outdoor Rental / Services 1 (6 jobs, 1 up, 0 down); Property Management / Real Estate 1 (6 jobs, 1 up, 0 down); Cultural Center / Community / Historic Landmark 1 (6 jobs, 1 up, 0 down); Stadium / Historic Landmark 1 (6 jobs, 1 up, 0 down); Church 1 (5 jobs, 1 up, 0 down); Herbalist & Tea Shop 1 (4 jobs, 1 up, 0 down); Korean Grocery 1 (4 jobs, 1 up, 0 down); Wholesale Grocery 1 (4 jobs, 1 up, 0 down); Pharmacy / Retail 1 (4 jobs, 1 up, 0 down); Wine Shop 1 (4 jobs, 1 up, 0 down); Garden Center / Retail 1 (4 jobs, 0 up, 1 down); Wine & Spirits Shop 1 (4 jobs, 1 up, 0 down); Hardware Store 1 (4 jobs, 1 up, 0 down); Butcher Shop 1 (4 jobs, 0 up, 1 down); Grocery 1 (4 jobs, 1 up, 0 down); Quinceañera & Formalwear Boutique 1 (4 jobs, 1 up, 0 down); Mexican Grocery 1 (4 jobs, 1 up, 0 down); Pawn & Jewelry Shop 1 (4 jobs, 0 up, 1 down); Antiques Shop 1 (4 jobs, 1 up, 0 down); Women's Boutique 1 (4 jobs, 0 up, 1 down); Bike Shop 1 (4 jobs, 1 up, 0 down); Toy Store 1 (4 jobs, 0 up, 1 down); Jewelry Store 1 (4 jobs, 0 up, 1 down); Children's Boutique 1 (4 jobs, 0 up, 1 down); Men's Clothing Store 1 (4 jobs, 1 up, 0 down); Florist Shop 1 (4 jobs, 1 up, 0 down); Corporate 1 (3 jobs, 1 up, 0 down); Faith / Methodist 1 (1 jobs, 1 up, 0 down); Science 1 (0 jobs, 1 up, 0 down) — the rest of the ledger is on Business_Ledger",
+          "src": "output/beats/Business_Ledger.jsonl @C117 vs prev/"
+        },
+        {
+          "text": "Glenview Cafe (Cafe / dining), Glenview — 5 employees, revenue $493k, growing -0.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$31, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00140 vs prev/"
+        },
+        {
+          "text": "Parkridge Cleaners (Services), Glenview — 3 employees, revenue $360k, growing -0.1% a year — since C116: yearly growth rate +1.0 pts, revenue -$6, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00142 vs prev/"
+        },
+        {
+          "text": "Glenview Kitchen (Restaurant & Dining), Glenview — 9 employees, revenue $861k, growing -1.0% a year — since C116: yearly growth rate +1.0 pts, revenue -$161, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00144 vs prev/"
+        },
+        {
+          "text": "Oakland Casino Town (Nightlife & Entertainment), Baylight District — 94 employees, growing -1.5% a year — since C116: yearly growth rate +1.0 pts, -3 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00100 vs prev/"
+        },
+        {
+          "text": "Hillcrest Kitchen (Restaurant & Dining), Ivy Hill — 0 employees, revenue $572k, growing -3.3% a year — since C116: yearly growth rate +1.0 pts, revenue -$364, -1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00154 vs prev/"
+        },
+        {
+          "text": "Northshore Dental (Healthcare), Adams Point — 1 employees, revenue $1.3M, growing -0.1% a year — since C116: yearly growth rate +0.9 pts, revenue -$12, -3 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00110 vs prev/"
+        },
+        {
+          "text": "Hillside Family Dental (Healthcare), Glenview — 0 employees, revenue $936k, growing -0.7% a year — since C116: yearly growth rate +0.5 pts, revenue -$131, -3 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00141 vs prev/"
+        },
+        {
+          "text": "Bay Tribune (Media & Journalism), Downtown — 63 employees, revenue $19.9M, growing 14.3% a year — since C116: yearly growth rate -0.4 pts, revenue +$54k, +1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00018 vs prev/"
+        },
+        {
+          "text": "Ridgeline Studio (Architecture), Uptown — 62 employees, revenue $33.1M, growing 16.1% a year — since C116: yearly growth rate -0.2 pts, revenue +$102k, +1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00053 vs prev/"
+        },
+        {
+          "text": "Atlas Bay Architects (Architecture), Downtown — 87 employees, revenue $43.0M, growing 13.2% a year — since C116: yearly growth rate +0.2 pts, revenue +$109k, +1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00089 vs prev/"
+        },
+        {
+          "text": "Bayline 6 (Media & Journalism), Jack London — 143 employees, revenue $46.7M, growing 12.9% a year — since C116: yearly growth rate +0.1 pts, revenue +$116k, +1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00183 vs prev/"
+        },
+        {
+          "text": "DigitalOcean (Cloud Infrastructure), Baylight District — 801 employees, revenue $522.4M, growing 5.2% a year — since C116: yearly growth rate -0.1 pts, revenue +$520k, +1 employees",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00002 vs prev/"
+        },
+        {
+          "text": "Marine Systems (Science), Baylight District — 0 employees, growing -1.8% a year — since C116: yearly growth rate +1.0 pts",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00105 vs prev/"
+        },
+        {
+          "text": "Slopeview Hardware (Retail), Glenview — 7 employees, revenue $630k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00143 vs prev/"
+        },
+        {
+          "text": "Ivy Hill Market (Retail), Ivy Hill — 0 employees, revenue $513k, growing -4.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$463",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00150 vs prev/"
+        },
+        {
+          "text": "Ivy Hill Cafe (Cafe / dining), Ivy Hill — 0 employees, revenue $311k, growing -2.4% a year — since C116: yearly growth rate +1.0 pts, revenue -$146",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00151 vs prev/"
+        },
+        {
+          "text": "Ivy Cleaners (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.9% a year — since C116: yearly growth rate +1.0 pts, revenue -$93",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00152 vs prev/"
+        },
+        {
+          "text": "Fold Laundry (Services), Ivy Hill — 0 employees, revenue $258k, growing -1.8% a year — since C116: yearly growth rate +1.0 pts, revenue -$89",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00155 vs prev/"
+        },
+        {
+          "text": "Shift Change Kitchen (Restaurant & Dining), San Antonio — 12 employees, revenue $866k, growing -0.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$108",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00172 vs prev/"
+        },
+        {
+          "text": "Lakeshore Cigar Club (Cigar Lounge), Lake Merritt — 11 employees, revenue $722k, growing 4.5% a year — since C116: yearly growth rate +1.0 pts, revenue +$629",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00241 vs prev/"
+        },
+        {
+          "text": "Grand Avenue Wine Bar (Wine Bar), Lake Merritt — 11 employees, revenue $722k, growing 4.8% a year — since C116: yearly growth rate +1.0 pts, revenue +$664",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00242 vs prev/"
+        },
+        {
+          "text": "Baylight Construction Authority (Construction), Baylight District — 451 employees, revenue $31.4M, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$16k",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00020 vs prev/"
+        },
+        {
+          "text": "Lucky Harbor Herbalist & Tea (Herbalist & Tea Shop), Chinatown — 4 employees, revenue $381k, growing 2.7% a year — since C116: yearly growth rate +1.0 pts, revenue +$199",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00206 vs prev/"
+        },
+        {
+          "text": "Seoul Corner Market (Korean Grocery), KONO — 4 employees, revenue $381k, growing 2.4% a year — since C116: yearly growth rate +1.0 pts, revenue +$178",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00215 vs prev/"
+        },
+        {
+          "text": "Ridgeline Ventures (Venture Capital), Lake Merritt — 12 employees, revenue $4.6M, growing 16.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00007 vs prev/"
+        },
+        {
+          "text": "Gridiron Analytics (Sports Analytics), Temescal — 20 employees, revenue $3.0M, growing 25.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$15k",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00008 vs prev/"
+        },
+        {
+          "text": "Fruitvale Community Clinic (Healthcare), Fruitvale — 38 employees, revenue $8.2M, growing 13.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$21k",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00026 vs prev/"
+        },
+        {
+          "text": "Coliseum District Development (Real Estate), East Oakland — 31 employees, revenue $19.7M, growing 9.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$34k",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00029 vs prev/"
+        },
+        {
+          "text": "Fruitvale Diner (Restaurant & Dining), Fruitvale — 2 employees, revenue $208k, growing 11.9% a year — since C116: yearly growth rate -1.0 pts, revenue +$475",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00045 vs prev/"
+        },
+        {
+          "text": "Midnight Bistro (Restaurant & Dining), Downtown — 2 employees, revenue $253k, growing 12.5% a year — since C116: yearly growth rate -1.0 pts, revenue +$607",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00049 vs prev/"
+        },
+        {
+          "text": "Estuary Architects (Architecture), Lake Merritt — 45 employees, growing 10.0% a year — since C116: yearly growth rate -1.0 pts",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00055 vs prev/"
+        },
+        {
+          "text": "Romano's (Food & Beverage), Dimond — 16 employees, revenue $1.4M, growing 4.4% a year — since C116: yearly growth rate -1.0 pts, revenue +$1k",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00075 vs prev/"
+        },
+        {
+          "text": "Port Grind (Food & Beverage), Grand Lake — 9 employees, revenue $1.0M, growing 12.1% a year — since C116: yearly growth rate -1.0 pts, revenue +$2k",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00076 vs prev/"
+        },
+        {
+          "text": "B'nai Tikvah Synagogue (Synagogue), Piedmont Ave — 6 employees, revenue $382k, growing 2.8% a year — since C116: yearly growth rate -1.0 pts, revenue +$204",
+          "src": "output/beats/Business_Ledger.jsonl @C117 BIZ-00092 vs prev/"
+        },
+        {
+          "text": "business-closure | closure: Ivy Hill Family Dental (Healthcare) — 0 jobs | Ivy Hill | mag -25 | targets BIZ-00153",
+          "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+        },
+        {
+          "text": "carryover | carryover: cycle 1 of 4 | Adams Point | mag -8 | targets BIZ-00061",
+          "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+        },
+        {
+          "text": "carryover | carryover: cycle 2 of 4 | Baylight District | mag -8 | targets BIZ-00105",
+          "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+        },
+        {
+          "text": "carryover | carryover: cycle 3 of 4 | Ivy Hill | mag -8 | targets BIZ-00150",
+          "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+        },
+        {
+          "text": "sector-impact:services/retail | Oakland Casino Town lost 3 employees | Baylight District | mag -8 | targets BIZ-00100",
+          "src": "output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)"
+        },
+        {
+          "text": "Casino C117: 17 undocked wagers placed, 14 sports wagers placed; 2 settled, 15 voided",
+          "src": "output/beats/Casino_Ledger.jsonl @C117"
+        },
+        {
+          "text": "Casino house float: $246k",
+          "src": "output/beats/Casino_Ledger.jsonl HOUSE"
+        },
+        {
+          "text": "Maria Keen won on undocked (no) — staked $385, paid $705",
+          "src": "output/beats/Casino_Ledger.jsonl 0f679cb015012003"
+        },
+        {
+          "text": "Jax Caldera lost on undocked (neg) — staked $428, the house kept it",
+          "src": "output/beats/Casino_Ledger.jsonl 91a9400c9b3e9a11"
+        },
+        {
+          "text": "Downtown: median income $123k, median rent $3k, housing pressure 10, trajectory growth",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Temescal: median income $68k, median rent $2k, housing pressure 0.5, trajectory steady",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Laurel: median income $86k, median rent $2k, housing pressure 0, trajectory decay",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "West Oakland: median income $147k, median rent $4k, housing pressure 6.5, trajectory growth",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Fruitvale: median income $100k, median rent $3k, housing pressure 10, trajectory growth",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Jack London: median income $121k, median rent $3k, housing pressure 10, trajectory growth",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Rockridge: median income $162k, median rent $4k, housing pressure 3.5, trajectory steady",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Adams Point: median income $94k, median rent $2k, housing pressure 0, trajectory decay",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Grand Lake: median income $107k, median rent $3k, housing pressure 6, trajectory growth",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Piedmont Ave: median income $151k, median rent $4k, housing pressure 1.5, trajectory growth",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Chinatown: median income $85k, median rent $2k, housing pressure 0, trajectory steady",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Brooklyn: median income $129k, median rent $3k, housing pressure 0, trajectory decay",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Eastlake: median income $83k, median rent $2k, housing pressure 0, trajectory decay",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Glenview: median income $81k, median rent $2k, housing pressure 0, trajectory decay",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Dimond: median income $79k, median rent $2k, housing pressure 0, trajectory decay",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Ivy Hill: median income $77k, median rent $2k, housing pressure 0, trajectory decay",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "San Antonio: median income $69k, median rent $2k, housing pressure 0, trajectory decay",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "KONO: median income $83k, median rent $2k, housing pressure 1, trajectory steady",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Lake Merritt: median income $186k, median rent $5k, housing pressure 0, trajectory steady",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Uptown: median income $99k, median rent $2k, housing pressure 10, trajectory growth",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "Baylight District: median income $139k, median rent $3k, housing pressure 0, trajectory steady",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "East Oakland: median income $72k, median rent $2k, housing pressure 0, trajectory steady",
+          "src": "output/beats/Neighborhood_Map.jsonl @C117"
+        },
+        {
+          "text": "City treasury C117: revenue $5.0M (weekly budget allocation), balance after $136.8M",
+          "src": "output/beats/City_Treasury.jsonl @C117"
+        },
+        {
+          "text": "City treasury C117: revenue $126k (28 cleared charges, fined at the hood rate), balance after $136.9M",
+          "src": "output/beats/City_Treasury.jsonl @C117"
+        }
+      ],
+      "forbidden": [
+        "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+        "Do not contradict a role, employer or neighborhood listed here",
+        "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+      ],
+      "deltas": {
+        "state": "PRIOR_CYCLE_ON_DISK",
+        "vs": 116
+      },
+      "hooks": [],
+      "note": null,
+      "pageVoices": [],
+      "factCap": 68,
+      "peopleCap": 25,
+      "roomIsYours": ""
+    },
+    "citizens": [
+      {
+        "popid": "POP-00042",
+        "name": "Ramon Vega",
+        "role": "City Council District 4",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Ramon Vega — City Council District 4 — Lake Merritt — C117: staked $392 on sports (win), open",
+        "why": "C117: staked $392 on sports (win), open"
+      },
+      {
+        "popid": "POP-00131",
+        "name": "Lorenzo Jordan",
+        "role": "Public Defender",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Lorenzo Jordan — Public Defender — Downtown — C117: staked $189 on undocked (pos), open",
+        "why": "C117: staked $189 on undocked (pos), open"
+      },
+      {
+        "popid": "POP-00142",
+        "name": "Jonas Patel",
+        "role": "MEDICAL EXAMINER",
+        "neighborhood": "Chinatown",
+        "business": null,
+        "profile": "Jonas Patel — MEDICAL EXAMINER — Chinatown — C117: staked $552 on sports (loss), open",
+        "why": "C117: staked $552 on sports (loss), open"
+      },
+      {
+        "popid": "POP-00023",
+        "name": "Gregory Mims",
+        "role": "Organized Crime",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Gregory Mims — Organized Crime — West Oakland — Organized Crime at Oakland Casino Town (-3 employees this cycle); C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner",
+        "why": "Organized Crime at Oakland Casino Town (-3 employees this cycle); C117: saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner"
+      },
+      {
+        "popid": "POP-00027",
+        "name": "Philly Rodriguez",
+        "role": "Casino Manager",
+        "neighborhood": "West Oakland",
+        "business": null,
+        "profile": "Philly Rodriguez — Casino Manager — West Oakland — Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch",
+        "why": "Casino Manager at Oakland Casino Town (-3 employees this cycle); C117: showed up to work with a burp cloth still on one shoulder and didn't notice until lunch"
+      },
+      {
+        "popid": "POP-00028",
+        "name": "Manfred Owens",
+        "role": "Booky",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Manfred Owens — Booky — Jack London — Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day",
+        "why": "Booky at Oakland Casino Town (-3 employees this cycle); C117: left a cousin's birthday card unsigned on the counter past the day"
+      },
+      {
+        "popid": "POP-00132",
+        "name": "Tobias Jurko",
+        "role": "Landscape Architect",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Tobias Jurko — Landscape Architect — Piedmont Ave — Landscape Architect at Atlas Bay Architects (+1 employees this cycle); C117: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "why": "Landscape Architect at Atlas Bay Architects (+1 employees this cycle); C117: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots"
+      },
+      {
+        "popid": "POP-00135",
+        "name": "Mina Linas",
+        "role": "Sea Level Monitoring Technician",
+        "neighborhood": "Lake Merritt",
+        "business": null,
+        "profile": "Mina Linas — Sea Level Monitoring Technician — Lake Merritt — Sea Level Monitoring Technician at DigitalOcean (+1 employees this cycle); C117: said no to something and felt the shape of who they are in it",
+        "why": "Sea Level Monitoring Technician at DigitalOcean (+1 employees this cycle); C117: said no to something and felt the shape of who they are in it"
+      },
+      {
+        "popid": "POP-00299",
+        "name": "Joel Henry",
+        "role": "Plumber",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Joel Henry — Plumber — Uptown — Plumber at Bay Tribune (+1 employees this cycle); C117: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+        "why": "Plumber at Bay Tribune (+1 employees this cycle); C117: read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline"
+      },
+      {
+        "popid": "POP-00546",
+        "name": "Tara Ellison",
+        "role": "Journalist",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Tara Ellison — Journalist — Rockridge — Journalist at Bay Tribune (+1 employees this cycle); C117: checked in with a relative",
+        "why": "Journalist at Bay Tribune (+1 employees this cycle); C117: checked in with a relative"
+      },
+      {
+        "popid": "POP-00595",
+        "name": "Sarah Corliss",
+        "role": "Capacity Analyst, DigitalOcean",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Sarah Corliss — Capacity Analyst, DigitalOcean — Jack London — Capacity Analyst, DigitalOcean at DigitalOcean (+1 employees this cycle); C117: told the story of their first A's game again, and nobody minded",
+        "why": "Capacity Analyst, DigitalOcean at DigitalOcean (+1 employees this cycle); C117: told the story of their first A's game again, and nobody minded"
+      },
+      {
+        "popid": "POP-00596",
+        "name": "Michael Corliss",
+        "role": "Photographer",
+        "neighborhood": "KONO",
+        "business": null,
+        "profile": "Michael Corliss — Photographer — KONO — Photographer at Bay Tribune (+1 employees this cycle); C117: hung the new Oaks banner in the window facing the street",
+        "why": "Photographer at Bay Tribune (+1 employees this cycle); C117: hung the new Oaks banner in the window facing the street"
+      },
+      {
+        "popid": "POP-01049",
+        "name": "Sarah Huang",
+        "role": "Healthcare Director, Atlas Bay Architects",
+        "neighborhood": "Grand Lake",
+        "business": null,
+        "profile": "Sarah Huang — Healthcare Director, Atlas Bay Architects — Grand Lake — Healthcare Director, Atlas Bay Architects at Atlas Bay Architects (+1 employees this cycle); C117: kept score by hand at the kitchen table the way their father taught them near a busy shopping block",
+        "why": "Healthcare Director, Atlas Bay Architects at Atlas Bay Architects (+1 employees this cycle); C117: kept score by hand at the kitchen table the way their father taught them near a busy shopping block"
+      },
+      {
+        "popid": "POP-01057",
+        "name": "Nina Reyes",
+        "role": "actress",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Nina Reyes — actress — Fruitvale — actress at Bay Tribune (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "why": "actress at Bay Tribune (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard"
+      },
+      {
+        "popid": "POP-01064",
+        "name": "Pixel Pete",
+        "role": "streamer",
+        "neighborhood": "Rockridge",
+        "business": null,
+        "profile": "Pixel Pete — streamer — Rockridge — streamer at Bay Tribune (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "why": "streamer at Bay Tribune (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard"
+      },
+      {
+        "popid": "POP-01068",
+        "name": "Kai Tanaka",
+        "role": "artist",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Kai Tanaka — artist — Fruitvale — artist at Bayline 6 (+1 employees this cycle); C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them",
+        "why": "artist at Bayline 6 (+1 employees this cycle); C117: watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to beat them"
+      },
+      {
+        "popid": "POP-01070",
+        "name": "Rosa Martinez",
+        "role": "Studio Assistant",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Rosa Martinez — Studio Assistant — Downtown — Studio Assistant at Bayline 6 (+1 employees this cycle); C117: heard a song they did not know and changed the station before the chorus",
+        "why": "Studio Assistant at Bayline 6 (+1 employees this cycle); C117: heard a song they did not know and changed the station before the chorus"
+      },
+      {
+        "popid": "POP-01071",
+        "name": "Claire Ashford",
+        "role": "author",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Claire Ashford — author — Piedmont Ave — author at Atlas Bay Architects (+1 employees this cycle); C117: caught themselves arguing with a new idea before they had heard the end of it",
+        "why": "author at Atlas Bay Architects (+1 employees this cycle); C117: caught themselves arguing with a new idea before they had heard the end of it"
+      },
+      {
+        "popid": "POP-01073",
+        "name": "Li Wei",
+        "role": "Studio Assistant",
+        "neighborhood": "Fruitvale",
+        "business": null,
+        "profile": "Li Wei — Studio Assistant — Fruitvale — Studio Assistant at Ridgeline Studio (+1 employees this cycle); C117: felt the city's pace pulling them forward",
+        "why": "Studio Assistant at Ridgeline Studio (+1 employees this cycle); C117: felt the city's pace pulling them forward"
+      },
+      {
+        "popid": "POP-01075",
+        "name": "Marcus Duval",
+        "role": "actor",
+        "neighborhood": "Laurel",
+        "business": null,
+        "profile": "Marcus Duval — actor — Laurel — actor at Bayline 6 (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+        "why": "actor at Bayline 6 (+1 employees this cycle); C117: attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard"
+      },
+      {
+        "popid": "POP-01098",
+        "name": "Naomi Castellanos",
+        "role": "Principal, Ridgeline Studio",
+        "neighborhood": "Piedmont Ave",
+        "business": null,
+        "profile": "Naomi Castellanos — Principal, Ridgeline Studio — Piedmont Ave — Principal, Ridgeline Studio at Ridgeline Studio (+1 employees this cycle); C117: ran into neighbors at The Keane Family Block Party",
+        "why": "Principal, Ridgeline Studio at Ridgeline Studio (+1 employees this cycle); C117: ran into neighbors at The Keane Family Block Party"
+      },
+      {
+        "popid": "POP-00180",
+        "name": "Cameron Wallen",
+        "role": "Corporate Accountant",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Cameron Wallen — Corporate Accountant — Downtown — C117: paid a bill early just because the option existed near a busy plaza",
+        "why": "C117: paid a bill early just because the option existed near a busy plaza"
+      },
+      {
+        "popid": "POP-00208",
+        "name": "Patrick When",
+        "role": "Janitor",
+        "neighborhood": "Downtown",
+        "business": null,
+        "profile": "Patrick When — Janitor — Downtown — C117: did rent math on the back of an envelope and sat back hard",
+        "why": "C117: did rent math on the back of an envelope and sat back hard"
+      },
+      {
+        "popid": "POP-00237",
+        "name": "Jerry Nelson",
+        "role": "Janitor",
+        "neighborhood": "Uptown",
+        "business": null,
+        "profile": "Jerry Nelson — Janitor — Uptown — C117: mopped the gym floor into drying stripes and waited by the door",
+        "why": "C117: mopped the gym floor into drying stripes and waited by the door"
+      },
+      {
+        "popid": "POP-00243",
+        "name": "Xanny Allen",
+        "role": "Warehouse worker",
+        "neighborhood": "Jack London",
+        "business": null,
+        "profile": "Xanny Allen — Warehouse worker — Jack London — C117: set up automatic transfers to the savings account and felt briefly like an adult near a venue doorway",
+        "why": "C117: set up automatic transfers to the savings account and felt briefly like an adult near a venue doorway"
+      }
+    ],
+    "pointers": [
+      "the economy record of C117"
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153",
+    "text": "Working headline: who is losing hours at the casino while Baylight grows. I'll start with the Business_Ledger row for Oakland Casino Town and pull the C116 and C117 headcounts side by side. Then I'll read the Casino_Ledger and Initiative_Tracker for context on the voided wagers and any casino program that touches jobs. I'll ask Deputy Mayor Osei what the -3 means: layoffs, attrition or shift cuts, and which roles. I'll ask Philly Rodriguez, Manfred Owens and Gregory Mims what changed on the floor, whether they are among the three, and what their pay and hours look like now. Then I'll set the casino against the hiring at DigitalOcean, the architecture firms and Bayline 6 to show who is gettin",
+    "plan": {
+      "chase": "Working headline: who is losing hours at the casino while Baylight grows. I'll start with the Business_Ledger row for Oakland Casino Town and pull the C116 and C117 headcounts side by side. Then I'll read the Casino_Ledger and Initiative_Tracker for context on the voided wagers and any casino program that touches jobs. I'll ask Deputy Mayor Osei what the -3 means: layoffs, attrition or shift cuts, and which roles. I'll ask Philly Rodriguez, Manfred Owens and Gregory Mims what changed on the floor, whether they are among the three, and what their pay and hours look like now. Then I'll set the casino against the hiring at DigitalOcean, the architecture firms and Bayline 6 to show who is gettin",
+      "focus": "Oakland Casino Town lost 3 jobs this cycle, while the firms around it in Baylight, Jack London and Downtown each added 1. I want to know who the three people are and what the job losses say about who gains from the casino.",
+      "why": "The Business_Ledger shows Oakland Casino Town at 94 employees, down 3 since C116. Its yearly growth rate is -1.5%. The ripple ledger logs the loss as a sector impact at magnitude -8. In the same cycle, DigitalOcean, Bayline 6, Atlas Bay, Ridgeline Studio and the Tribune each added one job. The casino's own ledger shows 17 undocked and 14 sports wagers placed, with only 2 settled and 15 voided. The house float is $246k. Three named casino workers live in West Oakland and Jack London, which is my ",
+      "checks": [
+        "Confirm in the Business_Ledger that the Oakland Casino Town headcount fell by 3 between C116 and C117, and find which roles were cut.",
+        "Check whether the named casino workers (Rodriguez, Owens, Mims) are actually among the three, or whether the row only tags their employer.",
+        "Ask what '15 voided' wagers means in the Casino_Ledger before I say anything about casino activity.",
+        "Check the Tribune archive via canon_recall for earlier casino staffing or Baylight jobs coverage so I don't repeat it or contradict it.",
+        "Compare the +1 hires at DigitalOcean, Atlas Bay, Ridgeline, Bayline 6 and the Tribune with the casino cut, and note that the Tribune is my own employer.",
+        "Get pay and hours figures from sources. I will not estimate wages from the record."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00027",
+          "question": "You manage the floor at Oakland Casino Town, and the casino lost 3 people this cycle. Who went, was it layoffs or attrition, and what are the remaining staff's hours and pay like now?",
+          "basis": "Casino Manager at Oakland Casino Town, which shows -3 employees this cycle. She lives in West Oakland."
+        },
+        {
+          "pop": "POP-00028",
+          "question": "You work the book at the casino and live in Jack London. Has your shift or your volume changed, and who is picking up the work of the three who left?",
+          "basis": "Booky at Oakland Casino Town, -3 employees this cycle. He lives in Jack London, which is a high-housing-pressure neighborhood."
+        },
+        {
+          "pop": "POP-00023",
+          "question": "What have you seen change around the casino and West Oakland as staffing shrank, and is the neighborhood feeling any benefit from the casino?",
+          "basis": "Listed under Organized Crime at Oakland Casino Town, in West Oakland, and tied to the same -3 employee change. He is a possible source for the neighborhood's view."
+        }
+      ],
+      "interpretation": "A 3-job drop at a 94-person employer is small in absolute terms. It still runs against the +1 pattern at the Baylight-area firms, and the casino's yearly growth is -1.5%. My hunch is that the Baylight boom is not reaching the nightlife and service workers who live nearby. I haven't established that yet. West Oakland's median rent and income figures suggest the neighborhood is going upmarket, but the average hides who is being priced out.",
+      "unverifiedLead": [
+        "Whether the -3 at Casino Town are layoffs, quits or a reclassification. The ledger doesn't say.",
+        "Whether the 15 voided wagers reflect a system or compliance issue at the casino, or are routine.",
+        "Whether any of the three named casino workers are actually among those who left.",
+        "Whether Ivy Hill's run of businesses at 0 employees, plus the Ivy Hill Family Dental closure, is a bigger story than the casino cut."
+      ]
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+      "kind": "anomaly",
+      "hood": "Downtown",
+      "ref": "output/engine_audit_c117.json patterns[0]; evidence: Initiative_Tracker row(s) 8; storyline INIT-008:vote-scheduled",
+      "popids": [
+        "POP-00688",
+        "POP-00753",
+        "POP-00764"
+      ]
+    },
+    {
+      "label": "economic ailment — economic footprint, affected businesses, workforce impact in Dimond | Business conditions in Dimond track the economic picture.",
+      "kind": "anomaly",
+      "hood": "Dimond",
+      "ref": "output/engine_audit_c117.json patterns[1]; evidence: Initiative_Tracker row(s) 12; storyline INIT-012:announced",
+      "popids": [
+        "POP-01146",
+        "POP-01199",
+        "POP-01205"
+      ]
+    },
+    {
+      "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale | Business conditions in Fruitvale track the transit picture.",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c117.json patterns[4]; evidence: Neighborhood_Map row(s) 6",
+      "popids": [
+        "POP-00598",
+        "POP-00744",
+        "POP-00953"
+      ]
+    },
+    {
+      "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c117.json patterns[8]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-01116",
+        "POP-01125",
+        "POP-01136"
+      ]
+    },
+    {
+      "label": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale | Business momentum in Fruitvale tracks the transit gain.",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c117.json patterns[9]; evidence: Initiative_Tracker row(s) 4; storyline INIT-003:design-phase",
+      "popids": [
+        "POP-00231",
+        "POP-00754",
+        "POP-01057"
+      ]
+    }
+  ],
+  "laneEntries": 46,
+  "angleCapHits": 0,
+  "ranAt": "2026-11-23T12:15:55.810Z"
+}

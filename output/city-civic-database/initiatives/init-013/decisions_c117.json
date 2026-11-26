@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-013",
+  "initiativeId": "INIT-013",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-012)",
+  "consolidatedFrom": [
+    "STMT-117-mayor_gavel-012 (Mayor gavel — Duplicative Ivy Hill filing hold)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-013",
+    "ImplementationPhase": "stalled",
+    "MilestoneNotes": "C117: No verified filing or nonduplication record is supplied; INIT-013 is stalled pending a distinct scope and separation from INIT-011 and INIT-014.",
+    "NextScheduledAction": "Publish a distinct scope and nonduplication record before any Clerk-verified filing",
+    "NextActionCycle": 118
+  }
+}

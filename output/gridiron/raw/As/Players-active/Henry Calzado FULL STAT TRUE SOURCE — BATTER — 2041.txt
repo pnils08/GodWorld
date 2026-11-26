@@ -1,0 +1,158 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Henry Calzado
+Team: Athletics
+Position: C
+Jersey: #35
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: C
+Overall: 75
+MLB Service: 3.071
+Age: 30
+Bats: L
+Throws: R
+Height: 6'3"
+Weight: 194 lbs
+Drafted: Round 2 (2029)
+Secondary Position: NONE
+Hitter Tendency: WHOLE FIELD
+Born: PUERTO RICO
+Canonical POPID: POP-01240
+
+--------------------------------------------------
+
+ATTRIBUTES (game screen)
+
+CON R: 63
+CON L: 59
+POW R: 59
+POW L: 59
+VIS: 64
+DISC: 56
+CLT: 56
+BUNT: 26
+DBUNT: 22
+DUR: 85
+FLD: 60
+ARM: 77
+ACC: 68
+REAC: 55
+BLK: 63
+SPD: 38
+STEAL: 24
+BR AGG: 63
+
+--------------------------------------------------
+
+ATTRIBUTE HISTORY
+
+ATTR    WAS      NOW   CHANGE
+CON R   63        63    0
+CON L   59        59    0
+POW R   59        59    0
+POW L   59        59    0
+VIS     64        64    0
+DISC    55        56    +1
+CLT     56        56    0
+BUNT    27        26    -1
+DBUNT   22        22    0
+DUR     85        85    0
+FLD     60        60    0
+ARM     78        77    -1
+ACC     68        68    0
+REAC    55        55    0
+BLK     63        63    0
+SPD     39        38    -1
+STEAL   24        24    0
+BR AGG  63        63    0
+
+NOW = the latest attributes screen.
+WAS = NOW value minus the change marker shown on that screen;
+the cycle of that earlier reading is not shown in the game.
+
+--------------------------------------------------
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   AB   R   H   2B  3B  HR  RBI  BB  SO  SB  CS  AVG   OBP   SLG
+2041  ATH   73  242  35  69  15  1   11  33   12  42  4   2   .285  .326  .492
+2040  ATH   46  150  19  36  6   0   2   15   18  28  3   2   .240  .318  .320
+Pre-2037 (derived)  -  48  167  14  32  8  0  4  13  14  45  4  0  .192  .258  .311
+
+--------------------------------------------------
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS   PA   SF  SAC  GIDP  HBP  IBB  TB   SB%    PO   A   E  FLD%  INN    WAR
+2041  ATH   .818  258  1   0    6     3    0    119  .667   668  43  2  .997  619.0  2.4
+2040  ATH   .638  171  2   1    4     0    0    48   .600   425  32  1  .998  403.0  0.8
+Pre-2037 (derived)  -  .569  182  0  0  2  1  0  52  1.000  452  36  3  .994  427.2  0.0
+
+Note: 2037-2039 show 0 G on the game screen and are left off. The Pre-2037 rows are
+career totals minus 2040 and 2041; the season rows below 2037 were not on screen.
+
+--------------------------------------------------
+
+CAREER TOTALS
+
+G: 167
+AB: 559
+R: 68
+H: 137
+2B: 29
+3B: 1
+HR: 17
+RBI: 61
+BB: 44
+SO: 115
+SB: 11
+CS: 4
+AVG: .245
+OBP: .303
+SLG: .392
+OPS: .695
+TB: 219
+PO: 1545
+A: 111
+E: 6
+FLD%: .996
+INN: 1449.2
+WAR: 3.2
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2042–2044: Arbitration (ARB)
+2045–2051: Free Agent (FA)
+
+Note: the contract screen starts at 2042 and shows no salary figure.
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Option: 3/3 Used
+Playoff Eligible: - (shown as a dash on screen)
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+METADATA & VERIFICATION FOOTER
+--------------------------------------------------
+TS Code: TS-MLB-ATH-2041-01232
+Verification Tag: Screen-Checked
+Steward of Record: Claude Staged
+POPID: POP-01240
+==================================================

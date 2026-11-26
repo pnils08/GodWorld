@@ -1,0 +1,226 @@
+{
+  "office": "council_d4",
+  "agentDir": "civic-office-council-d4",
+  "holder": "Ramon Vega",
+  "popid": "POP-00042",
+  "title": "City Council District 4",
+  "date": "2026-11-25",
+  "cycle": 117,
+  "model": "openai/gpt-6-luna",
+  "statement": "Dimond’s record shows a mixed picture: sentiment was unchanged, crime index eased slightly, and retail vitality fell. The brief also records a Dimond Emergency Town Briefing and a garbage-truck dumping incident marked cleared, but it does not provide the briefing’s findings or document the status of outstanding service questions in Dimond or Glenview. I will not fill those gaps with assumptions or treat an event label as proof that follow-up is complete. I’m asking for the underlying service records before making a stronger claim; no initiative move is justified by this record alone.",
+  "moves": [
+    {
+      "type": "answer",
+      "payload": {
+        "confrontationId": "CONF-117-civic-office-council-d4",
+        "text": "The C117 record for Dimond shows sentiment at -0.01, unchanged from the prior reading; crime index at 0.69, down from 0.70; and retail vitality at 4.38, down from 6.51. It records a Dimond Emergency Town Briefing, but provides no findings from that briefing. It also records a garbage-truck dumping incident marked cleared; that entry does not establish the status of any other service request. For Glenview, the brief provides neighborhood measurements but no service-question or follow-up record. I cannot verify from the available record whether outstanding service questions in either neighborhood have been resolved. Please provide the underlying service records and any documented follow-up before we describe them as complete.",
+        "directiveCycle": 117,
+        "confrontationSeat": "civic-office-council-d4"
+      }
+    }
+  ],
+  "movesRejected": [],
+  "numberMoved": "1",
+  "ranAt": "2026-11-25T11:45:59.855Z",
+  "usage": {
+    "prompt_tokens": 8047,
+    "completion_tokens": 834,
+    "total_tokens": 8881,
+    "cost": 0.001242595,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 1567,
+      "cache_write_tokens": 6477,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.001242595,
+      "upstream_inference_prompt_cost": 0.000825595,
+      "upstream_inference_completions_cost": 0.000417
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 516,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "fellBackFrom": null,
+  "evidenceGenerationHash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+  "evidenceReads": [
+    {
+      "round": 1,
+      "requests": [
+        {
+          "type": "event",
+          "id": "EV-summary-e81e23328b61c78f"
+        },
+        {
+          "type": "district",
+          "id": "D4"
+        }
+      ],
+      "replies": [
+        {
+          "key": "event/EV-summary-e81e23328b61c78f",
+          "available": true,
+          "generationHash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+          "data": {
+            "eventId": "EV-summary-e81e23328b61c78f",
+            "sourceRef": "output/world_summary_c117.md:116",
+            "sourceRevision": "bce09add1c9e456ff6532443fc0fa0825707d333dc0504874db3e5aa116fe8a8",
+            "occurredCycle": 117,
+            "status": "occurred",
+            "observedAt": "2026-11-22T23:52:30.201Z",
+            "category": "city-event",
+            "significance": "local",
+            "hoods": [
+              "Dimond"
+            ],
+            "citywideRelevance": false,
+            "entityIds": [],
+            "facts": [
+              "Dimond Emergency Town Briefing (Dimond)"
+            ],
+            "aliases": []
+          }
+        },
+        {
+          "key": "district/D4",
+          "available": true,
+          "generationHash": "ebd6bdab22a320c900af5997e94d07e45d45e836434c98a019d27a2e357b38e6",
+          "data": {
+            "available": true,
+            "district": "D4",
+            "neighborhoods": [
+              {
+                "hood": "Glenview",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.12",
+                    "previous": "0.06",
+                    "change": 0.06
+                  },
+                  "CrimeIndex": {
+                    "value": "0.72",
+                    "previous": "0.69",
+                    "change": 0.030000000000000027
+                  },
+                  "RetailVitality": {
+                    "value": "6.21",
+                    "previous": "6.15",
+                    "change": 0.05999999999999961
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  }
+                },
+                "sourceRef": "Neighborhood_Map (fire close)"
+              },
+              {
+                "hood": "Dimond",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "-0.01",
+                    "previous": "-0.01",
+                    "change": 0
+                  },
+                  "CrimeIndex": {
+                    "value": "0.69",
+                    "previous": "0.7",
+                    "change": -0.010000000000000009
+                  },
+                  "RetailVitality": {
+                    "value": "4.38",
+                    "previous": "6.51",
+                    "change": -2.13
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "0",
+                    "previous": "1",
+                    "change": -1
+                  }
+                },
+                "sourceRef": "Neighborhood_Map (fire close)"
+              },
+              {
+                "hood": "Ivy Hill",
+                "available": true,
+                "measured": {
+                  "Sentiment": {
+                    "value": "0.01",
+                    "previous": "-0.06",
+                    "change": 0.06999999999999999
+                  },
+                  "CrimeIndex": {
+                    "value": "0.69",
+                    "previous": "0.67",
+                    "change": 0.019999999999999907
+                  },
+                  "RetailVitality": {
+                    "value": "5.05",
+                    "previous": "5.54",
+                    "change": -0.4900000000000002
+                  },
+                  "HousingPressure": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  },
+                  "NeighborhoodTrajectory": {
+                    "value": "decay",
+                    "previous": "decay",
+                    "change": null
+                  },
+                  "TrajectoryMomentum": {
+                    "value": "0",
+                    "previous": "0",
+                    "change": 0
+                  }
+                },
+                "sourceRef": "Neighborhood_Map (fire close)"
+              }
+            ],
+            "previousCycleAvailable": true
+          }
+        }
+      ]
+    }
+  ],
+  "provider": "OpenAI",
+  "finishReason": "stop",
+  "elapsedMs": 6694,
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00042",
+    "id": "T4ULN4jY2LJ5KiQii3s8rw",
+    "customId": "cp-POP-00042-c117-CIVIC-datawake-2026-11-25"
+  }
+}

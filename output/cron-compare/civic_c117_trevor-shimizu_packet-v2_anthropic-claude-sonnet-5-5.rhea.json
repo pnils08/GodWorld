@@ -1,0 +1,89 @@
+{
+  "draft": "output/cron-compare/civic_c117_trevor-shimizu_packet-v2_anthropic-claude-sonnet-5-5.md",
+  "cycle": "117",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d557eecf8abf1ef282e9c2b5939c55947ccda1dfc4d1b306172e84f41ea1dce2",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen quotes, transit data, corridor metrics, and sports references match Cycle 117 ground truth exactly with zero sourcing failures.",
+  "review": {
+    "profileId": "trevor-shimizu",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "trevor-transit-v2",
+    "packageVersion": "TREVOR-LEP2-3",
+    "manifestId": "AM-93a73cf33a02",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "213",
+          "112",
+          "162",
+          "89%",
+          "115",
+          "526",
+          "0.12",
+          "107",
+          "191",
+          "114",
+          "011",
+          "699",
+          "11"
+        ]
+      }
+    ],
+    "pageLines": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Eleanor Rivera",
+      "Elena Soria Dominguez",
+      "Evan Lewis",
+      "Trevor Shimizu",
+      "Ximena Mehta"
+    ],
+    "unverified": [
+      "International Blvd",
+      "Soria Dominguez",
+      "St Oakland City Center"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "pageContradictions": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0159,
+  "durationMs": 10294,
+  "parseError": false,
+  "ranAt": "2026-11-24T00:19:58.120Z",
+  "contractScore": {
+    "opened": true,
+    "purposeMet": true,
+    "inTarget": true,
+    "inTargetBy": "judge",
+    "words": 887,
+    "short": "",
+    "score": 3,
+    "max": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "d557eecf8abf1ef282e9c2b5939c55947ccda1dfc4d1b306172e84f41ea1dce2",
+    "costUsd": 0.0011
+  }
+}

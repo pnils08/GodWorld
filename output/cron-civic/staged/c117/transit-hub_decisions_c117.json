@@ -1,0 +1,18 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 117,
+  "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+  "consolidatedFrom": [
+    "STMT-117-mayor_gavel-003 (Mayor gavel — Fruitvale Transit Hub schematics and community review)",
+    "STMT-117-transit_hub-001 (Soria Dominguez — INIT-003 complete-entry versus open design review — where the unfinished work...)",
+    "STMT-117-transit_hub-002 (Soria Dominguez — Fruitvale answer desk and the public comment log)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-003",
+    "ImplementationPhase": "design-phase",
+    "MilestoneNotes": "C117: Further design advancement is held; preliminary schematics and a documented Fruitvale public comment-and-response record are not evidenced in the packet.",
+    "NextScheduledAction": "Deliver preliminary schematics and publish the documented Fruitvale public comment-and-response record",
+    "NextActionCycle": 118
+  }
+}

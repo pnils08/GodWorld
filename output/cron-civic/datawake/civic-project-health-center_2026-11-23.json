@@ -1,0 +1,66 @@
+{
+  "office": "health_center",
+  "agentDir": "civic-project-health-center",
+  "holder": "Bobby Chen-Ramirez",
+  "popid": "POP-00792",
+  "title": "Health Center Project Director",
+  "date": "2026-11-23",
+  "cycle": 117,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "statement": "**Weekly report — Cycle 117, Temescal Community Health Center (INIT-005)**\n\n**The Q3 filing did not happen.** I want that at the top of this report, not buried in the middle. When I wrote last cycle I said I'd file the Q3 intake audit with HCAI and the Clerk and complete the Telegraph & 47th merchant walkthrough before oversight certification. The tracker now tells me plainly that certification is withheld pending verified Q3 filing and a documented walkthrough, with the next scheduled action moved to cycle 118. I'm not going to dress that up as a procedural delay caused by the system. The schedule I set is the schedule I own. Next cycle is the filing and the walkthrough, and I'll report the receipt number and the walkthrough notes, not my intentions.\n\n**Budget.** $15,230,769.20 remaining on $45M — down from $15,576,923.05 last cycle. No city payments posted this cycle; the movement is the work we already committed to. That's where the project should be at this stage and I won't pretend otherwise. But I'm mindful that a center running this far under its total is only good news if the money is going where the need is, and that's the question the audit is supposed to answer.\n\n**What the numbers show.** Citywide: 34 intakes against 68 in care at the start, 68 at the end, 34 exits, no transfers either direction. The system is flat — the same 34/68/68 as last cycle. Look back further and there's the part that matters: intakes have been sliding, 36, 35, 35, 34, 34, 34, while exits and the in-care count come down in step. Fewer people in care every cycle. I'm not going to call that a win just because the beds match. Temescal this cycle: 2 intakes, 4 in care, 4 beds. That's the building doing its job. Whether it's doing enough of the job is exactly what I don't have a verified answer to yet.\n\n**The need.** Temescal has 77 residents sick. But East Oakland is at 113, Ivy Hill 109, Fruitvale 108, San Antonio 104, Laurel 101. Chinatown is 133 — the heaviest on the board — and Rockridge and Grand Lake are both at 96. Six cycles ago those figures were higher across the board, and the drop is real, but it isn't a door I can point to. Our center sits in one neighborhood and the sickest neighborhoods on this map are three or four buses away for a lot of people who live in them. That's the knot and I'm not going to loosen it with a good paragraph.\n\n**Programs and events.** Five health programs active — East Bay Harm Reduction Alliance and Foothill Baptist Tabernacle's seniors lunch in East Oakland, the Postpartum Oakland Network in Fruitvale, Elders in Place citywide, New Covenant Pentecostal's seniors lunch in West Oakland. No health events logged this cycle; the last on the ledger is the medium-severity spike in Piedmont Ave in cycle 116, which I flagged last week. I'll say this much: East Oakland and West Oakland carry some of the heaviest need on the map and each has exactly one of those programs inside its neighborhood, while our two heaviest-load neighborhoods, East Oakland and Chinatown, are not where our center is. Worth keeping in view when the walkthrough finally happens.\n\n**What I'm doing next cycle.** File the Q3 intake audit with HCAI and the Council Clerk and bring back the date and confirmation. Walk Telegraph & 47th myself, with notes — who's referring, who's being turned away, and whether the corridor connects people to the center or just to the front desk. Until those two are on the record, I'm withholding my own verdict as firmly as the city is withholding the certification. The hours have to match the need, and I intend to be the one who says whether they do.\n\n— Bobby Chen-Ramirez, Health Center Project Director, Temescal",
+  "moves": [],
+  "movesRejected": [],
+  "numberMoved": null,
+  "ranAt": "2026-11-23T11:47:56.630Z",
+  "usage": {
+    "prompt_tokens": 9766,
+    "completion_tokens": 1049,
+    "cost": 0.0024
+  },
+  "fellBackFrom": null,
+  "template": "worker/2",
+  "toolTrace": [
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "The city's payments on INIT-005",
+        "from_cycle": 112
+      },
+      "resultChars": 83
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Hospital intakes, citywide by Cycle",
+        "from_cycle": 112
+      },
+      "resultChars": 395
+    },
+    {
+      "tool": "record_read",
+      "input": {
+        "record": "Health events on the city's event ledger",
+        "from_cycle": 112
+      },
+      "resultChars": 246
+    }
+  ],
+  "memory": {
+    "searchedOn": "health center clinic patients",
+    "entries": 5,
+    "fromSearch": 3,
+    "newest": 2,
+    "failed": []
+  },
+  "figuresNotHanded": [],
+  "finishReason": "stop",
+  "dutyKind": "regular",
+  "eventKeys": [],
+  "decisionSchema": "legacy",
+  "positionWall": {
+    "recorded": true,
+    "tag": "cp-POP-00792",
+    "id": "yLy4A3cCoXMfPJBo7phjSk",
+    "customId": "cp-POP-00792-c117-CIVIC-datawake-2026-11-23"
+  }
+}

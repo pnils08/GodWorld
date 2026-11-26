@@ -471,7 +471,7 @@ function build(cycle, { root, beats, profiles }) {
   const leadHood = (todays[0] && todays[0].neighborhood) || (people.find(p => p.popid === leadFact.popid) || {}).hood || null;
   // The ref carries the day: the fanout drops a beat seat whose ref was already filed this Cycle
   // (newsroom-fanout.js staleBeatRef) — right for a weekly seat, fatal for a daily one.
-  return K.makeSlice(SEAT, cycle, beats, { livedFacts: false,
+  return K.makeSlice(SEAT, cycle, beats, {
     ref: evSrc + ' ' + dayToken(day), hood: leadHood,
     label: 'the lives of C' + cycle,
     angle: 'the lives of C' + cycle,

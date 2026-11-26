@@ -206,38 +206,9 @@ function citizenTags(people) {
  * Assemble the common slice shape. `seat` = { slug, name, popid, desk, kind, domain, approach, roomIsYours }.
  * `body` = { hood, label, angle, hookLine, facts:[{text,src}], people:[person], deltas, hooks, note, extra }.
  */
-// What happened to the record's people this Cycle, as facts: each person's own life-log lines, whole, with the row
-// as source (C117 read 2026-11-26: Angela's seat-file morning held 44 facts, every one a table or a headcount, and
-// her 30 people's weeks only inside the interview list — she wrote the table). A seat's own picking still decides.
-const LIVED_LINES_PER_PERSON = 3;
-function livedFacts(people, cycle, beats, cap) {
-  const log = (beats && beats.LifeHistory_Log) || [];
-  if (!log.length) return [];
-  const byPop = new Map();
-  for (const r of log) {
-    if (String(r.Cycle) !== String(cycle)) continue;
-    const text = String(r.EventText || '').trim();
-    const id = String(r.POPID || '').toUpperCase();
-    if (!text || !id) continue;
-    if (!byPop.has(id)) byPop.set(id, []);
-    const lines = byPop.get(id);
-    if (!lines.includes(text)) lines.push(text);
-  }
-  const out = [];
-  for (const p of people.slice(0, cap)) {
-    const lines = (byPop.get(String(p.popid).toUpperCase()) || []).slice(0, LIVED_LINES_PER_PERSON);
-    if (!lines.length) continue;
-    const who = [p.name, p.role, p.neighborhood].filter(Boolean).join(', ');
-    for (const line of lines) out.push({ text: who + ' — ' + line, src: 'output/beats/LifeHistory_Log.jsonl ' + p.popid + ' @C' + cycle });
-  }
-  return out;
-}
-
 function makeSlice(seat, cycle, beats, body) {
   const people = body.people || [];
-  // a record already built of its people's lives (Lives) carries them its own way
-  const lived = body.livedFacts === false ? [] : livedFacts(people, cycle, beats, Number(body.peopleCap) || 12);
-  const facts = lived.concat((body.facts || []).filter(f => !lived.some(l => l.text === f.text)));
+  const facts = body.facts || [];
   return {
     version: seat.version, empty: false, cycle: Number(cycle), kind: seat.kind, seat: {
       slug: seat.slug, name: seat.name, popid: seat.popid, desk: seat.desk, domain: seat.domain
@@ -260,7 +231,7 @@ function makeSlice(seat, cycle, beats, body) {
       // pipeline.70: what the citizens' own pages say — colour and sourcing, never a number in print.
       pageVoices: body.pageVoices || [],
       // a seat whose slice is threads (Lives) asks the prompt for more than the default 12 fact lines
-      ...(body.factCap ? { factCap: Number(body.factCap) + lived.length } : {}),
+      ...(body.factCap ? { factCap: Number(body.factCap) } : {}),
       ...(body.peopleCap ? { peopleCap: Number(body.peopleCap) } : {}),
       ...(body.factChars ? { factChars: Number(body.factChars) } : {}),
       roomIsYours: seat.roomIsYours

@@ -275,8 +275,13 @@ function spotTag_(tags) {
   return false;
 }
 
-function citizenSpotFor_(hoodSpots, popId) {
+// engine.356 cut C (builder 2026-11-26: "Let's build it and see how it looks"): pickedId is the citizen's own
+// pick (Simulation_Ledger SpotBizId, written by their wake). It is their spot while it is on the list handed
+// in — a business that closed, changed class, or sits in a hood they left is not on it, and the fixed-hash
+// pick below stands in. No roll either way.
+function citizenSpotFor_(hoodSpots, popId, pickedId) {
   if (!hoodSpots || !hoodSpots.length || !popId) return null;
+  if (pickedId) for (var p = 0; p < hoodSpots.length; p++) if (String(hoodSpots[p].id) === pickedId) return hoodSpots[p];
   var best = null, bestRank = -1;
   for (var i = 0; i < hoodSpots.length; i++) {
     var sp = hoodSpots[i], rk = spotRank_(popId, sp.id);
@@ -498,6 +503,15 @@ function generateCitizensEvents_(ctx) {
   var iFirst = idx("First");
   var iLast = idx("Last");
   var iNeighborhood = idx("Neighborhood");
+  // engine.356 cut C: each citizen's own pick of a spot (blank for almost everyone; no column → no picks)
+  var iSpotPick = idx("SpotBizId");
+  var spotPickByPop_ = {};
+  var spotPicks = { stored: 0, honored: 0 };
+  if (iSpotPick >= 0 && iPopID >= 0) for (var spr = 0; spr < rows.length; spr++) {
+    var spv = String(rows[spr][iSpotPick] || '').trim();
+    if (spv) spotPickByPop_[rows[spr][iPopID]] = spv;
+  }
+  S.spotPicks = spotPicks;
 
   // v2.5: Optional attributes (no schema requirement)
   var iBirthYear = idx("BirthYear");
@@ -1720,7 +1734,7 @@ function generateCitizensEvents_(ctx) {
       spots = fit;
     }
     if (spots && spots.length) {
-      var own = popId ? citizenSpotFor_(spots, popId) : null;
+      var own = popId ? citizenSpotFor_(spots, popId, spotPickByPop_[popId]) : null;
       var sp = (own && roll() < 0.5) ? own : spots[Math.floor(roll() * spots.length)];
       lastPlace_ = { id: sp.id, name: sp.name };
       return sp.name;
@@ -3611,7 +3625,9 @@ function generateCitizensEvents_(ctx) {
 
     // engine.214 8a Cut C: what happened at the citizen's own spot this week (S.hoodSpots, Phase5-BusinessDynamics;
     // unset when that phase failed → nothing offered).
-    var spotPool = citizenSpotLines_(citizenSpotFor_(S.hoodSpots ? S.hoodSpots[citizenHood] : null, popId));
+    var ownSpot = citizenSpotFor_(S.hoodSpots ? S.hoodSpots[citizenHood] : null, popId, spotPickByPop_[popId]);
+    if (spotPickByPop_[popId]) { spotPicks.stored++; if (ownSpot && String(ownSpot.id) === spotPickByPop_[popId]) spotPicks.honored++; }
+    var spotPool = citizenSpotLines_(ownSpot);
     for (var spi = 0; spi < spotPool.length; spi++) {
       pool.push(makeEntry(spotPool[spi].text, mergeTags(spotPool[spi].tags, calendarTags), spotPool[spi].weight, false));
     }

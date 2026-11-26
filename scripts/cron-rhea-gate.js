@@ -392,11 +392,25 @@ function readAgentFile(rel) {
 // Each page is capped at PAGE_LINE_CAP chars — every self-initiated page is under it (max 4,083
 // at 2026-10-25); the cap bounds a pathological row, it never cuts a real one (agy #5).
 const PAGE_LINE_CAP = 8000;
+// pipeline.111 (2026-11-25, Jax C117 held: "Fabricated speech attributed to … Elias Varek" for a line that is word for word in
+// his Civis Systems Journal, which Jax's record hands him): a journal entry on the record is its author's own written words,
+// shown to the gate beside the page lines. The record line reads "<Name>, Civis Systems Journal, C<N>: <entry>".
+function journalLinesFromManifest(manifest) {
+  const out = [];
+  for (const f of (manifest && manifest.approvedFacts) || []) {
+    if (!/^output\/civis-journal\/civis_journal_c\d+\.md$/.test(String(f.src || ''))) continue;
+    const m = /^(.+?), Civis Systems Journal, C(\d+): ([\s\S]+)$/.exec(String(f.text || ''));
+    if (m) out.push({ customId: f.src, name: m[1].trim(), text: m[3].slice(0, PAGE_LINE_CAP) });
+  }
+  return out;
+}
+
 function pageLinesFromManifest(manifest, deps) {
+  const journal = journalLinesFromManifest(manifest);
   const facts = (manifest && manifest.approvedFacts) || [];
   const subjects = new Map(((manifest && manifest.approvedSubjects) || []).map(s => [s.id, s.name]));
   const wanted = facts.map(f => /citizen_pages\/index\.jsonl (cp-\S+)/.exec(String(f.src || ''))).filter(Boolean).map(m => m[1]);
-  if (!wanted.length) return [];
+  if (!wanted.length) return journal;
   let index = deps && deps.index;
   if (!index) {
     try { index = require('./scanCitizenPages').loadIndex(ROOT); }
@@ -412,7 +426,7 @@ function pageLinesFromManifest(manifest, deps) {
     const missing = wanted.filter(id => !out.some(p => p.customId === id));
     log.warn('page lines: ' + out.length + '/' + wanted.length + ' resolved; not in the page store: ' + missing.join(', '));
   }
-  return out;
+  return out.concat(journal);
 }
 
 function loadReviewContext(persona, articlePacketFile, draftText, cycle) {
@@ -916,5 +930,5 @@ module.exports = {
   scanEngineVerbiage,
   scanStructuralJunk,
   contractWordFloor, contractWordCount, buildContractPrompt, parseContractScore, // pipeline.77
-  pageLinesFromManifest, PAGE_LINE_CAP, // pipeline.85
+  pageLinesFromManifest, journalLinesFromManifest, PAGE_LINE_CAP, // pipeline.85; journal lines pipeline.111
 };

@@ -39,6 +39,7 @@ const { buildPool, coResidents, loadLifeArc, loadDayMoments, loadSportsSlice, lo
   loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
   lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageKey, wakeAdmission, owedPageStep, loadOwedRecords, acquireFileLock,
   SHOW_RESERVE, owedFromShow, showCandidates, showWakesUsed, showMarkSpent } = require('/root/GodWorld/lib/wakePerception');
+const spotPick = require('/root/GodWorld/lib/spotPick'); // engine.356 cut C: the citizen's own pick of a spot
 const nextChapter = require('/root/GodWorld/lib/nextChapter'); // engine.338: the builder's question → the citizen's MOVE → an Advancement_Intake1 row // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed; pipeline.95 show
 const showRecord = require('./undockedShowRecord'); // pipeline.95 — a pilot's UNDOCKED nights, read from the show's files
 const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
@@ -397,7 +398,14 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   const tensionBlock = openTensions.length
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';
-  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine, showFenced, question);
+  const { system, user: userBase, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine, showFenced, question);
+
+  // engine.356 cut C (builder 2026-11-26: "Let's build it and see how it looks") — a citizen whose own words named
+  // a place of their hood is shown the hood's places at their next wake and may end on a SPOT line. Off while the
+  // ledger has no SpotBizId column (c.spotPick === null); --spot-ask with --dry-run shows the ask to any citizen.
+  let spot = null;
+  try { spot = spotPick.prepare(c, { force: DRY && ARGV.includes('--spot-ask') }); } catch (e) { logLine('spot: the hood\'s places could not be read (non-fatal, no ask this wake): ' + e.message); }
+  const user = spot && spot.ask ? userBase + '\n\n' + spot.block : userBase;
 
   // Record what this wake put in front of the citizen, BEFORE they answer. Names come
   // from two shapes: POPIDs we know structurally (neighbours, bonds), and names that
@@ -434,13 +442,16 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   console.log('\n--- reflection ---\n' + reply + '\n------------------');
   // engine.338 — builder 2026-11-21: a question is not a job pick; the answer is read as his words only, nothing filed
   const parsedMove = null;
-  const reflection = parsedMove ? parsedMove.text : reply;
+  // engine.356 cut C: an asked wake's SPOT line is read and taken off the words that go to the page
+  const spotParsed = spot && spot.ask ? spotPick.parsePick(reply, spot.spots) : { text: reply, pick: null, raw: '' };
+  const reflection = parsedMove ? parsedMove.text : spotParsed.text;
   if (parsedMove) logLine(`next-chapter: ${c.popId} answered "${question.slice(0, 80)}" -> ${parsedMove.move ? 'role=' + parsedMove.move.role + (parsedMove.move.where ? ' where=' + parsedMove.move.where : '') : parsedMove.reason}`);
 
   if (DRY) {
     if (parsedMove) await fileNextChapter(c, cycle, question, parsedMove, true);
     const tags = await classifier.classifyTripleReflection_(reflection, openTensions.map((t) => t.q));
     logLine(`[dry-run] would classify -> ${JSON.stringify(tags)}; no writes (incl. no tension-state write)`);
+    for (const l of await spotPick.settle(spot, c, cycle, spotParsed, reflection, { dry: true })) logLine(l);
     process.exit(0);
   }
 
@@ -554,6 +565,9 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   // 5) recall bookkeeping (live runs only). pipeline.73 — the lived event is spent only here, after the
   // page write landed (a failed append exits above and the event waits). engine.197: spent per recipient,
   // eventId:POPID — another survivor of the same death still perceives it if drawn. Receipts age out.
+  // engine.356 cut C — after the page landed: an asked wake's pick goes to the citizen's own ledger cell; a wake
+  // that named a place owes the next one the ask. A failure here is logged and never fails the wake.
+  try { for (const l of await spotPick.settle(spot, c, cycle, spotParsed, reflection, { sheets })) logLine(l); } catch (e) { logLine('spot: not settled (non-fatal): ' + e.message); }
   const spentKey = recordLivedSpend(state, lived, c.popId, cycle);
   saveState(state);
   if (spentKey && !((loadState().livedSpent || {})[spentKey])) {

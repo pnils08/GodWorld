@@ -5,7 +5,7 @@
 //      not the fixed-hash one. (0 such lines = NOT PROVEN.)
 //   2. A wrong-hood or unknown pick is ignored: no line of that citizen is placed at it, and a spot: line of theirs
 //      names the fixed-hash spot.
-//   3. The picks are still on the bench ledger after the fire (the engine writes the ledger back whole).
+//   3. The picks are still on the bench Spot_Picks tab after the fire.
 //   4. The week is a week: row count within 15% of the unseeded run's.
 //   Counted: good-pick citizens' lines placed at their pick (PlaceId), the half-the-time venue path.
 const { sheets, fs, U } = require('./bench');
@@ -29,10 +29,9 @@ const C = String(process.argv[2]), LABEL = String(process.argv[3] || 'full');
       if (r[3] === p.biz || r[1].indexOf('place:' + p.biz) >= 0) problems.push(r[0] + ' (' + p.kind + ') placed at the ignored pick ' + p.biz);
       if (isSpot(r)) { if (r[2].indexOf(p.hashName) >= 0) t.ignoredSpotLinesOnHash++; else problems.push(r[0] + ' (' + p.kind + ') spot line not at the hash spot ' + p.hashName + ': ' + r[2].slice(0, 120)); } }
   }
-  const led = await sheets.getRawSheetData('Simulation_Ledger'), iPop = led[0].indexOf('POPID'), iPick = led[0].indexOf('SpotBizId');
-  if (iPick < 0) problems.push('SpotBizId is gone from the bench ledger after the fire');
-  else { const cell = {}; for (let i = 1; i < led.length; i++) cell[U(led[i][iPop])] = String(led[i][iPick] || '');
-    for (const p of seed) { if (cell[p.pop] === p.biz) t.cellsKept++; else problems.push(p.pop + ' cell after the fire: "' + cell[p.pop] + '", seeded ' + p.biz); } }
+  let tab = null; try { tab = await sheets.getRawSheetData('Spot_Picks'); } catch (e) { problems.push('Spot_Picks is gone from the bench after the fire'); }
+  if (tab) { const last = {}; for (let i = 1; i < tab.length; i++) last[U(tab[i][1])] = String(tab[i][2] || '');
+    for (const p of seed) { if (last[p.pop] === p.biz) t.cellsKept++; else problems.push(p.pop + ' last row after the fire: "' + last[p.pop] + '", seeded ' + p.biz); } }
   if (Math.abs(log.length - full.length) > 0.15 * full.length) problems.push('row count ' + log.length + ' vs the unseeded run ' + full.length);
   if (!t.spotLinesOnPick) notProven.push('no good-pick citizen drew a spot line');
   if (!t.placedAtPick) notProven.push('no good-pick citizen had a line placed at the pick');

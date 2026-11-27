@@ -276,8 +276,8 @@ function spotTag_(tags) {
 }
 
 // engine.356 cut C (builder 2026-11-26: "Let's build it and see how it looks"): pickedId is the citizen's own
-// pick (Simulation_Ledger SpotBizId, written by their wake). It is their spot while it is on the list handed
-// in — a business that closed, changed class, or sits in a hood they left is not on it, and the fixed-hash
+// pick (their last row on the Spot_Picks tab, appended by their wake). It is their spot while it is on the list
+// handed in — a business that closed, changed class, or sits in a hood they left is not on it, and the fixed-hash
 // pick below stands in. No roll either way.
 function citizenSpotFor_(hoodSpots, popId, pickedId) {
   if (!hoodSpots || !hoodSpots.length || !popId) return null;
@@ -503,15 +503,24 @@ function generateCitizensEvents_(ctx) {
   var iFirst = idx("First");
   var iLast = idx("Last");
   var iNeighborhood = idx("Neighborhood");
-  // engine.356 cut C: each citizen's own pick of a spot (blank for almost everyone; no column → no picks)
-  var iSpotPick = idx("SpotBizId");
+  // engine.356 cut C: each citizen's own pick of a spot — Spot_Picks (POPID, BizId), the last row a citizen wins,
+  // a blank BizId clears. No tab, an unreadable tab or no rows → no picks (the fixed-hash spot for everyone).
+  // stored: citizens holding a pick; reached: of those, who drew a week; honored: of those, the pick was their spot
   var spotPickByPop_ = {};
-  // stored: cells holding a pick; reached: of those, citizens who drew a week; honored: of those, the pick was their spot
   var spotPicks = { stored: 0, reached: 0, honored: 0 };
-  if (iSpotPick >= 0 && iPopID >= 0) for (var spr = 0; spr < rows.length; spr++) {
-    var spv = String(rows[spr][iSpotPick] || '').trim();
-    if (spv) { spotPickByPop_[rows[spr][iPopID]] = spv; spotPicks.stored++; }
-  }
+  try {
+    var spSheet = ctx.ss ? ctx.ss.getSheetByName('Spot_Picks') : null;
+    if (spSheet && spSheet.getLastRow() > 1) {
+      var spVals = spSheet.getDataRange().getValues();
+      var spPop = spVals[0].indexOf('POPID'), spBiz = spVals[0].indexOf('BizId');
+      if (spPop >= 0 && spBiz >= 0) for (var spr = 1; spr < spVals.length; spr++) {
+        var spKey = String(spVals[spr][spPop] || '').trim().toUpperCase();
+        if (spKey) spotPickByPop_[spKey] = String(spVals[spr][spBiz] || '').trim();
+      }
+      for (var spk in spotPickByPop_) if (spotPickByPop_[spk]) spotPicks.stored++;
+    }
+  } catch (spErr) { spotPickByPop_ = {}; if (typeof Logger !== 'undefined') Logger.log('generateCitizensEvents_ Spot_Picks unreadable, no picks this Cycle: ' + spErr.message); }
+  function spotPickOf_(pid) { return spotPickByPop_[String(pid || '').trim().toUpperCase()] || ''; }
 
   // v2.5: Optional attributes (no schema requirement)
   var iBirthYear = idx("BirthYear");
@@ -1735,7 +1744,7 @@ function generateCitizensEvents_(ctx) {
       spots = fit;
     }
     if (spots && spots.length) {
-      var own = popId ? citizenSpotFor_(spots, popId, spotPickByPop_[popId]) : null;
+      var own = popId ? citizenSpotFor_(spots, popId, spotPickOf_(popId)) : null;
       var sp = (own && roll() < 0.5) ? own : spots[Math.floor(roll() * spots.length)];
       lastPlace_ = { id: sp.id, name: sp.name };
       return sp.name;
@@ -3626,8 +3635,9 @@ function generateCitizensEvents_(ctx) {
 
     // engine.214 8a Cut C: what happened at the citizen's own spot this week (S.hoodSpots, Phase5-BusinessDynamics;
     // unset when that phase failed → nothing offered).
-    var ownSpot = citizenSpotFor_(S.hoodSpots ? S.hoodSpots[citizenHood] : null, popId, spotPickByPop_[popId]);
-    if (spotPickByPop_[popId]) { spotPicks.reached++; if (ownSpot && String(ownSpot.id) === spotPickByPop_[popId]) spotPicks.honored++; }
+    var ownPick = spotPickOf_(popId);
+    var ownSpot = citizenSpotFor_(S.hoodSpots ? S.hoodSpots[citizenHood] : null, popId, ownPick);
+    if (ownPick) { spotPicks.reached++; if (ownSpot && String(ownSpot.id) === ownPick) spotPicks.honored++; }
     var spotPool = citizenSpotLines_(ownSpot);
     for (var spi = 0; spi < spotPool.length; spi++) {
       pool.push(makeEntry(spotPool[spi].text, mergeTags(spotPool[spi].tags, calendarTags), spotPool[spi].weight, false));

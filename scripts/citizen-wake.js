@@ -401,8 +401,8 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   const { system, user: userBase, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine, showFenced, question);
 
   // engine.356 cut C (builder 2026-11-26: "Let's build it and see how it looks") — a citizen whose own words named
-  // a place of their hood is shown the hood's places at their next wake and may end on a SPOT line. Off while the
-  // ledger has no SpotBizId column (c.spotPick === null); --spot-ask with --dry-run shows the ask to any citizen.
+  // a place of their hood is shown the hood's places at their next wake and may end on a SPOT line. Off until
+  // output/spot-ask-state.json exists (made with the Spot_Picks tab); --spot-ask with --dry-run shows the ask to any citizen.
   let spot = null;
   try { spot = spotPick.prepare(c, { force: DRY && ARGV.includes('--spot-ask') }); } catch (e) { logLine('spot: the hood\'s places could not be read (non-fatal, no ask this wake): ' + e.message); }
   const user = spot && spot.ask ? userBase + '\n\n' + spot.block : userBase;
@@ -565,7 +565,7 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   // 5) recall bookkeeping (live runs only). pipeline.73 — the lived event is spent only here, after the
   // page write landed (a failed append exits above and the event waits). engine.197: spent per recipient,
   // eventId:POPID — another survivor of the same death still perceives it if drawn. Receipts age out.
-  // engine.356 cut C — after the page landed: an asked wake's pick goes to the citizen's own ledger cell; a wake
+  // engine.356 cut C — after the page landed: an asked wake's pick is appended to Spot_Picks; a wake
   // that named a place owes the next one the ask. A failure here is logged and never fails the wake.
   try { for (const l of await spotPick.settle(spot, c, cycle, spotParsed, reflection, { sheets })) logLine(l); } catch (e) { logLine('spot: not settled (non-fatal): ' + e.message); }
   const spentKey = recordLivedSpend(state, lived, c.popId, cycle);

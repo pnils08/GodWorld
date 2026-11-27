@@ -9,7 +9,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.354 | 331 job tags are wrong | needs-info | engine-sheet | — |
-| engine.370 | More places, West Oakland first (builder 11-27): 8 minted, 2 → 10 spots. His calls: Blue Lantern's hood, Spooky Spirits' label, owners; next hood | needs-info | engine-sheet | — |
+| engine.370 | More places, West Oakland first (builder 11-27): 8 minted, Blue Lantern moved in, 12 spots. Read C118: Oscar Ruiz minted as owner. His: SpeedyBurger's owner | needs-info | engine-sheet | — |
 | engine.331 | Sports triggers: C115 read, every pitch traces to a word; P3 fails, 142 signed fan lines a week vs 37–74 before — his call | needs-info | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 | engine.94 | Memory that fires: C115 B.2 re-read, every hood at 0, 14 defaulted carriers; 24 rows unapplied and the challenger call wait on him | needs-info | engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] §Status log engine.94 B.3 v3 live reads |
 | civic.47 | Civic autonomy, the one plan (builder 11-01). A1 landed; F7 transit reader live (@173); M1 Mara live 11-03; the rest of the plan is open; A2 waits on his go | needs-info | research-build | [[../plans/2026-10-31-civic-autonomy]] |

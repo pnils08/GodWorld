@@ -1,0 +1,84 @@
+# City feed — C117 (dry run, nothing written)
+
+## faith → elliot-graye
+
+**CF-117-faith-1** · Imam Aziz Rahimi (Faith Leader, Masjid An-Nur Oakland)
+
+Masjid An-Nur Oakland (East Oakland), C117 — crisis response: community grief gathering organized (attendance 56). Masjid An-Nur Oakland (East Oakland), C115 — community program: seniors lunch program marks milestone (attendance 50). Masjid An-Nur Oakland (East Oakland), C114 — community program: after-school tutoring program expands (attendance 43). The Faith Ledger lists Masjid An-Nur Oakland's C114 event as "after-school tutoring program expands," attendance 43. The Faith Ledger lists Masjid An-Nur Oakland's C115 event as "seniors lunch program marks milestone," attendance 50. The Faith Ledger lists Masjid An-Nur Oakland's C111 event as "food pantry serves neighbors in need," attendance 50. The Faith Ledger lists Masjid An-Nur Oakland's C110 event as "seniors lunch program marks milestone," attendance 52. The world-events ledger files the C117 entry "Masjid An-Nur Oakland: community grief gathering organized" under the FAITH domain with severity medium. Faith_Organizations lists Masjid An-Nur Oakland as Muslim, in East Oakland, founded 1978, congregation 400, led by Imam Aziz Rahimi, with the character "African American Muslim heritage." Is this the masjid's first crisis_response row in the ledger, after earlier rows that were all community programs?
+
+- StoryAngle: Is this the masjid's first crisis_response row in the ledger, after earlier rows that were all community programs?
+- Storyline: faith:imam-aziz-rahimi:c117
+- Seats: elliot-graye
+- Refs:
+  - output/beats/Faith_Ledger.jsonl C117 "Masjid An-Nur Oakland"
+  - output/beats/Faith_Ledger.jsonl C115 "Masjid An-Nur Oakland"
+  - output/beats/Faith_Ledger.jsonl C114 "Masjid An-Nur Oakland"
+  - Faith_Ledger row 240 (beats dump C117)
+  - Faith_Ledger row 244 (beats dump C117)
+  - Faith_Ledger row 222 (beats dump C117)
+  - Faith_Ledger row 220 (beats dump C117)
+  - WorldEvents_V3_Ledger row 489 (beats dump C117)
+  - Faith_Organizations row 11 (beats dump C117)
+- 1273 chars
+
+Reads (7, 71 lines): record_read({"tab":"Faith_Ledger","match":"Masjid An-Nur Oakland"}); canon_recall({"query":"Masjid An-Nur Oakland"}); citizen_lookup({"name":"Aziz Rahimi","thread":true}); record_read({"tab":"Faith_Organizations","match":"Masjid An-Nur Oakland"}); record_read({"tab":"WorldEvents_V3_Ledger","match":"East Oakland"}); record_read({"tab":"Crime_Metrics","match":"East Oakland"}); record_read({"tab":"Faith_Ledger","match":"crisis_response"})
+
+Dropped by the check (3):
+- [event] Masjid An-Nur Oakland in East Oakland organized a community grief gathering in C117, with attendance of 56. Its two earlier rows in the handed set are a C115 seniors lunch program milestone (attendance 50) and a C114 after-school tutoring expansion (attendance 43). — count "two" not in the unit; word "handed" not in the unit; the rows' own text used instead
+- [question] What loss or event is the Masjid An-Nur Oakland grief gathering responding to? — causal "responding to" not in the unit
+- [question] Why does the record give no cause for a gathering it rates medium severity? — causal "cause" not in the unit
+
+Cost: $0.0623
+
+## health → lila-mezran
+
+**CF-117-health-1** · Yu Zen (Commercial Insurance Broker, Rockridge), Maurice Franklin (Drone Fleet Coordinator, Rockridge)
+
+Yu Zen (Rockridge) — admitted C105 after a workplace accident; discharged C109, recovered after 4 cycles in care; the ledger status still reads active. Maurice Franklin (Rockridge) — admitted C106 after severe seasonal flu; discharged C111, recovered after 5 cycles in care; the ledger status still reads active. Rockridge: 96 sick residents → 2 admissions → 4 in care at the close (0 tracked, 4 other residents) → 4 beds occupied; tracked: none tracked. In C107 the Tribune quoted Yu Zen from his hospital bed in Rockridge, listening to nurses talk about how Chinatown had been hit hard. In C112 the Tribune wrote that Maurice Franklin came home to Rockridge after a hospital stay for severe seasonal flu. A C112 daily by Dr. Lila Mezran said all three remain in hospital care as active cases on the ledger. Why does the ledger still read active for Yu Zen, discharged in C109, and for Maurice Franklin, discharged in C111? Do the 4 residents in care in Rockridge at the close of C117 include anyone tracked by name? Is the C112 daily's description of active cases in hospital care a reading of the same status field that still shows active now?
+
+- StoryAngle: Why does the ledger still read active for Yu Zen, discharged in C109, and for Maurice Franklin, discharged in C111?
+- Storyline: health:yu-zen:c117
+- Seats: lila-mezran
+- Refs:
+  - output/beats/Hospital_Ledger.jsonl POP-00194
+  - output/beats/Hospital_Ledger.jsonl POP-00801
+  - output/beats/Care_Justice_Census.jsonl hospital @C117 Rockridge
+  - canon_recall "Rockridge illness hospital" [C107 · daily · Dr. Lila Mezran] "# Chinatown's Illness Toll Ripples Through Tight-Knit Commun…"
+  - canon_recall "Maurice Franklin" [C112 · daily · Tamsin Pruitt] "Maurice Franklin came home to Rockridge after a hospital sta…"
+  - canon_recall "Yu Zen" [C112 · daily · Dr. Lila Mezran] "All three remain in hospital care as active cases on the led…"
+- 1146 chars
+
+Reads (7, 17 lines): citizen_lookup({"name":"Yu Zen","thread":true}); citizen_lookup({"name":"Maurice Franklin","thread":true}); record_read({"tab":"Hospital_Ledger","match":"Rockridge"}); canon_recall({"query":"Rockridge illness hospital"}); canon_recall({"query":"Yu Zen"}); canon_recall({"query":"Maurice Franklin"}); record_read({"tab":"Hospital_Ledger","match":"Yu Zen"})
+
+Dropped by the check (3):
+- [event] In Rockridge, the hospital ledger lists Yu Zen (admitted C105 after a workplace accident, discharged C109, recovered after 4 cycles in care) and Maurice Franklin (admitted C106 after severe seasonal flu, discharged C111, recovered after 5 cycles in care). Both ledger statuses still read active. This cycle Rockridge has 96 sick residents, 2 admissions and 4 in care at the close, with none of those tracked. — word "hospital" not in the unit; the rows' own text used instead
+- [history u3] Hospital_Ledger row 2 has Yu Zen admitted in C105 for a workplace accident, with a discharge in C109, outcome recovered, and 4 cycles in care. — cycle C109 not in the unit
+- [history u4] Hospital_Ledger row 4 has Maurice Franklin admitted in C106 for severe seasonal flu, with a discharge in C111, outcome recovered, and 5 cycles in care. — cycle C111 not in the unit
+
+Cost: $0.0516
+
+## economy → business-desk
+
+**CF-117-economy-1** · Ivy Hill Family Dental (Healthcare), Ivy Hill Market (Retail)
+
+business-closure | closure: Ivy Hill Family Dental (Healthcare) — 0 jobs | Ivy Hill | mag -25 | targets BIZ-00153. carryover | carryover: cycle 3 of 4 | Ivy Hill | mag -8 | targets BIZ-00150. Ivy Hill Market (Retail), Ivy Hill — 0 employees, revenue $513k, growing -4.7% a year — since C116: yearly growth rate +1.0 pts, revenue -$463. Ivy Hill Family Dental is closing in Ivy Hill — 8 weeks of decline and revenue under the line; 0 jobs go with it. The Business_Archive entry for Ivy Hill Family Dental lists 0 employees, annual revenue of 591045, a growth rate of -10, and a closed cycle of 117. In C113 Ivy Hill Market shed two workers and its growth was negative 3.9 percent. In C114 Ivy Hill Market shed three workers and was at negative 4.5 percent growth, and the ledger's contraction list that cycle was concentrated in Ivy Hill. What brought Ivy Hill Family Dental's revenue under the line after 8 weeks of decline? How many patients and former staff of Ivy Hill Family Dental are affected, given that the record shows 0 jobs lost? Does the carryover on Ivy Hill Market, now at cycle 3 of 4, end in a closure there too?
+
+- StoryAngle: What brought Ivy Hill Family Dental's revenue under the line after 8 weeks of decline?
+- Storyline: economy:ivy-hill-family-dental:c117
+- Seats: business-desk
+- Refs:
+  - output/world_summary_c117.md ## What Moved › economic-event (Ripple_Ledger)
+  - output/beats/Business_Ledger.jsonl @C117 BIZ-00150 vs prev/
+  - WorldEvents_V3_Ledger row 492 (beats dump C117)
+  - Business_Archive row 4 (beats dump C117)
+  - canon_recall "Ivy Hill" [C113 · daily · Jordan Velez] "The view from Ivy Hill For contrast, the one contraction on …"
+  - canon_recall "Ivy Hill" [C114 · daily · Jordan Velez] "And what does the neighborhood owe us? I think it owes us a …"
+- 1128 chars
+
+Reads (9, 19 lines): record_read({"tab":"Business_Ledger","match":"Ivy Hill Family Dental"}); canon_recall({"query":"Ivy Hill Family Dental"}); record_read({"tab":"Business_Archive","match":"Ivy Hill Family Dental"}); record_read({"tab":"Business_Ledger","match":"Ivy Hill"}); record_read({"tab":"Business_Archive","match":"Ivy Hill"}); canon_recall({"query":"Ivy Hill dental closure"}); canon_recall({"query":"Ivy Hill"}); record_read({"tab":"WorldEvents_V3_Ledger","match":"Ivy Hill"}); record_read({"tab":"Neighborhood_Demographics","match":"Ivy Hill"})
+
+Dropped by the check (2):
+- [event] Ivy Hill Family Dental, a Healthcare business in Ivy Hill, is closed in C117, with 0 jobs attached and a magnitude of -25. A carryover row (cycle 3 of 4, magnitude -8) in Ivy Hill targets Ivy Hill Market, which has 0 employees, revenue of $513k and growth of -4.7% a year. — word "attached" not in the unit; the rows' own text used instead
+- [history u19] The Neighborhood_Demographics row for Ivy Hill, updated C117, lists 89 unemployed and 109 sick. — cycle C117 not in the unit
+
+Cost: $0.1093

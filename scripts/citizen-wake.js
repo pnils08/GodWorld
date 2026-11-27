@@ -402,7 +402,7 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
 
   // engine.356 cut C (builder 2026-11-26: "Let's build it and see how it looks") — a citizen whose own words named
   // a place of their hood is shown the hood's places at their next wake and may end on a SPOT line. Off until
-  // output/spot-ask-state.json exists (made with the Spot_Picks tab); --spot-ask with --dry-run shows the ask to any citizen.
+  // logs/citizen-spot-ask-state.json exists (made with the Spot_Picks tab); --spot-ask with --dry-run shows the ask to any citizen.
   let spot = null;
   try { spot = spotPick.prepare(c, { force: DRY && ARGV.includes('--spot-ask') }); } catch (e) { logLine('spot: the hood\'s places could not be read (non-fatal, no ask this wake): ' + e.message); }
   const user = spot && spot.ask ? userBase + '\n\n' + spot.block : userBase;

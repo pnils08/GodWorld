@@ -1542,6 +1542,54 @@
       "name": "Or Hashalom Renewal Community",
       "sector": "Faith Organization",
       "neighborhood": "Grand Lake"
+    },
+    {
+      "bizId": "BIZ-00294",
+      "name": "SpeedyBurger West Oakland",
+      "sector": "Fast Food & Quick Service",
+      "neighborhood": "West Oakland"
+    },
+    {
+      "bizId": "BIZ-00295",
+      "name": "Railhead Coffee Roasters",
+      "sector": "Coffee Roaster",
+      "neighborhood": "West Oakland"
+    },
+    {
+      "bizId": "BIZ-00296",
+      "name": "Parkway Press & Bowl",
+      "sector": "Juice Bar / Cafe",
+      "neighborhood": "West Oakland"
+    },
+    {
+      "bizId": "BIZ-00297",
+      "name": "Foundry Climb & Cafe",
+      "sector": "Climbing Gym / Cafe",
+      "neighborhood": "West Oakland"
+    },
+    {
+      "bizId": "BIZ-00298",
+      "name": "Prescott Natural Foods",
+      "sector": "Natural Foods Grocery",
+      "neighborhood": "West Oakland"
+    },
+    {
+      "bizId": "BIZ-00299",
+      "name": "Crane & Brick Taproom",
+      "sector": "Taproom / Brewery",
+      "neighborhood": "West Oakland"
+    },
+    {
+      "bizId": "BIZ-00300",
+      "name": "Flatland Cycles",
+      "sector": "Bike Shop",
+      "neighborhood": "West Oakland"
+    },
+    {
+      "bizId": "BIZ-00301",
+      "name": "Yard Shift Noodles",
+      "sector": "Late-Night Restaurant & Dining",
+      "neighborhood": "West Oakland"
     }
   ],
   "notes": "S357 engine.83: 20 generic-occupation keyword rules demoted (generic trade -> tracked biz was the mass-hiring failure; those roles now resolve UNTRACKED). Org-name rules kept."

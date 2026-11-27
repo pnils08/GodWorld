@@ -15,7 +15,7 @@
     "canonSearch": false,
     "writtenBrief": false,
     "audioFocus": false,
-    "worldSummary": true,
+    "worldSummary": false,
     "driveDest": "daily-news",
     "pingTime": "08:00 America/Chicago"
   },

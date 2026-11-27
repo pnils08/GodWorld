@@ -180,8 +180,9 @@ const WRITEBACK_FIELDS = [
 //   - any write with a stale/empty NextActionCycle → advance to cycle+1 (G-PREP2).
 //   - a phase advance with no MilestoneNotes → stamp "C<cycle>: advanced to <phase>"
 //     so the cycle's motion is recorded, never silently lost (G-R3).
-function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
+function normalizeTrackerWrite(trackerUpdates, currentRow, cycle, opts) {
   const tu = trackerUpdates || {};
+  const voteStaging = !!(opts && opts.voteStaging);
   const cur = currentRow || {};
   const updates = {};
   const warnings = [];
@@ -202,8 +203,19 @@ function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
   // gavel stamp here would open a clinic before its build ran or undo a stall.
   // Pre-vote (Proposed) rows keep the gavel's vote-scheduling phases.
   const ownedStage = ['Funded', 'Standing', 'Delivering'].includes(String(cur.Stage || '').trim());
+  // civic.51 (builder 2026-11-27: "Propose / vote / pass-fail. Anything else is
+  // you adding on"; "the idea is the vote , the color about filing has zero to do
+  // with the sim , that's just canon for depth"): an unvoted row's phase moves
+  // only with its vote. A `stalled` stamped on a Proposed row by a gavel's story
+  // reached hood effects (intensity -0.5, no status gate) and approval; a
+  // `vote-scheduled` stamped alone left a vote date on a row still `proposed`.
+  // Only the script-staged vote write (call-vote / petition sweep, marked by the
+  // caller) may set the phase here. The office's words still land in MilestoneNotes.
+  const unvoted = String(cur.Stage || '').trim() === 'Proposed';
   if (ownedStage && tu.ImplementationPhase != null && String(tu.ImplementationPhase).trim() !== '') {
     warnings.push(`ImplementationPhase "${tu.ImplementationPhase}" NOT written — Stage ${String(cur.Stage).trim()} rows are phased by the engine; prior value "${cur.ImplementationPhase || ''}" kept.`);
+  } else if (unvoted && !voteStaging && tu.ImplementationPhase != null && String(tu.ImplementationPhase).trim() !== '') {
+    warnings.push(`ImplementationPhase "${tu.ImplementationPhase}" NOT written — a Proposed row's phase moves only with its vote; prior value "${cur.ImplementationPhase || ''}" kept.`);
   } else if (tu.ImplementationPhase != null && String(tu.ImplementationPhase).trim() !== '') {
     const res = C.canonicalizePhase(tu.ImplementationPhase);
     if (res.how === 'none') {
@@ -262,7 +274,9 @@ function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
 
   // G-PREP1 — vote-scheduled needs a deterministic VoteCycle + NextActionCycle.
   // Respect an emitted VoteCycle; otherwise stamp cycle+1 when the row has none.
-  if (finalPhase === 'vote-scheduled') {
+  // civic.51: on an unvoted row the stamp belongs to the vote-staging write alone —
+  // a note written onto a row already reading `vote-scheduled` stamps no date.
+  if (finalPhase === 'vote-scheduled' && (!unvoted || voteStaging)) {
     const emittedVote = tu.VoteCycle != null ? String(tu.VoteCycle).trim() : '';
     const curVote = cur.VoteCycle != null ? String(cur.VoteCycle).trim() : '';
     if (emittedVote) setField('VoteCycle', tu.VoteCycle);
@@ -375,6 +389,8 @@ function findDecisionFiles(cycle) {
             initiativeId: data.initiative || data.initiativeId,
             cycle: data.cycle,
             trackerUpdates: data.trackerUpdates,
+            // civic.51: the script-staged vote write's own marks (call-vote / petition sweep)
+            _callVote: data._callVote, _petitionGate: data._petitionGate,
             file: decFile
           });
         }
@@ -655,7 +671,8 @@ async function main() {
     // Phase 3): canonicalize phase, stamp vote-cycle, advance NextActionCycle,
     // record motion in MilestoneNotes. Replaces the old verbatim WRITEBACK_FIELDS
     // copy that let drifted phases reach the sheet and the engine zero them.
-    const { updates, warnings: gateWarnings, changes } = normalizeTrackerWrite(dec.trackerUpdates, currentRow, CYCLE);
+    const { updates, warnings: gateWarnings, changes } = normalizeTrackerWrite(dec.trackerUpdates, currentRow, CYCLE,
+      { voteStaging: !!(dec._callVote || dec._petitionGate) });
     changes.forEach(ch => console.log(`  ${ch.field}: "${ch.old}" → "${ch.new}"`));
     gateWarnings.forEach(w => console.log(`  ⚠ ${w}`));
     if (dec.trackerUpdates && dec.trackerUpdates.RenewalVoteCycle !== undefined) {

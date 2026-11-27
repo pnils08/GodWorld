@@ -343,7 +343,7 @@ if (require.main === module) (async () => {
           const cur = trackerRows.find(r => r.InitiativeID === initId || r.ID === initId || r.id === initId) || {};
           const prior = {};
           for (const f of TRACKER_AUDIT_FIELDS) if (cur[f] !== undefined && cur[f] !== '') prior[f] = cur[f];
-          const { updates } = normalizeTrackerWrite(tu, cur, Number(cycle));
+          const { updates } = normalizeTrackerWrite(tu, cur, Number(cycle), { voteStaging: !!(d._callVote || d._petitionGate) });
           return '## ' + initId + ' (primary voice: ' + (d.primaryVoice || d.primary || '?') + ')\n' +
             'prior row: ' + JSON.stringify(prior) + '\n' +
             'write: ' + JSON.stringify(updates);

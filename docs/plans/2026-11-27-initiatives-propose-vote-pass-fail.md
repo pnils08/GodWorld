@@ -53,7 +53,7 @@ Nothing below is approved to build. Each task waits on his go.
 |---|------|-------|--------|
 | 0 | A `proposed` row whose VoteCycle is the fire votes at that fire (`civicInitiativeEngine.js`) | es | built `9bdb1a971`; not benched (sandbox runs locked), not live |
 | 1 | The take-out list: every running piece of civic machinery, one line each, in his definition or not. He marks what stays | es | not started |
-| 2 | City hall's writing loses the control cells: Status, ImplementationPhase, VoteCycle, NextActionCycle are written only by a proposal, a vote, and the engine after a pass. Notes stay open as color | es | not started |
+| 2 | City hall's writing loses the control cells: Status, ImplementationPhase, VoteCycle, NextActionCycle are written only by a proposal, a vote, and the engine after a pass. Notes stay open as color | es | phase half built (this commit): a Proposed row's phase moves only with a script-staged vote write; live at the next Sunday chain. Open: Status / VoteCycle / NextActionCycle, blank-Stage rows (INIT-003, 006, 007), the `stalled` already on INIT-008 and 013 |
 | 3 | Cycle 1 propose → Cycle 2 vote, with no scheduling step: a proposal filed in Cycle N is voted at fire N+1. Petition count and call-vote come out | es | not started |
 | 4 | A proposal says what suggests the need (district data) and what money pays for it; the voting seats see both | es | not started — shape is his |
 | 5 | The council seats cast the vote, each on the need shown and its own persona and district data | es | not started — shape is his |
@@ -84,5 +84,6 @@ Nothing below is approved to build. Each task waits on his go.
 
 ## Changelog
 
+- 2026-11-27 (engine-sheet) — Task 2 phase half: `normalizeTrackerWrite` refuses a model-emitted phase on a Proposed row and stamps no vote date off a note; call-vote / petition staging still lands. Six shapes printed by hand; suites not run (test lock).
 - 2026-11-27 (engine-sheet) — Corrected the live count to 7 passed / 7 proposed (the first write said 6 / 8). Read added: a `stalled` label on an unvoted row reaches hood effects and approval.
 - 2026-11-27 (engine-sheet) — Plan opened as a record of the builder's three-stage definition; his 2026-11-27 words found no earlier record. The 2026-09-19 "3 stage gate" was built as post-vote stages on top of the 20-label admin layer, which stayed. Task 0 built, unbenched.

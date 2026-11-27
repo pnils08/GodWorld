@@ -86,7 +86,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.356 | A moment has a place (builder 11-21): A1–A5, bonds LIVE stage 89; spot pick stage 90, ask on. Read C118 Sun 2026-11-29: stage 84–90 smoke, wake | in-progress | engine-sheet | [[../plans/2026-11-21-a-moment-has-a-place]] |
-| civic.51 | A vote dated for a fire is held at that fire (builder 11-27): INIT-009 `proposed` at VoteCycle 118. Bench, then PROD | in-progress | engine-sheet | `output/engine-sheet/2026-11-27-civic51/` |
+| civic.51 | Initiatives run propose / vote / pass-fail (builder 11-27). Task 0 vote-at-its-date built, unbenched; tasks 1–7 wait on his go | in-progress | engine-sheet | [[../plans/2026-11-27-initiatives-propose-vote-pass-fail]] |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
 | engine.346 | Feed word `off-season` (builder 11-15): live @182; benched 11-16 inside stage 49 (C117/C118 PASS). Owed: the sheet dropdown (his menu run) | in-progress | research-build | [[../plans/2026-11-05-sports-feed-triggers]] §Changelog |
 | pipeline.110 | Role citizens wake as themselves (builder 11-10). 14 of 14 workers lean and live; next: media (reporter template); council on hold | in-progress | engine-sheet | [[../plans/2026-11-10-role-citizens-wake-as-themselves]] |

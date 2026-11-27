@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-25",
+  "generated": "2026-11-26",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
   "functionsMapped": 1798,
@@ -3673,6 +3673,12 @@
       ],
       "readers": []
     },
+    "spotPicks": {
+      "writers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ],
+      "readers": []
+    },
     "templateCooldowns": {
       "writers": [
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
@@ -5341,6 +5347,12 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/runYouthEngine.js::runYouthEngine_",
         "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_"
+      ]
+    },
+    "Spot_Picks": {
+      "writers": [],
+      "readers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
     "Civic_Sweep_Report": {

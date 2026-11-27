@@ -3,5 +3,5 @@ PROD pull = stage 89 (e356u-prod.sha256)
 manifest written: /root/GodWorld/output/engine-sheet/2026-11-26-e356v/e356v.sha256
 └─ utilities/writeIntents.js
 └─ utilities/writeIntents.js
-Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @264
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @266
 bench pull-back byte-identical to /root/GodWorld/output/engine-sheet/2026-11-26-e356v/e356v.sha256

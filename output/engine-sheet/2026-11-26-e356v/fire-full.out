@@ -1,8 +1,8 @@
-◇ injected env (33) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
 {
  "label": "e356v-full",
  "expect": 117,
- "at": "2026-11-27T02:00:18.279Z",
+ "at": "2026-11-27T02:24:16.297Z",
  "pre": {
   "bench": 117,
   "live": 117,
@@ -10,12 +10,12 @@
   "rileyLast": 117,
   "checkpoint": null
  },
- "wallS": 225,
+ "wallS": 203,
  "http": 200,
  "resp": {
   "ok": true,
   "state": "done",
-  "ranMs": 221386,
+  "ranMs": 199441,
   "persistErrors": [],
   "carryForward": [
    {

@@ -1,8 +1,8 @@
-◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
 {
  "label": "e356v-picks",
  "expect": 117,
- "at": "2026-11-27T02:10:40.789Z",
+ "at": "2026-11-27T02:34:10.168Z",
  "pre": {
   "bench": 117,
   "live": 117,
@@ -10,12 +10,12 @@
   "rileyLast": 117,
   "checkpoint": null
  },
- "wallS": 250,
+ "wallS": 262,
  "http": 200,
  "resp": {
   "ok": true,
   "state": "done",
-  "ranMs": 245686,
+  "ranMs": 258167,
   "persistErrors": [],
   "carryForward": [
    {
@@ -165,12 +165,10 @@
  "post": {
   "bench": 118,
   "live": 117,
-  "ee": 11,
+  "ee": 10,
   "rileyLast": 118,
   "checkpoint": null
  },
- "newEE": [
-  "[118,\"Phase11-CitizenArchive\",\"engine.90: Citizen_Archive header does not match Simulation_Ledger header + metadata (62 vs 63 cols) — nothing moved; re-run scripts/ensureCitizenArchive.js\"]"
- ],
- "verdict": "PASS-WITH-NEW-EE (read them)"
+ "newEE": [],
+ "verdict": "PASS"
 }

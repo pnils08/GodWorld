@@ -1,9 +1,9 @@
-◇ injected env (33) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
 source (LIVE): Simulation_Narrative — 90 tabs
 dest (BENCH):  Sandox_104_c109-live_Simulation_Narrative — 91 tabs
 tabs to sync: 90 | missing on bench (will create): 0
 bench-only tabs (untouched): Spot_Diag
-read 89374 rows across 90 tabs from live
+read 89386 rows across 90 tabs from live
 sanitized 11 oversized cell(s) (>49900 chars, values-API cap)
 bench tabs cleared (1 batch call)
   ...10/90 tabs written
@@ -20,5 +20,5 @@ SYNCED 90 tabs. Bench is live-equivalent.
   verify LifeHistory_Archive: bench 21321 rows vs live 21321 — OK
   verify Relationship_Bond_Ledger: bench 4090 rows vs live 4090 — OK
   verify Relationship_Bond_Archive: bench 3212 rows vs live 3212 — OK
-  verify Reflection_Intake: bench 3163 rows vs live 3163 — OK
+  verify Reflection_Intake: bench 3175 rows vs live 3175 — OK
 Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

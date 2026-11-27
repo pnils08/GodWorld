@@ -1,2 +1,2 @@
-◇ injected env (33) from ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
 {"label":"full","cycle":"118","logRows":3460,"bonds":785,"verdict":"DUMPED"}

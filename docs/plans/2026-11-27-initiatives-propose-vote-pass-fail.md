@@ -43,7 +43,8 @@ Nothing below is approved to build. Each task waits on his go.
 | A vote is scheduled only by a petition count (no threshold set for any domain) or a seat's call-vote move | `cron-civic-run.js:3411`, `:3510` |
 | The engine rolls the vote; seats do not cast it | `civicInitiativeEngine.js:401-434` |
 | Seat moves C113–C117: answer 45, work 34, canvass 7, propose 3, call-vote 2 | `output/cron-civic/moves/moves_c113..c117.jsonl` |
-| Live: 6 passed, 8 proposed; 6 proposed rows carry no vote date; INIT-007, 008, 013 read `stalled` | live sheet |
+| Live: 7 passed, 7 proposed; 6 proposed rows carry no vote date; INIT-007, 008, 013 read `stalled` | live sheet |
+| A `stalled` label on an unvoted row is not skipped: the hood-effects loop has no status gate before the phase intensity (−0.5), and approval scores it as failing | `applyInitiativeImplementationEffects.js:420-565`, `:162`; `updateCivicApprovalRatings.js:1139` |
 | Delivering is measurable for health, transit, education only; `environment` is in no catalog | `civicInitiativeEngine.js:3336-3343` |
 
 ## Tasks
@@ -83,4 +84,5 @@ Nothing below is approved to build. Each task waits on his go.
 
 ## Changelog
 
+- 2026-11-27 (engine-sheet) — Corrected the live count to 7 passed / 7 proposed (the first write said 6 / 8). Read added: a `stalled` label on an unvoted row reaches hood effects and approval.
 - 2026-11-27 (engine-sheet) — Plan opened as a record of the builder's three-stage definition; his 2026-11-27 words found no earlier record. The 2026-09-19 "3 stage gate" was built as post-vote stages on top of the 20-label admin layer, which stayed. Task 0 built, unbenched.

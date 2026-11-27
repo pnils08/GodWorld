@@ -506,12 +506,12 @@ function generateCitizensEvents_(ctx) {
   // engine.356 cut C: each citizen's own pick of a spot (blank for almost everyone; no column → no picks)
   var iSpotPick = idx("SpotBizId");
   var spotPickByPop_ = {};
-  var spotPicks = { stored: 0, honored: 0 };
+  // stored: cells holding a pick; reached: of those, citizens who drew a week; honored: of those, the pick was their spot
+  var spotPicks = { stored: 0, reached: 0, honored: 0 };
   if (iSpotPick >= 0 && iPopID >= 0) for (var spr = 0; spr < rows.length; spr++) {
     var spv = String(rows[spr][iSpotPick] || '').trim();
-    if (spv) spotPickByPop_[rows[spr][iPopID]] = spv;
+    if (spv) { spotPickByPop_[rows[spr][iPopID]] = spv; spotPicks.stored++; }
   }
-  S.spotPicks = spotPicks;
 
   // v2.5: Optional attributes (no schema requirement)
   var iBirthYear = idx("BirthYear");
@@ -544,6 +544,7 @@ function generateCitizensEvents_(ctx) {
 
   var lifeLog = ctx.ss.getSheetByName("LifeHistory_Log");
   var S = ctx.summary || (ctx.summary = {});
+  S.spotPicks = spotPicks;   // engine.356 cut C
   var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
 
   // The self-arm supplies 8 on live Sheets. The cap follows the log's 12-Cycle
@@ -3626,7 +3627,7 @@ function generateCitizensEvents_(ctx) {
     // engine.214 8a Cut C: what happened at the citizen's own spot this week (S.hoodSpots, Phase5-BusinessDynamics;
     // unset when that phase failed → nothing offered).
     var ownSpot = citizenSpotFor_(S.hoodSpots ? S.hoodSpots[citizenHood] : null, popId, spotPickByPop_[popId]);
-    if (spotPickByPop_[popId]) { spotPicks.stored++; if (ownSpot && String(ownSpot.id) === spotPickByPop_[popId]) spotPicks.honored++; }
+    if (spotPickByPop_[popId]) { spotPicks.reached++; if (ownSpot && String(ownSpot.id) === spotPickByPop_[popId]) spotPicks.honored++; }
     var spotPool = citizenSpotLines_(ownSpot);
     for (var spi = 0; spi < spotPool.length; spi++) {
       pool.push(makeEntry(spotPool[spi].text, mergeTags(spotPool[spi].tags, calendarTags), spotPool[spi].weight, false));

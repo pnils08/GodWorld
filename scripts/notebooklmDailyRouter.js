@@ -398,7 +398,10 @@ function routeDailyNews(inventory, options = {}) {
 
   const presentation = {
     [PROFILES.CYCLE_OPEN]: { format: 'brief', length: 'short' },
-    [PROFILES.REPORTED_DAY]: { format: 'deep_dive', length: 'default' },
+    // builder 2026-11-27 ("if 9 articles and 35 reflections make it and I get a 10 min summary … I won't know anything
+    // those sources said"): 'default' ran 16-24 min on every one of the 43 shows on record (11.2 min on C117's 9-article
+    // day); the same 28 sources at 'long' ran 45.4 min (test render 6bf98242, 2026-11-27).
+    [PROFILES.REPORTED_DAY]: { format: 'deep_dive', length: 'long' },
     [PROFILES.VERIFIED_OPPOSITION]: { format: 'debate', length: 'default' },
     [PROFILES.QUIET_DESK]: { format: 'brief', length: 'short' },
   }[profile];

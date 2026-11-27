@@ -9,7 +9,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.354 | 331 job tags are wrong | needs-info | engine-sheet | — |
-| engine.370 | More places, West Oakland first (builder 11-27): 8 minted, Blue Lantern moved in, 12 spots. Read C118: Oscar Ruiz minted as owner. His: SpeedyBurger's owner | needs-info | engine-sheet | — |
 | engine.331 | Sports triggers: C115 read, every pitch traces to a word; P3 fails, 142 signed fan lines a week vs 37–74 before — his call | needs-info | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 | engine.94 | Memory that fires: C115 B.2 re-read, every hood at 0, 14 defaulted carriers; 24 rows unapplied and the challenger call wait on him | needs-info | engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] §Status log engine.94 B.3 v3 live reads |
 | civic.47 | Civic autonomy, the one plan (builder 11-01). A1 landed; F7 transit reader live (@173); M1 Mara live 11-03; the rest of the plan is open; A2 waits on his go | needs-info | research-build | [[../plans/2026-10-31-civic-autonomy]] |
@@ -81,6 +80,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.361 | Life-log rows complete: LIVE stage 76 @211, benched. Read C118 Sun 2026-11-29: no bare stamp, no blank Name / hood on the log | live-observing | engine-sheet | `output/production_log_run_cycle_c117_gaps.md` G-EC52 |
 | engine.364 | Hospital record reads right (builder 11-23): LIVE stage 77 @212, benched. Read C118 Sun 2026-11-29: carry starts at rounding, stamp | live-observing | engine-sheet | [[../plans/2026-11-23-hospital-record-reads-right]] |
 | engine.365 | Arrests read right (builder 11-23/24): LIVE stage 78 @213, benched. Read C118 Sun 2026-11-29: incidents by residents, arrests, carry | live-observing | engine-sheet | [[../plans/2026-11-24-arrests-read-right]] |
+| engine.370 | More places, West Oakland first (builder 11-27): 8 minted, Blue Lantern moved in. Read C118 Sun 2026-11-29: Ruiz, Shaw minted as owners; Shaw paid by both | live-observing | engine-sheet | — |
 ## 3. Now — being worked, one per terminal (in-progress)
 
 | # | Item | State | Terminal | Pointer |

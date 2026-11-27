@@ -14,6 +14,7 @@
 const fs = require('fs');
 const path = require('path');
 const { loadBeatTabs } = require('./buildEconomicSlice');
+const SEEDS = require('./seedRecord');
 const { SIM_HOLIDAYS } = require('../phase02-world-state/getSimHoliday');
 
 const ROOT = path.join(__dirname, '..');
@@ -311,8 +312,14 @@ function wire(seat) {
     // a record that reads no beat tab (the live sports seats: tabs []) does not wait on the beat dump's Cycle
     const beats = opts.beats || ((seat.tabs || []).length ? loadBeatTabs(root, cycle, seat.tabs) : {});
     const profiles = opts.profiles || loadProfiles(root);
-    const slice = seat.build(Number(cycle), { root, beats, profiles });
+    let slice = seat.build(Number(cycle), { root, beats, profiles });
     if (slice && !slice.empty) slice.seat.builder = seat.builder;
+    // pipeline.118 (builder 2026-11-27: "They go to their slice"): the engine's story seeds for the seat lead its record.
+    // A failure here never costs the seat its record.
+    if (slice && !slice.empty && SEEDS.ROUTES[seat.slug]) {
+      try { slice = SEEDS.leadWithSeeds(slice, seat, loadBeatTabs(root, cycle, ['Story_Seed_Deck']).Story_Seed_Deck, profiles, module.exports); }
+      catch (e) { console.error('[seeds] ' + seat.slug + ': ' + e.message + ' — record left as built'); }
+    }
     return slice;
   }
   function write(cycle, slice, root = ROOT) {
@@ -326,7 +333,8 @@ function wire(seat) {
   function load(cycle, root = ROOT) {
     const cached = loadJson(paths(cycle, root).json);
     // pipeline.111: a seat read live (seat.live — the sports feed's morning copy) is rebuilt on every load; its source moves mid-Cycle
-    if (!seat.live && cached && cached.version === seat.version && !cached.empty) return cached;
+    // a copy saved before the seeds led the record is rebuilt (pipeline.118)
+    if (!seat.live && cached && cached.version === seat.version && !cached.empty && (!SEEDS.ROUTES[seat.slug] || cached.seedsVersion === SEEDS.VERSION)) return cached;
     const slice = build(cycle, { root });
     // a live seat's saved copy is only a copy (it is rebuilt on every load): a refused save (a test day's no-write guard) never stops the day
     if (seat.live) { try { write(cycle, slice, root); } catch (e) { /* the copy is not the record */ } } else write(cycle, slice, root);

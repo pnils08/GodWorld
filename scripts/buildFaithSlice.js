@@ -42,10 +42,7 @@ const SEAT = {
   tabs: ['Faith_Organizations', 'Faith_Ledger', 'LifeHistory_Log'],
   approach: '',
   roomIsYours: '',
-  // pipeline.118: his city feed entries lead the record when the feed's copy is on disk (no copy: this record, unchanged);
-  // live then, because the feed moves inside a Cycle and a cached Sunday copy would hide a midweek row
-  live: require('./cityRecord').hasFeed(),
-  build: require('./cityRecord').withCityFeed({ slug: 'elliot-graye' }, build)
+  build
 };
 
 const EVENT_WINDOW = 7;   // weekly seat — the record since his last slot

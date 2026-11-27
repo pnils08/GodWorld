@@ -1,0 +1,28 @@
+[
+  {
+    "Cycle": "117",
+    "Beat": "faith",
+    "EventType": "event",
+    "NamesUsed": "Imam Aziz Rahimi (Faith Leader, Masjid An-Nur Oakland)",
+    "Notes": "Masjid An-Nur Oakland (East Oakland), C117 — crisis response: community grief gathering organized (attendance 56). Masjid An-Nur Oakland (East Oakland), C115 — community program: seniors lunch program marks milestone (attendance 50). Masjid An-Nur Oakland (East Oakland), C114 — community program: after-school tutoring program expands (attendance 43). The Faith Ledger lists Masjid An-Nur Oakland's C114 event as \"after-school tutoring program expands,\" attendance 43. The Faith Ledger lists Masjid An-Nur Oakland's C115 event as \"seniors lunch program marks milestone,\" attendance 50. The Faith Ledger lists Masjid An-Nur Oakland's C111 event as \"food pantry serves neighbors in need,\" attendance 50. The Faith Ledger lists Masjid An-Nur Oakland's C110 event as \"seniors lunch program marks milestone,\" attendance 52. The world-events ledger files the C117 entry \"Masjid An-Nur Oakland: community grief gathering organized\" under the FAITH domain with severity medium. Faith_Organizations lists Masjid An-Nur Oakland as Muslim, in East Oakland, founded 1978, congregation 400, led by Imam Aziz Rahimi, with the character \"African American Muslim heritage.\" Is this the masjid's first crisis_response row in the ledger, after earlier rows that were all community programs?",
+    "StoryAngle": "Is this the masjid's first crisis_response row in the ledger, after earlier rows that were all community programs?",
+    "Storyline": "faith:imam-aziz-rahimi:c117",
+    "Refs": "output/beats/Faith_Ledger.jsonl C117 \"Masjid An-Nur Oakland\" ; output/beats/Faith_Ledger.jsonl C115 \"Masjid An-Nur Oakland\" ; output/beats/Faith_Ledger.jsonl C114 \"Masjid An-Nur Oakland\" ; Faith_Ledger row 240 (beats dump C117) ; Faith_Ledger row 244 (beats dump C117) ; Faith_Ledger row 222 (beats dump C117) ; Faith_Ledger row 220 (beats dump C117) ; WorldEvents_V3_Ledger row 489 (beats dump C117) ; Faith_Organizations row 11 (beats dump C117)",
+    "Seats": "elliot-graye",
+    "WrittenBy": "city-desk",
+    "EntryId": "CF-117-faith-1"
+  },
+  {
+    "Cycle": "117",
+    "Beat": "faith",
+    "EventType": "event",
+    "NamesUsed": "Temple Beth Or (Reform Jewish congregation, Rockridge), Rabbi Naomi Sterling (rabbi)",
+    "Notes": "Temple Beth Or (Rockridge), C117 — crisis response: vigil held for community healing (attendance 91). Temple Beth Or (Rockridge), C116 — community program: food pantry serves neighbors in need (attendance 89). In C116 Temple Beth Or's food pantry served neighbors in need, with attendance 89. In C95 the Tribune's edition on the city's faith community after the spike described Temple Beth Or's Yom Kippur observance in Rockridge. What happened in C117 that the vigil at Temple Beth Or was held to heal? Is the vigil connected to the grief gathering at Masjid An-Nur Oakland and the emergency assistance fund at Adams Point United Methodist, which are also C117 crisis responses?",
+    "StoryAngle": "What happened in C117 that the vigil at Temple Beth Or was held to heal?",
+    "Storyline": "faith:temple-beth-or:c117",
+    "Refs": "output/beats/Faith_Ledger.jsonl C117 \"Temple Beth Or\" ; output/beats/Faith_Ledger.jsonl C116 \"Temple Beth Or\" ; Faith_Ledger row 249 (beats dump C117) ; canon_recall \"Temple Beth Or\" [C95 · edition] \"Quiet Care, Many Doors: The City's Faith Community After The…\"",
+    "Seats": "elliot-graye",
+    "WrittenBy": "city-desk",
+    "EntryId": "CF-117-faith-2"
+  }
+]

@@ -391,6 +391,22 @@ function runCivicInitiativeEngine_(ctx) {
     // made, and BEFORE the vote trigger so a row the engine is about to resolve
     // is left alone. (v2.1: body lives in applyEngineClockHold_ so the signed
     // skip above can share it.)
+    // civic.51: a vote dated for this fire is held at this fire. The Sunday fold
+    // stamps VoteCycle = cycle+1 on a `vote-scheduled` write (applyTrackerUpdates
+    // G-PREP1) and leaves Status `proposed` unless the same write asks for
+    // pending-vote; the proximity ladder at the bottom of this loop needs two
+    // fires (proposed -> active -> pending-vote) and the stamp gives it one, so
+    // the row turned `active` on its vote date and the date was behind it for
+    // good (INIT-009, VoteCycle 118). Exact date only: an undated proposal
+    // (voteCycle 0) and a future date are untouched.
+    if (status === 'proposed' && voteCycle > 0 && voteCycle === cycle) {
+      row[iStatus] = 'pending-vote';
+      status = 'pending-vote';
+      rows[r] = row;
+      updated = true;
+      Logger.log('civicInitiativeEngine: ' + initId + ' proposed with VoteCycle ' + voteCycle + ' = this fire — vote held now');
+    }
+
     var engineWillAct = (voteCycle === cycle && (status === 'active' || status === 'pending-vote'));
     if (!isStagedRow && applyEngineClockHold_(ctx, row, cycle, engineWillAct, initId, iNextActionCycle, iNotes, iLastUpdated)) {
       rows[r] = row;

@@ -111,7 +111,7 @@ Done: see §State of the work.
 | 33 | P Slayer on his seat: SEAT.md, live A's + Oaks record with colleagues' pieces and the feed's people (buildPSlayerRecord on sportsRecord.js), Haiku plans / Grok writes; agy folded | rb | live Wed 11-25; test piece output/research-build/2026-11-25-pslayer/ |
 | 34 | The Oaks seats: Selena Grant (data), Talia Finch (street, apart from P Slayer) | rb | Talia live Thu 11-26 (`84839ec34`, agy folded `861a22447`, Essence `71345f6f6`); test day held for the builder's word; Selena next (Tue 12-01) |
 | 35 | Hal Richmond (history, pre-2025 real sports history open), then Marbury, Tanya, Simon; archive each seat's old files at its first live read | rb | not started |
-| 36 | Mags's Saturday run: what reaches the EIC from the new seats | rb | not started |
+| 36 | What the editor hands the seats: the city feed (builder 2026-11-26, "city feed is a good idea … approved") — plan [[2026-11-26-city-feed]]. Mags's Saturday run: what reaches the EIC from the new seats, after it | rb | plan written 2026-11-26; its Task 1 started |
 
 ## Gridiron Analytics — the sports data house (Tasks 27-30)
 
@@ -198,6 +198,8 @@ Keep: the ten methods as his own craft (he picks), rate arithmetic, sourcing (ev
 
 
 ## Changelog
+
+- 2026-11-26 (research-build) — Task 36 becomes the city feed: non-sports seats get sports-feed-shaped entries (event, canon history, people, open questions), written unattended. Plan [[2026-11-26-city-feed]]; builder approved the vision and a three-entry C117 test.
 - 2026-11-26 (research-build) — C117 read: the seat-file civic pieces (Angela, Lila, Trevor, Carmen, Rachel) write the tables back, worse than C116; the morning facts hold no FACT on the job line's angles; "the engine's" in 14 job lines (gap log C117 G-EC80, G-EC81). A people-first facts change was made and reverted (builder: "I don't approve"). No fix; builder's call owed.
 - 2026-11-25 (research-build) — Interviews wake the citizen as their own cron ("Why wouldn't the citizens wake as the Cron ?"): the wake's prompt builder shared (lib/citizenWakePrompt.js), the reporter's question as the wake's question, the citizen's own model; their words are the quote. agy folded. Talia live Thu with her Essence reframed ("fandom is a dial").
 - 2026-11-25 (research-build) — Interviews: a seat-file reporter asks whom it picks ("take the restriction out, keep the cap"; "if it chases a different angle we dont want to punish them"); the record still lists who the week touched; a pick gives its reason and answers from its own life; refused only off-ledger, inactive, self, Tribune staff. Talia's bio on her row ("relocated her to Oakland to follow paulson"); her tools and job approved ("looks good"). `91385f174`

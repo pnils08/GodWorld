@@ -33,15 +33,14 @@ const sports = require('./sportsSubstrate');
 
 const ROOT = path.join(__dirname, '..');
 
-// pipeline.118 (builder 2026-11-27: "he had his persona and beat, so it's prioritizing your audits over its life";
-// the bar is his Isley Kelley Origins): the man first, the paperwork never named; the facts of play stay true.
 const HAL_APPROACH =
-  'Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, a cadence, a person. ' +
-  'Where the man is now, then the ground he came from, the road, the name, what he became. ' +
-  'The facts of play stay as they are (seasons, stats, results, contracts); the life around them is yours to write. ' +
-  'Never name a ledger, feed, row, record or packet in the piece. ' +
-  'Close on a line that holds. ' +
-  'Not the fan "we", not contract math as the spine, not elegy as the default register, not a multi-voice desk average.';
+  'Historian approach (Hal Richmond): the Origins of the Dynasty bar — third-person biography, first person at most once; literary, not wire, not bleacher rage. ' +
+  'Present fact first (feed-true: StoryAngle, Stats, record), then the ground the man came from. ' +
+  'An origin, road, nickname or recorded word may enter only when canon_search or the Packet holds it; otherwise leave it out. ' +
+  'Pick 1–2 archive-bag shapes. Numbers plain as the record prints them, not poetry and not scouting grades. ' +
+  'End on the closing note in this slice (the line that holds, or the quiet note the class carries). ' +
+  'FORBIDDEN: fan "we" charge, Anthony salary–value architecture as spine, elegy as the default register, inventing seasons/x-stats, ' +
+  'FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.';
 
 /** Archive bag modes (docs/media/HAL_ARCHIVE_BAG.md) */
 const BAG_MODES = {
@@ -476,7 +475,8 @@ function buildHalSlice(cycle, opts) {
     claim,
     foilNumber: foil,
     missing: [
-      'No invented season, stat, result, contract or trade',
+      'Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet',
+      'No invented seasons or franchise history beyond packet + feed',
       'No x-stats / barrel% / invented OPS+',
       'Not a business-desk storefront assignment',
       'Not P Slayer charge; not Anthony board architecture as spine'
@@ -533,8 +533,8 @@ function buildHalSlice(cycle, opts) {
       record: row.record || null,
       streak: row.streak || null,
       colorRoom:
-        'The ground he came from, the road, the room: yours to write, the Origins way. ' +
-        'Seasons, stats, results and contracts stay as they are. Not a business storefront beat.'
+        'An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. ' +
+        'People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.'
     },
     candidates: scored.slice(0, 10).map(s => ({
       score: s.score,
